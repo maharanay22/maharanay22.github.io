@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maha Rana Yadavalli | Data & AI Architect</title>
+  <meta name="description" content="Data & AI Architect with 15+ years building enterprise cloud data platforms across Azure, AWS, and GCP." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --bg:        #05080f;
+      --surface:   #0b1120;
+      --surface2:  #101828;
+      --border:    rgba(148,210,255,0.1);
+      --border2:   rgba(148,210,255,0.18);
+      --cyan:      #7dd3fc;
+      --cyan-dim:  rgba(125,211,252,0.12);
+      --amber:     #fbbf24;
+      --amber-dim: rgba(251,191,36,0.1);
+      --green:     #4ade80;
+      --green-dim: rgba(74,222,128,0.1);
+      --violet:    #c084fc;
+      --violet-dim:rgba(192,132,252,0.1);
+      --text:      #e2ecf8;
+      --muted:     #64748b;
+      --muted2:    #94a3b8;
+    }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 10% 10%, rgba(125,211,252,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 90% 80%, rgba(192,132,252,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 55% 45%, rgba(251,191,36,0.03) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .wrap { width: min(1160px, calc(100% - 48px)); margin: 0 auto; position: relative; z-index: 1; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes lineGrow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(125,211,252,0.3); }
+      70%  { box-shadow: 0 0 0 14px rgba(125,211,252,0); }
+      100% { box-shadow: 0 0 0 0 rgba(125,211,252,0); }
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,8,15,0.88);
+      backdrop-filter: blur(18px);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 0; gap: 24px;
+    }
+    .nav-brand { display: flex; align-items: baseline; gap: 10px; }
+    .nav-brand .name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; }
+    .nav-brand .slash { color: var(--cyan); font-size: 1.1rem; }
+    .nav-brand .role { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted2); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* HERO */
+    .hero { padding: 100px 0 90px; border-bottom: 1px solid var(--border); }
+    .hero-grid { display: grid; grid-template-columns: 1fr 360px; gap: 64px; align-items: center; }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.7s 0.1s ease forwards;
+    }
+    .hero-eyebrow span { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); }
+    .eyebrow-line {
+      height: 1px; width: 48px; background: var(--cyan);
+      transform-origin: left; animation: lineGrow 0.6s 0.6s ease forwards; transform: scaleX(0);
+    }
+    .hero h1 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 400;
+      line-height: 1.05; letter-spacing: -0.02em; color: #fff; margin-bottom: 10px;
+      opacity: 0; animation: fadeUp 0.7s 0.25s ease forwards;
+    }
+    .hero h1 em { font-style: italic; color: var(--cyan); }
+    .hero-sub {
+      font-family: 'Syne', sans-serif; font-size: 0.75rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted2); margin-bottom: 32px;
+      opacity: 0; animation: fadeUp 0.7s 0.4s ease forwards;
+    }
+    .hero-bio {
+      font-family: 'Instrument Serif', serif; font-size: 1.25rem;
+      line-height: 1.8; color: var(--muted2); max-width: 600px; margin-bottom: 44px;
+      opacity: 0; animation: fadeUp 0.7s 0.55s ease forwards;
+    }
+    .hero-bio strong { color: var(--text); }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; opacity: 0; animation: fadeUp 0.7s 0.7s ease forwards; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.14em; text-transform: uppercase; padding: 13px 26px;
+      border: 1px solid transparent; cursor: pointer;
+      transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary { background: var(--cyan); color: var(--bg); border-color: var(--cyan); font-weight: 600; }
+    .btn-primary:hover { box-shadow: 0 8px 28px rgba(125,211,252,0.3); }
+    .btn-outline { border-color: var(--border2); color: var(--muted2); background: transparent; }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* HERO CARD */
+    .hero-card {
+      border: 1px solid var(--border); background: var(--surface); overflow: hidden;
+      opacity: 0; animation: fadeUp 0.7s 0.5s ease forwards;
+    }
+    .hero-card-top {
+      padding: 32px; text-align: center; border-bottom: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(125,211,252,0.05), transparent);
+    }
+    .avatar-ring {
+      width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 16px;
+      border: 2px solid var(--cyan); overflow: hidden; background: var(--surface2);
+      display: grid; place-items: center; animation: pulse-ring 3s infinite; font-size: 2.5rem;
+    }
+    .avatar-ring img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-card-top h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: #fff; margin-bottom: 4px; }
+    .hero-card-top p { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; }
+    .stat { padding: 22px 20px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stat:nth-child(even) { border-right: none; }
+    .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+    .stat-val { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--cyan); line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+
+    /* SECTIONS */
+    section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+    .section-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .section-eyebrow span { font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase; }
+    .dot { width: 5px; height: 5px; border-radius: 50%; }
+    .section-title {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400; color: #fff; letter-spacing: -0.02em; margin-bottom: 56px; line-height: 1.1;
+    }
+
+    /* ABOUT */
+    .about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .about-card { background: var(--bg); padding: 36px 30px; transition: background 0.25s; }
+    .about-card:hover { background: rgba(125,211,252,0.03); }
+    .about-icon { width: 44px; height: 44px; border: 1px solid var(--border2); display: grid; place-items: center; font-size: 1.15rem; margin-bottom: 20px; background: var(--surface); }
+    .about-card h3 { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; color: #fff; margin-bottom: 10px; }
+    .about-card p { font-size: 0.72rem; line-height: 1.9; color: var(--muted2); }
+
+    /* SKILLS */
+    .skills-section { display: grid; grid-template-columns: 200px 1fr; gap: 56px; align-items: start; }
+    .skills-nav { display: flex; flex-direction: column; gap: 2px; }
+    .skills-tab {
+      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 12px 16px; color: var(--muted); cursor: pointer;
+      border-left: 2px solid transparent; border-top: none; border-right: none; border-bottom: none;
+      background: none; text-align: left; font-family: 'JetBrains Mono', monospace;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .skills-tab.active, .skills-tab:hover { color: var(--cyan); border-left-color: var(--cyan); background: var(--cyan-dim); }
+    .skills-panel { display: none; }
+    .skills-panel.active { display: block; }
+    .skills-panel h3 { font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted2); margin-bottom: 20px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      font-size: 0.68rem; letter-spacing: 0.1em; padding: 8px 16px;
+      border: 1px solid var(--border); color: var(--muted2); background: var(--surface);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .chip:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+    .chip.hi { border-color: rgba(125,211,252,0.3); color: var(--cyan); background: var(--cyan-dim); }
+
+    /* PROJECTS */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .project-card { background: var(--bg); padding: 32px 28px; display: flex; flex-direction: column; transition: background 0.25s; }
+    .project-card:hover { background: rgba(125,211,252,0.025); }
+    .project-num { font-size: 0.62rem; letter-spacing: 0.25em; color: var(--muted); margin-bottom: 18px; }
+    .project-card h3 { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; color: #fff; margin-bottom: 12px; line-height: 1.3; }
+    .project-card p { font-size: 0.7rem; line-height: 1.9; color: var(--muted2); flex: 1; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 20px; }
+    .ptag { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 5px 10px; border: 1px solid var(--border); color: var(--muted); }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; }
+    .tl-item { display: grid; grid-template-columns: 180px 1px 1fr; gap: 0 40px; padding-bottom: 48px; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-date { text-align: right; padding-top: 4px; }
+    .tl-date span { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .tl-line { position: relative; display: flex; justify-content: center; }
+    .tl-line::before { content: ''; position: absolute; top: 0; bottom: -48px; left: 0; width: 1px; background: var(--border2); }
+    .tl-item:last-child .tl-line::before { display: none; }
+    .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--cyan); border: 2px solid var(--bg); outline: 1px solid var(--cyan); position: relative; z-index: 1; flex-shrink: 0; }
+    .tl-content { border: 1px solid var(--border); background: var(--surface); padding: 28px; transition: border-color 0.25s; }
+    .tl-content:hover { border-color: var(--border2); }
+    .tl-content h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.05rem; color: #fff; margin-bottom: 4px; }
+    .tl-content .company { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--cyan); margin-bottom: 14px; }
+    .tl-content p { font-size: 0.72rem; line-height: 1.9; color: var(--muted2); }
+
+    /* CERTIFICATIONS */
+    .certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .cert-card {
+      border: 1px solid var(--border); background: var(--surface); padding: 28px 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .cert-card:hover { border-color: var(--amber); background: rgba(251,191,36,0.04); }
+    .cert-badge { font-size: 1.4rem; }
+    .cert-card h3 { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; color: #fff; line-height: 1.3; }
+    .cert-card p { font-size: 0.68rem; line-height: 1.8; color: var(--muted2); flex: 1; }
+    .cert-status { font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); border: 1px solid rgba(251,191,36,0.3); padding: 4px 10px; display: inline-block; align-self: flex-start; }
+
+    /* CONTACT */
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .contact-left h2 {
+      font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 400; color: #fff; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 20px;
+    }
+    .contact-left p { font-size: 0.75rem; line-height: 2; color: var(--muted2); margin-bottom: 36px; }
+    .contact-actions { display: flex; flex-direction: column; gap: 12px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 16px; padding: 18px 22px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--muted2);
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .contact-link:hover { border-color: var(--cyan); color: var(--cyan); background: var(--cyan-dim); }
+    .cl-icon { font-size: 1.1rem; }
+    .cl-label { flex: 1; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.65rem; }
+    .cl-val { color: var(--muted); font-size: 0.68rem; }
+    .contact-right { border: 1px solid var(--border); background: var(--surface); padding: 40px 36px; }
+    .contact-right h3 { font-family: 'Syne', sans-serif; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted2); margin-bottom: 28px; }
+    .avail-items { display: flex; flex-direction: column; gap: 16px; }
+    .avail-item { display: flex; align-items: center; gap: 16px; font-size: 0.72rem; color: var(--muted2); }
+    .avail-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .avail-dot.green { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .avail-dot.cyan  { background: var(--cyan);  box-shadow: 0 0 8px var(--cyan);  }
+    .avail-dot.amber { background: var(--amber); box-shadow: 0 0 8px var(--amber); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; position: relative; z-index: 1; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    footer p { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--cyan); }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px) {
+      .hero-grid, .about-grid, .projects-grid, .certs-grid, .contact-wrap { grid-template-columns: 1fr; }
+      .skills-section { grid-template-columns: 1fr; }
+      .skills-nav { flex-direction: row; flex-wrap: wrap; }
+      .tl-item { grid-template-columns: 1fr; }
+      .tl-date { text-align: left; }
+      .tl-line { display: none; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 0; }
+      section { padding: 60px 0; }
+      .certs-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="wrap nav-inner">
+      <div class="nav-brand">
+        <span class="name">Maha Rana Yadavalli</span>
+        <span class="slash">/</span>
+        <span class="role">Data &amp; AI Architect</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#certifications">Certs</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span>Enterprise Data &amp; AI Architecture</span>
+          <div class="eyebrow-line"></div>
+        </div>
+        <h1>Building <em>data platforms</em> that scale.</h1>
+        <p class="hero-sub">Azure · AWS · GCP · Databricks · AI Enablement</p>
+        <p class="hero-bio">
+          I'm <strong>Maha Rana Yadavalli</strong> — a Data &amp; AI Architect with 15+ years delivering cloud-native data platforms, Medallion architectures, governance frameworks, and AI-ready pipelines for Fortune 500 enterprises.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">View Projects →</a>
+          <a class="btn btn-outline" href="resume.pdf" download>Download Resume</a>
+          <a class="btn btn-outline" href="#contact">Get In Touch</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-top">
+          <div class="avatar-ring">
+            <!-- Replace with: <img src="profile.jpg" alt="Maha Rana Yadavalli" /> -->
+            🧠
+          </div>
+          <h3>Maha Rana Yadavalli</h3>
+          <p>Data &amp; AI Architect · Cumming, GA</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat"><div class="stat-val">15+</div><div class="stat-label">Yrs Experience</div></div>
+          <div class="stat"><div class="stat-val">3</div><div class="stat-label">Cloud Ecosystems</div></div>
+          <div class="stat"><div class="stat-val">AI</div><div class="stat-label">Architecture Focus</div></div>
+          <div class="stat"><div class="stat-val">F500</div><div class="stat-label">Clients Served</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="section-eyebrow"><div class="dot" style="background:var(--cyan)"></div><span style="color:var(--cyan)">About</span></div>
+      <h2 class="section-title">What I bring to the table</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="about-icon">☁️</div>
+          <h3>Cloud Architecture</h3>
+          <p>Designed and delivered scalable data and analytics platforms across Azure, AWS, and GCP — with emphasis on reliability, security posture, and long-term maintainability at enterprise scale.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🧠</div>
+          <h3>AI &amp; Data Strategy</h3>
+          <p>Driving AI enablement through metadata automation, agentic pipelines, MCP integrations, knowledge graph design, and NL-to-SQL copilots. From POC to production.</p>
+        </div>
+        <div class="about-card">
+          <div class="about-icon">🏛️</div>
+          <h3>Governance &amp; Optimization</h3>
+          <p>Led platform governance using Azure Purview, Delta Lake, Unity Catalog, and Medallion Architecture — with measurable wins in cost, compliance, and operational maturity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-eyebrow"><div class="dot" style="background:var(--violet)"></div><span style="color:var(--violet)">Skills</span></div>
+      <h2 class="section-title">Core Technologies</h2>
+      <div class="skills-section">
+        <div class="skills-nav">
+          <button class="skills-tab active" onclick="showTab(event,'cloud')">Cloud</button>
+          <button class="skills-tab" onclick="showTab(event,'data')">Data Engineering</button>
+          <button class="skills-tab" onclick="showTab(event,'ai')">AI &amp; ML</button>
+          <button class="skills-tab" onclick="showTab(event,'devops')">DevOps</button>
+          <button class="skills-tab" onclick="showTab(event,'languages')">Languages</button>
+        </div>
+        <div>
+          <div id="tab-cloud" class="skills-panel active">
+            <h3>Cloud Platforms &amp; Services</h3>
+            <div class="chips">
+              <span class="chip hi">Azure</span><span class="chip hi">AWS</span><span class="chip hi">GCP</span>
+              <span class="chip">Azure Data Factory</span><span class="chip">Azure Synapse Analytics</span>
+              <span class="chip">Azure Databricks</span><span class="chip">Azure Purview</span>
+              <span class="chip">Microsoft Fabric</span><span class="chip">Azure Blob Storage</span>
+              <span class="chip">Azure App Service</span><span class="chip">AWS Lambda</span>
+              <span class="chip">AWS Step Functions</span><span class="chip">AWS ACM</span>
+            </div>
+          </div>
+          <div id="tab-data" class="skills-panel">
+            <h3>Data Engineering &amp; Architecture</h3>
+            <div class="chips">
+              <span class="chip hi">Medallion Architecture</span><span class="chip hi">Delta Lake</span>
+              <span class="chip hi">ETL / ELT Design</span><span class="chip">Unity Catalog</span>
+              <span class="chip">PySpark</span><span class="chip">Azure SQL</span><span class="chip">PostgreSQL</span>
+              <span class="chip">Cosmos DB</span><span class="chip">Power BI</span><span class="chip">Tableau</span>
+              <span class="chip">OneLake</span><span class="chip">Data Governance</span><span class="chip">Metadata Management</span>
+            </div>
+          </div>
+          <div id="tab-ai" class="skills-panel">
+            <h3>AI, ML &amp; Agentic Systems</h3>
+            <div class="chips">
+              <span class="chip hi">Agentic Pipelines</span><span class="chip hi">MCP (Model Context Protocol)</span>
+              <span class="chip">Generative AI</span><span class="chip">NL-to-SQL</span>
+              <span class="chip">Knowledge Graphs</span><span class="chip">Neo4j</span>
+              <span class="chip">Claude API</span><span class="chip">Azure OpenAI</span>
+              <span class="chip">Retrieval-Augmented Generation</span><span class="chip">ML Ops</span>
+            </div>
+          </div>
+          <div id="tab-devops" class="skills-panel">
+            <h3>DevOps &amp; Infrastructure</h3>
+            <div class="chips">
+              <span class="chip hi">Terraform</span><span class="chip">Ansible</span>
+              <span class="chip">Kubernetes</span><span class="chip">Docker</span>
+              <span class="chip">GitHub Actions</span><span class="chip">Azure DevOps</span>
+              <span class="chip">Venafi</span><span class="chip">CI/CD Pipelines</span>
+              <span class="chip">Infrastructure as Code</span>
+            </div>
+          </div>
+          <div id="tab-languages" class="skills-panel">
+            <h3>Languages &amp; Frameworks</h3>
+            <div class="chips">
+              <span class="chip hi">Python</span><span class="chip hi">SQL</span>
+              <span class="chip">PySpark</span><span class="chip">C#</span><span class="chip">Flask</span>
+              <span class="chip">JavaScript</span><span class="chip">HTML / CSS</span>
+              <span class="chip">Bash / Shell</span><span class="chip">REST APIs</span>
+              <span class="chip">Databricks REST API</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-eyebrow"><div class="dot" style="background:var(--green)"></div><span style="color:var(--green)">Projects</span></div>
+      <h2 class="section-title">Selected Work</h2>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-num">01 / Enterprise Platform</div>
+          <h3>EDAV Analytics Platform</h3>
+          <p>Architected enterprise analytics capabilities across Databricks, Synapse, ADF, Data Lake, PostgreSQL, Azure SQL, Power BI, and Cosmos DB with full Medallion Architecture and governance strategy.</p>
+          <div class="project-tags"><span class="ptag">Azure</span><span class="ptag">Databricks</span><span class="ptag">Synapse</span><span class="ptag">Medallion</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">02 / AI Enablement</div>
+          <h3>MahAI — Enterprise Data Intelligence</h3>
+          <p>Designed a multi-phase AI reasoning platform spanning Databricks, Synapse, Purview, Snowflake, and Redshift. 4-phase roadmap: telemetry → Neo4j knowledge graph → AI reasoning → NL copilot.</p>
+          <div class="project-tags"><span class="ptag">AI</span><span class="ptag">Neo4j</span><span class="ptag">Agentic</span><span class="ptag">NL-to-SQL</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">03 / Governance</div>
+          <h3>AI-Powered Metadata &amp; Purview Governance</h3>
+          <p>Advanced metadata enrichment using Azure Purview with AI-assisted asset descriptions, enterprise catalog scanning, and governance framework improvements across large-scale data estates.</p>
+          <div class="project-tags"><span class="ptag">Purview</span><span class="ptag">AI</span><span class="ptag">Governance</span><span class="ptag">Metadata</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">04 / Automation</div>
+          <h3>Certificate Automation Platform</h3>
+          <p>Large-scale certificate renewal and deployment automation using Venafi, AWS ACM, Lambda, Step Functions, Terraform, and PostgreSQL across multi-account AWS environments.</p>
+          <div class="project-tags"><span class="ptag">AWS</span><span class="ptag">Terraform</span><span class="ptag">Automation</span><span class="ptag">Lambda</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">05 / SaaS Product</div>
+          <h3>Maha Wedding — Multi-Tenant SaaS</h3>
+          <p>Built a full multi-tenant wedding planning platform with Python/Flask, Razorpay/Stripe payments, Azure Blob Storage, and complete deployment on Azure App Service.</p>
+          <div class="project-tags"><span class="ptag">Flask</span><span class="ptag">Azure</span><span class="ptag">Stripe</span><span class="ptag">SaaS</span></div>
+        </div>
+        <div class="project-card">
+          <div class="project-num">06 / Optimization</div>
+          <h3>Databricks Bulk Ownership &amp; Optimization</h3>
+          <p>Bulk ownership updates across Production/QA/Dev environments using Databricks REST API with Azure Storage integration. Performance tuning and serverless adoption strategy.</p>
+          <div class="project-tags"><span class="ptag">Databricks</span><span class="ptag">REST API</span><span class="ptag">Optimization</span><span class="ptag">Serverless</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-eyebrow"><div class="dot" style="background:var(--amber)"></div><span style="color:var(--amber)">Experience</span></div>
+      <h2 class="section-title">Career Timeline</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date"><span>Present</span></div>
+          <div class="tl-line"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <h3>Data &amp; AI Architect</h3>
+            <p class="company">Informatik Data Solutions — Microsoft / Azure / Databricks Consulting</p>
+            <p>Leading cloud data architecture, AI enablement, agentic pipeline design, and enterprise analytics modernization for clients including Equifax, Molina, Cox, and RaceTrac. Driving Medallion Architecture, Delta Lake governance, and Azure Purview implementations.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>Prior Roles</span></div>
+          <div class="tl-line"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <h3>Cloud Data Platform Specialist</h3>
+            <p class="company">Azure · AWS · GCP</p>
+            <p>Designed scalable ELT pipelines, automation frameworks, and analytics ecosystems across major cloud providers. Deep work in Synapse Analytics, Azure Data Factory, AWS Step Functions, Terraform, and multi-environment governance models.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date"><span>15+ Years</span></div>
+          <div class="tl-line"><div class="tl-dot"></div></div>
+          <div class="tl-content">
+            <h3>Enterprise Data Engineering &amp; Modernization</h3>
+            <p class="company">Fortune 500 / Enterprise Delivery</p>
+            <p>Full-stack delivery across data pipelines, frontend tooling, and cloud deployment — from raw ingestion to BI reporting. Consistently aligned platform architecture to business outcomes with a cost, compliance, and scalability lens.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="wrap">
+      <div class="section-eyebrow"><div class="dot" style="background:var(--amber)"></div><span style="color:var(--amber)">Certifications</span></div>
+      <h2 class="section-title">Credentials &amp; Learning</h2>
+      <div class="certs-grid">
+        <div class="cert-card">
+          <div class="cert-badge">🏆</div>
+          <h3>Azure Data &amp; AI Certifications</h3>
+          <p>Add your Azure certifications here — DP-900, DP-203, AI-102, AZ-305. Include badge links or Credly verification IDs.</p>
+          <span class="cert-status">Add Your Certs</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">🏆</div>
+          <h3>Databricks Certifications</h3>
+          <p>Add your Databricks credentials — Associate / Professional Data Engineer, Generative AI Fundamentals, etc.</p>
+          <span class="cert-status">Add Your Certs</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">🏆</div>
+          <h3>AWS Certifications</h3>
+          <p>Add your AWS credentials — Solutions Architect, Data Analytics, or Cloud Practitioner. Include validation ID.</p>
+          <span class="cert-status">Add Your Certs</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">🎓</div>
+          <h3>Claude Certified Architect (CCA)</h3>
+          <p>Claude Certified Architect – Foundations, pursued via Informatik's Anthropic partner network access.</p>
+          <span class="cert-status">In Progress</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">🏆</div>
+          <h3>AI / ML Credentials</h3>
+          <p>Add AI and ML certifications — Azure AI Engineer, Google ML Engineer, or relevant coursework and programs.</p>
+          <span class="cert-status">Add Your Certs</span>
+        </div>
+        <div class="cert-card">
+          <div class="cert-badge">🏆</div>
+          <h3>Cloud Architecture Programs</h3>
+          <p>Add GCP credentials, Kubernetes, Terraform, or other infrastructure and architecture certifications.</p>
+          <span class="cert-status">Add Your Certs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-wrap">
+        <div class="contact-left">
+          <h2>Let's build something <em style="font-style:italic;color:var(--cyan)">impactful</em> together.</h2>
+          <p>Open to consulting engagements, enterprise architecture advisory, AI platform design, and speaking opportunities in the data &amp; AI space.</p>
+          <div class="contact-actions">
+            <a class="contact-link" href="mailto:maharanay@gmail.com">
+              <span class="cl-icon">✉</span>
+              <span class="cl-label">Email</span>
+              <span class="cl-val">maharanay@gmail.com</span>
+            </a>
+            <a class="contact-link" href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">
+              <span class="cl-icon">in</span>
+              <span class="cl-label">LinkedIn</span>
+              <span class="cl-val">maha-rana-yadavalli</span>
+            </a>
+            <a class="contact-link" href="https://github.com/maharanay22" target="_blank">
+              <span class="cl-icon">⌘</span>
+              <span class="cl-label">GitHub</span>
+              <span class="cl-val">maharanay22</span>
+            </a>
+          </div>
+        </div>
+        <div class="contact-right">
+          <h3>Currently Available For</h3>
+          <div class="avail-items">
+            <div class="avail-item"><div class="avail-dot green"></div><span>Enterprise Data Architecture Consulting</span></div>
+            <div class="avail-item"><div class="avail-dot green"></div><span>Azure / Databricks Platform Design</span></div>
+            <div class="avail-item"><div class="avail-dot cyan"></div><span>AI Enablement &amp; Agentic Pipeline Design</span></div>
+            <div class="avail-item"><div class="avail-dot cyan"></div><span>Data Governance &amp; Purview Implementations</span></div>
+            <div class="avail-item"><div class="avail-dot amber"></div><span>Speaking &amp; Technical Advisory</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 Maha Rana Yadavalli</p>
+      <div class="footer-links">
+        <a href="https://github.com/maharanay22" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">LinkedIn</a>
+        <a href="mailto:maharanay@gmail.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function showTab(e, id) {
+      document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.skills-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('tab-' + id).classList.add('active');
+      e.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
