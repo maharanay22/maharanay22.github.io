@@ -1,716 +1,841 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Maha Rana Yadavalli | Data & AI Architect</title>
-  <meta name="description" content="Data & AI Architect — Azure · Databricks · Agentic AI · 15+ Years Enterprise Experience"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Syne:wght@600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maha Rana Yadavalli · Data & AI Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Clash+Display:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-/* ════════════════════════════════════════════
-   ROOT & RESET
-════════════════════════════════════════════ */
-:root {
-  --bg:       #03080f;
-  --bg2:      #060e1a;
-  --surface:  #0a1628;
-  --s2:       #0e1f36;
-  --s3:       #132540;
-  --cyan:     #00c8f0;
-  --cyan-lo:  rgba(0,200,240,0.08);
-  --cyan-md:  rgba(0,200,240,0.18);
-  --cyan-hi:  rgba(0,200,240,0.35);
-  --green:    #00e887;
-  --green-lo: rgba(0,232,135,0.08);
-  --amber:    #f5a623;
-  --amber-lo: rgba(245,166,35,0.1);
-  --violet:   #9d6aff;
-  --violet-lo:rgba(157,106,255,0.1);
-  --pink:     #f472b6;
-  --border:   rgba(0,200,240,0.1);
-  --border2:  rgba(0,200,240,0.22);
-  --text:     #d4e8f8;
-  --muted:    #3d5c7a;
-  --muted2:   #6b8fad;
-  --muted3:   #94b4cc;
-}
+/*==================================================
+  RESET & VARS
+==================================================*/
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px}
+html{scroll-behavior:smooth}
+:root{
+  --c0:#020510;
+  --c1:#0a0f2e;
+  --neon1:#00fff7;
+  --neon2:#bf00ff;
+  --neon3:#ff006e;
+  --neon4:#ffcc00;
+  --neon5:#00ff88;
+  --neon6:#ff6b35;
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.08);
+  --b1:rgba(0,255,247,0.15);
+  --b2:rgba(191,0,255,0.15);
+  --text:#e8f4ff;
+  --muted:#5a7a9a;
+  --muted2:#8aaabb;
+}
 body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
+  font-family:'Fira Code',monospace;
+  background:var(--c0);
   color:var(--text);
   overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
+  cursor:none;
 }
 a{text-decoration:none;color:inherit}
-img{display:block;max-width:100%}
 
-/* ════════════════════════════════════════════
-   BACKGROUND LAYERS
-════════════════════════════════════════════ */
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-.bg-mesh{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 60% at 0% 0%,   rgba(0,200,240,0.07) 0%,transparent 55%),
-    radial-gradient(ellipse 60% 80% at 100% 100%,rgba(157,106,255,0.06) 0%,transparent 55%),
-    radial-gradient(ellipse 50% 50% at 50% 50%,  rgba(0,232,135,0.03) 0%,transparent 60%);
+/*==================================================
+  CUSTOM CURSOR
+==================================================*/
+#cursor{
+  position:fixed;width:12px;height:12px;border-radius:50%;
+  background:var(--neon1);pointer-events:none;z-index:9999;
+  mix-blend-mode:screen;
+  transition:transform 0.1s ease,width 0.2s,height 0.2s;
+  box-shadow:0 0 20px var(--neon1),0 0 40px rgba(0,255,247,0.5);
 }
-.bg-grid{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(0,200,240,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,200,240,0.03) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+#cursor-ring{
+  position:fixed;width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(0,255,247,0.4);
+  pointer-events:none;z-index:9998;
+  transition:transform 0.18s ease,left 0.12s ease,top 0.12s ease;
+}
+body:hover #cursor{transform:scale(1)}
+a:hover ~ #cursor, button:hover ~ #cursor{width:20px;height:20px}
+
+/*==================================================
+  AURORA CANVAS
+==================================================*/
+#aurora{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none;opacity:0.7;
 }
 
-/* ════════════════════════════════════════════
-   LAYOUT
-════════════════════════════════════════════ */
-.wrap{width:min(1160px,calc(100% - 48px));margin:0 auto;position:relative;z-index:2}
+/*==================================================
+  NOISE OVERLAY
+==================================================*/
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+}
 
-/* ════════════════════════════════════════════
-   KEYFRAMES
-════════════════════════════════════════════ */
-@keyframes fadeUp   {from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes fadeIn   {from{opacity:0}to{opacity:1}}
-@keyframes blink    {0%,100%{opacity:1}50%{opacity:0}}
-@keyframes twinkle  {from{opacity:0.05}to{opacity:0.9}}
-@keyframes floatUp  {0%{opacity:0;transform:translateY(0) translateX(0)}10%{opacity:0.7}90%{opacity:0.1}100%{opacity:0;transform:translateY(-90vh) translateX(var(--dx))}}
-@keyframes scanline {0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
-@keyframes shimmer  {0%{background-position:200% center}100%{background-position:-200% center}}
-@keyframes spin     {from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 rgba(0,200,240,0.3),0 0 30px rgba(0,200,240,0.15)}50%{box-shadow:0 0 0 10px rgba(0,200,240,0),0 0 60px rgba(0,200,240,0.3)}}
-@keyframes bar-fill {from{width:0}to{width:var(--pct)}}
-@keyframes counter  {from{--n:0}to{--n:var(--target)}}
-@keyframes borderRun{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+/*==================================================
+  LAYOUT
+==================================================*/
+.wrap{width:min(1160px,calc(100% - 40px));margin:0 auto;position:relative;z-index:3}
 
-/* ════════════════════════════════════════════
-   NAV
-════════════════════════════════════════════ */
+/*==================================================
+  KEYFRAMES
+==================================================*/
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-12px) rotate(1deg)}66%{transform:translateY(-6px) rotate(-1deg)}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spinRev{from{transform:rotate(360deg)}to{transform:rotate(0deg)}}
+@keyframes neonPulse{
+  0%,100%{text-shadow:0 0 10px var(--neon1),0 0 30px var(--neon1),0 0 60px rgba(0,255,247,0.4)}
+  50%{text-shadow:0 0 20px var(--neon1),0 0 60px var(--neon1),0 0 100px rgba(0,255,247,0.7)}
+}
+@keyframes borderFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes glitch{
+  0%,90%,100%{transform:translate(0)}
+  92%{transform:translate(-3px,1px)}
+  94%{transform:translate(3px,-1px)}
+  96%{transform:translate(-1px,2px)}
+  98%{transform:translate(2px,-2px)}
+}
+@keyframes scanDown{
+  0%{transform:translateY(-100%);opacity:0.6}
+  100%{transform:translateY(100vh);opacity:0}
+}
+@keyframes orb{
+  0%,100%{transform:scale(1) translate(0,0)}
+  25%{transform:scale(1.15) translate(20px,-15px)}
+  50%{transform:scale(0.9) translate(-10px,20px)}
+  75%{transform:scale(1.1) translate(-20px,-10px)}
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmerText{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+@keyframes revealCard{
+  from{opacity:0;transform:translateY(50px) scale(0.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes hueShift{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
+@keyframes ping{
+  75%,100%{transform:scale(2);opacity:0}
+}
+
+/*==================================================
+  NAV
+==================================================*/
 nav{
   position:sticky;top:0;z-index:200;
-  border-bottom:1px solid var(--border);
-  background:rgba(3,8,15,0.9);
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
+  background:rgba(2,5,16,0.85);
+  backdrop-filter:blur(30px);
+  border-bottom:1px solid rgba(0,255,247,0.08);
 }
-.nav-inner{
+.nav-in{
   display:flex;justify-content:space-between;align-items:center;
-  padding:18px 0;gap:20px;
+  padding:16px 0;
 }
-.nav-brand{display:flex;align-items:center;gap:12px}
 .nav-logo{
-  font-family:'Fira Code',monospace;font-size:0.95rem;font-weight:600;
+  font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon1));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:borderFlow 3s linear infinite;
 }
-.nl-user{color:#fff}
-.nl-dot{color:var(--muted2)}
-.nl-fn{color:var(--cyan)}
-.nl-par{color:var(--muted)}
-
-.nav-status{
-  display:flex;align-items:center;gap:7px;
-  font-family:'Fira Code',monospace;
-  font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--green);
-  border:1px solid rgba(0,232,135,0.2);
-  padding:4px 10px;
+.nav-pill{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:5px 12px;
+  border:1px solid rgba(0,255,136,0.3);
+  color:var(--neon5);
+  background:rgba(0,255,136,0.06);
+  position:relative;
 }
-.status-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 6px var(--green);
-  animation:pulse-glow 2s infinite;
+.ping-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--neon5);position:relative;
 }
-
-.nav-links{display:flex;gap:28px;list-style:none}
+.ping-dot::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--neon5);animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;
+}
+.nav-links{display:flex;gap:24px;list-style:none}
 .nav-links a{
-  font-family:'Fira Code',monospace;
-  font-size:0.68rem;color:var(--muted2);
-  transition:color 0.2s;letter-spacing:0.05em;
+  font-size:0.67rem;color:var(--muted2);
+  transition:color 0.2s;letter-spacing:0.06em;position:relative;
 }
-.nav-links a::before{content:'./';color:var(--muted);transition:color 0.2s}
-.nav-links a:hover{color:var(--cyan)}
-.nav-links a:hover::before{color:var(--cyan)}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.nav-links a:hover{color:var(--neon1)}
+.nav-links a:hover::after{transform:scaleX(1)}
 
-/* ════════════════════════════════════════════
-   HERO
-════════════════════════════════════════════ */
+/*==================================================
+  HERO
+==================================================*/
 .hero{
   min-height:100vh;display:flex;align-items:center;
-  padding:100px 0 80px;
-  border-bottom:1px solid var(--border);
-  position:relative;overflow:hidden;
+  padding:100px 0 80px;position:relative;overflow:hidden;
 }
-/* moving scanline */
-.hero::before{
-  content:'';position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(to bottom,transparent 0%,rgba(0,200,240,0.025) 50%,transparent 100%);
-  height:200px;
-  animation:scanline 8s linear infinite;
-}
-.hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:64px;align-items:center}
 
-/* Terminal prompt line */
-.hero-terminal{
-  font-family:'Fira Code',monospace;
-  font-size:0.75rem;color:var(--muted2);
-  margin-bottom:22px;display:flex;align-items:center;gap:8px;
+/* Floating orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  pointer-events:none;z-index:1;animation:orb var(--d) ease-in-out infinite;
+}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,247,0.15),transparent 70%);top:-100px;right:-100px;--d:12s}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(191,0,255,0.12),transparent 70%);bottom:-50px;left:-80px;--d:15s;animation-delay:-5s}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,0,110,0.1),transparent 70%);top:40%;left:40%;--d:10s;animation-delay:-3s}
+
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;position:relative;z-index:2}
+
+/* terminal line */
+.term-line{
+  font-size:0.73rem;color:var(--muted2);
+  display:flex;align-items:center;gap:6px;margin-bottom:24px;
   opacity:0;animation:fadeUp 0.5s 0.1s ease forwards;
 }
-.t-user{color:var(--green)}
-.t-host{color:var(--cyan)}
-.t-path{color:var(--violet)}
-.t-dollar{color:var(--muted3)}
-.t-cmd{color:var(--text)}
-.cursor{display:inline-block;width:8px;height:14px;background:var(--cyan);animation:blink 1s infinite;vertical-align:middle;margin-left:2px}
+.t-g{color:var(--neon5)}.t-c{color:var(--neon1)}.t-v{color:var(--neon2)}
+.cursor-bar{
+  display:inline-block;width:9px;height:16px;
+  background:var(--neon1);animation:blink 1s infinite;
+  box-shadow:0 0 10px var(--neon1);
+  vertical-align:middle;margin-left:3px;
+}
 
+/* big name */
 .hero-name{
   font-family:'Syne',sans-serif;
-  font-size:clamp(2.8rem,5.8vw,5.2rem);
-  font-weight:800;line-height:1.0;
-  letter-spacing:-0.02em;
-  margin-bottom:8px;
-  opacity:0;animation:fadeUp 0.55s 0.25s ease forwards;
+  font-size:clamp(2.8rem,6vw,5.8rem);
+  font-weight:800;line-height:0.95;
+  letter-spacing:-0.03em;
+  margin-bottom:14px;
+  opacity:0;animation:fadeUp 0.6s 0.25s ease forwards;
+  position:relative;
 }
-.hero-name .part1{color:#fff}
-.hero-name .part2{
-  background:linear-gradient(135deg,var(--cyan) 0%,var(--violet) 60%,var(--pink) 100%);
+.hero-name .n1{
+  display:block;color:#fff;
+  text-shadow:0 0 60px rgba(255,255,255,0.1);
+}
+.hero-name .n2{
+  display:block;
+  background:linear-gradient(135deg,var(--neon1) 0%,var(--neon2) 40%,var(--neon3) 70%,var(--neon4) 100%);
+  background-size:300% auto;
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  background-size:200% auto;animation:shimmer 4s linear infinite;
+  animation:shimmerText 4s linear infinite;
 }
+/* glitch effect on hover */
+.hero-name:hover .n1{animation:glitch 0.5s infinite}
 
 .hero-role{
-  font-family:'Fira Code',monospace;
-  font-size:0.82rem;color:var(--muted2);
-  margin-bottom:30px;
-  opacity:0;animation:fadeUp 0.55s 0.4s ease forwards;
+  font-size:0.82rem;color:var(--muted2);margin-bottom:28px;
+  opacity:0;animation:fadeUp 0.6s 0.4s ease forwards;
 }
-.hero-role .fn{color:var(--amber)}
-.hero-role .args{color:var(--violet)}
-.hero-role .ret{color:var(--cyan)}
+.fn-c{color:var(--neon4)}.arg-c{color:var(--neon2)}.ret-c{color:var(--neon1)}
 
-/* animated badge pills */
+/* animated tag pills */
 .hero-pills{
   display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px;
-  opacity:0;animation:fadeUp 0.55s 0.55s ease forwards;
+  opacity:0;animation:fadeUp 0.6s 0.55s ease forwards;
 }
-.pill{
-  font-family:'Fira Code',monospace;
-  font-size:0.65rem;letter-spacing:0.08em;
-  padding:6px 14px;
-  border:1px solid var(--cyan-hi);
-  color:var(--cyan);
-  background:var(--cyan-lo);
-  position:relative;overflow:hidden;
-  transition:all 0.25s;
+.hpill{
+  font-size:0.63rem;letter-spacing:0.08em;padding:6px 14px;
+  position:relative;overflow:hidden;cursor:default;
+  border:1px solid transparent;
+  background:linear-gradient(var(--c0),var(--c0)) padding-box,
+             linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3)) border-box;
+  color:var(--text);transition:transform 0.2s,box-shadow 0.2s;
 }
-.pill::after{
+.hpill::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(0,200,240,0.15),transparent);
-  transform:translateX(-100%);transition:transform 0.4s;
+  background:linear-gradient(90deg,rgba(0,255,247,0.08),rgba(191,0,255,0.08),rgba(255,0,110,0.08));
+  opacity:0;transition:opacity 0.3s;
 }
-.pill:hover::after{transform:translateX(100%)}
-.pill:hover{background:var(--cyan-md);box-shadow:0 0 16px rgba(0,200,240,0.2)}
+.hpill:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,255,247,0.2)}
+.hpill:hover::before{opacity:1}
 
 .hero-bio{
-  font-size:0.88rem;line-height:1.9;
-  color:var(--muted3);max-width:560px;margin-bottom:40px;
-  opacity:0;animation:fadeUp 0.55s 0.7s ease forwards;
+  font-size:0.82rem;line-height:1.95;color:var(--muted2);
+  max-width:560px;margin-bottom:40px;
+  opacity:0;animation:fadeUp 0.6s 0.7s ease forwards;
 }
-.hero-bio strong{color:var(--text);font-weight:500}
+.hero-bio strong{color:var(--text)}
 
-.hero-actions{
+.hero-btns{
   display:flex;gap:14px;flex-wrap:wrap;
-  opacity:0;animation:fadeUp 0.55s 0.85s ease forwards;
+  opacity:0;animation:fadeUp 0.6s 0.85s ease forwards;
 }
 .btn{
   font-family:'Fira Code',monospace;font-size:0.7rem;
-  padding:13px 28px;border:1px solid;cursor:pointer;
-  transition:all 0.22s ease;display:inline-flex;align-items:center;gap:8px;
+  padding:13px 28px;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
   position:relative;overflow:hidden;letter-spacing:0.05em;
+  transition:transform 0.2s,box-shadow 0.2s;
 }
-.btn-primary{
-  background:var(--cyan);color:var(--bg);
-  border-color:var(--cyan);font-weight:600;
+.btn-neon{
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  color:#000;font-weight:700;
+  box-shadow:0 0 20px rgba(0,255,247,0.3),inset 0 1px 0 rgba(255,255,255,0.3);
 }
-.btn-primary::before{
+.btn-neon::before{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);
-  transform:translateX(-100%);transition:transform 0.4s;
+  background:linear-gradient(135deg,var(--neon2),var(--neon3));
+  opacity:0;transition:opacity 0.3s;
 }
-.btn-primary:hover::before{transform:translateX(100%)}
-.btn-primary:hover{box-shadow:0 0 32px rgba(0,200,240,0.5);transform:translateY(-2px)}
-
-.btn-glass{
+.btn-neon:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,255,247,0.5)}
+.btn-neon:hover::before{opacity:1}
+.btn-neon span{position:relative;z-index:1}
+.btn-ghost{
   background:rgba(255,255,255,0.04);
-  border-color:var(--border2);color:var(--muted3);
+  border:1px solid rgba(0,255,247,0.25);
+  color:var(--neon1);
   backdrop-filter:blur(8px);
 }
-.btn-glass:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);background:var(--cyan-lo)}
+.btn-ghost:hover{background:rgba(0,255,247,0.08);border-color:var(--neon1);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,255,247,0.2)}
 
-/* ════════════════════════════════════════════
-   CODE CARD (hero right)
-════════════════════════════════════════════ */
-.code-card{
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.85);
-  backdrop-filter:blur(16px);
+/*==================================================
+  HERO RIGHT: HOLOGRAPHIC CARD
+==================================================*/
+.holo-card{
+  position:relative;
+  opacity:0;animation:fadeIn 1s 0.6s ease forwards;
+}
+.holo-card-inner{
+  background:rgba(8,16,40,0.8);
+  border:1px solid rgba(0,255,247,0.15);
+  backdrop-filter:blur(20px);
   overflow:hidden;
-  box-shadow:0 0 0 1px var(--border),0 32px 80px rgba(0,0,0,0.6),inset 0 1px 0 rgba(255,255,255,0.05);
-  opacity:0;animation:fadeIn 0.8s 0.5s ease forwards;
+  box-shadow:
+    0 0 0 1px rgba(0,255,247,0.08),
+    0 40px 100px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.07);
   position:relative;
+  animation:float 8s ease-in-out infinite;
 }
-/* animated border glow */
-.code-card::before{
-  content:'';position:absolute;inset:-1px;z-index:-1;
-  background:linear-gradient(90deg,var(--cyan),var(--violet),var(--cyan));
-  background-size:200% auto;
-  animation:borderRun 4s linear infinite;
-  opacity:0.2;
+/* rainbow shimmer on hover */
+.holo-card-inner::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(
+    135deg,
+    rgba(0,255,247,0.05) 0%,
+    rgba(191,0,255,0.05) 25%,
+    rgba(255,0,110,0.05) 50%,
+    rgba(255,204,0,0.05) 75%,
+    rgba(0,255,136,0.05) 100%
+  );
+  background-size:400% 400%;
+  animation:borderFlow 6s ease infinite;
 }
+/* spinning ring */
+.holo-ring{
+  position:absolute;inset:-20px;border-radius:50%;pointer-events:none;z-index:0;
+  border:1px dashed rgba(0,255,247,0.1);
+  animation:spinSlow 20s linear infinite;
+}
+.holo-ring2{
+  position:absolute;inset:-35px;border-radius:50%;pointer-events:none;z-index:0;
+  border:1px dashed rgba(191,0,255,0.08);
+  animation:spinRev 30s linear infinite;
+}
+
 .cc-bar{
-  background:rgba(14,31,54,0.9);padding:10px 16px;
+  background:rgba(10,15,40,0.9);padding:11px 16px;
   display:flex;align-items:center;gap:8px;
-  border-bottom:1px solid var(--border);
+  border-bottom:1px solid rgba(0,255,247,0.08);
+  position:relative;z-index:1;
 }
-.cc-dot{width:11px;height:11px;border-radius:50%}
-.cc-dot.r{background:#ff5f57}.cc-dot.y{background:#febc2e}.cc-dot.g{background:#28c840}
-.cc-file{font-family:'Fira Code',monospace;font-size:0.63rem;color:var(--muted2);margin-left:6px}
+.cc-dot{width:11px;height:11px;border-radius:50%;box-shadow:0 0 6px currentColor}
+.cc-dot.r{background:#ff5f57;color:#ff5f57}
+.cc-dot.y{background:#febc2e;color:#febc2e}
+.cc-dot.g{background:#28c840;color:#28c840}
+.cc-fname{font-size:0.63rem;color:var(--muted2);margin-left:6px}
 
-/* avatar */
-.cc-avatar{
-  display:flex;flex-direction:column;align-items:center;
-  padding:28px 20px 20px;border-bottom:1px solid var(--border);
-  background:linear-gradient(160deg,rgba(0,200,240,0.04),transparent);
+/* avatar area */
+.cc-top{
+  padding:28px 20px 20px;text-align:center;
+  border-bottom:1px solid rgba(0,255,247,0.08);
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,rgba(0,255,247,0.03),transparent);
 }
-.avatar-ring{
-  width:88px;height:88px;border-radius:50%;
-  border:2px solid var(--cyan);
-  background:var(--s2);
-  display:grid;place-items:center;font-size:2.2rem;
-  margin-bottom:14px;
-  animation:pulse-glow 3s ease-in-out infinite;
-  position:relative;
+.av-wrap{position:relative;display:inline-block;margin-bottom:14px}
+.av-circle{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(0,255,247,0.1),rgba(191,0,255,0.1));
+  border:2px solid var(--neon1);
+  display:grid;place-items:center;font-size:2.3rem;
+  box-shadow:0 0 0 4px rgba(0,255,247,0.08),0 0 40px rgba(0,255,247,0.3);
+  animation:float 5s ease-in-out infinite;
+  position:relative;z-index:1;
 }
-.avatar-ring::after{
-  content:'';position:absolute;inset:-6px;border-radius:50%;
-  border:1px solid rgba(0,200,240,0.15);
-  animation:spin 12s linear infinite;
-  border-style:dashed;
+.av-spin{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--neon1);border-right-color:var(--neon2);
+  animation:spinSlow 3s linear infinite;
 }
-.cc-name{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:3px}
-.cc-title{font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--muted2);letter-spacing:0.1em}
+.av-spin2{
+  position:absolute;inset:-16px;border-radius:50%;
+  border:1px solid transparent;
+  border-bottom-color:var(--neon3);border-left-color:var(--neon4);
+  animation:spinRev 5s linear infinite;
+}
+.cc-name{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+  background:linear-gradient(90deg,#fff,var(--neon1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.cc-sub{font-size:0.62rem;color:var(--muted2);letter-spacing:0.12em}
 
-/* code body */
-.cc-code{padding:20px 24px;font-family:'Fira Code',monospace;font-size:0.7rem;line-height:2}
-.ck{color:var(--violet)}.cc{color:var(--amber)}.cf{color:var(--cyan)}
-.cs{color:var(--green)}.cn{color:#f97316}.cm{color:var(--muted);font-style:italic}
-.cself{color:#fb7185}
+/* code block */
+.cc-code{
+  padding:20px 22px;font-size:0.68rem;line-height:2.1;
+  position:relative;z-index:1;
+  border-bottom:1px solid rgba(0,255,247,0.08);
+}
+.ck{color:var(--neon2)}.ccls{color:var(--neon4)}.cf{color:var(--neon1)}
+.cs{color:var(--neon5)}.cn{color:var(--neon6)}.cm{color:var(--muted);font-style:italic}
+.cse{color:var(--neon3)}
 .i1{display:inline-block;width:20px}.i2{display:inline-block;width:40px}
 
-/* stats inside card */
-.cc-stats{display:grid;grid-template-columns:repeat(2,1fr)}
-.cc-stat{
-  padding:18px 20px;text-align:center;
-  border-right:1px solid var(--border);border-top:1px solid var(--border);
+/* stat grid */
+.cc-stats{display:grid;grid-template-columns:repeat(2,1fr);position:relative;z-index:1}
+.cc-s{
+  padding:18px 16px;text-align:center;
+  border-right:1px solid rgba(0,255,247,0.08);
+  border-top:1px solid rgba(0,255,247,0.08);
+  transition:background 0.3s;
 }
-.cc-stat:nth-child(even){border-right:none}
-.cc-stat-val{
+.cc-s:nth-child(even){border-right:none}
+.cc-s:hover{background:rgba(0,255,247,0.04)}
+.cc-sv{
   font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   line-height:1;margin-bottom:5px;
+  animation:neonPulse 3s ease-in-out infinite;
 }
-.cc-stat-lbl{font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
+.cc-sl{font-size:0.58rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
 
-/* ════════════════════════════════════════════
-   SCROLL CTA
-════════════════════════════════════════════ */
-.scroll-cta{
-  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+/* scroll indicator */
+.scroll-ind{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
-  font-family:'Fira Code',monospace;font-size:0.6rem;
-  color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;
-  opacity:0;animation:fadeIn 1s 1.4s ease forwards;
+  font-size:0.58rem;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;
+  opacity:0;animation:fadeIn 1s 1.5s ease forwards;z-index:2;
 }
-.scroll-line{
-  width:1px;height:44px;
-  background:linear-gradient(to bottom,var(--cyan),transparent);
-  animation:scroll-pulse 2s ease-in-out infinite;
-}
-@keyframes scroll-pulse{0%,100%{opacity:0.3;transform:scaleY(0.6)}50%{opacity:1;transform:scaleY(1)}}
-
-/* ════════════════════════════════════════════
-   TECH STRIP
-════════════════════════════════════════════ */
-.strip-outer{
-  overflow:hidden;
-  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  background:rgba(6,14,26,0.8);padding:14px 0;
-  position:relative;z-index:2;
-}
-.strip-outer::before,.strip-outer::after{
-  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:3;pointer-events:none;
-}
-.strip-outer::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
-.strip-outer::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
-.strip-track{display:flex;white-space:nowrap;animation:marquee 30s linear infinite}
-.strip-track:hover{animation-play-state:paused}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.s-item{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:0 28px;font-family:'Fira Code',monospace;
-  font-size:0.68rem;color:var(--muted2);
-  border-right:1px solid var(--border);transition:color 0.2s;
-}
-.s-item:hover{color:var(--cyan)}
-.s-ico{font-size:0.85rem}
-
-/* ════════════════════════════════════════════
-   SECTIONS SHARED
-════════════════════════════════════════════ */
-section{padding:96px 0;border-bottom:1px solid var(--border);position:relative;z-index:2}
-
-.sec-eyebrow{
-  display:flex;align-items:center;gap:10px;margin-bottom:12px;
-  font-family:'Fira Code',monospace;font-size:0.63rem;
-  letter-spacing:0.3em;text-transform:uppercase;
-}
-.sec-eyebrow .dash{height:1px;width:36px;background:currentColor;opacity:0.5}
-
-.sec-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(2rem,3.8vw,3rem);
-  font-weight:800;color:#fff;
-  letter-spacing:-0.02em;line-height:1.1;margin-bottom:60px;
-}
-.sec-title em{
-  font-style:normal;
-  background:linear-gradient(135deg,var(--cyan),var(--violet));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-
-/* ════════════════════════════════════════════
-   ABOUT CARDS
-════════════════════════════════════════════ */
-.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.about-card{
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.6);
-  backdrop-filter:blur(12px);
-  padding:36px 28px;
-  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+.scroll-bar{
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,var(--neon1),transparent);
   position:relative;overflow:hidden;
+}
+.scroll-bar::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:100%;
+  background:linear-gradient(to bottom,transparent,var(--neon1),transparent);
+  animation:scanDown 1.8s ease-in-out infinite;
+}
+
+/*==================================================
+  TECH STRIP
+==================================================*/
+.strip-wrap{
+  overflow:hidden;padding:15px 0;
+  border-top:1px solid rgba(0,255,247,0.06);
+  border-bottom:1px solid rgba(0,255,247,0.06);
+  background:rgba(8,12,30,0.8);position:relative;z-index:3;
+}
+.strip-wrap::before,.strip-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:4;pointer-events:none;
+}
+.strip-wrap::before{left:0;background:linear-gradient(to right,var(--c0),transparent)}
+.strip-wrap::after{right:0;background:linear-gradient(to left,var(--c0),transparent)}
+.strip-tr{display:flex;white-space:nowrap;animation:marquee 25s linear infinite}
+.strip-tr:hover{animation-play-state:paused}
+.si{
+  display:inline-flex;align-items:center;gap:9px;padding:0 26px;
+  font-size:0.67rem;color:var(--muted2);
+  border-right:1px solid rgba(0,255,247,0.06);
+  transition:color 0.2s;cursor:default;
+}
+.si:hover{color:var(--neon1)}
+.si-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  box-shadow:0 0 8px var(--neon1);
+}
+
+/*==================================================
+  SECTIONS SHARED
+==================================================*/
+section{padding:100px 0;position:relative;z-index:3}
+section+section{border-top:1px solid rgba(255,255,255,0.04)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.eyebrow-line{height:1px;width:30px}
+.sec-h{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:60px;
+}
+.sec-h span{
+  background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmerText 5s linear infinite;
+}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(40px) scale(0.97);transition:opacity 0.7s ease,transform 0.7s ease}
+.rv.in{opacity:1;transform:none}
+
+/*==================================================
+  ABOUT
+==================================================*/
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.about-card{
+  background:rgba(8,16,40,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:36px 28px;
+  position:relative;overflow:hidden;
+  transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
+  backdrop-filter:blur(12px);cursor:default;
 }
 .about-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--nc1,rgba(0,255,247,0.04)),transparent 60%);
+  opacity:0;transition:opacity 0.4s;
+}
+.about-card::after{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--cyan),var(--violet));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s ease;
+  background:linear-gradient(90deg,var(--nc1,var(--neon1)),var(--nc2,var(--neon2)));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
 }
-.about-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.4),0 0 30px rgba(0,200,240,0.06)}
-.about-card:hover::before{transform:scaleX(1)}
-.about-ico{font-size:2rem;margin-bottom:20px;display:block}
+.about-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,255,255,0.12);
+  box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 40px var(--glow,rgba(0,255,247,0.08));
+}
+.about-card:hover::before{opacity:1}
+.about-card:hover::after{transform:scaleX(1)}
+.ac-ico{font-size:2.2rem;margin-bottom:20px;display:block;animation:float 6s ease-in-out infinite}
+.ac-ico:nth-child(1){animation-delay:0s}
 .about-card h3{
-  font-family:'Syne',sans-serif;font-weight:700;
-  font-size:1.05rem;color:#fff;margin-bottom:12px;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;
+  color:#fff;margin-bottom:12px;
 }
-.about-card p{font-size:0.78rem;line-height:1.85;color:var(--muted3)}
+.about-card p{font-size:0.73rem;line-height:1.9;color:var(--muted2)}
 
-/* ════════════════════════════════════════════
-   SKILLS
-════════════════════════════════════════════ */
-.skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+/*==================================================
+  SKILLS
+==================================================*/
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
 
-/* proficiency bars */
-.prof-title{
-  font-family:'Fira Code',monospace;font-size:0.65rem;
-  letter-spacing:0.2em;text-transform:uppercase;
-  color:var(--muted2);margin-bottom:28px;
-}
-.bars{display:flex;flex-direction:column;gap:22px}
+.bars-title{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.bars{display:flex;flex-direction:column;gap:20px}
 .bar-row{}
-.bar-meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
-.bar-name{font-family:'Fira Code',monospace;font-size:0.7rem;color:var(--muted3)}
+.bar-info{display:flex;justify-content:space-between;margin-bottom:7px}
+.bar-label{font-size:0.68rem;color:var(--muted2)}
 .bar-pct{
-  font-family:'Syne',sans-serif;font-size:0.8rem;font-weight:700;
-  color:var(--cyan);
+  font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .bar-track{
-  height:3px;background:rgba(255,255,255,0.06);
-  position:relative;overflow:hidden;
+  height:3px;background:rgba(255,255,255,0.05);
+  position:relative;overflow:visible;
 }
 .bar-fill{
-  position:absolute;top:0;left:0;height:100%;width:0;
-  background:linear-gradient(90deg,var(--cyan),var(--violet));
-  transition:width 1.4s cubic-bezier(0.22,1,0.36,1);
-  box-shadow:0 0 10px rgba(0,200,240,0.4);
+  height:100%;width:0;position:relative;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+  transition:width 1.6s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 0 12px rgba(0,255,247,0.6),0 0 30px rgba(0,255,247,0.2);
 }
-.bar-fill.lit{width:var(--pct)}
+.bar-fill::after{
+  content:'';position:absolute;right:-1px;top:-3px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--neon1);
+  box-shadow:0 0 10px var(--neon1),0 0 20px var(--neon1);
+  opacity:0;transition:opacity 0.3s 1.4s;
+}
+.bar-fill.go{width:var(--w)}
+.bar-fill.go::after{opacity:1}
 
-/* skill tabs */
-.tabs-wrap{}
-.tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
 .tab-btn{
-  font-family:'Fira Code',monospace;font-size:0.65rem;
-  letter-spacing:0.1em;padding:8px 16px;
-  border:1px solid var(--border);
-  background:transparent;color:var(--muted2);cursor:pointer;
-  transition:all 0.2s;
+  font-family:'Fira Code',monospace;font-size:0.63rem;letter-spacing:0.08em;
+  padding:7px 15px;background:transparent;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.08);color:var(--muted2);
+  transition:all 0.2s;position:relative;overflow:hidden;
 }
-.tab-btn:hover{border-color:var(--cyan);color:var(--cyan)}
-.tab-btn.on{background:var(--cyan);border-color:var(--cyan);color:var(--bg);font-weight:600}
-.tab-panel{display:none}
-.tab-panel.on{display:block}
-.chips{display:flex;flex-wrap:wrap;gap:9px}
+.tab-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  opacity:0;transition:opacity 0.2s;
+}
+.tab-btn:hover{color:#fff;border-color:rgba(0,255,247,0.3)}
+.tab-btn.on{border-color:transparent;color:#000;font-weight:600}
+.tab-btn.on::before{opacity:1}
+.tab-btn span{position:relative;z-index:1}
+.tpanel{display:none}.tpanel.on{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
 .chip{
-  font-family:'Fira Code',monospace;font-size:0.65rem;
-  padding:7px 14px;
-  border:1px solid var(--border);
-  color:var(--muted2);background:rgba(255,255,255,0.02);
-  transition:all 0.2s;cursor:default;
+  font-size:0.63rem;letter-spacing:0.06em;padding:7px 14px;
+  border:1px solid rgba(255,255,255,0.07);color:var(--muted2);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.22s;cursor:default;position:relative;overflow:hidden;
 }
-.chip:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-lo)}
-.chip.star{
-  border-color:var(--cyan-hi);color:var(--cyan);
-  background:var(--cyan-lo);
+.chip::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,255,247,0.08),rgba(191,0,255,0.08));
+  opacity:0;transition:opacity 0.3s;
 }
-.chip.star::before{content:'▸ ';opacity:0.7}
+.chip:hover{border-color:rgba(0,255,247,0.3);color:var(--neon1)}
+.chip:hover::before{opacity:1}
+.chip.hi{
+  border-color:rgba(0,255,247,0.25);color:var(--neon1);
+  background:rgba(0,255,247,0.06);
+}
+.chip.hi::after{content:' ▸';opacity:0.5}
 
-/* ════════════════════════════════════════════
-   PROJECTS
-════════════════════════════════════════════ */
-.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.proj-card{
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.5);
-  backdrop-filter:blur(8px);
-  padding:28px 24px;
-  display:flex;flex-direction:column;
-  transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+/*==================================================
+  PROJECTS
+==================================================*/
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.proj{
+  background:rgba(8,14,36,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px 24px;display:flex;flex-direction:column;
   position:relative;overflow:hidden;
-  cursor:default;
+  transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
+  cursor:default;backdrop-filter:blur(10px);
 }
-.proj-card::after{
+.proj::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--neon1),var(--neon2),transparent);
+  transition:left 0.5s;
+}
+.proj::after{
   content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--cyan),var(--violet));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s ease;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s 0.1s;
 }
-.proj-card:hover{border-color:var(--border2);transform:translateY(-5px);box-shadow:0 24px 64px rgba(0,0,0,0.5),0 0 40px rgba(0,200,240,0.05)}
-.proj-card:hover::after{transform:scaleX(1)}
-.proj-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
-.proj-num{
-  font-family:'Fira Code',monospace;font-size:0.6rem;
-  letter-spacing:0.2em;color:var(--muted);
+.proj:hover{
+  transform:translateY(-8px) scale(1.01);
+  border-color:rgba(0,255,247,0.15);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 50px rgba(0,255,247,0.06);
 }
-.proj-icon{font-size:1.3rem}
-.proj-card h3{
-  font-family:'Syne',sans-serif;font-weight:700;
-  font-size:0.95rem;color:#fff;margin-bottom:10px;line-height:1.3;
-}
-.proj-card p{font-size:0.72rem;line-height:1.85;color:var(--muted3);flex:1}
+.proj:hover::before{left:100%}
+.proj:hover::after{transform:scaleX(1)}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.proj-num{font-size:0.58rem;letter-spacing:0.2em;color:var(--muted)}
+.proj-ico{font-size:1.4rem}
+.proj h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:10px;line-height:1.3}
+.proj p{font-size:0.7rem;line-height:1.9;color:var(--muted2);flex:1}
 .proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
 .ptag{
-  font-family:'Fira Code',monospace;font-size:0.58rem;
-  letter-spacing:0.1em;text-transform:uppercase;
-  padding:4px 9px;border:1px solid var(--border);color:var(--muted2);
-  transition:border-color 0.2s,color 0.2s;
+  font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:4px 9px;border:1px solid rgba(255,255,255,0.07);color:var(--muted);
+  transition:all 0.2s;
 }
-.proj-card:hover .ptag{border-color:rgba(0,200,240,0.2);color:var(--muted3)}
+.proj:hover .ptag{border-color:rgba(0,255,247,0.15);color:var(--muted2)}
 
-/* ════════════════════════════════════════════
-   EXPERIENCE
-════════════════════════════════════════════ */
-.exp-items{display:flex;flex-direction:column}
-.exp-row{display:grid;grid-template-columns:160px 48px 1fr;padding-bottom:44px}
+/*==================================================
+  EXPERIENCE
+==================================================*/
+.exp-list{display:flex;flex-direction:column}
+.exp-row{display:grid;grid-template-columns:150px 50px 1fr;padding-bottom:44px}
 .exp-row:last-child{padding-bottom:0}
-.exp-when{text-align:right;font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.1em;padding-top:6px}
-.exp-spine{display:flex;flex-direction:column;align-items:center;position:relative}
-.exp-spine::after{content:'';position:absolute;top:16px;bottom:-44px;width:1px;background:linear-gradient(to bottom,var(--border2),transparent)}
-.exp-row:last-child .exp-spine::after{display:none}
-.exp-node{
-  width:11px;height:11px;border-radius:50%;
-  background:var(--cyan);border:2px solid var(--bg);
-  outline:2px solid var(--cyan);flex-shrink:0;
-  box-shadow:0 0 12px rgba(0,200,240,0.5);
+.exp-date{text-align:right;font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;padding-top:7px}
+.exp-mid{display:flex;flex-direction:column;align-items:center;position:relative}
+.exp-mid::after{
+  content:'';position:absolute;top:16px;bottom:-44px;width:1px;
+  background:linear-gradient(to bottom,rgba(0,255,247,0.3),transparent);
+}
+.exp-row:last-child .exp-mid::after{display:none}
+.exp-dot{
+  width:12px;height:12px;border-radius:50%;flex-shrink:0;
+  background:var(--neon1);border:2px solid var(--c0);
+  box-shadow:0 0 0 3px rgba(0,255,247,0.2),0 0 20px rgba(0,255,247,0.5);
   margin-top:4px;
 }
 .exp-body{
-  margin-left:20px;
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.6);
-  backdrop-filter:blur(8px);
-  padding:26px 28px;
-  transition:border-color 0.3s;
+  margin-left:18px;
+  background:rgba(8,14,36,0.6);
+  border:1px solid rgba(255,255,255,0.06);
+  backdrop-filter:blur(10px);padding:26px 28px;
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,box-shadow 0.3s;
 }
-.exp-body:hover{border-color:var(--border2)}
-.exp-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1.02rem;color:#fff;margin-bottom:4px}
-.exp-co{
-  font-family:'Fira Code',monospace;font-size:0.64rem;
-  letter-spacing:0.12em;text-transform:uppercase;
-  color:var(--cyan);margin-bottom:14px;
+.exp-body::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
 }
-.exp-body p{font-size:0.74rem;line-height:1.85;color:var(--muted3)}
+.exp-body:hover{border-color:rgba(0,255,247,0.12);box-shadow:0 16px 50px rgba(0,0,0,0.4)}
+.exp-body:hover::before{transform:scaleX(0.6)}
+.exp-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px}
+.exp-co{font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--neon1);margin-bottom:14px}
+.exp-body p{font-size:0.72rem;line-height:1.9;color:var(--muted2)}
 .exp-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.exp-chip{
-  font-family:'Fira Code',monospace;font-size:0.58rem;
-  padding:3px 9px;border:1px solid var(--border);color:var(--muted);
-}
+.ec{font-size:0.57rem;padding:3px 9px;border:1px solid rgba(0,255,247,0.12);color:var(--muted2)}
 
-/* ════════════════════════════════════════════
-   CERTIFICATIONS
-════════════════════════════════════════════ */
-.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.cert-card{
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.6);
-  backdrop-filter:blur(12px);
-  padding:28px 22px;
-  display:flex;flex-direction:column;gap:12px;
-  transition:all 0.3s;position:relative;overflow:hidden;
+/*==================================================
+  CERTIFICATIONS
+==================================================*/
+.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cert{
+  background:rgba(8,14,36,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px 22px;display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+  transition:all 0.35s;backdrop-filter:blur(12px);
 }
-.cert-card::before{
+.cert::after{
   content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(0,200,240,0.04),transparent);
+  background:linear-gradient(135deg,rgba(0,255,247,0.03),rgba(191,0,255,0.03));
   opacity:0;transition:opacity 0.3s;
 }
-.cert-card:hover{border-color:var(--amber);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 30px rgba(245,166,35,0.08)}
-.cert-card:hover::before{opacity:1}
-.cert-ico{font-size:1.8rem}
-.cert-issuer{
-  font-family:'Fira Code',monospace;font-size:0.58rem;
-  letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);
+.cert:hover{
+  transform:translateY(-6px) scale(1.02);
+  border-color:rgba(0,255,247,0.2);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(0,255,247,0.08);
 }
-.cert-card h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;line-height:1.35}
-.cert-card p{font-size:0.68rem;line-height:1.75;color:var(--muted3);flex:1}
-.cert-badge{
-  font-family:'Fira Code',monospace;
-  font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;
-  padding:5px 11px;display:inline-block;align-self:flex-start;
-  border:1px solid;
+.cert:hover::after{opacity:1}
+.cert-ico{font-size:2rem;position:relative;z-index:1;animation:float 7s ease-in-out infinite}
+.cert-iss{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
+.cert h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.87rem;color:#fff;line-height:1.3;position:relative;z-index:1}
+.cert p{font-size:0.67rem;line-height:1.75;color:var(--muted2);flex:1;position:relative;z-index:1}
+.cbadge{
+  font-size:0.57rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 11px;border:1px solid;display:inline-block;align-self:flex-start;
+  position:relative;z-index:1;
 }
-.cert-badge.verified{color:var(--cyan);border-color:rgba(0,200,240,0.3)}
-.cert-badge.wip{color:var(--green);border-color:rgba(0,232,135,0.3)}
+.cbadge.v{
+  color:var(--neon1);border-color:rgba(0,255,247,0.3);
+  background:rgba(0,255,247,0.05);
+  box-shadow:0 0 12px rgba(0,255,247,0.1);
+}
+.cbadge.w{
+  color:var(--neon5);border-color:rgba(0,255,136,0.3);
+  background:rgba(0,255,136,0.05);
+  box-shadow:0 0 12px rgba(0,255,136,0.1);
+}
 
-/* ════════════════════════════════════════════
-   CONTACT
-════════════════════════════════════════════ */
-.contact-layout{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start}
+/*==================================================
+  CONTACT
+==================================================*/
+.contact-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start}
 .contact-left h2{
-  font-family:'Syne',sans-serif;font-weight:800;
-  font-size:clamp(2rem,3.5vw,2.8rem);color:#fff;
-  letter-spacing:-0.02em;line-height:1.1;margin-bottom:18px;
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,2.9rem);
+  font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:18px;
 }
-.contact-left h2 em{font-style:normal;color:var(--cyan)}
-.contact-left p{font-size:0.8rem;line-height:1.9;color:var(--muted3);margin-bottom:32px}
-.contact-links{display:flex;flex-direction:column;gap:12px}
-.c-link{
-  display:flex;align-items:center;gap:16px;
-  padding:17px 20px;
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.5);
-  backdrop-filter:blur(8px);
-  transition:all 0.25s;
+.contact-left h2 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.c-link:hover{border-color:var(--cyan);background:var(--cyan-lo);transform:translateX(4px)}
-.c-link-ico{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
-.c-link-lbl{
-  font-family:'Fira Code',monospace;font-size:0.62rem;
-  letter-spacing:0.15em;text-transform:uppercase;
-  color:var(--muted2);flex:1;transition:color 0.25s;
+.contact-left p{font-size:0.78rem;line-height:1.95;color:var(--muted2);margin-bottom:32px}
+.clinks{display:flex;flex-direction:column;gap:10px}
+.clink{
+  display:flex;align-items:center;gap:16px;padding:16px 20px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(8,14,36,0.5);backdrop-filter:blur(8px);
+  transition:all 0.25s;position:relative;overflow:hidden;
 }
-.c-link:hover .c-link-lbl{color:var(--cyan)}
-.c-link-val{font-size:0.7rem;color:var(--muted)}
+.clink::before{
+  content:'';position:absolute;left:-100%;top:0;bottom:0;width:100%;
+  background:linear-gradient(90deg,transparent,rgba(0,255,247,0.05),transparent);
+  transition:left 0.4s;
+}
+.clink:hover{border-color:rgba(0,255,247,0.2);transform:translateX(4px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.clink:hover::before{left:100%}
+.clink-ico{font-size:1rem;width:22px;text-align:center}
+.clink-lbl{font-size:0.61rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted2);flex:1;transition:color 0.2s}
+.clink:hover .clink-lbl{color:var(--neon1)}
+.clink-val{font-size:0.68rem;color:var(--muted)}
 
-.avail-box{
-  border:1px solid var(--border);
-  background:rgba(10,22,40,0.6);
-  backdrop-filter:blur(12px);
-  padding:32px 28px;
+.avail-card{
+  background:rgba(8,14,36,0.7);border:1px solid rgba(255,255,255,0.06);
+  padding:32px 28px;backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
 }
-.avail-box h3{
-  font-family:'Fira Code',monospace;font-size:0.65rem;
-  letter-spacing:0.25em;text-transform:uppercase;
-  color:var(--muted2);margin-bottom:24px;
+.avail-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
 }
-.avail-list{display:flex;flex-direction:column;gap:14px}
-.avail-row{display:flex;align-items:center;gap:14px;font-size:0.74rem;color:var(--muted3)}
+.avail-card h3{font-size:0.63rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.avail-list{display:flex;flex-direction:column;gap:13px}
+.avail-row{display:flex;align-items:center;gap:13px;font-size:0.72rem;color:var(--muted2)}
 .adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
-.adot.g{background:var(--green);box-shadow:0 0 8px var(--green)}
-.adot.c{background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
-.adot.a{background:var(--amber);box-shadow:0 0 8px var(--amber)}
+.adot.g{background:var(--neon5);box-shadow:0 0 10px var(--neon5)}
+.adot.c{background:var(--neon1);box-shadow:0 0 10px var(--neon1)}
+.adot.a{background:var(--neon4);box-shadow:0 0 10px var(--neon4)}
 
-/* ════════════════════════════════════════════
-   FOOTER
-════════════════════════════════════════════ */
-footer{padding:30px 0;position:relative;z-index:2;border-top:1px solid var(--border)}
-.foot-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
-footer p{font-family:'Fira Code',monospace;font-size:0.62rem;letter-spacing:0.12em;color:var(--muted)}
-.foot-links{display:flex;gap:22px}
-.foot-links a{font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--muted);transition:color 0.2s}
-.foot-links a:hover{color:var(--cyan)}
-
-/* ════════════════════════════════════════════
-   FLOATING PARTICLES
-════════════════════════════════════════════ */
-.particle{
-  position:fixed;pointer-events:none;z-index:0;
-  border-radius:50%;opacity:0;
-  animation:floatUp var(--dur) var(--delay) infinite linear;
+/*==================================================
+  FOOTER
+==================================================*/
+footer{
+  padding:28px 0;z-index:3;position:relative;
+  border-top:1px solid rgba(255,255,255,0.04);
 }
+.foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px}
+footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:0.6rem;color:var(--muted);transition:color 0.2s}
+.foot-links a:hover{color:var(--neon1)}
 
-/* ════════════════════════════════════════════
-   SCROLL REVEAL
-════════════════════════════════════════════ */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
-.reveal.shown{opacity:1;transform:translateY(0)}
-
-/* ════════════════════════════════════════════
-   RESPONSIVE
-════════════════════════════════════════════ */
+/*==================================================
+  RESPONSIVE
+==================================================*/
 @media(max-width:1020px){
-  .hero-grid,.skills-layout,.contact-layout{grid-template-columns:1fr}
+  .hero-grid,.skills-wrap,.contact-wrap{grid-template-columns:1fr}
   .about-grid,.proj-grid{grid-template-columns:repeat(2,1fr)}
   .certs-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:640px){
-  .nav-links,.nav-status{display:none}
-  .hero{padding:70px 0 60px;min-height:auto}
+  .nav-links,.nav-pill{display:none}
   section{padding:64px 0}
   .about-grid,.proj-grid{grid-template-columns:1fr}
-  .certs-grid{grid-template-columns:1fr 1fr}
   .exp-row{grid-template-columns:1fr}
-  .exp-when,.exp-spine{display:none}
+  .exp-date,.exp-mid{display:none}
   .exp-body{margin-left:0}
-  .foot-inner{flex-direction:column;text-align:center}
+  .foot-in{flex-direction:column;text-align:center}
+  #cursor,#cursor-ring{display:none}
+  body{cursor:auto}
 }
 </style>
 </head>
 <body>
 
-<!-- BG LAYERS -->
-<div class="bg-mesh"></div>
-<div class="bg-grid"></div>
-<canvas id="bg-canvas"></canvas>
-<div id="particles-host"></div>
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
 
-<!-- ══════════════════════════════
-     NAV
-══════════════════════════════ -->
+<!-- AURORA CANVAS -->
+<canvas id="aurora"></canvas>
+
+<!-- ════ NAV ════ -->
 <nav>
-  <div class="wrap nav-inner">
-    <div class="nav-brand">
-      <div class="nav-logo">
-        <span class="nl-user">maha</span><span class="nl-dot">.</span><span class="nl-fn">yadavalli</span><span class="nl-par">()</span>
-      </div>
-      <div class="nav-status"><div class="status-dot"></div>available</div>
+  <div class="wrap nav-in">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="nav-logo">maha.yadavalli()</div>
+      <div class="nav-pill"><div class="ping-dot"></div>available</div>
     </div>
     <ul class="nav-links">
       <li><a href="#about">about</a></li>
@@ -723,461 +848,382 @@ footer p{font-family:'Fira Code',monospace;font-size:0.62rem;letter-spacing:0.12
   </div>
 </nav>
 
-<!-- ══════════════════════════════
-     HERO
-══════════════════════════════ -->
+<!-- ════ HERO ════ -->
 <section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
   <div class="wrap hero-grid">
     <!-- LEFT -->
     <div>
-      <div class="hero-terminal">
-        <span class="t-user">maha</span><span class="t-host">@azure-platform</span><span class="t-dollar">:~$</span>
-        <span class="t-cmd" id="typed-cmd"></span><span class="cursor"></span>
+      <div class="term-line">
+        <span class="t-g">maha@azure</span><span style="color:var(--muted)">:</span><span class="t-v">~/architect</span><span class="t-g">$</span>
+        <span id="typed" class="t-c"></span><span class="cursor-bar"></span>
       </div>
 
       <h1 class="hero-name">
-        <span class="part1">Maha Rana<br></span>
-        <span class="part2">Yadavalli</span>
+        <span class="n1">Maha Rana</span>
+        <span class="n2">Yadavalli</span>
       </h1>
 
       <div class="hero-role">
-        <span class="fn">DataArchitect</span><span style="color:var(--muted2)">(</span><span class="args">"Azure", "Databricks", "AI"</span><span style="color:var(--muted2)">)</span>
-        <span style="color:var(--muted2)"> → </span><span class="ret">enterprise_scale</span>
+        <span class="fn-c">DataArchitect</span><span style="color:var(--muted2)">(</span><span class="arg-c">"Azure","Databricks","AI"</span><span style="color:var(--muted2)">)</span>
+        <span style="color:var(--muted)"> ⟶ </span><span class="ret-c">enterprise_at_scale</span>
       </div>
 
       <div class="hero-pills">
-        <span class="pill">☁ Cloud Architecture</span>
-        <span class="pill">⚡ Agentic AI</span>
-        <span class="pill">🏛 Medallion Architecture</span>
-        <span class="pill">🔷 Delta Lake</span>
-        <span class="pill">🔗 MCP Pipelines</span>
-        <span class="pill">🧠 LLMs &amp; GPT</span>
+        <div class="hpill">☁ Cloud Architecture</div>
+        <div class="hpill">⚡ Agentic AI</div>
+        <div class="hpill">🏛 Medallion Arch</div>
+        <div class="hpill">🔷 Delta Lake</div>
+        <div class="hpill">🧠 LLMs & GPT</div>
+        <div class="hpill">🔗 MCP Protocol</div>
       </div>
 
       <p class="hero-bio">
         <strong>15+ years</strong> delivering enterprise-grade cloud data platforms across <strong>Azure · AWS · GCP</strong>.
-        From Medallion Architecture and Delta Lake governance to agentic AI pipelines and NL-to-SQL copilots —
-        I architect data systems that reason, scale, and stay production-ready for Fortune 500 enterprises.
+        From Medallion Architecture and Delta Lake to agentic AI pipelines, LLM integrations, and NL-to-SQL copilots —
+        I architect data that <strong>thinks, scales, and ships</strong> for Fortune 500 enterprises.
       </p>
 
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#projects">./explore_work →</a>
-        <a class="btn btn-glass" href="resume.pdf" download>↓ resume.pdf</a>
-        <a class="btn btn-glass" href="#contact">ping_me()</a>
+      <div class="hero-btns">
+        <a class="btn btn-neon" href="#projects"><span>./explore_work →</span></a>
+        <a class="btn btn-ghost" href="resume.pdf" download>↓ resume.pdf</a>
+        <a class="btn btn-ghost" href="#contact">ping_me()</a>
       </div>
     </div>
 
-    <!-- RIGHT: CODE CARD -->
-    <div class="code-card">
-      <div class="cc-bar">
-        <div class="cc-dot r"></div><div class="cc-dot y"></div><div class="cc-dot g"></div>
-        <span class="cc-file">architect.py — Python 3.12</span>
-      </div>
-      <div class="cc-avatar">
-        <div class="avatar-ring">
-          <!-- Replace with: <img src="profile.jpg" alt="Maha" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"> -->
-          🧠
+    <!-- RIGHT: HOLO CARD -->
+    <div class="holo-card">
+      <div class="holo-ring"></div>
+      <div class="holo-ring2"></div>
+      <div class="holo-card-inner">
+        <div class="cc-bar">
+          <div class="cc-dot r"></div><div class="cc-dot y"></div><div class="cc-dot g"></div>
+          <span class="cc-fname">architect.py — Python 3.12</span>
         </div>
-        <div class="cc-name">Maha Rana Yadavalli</div>
-        <div class="cc-title">Data &amp; AI Architect · Cumming, GA</div>
-      </div>
-      <div class="cc-code">
-<span class="ck">class</span> <span class="cc">DataArchitect</span>:<br>
-<span class="cm"><i1></i1># Enterprise Data &amp; AI Platform Builder</span><br>
-<br>
-<span class="i1"></span><span class="ck">def</span> <span class="cf">__init__</span>(<span class="cself">self</span>):<br>
-<span class="i2"></span><span class="cself">self</span>.clouds = [<span class="cs">"Azure"</span>, <span class="cs">"AWS"</span>, <span class="cs">"GCP"</span>]<br>
-<span class="i2"></span><span class="cself">self</span>.yrs_xp = <span class="cn">15</span><span class="cm"> # and counting</span><br>
-<span class="i2"></span><span class="cself">self</span>.stack = [<br>
-<span class="i2"></span><span class="i1"></span><span class="cs">"Databricks"</span>, <span class="cs">"Delta Lake"</span>,<br>
-<span class="i2"></span><span class="i1"></span><span class="cs">"Agentic AI"</span>, <span class="cs">"MCP"</span>,<br>
-<span class="i2"></span><span class="i1"></span><span class="cs">"Neo4j"</span>, <span class="cs">"Purview"</span><br>
-<span class="i2"></span>]<br>
-<br>
-<span class="i1"></span><span class="ck">def</span> <span class="cf">superpower</span>(<span class="cself">self</span>):<br>
+        <div class="cc-top">
+          <div class="av-wrap">
+            <div class="av-spin"></div>
+            <div class="av-spin2"></div>
+            <div class="av-circle">🧠</div>
+          </div>
+          <div class="cc-name">Maha Rana Yadavalli</div>
+          <div class="cc-sub">Data & AI Architect · Cumming, GA 🌆</div>
+        </div>
+        <div class="cc-code">
+<span class="ck">class</span> <span class="ccls">DataArchitect</span>:<br>
+<span class="i1"></span><span class="ck">def</span> <span class="cf">__init__</span>(<span class="cse">self</span>):<br>
+<span class="i2"></span><span class="cse">self</span>.clouds = [<span class="cs">"Azure"</span>,<span class="cs">"AWS"</span>,<span class="cs">"GCP"</span>]<br>
+<span class="i2"></span><span class="cse">self</span>.yrs = <span class="cn">15</span> <span class="cm"># and counting</span><br>
+<span class="i2"></span><span class="cse">self</span>.stack = [<span class="cs">"Databricks"</span>,<span class="cs">"Neo4j"</span>,<br>
+<span class="i2"></span><span class="i1"></span><span class="cs">"Agentic AI"</span>,<span class="cs">"MCP"</span>,<span class="cs">"LLMs"</span>]<br>
+<span class="i1"></span><span class="ck">def</span> <span class="cf">superpower</span>(<span class="cse">self</span>):<br>
 <span class="i2"></span><span class="ck">return</span> <span class="cs">"data that reasons ✨"</span>
-      </div>
-      <div class="cc-stats">
-        <div class="cc-stat"><div class="cc-stat-val">15+</div><div class="cc-stat-lbl">Yrs Experience</div></div>
-        <div class="cc-stat"><div class="cc-stat-val">3</div><div class="cc-stat-lbl">Cloud Platforms</div></div>
-        <div class="cc-stat"><div class="cc-stat-val">F500</div><div class="cc-stat-lbl">Clients Served</div></div>
-        <div class="cc-stat"><div class="cc-stat-val">AI</div><div class="cc-stat-lbl">Native Architect</div></div>
+        </div>
+        <div class="cc-stats">
+          <div class="cc-s"><div class="cc-sv">15+</div><div class="cc-sl">Yrs XP</div></div>
+          <div class="cc-s"><div class="cc-sv">3</div><div class="cc-sl">Clouds</div></div>
+          <div class="cc-s"><div class="cc-sv">F500</div><div class="cc-sl">Clients</div></div>
+          <div class="cc-s"><div class="cc-sv">AI</div><div class="cc-sl">Native</div></div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="scroll-cta"><span>scroll</span><div class="scroll-line"></div></div>
+  <div class="scroll-ind">
+    <span>scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
 </section>
 
 <!-- TECH STRIP -->
-<div class="strip-outer">
-  <div class="strip-track" id="strip-el"></div>
+<div class="strip-wrap">
+  <div class="strip-tr" id="strip"></div>
 </div>
 
-<!-- ══════════════════════════════
-     ABOUT
-══════════════════════════════ -->
+<!-- ════ ABOUT ════ -->
 <section id="about">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--cyan)"><div class="dash"></div>About<div class="dash"></div></div>
-    <h2 class="sec-title">What I <em>Build</em></h2>
+    <div class="eyebrow" style="color:var(--neon1)">
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+      About
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+    </div>
+    <h2 class="sec-h">What I <span>Build</span></h2>
     <div class="about-grid">
-      <div class="about-card reveal">
-        <span class="about-ico">☁️</span>
+      <div class="about-card rv" style="--nc1:rgba(0,255,247,0.05);--nc2:rgba(0,200,255,0.08);--glow:rgba(0,255,247,0.06)">
+        <span class="ac-ico">☁️</span>
         <h3>Cloud Architecture</h3>
-        <p>Scalable, production-grade data platforms across Azure, AWS, and GCP. Azure Synapse, ADF, Databricks, Microsoft Fabric — designed for reliability, security, and long-term maintainability at enterprise scale.</p>
+        <p>Scalable data platforms across Azure, AWS, and GCP. Synapse, ADF, Databricks, Microsoft Fabric — built for reliability, security, and enterprise-scale maintainability.</p>
       </div>
-      <div class="about-card reveal">
-        <span class="about-ico">🤖</span>
-        <h3>Agentic AI &amp; LLMs</h3>
-        <p>Agentic pipelines using MCP Protocol, LLMs, GPT models, and RAG systems. NL-to-SQL copilots, knowledge graph reasoning with Neo4j, and Azure AI Foundry — from proof-of-concept to production AI.</p>
+      <div class="about-card rv" style="--nc1:rgba(191,0,255,0.05);--nc2:rgba(255,0,110,0.05);--glow:rgba(191,0,255,0.06)">
+        <span class="ac-ico">🤖</span>
+        <h3>Agentic AI & LLMs</h3>
+        <p>Agentic pipelines using MCP Protocol, LLMs, GPT models, and RAG systems. NL-to-SQL copilots, knowledge graphs with Neo4j, and Azure AI Foundry — from POC to production.</p>
       </div>
-      <div class="about-card reveal">
-        <span class="about-ico">🏛️</span>
-        <h3>Governance &amp; Platform Design</h3>
-        <p>Medallion Architecture, Delta Lake, Unity Catalog, and Azure Purview. Building data estates that are trusted, governed, cost-optimized, and compliant at Fortune 500 scale.</p>
+      <div class="about-card rv" style="--nc1:rgba(0,255,136,0.05);--nc2:rgba(255,204,0,0.05);--glow:rgba(0,255,136,0.06)">
+        <span class="ac-ico">🏛️</span>
+        <h3>Governance & Platform Design</h3>
+        <p>Medallion Architecture, Delta Lake, Unity Catalog, and Azure Purview. Data estates that are trusted, governed, cost-optimized, and audit-ready at Fortune 500 scale.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     SKILLS
-══════════════════════════════ -->
+<!-- ════ SKILLS ════ -->
 <section id="skills">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--violet)"><div class="dash"></div>Skills<div class="dash"></div></div>
-    <h2 class="sec-title">Tech <em>Proficiency</em></h2>
-    <div class="skills-layout">
+    <div class="eyebrow" style="color:var(--neon2)">
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>Skills
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>
+    </div>
+    <h2 class="sec-h">Tech <span>Proficiency</span></h2>
+    <div class="skills-wrap">
 
-      <!-- PROFICIENCY BARS -->
-      <div class="reveal" id="bar-section">
-        <p class="prof-title">// proficiency_levels.json</p>
+      <!-- BARS -->
+      <div class="rv" id="bar-host">
+        <p class="bars-title">// proficiency_levels</p>
         <div class="bars">
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Azure &amp; Cloud Platforms</span><span class="bar-pct">96%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:96%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Databricks &amp; Delta Lake</span><span class="bar-pct">94%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:94%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Data Architecture &amp; ETL</span><span class="bar-pct">97%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:97%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Agentic AI &amp; LLMs</span><span class="bar-pct">91%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:91%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Data Governance &amp; Purview</span><span class="bar-pct">93%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:93%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">Python &amp; PySpark</span><span class="bar-pct">91%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:91%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">SQL &amp; PostgreSQL</span><span class="bar-pct">95%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:95%"></div></div>
-          </div>
-          <div class="bar-row">
-            <div class="bar-meta"><span class="bar-name">DevOps &amp; Terraform</span><span class="bar-pct">85%</span></div>
-            <div class="bar-track"><div class="bar-fill" style="--pct:85%"></div></div>
-          </div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure & Cloud Platforms</span><span class="bar-pct">96%</span></div><div class="bar-track"><div class="bar-fill" style="--w:96%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Databricks & Delta Lake</span><span class="bar-pct">94%</span></div><div class="bar-track"><div class="bar-fill" style="--w:94%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Architecture & ETL</span><span class="bar-pct">97%</span></div><div class="bar-track"><div class="bar-fill" style="--w:97%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Agentic AI & LLMs</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--w:91%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Governance & Purview</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" style="--w:93%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">SQL & PostgreSQL</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" style="--w:95%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Python & PySpark</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--w:91%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">DevOps & Terraform</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div></div>
         </div>
       </div>
 
-      <!-- SKILL TABS -->
-      <div class="reveal">
+      <!-- TABS -->
+      <div class="rv">
         <div class="tab-nav">
-          <button class="tab-btn on" onclick="tab(event,'cloud')">Cloud</button>
-          <button class="tab-btn" onclick="tab(event,'data')">Data Eng</button>
-          <button class="tab-btn" onclick="tab(event,'ai')">AI &amp; ML</button>
-          <button class="tab-btn" onclick="tab(event,'devops')">DevOps</button>
-          <button class="tab-btn" onclick="tab(event,'lang')">Languages</button>
+          <button class="tab-btn on" onclick="doTab(event,'cloud')"><span>Cloud</span></button>
+          <button class="tab-btn" onclick="doTab(event,'data')"><span>Data Eng</span></button>
+          <button class="tab-btn" onclick="doTab(event,'ai')"><span>AI & ML</span></button>
+          <button class="tab-btn" onclick="doTab(event,'devops')"><span>DevOps</span></button>
+          <button class="tab-btn" onclick="doTab(event,'lang')"><span>Languages</span></button>
         </div>
-
-        <div id="tab-cloud" class="tab-panel on">
-          <div class="chips">
-            <span class="chip star">Azure</span><span class="chip star">AWS</span><span class="chip star">GCP</span>
-            <span class="chip star">Azure AI Foundry</span>
-            <span class="chip">Azure Data Factory</span><span class="chip">Synapse Analytics</span>
-            <span class="chip">Azure Databricks</span><span class="chip">Azure Purview</span>
-            <span class="chip">Microsoft Fabric</span><span class="chip">Azure Blob Storage</span>
-            <span class="chip">Azure App Service</span>
-            <span class="chip">AWS Lambda</span><span class="chip">AWS Step Functions</span>
-            <span class="chip">AWS SageMaker</span><span class="chip">AWS ACM</span>
-            <span class="chip">GCP Vertex AI</span><span class="chip">GCP BigQuery</span>
-          </div>
-        </div>
-        <div id="tab-data" class="tab-panel">
-          <div class="chips">
-            <span class="chip star">Medallion Architecture</span>
-            <span class="chip star">Delta Lake</span>
-            <span class="chip star">ETL / ELT Design</span>
-            <span class="chip star">PostgreSQL</span>
-            <span class="chip star">Cosmos DB</span>
-            <span class="chip star">Neo4j</span>
-            <span class="chip">Unity Catalog</span>
-            <span class="chip">PySpark</span><span class="chip">Azure SQL</span>
-            <span class="chip">Power BI</span><span class="chip">Tableau</span>
-            <span class="chip">OneLake</span><span class="chip">Metadata Management</span>
-          </div>
-        </div>
-        <div id="tab-ai" class="tab-panel">
-          <div class="chips">
-            <span class="chip star">Agentic Pipelines</span>
-            <span class="chip star">MCP Protocol</span>
-            <span class="chip star">LLMs</span>
-            <span class="chip star">GPT Models</span>
-            <span class="chip">Generative AI</span><span class="chip">NL-to-SQL</span>
-            <span class="chip">Knowledge Graphs</span><span class="chip">Neo4j</span>
-            <span class="chip">Claude API</span><span class="chip">Azure OpenAI</span>
-            <span class="chip">RAG Systems</span><span class="chip">ML Ops</span>
-            <span class="chip">Prompt Engineering</span><span class="chip">AI Foundry</span>
-          </div>
-        </div>
-        <div id="tab-devops" class="tab-panel">
-          <div class="chips">
-            <span class="chip star">Terraform</span>
-            <span class="chip">Ansible</span><span class="chip">Kubernetes</span>
-            <span class="chip">Docker</span><span class="chip">GitHub Actions</span>
-            <span class="chip">Azure DevOps</span><span class="chip">Venafi</span>
-            <span class="chip">CI/CD Pipelines</span>
-            <span class="chip">Infrastructure as Code</span>
-          </div>
-        </div>
-        <div id="tab-lang" class="tab-panel">
-          <div class="chips">
-            <span class="chip star">Python</span>
-            <span class="chip star">SQL</span>
-            <span class="chip star">PostgreSQL</span>
-            <span class="chip">PySpark</span><span class="chip">C#</span>
-            <span class="chip">Flask</span><span class="chip">JavaScript</span>
-            <span class="chip">HTML / CSS</span><span class="chip">Bash</span>
-            <span class="chip">Databricks REST API</span>
-          </div>
-        </div>
+        <div id="tab-cloud" class="tpanel on"><div class="chips">
+          <span class="chip hi">Azure</span><span class="chip hi">AWS</span><span class="chip hi">GCP</span>
+          <span class="chip hi">Azure AI Foundry</span>
+          <span class="chip">Azure Data Factory</span><span class="chip">Synapse Analytics</span>
+          <span class="chip">Azure Databricks</span><span class="chip">Azure Purview</span>
+          <span class="chip">Microsoft Fabric</span><span class="chip">Azure Blob Storage</span>
+          <span class="chip">Azure App Service</span>
+          <span class="chip">AWS Lambda</span><span class="chip">AWS Step Functions</span>
+          <span class="chip">AWS SageMaker</span><span class="chip">AWS ACM</span>
+          <span class="chip">GCP Vertex AI</span><span class="chip">GCP BigQuery</span>
+        </div></div>
+        <div id="tab-data" class="tpanel"><div class="chips">
+          <span class="chip hi">Medallion Architecture</span><span class="chip hi">Delta Lake</span>
+          <span class="chip hi">ETL / ELT Design</span>
+          <span class="chip hi">PostgreSQL</span><span class="chip hi">Cosmos DB</span><span class="chip hi">Neo4j</span>
+          <span class="chip">Unity Catalog</span><span class="chip">PySpark</span>
+          <span class="chip">Azure SQL</span><span class="chip">Power BI</span>
+          <span class="chip">Tableau</span><span class="chip">OneLake</span>
+          <span class="chip">Metadata Management</span>
+        </div></div>
+        <div id="tab-ai" class="tpanel"><div class="chips">
+          <span class="chip hi">Agentic Pipelines</span><span class="chip hi">MCP Protocol</span>
+          <span class="chip hi">LLMs</span><span class="chip hi">GPT Models</span>
+          <span class="chip">Generative AI</span><span class="chip">NL-to-SQL</span>
+          <span class="chip">Knowledge Graphs</span><span class="chip">Neo4j</span>
+          <span class="chip">Claude API</span><span class="chip">Azure OpenAI</span>
+          <span class="chip">RAG Systems</span><span class="chip">ML Ops</span>
+          <span class="chip">Prompt Engineering</span><span class="chip">AI Foundry</span>
+        </div></div>
+        <div id="tab-devops" class="tpanel"><div class="chips">
+          <span class="chip hi">Terraform</span>
+          <span class="chip">Ansible</span><span class="chip">Kubernetes</span>
+          <span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+          <span class="chip">Azure DevOps</span><span class="chip">Venafi</span>
+          <span class="chip">CI/CD Pipelines</span><span class="chip">Infrastructure as Code</span>
+        </div></div>
+        <div id="tab-lang" class="tpanel"><div class="chips">
+          <span class="chip hi">Python</span><span class="chip hi">SQL</span><span class="chip hi">PostgreSQL</span>
+          <span class="chip">PySpark</span><span class="chip">C#</span><span class="chip">Flask</span>
+          <span class="chip">JavaScript</span><span class="chip">HTML / CSS</span>
+          <span class="chip">Bash</span><span class="chip">Databricks REST API</span>
+        </div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     PROJECTS
-══════════════════════════════ -->
+<!-- ════ PROJECTS ════ -->
 <section id="projects">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--green)"><div class="dash"></div>Projects<div class="dash"></div></div>
-    <h2 class="sec-title">Selected <em>Work</em></h2>
+    <div class="eyebrow" style="color:var(--neon5)">
+      <div class="eyebrow-line" style="background:var(--neon5)"></div>Projects
+      <div class="eyebrow-line" style="background:var(--neon5)"></div>
+    </div>
+    <h2 class="sec-h">Selected <span>Work</span></h2>
     <div class="proj-grid">
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">01 / enterprise platform</div>
-          <div class="proj-icon">🏗️</div>
-        </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">01 / enterprise</div><div class="proj-ico">🏗️</div></div>
         <h3>EDAV Analytics Platform</h3>
-        <p>End-to-end enterprise analytics across Databricks, Synapse, ADF, Data Lake, PostgreSQL, Power BI, and Cosmos DB. Full Medallion Architecture design and governance strategy for a major enterprise client.</p>
+        <p>End-to-end enterprise analytics across Databricks, Synapse, ADF, Data Lake, PostgreSQL, Power BI, and Cosmos DB. Full Medallion Architecture and governance strategy.</p>
         <div class="proj-tags"><span class="ptag">Azure</span><span class="ptag">Databricks</span><span class="ptag">Synapse</span><span class="ptag">Medallion</span></div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">02 / AI enablement</div>
-          <div class="proj-icon">🧠</div>
-        </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">02 / AI platform</div><div class="proj-ico">🧠</div></div>
         <h3>MahAI — Enterprise Data Intelligence</h3>
-        <p>Multi-phase AI reasoning platform spanning Databricks, Synapse, Purview, Snowflake, and Redshift. 4-phase roadmap: telemetry → Neo4j knowledge graph → AI reasoning → NL copilot.</p>
+        <p>Multi-phase AI reasoning platform spanning Databricks, Synapse, Purview, Snowflake, Redshift. 4-phase roadmap: telemetry → Neo4j graph → AI reasoning → NL copilot.</p>
         <div class="proj-tags"><span class="ptag">LLMs</span><span class="ptag">Neo4j</span><span class="ptag">Agentic</span><span class="ptag">NL-to-SQL</span></div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">03 / governance</div>
-          <div class="proj-icon">🛡️</div>
-        </div>
-        <h3>AI-Powered Metadata &amp; Purview</h3>
-        <p>Advanced metadata enrichment using Azure Purview with AI-assisted asset descriptions, enterprise catalog scanning, and governance framework improvements across large-scale data estates.</p>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">03 / governance</div><div class="proj-ico">🛡️</div></div>
+        <h3>AI-Powered Metadata & Purview</h3>
+        <p>Advanced metadata enrichment using Azure Purview with AI-assisted asset descriptions, enterprise catalog scanning, and governance framework improvements at scale.</p>
         <div class="proj-tags"><span class="ptag">Purview</span><span class="ptag">AI</span><span class="ptag">Governance</span><span class="ptag">Metadata</span></div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">04 / automation</div>
-          <div class="proj-icon">⚙️</div>
-        </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">04 / automation</div><div class="proj-ico">⚙️</div></div>
         <h3>Certificate Automation Platform</h3>
-        <p>Large-scale certificate renewal and deployment automation using Venafi, AWS ACM, Lambda, Step Functions, Terraform, and PostgreSQL across multi-account AWS environments.</p>
+        <p>Large-scale certificate automation using Venafi, AWS ACM, Lambda, Step Functions, Terraform, and PostgreSQL across multi-account AWS environments.</p>
         <div class="proj-tags"><span class="ptag">AWS</span><span class="ptag">Terraform</span><span class="ptag">Lambda</span><span class="ptag">Automation</span></div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">05 / saas product</div>
-          <div class="proj-icon">💍</div>
-        </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">05 / saas</div><div class="proj-ico">💍</div></div>
         <h3>Wedorax — Wedding Planning Platform</h3>
-        <p>Multi-tenant wedding planning SaaS with Python/Flask, Razorpay/Stripe payments, Azure Blob Storage, and full Azure App Service deployment. Live at <a href="https://wedorax.com" target="_blank" style="color:var(--cyan)">wedorax.com</a>.</p>
+        <p>Multi-tenant SaaS with Python/Flask, Stripe payments, Azure Blob Storage, and Azure App Service deployment. Live at <a href="https://wedorax.com" target="_blank" style="color:var(--neon1)">wedorax.com</a>.</p>
         <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Azure</span><span class="ptag">Stripe</span><span class="ptag">SaaS</span></div>
       </div>
-
-      <div class="proj-card reveal">
-        <div class="proj-header">
-          <div class="proj-num">06 / optimization</div>
-          <div class="proj-icon">📈</div>
-        </div>
-        <h3>Databricks Bulk Ownership &amp; Optimization</h3>
-        <p>Bulk ownership updates across Production/QA/Dev via Databricks REST API with Azure Storage integration. Performance tuning, serverless adoption, and cost optimization strategy.</p>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">06 / optimization</div><div class="proj-ico">📈</div></div>
+        <h3>Databricks Bulk Ownership & Optimization</h3>
+        <p>Bulk ownership updates across Production/QA/Dev via Databricks REST API with Azure Storage integration. Performance tuning and serverless adoption strategy.</p>
         <div class="proj-tags"><span class="ptag">Databricks</span><span class="ptag">REST API</span><span class="ptag">Optimization</span><span class="ptag">Serverless</span></div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     EXPERIENCE
-══════════════════════════════ -->
+<!-- ════ EXPERIENCE ════ -->
 <section id="experience">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--amber)"><div class="dash"></div>Experience<div class="dash"></div></div>
-    <h2 class="sec-title">Career <em>Timeline</em></h2>
-    <div class="exp-items">
-
-      <div class="exp-row reveal">
-        <div class="exp-when">Present</div>
-        <div class="exp-spine"><div class="exp-node"></div></div>
+    <div class="eyebrow" style="color:var(--neon4)">
+      <div class="eyebrow-line" style="background:var(--neon4)"></div>Experience
+      <div class="eyebrow-line" style="background:var(--neon4)"></div>
+    </div>
+    <h2 class="sec-h">Career <span>Timeline</span></h2>
+    <div class="exp-list">
+      <div class="exp-row rv">
+        <div class="exp-date">Present</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
         <div class="exp-body">
-          <h3>Data &amp; AI Architect</h3>
+          <h3>Data & AI Architect</h3>
           <p class="exp-co">Informatik Data Solutions — Microsoft / Azure / Databricks Consulting</p>
-          <p>Leading cloud data architecture, AI enablement, agentic pipeline design, and enterprise analytics modernization for clients including Equifax, Molina, Cox, and RaceTrac. Driving Medallion Architecture, Delta Lake governance, and Azure Purview implementations at scale.</p>
-          <div class="exp-chips">
-            <span class="exp-chip">Azure</span><span class="exp-chip">Databricks</span>
-            <span class="exp-chip">Agentic AI</span><span class="exp-chip">Purview</span>
-            <span class="exp-chip">Medallion</span><span class="exp-chip">MCP</span>
-          </div>
+          <p>Leading cloud data architecture, AI enablement, agentic pipelines, and enterprise analytics modernization for clients including Equifax, Molina, Cox, and RaceTrac. Driving Medallion Architecture, Delta Lake governance, and Azure Purview at scale.</p>
+          <div class="exp-chips"><span class="ec">Azure</span><span class="ec">Databricks</span><span class="ec">Agentic AI</span><span class="ec">Purview</span><span class="ec">Medallion</span><span class="ec">MCP</span></div>
         </div>
       </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-when">Prior Roles</div>
-        <div class="exp-spine"><div class="exp-node"></div></div>
+      <div class="exp-row rv">
+        <div class="exp-date">Prior</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
         <div class="exp-body">
           <h3>Cloud Data Platform Specialist</h3>
           <p class="exp-co">Azure · AWS · GCP — Multi-Cloud Engineering</p>
-          <p>Designed scalable ELT pipelines, automation frameworks, and analytics ecosystems across major cloud providers. Deep work in Synapse Analytics, ADF, AWS Step Functions, Terraform, and multi-environment governance models.</p>
-          <div class="exp-chips">
-            <span class="exp-chip">Synapse</span><span class="exp-chip">ADF</span>
-            <span class="exp-chip">Terraform</span><span class="exp-chip">AWS Lambda</span>
-            <span class="exp-chip">GCP</span>
-          </div>
+          <p>Designed scalable ELT pipelines, automation frameworks, and analytics ecosystems. Deep work in Synapse Analytics, ADF, AWS Step Functions, Terraform, and multi-environment governance models.</p>
+          <div class="exp-chips"><span class="ec">Synapse</span><span class="ec">ADF</span><span class="ec">Terraform</span><span class="ec">AWS Lambda</span><span class="ec">GCP</span></div>
         </div>
       </div>
-
-      <div class="exp-row reveal">
-        <div class="exp-when">15+ Years</div>
-        <div class="exp-spine"><div class="exp-node"></div></div>
+      <div class="exp-row rv">
+        <div class="exp-date">15+ Yrs</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
         <div class="exp-body">
-          <h3>Enterprise Data Engineering &amp; Modernization</h3>
+          <h3>Enterprise Data Engineering & Modernization</h3>
           <p class="exp-co">Fortune 500 / Enterprise Delivery</p>
-          <p>Full-stack delivery from raw ingestion through BI reporting. Consistently aligned platform architecture to business outcomes — with a lens on cost optimization, compliance, scalability, and operational maturity.</p>
-          <div class="exp-chips">
-            <span class="exp-chip">Python</span><span class="exp-chip">SQL</span>
-            <span class="exp-chip">ETL</span><span class="exp-chip">Power BI</span>
-            <span class="exp-chip">PostgreSQL</span>
-          </div>
+          <p>Full-stack delivery from raw ingestion through BI reporting. Aligned platform architecture to business outcomes with a lens on cost optimization, compliance, and scalability.</p>
+          <div class="exp-chips"><span class="ec">Python</span><span class="ec">SQL</span><span class="ec">ETL</span><span class="ec">Power BI</span><span class="ec">PostgreSQL</span></div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     CERTIFICATIONS
-══════════════════════════════ -->
+<!-- ════ CERTIFICATIONS ════ -->
 <section id="certifications">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--amber)"><div class="dash"></div>Certifications<div class="dash"></div></div>
-    <h2 class="sec-title">Credentials &amp; <em>Learning</em></h2>
+    <div class="eyebrow" style="color:var(--neon6)">
+      <div class="eyebrow-line" style="background:var(--neon6)"></div>Certifications
+      <div class="eyebrow-line" style="background:var(--neon6)"></div>
+    </div>
+    <h2 class="sec-h">Credentials & <span>Learning</span></h2>
     <div class="certs-grid">
-
-      <div class="cert-card reveal">
+      <div class="cert rv">
         <div class="cert-ico">🔷</div>
-        <div class="cert-issuer">Microsoft</div>
+        <div class="cert-iss">Microsoft</div>
         <h3>Azure Solutions Architect Expert</h3>
-        <p>Designs and implements Azure solutions — compute, network, storage, and security. Expert-level cloud architecture validation.</p>
-        <span class="cert-badge verified">✓ Verified</span>
+        <p>Designs and implements Azure solutions including compute, network, storage, and security. Expert-level cloud architecture validation.</p>
+        <span class="cbadge v">✓ Verified</span>
       </div>
-
-      <div class="cert-card reveal">
+      <div class="cert rv">
         <div class="cert-ico">⚡</div>
-        <div class="cert-issuer">Databricks</div>
+        <div class="cert-iss">Databricks</div>
         <h3>Databricks Certified Data Engineer</h3>
         <p>Expertise in data pipelines, Delta Lake, and Databricks lakehouse architecture at professional level.</p>
-        <span class="cert-badge verified">✓ Verified</span>
+        <span class="cbadge v">✓ Verified</span>
       </div>
-
-      <div class="cert-card reveal">
+      <div class="cert rv">
         <div class="cert-ico">🪢</div>
-        <div class="cert-issuer">Microsoft</div>
+        <div class="cert-iss">Microsoft</div>
         <h3>Fabric Analytics Engineer Associate</h3>
         <p>OneLake, data integration, real-time analytics, and end-to-end platform design on Microsoft Fabric.</p>
-        <span class="cert-badge verified">✓ Verified</span>
+        <span class="cbadge v">✓ Verified</span>
       </div>
-
-      <div class="cert-card reveal">
+      <div class="cert rv">
         <div class="cert-ico">🎓</div>
-        <div class="cert-issuer">Anthropic · Informatik</div>
+        <div class="cert-iss">Anthropic · Informatik</div>
         <h3>Claude Certified Architect (CCA)</h3>
         <p>Claude Certified Architect – Foundations, via Informatik's Anthropic partner network access.</p>
-        <span class="cert-badge wip">⟳ In Progress</span>
+        <span class="cbadge w">⟳ In Progress</span>
       </div>
-
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════
-     CONTACT
-══════════════════════════════ -->
+<!-- ════ CONTACT ════ -->
 <section id="contact">
   <div class="wrap">
-    <div class="sec-eyebrow" style="color:var(--cyan)"><div class="dash"></div>Contact<div class="dash"></div></div>
-    <div class="contact-layout">
-      <div class="contact-left reveal">
+    <div class="eyebrow" style="color:var(--neon1)">
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>Contact
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-left rv">
         <h2>Let's build something <em>impactful</em> together.</h2>
-        <p>Open to consulting engagements, enterprise architecture advisory, AI platform design, and speaking opportunities in the data &amp; AI space. Always interested in challenging problems.</p>
-        <div class="contact-links">
-          <a class="c-link" href="mailto:maharanay@gmail.com">
-            <span class="c-link-ico">✉</span>
-            <span class="c-link-lbl">Email</span>
-            <span class="c-link-val">maharanay@gmail.com</span>
+        <p>Open to consulting, enterprise architecture advisory, AI platform design, and speaking in the data & AI space. Always interested in hard problems at scale.</p>
+        <div class="clinks">
+          <a class="clink" href="mailto:maharanay@gmail.com">
+            <span class="clink-ico">✉</span>
+            <span class="clink-lbl">Email</span>
+            <span class="clink-val">maharanay@gmail.com</span>
           </a>
-          <a class="c-link" href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">
-            <span class="c-link-ico">in</span>
-            <span class="c-link-lbl">LinkedIn</span>
-            <span class="c-link-val">maha-rana-yadavalli</span>
+          <a class="clink" href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">
+            <span class="clink-ico">in</span>
+            <span class="clink-lbl">LinkedIn</span>
+            <span class="clink-val">maha-rana-yadavalli</span>
           </a>
-          <a class="c-link" href="https://github.com/maharanay22" target="_blank">
-            <span class="c-link-ico">⌘</span>
-            <span class="c-link-lbl">GitHub</span>
-            <span class="c-link-val">maharanay22</span>
+          <a class="clink" href="https://github.com/maharanay22" target="_blank">
+            <span class="clink-ico">⌘</span>
+            <span class="clink-lbl">GitHub</span>
+            <span class="clink-val">maharanay22</span>
           </a>
         </div>
       </div>
-      <div class="avail-box reveal">
+      <div class="avail-card rv">
         <h3>// currently_available_for</h3>
         <div class="avail-list">
           <div class="avail-row"><div class="adot g"></div><span>Enterprise Data Architecture Consulting</span></div>
           <div class="avail-row"><div class="adot g"></div><span>Azure / Databricks Platform Design</span></div>
-          <div class="avail-row"><div class="adot c"></div><span>Agentic AI &amp; MCP Pipeline Design</span></div>
-          <div class="avail-row"><div class="adot c"></div><span>Data Governance &amp; Purview Implementations</span></div>
-          <div class="avail-row"><div class="adot c"></div><span>LLM Integration &amp; AI Foundry Projects</span></div>
-          <div class="avail-row"><div class="adot a"></div><span>Speaking &amp; Technical Advisory</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>Agentic AI & MCP Pipeline Design</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>Data Governance & Purview Implementations</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>LLM Integration & AI Foundry Projects</span></div>
+          <div class="avail-row"><div class="adot a"></div><span>Speaking & Technical Advisory</span></div>
         </div>
       </div>
     </div>
@@ -1186,8 +1232,8 @@ footer p{font-family:'Fira Code',monospace;font-size:0.62rem;letter-spacing:0.12
 
 <!-- FOOTER -->
 <footer>
-  <div class="wrap foot-inner">
-    <p>// maha.yadavalli() · © 2026 · built with embeddings &amp; caffeine ☕</p>
+  <div class="wrap foot-in">
+    <p>// maha.yadavalli() · © 2026 · built with embeddings & caffeine ☕</p>
     <div class="foot-links">
       <a href="https://github.com/maharanay22" target="_blank">github</a>
       <a href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">linkedin</a>
@@ -1196,122 +1242,130 @@ footer p{font-family:'Fira Code',monospace;font-size:0.62rem;letter-spacing:0.12
   </div>
 </footer>
 
-<!-- ══════════════════════════════
-     SCRIPTS
-══════════════════════════════ -->
 <script>
-/* ── STARFIELD CANVAS ── */
+/* ═══ CUSTOM CURSOR ═══ */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=(mx-6)+'px'; cur.style.top=(my-6)+'px';
+});
+function animRing(){
+  rx+=(mx-rx-18)*0.12; ry+=(my-ry-18)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.proj,.cert,.about-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';cur.style.background='var(--neon2)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';cur.style.background='var(--neon1)';});
+});
+
+/* ═══ AURORA CANVAS ═══ */
 (function(){
-  const canvas = document.getElementById('bg-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, stars = [];
-  function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  for(let i=0;i<160;i++){
-    stars.push({
-      x:Math.random()*1, y:Math.random()*1,
-      r:Math.random()*1.2+0.2,
-      a:Math.random(), da:(Math.random()-0.5)*0.004,
-      speed:Math.random()*0.00008+0.00002
-    });
-  }
+  const c=document.getElementById('aurora');
+  const ctx=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+
+  const blobs=[
+    {x:0.15,y:0.2,r:0.38,vx:0.0002,vy:0.00015,color:[0,255,247]},
+    {x:0.8,y:0.7,r:0.32,vx:-0.00018,vy:-0.0002,color:[191,0,255]},
+    {x:0.5,y:0.5,r:0.25,vx:0.00012,vy:0.00022,color:[255,0,110]},
+    {x:0.2,y:0.8,r:0.28,vx:0.0003,vy:-0.00012,color:[0,255,136]},
+    {x:0.9,y:0.2,r:0.22,vx:-0.00025,vy:0.0003,color:[255,204,0]},
+  ];
+  let t=0;
   function draw(){
     ctx.clearRect(0,0,W,H);
-    stars.forEach(s=>{
-      s.x += s.speed; if(s.x>1) s.x=0;
-      s.a += s.da; if(s.a<0||s.a>1) s.da*=-1;
-      ctx.beginPath();
-      ctx.arc(s.x*W, s.y*H, s.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(200,230,255,${s.a*0.8})`;
-      ctx.fill();
+    blobs.forEach(b=>{
+      b.x+=b.vx; b.y+=b.vy;
+      if(b.x<-0.1||b.x>1.1)b.vx*=-1;
+      if(b.y<-0.1||b.y>1.1)b.vy*=-1;
+      const px=b.x*W, py=b.y*H, pr=b.r*Math.min(W,H);
+      const g=ctx.createRadialGradient(px,py,0,px,py,pr);
+      const alpha=0.12+0.04*Math.sin(t*0.5+b.x*10);
+      g.addColorStop(0,`rgba(${b.color.join(',')},${alpha})`);
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.fill();
     });
+    t+=0.01;
     requestAnimationFrame(draw);
   }
   draw();
 })();
 
-/* ── PARTICLES ── */
+/* ═══ TYPING EFFECT ═══ */
 (function(){
-  const host = document.getElementById('particles-host');
-  for(let i=0;i<20;i++){
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = Math.random()*2+1;
-    const colors = ['rgba(0,200,240,0.6)','rgba(157,106,255,0.5)','rgba(0,232,135,0.4)'];
-    p.style.cssText = `
-      width:${size}px;height:${size}px;
-      left:${Math.random()*100}%;bottom:0;
-      background:${colors[Math.floor(Math.random()*colors.length)]};
-      --dur:${7+Math.random()*9}s;
-      --delay:${Math.random()*9}s;
-      --dx:${(Math.random()-0.5)*140}px;
-    `;
-    host.appendChild(p);
+  const el=document.getElementById('typed');
+  const words=['python architect.py','./build_platform.sh','deploy --env=prod','git push origin main'];
+  let wi=0,ci=0,del=false;
+  function tick(){
+    const w=words[wi];
+    if(!del){
+      el.textContent=w.slice(0,++ci);
+      if(ci===w.length){del=true;setTimeout(tick,1800);return}
+    } else {
+      el.textContent=w.slice(0,--ci);
+      if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(tick,400);return}
+    }
+    setTimeout(tick,del?40:70);
   }
+  setTimeout(tick,1000);
 })();
 
-/* ── TECH STRIP ── */
+/* ═══ TECH STRIP ═══ */
 (function(){
-  const items = [
+  const items=[
     ['⚡','Azure Databricks'],['☁','Azure Synapse'],['🔷','Delta Lake'],
     ['🏛','Medallion Arch'],['🤖','Agentic AI'],['🔗','MCP Protocol'],
     ['🧠','Neo4j'],['📊','Power BI'],['🌐','Azure Purview'],
     ['🛠','Terraform'],['🐍','PySpark'],['⚙','Azure Data Factory'],
     ['🔍','Unity Catalog'],['🌩','AWS Lambda'],['🧬','RAG Systems'],
-    ['🗄','PostgreSQL'],['💎','Microsoft Fabric'],['🤖','LLMs & GPT'],
+    ['🗄','PostgreSQL'],['💎','Fabric'],['🤖','LLMs & GPT'],
     ['🔮','AI Foundry'],['📦','Docker'],['♾','Azure DevOps'],
   ];
-  const el = document.getElementById('strip-el');
-  const all = [...items,...items];
-  el.innerHTML = all.map(([ico,name])=>
-    `<div class="s-item"><span class="s-ico">${ico}</span>${name}</div>`
+  const el=document.getElementById('strip');
+  el.innerHTML=[...items,...items].map(([i,n])=>
+    `<div class="si"><div class="si-dot"></div><span>${i}</span>${n}</div>`
   ).join('');
 })();
 
-/* ── TYPING EFFECT ── */
-(function(){
-  const el = document.getElementById('typed-cmd');
-  const text = 'python architect.py --mode=production';
-  let i=0;
-  function type(){
-    if(i<=text.length){ el.textContent=text.slice(0,i++); setTimeout(type,55); }
-  }
-  setTimeout(type, 800);
-})();
-
-/* ── SKILL TABS ── */
-function tab(e, id){
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('on'));
+/* ═══ SKILL TABS ═══ */
+function doTab(e,id){
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
   document.getElementById('tab-'+id).classList.add('on');
   e.currentTarget.classList.add('on');
 }
 
-/* ── SCROLL REVEAL ── */
-const revealObs = new IntersectionObserver((entries)=>{
-  entries.forEach((e,idx)=>{
+/* ═══ SCROLL REVEAL ═══ */
+const rvObs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
     if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('shown'), idx*80);
-      revealObs.unobserve(e.target);
+      setTimeout(()=>e.target.classList.add('in'),i*90);
+      rvObs.unobserve(e.target);
     }
   });
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>revealObs.observe(el));
+},{threshold:0.08});
+document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-/* ── SKILL BARS ── */
-const barObs = new IntersectionObserver((entries)=>{
+/* ═══ SKILL BARS ═══ */
+const barObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       document.querySelectorAll('.bar-fill').forEach((b,i)=>{
-        setTimeout(()=>b.classList.add('lit'), i*120);
+        setTimeout(()=>b.classList.add('go'),i*130);
       });
       barObs.disconnect();
     }
   });
-},{threshold:0.3});
-const barSection = document.getElementById('bar-section');
-if(barSection) barObs.observe(barSection);
+},{threshold:0.2});
+const bh=document.getElementById('bar-host');
+if(bh)barObs.observe(bh);
 </script>
-
 </body>
 </html>
