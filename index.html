@@ -11,7 +11,7 @@
   RESET & VARS
 ==================================================*/
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 :root{
   --c0:#020510;
   --c1:#0a0f2e;
@@ -138,7 +138,7 @@ body::before{
 nav{
   position:sticky;top:0;z-index:200;
   background:rgba(2,5,16,0.85);
-  backdrop-filter:blur(30px);
+  -webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);
   border-bottom:1px solid rgba(0,255,247,0.08);
 }
 .nav-in{
@@ -301,7 +301,7 @@ nav{
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(0,255,247,0.25);
   color:var(--neon1);
-  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
 }
 .btn-ghost:hover{background:rgba(0,255,247,0.08);border-color:var(--neon1);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,255,247,0.2)}
 
@@ -315,7 +315,7 @@ nav{
 .holo-card-inner{
   background:rgba(8,16,40,0.8);
   border:1px solid rgba(0,255,247,0.15);
-  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
   overflow:hidden;
   box-shadow:
     0 0 0 1px rgba(0,255,247,0.08),
@@ -514,7 +514,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
   padding:36px 28px;
   position:relative;overflow:hidden;
   transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
-  backdrop-filter:blur(12px);cursor:default;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:default;
 }
 .about-card::before{
   content:'';position:absolute;inset:0;
@@ -573,7 +573,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
   box-shadow:0 0 10px var(--neon1),0 0 20px var(--neon1);
   opacity:0;transition:opacity 0.3s 1.4s;
 }
-.bar-fill.go{width:var(--w)}
+.bar-fill.go{width:var(--w,0%)}
 .bar-fill.go::after{opacity:1}
 
 .tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
@@ -623,7 +623,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
   padding:28px 24px;display:flex;flex-direction:column;
   position:relative;overflow:hidden;
   transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
-  cursor:default;backdrop-filter:blur(10px);
+  cursor:default;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
 }
 .proj::before{
   content:'';position:absolute;top:0;left:-100%;width:100%;height:1px;
@@ -678,7 +678,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
   margin-left:18px;
   background:rgba(8,14,36,0.6);
   border:1px solid rgba(255,255,255,0.06);
-  backdrop-filter:blur(10px);padding:26px 28px;
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:26px 28px;
   position:relative;overflow:hidden;
   transition:border-color 0.3s,box-shadow 0.3s;
 }
@@ -704,7 +704,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
   border:1px solid rgba(255,255,255,0.06);
   padding:28px 22px;display:flex;flex-direction:column;gap:10px;
   position:relative;overflow:hidden;
-  transition:all 0.35s;backdrop-filter:blur(12px);
+  transition:all 0.35s;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
 }
 .cert::after{
   content:'';position:absolute;inset:0;
@@ -755,7 +755,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
 .clink{
   display:flex;align-items:center;gap:16px;padding:16px 20px;
   border:1px solid rgba(255,255,255,0.06);
-  background:rgba(8,14,36,0.5);backdrop-filter:blur(8px);
+  background:rgba(8,14,36,0.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   transition:all 0.25s;position:relative;overflow:hidden;
 }
 .clink::before{
@@ -772,7 +772,7 @@ section+section{border-top:1px solid rgba(255,255,255,0.04)}
 
 .avail-card{
   background:rgba(8,14,36,0.7);border:1px solid rgba(255,255,255,0.06);
-  padding:32px 28px;backdrop-filter:blur(12px);
+  padding:32px 28px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   position:relative;overflow:hidden;
 }
 .avail-card::before{
@@ -803,21 +803,130 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
 /*==================================================
   RESPONSIVE
 ==================================================*/
+/* ── TABLET: 768px – 1020px ── */
 @media(max-width:1020px){
-  .hero-grid,.skills-wrap,.contact-wrap{grid-template-columns:1fr}
-  .about-grid,.proj-grid{grid-template-columns:repeat(2,1fr)}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .holo-card{max-width:480px;margin:0 auto}
+  .skills-wrap{grid-template-columns:1fr;gap:48px}
+  .contact-wrap{grid-template-columns:1fr;gap:40px}
+  .about-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
   .certs-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{min-height:auto;padding:80px 0 60px}
+  .hero-name{font-size:clamp(2.4rem,5vw,3.8rem)}
+  .sec-h{font-size:clamp(1.8rem,3.5vw,2.6rem)}
 }
-@media(max-width:640px){
-  .nav-links,.nav-pill{display:none}
-  section{padding:64px 0}
-  .about-grid,.proj-grid{grid-template-columns:1fr}
+
+/* ── LARGE PHONE: 480px – 768px ── */
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-pill{display:flex}
+  .hero-pills{gap:7px}
+  .hpill{font-size:0.58rem;padding:5px 11px}
+  .cc-stats{grid-template-columns:repeat(4,1fr)}
+  .cc-s{padding:14px 10px}
+  .cc-sv{font-size:1.2rem}
+  .strip-wrap{display:none}
+  section{padding:72px 0}
+}
+
+/* ── PHONE: up to 480px ── */
+@media(max-width:480px){
+  .wrap{width:calc(100% - 28px)}
+  nav .wrap{padding:0}
+  .nav-in{padding:14px 0}
+  .nav-logo{font-size:0.85rem}
+  .nav-pill{display:none}
+
+  .hero{padding:70px 0 50px;min-height:auto}
+  .hero-grid{gap:32px}
+  .hero-name{font-size:clamp(2.2rem,9vw,3rem)}
+  .hero-role{font-size:0.72rem}
+  .hero-pills{gap:6px}
+  .hpill{font-size:0.56rem;padding:5px 10px}
+  .hero-bio{font-size:0.76rem}
+  .hero-btns{gap:10px}
+  .btn{font-size:0.65rem;padding:11px 20px}
+
+  .holo-card{max-width:100%}
+  .cc-code{font-size:0.62rem;padding:14px 16px;line-height:1.9}
+  .cc-stats{grid-template-columns:repeat(2,1fr)}
+  .cc-s{padding:16px 12px}
+  .cc-sv{font-size:1.3rem}
+  .av-circle{width:70px;height:70px;font-size:1.8rem}
+  .av-spin{inset:-5px}.av-spin2{inset:-10px}
+
+  section{padding:56px 0}
+  .sec-h{margin-bottom:36px}
+  .eyebrow-line{width:20px}
+
+  .about-card{padding:26px 20px}
+  .proj{padding:22px 18px}
   .exp-row{grid-template-columns:1fr}
   .exp-date,.exp-mid{display:none}
-  .exp-body{margin-left:0}
-  .foot-in{flex-direction:column;text-align:center}
+  .exp-body{margin-left:0;padding:20px 18px}
+  .certs-grid{grid-template-columns:1fr}
+  .cert{padding:22px 18px}
+  .contact-wrap{gap:28px}
+  .contact-left h2{font-size:1.7rem}
+  .avail-card{padding:22px 18px}
+  .tab-nav{gap:4px}
+  .tab-btn{font-size:0.58rem;padding:6px 11px}
+  .chip{font-size:0.58rem;padding:5px 11px}
+  .bars-title{font-size:0.58rem}
+  .bar-label{font-size:0.62rem}
+  .foot-in{flex-direction:column;text-align:center;gap:12px}
   #cursor,#cursor-ring{display:none}
   body{cursor:auto}
+}
+
+/* ── VERY SMALL: up to 360px ── */
+@media(max-width:360px){
+  .hero-name{font-size:2rem}
+  .hero-role{font-size:0.65rem;word-break:break-all}
+  .btn{padding:10px 16px;font-size:0.6rem}
+  .hpill{display:none}
+  .hero-pills .hpill:nth-child(-n+3){display:inline-flex}
+}
+/* ── HAMBURGER ── */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:6px;
+  z-index:300;
+}
+.hamburger span{
+  display:block;width:24px;height:2px;
+  background:var(--neon1);
+  transition:transform 0.3s,opacity 0.3s;
+  box-shadow:0 0 6px var(--neon1);
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{
+    display:none;flex-direction:column;gap:0;
+    position:fixed;top:0;right:0;bottom:0;width:260px;
+    background:rgba(2,5,16,0.97);
+    -webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);
+    border-left:1px solid rgba(0,255,247,0.1);
+    padding:80px 32px 40px;z-index:250;
+    transform:translateX(100%);
+    transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  }
+  .nav-links.open{display:flex;transform:translateX(0)}
+  .nav-links li{border-bottom:1px solid rgba(255,255,255,0.05)}
+  .nav-links a{
+    display:block;padding:16px 0;font-size:0.85rem;
+    color:var(--muted2);letter-spacing:0.12em;
+  }
+  .nav-links a:hover{color:var(--neon1)}
+  .nav-links a::after{display:none}
 }
 </style>
 </head>
@@ -837,14 +946,17 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
       <div class="nav-logo">maha.yadavalli()</div>
       <div class="nav-pill"><div class="ping-dot"></div>available</div>
     </div>
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#skills">skills</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#experience">experience</a></li>
-      <li><a href="#certifications">certs</a></li>
-      <li><a href="#contact">contact</a></li>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">about</a></li>
+      <li><a href="#skills" onclick="closeNav()">skills</a></li>
+      <li><a href="#projects" onclick="closeNav()">projects</a></li>
+      <li><a href="#experience" onclick="closeNav()">experience</a></li>
+      <li><a href="#certifications" onclick="closeNav()">certs</a></li>
+      <li><a href="#contact" onclick="closeNav()">contact</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -984,16 +1096,20 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
 
       <!-- BARS -->
       <div class="rv" id="bar-host">
-        <p class="bars-title">// proficiency_levels</p>
+        <p class="bars-title">// proficiency_levels — hover to inspect</p>
         <div class="bars">
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure & Cloud Platforms</span><span class="bar-pct">96%</span></div><div class="bar-track"><div class="bar-fill" style="--w:96%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Databricks & Delta Lake</span><span class="bar-pct">94%</span></div><div class="bar-track"><div class="bar-fill" style="--w:94%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Architecture & ETL</span><span class="bar-pct">97%</span></div><div class="bar-track"><div class="bar-fill" style="--w:97%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Agentic AI & LLMs</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--w:91%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Governance & Purview</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" style="--w:93%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">SQL & PostgreSQL</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" style="--w:95%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">Python & PySpark</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--w:91%"></div></div></div>
-          <div class="bar-row"><div class="bar-info"><span class="bar-label">DevOps & Terraform</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" style="--w:85%"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure & Cloud Architecture</span><span class="bar-pct">96%</span></div><div class="bar-track"><div class="bar-fill" data-w="96"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Databricks & Delta Lake</span><span class="bar-pct">94%</span></div><div class="bar-track"><div class="bar-fill" data-w="94"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Snowflake & Redshift</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure Synapse Analytics</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" data-w="93"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Architecture & ETL</span><span class="bar-pct">97%</span></div><div class="bar-track"><div class="bar-fill" data-w="97"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Agentic AI & LLMs</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" data-w="91"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Palantir Foundry</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" data-w="82"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Governance & Purview</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" data-w="93"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">SQL & PostgreSQL</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" data-w="95"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Python & PySpark</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" data-w="91"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Microsoft Fabric & OneLake</span><span class="bar-pct">89%</span></div><div class="bar-track"><div class="bar-fill" data-w="89"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">DevOps & Terraform</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
         </div>
       </div>
 
@@ -1001,52 +1117,90 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
       <div class="rv">
         <div class="tab-nav">
           <button class="tab-btn on" onclick="doTab(event,'cloud')"><span>Cloud</span></button>
+          <button class="tab-btn" onclick="doTab(event,'platforms')"><span>Data Platforms</span></button>
           <button class="tab-btn" onclick="doTab(event,'data')"><span>Data Eng</span></button>
           <button class="tab-btn" onclick="doTab(event,'ai')"><span>AI & ML</span></button>
           <button class="tab-btn" onclick="doTab(event,'devops')"><span>DevOps</span></button>
           <button class="tab-btn" onclick="doTab(event,'lang')"><span>Languages</span></button>
         </div>
+
         <div id="tab-cloud" class="tpanel on"><div class="chips">
           <span class="chip hi">Azure</span><span class="chip hi">AWS</span><span class="chip hi">GCP</span>
           <span class="chip hi">Azure AI Foundry</span>
           <span class="chip">Azure Data Factory</span><span class="chip">Synapse Analytics</span>
           <span class="chip">Azure Databricks</span><span class="chip">Azure Purview</span>
           <span class="chip">Microsoft Fabric</span><span class="chip">Azure Blob Storage</span>
-          <span class="chip">Azure App Service</span>
+          <span class="chip">Azure App Service</span><span class="chip">Azure Data Lake</span>
           <span class="chip">AWS Lambda</span><span class="chip">AWS Step Functions</span>
-          <span class="chip">AWS SageMaker</span><span class="chip">AWS ACM</span>
-          <span class="chip">GCP Vertex AI</span><span class="chip">GCP BigQuery</span>
+          <span class="chip">AWS SageMaker</span><span class="chip">AWS Glue</span><span class="chip">AWS ACM</span>
+          <span class="chip">GCP Vertex AI</span><span class="chip">GCP BigQuery</span><span class="chip">GCP Dataflow</span>
         </div></div>
+
+        <div id="tab-platforms" class="tpanel"><div class="chips">
+          <span class="chip hi">Databricks</span>
+          <span class="chip hi">Snowflake</span>
+          <span class="chip hi">Azure Synapse Analytics</span>
+          <span class="chip hi">Amazon Redshift</span>
+          <span class="chip hi">Palantir Foundry</span>
+          <span class="chip hi">Microsoft Fabric</span>
+          <span class="chip">Google BigQuery</span>
+          <span class="chip">Azure Purview</span>
+          <span class="chip">Unity Catalog</span>
+          <span class="chip">OneLake</span>
+          <span class="chip">Azure Data Lake Gen2</span>
+          <span class="chip">Apache Spark</span>
+          <span class="chip">Apache Kafka</span>
+          <span class="chip">Apache Airflow</span>
+          <span class="chip">dbt</span>
+          <span class="chip">Delta Sharing</span>
+          <span class="chip">Lakehouse Architecture</span>
+        </div></div>
+
         <div id="tab-data" class="tpanel"><div class="chips">
           <span class="chip hi">Medallion Architecture</span><span class="chip hi">Delta Lake</span>
           <span class="chip hi">ETL / ELT Design</span>
           <span class="chip hi">PostgreSQL</span><span class="chip hi">Cosmos DB</span><span class="chip hi">Neo4j</span>
           <span class="chip">Unity Catalog</span><span class="chip">PySpark</span>
-          <span class="chip">Azure SQL</span><span class="chip">Power BI</span>
-          <span class="chip">Tableau</span><span class="chip">OneLake</span>
-          <span class="chip">Metadata Management</span>
+          <span class="chip">Azure SQL</span><span class="chip">SQL Server</span>
+          <span class="chip">Power BI</span><span class="chip">Tableau</span>
+          <span class="chip">Looker</span><span class="chip">OneLake</span>
+          <span class="chip">Data Vault 2.0</span><span class="chip">Star Schema</span>
+          <span class="chip">Change Data Capture</span><span class="chip">Metadata Management</span>
+          <span class="chip">Data Lineage</span><span class="chip">Master Data Management</span>
         </div></div>
+
         <div id="tab-ai" class="tpanel"><div class="chips">
           <span class="chip hi">Agentic Pipelines</span><span class="chip hi">MCP Protocol</span>
           <span class="chip hi">LLMs</span><span class="chip hi">GPT Models</span>
+          <span class="chip hi">Azure OpenAI</span><span class="chip hi">Claude API</span>
           <span class="chip">Generative AI</span><span class="chip">NL-to-SQL</span>
           <span class="chip">Knowledge Graphs</span><span class="chip">Neo4j</span>
-          <span class="chip">Claude API</span><span class="chip">Azure OpenAI</span>
-          <span class="chip">RAG Systems</span><span class="chip">ML Ops</span>
+          <span class="chip">RAG Systems</span><span class="chip">Vector Databases</span>
           <span class="chip">Prompt Engineering</span><span class="chip">AI Foundry</span>
+          <span class="chip">LangChain</span><span class="chip">Semantic Kernel</span>
+          <span class="chip">ML Ops</span><span class="chip">Fine-tuning</span>
+          <span class="chip">Embeddings</span><span class="chip">AI Gateway</span>
         </div></div>
+
         <div id="tab-devops" class="tpanel"><div class="chips">
-          <span class="chip hi">Terraform</span>
+          <span class="chip hi">Terraform</span><span class="chip hi">Azure DevOps</span>
           <span class="chip">Ansible</span><span class="chip">Kubernetes</span>
           <span class="chip">Docker</span><span class="chip">GitHub Actions</span>
-          <span class="chip">Azure DevOps</span><span class="chip">Venafi</span>
-          <span class="chip">CI/CD Pipelines</span><span class="chip">Infrastructure as Code</span>
+          <span class="chip">Venafi</span><span class="chip">CI/CD Pipelines</span>
+          <span class="chip">Infrastructure as Code</span><span class="chip">Helm</span>
+          <span class="chip">GitOps</span><span class="chip">ARM Templates</span>
+          <span class="chip">Bicep</span><span class="chip">Azure Monitor</span>
+          <span class="chip">Log Analytics</span>
         </div></div>
+
         <div id="tab-lang" class="tpanel"><div class="chips">
           <span class="chip hi">Python</span><span class="chip hi">SQL</span><span class="chip hi">PostgreSQL</span>
-          <span class="chip">PySpark</span><span class="chip">C#</span><span class="chip">Flask</span>
+          <span class="chip">PySpark</span><span class="chip">Scala</span><span class="chip">C#</span>
+          <span class="chip">Flask</span><span class="chip">FastAPI</span>
           <span class="chip">JavaScript</span><span class="chip">HTML / CSS</span>
-          <span class="chip">Bash</span><span class="chip">Databricks REST API</span>
+          <span class="chip">Bash / Shell</span><span class="chip">YAML</span>
+          <span class="chip">Databricks REST API</span><span class="chip">GraphQL</span>
+          <span class="chip">REST APIs</span>
         </div></div>
       </div>
     </div>
@@ -1198,10 +1352,10 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
         <h2>Let's build something <em>impactful</em> together.</h2>
         <p>Open to consulting, enterprise architecture advisory, AI platform design, and speaking in the data & AI space. Always interested in hard problems at scale.</p>
         <div class="clinks">
-          <a class="clink" href="mailto:maharanay@gmail.com">
+          <a class="clink" href="/cdn-cgi/l/email-protection#dab7bbb2bba8bbb4bba39abdb7bbb3b6f4b9b5b7">
             <span class="clink-ico">✉</span>
             <span class="clink-lbl">Email</span>
-            <span class="clink-val">maharanay@gmail.com</span>
+            <span class="clink-val"><span class="__cf_email__" data-cfemail="6e030f060f1c0f000f172e09030f0702400d0103">[email&#160;protected]</span></span>
           </a>
           <a class="clink" href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">
             <span class="clink-ico">in</span>
@@ -1237,12 +1391,12 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
     <div class="foot-links">
       <a href="https://github.com/maharanay22" target="_blank">github</a>
       <a href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank">linkedin</a>
-      <a href="mailto:maharanay@gmail.com">email</a>
+      <a href="/cdn-cgi/l/email-protection#95f8f4fdf4e7f4fbf4ecd5f2f8f4fcf9bbf6faf8">email</a>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══ CUSTOM CURSOR ═══ */
 const cur = document.getElementById('cursor');
 const ring = document.getElementById('cursor-ring');
@@ -1353,19 +1507,86 @@ const rvObs=new IntersectionObserver(entries=>{
 },{threshold:0.08});
 document.querySelectorAll('.rv').forEach(el=>rvObs.observe(el));
 
-/* ═══ SKILL BARS ═══ */
-const barObs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      document.querySelectorAll('.bar-fill').forEach((b,i)=>{
-        setTimeout(()=>b.classList.add('go'),i*130);
+/* ═══ SKILL BARS — continuous repeating animation ═══ */
+(function(){
+  const bars = [...document.querySelectorAll('.bar-fill')];
+  bars.forEach(b => { b.style.width = '0%'; b.style.transition = 'none'; });
+
+  function runCycle() {
+    // Reset all to 0 instantly
+    bars.forEach(b => {
+      b.style.transition = 'none';
+      b.style.width = '0%';
+      b.style.opacity = '0';
+    });
+
+    // Small pause then fill in staggered
+    setTimeout(() => {
+      bars.forEach((b, i) => {
+        const w = b.getAttribute('data-w') || '80';
+        setTimeout(() => {
+          b.style.transition = 'width 1.4s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease';
+          b.style.opacity = '1';
+          b.style.width = w + '%';
+        }, i * 110);
       });
-      barObs.disconnect();
-    }
-  });
-},{threshold:0.2});
-const bh=document.getElementById('bar-host');
-if(bh)barObs.observe(bh);
+    }, 200);
+
+    // Hold fully filled for a bit, then drain back to 0
+    const fillTime = 200 + bars.length * 110 + 1400;
+    setTimeout(() => {
+      bars.forEach((b, i) => {
+        setTimeout(() => {
+          b.style.transition = 'width 1s cubic-bezier(0.7,0,1,1), opacity 0.4s ease';
+          b.style.width = '0%';
+          b.style.opacity = '0.3';
+        }, i * 60);
+      });
+    }, fillTime + 1800);
+
+    // Loop again after drain completes
+    const drainTime = fillTime + 1800 + bars.length * 60 + 1200;
+    setTimeout(runCycle, drainTime);
+  }
+
+  // Start when bar section is visible
+  const barObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        runCycle();
+        barObs.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+  const bh = document.getElementById('bar-host');
+  if (bh) barObs.observe(bh);
+})();-e 
+/* ═══ HAMBURGER MENU ═══ */
+function toggleNav(){
+  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeNav(){
+  document.getElementById('nav-links').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+}
+// Close on outside tap
+document.addEventListener('click', e => {
+  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  if(nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)){
+    closeNav();
+  }
+});
+
+/* ═══ TOUCH: disable custom cursor on touch devices ═══ */
+window.addEventListener('touchstart', () => {
+  document.getElementById('cursor').style.display = 'none';
+  document.getElementById('cursor-ring').style.display = 'none';
+  document.body.style.cursor = 'auto';
+}, { once: true });
 </script>
 </body>
 </html>
