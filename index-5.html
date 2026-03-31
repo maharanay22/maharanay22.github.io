@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maha Rana Yadavalli · Data & AI Architect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Clash+Display:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+/*==================================================
+  RESET & VARS
+==================================================*/
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:70px}
+:root{
+  --c0:#020510;
+  --c1:#0a0f2e;
+  --neon1:#00fff7;
+  --neon2:#bf00ff;
+  --neon3:#ff006e;
+  --neon4:#ffcc00;
+  --neon5:#00ff88;
+  --neon6:#ff6b35;
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.08);
+  --b1:rgba(0,255,247,0.15);
+  --b2:rgba(191,0,255,0.15);
+  --text:#e8f4ff;
+  --muted:#5a7a9a;
+  --muted2:#8aaabb;
+}
+body{
+  font-family:'Fira Code',monospace;
+  background:var(--c0);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+/* ensure all links and buttons are always clickable */
+a,button,.btn,.nav-links a,.hamburger{position:relative;z-index:10}
+
+/*==================================================
+  CUSTOM CURSOR
+==================================================*/
+#cursor{
+  position:fixed;width:12px;height:12px;border-radius:50%;
+  background:var(--neon1);pointer-events:none;z-index:9999;
+  mix-blend-mode:screen;
+  transition:transform 0.1s ease,width 0.2s,height 0.2s;
+  box-shadow:0 0 20px var(--neon1),0 0 40px rgba(0,255,247,0.5);
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(0,255,247,0.4);
+  pointer-events:none;z-index:9998;
+  transition:transform 0.18s ease,left 0.12s ease,top 0.12s ease;
+}
+body:hover #cursor{transform:scale(1)}
+a:hover ~ #cursor, button:hover ~ #cursor{width:20px;height:20px}
+
+/*==================================================
+  AURORA CANVAS
+==================================================*/
+#aurora{
+  position:fixed;inset:0;z-index:0;
+  pointer-events:none !important;opacity:0.55;
+}
+
+/*==================================================
+  NOISE OVERLAY
+==================================================*/
+body::before{
+  content:'';position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  background-size:180px 180px;
+  pointer-events:none;
+}
+
+/*==================================================
+  LAYOUT
+==================================================*/
+.wrap{width:min(1160px,calc(100% - 40px));margin:0 auto;position:relative;z-index:3}
+
+/*==================================================
+  KEYFRAMES
+==================================================*/
+@keyframes fadeUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0deg)}33%{transform:translateY(-12px) rotate(1deg)}66%{transform:translateY(-6px) rotate(-1deg)}}
+@keyframes spinSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes spinRev{from{transform:rotate(360deg)}to{transform:rotate(0deg)}}
+@keyframes neonPulse{
+  0%,100%{text-shadow:0 0 10px var(--neon1),0 0 30px var(--neon1),0 0 60px rgba(0,255,247,0.4)}
+  50%{text-shadow:0 0 20px var(--neon1),0 0 60px var(--neon1),0 0 100px rgba(0,255,247,0.7)}
+}
+@keyframes borderFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes glitch{
+  0%,90%,100%{transform:translate(0)}
+  92%{transform:translate(-3px,1px)}
+  94%{transform:translate(3px,-1px)}
+  96%{transform:translate(-1px,2px)}
+  98%{transform:translate(2px,-2px)}
+}
+@keyframes scanDown{
+  0%{transform:translateY(-100%);opacity:0.6}
+  100%{transform:translateY(100vh);opacity:0}
+}
+@keyframes orb{
+  0%,100%{transform:scale(1) translate(0,0)}
+  25%{transform:scale(1.15) translate(20px,-15px)}
+  50%{transform:scale(0.9) translate(-10px,20px)}
+  75%{transform:scale(1.1) translate(-20px,-10px)}
+}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmerText{
+  0%{background-position:200% center}
+  100%{background-position:-200% center}
+}
+@keyframes revealCard{
+  from{opacity:0;transform:translateY(50px) scale(0.95)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+@keyframes hueShift{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
+@keyframes ping{
+  75%,100%{transform:scale(2);opacity:0}
+}
+
+/*==================================================
+  NAV
+==================================================*/
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(2,5,16,0.85);
+  -webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);
+  border-bottom:1px solid rgba(0,255,247,0.08);
+}
+.nav-in{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 0;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon1));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:borderFlow 3s linear infinite;
+}
+.nav-pill{
+  display:flex;align-items:center;gap:6px;
+  font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;
+  padding:5px 12px;
+  border:1px solid rgba(0,255,136,0.3);
+  color:var(--neon5);
+  background:rgba(0,255,136,0.06);
+  position:relative;
+}
+.ping-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--neon5);position:relative;
+}
+.ping-dot::after{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  background:var(--neon5);animation:ping 1.5s cubic-bezier(0,0,0.2,1) infinite;
+}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{
+  font-size:0.67rem;color:var(--muted2);
+  transition:color 0.2s;letter-spacing:0.06em;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.nav-links a:hover{color:var(--neon1)}
+.nav-links a:hover::after{transform:scaleX(1)}
+
+/*==================================================
+  HERO
+==================================================*/
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:100px 0 80px;position:relative;overflow:hidden;
+}
+
+/* Floating orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  pointer-events:none;z-index:0;animation:orb var(--d) ease-in-out infinite;
+}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,255,247,0.15),transparent 70%);top:-100px;right:-100px;--d:12s}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(191,0,255,0.12),transparent 70%);bottom:-50px;left:-80px;--d:15s;animation-delay:-5s}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,0,110,0.1),transparent 70%);top:40%;left:40%;--d:10s;animation-delay:-3s}
+
+.hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:60px;align-items:center;position:relative;z-index:4}
+
+/* terminal line */
+.term-line{
+  font-size:0.73rem;color:var(--muted2);
+  display:flex;align-items:center;gap:6px;margin-bottom:24px;
+  opacity:0;animation:fadeUp 0.5s 0.1s ease forwards;
+}
+.t-g{color:var(--neon5)}.t-c{color:var(--neon1)}.t-v{color:var(--neon2)}
+.cursor-bar{
+  display:inline-block;width:9px;height:16px;
+  background:var(--neon1);animation:blink 1s infinite;
+  box-shadow:0 0 10px var(--neon1);
+  vertical-align:middle;margin-left:3px;
+}
+
+/* big name */
+.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.8rem,6vw,5.8rem);
+  font-weight:800;line-height:0.95;
+  letter-spacing:-0.03em;
+  margin-bottom:14px;
+  opacity:0;animation:fadeUp 0.6s 0.25s ease forwards;
+  position:relative;
+}
+.hero-name .n1{
+  display:block;color:#fff;
+  text-shadow:0 0 60px rgba(255,255,255,0.1);
+}
+.hero-name .n2{
+  display:block;
+  background:linear-gradient(135deg,var(--neon1) 0%,var(--neon2) 40%,var(--neon3) 70%,var(--neon4) 100%);
+  background-size:300% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmerText 4s linear infinite;
+}
+/* glitch effect on hover */
+.hero-name:hover .n1{animation:glitch 0.5s infinite}
+
+.hero-role{
+  font-size:0.82rem;color:var(--muted2);margin-bottom:28px;
+  opacity:0;animation:fadeUp 0.6s 0.4s ease forwards;
+}
+.fn-c{color:var(--neon4)}.arg-c{color:var(--neon2)}.ret-c{color:var(--neon1)}
+
+/* animated tag pills */
+.hero-pills{
+  display:flex;flex-wrap:wrap;gap:9px;margin-bottom:32px;
+  opacity:0;animation:fadeUp 0.6s 0.55s ease forwards;
+}
+.hpill{
+  font-size:0.63rem;letter-spacing:0.08em;padding:6px 14px;
+  position:relative;overflow:hidden;cursor:default;
+  border:1px solid transparent;
+  background:linear-gradient(var(--c0),var(--c0)) padding-box,
+             linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3)) border-box;
+  color:var(--text);transition:transform 0.2s,box-shadow 0.2s;
+}
+.hpill::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(0,255,247,0.08),rgba(191,0,255,0.08),rgba(255,0,110,0.08));
+  opacity:0;transition:opacity 0.3s;
+}
+.hpill:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,255,247,0.2)}
+.hpill:hover::before{opacity:1}
+
+.hero-bio{
+  font-size:0.82rem;line-height:1.95;color:var(--muted2);
+  max-width:560px;margin-bottom:40px;
+  opacity:0;animation:fadeUp 0.6s 0.7s ease forwards;
+}
+.hero-bio strong{color:var(--text)}
+
+.hero-btns{
+  display:flex;gap:14px;flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.6s 0.85s ease forwards;
+}
+.btn{
+  font-family:'Fira Code',monospace;font-size:0.7rem;
+  padding:13px 28px;border:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:9px;
+  position:relative;overflow:hidden;letter-spacing:0.05em;
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-neon{
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  color:#000;font-weight:700;
+  box-shadow:0 0 20px rgba(0,255,247,0.3),inset 0 1px 0 rgba(255,255,255,0.3);
+}
+.btn-neon::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--neon2),var(--neon3));
+  opacity:0;transition:opacity 0.3s;
+}
+.btn-neon:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,255,247,0.5)}
+.btn-neon:hover::before{opacity:1}
+.btn-neon span{position:relative;z-index:1}
+.btn-ghost{
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(0,255,247,0.25);
+  color:var(--neon1);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.btn-ghost:hover{background:rgba(0,255,247,0.08);border-color:var(--neon1);transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,255,247,0.2)}
+
+/*==================================================
+  HERO RIGHT: HOLOGRAPHIC CARD
+==================================================*/
+.holo-card{
+  position:relative;
+  opacity:0;animation:fadeIn 1s 0.6s ease forwards;
+}
+.holo-card-inner{
+  background:rgba(8,16,40,0.8);
+  border:1px solid rgba(0,255,247,0.15);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  overflow:hidden;
+  box-shadow:
+    0 0 0 1px rgba(0,255,247,0.08),
+    0 40px 100px rgba(0,0,0,0.7),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+  position:relative;
+  animation:float 8s ease-in-out infinite;
+}
+/* rainbow shimmer on hover */
+.holo-card-inner::before{
+  content:'';position:absolute;inset:0;z-index:0;
+  background:linear-gradient(
+    135deg,
+    rgba(0,255,247,0.05) 0%,
+    rgba(191,0,255,0.05) 25%,
+    rgba(255,0,110,0.05) 50%,
+    rgba(255,204,0,0.05) 75%,
+    rgba(0,255,136,0.05) 100%
+  );
+  background-size:400% 400%;
+  animation:borderFlow 6s ease infinite;
+}
+/* spinning ring */
+.holo-ring{
+  position:absolute;inset:-20px;border-radius:50%;pointer-events:none;z-index:0;
+  border:1px dashed rgba(0,255,247,0.1);
+  animation:spinSlow 20s linear infinite;
+}
+.holo-ring2{
+  position:absolute;inset:-35px;border-radius:50%;pointer-events:none;z-index:0;
+  border:1px dashed rgba(191,0,255,0.08);
+  animation:spinRev 30s linear infinite;
+}
+
+.cc-bar{
+  background:rgba(10,15,40,0.9);padding:11px 16px;
+  display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid rgba(0,255,247,0.08);
+  position:relative;z-index:1;
+}
+.cc-dot{width:11px;height:11px;border-radius:50%;box-shadow:0 0 6px currentColor}
+.cc-dot.r{background:#ff5f57;color:#ff5f57}
+.cc-dot.y{background:#febc2e;color:#febc2e}
+.cc-dot.g{background:#28c840;color:#28c840}
+.cc-fname{font-size:0.63rem;color:var(--muted2);margin-left:6px}
+
+/* avatar area */
+.cc-top{
+  padding:28px 20px 20px;text-align:center;
+  border-bottom:1px solid rgba(0,255,247,0.08);
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,rgba(0,255,247,0.03),transparent);
+}
+.av-wrap{position:relative;display:inline-block;margin-bottom:14px}
+.av-circle{
+  width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(0,255,247,0.1),rgba(191,0,255,0.1));
+  border:2px solid var(--neon1);
+  display:grid;place-items:center;font-size:2.3rem;
+  box-shadow:0 0 0 4px rgba(0,255,247,0.08),0 0 40px rgba(0,255,247,0.3);
+  animation:float 5s ease-in-out infinite;
+  position:relative;z-index:1;
+}
+.av-spin{
+  position:absolute;inset:-8px;border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--neon1);border-right-color:var(--neon2);
+  animation:spinSlow 3s linear infinite;
+}
+.av-spin2{
+  position:absolute;inset:-16px;border-radius:50%;
+  border:1px solid transparent;
+  border-bottom-color:var(--neon3);border-left-color:var(--neon4);
+  animation:spinRev 5s linear infinite;
+}
+.cc-name{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;
+  background:linear-gradient(90deg,#fff,var(--neon1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:4px;
+}
+.cc-sub{font-size:0.62rem;color:var(--muted2);letter-spacing:0.12em}
+
+/* code block */
+.cc-code{
+  padding:20px 22px;font-size:0.68rem;line-height:2.1;
+  position:relative;z-index:1;
+  border-bottom:1px solid rgba(0,255,247,0.08);
+}
+.ck{color:var(--neon2)}.ccls{color:var(--neon4)}.cf{color:var(--neon1)}
+.cs{color:var(--neon5)}.cn{color:var(--neon6)}.cm{color:var(--muted);font-style:italic}
+.cse{color:var(--neon3)}
+.i1{display:inline-block;width:20px}.i2{display:inline-block;width:40px}
+
+/* stat grid */
+.cc-stats{display:grid;grid-template-columns:repeat(2,1fr);position:relative;z-index:1}
+.cc-s{
+  padding:18px 16px;text-align:center;
+  border-right:1px solid rgba(0,255,247,0.08);
+  border-top:1px solid rgba(0,255,247,0.08);
+  transition:background 0.3s;
+}
+.cc-s:nth-child(even){border-right:none}
+.cc-s:hover{background:rgba(0,255,247,0.04)}
+.cc-sv{
+  font-family:'Syne',sans-serif;font-size:1.5rem;font-weight:800;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  line-height:1;margin-bottom:5px;
+  animation:neonPulse 3s ease-in-out infinite;
+}
+.cc-sl{font-size:0.58rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase}
+
+/* scroll indicator */
+.scroll-ind{
+  position:absolute;bottom:30px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-size:0.58rem;color:var(--muted);letter-spacing:0.25em;text-transform:uppercase;
+  opacity:0;animation:fadeIn 1s 1.5s ease forwards;z-index:2;
+}
+.scroll-bar{
+  width:1px;height:50px;
+  background:linear-gradient(to bottom,var(--neon1),transparent);
+  position:relative;overflow:hidden;
+}
+.scroll-bar::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:100%;
+  background:linear-gradient(to bottom,transparent,var(--neon1),transparent);
+  animation:scanDown 1.8s ease-in-out infinite;
+}
+
+/*==================================================
+  TECH STRIP
+==================================================*/
+.strip-wrap{
+  overflow:hidden;padding:15px 0;
+  border-top:1px solid rgba(0,255,247,0.06);
+  border-bottom:1px solid rgba(0,255,247,0.06);
+  background:rgba(8,12,30,0.8);position:relative;z-index:3;
+}
+.strip-wrap::before,.strip-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:100px;z-index:4;pointer-events:none;
+}
+.strip-wrap::before{left:0;background:linear-gradient(to right,var(--c0),transparent)}
+.strip-wrap::after{right:0;background:linear-gradient(to left,var(--c0),transparent)}
+.strip-tr{display:flex;white-space:nowrap;animation:marquee 25s linear infinite}
+.strip-tr:hover{animation-play-state:paused}
+.si{
+  display:inline-flex;align-items:center;gap:9px;padding:0 26px;
+  font-size:0.67rem;color:var(--muted2);
+  border-right:1px solid rgba(0,255,247,0.06);
+  transition:color 0.2s;cursor:default;
+}
+.si:hover{color:var(--neon1)}
+.si-dot{
+  width:5px;height:5px;border-radius:50%;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  box-shadow:0 0 8px var(--neon1);
+}
+
+/*==================================================
+  SECTIONS SHARED
+==================================================*/
+section{padding:100px 0;position:relative;z-index:3}
+section+section{border-top:1px solid rgba(255,255,255,0.04)}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.62rem;letter-spacing:0.3em;text-transform:uppercase;
+  margin-bottom:14px;
+}
+.eyebrow-line{height:1px;width:30px}
+.sec-h{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;
+  margin-bottom:60px;
+}
+.sec-h span{
+  background:linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3));
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmerText 5s linear infinite;
+}
+
+/* scroll reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity 0.65s ease,transform 0.65s ease;animation:rvFallback 0s 2s forwards}
+.rv.in{opacity:1;transform:none;animation:none}
+@keyframes rvFallback{to{opacity:1;transform:none}}
+
+/*==================================================
+  ABOUT
+==================================================*/
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.about-card{
+  background:rgba(8,16,40,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:36px 28px;
+  position:relative;overflow:hidden;
+  transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);cursor:default;
+}
+.about-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--nc1,rgba(0,255,247,0.04)),transparent 60%);
+  opacity:0;transition:opacity 0.4s;
+}
+.about-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--nc1,var(--neon1)),var(--nc2,var(--neon2)));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.about-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,255,255,0.12);
+  box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 40px var(--glow,rgba(0,255,247,0.08));
+}
+.about-card:hover::before{opacity:1}
+.about-card:hover::after{transform:scaleX(1)}
+.ac-ico{font-size:2.2rem;margin-bottom:20px;display:block;animation:float 6s ease-in-out infinite}
+.ac-ico:nth-child(1){animation-delay:0s}
+.about-card h3{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;
+  color:#fff;margin-bottom:12px;
+}
+.about-card p{font-size:0.73rem;line-height:1.9;color:var(--muted2)}
+
+/*==================================================
+  SKILLS
+==================================================*/
+.skills-wrap{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start}
+
+.bars-title{font-size:0.62rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.bars{display:flex;flex-direction:column;gap:20px}
+.bar-row{}
+.bar-info{display:flex;justify-content:space-between;margin-bottom:7px}
+.bar-label{font-size:0.68rem;color:var(--muted2)}
+.bar-pct{
+  font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.bar-track{
+  height:3px;background:rgba(255,255,255,0.05);
+  position:relative;overflow:visible;
+}
+.bar-fill{
+  height:100%;width:0%;position:relative;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+  box-shadow:0 0 12px rgba(0,255,247,0.6),0 0 30px rgba(0,255,247,0.2);
+  animation:barLoop var(--dur,6s) var(--delay,0s) infinite ease-in-out;
+}
+@keyframes barLoop{
+  0%    { width:0%;   opacity:0;   }
+  8%    { opacity:1;              }
+  40%   { width:var(--pct,80%);  }
+  65%   { width:var(--pct,80%);  }
+  90%   { width:0%;   opacity:0.3;}
+  100%  { width:0%;   opacity:0;  }
+}
+.bar-fill::after{
+  content:'';position:absolute;right:-1px;top:-3px;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--neon1);
+  box-shadow:0 0 10px var(--neon1),0 0 20px var(--neon1);
+  opacity:0;transition:opacity 0.3s 1.4s;
+}
+
+
+.tab-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.tab-btn{
+  font-family:'Fira Code',monospace;font-size:0.63rem;letter-spacing:0.08em;
+  padding:7px 15px;background:transparent;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.08);color:var(--muted2);
+  transition:all 0.2s;position:relative;overflow:hidden;
+}
+.tab-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  opacity:0;transition:opacity 0.2s;
+}
+.tab-btn:hover{color:#fff;border-color:rgba(0,255,247,0.3)}
+.tab-btn.on{border-color:transparent;color:#000;font-weight:600}
+.tab-btn.on::before{opacity:1}
+.tab-btn span{position:relative;z-index:1}
+.tpanel{display:none}.tpanel.on{display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  font-size:0.63rem;letter-spacing:0.06em;padding:7px 14px;
+  border:1px solid rgba(255,255,255,0.07);color:var(--muted2);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.22s;cursor:default;position:relative;overflow:hidden;
+}
+.chip::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,255,247,0.08),rgba(191,0,255,0.08));
+  opacity:0;transition:opacity 0.3s;
+}
+.chip:hover{border-color:rgba(0,255,247,0.3);color:var(--neon1)}
+.chip:hover::before{opacity:1}
+.chip.hi{
+  border-color:rgba(0,255,247,0.25);color:var(--neon1);
+  background:rgba(0,255,247,0.06);
+}
+.chip.hi::after{content:' ▸';opacity:0.5}
+
+/*==================================================
+  PROJECTS
+==================================================*/
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.mahai-card{
+  grid-column:1 / -1;
+  position:relative;overflow:hidden;
+  border:1px solid rgba(255,204,0,0.25);
+  background:rgba(8,14,36,0.9);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  transition:border-color 0.4s,box-shadow 0.4s;
+}
+.mahai-card:hover{
+  border-color:rgba(255,204,0,0.45);
+  box-shadow:0 0 80px rgba(255,204,0,0.08),0 40px 100px rgba(0,0,0,0.6);
+}
+.mahai-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%,rgba(255,204,0,0.05) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 30%,rgba(0,255,247,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse 50% 40% at 50% 80%,rgba(191,0,255,0.04) 0%,transparent 60%);
+  animation:borderFlow 8s ease infinite;background-size:200% 200%;
+}
+.mahai-grid-overlay{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,204,0,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,204,0,0.02) 1px,transparent 1px);
+  background-size:40px 40px;
+  mask-image:radial-gradient(ellipse 80% 80% at 80% 50%,black 0%,transparent 70%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 80% 50%,black 0%,transparent 70%);
+}
+.mahai-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon4),var(--neon2),var(--neon3),var(--neon4));
+  background-size:300% auto;animation:borderFlow 4s linear infinite;
+}
+.mahai-inner{
+  display:grid;grid-template-columns:1.2fr 0.8fr;gap:56px;
+  padding:48px;align-items:center;position:relative;z-index:1;
+}
+.mahai-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.mahai-own{
+  font-family:'Fira Code',monospace;font-size:0.6rem;letter-spacing:0.2em;
+  text-transform:uppercase;padding:5px 12px;
+  border:1px solid rgba(0,255,247,0.35);color:var(--neon1);
+  background:rgba(0,255,247,0.07);
+}
+.mahai-wip{
+  font-family:'Fira Code',monospace;font-size:0.6rem;letter-spacing:0.2em;
+  text-transform:uppercase;padding:5px 12px;
+  border:1px solid rgba(255,204,0,0.4);color:var(--neon4);
+  background:rgba(255,204,0,0.07);
+  box-shadow:0 0 12px rgba(255,204,0,0.15);
+}
+.mahai-title{
+  font-family:'Syne',sans-serif;font-size:clamp(2.8rem,5vw,4.5rem);
+  font-weight:800;color:#fff;letter-spacing:-0.03em;
+  line-height:1;margin-bottom:8px;
+}
+.mahai-ai{
+  background:linear-gradient(135deg,var(--neon4),var(--neon3),var(--neon2));
+  background-size:200% auto;animation:shimmerText 3s linear infinite;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.mahai-tagline{
+  font-family:'Fira Code',monospace;font-size:0.72rem;
+  letter-spacing:0.15em;color:var(--muted2);margin-bottom:24px;text-transform:uppercase;
+}
+.mahai-desc{font-size:0.82rem;line-height:2;color:var(--muted2);margin-bottom:28px;max-width:560px}
+.mahai-desc strong{color:var(--text)}.mahai-desc em{color:var(--neon4);font-style:normal}
+.mahai-phases{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+.mahai-phase{display:flex;gap:14px;align-items:flex-start}
+.mph-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.mahai-phase.done .mph-dot{background:var(--neon5);box-shadow:0 0 8px var(--neon5)}
+.mahai-phase.active .mph-dot{background:var(--neon4);box-shadow:0 0 12px var(--neon4);animation:pulse-glow 1.5s infinite}
+.mahai-phase.upcoming .mph-dot{background:var(--muted)}
+.mph-name{font-family:'Syne',sans-serif;font-size:0.78rem;font-weight:700;margin-bottom:3px}
+.mahai-phase.done .mph-name{color:var(--neon5)}
+.mahai-phase.active .mph-name{color:var(--neon4)}
+.mahai-phase.upcoming .mph-name{color:var(--muted2)}
+.mph-desc{font-size:0.68rem;line-height:1.7;color:var(--muted)}
+.mahai-phase.active .mph-desc{color:var(--muted2)}
+.mahai-promise{
+  display:flex;align-items:center;gap:12px;padding:14px 18px;
+  border:1px solid rgba(255,204,0,0.2);background:rgba(255,204,0,0.04);
+  font-size:0.73rem;color:var(--muted2);font-style:italic;
+}
+.mp-ico{font-size:1.1rem;font-style:normal}
+.mahai-right{display:flex;flex-direction:column;align-items:center;gap:28px}
+.mahai-orb-wrap{position:relative;width:280px;height:280px;display:grid;place-items:center;flex-shrink:0}
+.mahai-orb-ring{position:absolute;border-radius:50%;border-style:solid;border-color:transparent}
+.r1{width:100%;height:100%;border:1px solid rgba(255,204,0,0.12);animation:spinSlow 20s linear infinite;border-top-color:rgba(255,204,0,0.5)}
+.r2{width:74%;height:74%;border:1px dashed rgba(0,255,247,0.1);animation:spinRev 14s linear infinite;border-right-color:rgba(0,255,247,0.4)}
+.r3{width:50%;height:50%;border:1px solid rgba(191,0,255,0.1);animation:spinSlow 9s linear infinite;border-bottom-color:rgba(191,0,255,0.4)}
+.mahai-core{
+  position:relative;z-index:2;width:80px;height:80px;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,204,0,0.15),rgba(8,14,36,0.9));
+  border:2px solid rgba(255,204,0,0.5);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  box-shadow:0 0 30px rgba(255,204,0,0.3),0 0 60px rgba(255,204,0,0.1);
+  animation:pulse-glow 2.5s ease-in-out infinite;
+}
+.mahai-core-icon{font-size:1.8rem}
+.mahai-core-label{font-family:'Syne',sans-serif;font-size:0.55rem;font-weight:800;color:var(--neon4);letter-spacing:0.15em}
+.mahai-node{
+  position:absolute;font-family:'Fira Code',monospace;font-size:0.55rem;
+  letter-spacing:0.1em;text-transform:uppercase;padding:4px 8px;
+  border:1px solid rgba(0,255,247,0.25);color:var(--neon1);
+  background:rgba(8,14,36,0.9);white-space:nowrap;
+}
+.n1{top:4%;left:50%;transform:translateX(-50%)}
+.n2{top:18%;right:-4px}
+.n3{top:62%;right:-4px}
+.n4{bottom:4%;left:50%;transform:translateX(-50%)}
+.n5{top:62%;left:-4px}
+.n6{top:18%;left:-4px}
+.mahai-era{text-align:center}
+.mahai-era-text{font-family:'Syne',sans-serif;font-size:1rem;font-weight:800;color:#fff;line-height:1.3;margin-bottom:6px}
+.mahai-era-text strong{
+  background:linear-gradient(135deg,var(--neon4),var(--neon1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.mahai-era-sub{font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--muted);letter-spacing:0.2em}
+@media(max-width:1020px){
+  .mahai-inner{grid-template-columns:1fr;gap:40px;padding:32px}
+  .mahai-right{order:-1}
+  .mahai-orb-wrap{width:200px;height:200px}
+}
+@media(max-width:480px){
+  .mahai-inner{padding:24px 18px}
+  .mahai-title{font-size:2.4rem}
+  .mahai-orb-wrap{width:160px;height:160px}
+  .mahai-node{font-size:0.45rem;padding:3px 6px}
+  .mahai-core{width:60px;height:60px}
+  .mahai-core-icon{font-size:1.4rem}
+}
+.proj{
+  background:rgba(8,14,36,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px 24px;display:flex;flex-direction:column;
+  position:relative;overflow:hidden;
+  transition:transform 0.35s,box-shadow 0.35s,border-color 0.35s;
+  cursor:default;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.proj::before{
+  content:'';position:absolute;top:0;left:-100%;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--neon1),var(--neon2),transparent);
+  transition:left 0.5s;
+}
+.proj::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s 0.1s;
+}
+.proj:hover{
+  transform:translateY(-8px) scale(1.01);
+  border-color:rgba(0,255,247,0.15);
+  box-shadow:0 30px 80px rgba(0,0,0,0.6),0 0 50px rgba(0,255,247,0.06);
+}
+.proj:hover::before{left:100%}
+.proj:hover::after{transform:scaleX(1)}
+.proj-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.proj-num{font-size:0.58rem;letter-spacing:0.2em;color:var(--muted)}
+.proj-ico{font-size:1.4rem}
+.proj h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;color:#fff;margin-bottom:10px;line-height:1.3}
+.proj p{font-size:0.7rem;line-height:1.9;color:var(--muted2);flex:1}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.ptag{
+  font-size:0.57rem;letter-spacing:0.1em;text-transform:uppercase;
+  padding:4px 9px;border:1px solid rgba(255,255,255,0.07);color:var(--muted);
+  transition:all 0.2s;
+}
+.proj:hover .ptag{border-color:rgba(0,255,247,0.15);color:var(--muted2)}
+
+/*==================================================
+  EXPERIENCE
+==================================================*/
+.exp-list{display:flex;flex-direction:column}
+.exp-row{display:grid;grid-template-columns:150px 50px 1fr;padding-bottom:44px}
+.exp-row:last-child{padding-bottom:0}
+.exp-date{text-align:right;font-size:0.6rem;color:var(--muted);letter-spacing:0.1em;padding-top:7px}
+.exp-mid{display:flex;flex-direction:column;align-items:center;position:relative}
+.exp-mid::after{
+  content:'';position:absolute;top:16px;bottom:-44px;width:1px;
+  background:linear-gradient(to bottom,rgba(0,255,247,0.3),transparent);
+}
+.exp-row:last-child .exp-mid::after{display:none}
+.exp-dot{
+  width:12px;height:12px;border-radius:50%;flex-shrink:0;
+  background:var(--neon1);border:2px solid var(--c0);
+  box-shadow:0 0 0 3px rgba(0,255,247,0.2),0 0 20px rgba(0,255,247,0.5);
+  margin-top:4px;
+}
+.exp-body{
+  margin-left:18px;
+  background:rgba(8,14,36,0.6);
+  border:1px solid rgba(255,255,255,0.06);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:26px 28px;
+  position:relative;overflow:hidden;
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.exp-body::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),transparent);
+  transform:scaleX(0);transform-origin:left;transition:transform 0.4s;
+}
+.exp-body:hover{border-color:rgba(0,255,247,0.12);box-shadow:0 16px 50px rgba(0,0,0,0.4)}
+.exp-body:hover::before{transform:scaleX(0.6)}
+.exp-body h3{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:#fff;margin-bottom:4px}
+.exp-co{font-size:0.63rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--neon1);margin-bottom:14px}
+.exp-body p{font-size:0.72rem;line-height:1.9;color:var(--muted2)}
+.exp-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.ec{font-size:0.57rem;padding:3px 9px;border:1px solid rgba(0,255,247,0.12);color:var(--muted2)}
+
+/*==================================================
+  CERTIFICATIONS
+==================================================*/
+.certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cert{
+  background:rgba(8,14,36,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  padding:28px 22px;display:flex;flex-direction:column;gap:10px;
+  position:relative;overflow:hidden;
+  transition:all 0.35s;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+.cert::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,255,247,0.03),rgba(191,0,255,0.03));
+  opacity:0;transition:opacity 0.3s;
+}
+.cert:hover{
+  transform:translateY(-6px) scale(1.02);
+  border-color:rgba(0,255,247,0.2);
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 40px rgba(0,255,247,0.08);
+}
+.cert:hover::after{opacity:1}
+.cert-ico{font-size:2rem;position:relative;z-index:1;animation:float 7s ease-in-out infinite}
+.cert-iss{font-size:0.58rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
+.cert h3{font-family:'Syne',sans-serif;font-weight:700;font-size:0.87rem;color:#fff;line-height:1.3;position:relative;z-index:1}
+.cert p{font-size:0.67rem;line-height:1.75;color:var(--muted2);flex:1;position:relative;z-index:1}
+.cbadge{
+  font-size:0.57rem;letter-spacing:0.15em;text-transform:uppercase;
+  padding:5px 11px;border:1px solid;display:inline-block;align-self:flex-start;
+  position:relative;z-index:1;
+}
+.cbadge.v{
+  color:var(--neon1);border-color:rgba(0,255,247,0.3);
+  background:rgba(0,255,247,0.05);
+  box-shadow:0 0 12px rgba(0,255,247,0.1);
+}
+.cbadge.w{
+  color:var(--neon5);border-color:rgba(0,255,136,0.3);
+  background:rgba(0,255,136,0.05);
+  box-shadow:0 0 12px rgba(0,255,136,0.1);
+}
+
+/*==================================================
+  CONTACT
+==================================================*/
+.contact-wrap{display:grid;grid-template-columns:1.1fr 0.9fr;gap:64px;align-items:start}
+.contact-left h2{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,2.9rem);
+  font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1.1;margin-bottom:18px;
+}
+.contact-left h2 em{
+  font-style:normal;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.contact-left p{font-size:0.78rem;line-height:1.95;color:var(--muted2);margin-bottom:32px}
+.clinks{display:flex;flex-direction:column;gap:10px}
+.clink{
+  display:flex;align-items:center;gap:16px;padding:16px 20px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(8,14,36,0.5);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.clink::before{
+  content:'';position:absolute;left:-100%;top:0;bottom:0;width:100%;
+  background:linear-gradient(90deg,transparent,rgba(0,255,247,0.05),transparent);
+  transition:left 0.4s;
+}
+.clink:hover{border-color:rgba(0,255,247,0.2);transform:translateX(4px);box-shadow:0 8px 30px rgba(0,0,0,0.3)}
+.clink:hover::before{left:100%}
+.clink-ico{font-size:1rem;width:22px;text-align:center}
+.clink-lbl{font-size:0.61rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted2);flex:1;transition:color 0.2s}
+.clink:hover .clink-lbl{color:var(--neon1)}
+.clink-val{font-size:0.68rem;color:var(--muted)}
+
+.avail-card{
+  background:rgba(8,14,36,0.7);border:1px solid rgba(255,255,255,0.06);
+  padding:32px 28px;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  position:relative;overflow:hidden;
+}
+.avail-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+}
+.avail-card h3{font-size:0.63rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
+.avail-list{display:flex;flex-direction:column;gap:13px}
+.avail-row{display:flex;align-items:center;gap:13px;font-size:0.72rem;color:var(--muted2)}
+.adot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.adot.g{background:var(--neon5);box-shadow:0 0 10px var(--neon5)}
+.adot.c{background:var(--neon1);box-shadow:0 0 10px var(--neon1)}
+.adot.a{background:var(--neon4);box-shadow:0 0 10px var(--neon4)}
+
+/*==================================================
+  FOOTER
+==================================================*/
+footer{
+  padding:28px 0;z-index:3;position:relative;
+  border-top:1px solid rgba(255,255,255,0.04);
+}
+.foot-in{display:flex;justify-content:space-between;align-items:center;gap:20px}
+footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
+.foot-links{display:flex;gap:20px}
+.foot-links a{font-size:0.6rem;color:var(--muted);transition:color 0.2s}
+.foot-links a:hover{color:var(--neon1)}
+
+/*==================================================
+  RESPONSIVE
+==================================================*/
+/* ── TABLET: 768px – 1020px ── */
+@media(max-width:1020px){
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .holo-card{max-width:480px;margin:0 auto}
+  .skills-wrap{grid-template-columns:1fr;gap:48px}
+  .contact-wrap{grid-template-columns:1fr;gap:40px}
+  .about-grid{grid-template-columns:repeat(2,1fr)}
+  .proj-grid{grid-template-columns:repeat(2,1fr)}
+  .certs-grid{grid-template-columns:repeat(2,1fr)}
+  .hero{min-height:auto;padding:80px 0 60px}
+  .hero-name{font-size:clamp(2.4rem,5vw,3.8rem)}
+  .sec-h{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+}
+
+/* ── LARGE PHONE: 480px – 768px ── */
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr}
+  .proj-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-pill{display:flex}
+  .hero-pills{gap:7px}
+  .hpill{font-size:0.58rem;padding:5px 11px}
+  .cc-stats{grid-template-columns:repeat(4,1fr)}
+  .cc-s{padding:14px 10px}
+  .cc-sv{font-size:1.2rem}
+  .strip-wrap{display:none}
+  section{padding:72px 0}
+}
+
+/* ── PHONE: up to 480px ── */
+@media(max-width:480px){
+  .wrap{width:calc(100% - 28px)}
+  nav .wrap{padding:0}
+  .nav-in{padding:14px 0}
+  .nav-logo{font-size:0.85rem}
+  .nav-pill{display:none}
+
+  .hero{padding:70px 0 50px;min-height:auto}
+  .hero-grid{gap:32px}
+  .hero-name{font-size:clamp(2.2rem,9vw,3rem)}
+  .hero-role{font-size:0.72rem}
+  .hero-pills{gap:6px}
+  .hpill{font-size:0.56rem;padding:5px 10px}
+  .hero-bio{font-size:0.76rem}
+  .hero-btns{gap:10px}
+  .btn{font-size:0.65rem;padding:11px 20px}
+
+  .holo-card{max-width:100%}
+  .cc-code{font-size:0.62rem;padding:14px 16px;line-height:1.9}
+  .cc-stats{grid-template-columns:repeat(2,1fr)}
+  .cc-s{padding:16px 12px}
+  .cc-sv{font-size:1.3rem}
+  .av-circle{width:70px;height:70px;font-size:1.8rem}
+  .av-spin{inset:-5px}.av-spin2{inset:-10px}
+
+  section{padding:56px 0}
+  .sec-h{margin-bottom:36px}
+  .eyebrow-line{width:20px}
+
+  .about-card{padding:26px 20px}
+  .proj{padding:22px 18px}
+  .exp-row{grid-template-columns:1fr}
+  .exp-date,.exp-mid{display:none}
+  .exp-body{margin-left:0;padding:20px 18px}
+  .certs-grid{grid-template-columns:1fr}
+  .cert{padding:22px 18px}
+  .contact-wrap{gap:28px}
+  .contact-left h2{font-size:1.7rem}
+  .avail-card{padding:22px 18px}
+  .tab-nav{gap:4px}
+  .tab-btn{font-size:0.58rem;padding:6px 11px}
+  .chip{font-size:0.58rem;padding:5px 11px}
+  .bars-title{font-size:0.58rem}
+  .bar-label{font-size:0.62rem}
+  .foot-in{flex-direction:column;text-align:center;gap:12px}
+  #cursor,#cursor-ring{display:none}
+  body{cursor:auto}
+}
+
+/* ── VERY SMALL: up to 360px ── */
+@media(max-width:360px){
+  .hero-name{font-size:2rem}
+  .hero-role{font-size:0.65rem;word-break:break-all}
+  .btn{padding:10px 16px;font-size:0.6rem}
+  .hpill{display:none}
+  .hero-pills .hpill:nth-child(-n+3){display:inline-flex}
+}
+/* ══════════════════════════
+   CONSULTATION SECTION
+══════════════════════════ */
+.consult-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:52px;align-items:start}
+
+/* service list */
+.svc-list{display:flex;flex-direction:column;gap:14px}
+.svc-card{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:18px 20px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(8,14,36,0.5);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:border-color 0.25s,background 0.25s;
+}
+.svc-card:hover{border-color:rgba(0,255,247,0.2);background:rgba(0,255,247,0.04)}
+.svc-ico{font-size:1.3rem;flex-shrink:0;margin-top:1px}
+.svc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;margin-bottom:4px}
+.svc-desc{font-size:0.68rem;line-height:1.7;color:var(--muted2)}
+
+/* form card */
+.form-card{
+  border:1px solid rgba(0,255,247,0.12);
+  background:rgba(8,14,36,0.8);
+  -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+}
+.form-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+  animation:borderFlow 4s linear infinite;background-size:200% auto;
+}
+.form-header{
+  padding:28px 32px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg,rgba(0,255,247,0.04),transparent);
+}
+.form-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:4px}
+.form-sub{font-size:0.68rem;color:var(--muted2);letter-spacing:0.05em}
+
+form{padding:28px 32px;display:flex;flex-direction:column;gap:18px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:7px}
+label{
+  font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;
+  color:var(--muted2);
+}
+input,select,textarea{
+  font-family:'Fira Code',monospace;font-size:0.72rem;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  color:var(--text);padding:12px 14px;
+  outline:none;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  -webkit-appearance:none;appearance:none;
+  border-radius:0;
+  width:100%;
+}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--neon1);
+  box-shadow:0 0 0 2px rgba(0,255,247,0.1),0 0 16px rgba(0,255,247,0.08);
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8fad' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;cursor:pointer;
+}
+select option{background:#0a1628;color:var(--text)}
+textarea{resize:vertical;min-height:100px}
+
+.submit-btn{
+  font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:600;
+  letter-spacing:0.1em;padding:15px 28px;
+  background:linear-gradient(135deg,var(--neon1),var(--neon2));
+  color:#000;border:none;cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform 0.2s,box-shadow 0.2s;
+  align-self:flex-start;
+}
+.submit-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--neon2),var(--neon3));
+  opacity:0;transition:opacity 0.3s;
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,255,247,0.4)}
+.submit-btn:hover::before{opacity:1}
+.submit-btn span{position:relative;z-index:1}
+.submit-btn:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+/* success / error */
+.form-success{
+  padding:40px 32px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+}
+.success-ico{font-size:3rem;animation:float 3s ease-in-out infinite}
+.form-success h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#fff}
+.form-success p{font-size:0.75rem;line-height:1.85;color:var(--muted2);max-width:360px}
+.reset-btn{
+  font-family:'Fira Code',monospace;font-size:0.68rem;
+  padding:10px 22px;border:1px solid var(--neon1);
+  color:var(--neon1);background:transparent;cursor:pointer;
+  transition:all 0.2s;margin-top:8px;
+}
+.reset-btn:hover{background:var(--neon1);color:#000}
+.form-error{
+  padding:12px 32px 20px;
+}
+.form-error p{
+  font-size:0.7rem;color:var(--neon3);
+  border:1px solid rgba(255,0,110,0.3);
+  background:rgba(255,0,110,0.06);
+  padding:12px 16px;
+}
+
+/* nav link for consult */
+@media(max-width:1020px){.consult-wrap{grid-template-columns:1fr;gap:40px}}
+@media(max-width:480px){
+  form{padding:20px 18px;gap:14px}
+  .form-header{padding:22px 18px}
+  .field-row{grid-template-columns:1fr}
+  .submit-btn{width:100%;text-align:center;align-self:stretch}
+}
+
+/* ── HAMBURGER ── */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;
+  background:none;border:none;cursor:pointer;padding:6px;
+  z-index:300;position:relative;
+}
+.hamburger span{
+  display:block;width:24px;height:2px;
+  background:var(--neon1);
+  transition:transform 0.3s,opacity 0.3s;
+  box-shadow:0 0 6px var(--neon1);
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+@media(max-width:768px){
+  .hamburger{display:flex}
+  .nav-links{
+    flex-direction:column;gap:0;
+    position:fixed;top:0;right:0;bottom:0;width:260px;
+    background:rgba(2,5,16,0.97);
+    -webkit-backdrop-filter:blur(30px);backdrop-filter:blur(30px);
+    border-left:1px solid rgba(0,255,247,0.1);
+    padding:80px 32px 40px;z-index:250;
+    transform:translateX(100%);
+    transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+    visibility:hidden;
+    display:flex !important;
+  }
+  .nav-links.open{transform:translateX(0);visibility:visible}
+  .nav-links li{border-bottom:1px solid rgba(255,255,255,0.05)}
+  .nav-links a{
+    display:block;padding:16px 0;font-size:0.85rem;
+    color:var(--muted2);letter-spacing:0.12em;
+  }
+  .nav-links a:hover{color:var(--neon1)}
+  .nav-links a::after{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- CUSTOM CURSOR -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- AURORA CANVAS -->
+<canvas id="aurora"></canvas>
+
+<!-- ════ NAV ════ -->
+<nav>
+  <div class="wrap nav-in">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div class="nav-logo">maha.yadavalli()</div>
+      <div class="nav-pill"><div class="ping-dot"></div>available</div>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#about" onclick="closeNav()">about</a></li>
+      <li><a href="#skills" onclick="closeNav()">skills</a></li>
+      <li><a href="#projects" onclick="closeNav()">projects</a></li>
+      <li><a href="#experience" onclick="closeNav()">experience</a></li>
+      <li><a href="#certifications" onclick="closeNav()">certs</a></li>
+      <li><a href="#consult" onclick="closeNav()" style="color:var(--neon1)">consult</a></li>
+      <li><a href="#contact" onclick="closeNav()">contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ════ HERO ════ -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="wrap hero-grid">
+    <!-- LEFT -->
+    <div>
+      <div class="term-line">
+        <span class="t-g">maha@azure</span><span style="color:var(--muted)">:</span><span class="t-v">~/architect</span><span class="t-g">$</span>
+        <span id="typed" class="t-c"></span><span class="cursor-bar"></span>
+      </div>
+
+      <h1 class="hero-name">
+        <span class="n1">Maha Rana</span>
+        <span class="n2">Yadavalli</span>
+      </h1>
+
+      <div class="hero-role">
+        <span class="fn-c">DataArchitect</span><span style="color:var(--muted2)">(</span><span class="arg-c">"Azure","Databricks","AI"</span><span style="color:var(--muted2)">)</span>
+        <span style="color:var(--muted)"> ⟶ </span><span class="ret-c">enterprise_at_scale</span>
+      </div>
+
+      <div class="hero-pills">
+        <div class="hpill">☁ Cloud Architecture</div>
+        <div class="hpill">⚡ Agentic AI</div>
+        <div class="hpill">🏛 Medallion Arch</div>
+        <div class="hpill">🔷 Delta Lake</div>
+        <div class="hpill">🧠 LLMs & GPT</div>
+        <div class="hpill">🔗 MCP Protocol</div>
+      </div>
+
+      <p class="hero-bio">
+        <strong>15+ years</strong> delivering enterprise-grade cloud data platforms across <strong>Azure · AWS · GCP</strong>.
+        From Medallion Architecture and Delta Lake to agentic AI pipelines, LLM integrations, and NL-to-SQL copilots —
+        I architect data that <strong>thinks, scales, and ships</strong> for Fortune 500 enterprises.
+      </p>
+
+      <div class="hero-btns">
+        <a class="btn btn-neon" href="#consult"><span>Book a Consultation →</span></a>
+        <a class="btn btn-ghost" href="#projects">./explore_work</a>
+        <a class="btn btn-ghost" href="#contact">ping_me()</a>
+      </div>
+    </div>
+
+    <!-- RIGHT: HOLO CARD -->
+    <div class="holo-card">
+      <div class="holo-ring"></div>
+      <div class="holo-ring2"></div>
+      <div class="holo-card-inner">
+        <div class="cc-bar">
+          <div class="cc-dot r"></div><div class="cc-dot y"></div><div class="cc-dot g"></div>
+          <span class="cc-fname">architect.py — Python 3.12</span>
+        </div>
+        <div class="cc-top">
+          <div class="av-wrap">
+            <div class="av-spin"></div>
+            <div class="av-spin2"></div>
+            <div class="av-circle">🧠</div>
+          </div>
+          <div class="cc-name">Maha Rana Yadavalli</div>
+          <div class="cc-sub">Data & AI Architect · Cumming, GA 🌆</div>
+        </div>
+        <div class="cc-code">
+<span class="ck">class</span> <span class="ccls">DataArchitect</span>:<br>
+<span class="i1"></span><span class="ck">def</span> <span class="cf">__init__</span>(<span class="cse">self</span>):<br>
+<span class="i2"></span><span class="cse">self</span>.clouds = [<span class="cs">"Azure"</span>,<span class="cs">"AWS"</span>,<span class="cs">"GCP"</span>]<br>
+<span class="i2"></span><span class="cse">self</span>.yrs = <span class="cn">15</span> <span class="cm"># and counting</span><br>
+<span class="i2"></span><span class="cse">self</span>.stack = [<span class="cs">"Databricks"</span>,<span class="cs">"Neo4j"</span>,<br>
+<span class="i2"></span><span class="i1"></span><span class="cs">"Agentic AI"</span>,<span class="cs">"MCP"</span>,<span class="cs">"LLMs"</span>]<br>
+<span class="i1"></span><span class="ck">def</span> <span class="cf">superpower</span>(<span class="cse">self</span>):<br>
+<span class="i2"></span><span class="ck">return</span> <span class="cs">"data that reasons ✨"</span>
+        </div>
+        <div class="cc-stats">
+          <div class="cc-s"><div class="cc-sv">15+</div><div class="cc-sl">Yrs XP</div></div>
+          <div class="cc-s"><div class="cc-sv">3</div><div class="cc-sl">Clouds</div></div>
+          <div class="cc-s"><div class="cc-sv">F500</div><div class="cc-sl">Clients</div></div>
+          <div class="cc-s"><div class="cc-sv">AI</div><div class="cc-sl">Native</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <span>scroll</span>
+    <div class="scroll-bar"></div>
+  </div>
+</section>
+
+<!-- TECH STRIP -->
+<div class="strip-wrap">
+  <div class="strip-tr" id="strip"></div>
+</div>
+
+<!-- ════ ABOUT ════ -->
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon1)">
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+      About
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+    </div>
+    <h2 class="sec-h">What I <span>Build</span></h2>
+    <div class="about-grid">
+      <div class="about-card rv" style="--nc1:rgba(0,255,247,0.05);--nc2:rgba(0,200,255,0.08);--glow:rgba(0,255,247,0.06)">
+        <span class="ac-ico">☁️</span>
+        <h3>Cloud Architecture</h3>
+        <p>Scalable data platforms across Azure, AWS, and GCP. Synapse, ADF, Databricks, Microsoft Fabric — built for reliability, security, and enterprise-scale maintainability.</p>
+      </div>
+      <div class="about-card rv" style="--nc1:rgba(191,0,255,0.05);--nc2:rgba(255,0,110,0.05);--glow:rgba(191,0,255,0.06)">
+        <span class="ac-ico">🤖</span>
+        <h3>Agentic AI & LLMs</h3>
+        <p>Agentic pipelines using MCP Protocol, LLMs, GPT models, and RAG systems. NL-to-SQL copilots, knowledge graphs with Neo4j, and Azure AI Foundry — from POC to production.</p>
+      </div>
+      <div class="about-card rv" style="--nc1:rgba(0,255,136,0.05);--nc2:rgba(255,204,0,0.05);--glow:rgba(0,255,136,0.06)">
+        <span class="ac-ico">🏛️</span>
+        <h3>Governance & Platform Design</h3>
+        <p>Medallion Architecture, Delta Lake, Unity Catalog, and Azure Purview. Data estates that are trusted, governed, cost-optimized, and audit-ready at Fortune 500 scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ SKILLS ════ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon2)">
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>Skills
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>
+    </div>
+    <h2 class="sec-h">Tech <span>Proficiency</span></h2>
+    <div class="skills-wrap">
+
+      <!-- BARS -->
+      <div class="rv" id="bar-host">
+        <p class="bars-title">// proficiency_levels — hover to inspect</p>
+        <div class="bars">
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure & Cloud Architecture</span><span class="bar-pct">96%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:96%;--delay:0s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Databricks & Delta Lake</span><span class="bar-pct">94%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:94%;--delay:0.15s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Snowflake & Redshift</span><span class="bar-pct">88%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:88%;--delay:0.3s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Azure Synapse Analytics</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:93%;--delay:0.45s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Architecture & ETL</span><span class="bar-pct">97%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:97%;--delay:0.6s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Agentic AI & LLMs</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:91%;--delay:0.75s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Palantir Foundry</span><span class="bar-pct">82%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:82%;--delay:0.9s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Data Governance & Purview</span><span class="bar-pct">93%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:93%;--delay:1.05s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">SQL & PostgreSQL</span><span class="bar-pct">95%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:95%;--delay:1.2s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Python & PySpark</span><span class="bar-pct">91%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:91%;--delay:1.35s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">Microsoft Fabric & OneLake</span><span class="bar-pct">89%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:89%;--delay:1.5s"></div></div></div>
+          <div class="bar-row"><div class="bar-info"><span class="bar-label">DevOps & Terraform</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" style="--pct:85%;--delay:1.65s"></div></div></div>
+        </div>
+      </div>
+
+      <!-- TABS -->
+      <div class="rv">
+        <div class="tab-nav">
+          <button class="tab-btn on" onclick="doTab(event,'cloud')"><span>Cloud</span></button>
+          <button class="tab-btn" onclick="doTab(event,'platforms')"><span>Data Platforms</span></button>
+          <button class="tab-btn" onclick="doTab(event,'data')"><span>Data Eng</span></button>
+          <button class="tab-btn" onclick="doTab(event,'ai')"><span>AI & ML</span></button>
+          <button class="tab-btn" onclick="doTab(event,'devops')"><span>DevOps</span></button>
+          <button class="tab-btn" onclick="doTab(event,'lang')"><span>Languages</span></button>
+        </div>
+
+        <div id="tab-cloud" class="tpanel on"><div class="chips">
+          <span class="chip hi">Azure</span><span class="chip hi">AWS</span><span class="chip hi">GCP</span>
+          <span class="chip hi">Azure AI Foundry</span>
+          <span class="chip">Azure Data Factory</span><span class="chip">Synapse Analytics</span>
+          <span class="chip">Azure Databricks</span><span class="chip">Azure Purview</span>
+          <span class="chip">Microsoft Fabric</span><span class="chip">Azure Blob Storage</span>
+          <span class="chip">Azure App Service</span><span class="chip">Azure Data Lake</span>
+          <span class="chip">AWS Lambda</span><span class="chip">AWS Step Functions</span>
+          <span class="chip">AWS SageMaker</span><span class="chip">AWS Glue</span><span class="chip">AWS ACM</span>
+          <span class="chip">GCP Vertex AI</span><span class="chip">GCP BigQuery</span><span class="chip">GCP Dataflow</span>
+        </div></div>
+
+        <div id="tab-platforms" class="tpanel"><div class="chips">
+          <span class="chip hi">Databricks</span>
+          <span class="chip hi">Snowflake</span>
+          <span class="chip hi">Azure Synapse Analytics</span>
+          <span class="chip hi">Amazon Redshift</span>
+          <span class="chip hi">Palantir Foundry</span>
+          <span class="chip hi">Microsoft Fabric</span>
+          <span class="chip">Google BigQuery</span>
+          <span class="chip">Azure Purview</span>
+          <span class="chip">Unity Catalog</span>
+          <span class="chip">OneLake</span>
+          <span class="chip">Azure Data Lake Gen2</span>
+          <span class="chip">Apache Spark</span>
+          <span class="chip">Apache Kafka</span>
+          <span class="chip">Apache Airflow</span>
+          <span class="chip">dbt</span>
+          <span class="chip">Delta Sharing</span>
+          <span class="chip">Lakehouse Architecture</span>
+        </div></div>
+
+        <div id="tab-data" class="tpanel"><div class="chips">
+          <span class="chip hi">Medallion Architecture</span><span class="chip hi">Delta Lake</span>
+          <span class="chip hi">ETL / ELT Design</span>
+          <span class="chip hi">PostgreSQL</span><span class="chip hi">Cosmos DB</span><span class="chip hi">Neo4j</span>
+          <span class="chip">Unity Catalog</span><span class="chip">PySpark</span>
+          <span class="chip">Azure SQL</span><span class="chip">SQL Server</span>
+          <span class="chip">Power BI</span><span class="chip">Tableau</span>
+          <span class="chip">Looker</span><span class="chip">OneLake</span>
+          <span class="chip">Data Vault 2.0</span><span class="chip">Star Schema</span>
+          <span class="chip">Change Data Capture</span><span class="chip">Metadata Management</span>
+          <span class="chip">Data Lineage</span><span class="chip">Master Data Management</span>
+        </div></div>
+
+        <div id="tab-ai" class="tpanel"><div class="chips">
+          <span class="chip hi">Agentic Pipelines</span><span class="chip hi">MCP Protocol</span>
+          <span class="chip hi">LLMs</span><span class="chip hi">GPT Models</span>
+          <span class="chip hi">Azure OpenAI</span><span class="chip hi">Claude API</span>
+          <span class="chip">Generative AI</span><span class="chip">NL-to-SQL</span>
+          <span class="chip">Knowledge Graphs</span><span class="chip">Neo4j</span>
+          <span class="chip">RAG Systems</span><span class="chip">Vector Databases</span>
+          <span class="chip">Prompt Engineering</span><span class="chip">AI Foundry</span>
+          <span class="chip">LangChain</span><span class="chip">Semantic Kernel</span>
+          <span class="chip">ML Ops</span><span class="chip">Fine-tuning</span>
+          <span class="chip">Embeddings</span><span class="chip">AI Gateway</span>
+        </div></div>
+
+        <div id="tab-devops" class="tpanel"><div class="chips">
+          <span class="chip hi">Terraform</span><span class="chip hi">Azure DevOps</span>
+          <span class="chip">Ansible</span><span class="chip">Kubernetes</span>
+          <span class="chip">Docker</span><span class="chip">GitHub Actions</span>
+          <span class="chip">Venafi</span><span class="chip">CI/CD Pipelines</span>
+          <span class="chip">Infrastructure as Code</span><span class="chip">Helm</span>
+          <span class="chip">GitOps</span><span class="chip">ARM Templates</span>
+          <span class="chip">Bicep</span><span class="chip">Azure Monitor</span>
+          <span class="chip">Log Analytics</span>
+        </div></div>
+
+        <div id="tab-lang" class="tpanel"><div class="chips">
+          <span class="chip hi">Python</span><span class="chip hi">SQL</span><span class="chip hi">PostgreSQL</span>
+          <span class="chip">PySpark</span><span class="chip">Scala</span><span class="chip">C#</span>
+          <span class="chip">Flask</span><span class="chip">FastAPI</span>
+          <span class="chip">JavaScript</span><span class="chip">HTML / CSS</span>
+          <span class="chip">Bash / Shell</span><span class="chip">YAML</span>
+          <span class="chip">Databricks REST API</span><span class="chip">GraphQL</span>
+          <span class="chip">REST APIs</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ PROJECTS ════ -->
+<section id="projects">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon5)">
+      <div class="eyebrow-line" style="background:var(--neon5)"></div>Projects
+      <div class="eyebrow-line" style="background:var(--neon5)"></div>
+    </div>
+    <h2 class="sec-h">Selected <span>Work</span></h2>
+    <div class="proj-grid">
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">01 / enterprise</div><div class="proj-ico">🏗️</div></div>
+        <h3>EDAV Analytics Platform</h3>
+        <p>End-to-end enterprise analytics across Databricks, Synapse, ADF, Data Lake, PostgreSQL, Power BI, and Cosmos DB. Full Medallion Architecture and governance strategy.</p>
+        <div class="proj-tags"><span class="ptag">Azure</span><span class="ptag">Databricks</span><span class="ptag">Synapse</span><span class="ptag">Medallion</span></div>
+      </div>
+      <!-- ══ MahAI FEATURED CARD — full width ══ -->
+      <div class="mahai-card rv">
+        <!-- animated background mesh -->
+        <div class="mahai-bg"></div>
+        <div class="mahai-grid-overlay"></div>
+
+        <div class="mahai-inner">
+          <!-- left: content -->
+          <div class="mahai-left">
+            <div class="mahai-eyebrow">
+              <span class="mahai-own">✦ Own Product</span>
+              <span class="mahai-wip">⟳ In Progress</span>
+            </div>
+
+            <h3 class="mahai-title">Mah<span class="mahai-ai">AI</span></h3>
+            <div class="mahai-tagline">Enterprise Data Intelligence Platform</div>
+
+            <p class="mahai-desc">
+              The era of passive data platforms is ending.<br/>
+              <strong>MahAI</strong> is a self-owned product being built to fundamentally change how enterprises interact with their data — moving from dashboards and queries to a platform that <em>understands, reasons, and speaks back</em>.
+            </p>
+
+            <div class="mahai-phases">
+              <div class="mahai-phase done">
+                <div class="mph-dot"></div>
+                <div class="mph-body">
+                  <div class="mph-name">Phase 1 — Telemetry Layer</div>
+                  <div class="mph-desc">Cross-platform data collection across Databricks, Synapse, Snowflake, Redshift</div>
+                </div>
+              </div>
+              <div class="mahai-phase done">
+                <div class="mph-dot"></div>
+                <div class="mph-body">
+                  <div class="mph-name">Phase 2 — Knowledge Graph</div>
+                  <div class="mph-desc">Neo4j-powered semantic layer mapping relationships across the entire data estate</div>
+                </div>
+              </div>
+              <div class="mahai-phase active">
+                <div class="mph-dot"></div>
+                <div class="mph-body">
+                  <div class="mph-name">Phase 3 — AI Reasoning Engine</div>
+                  <div class="mph-desc">LLM-powered inference over structured graphs using MCP Protocol & Claude API</div>
+                </div>
+              </div>
+              <div class="mahai-phase upcoming">
+                <div class="mph-dot"></div>
+                <div class="mph-body">
+                  <div class="mph-name">Phase 4 — NL Copilot</div>
+                  <div class="mph-desc">Ask your data anything. Natural language → insight, instantly</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mahai-promise">
+              <span class="mp-ico">🚀</span>
+              <span>When MahAI ships — the way enterprises see their data will never be the same.</span>
+            </div>
+
+            <div class="proj-tags" style="margin-top:24px">
+              <span class="ptag">LLMs</span><span class="ptag">Neo4j</span><span class="ptag">MCP Protocol</span>
+              <span class="ptag">Agentic AI</span><span class="ptag">NL-to-SQL</span>
+              <span class="ptag">Databricks</span><span class="ptag">Snowflake</span><span class="ptag">Claude API</span>
+            </div>
+          </div>
+
+          <!-- right: visual -->
+          <div class="mahai-right">
+            <div class="mahai-orb-wrap">
+              <div class="mahai-orb-ring r1"></div>
+              <div class="mahai-orb-ring r2"></div>
+              <div class="mahai-orb-ring r3"></div>
+              <div class="mahai-core">
+                <div class="mahai-core-icon">🧠</div>
+                <div class="mahai-core-label">MahAI</div>
+              </div>
+              <!-- orbiting nodes -->
+              <div class="mahai-node n1">Neo4j</div>
+              <div class="mahai-node n2">LLM</div>
+              <div class="mahai-node n3">MCP</div>
+              <div class="mahai-node n4">SQL</div>
+              <div class="mahai-node n5">Azure</div>
+              <div class="mahai-node n6">RAG</div>
+            </div>
+            <div class="mahai-era">
+              <div class="mahai-era-text">A New Era of<br/><strong>Data Intelligence</strong></div>
+              <div class="mahai-era-sub">// coming soon</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">03 / governance</div><div class="proj-ico">🛡️</div></div>
+        <h3>AI-Powered Metadata & Purview</h3>
+        <p>Advanced metadata enrichment using Azure Purview with AI-assisted asset descriptions, enterprise catalog scanning, and governance framework improvements at scale.</p>
+        <div class="proj-tags"><span class="ptag">Purview</span><span class="ptag">AI</span><span class="ptag">Governance</span><span class="ptag">Metadata</span></div>
+      </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">04 / automation</div><div class="proj-ico">⚙️</div></div>
+        <h3>Certificate Automation Platform</h3>
+        <p>Large-scale certificate automation using Venafi, AWS ACM, Lambda, Step Functions, Terraform, and PostgreSQL across multi-account AWS environments.</p>
+        <div class="proj-tags"><span class="ptag">AWS</span><span class="ptag">Terraform</span><span class="ptag">Lambda</span><span class="ptag">Automation</span></div>
+      </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">05 / saas</div><div class="proj-ico">💍</div></div>
+        <h3>Wedorax — Wedding Planning Platform</h3>
+        <p>Multi-tenant SaaS with Python/Flask, Stripe payments, Azure Blob Storage, and Azure App Service deployment. Live at <a href="https://wedorax.com" target="_blank" style="color:var(--neon1)">wedorax.com</a>.</p>
+        <div class="proj-tags"><span class="ptag">Flask</span><span class="ptag">Azure</span><span class="ptag">Stripe</span><span class="ptag">SaaS</span></div>
+      </div>
+      <div class="proj rv">
+        <div class="proj-top"><div class="proj-num">06 / optimization</div><div class="proj-ico">📈</div></div>
+        <h3>Databricks Bulk Ownership & Optimization</h3>
+        <p>Bulk ownership updates across Production/QA/Dev via Databricks REST API with Azure Storage integration. Performance tuning and serverless adoption strategy.</p>
+        <div class="proj-tags"><span class="ptag">Databricks</span><span class="ptag">REST API</span><span class="ptag">Optimization</span><span class="ptag">Serverless</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ EXPERIENCE ════ -->
+<section id="experience">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon4)">
+      <div class="eyebrow-line" style="background:var(--neon4)"></div>Experience
+      <div class="eyebrow-line" style="background:var(--neon4)"></div>
+    </div>
+    <h2 class="sec-h">Career <span>Timeline</span></h2>
+    <div class="exp-list">
+      <div class="exp-row rv">
+        <div class="exp-date">Present</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
+        <div class="exp-body">
+          <h3>Data & AI Architect</h3>
+          <p class="exp-co">Informatik Data Solutions — Microsoft / Azure / Databricks Consulting</p>
+          <p>Leading cloud data architecture, AI enablement, agentic pipelines, and enterprise analytics modernization for clients including Equifax, Molina, Cox, and RaceTrac. Driving Medallion Architecture, Delta Lake governance, and Azure Purview at scale.</p>
+          <div class="exp-chips"><span class="ec">Azure</span><span class="ec">Databricks</span><span class="ec">Agentic AI</span><span class="ec">Purview</span><span class="ec">Medallion</span><span class="ec">MCP</span></div>
+        </div>
+      </div>
+      <div class="exp-row rv">
+        <div class="exp-date">Prior</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
+        <div class="exp-body">
+          <h3>Cloud Data Platform Specialist</h3>
+          <p class="exp-co">Azure · AWS · GCP — Multi-Cloud Engineering</p>
+          <p>Designed scalable ELT pipelines, automation frameworks, and analytics ecosystems. Deep work in Synapse Analytics, ADF, AWS Step Functions, Terraform, and multi-environment governance models.</p>
+          <div class="exp-chips"><span class="ec">Synapse</span><span class="ec">ADF</span><span class="ec">Terraform</span><span class="ec">AWS Lambda</span><span class="ec">GCP</span></div>
+        </div>
+      </div>
+      <div class="exp-row rv">
+        <div class="exp-date">15+ Yrs</div>
+        <div class="exp-mid"><div class="exp-dot"></div></div>
+        <div class="exp-body">
+          <h3>Enterprise Data Engineering & Modernization</h3>
+          <p class="exp-co">Fortune 500 / Enterprise Delivery</p>
+          <p>Full-stack delivery from raw ingestion through BI reporting. Aligned platform architecture to business outcomes with a lens on cost optimization, compliance, and scalability.</p>
+          <div class="exp-chips"><span class="ec">Python</span><span class="ec">SQL</span><span class="ec">ETL</span><span class="ec">Power BI</span><span class="ec">PostgreSQL</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CERTIFICATIONS ════ -->
+<section id="certifications">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon6)">
+      <div class="eyebrow-line" style="background:var(--neon6)"></div>Certifications
+      <div class="eyebrow-line" style="background:var(--neon6)"></div>
+    </div>
+    <h2 class="sec-h">Credentials & <span>Learning</span></h2>
+    <div class="certs-grid">
+      <div class="cert rv">
+        <div class="cert-ico">🔷</div>
+        <div class="cert-iss">Microsoft</div>
+        <h3>Azure Solutions Architect Expert</h3>
+        <p>Designs and implements Azure solutions including compute, network, storage, and security. Expert-level cloud architecture validation.</p>
+        <span class="cbadge v">✓ Verified</span>
+      </div>
+      <div class="cert rv">
+        <div class="cert-ico">⚡</div>
+        <div class="cert-iss">Databricks</div>
+        <h3>Databricks Certified Data Engineer</h3>
+        <p>Expertise in data pipelines, Delta Lake, and Databricks lakehouse architecture at professional level.</p>
+        <span class="cbadge v">✓ Verified</span>
+      </div>
+      <div class="cert rv">
+        <div class="cert-ico">🪢</div>
+        <div class="cert-iss">Microsoft</div>
+        <h3>Fabric Analytics Engineer Associate</h3>
+        <p>OneLake, data integration, real-time analytics, and end-to-end platform design on Microsoft Fabric.</p>
+        <span class="cbadge v">✓ Verified</span>
+      </div>
+      <div class="cert rv">
+        <div class="cert-ico">🎓</div>
+        <div class="cert-iss">Anthropic · Informatik</div>
+        <h3>Claude Certified Architect (CCA)</h3>
+        <p>Claude Certified Architect – Foundations, via Informatik's Anthropic partner network access.</p>
+        <span class="cbadge w">⟳ In Progress</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONSULT ════ -->
+<section id="consult">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon2)">
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>Work With Us
+      <div class="eyebrow-line" style="background:var(--neon2)"></div>
+    </div>
+    <h2 class="sec-h">Build Your <span>Data Platform</span></h2>
+    <p style="font-size:0.82rem;color:var(--muted2);line-height:1.9;max-width:660px;margin-bottom:52px;">
+      Through <strong style="color:var(--text)">Informatik Data Solutions</strong>, we design and build enterprise-grade cloud data platforms, AI pipelines, governance frameworks, and modern analytics stacks.
+      Tell us what you're building — we'll get back to you within one business day.
+    </p>
+
+    <div class="consult-wrap">
+      <!-- SERVICE CARDS -->
+      <div class="services rv">
+        <p class="bars-title" style="margin-bottom:20px">// what_we_build</p>
+        <div class="svc-list">
+          <div class="svc-card">
+            <div class="svc-ico">☁️</div>
+            <div>
+              <div class="svc-title">Cloud Data Platforms</div>
+              <div class="svc-desc">Azure, AWS, GCP — Databricks, Synapse, Snowflake, Redshift end-to-end builds</div>
+            </div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-ico">🤖</div>
+            <div>
+              <div class="svc-title">Agentic AI & LLM Integration</div>
+              <div class="svc-desc">MCP pipelines, NL-to-SQL copilots, RAG systems, Azure OpenAI & Claude API</div>
+            </div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-ico">🏛️</div>
+            <div>
+              <div class="svc-title">Medallion & Lakehouse Architecture</div>
+              <div class="svc-desc">Delta Lake, Unity Catalog, Fabric, OneLake — designed for scale and governance</div>
+            </div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-ico">🛡️</div>
+            <div>
+              <div class="svc-title">Data Governance & Purview</div>
+              <div class="svc-desc">Azure Purview, metadata automation, lineage, compliance, and data quality</div>
+            </div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-ico">🔗</div>
+            <div>
+              <div class="svc-title">Platform Modernization & Migration</div>
+              <div class="svc-desc">Legacy to cloud, CDC, Palantir Foundry, Snowflake, cross-cloud migrations</div>
+            </div>
+          </div>
+          <div class="svc-card">
+            <div class="svc-ico">📊</div>
+            <div>
+              <div class="svc-title">Analytics & BI Enablement</div>
+              <div class="svc-desc">Power BI, Tableau, Looker — semantic layer, star schema, self-serve analytics</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONSULTATION FORM -->
+      <div class="form-card rv">
+        <div class="form-header">
+          <div class="form-title">Request a Consultation</div>
+          <div class="form-sub">via <span style="color:var(--neon1)">Informatik Data Solutions</span></div>
+        </div>
+
+        <form id="consult-form" onsubmit="sendConsult(event)" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label>Full Name *</label>
+              <input type="text" id="f-name" placeholder="Jane Smith" required autocomplete="name"/>
+            </div>
+            <div class="field">
+              <label>Company *</label>
+              <input type="text" id="f-company" placeholder="Acme Corp" required/>
+            </div>
+          </div>
+          <div class="field">
+            <label>Work Email *</label>
+            <input type="email" id="f-email" placeholder="jane@company.com" required autocomplete="email"/>
+          </div>
+          <div class="field">
+            <label>Service Interested In</label>
+            <select id="f-service">
+              <option value="">— Select a service —</option>
+              <option>Cloud Data Platform Build (Azure / AWS / GCP)</option>
+              <option>Databricks / Snowflake / Redshift Implementation</option>
+              <option>Agentic AI & LLM Pipeline Design</option>
+              <option>Medallion / Lakehouse Architecture</option>
+              <option>Data Governance & Azure Purview</option>
+              <option>Platform Modernization & Migration</option>
+              <option>Analytics & BI Enablement</option>
+              <option>Technical Advisory / Architecture Review</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Tell us about your project *</label>
+            <textarea id="f-message" rows="4" placeholder="What are you building? What's your timeline and scale?" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn" id="submit-btn">
+            <span id="btn-text">Send Request →</span>
+            <span id="btn-spin" style="display:none">⟳ Sending…</span>
+          </button>
+        </form>
+
+        <!-- SUCCESS STATE -->
+        <div id="form-success" style="display:none" class="form-success">
+          <div class="success-ico">✅</div>
+          <h3>Request Sent!</h3>
+          <p>Thank you — we've received your consultation request and sent a confirmation to your email. Our team at <strong>Informatik Data Solutions</strong> will reach out within one business day.</p>
+          <button onclick="resetForm()" class="reset-btn">Send Another Request</button>
+        </div>
+
+        <!-- ERROR STATE -->
+        <div id="form-error" style="display:none" class="form-error">
+          <p id="error-msg">Something went wrong. Please try again or email us directly.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CONTACT ════ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow" style="color:var(--neon1)">
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>Contact
+      <div class="eyebrow-line" style="background:var(--neon1)"></div>
+    </div>
+    <div class="contact-wrap">
+      <div class="contact-left rv">
+        <h2>Let's build something <em>impactful</em> together.</h2>
+        <p>Reach out directly or use the consultation form above. We serve enterprise clients through Informatik Data Solutions — Microsoft, Azure, and Databricks consulting.</p>
+        <div class="clinks">
+          <div class="clink" id="email-link" style="cursor:pointer" onclick="revealEmail(this)">
+            <span class="clink-ico">✉</span>
+            <span class="clink-lbl">Business Email</span>
+            <span class="clink-val" id="email-val">click to reveal</span>
+          </div>
+          <a class="clink" href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank" rel="noopener">
+            <span class="clink-ico">in</span>
+            <span class="clink-lbl">LinkedIn</span>
+            <span class="clink-val">maha-rana-yadavalli</span>
+          </a>
+          <a class="clink" href="https://github.com/maharanay22" target="_blank" rel="noopener">
+            <span class="clink-ico">⌘</span>
+            <span class="clink-lbl">GitHub</span>
+            <span class="clink-val">maharanay22</span>
+          </a>
+          <a class="clink" href="https://informatikinc.com" target="_blank" rel="noopener">
+            <span class="clink-ico">🏢</span>
+            <span class="clink-lbl">Informatik Data Solutions</span>
+            <span class="clink-val">informatikinc.com</span>
+          </a>
+        </div>
+      </div>
+      <div class="avail-card rv">
+        <h3>// currently_available_for</h3>
+        <div class="avail-list">
+          <div class="avail-row"><div class="adot g"></div><span>Enterprise Data Platform Builds</span></div>
+          <div class="avail-row"><div class="adot g"></div><span>Azure / Databricks / Snowflake Projects</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>Agentic AI & LLM Pipeline Design</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>Data Governance & Purview Implementations</span></div>
+          <div class="avail-row"><div class="adot c"></div><span>Platform Modernization & Migration</span></div>
+          <div class="avail-row"><div class="adot a"></div><span>Architecture Reviews & Technical Advisory</span></div>
+        </div>
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.05)">
+          <div style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px">Delivered through</div>
+          <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;
+            background:linear-gradient(90deg,var(--neon1),var(--neon2));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+            Informatik Data Solutions
+          </div>
+          <div style="font-size:0.65rem;color:var(--muted);margin-top:4px">Microsoft · Azure · Databricks Partner</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-in">
+    <p>// maha.yadavalli() · Informatik Data Solutions · © 2026</p>
+    <div class="foot-links">
+      <a href="https://github.com/maharanay22" target="_blank" rel="noopener">github</a>
+      <a href="https://www.linkedin.com/in/maha-rana-yadavalli-a35668a5" target="_blank" rel="noopener">linkedin</a>
+      <a href="https://informatikinc.com" target="_blank" rel="noopener">informatik</a>
+    </div>
+  </div>
+</footer>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script data-cfasync="false">
+/* ════════════════════════════════
+   EMAILJS CONFIG
+   ─────────────────────────────────
+   SETUP STEPS (free, 5 min):
+   1. Go to https://www.emailjs.com and sign up
+   2. Add an Email Service → connect your Gmail/Outlook (use myadavalli@infodatasol.com)
+   3. Create TWO Email Templates:
+      Template 1 "consult_notify" — sends TO you with form fields:
+        Subject: "New Consultation Request from {{from_name}}"
+        Body: use {{from_name}}, {{from_email}}, {{company}}, {{service}}, {{message}}
+      Template 2 "consult_confirm" — sends TO the visitor (auto-reply):
+        To Email: {{reply_to}}
+        Subject: "We received your request — Informatik Data Solutions"
+        Body: "Hi {{from_name}}, thank you for reaching out to Informatik Data Solutions..."
+   4. Replace the 3 values below with your actual IDs from emailjs.com dashboard
+════════════════════════════════ */
+const EJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';      // Account → API Keys
+const EJS_SERVICE_ID   = 'YOUR_SERVICE_ID';      // Email Services → Service ID
+const EJS_TEMPLATE_NOTIFY  = 'consult_notify';   // Template ID for notification to you
+const EJS_TEMPLATE_CONFIRM = 'consult_confirm';  // Template ID for auto-reply to visitor
+
+emailjs.init({ publicKey: EJS_PUBLIC_KEY });
+
+async function sendConsult(e) {
+  e.preventDefault();
+  const name    = document.getElementById('f-name').value.trim();
+  const company = document.getElementById('f-company').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const service = document.getElementById('f-service').value;
+  const message = document.getElementById('f-message').value.trim();
+
+  // Basic validation
+  if (!name || !email || !message) {
+    showError('Please fill in all required fields.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showError('Please enter a valid email address.');
+    return;
+  }
+
+  setLoading(true);
+  document.getElementById('form-error').style.display = 'none';
+
+  const params = {
+    from_name: name,
+    from_email: email,
+    company:   company || 'Not provided',
+    service:   service || 'Not specified',
+    message:   message,
+    reply_to:  email,
+    to_name:   name,
+  };
+
+  try {
+    // Send notification to Maha
+    await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_NOTIFY, {
+      ...params,
+      to_email: atob('bXlhZGF2YWxsaUBpbmZvZGF0YXNvbC5jb20=')
+    });
+    // Send confirmation to visitor
+    await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_CONFIRM, params);
+
+    // Show success
+    document.getElementById('consult-form').style.display = 'none';
+    document.getElementById('form-success').style.display = 'flex';
+  } catch(err) {
+    console.error('EmailJS error:', err);
+    showError('Could not send your request. Please email us directly using the Contact section below.');
+  } finally {
+    setLoading(false);
+  }
+}
+
+function setLoading(on) {
+  const btn = document.getElementById('submit-btn');
+  document.getElementById('btn-text').style.display = on ? 'none' : 'inline';
+  document.getElementById('btn-spin').style.display = on ? 'inline' : 'none';
+  btn.disabled = on;
+}
+
+function showError(msg) {
+  const el = document.getElementById('form-error');
+  document.getElementById('error-msg').textContent = msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function resetForm() {
+  document.getElementById('consult-form').reset();
+  document.getElementById('consult-form').style.display = 'flex';
+  document.getElementById('form-success').style.display = 'none';
+  document.getElementById('form-error').style.display = 'none';
+}
+
+/* ── EMAIL REVEAL (bot protection) ── */
+function revealEmail(el) {
+  // Email stored base64 encoded — decoded only on user click
+  const decoded = atob('bXlhZGF2YWxsaUBpbmZvZGF0YXNvbC5jb20=');
+  document.getElementById('email-val').textContent = decoded;
+  el.href = 'mailto:' + decoded;
+  el.setAttribute('href','mailto:' + decoded);
+  el.style.cursor = 'default';
+  el.onclick = null;
+}
+</script>
+
+<script>
+/* ═══ CUSTOM CURSOR ═══ */
+const cur = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=(mx-6)+'px'; cur.style.top=(my-6)+'px';
+});
+function animRing(){
+  rx+=(mx-rx-18)*0.12; ry+=(my-ry-18)*0.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.proj,.cert,.about-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='scale(2.5)';cur.style.background='var(--neon2)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='scale(1)';cur.style.background='var(--neon1)';});
+});
+
+/* ═══ AURORA CANVAS ═══ */
+(function(){
+  const c=document.getElementById('aurora');
+  const ctx=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=innerWidth;H=c.height=innerHeight}
+  resize();window.addEventListener('resize',resize);
+
+  const blobs=[
+    {x:0.15,y:0.2,r:0.38,vx:0.0002,vy:0.00015,color:[0,255,247]},
+    {x:0.8,y:0.7,r:0.32,vx:-0.00018,vy:-0.0002,color:[191,0,255]},
+    {x:0.5,y:0.5,r:0.25,vx:0.00012,vy:0.00022,color:[255,0,110]},
+    {x:0.2,y:0.8,r:0.28,vx:0.0003,vy:-0.00012,color:[0,255,136]},
+    {x:0.9,y:0.2,r:0.22,vx:-0.00025,vy:0.0003,color:[255,204,0]},
+  ];
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    blobs.forEach(b=>{
+      b.x+=b.vx; b.y+=b.vy;
+      if(b.x<-0.1||b.x>1.1)b.vx*=-1;
+      if(b.y<-0.1||b.y>1.1)b.vy*=-1;
+      const px=b.x*W, py=b.y*H, pr=b.r*Math.min(W,H);
+      const g=ctx.createRadialGradient(px,py,0,px,py,pr);
+      const alpha=0.12+0.04*Math.sin(t*0.5+b.x*10);
+      g.addColorStop(0,`rgba(${b.color.join(',')},${alpha})`);
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;
+      ctx.beginPath();ctx.arc(px,py,pr,0,Math.PI*2);ctx.fill();
+    });
+    t+=0.01;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ═══ TYPING EFFECT ═══ */
+(function(){
+  const el=document.getElementById('typed');
+  const words=['python architect.py','./build_platform.sh','deploy --env=prod','git push origin main'];
+  let wi=0,ci=0,del=false;
+  function tick(){
+    const w=words[wi];
+    if(!del){
+      el.textContent=w.slice(0,++ci);
+      if(ci===w.length){del=true;setTimeout(tick,1800);return}
+    } else {
+      el.textContent=w.slice(0,--ci);
+      if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(tick,400);return}
+    }
+    setTimeout(tick,del?40:70);
+  }
+  setTimeout(tick,1000);
+})();
+
+/* ═══ TECH STRIP ═══ */
+(function(){
+  const items=[
+    ['⚡','Azure Databricks'],['☁','Azure Synapse'],['🔷','Delta Lake'],
+    ['🏛','Medallion Arch'],['🤖','Agentic AI'],['🔗','MCP Protocol'],
+    ['🧠','Neo4j'],['📊','Power BI'],['🌐','Azure Purview'],
+    ['🛠','Terraform'],['🐍','PySpark'],['⚙','Azure Data Factory'],
+    ['🔍','Unity Catalog'],['🌩','AWS Lambda'],['🧬','RAG Systems'],
+    ['🗄','PostgreSQL'],['💎','Fabric'],['🤖','LLMs & GPT'],
+    ['🔮','AI Foundry'],['📦','Docker'],['♾','Azure DevOps'],
+  ];
+  const el=document.getElementById('strip');
+  el.innerHTML=[...items,...items].map(([i,n])=>
+    `<div class="si"><div class="si-dot"></div><span>${i}</span>${n}</div>`
+  ).join('');
+})();
+
+/* ═══ SKILL TABS ═══ */
+function doTab(e,id){
+  document.querySelectorAll('.tpanel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  e.currentTarget.classList.add('on');
+}
+
+/* ═══ SCROLL REVEAL — bulletproof ═══ */
+(function(){
+  const els = [...document.querySelectorAll('.rv')];
+
+  // Fallback: if JS observer fails, show everything after 1.5s
+  const fallback = setTimeout(() => {
+    els.forEach(el => el.classList.add('in'));
+  }, 1500);
+
+  if (!('IntersectionObserver' in window)) {
+    // No support — show all immediately
+    els.forEach(el => el.classList.add('in'));
+    clearTimeout(fallback);
+    return;
+  }
+
+  let revealed = 0;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Small stagger based on position within parent
+        const siblings = [...entry.target.parentElement.querySelectorAll('.rv')];
+        const idx = siblings.indexOf(entry.target);
+        const delay = Math.min(idx * 80, 320); // cap at 320ms
+        setTimeout(() => {
+          entry.target.classList.add('in');
+          revealed++;
+          if (revealed >= els.length) clearTimeout(fallback);
+        }, delay);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ═══ HAMBURGER MENU ═══ */
+function toggleNav(){
+  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  if(!nav || !btn) return;
+  nav.classList.toggle('open');
+  btn.classList.toggle('open');
+}
+function closeNav(){
+  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  if(!nav || !btn) return;
+  nav.classList.remove('open');
+  btn.classList.remove('open');
+}
+// Close on outside tap
+document.addEventListener('click', e => {
+  const nav = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger');
+  if(nav && btn && nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)){
+    closeNav();
+  }
+});
+
+// Smooth scroll for all anchor buttons with fallback
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const id = this.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      const navH = document.querySelector('nav') ? document.querySelector('nav').offsetHeight : 64;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - navH - 10;
+      window.scrollTo({ top, behavior: 'smooth' });
+      closeNav();
+    }
+  });
+});
+
+/* ═══ TOUCH: disable custom cursor on touch devices ═══ */
+window.addEventListener('touchstart', () => {
+  document.getElementById('cursor').style.display = 'none';
+  document.getElementById('cursor-ring').style.display = 'none';
+  document.body.style.cursor = 'auto';
+}, { once: true });
+</script>
+</body>
+</html>
