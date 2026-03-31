@@ -964,7 +964,6 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
   .hero{min-height:auto;padding:80px 0 60px}
   .hero-name{font-size:clamp(1.9rem,3.5vw,2.8rem)}
   .sec-h{font-size:clamp(1.8rem,3.5vw,2.6rem)}
-  .consult-wrap{grid-template-columns:1fr;gap:36px}
   .exp-row{grid-template-columns:100px 40px 1fr}
 }
 
@@ -1074,11 +1073,7 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
   .cert{padding:20px 16px}
 
   /* CONSULT */
-  .consult-wrap{grid-template-columns:1fr;gap:28px}
   form{padding:18px 16px;gap:12px}
-  .form-header{padding:20px 16px}
-  .field-row{grid-template-columns:1fr}
-  .submit-btn{width:100%;text-align:center}
   .svc-card{padding:14px 16px;gap:12px}
 
   /* CONTACT */
@@ -1114,22 +1109,23 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
 /* ══════════════════════════
    CONSULTATION SECTION
 ══════════════════════════ */
-.consult-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:52px;align-items:start}
+.consult-wrap{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;align-items:start;width:100%}
 
 /* service list */
-.svc-list{display:flex;flex-direction:column;gap:14px}
+.svc-list{display:flex;flex-direction:column;gap:12px}
 .svc-card{
-  display:flex;align-items:flex-start;gap:16px;
-  padding:18px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px 18px;
   border:1px solid rgba(255,255,255,0.06);
   background:rgba(8,14,36,0.5);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
   transition:border-color 0.25s,background 0.25s;
+  width:100%;
 }
 .svc-card:hover{border-color:rgba(0,255,247,0.2);background:rgba(0,255,247,0.04)}
-.svc-ico{font-size:1.3rem;flex-shrink:0;margin-top:1px}
-.svc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;color:#fff;margin-bottom:4px}
-.svc-desc{font-size:0.68rem;line-height:1.7;color:var(--muted2)}
+.svc-ico{font-size:1.2rem;flex-shrink:0;margin-top:2px;line-height:1}
+.svc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.85rem;color:#fff;margin-bottom:3px}
+.svc-desc{font-size:0.67rem;line-height:1.65;color:var(--muted2)}
 
 /* form card */
 .form-card{
@@ -1137,6 +1133,7 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
   background:rgba(8,14,36,0.8);
   -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
   position:relative;overflow:hidden;
+  width:100%;min-width:0;
 }
 .form-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
@@ -1144,30 +1141,31 @@ footer p{font-size:0.6rem;letter-spacing:0.15em;color:var(--muted)}
   animation:borderFlow 4s linear infinite;background-size:200% auto;
 }
 .form-header{
-  padding:28px 32px 24px;
+  padding:24px 24px 20px;
   border-bottom:1px solid rgba(255,255,255,0.06);
   background:linear-gradient(180deg,rgba(0,255,247,0.04),transparent);
 }
-.form-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:#fff;margin-bottom:4px}
-.form-sub{font-size:0.68rem;color:var(--muted2);letter-spacing:0.05em}
+.form-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#fff;margin-bottom:4px}
+.form-sub{font-size:0.66rem;color:var(--muted2);letter-spacing:0.05em}
 
-form{padding:28px 32px;display:flex;flex-direction:column;gap:18px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.field{display:flex;flex-direction:column;gap:7px}
+form{padding:22px 24px;display:flex;flex-direction:column;gap:16px;width:100%}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
 label{
-  font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;
+  font-size:0.6rem;letter-spacing:0.16em;text-transform:uppercase;
   color:var(--muted2);
 }
 input,select,textarea{
-  font-family:'Fira Code',monospace;font-size:0.72rem;
+  font-family:'Fira Code',monospace;font-size:0.7rem;
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.1);
-  color:var(--text);padding:12px 14px;
+  color:var(--text);padding:11px 13px;
   outline:none;
   transition:border-color 0.2s,box-shadow 0.2s;
   -webkit-appearance:none;appearance:none;
   border-radius:0;
-  width:100%;
+  width:100%;min-width:0;
+  box-sizing:border-box;
 }
 input::placeholder,textarea::placeholder{color:var(--muted)}
 input:focus,select:focus,textarea:focus{
@@ -1176,20 +1174,20 @@ input:focus,select:focus,textarea:focus{
 }
 select{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b8fad' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:right 14px center;
-  padding-right:36px;cursor:pointer;
+  background-repeat:no-repeat;background-position:right 12px center;
+  padding-right:34px;cursor:pointer;
 }
 select option{background:#0a1628;color:var(--text)}
-textarea{resize:vertical;min-height:100px}
+textarea{resize:vertical;min-height:90px}
 
 .submit-btn{
-  font-family:'Fira Code',monospace;font-size:0.72rem;font-weight:600;
-  letter-spacing:0.1em;padding:15px 28px;
+  font-family:'Fira Code',monospace;font-size:0.7rem;font-weight:600;
+  letter-spacing:0.1em;padding:14px 24px;
   background:linear-gradient(135deg,var(--neon1),var(--neon2));
   color:#000;border:none;cursor:pointer;
   position:relative;overflow:hidden;
   transition:transform 0.2s,box-shadow 0.2s;
-  align-self:flex-start;
+  align-self:flex-start;width:100%;
 }
 .submit-btn::before{
   content:'';position:absolute;inset:0;
@@ -1203,28 +1201,124 @@ textarea{resize:vertical;min-height:100px}
 
 /* success / error */
 .form-success{
-  padding:40px 32px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
+  padding:32px 24px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
 }
-.success-ico{font-size:3rem;animation:float 3s ease-in-out infinite}
-.form-success h3{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;color:#fff}
-.form-success p{font-size:0.75rem;line-height:1.85;color:var(--muted2);max-width:360px}
+.success-ico{font-size:2.5rem;animation:float 3s ease-in-out infinite}
+.form-success h3{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;color:#fff}
+.form-success p{font-size:0.73rem;line-height:1.85;color:var(--muted2);max-width:320px}
 .reset-btn{
-  font-family:'Fira Code',monospace;font-size:0.68rem;
-  padding:10px 22px;border:1px solid var(--neon1);
+  font-family:'Fira Code',monospace;font-size:0.66rem;
+  padding:10px 20px;border:1px solid var(--neon1);
   color:var(--neon1);background:transparent;cursor:pointer;
-  transition:all 0.2s;margin-top:8px;
+  transition:all 0.2s;margin-top:6px;
 }
 .reset-btn:hover{background:var(--neon1);color:#000}
-.form-error{
-  padding:12px 32px 20px;
-}
+.form-error{padding:10px 24px 18px}
 .form-error p{
-  font-size:0.7rem;color:var(--neon3);
+  font-size:0.68rem;color:var(--neon3);
   border:1px solid rgba(255,0,110,0.3);
   background:rgba(255,0,110,0.06);
-  padding:12px 16px;
+  padding:10px 14px;
 }
+
+/* Mobile overrides for consult */
+@media(max-width:900px){
+  .consult-wrap{grid-template-columns:1fr;gap:32px}
+}
+@media(max-width:480px){
+  .consult-wrap{grid-template-columns:1fr;gap:24px}
+  .form-header{padding:18px 16px 16px}
+  .form-title{font-size:0.9rem}
+  form{padding:16px;gap:14px}
+  .field-row{grid-template-columns:1fr;gap:12px}
+  input,select,textarea{font-size:0.72rem;padding:12px 12px}
+  .submit-btn{font-size:0.68rem;padding:14px 20px}
+  .svc-card{padding:13px 14px;gap:11px}
+  .svc-title{font-size:0.8rem}
+  .svc-desc{font-size:0.64rem}
+}
+
+/* ══════════════════════════
+   QR CODE SECTION
+══════════════════════════ */
+.qr-wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.qr-title{
+  font-family:'Syne',sans-serif;font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:800;color:#fff;line-height:1.1;margin-bottom:18px;
+}
+.qr-hl{
+  background:linear-gradient(135deg,var(--neon4),var(--neon1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.qr-desc{font-size:0.78rem;line-height:1.95;color:var(--muted2);margin-bottom:24px}
+.qr-url{
+  display:flex;flex-direction:column;gap:4px;
+  padding:14px 18px;border:1px solid rgba(0,255,247,0.15);
+  background:rgba(0,255,247,0.04);margin-bottom:28px;
+}
+.qr-url-label{font-family:'Fira Code',monospace;font-size:0.6rem;color:var(--muted);letter-spacing:0.2em}
+.qr-url-val{font-family:'Fira Code',monospace;font-size:0.82rem;color:var(--neon1);letter-spacing:0.05em}
+.qr-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+/* QR card */
+.qr-card-outer{position:relative;display:flex;align-items:center;justify-content:center}
+.qr-ring{
+  position:absolute;border-radius:50%;border-style:solid;border-color:transparent;pointer-events:none;
+}
+.qr-r1{
+  width:360px;height:360px;
+  border:1px solid rgba(255,204,0,0.1);
+  animation:spinSlow 25s linear infinite;
+  border-top-color:rgba(255,204,0,0.4);
+}
+.qr-r2{
+  width:300px;height:300px;
+  border:1px dashed rgba(0,255,247,0.08);
+  animation:spinRev 18s linear infinite;
+  border-right-color:rgba(0,255,247,0.3);
+}
+.qr-card-inner{
+  position:relative;z-index:1;
+  background:rgba(8,14,36,0.95);
+  border:1px solid rgba(255,204,0,0.25);
+  padding:0;overflow:hidden;width:260px;
+  box-shadow:0 0 60px rgba(255,204,0,0.08),0 30px 80px rgba(0,0,0,0.6);
+}
+.qr-card-inner::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon4),var(--neon2));
+  animation:borderFlow 3s linear infinite;background-size:200% auto;
+}
+.qr-card-top{
+  padding:18px 20px 14px;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  background:linear-gradient(180deg,rgba(255,204,0,0.04),transparent);
+  text-align:center;
+}
+.qr-logo-text{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:0.85rem;
+  background:linear-gradient(90deg,var(--neon1),var(--neon4));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmerText 3s linear infinite;background-size:200% auto;
+  margin-bottom:3px;
+}
+.qr-tagline{font-family:'Fira Code',monospace;font-size:0.58rem;color:var(--muted);letter-spacing:0.15em}
+.qr-canvas-wrap{
+  padding:20px;display:flex;align-items:center;justify-content:center;
+  background:#fff;margin:16px;
+}
+#qr-code{display:flex;align-items:center;justify-content:center}
+#qr-code canvas,#qr-code svg{display:block !important}
+.qr-card-bottom{
+  padding:14px 20px 18px;text-align:center;
+  border-top:1px solid rgba(255,255,255,0.06);
+}
+.qr-scan-hint{font-size:0.65rem;color:var(--muted2);margin-bottom:4px}
+.qr-domain{font-family:'Fira Code',monospace;font-size:0.62rem;color:var(--neon1);letter-spacing:0.1em}
+
+@media(max-width:900px){.qr-wrap{grid-template-columns:1fr;gap:40px;text-align:center}.qr-actions{justify-content:center}.qr-url{text-align:left}.qr-card-outer{margin:0 auto}}
+@media(max-width:480px){.qr-card-inner{width:220px}.qr-r1{width:280px;height:280px}.qr-r2{width:240px;height:240px}}
 
 /* ── HAMBURGER ── */
 .hamburger{
@@ -1284,6 +1378,49 @@ textarea{resize:vertical;min-height:100px}
     color:var(--muted);letter-spacing:0.15em;cursor:pointer;
   }
 }
+
+/* ── QR CODE ── */
+.qr-wrap{display:flex;justify-content:center;padding-top:56px}
+.qr-card{
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+  border:1px solid rgba(0,255,247,0.2);
+  background:rgba(8,14,36,0.7);
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+  padding:24px 28px;
+  position:relative;overflow:hidden;
+  transition:box-shadow 0.3s,border-color 0.3s;
+}
+.qr-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));
+  background-size:200% auto;animation:borderFlow 3s linear infinite;
+}
+.qr-card:hover{
+  border-color:rgba(0,255,247,0.4);
+  box-shadow:0 0 40px rgba(0,255,247,0.1);
+}
+.qr-inner{
+  width:160px;height:160px;
+  border:3px solid rgba(0,255,247,0.3);
+  background:#fff;
+  display:grid;place-items:center;
+  padding:6px;
+  box-shadow:0 0 20px rgba(0,255,247,0.2);
+}
+.qr-img{width:100%;height:100%;display:block}
+.qr-label{text-align:center}
+.qr-title{
+  font-family:'Syne',sans-serif;font-size:0.75rem;font-weight:700;
+  color:#fff;letter-spacing:0.1em;margin-bottom:4px;
+}
+.qr-url{
+  font-family:'Fira Code',monospace;font-size:0.62rem;
+  color:var(--neon1);letter-spacing:0.12em;
+}
+@media(max-width:480px){
+  .qr-inner{width:130px;height:130px}
+  .qr-wrap{padding-top:36px}
+}
 </style>
 </head>
 <body>
@@ -1310,6 +1447,7 @@ textarea{resize:vertical;min-height:100px}
       <li><a href="#certifications" onclick="closeNav()">certs</a></li>
       <li><a href="#consult" onclick="closeNav()" class="nav-consult">consult</a></li>
       <li><a href="#contact" onclick="closeNav()">contact</a></li>
+      <li><a href="#qr" onclick="closeNav()" style="color:var(--neon4)">qr code</a></li>
     </ul>
     <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Toggle menu">
       <span></span><span></span><span></span>
@@ -1962,8 +2100,75 @@ textarea{resize:vertical;min-height:100px}
         </div>
       </div>
     </div>
+
+      <!-- QR CODE -->
+      <div class="qr-wrap rv">
+        <div class="qr-card">
+          <div class="qr-inner">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNzkgMjc5IiB3aWR0aD0iMjc5IiBoZWlnaHQ9IjI3OSI+CiAgPHJlY3Qgd2lkdGg9IjI3OSIgaGVpZ2h0PSIyNzkiIGZpbGw9IndoaXRlIiByeD0iMTIiLz4KICA8ZyBmaWxsPSIjMDUwZDFhIj4KPHJlY3QgeD0iMjciIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjM2IiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI0NSIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNTQiIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI3MiIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMTciIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEyNiIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNTMiIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE3MSIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTgwIiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODkiIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIyNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMTYiIHk9IjI3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMjciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjM2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSIzNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMzYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSIzNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMzUiIHk9IjM2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE3MSIgeT0iMzYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjI1IiB5PSIzNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyNyIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjU0IiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI2MyIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEwOCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMzUiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE0NCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTcxIiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODkiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iNDUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSI0NSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMjUiIHk9IjQ1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSI1NCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI0NSIgeT0iNTQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNTQiIHk9IjU0IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSI1NCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI4MSIgeT0iNTQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iOTkiIHk9IjU0IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEyNiIgeT0iNTQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSI1NCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjU0IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4OSIgeT0iNTQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSI1NCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMDciIHk9IjU0IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iNTQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjYzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjQ1IiB5PSI2MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iNjMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNjMiIHk9IjYzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSI2MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMDgiIHk9IjYzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEyNiIgeT0iNjMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTM1IiB5PSI2MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjYzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4OSIgeT0iNjMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSI2MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMDciIHk9IjYzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iNjMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjcyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSI3MiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iNzIiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSI3MiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMjYiIHk9IjcyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE0NCIgeT0iNzIiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSI3MiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjcyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iNzIiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjM2IiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI0NSIgeT0iODEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNTQiIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI3MiIgeT0iODEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMTciIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEzNSIgeT0iODEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4MCIgeT0iODEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTg5IiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxOTgiIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIwNyIgeT0iODEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjE2IiB5PSI4MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMjUiIHk9IjgxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSI5MCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMjYiIHk9IjkwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iOTAiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9Ijk5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjM2IiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iOTkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNzIiIHk9Ijk5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5MCIgeT0iOTkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMjYiIHk9Ijk5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEzNSIgeT0iOTkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNjIiIHk9Ijk5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4MCIgeT0iOTkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTg5IiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMDciIHk9Ijk5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iOTkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjM0IiB5PSI5OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIzNiIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIxMDgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iOTAiIHk9IjEwOCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjExNyIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE0NCIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE3MSIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIxNiIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMTA4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjExNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMTE3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTI2IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTYyIiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTgwIiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTg5IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjM0IiB5PSIxMTciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI2MyIgeT0iMTI2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjcyIiB5PSIxMjYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iOTAiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMDgiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMzUiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNjIiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODkiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMDciIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMTYiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMzQiIHk9IjEyNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyNyIgeT0iMTM1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjM2IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNjMiIHk9IjEzNSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI4MSIgeT0iMTM1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTM1IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTcxIiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjI1IiB5PSIxMzUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjE0NCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI3MiIgeT0iMTQ0IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTI2IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTYyIiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTgwIiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTg5IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjE2IiB5PSIxNDQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjE1MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMTUzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTM1IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTYyIiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTcxIiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjM0IiB5PSIxNTMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMzYiIHk9IjE2MiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIxNjIiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iOTAiIHk9IjE2MiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjExNyIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE0NCIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4MCIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIxNiIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMTYyIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIxNzEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI3MiIgeT0iMTcxIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSIxNzEiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iOTkiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMDgiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMzUiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNTMiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNjIiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODAiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODkiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMDciIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMzQiIHk9IjE3MSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEyNiIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE2MiIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4OSIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIxNiIgeT0iMTgwIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMzYiIHk9IjE4OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI0NSIgeT0iMTg5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjU0IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNjMiIHk9IjE4OSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI3MiIgeT0iMTg5IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjgxIiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTA4IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTM1IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTQ0IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTcxIiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTg5IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjE2IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjM0IiB5PSIxODkiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjE5OCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI4MSIgeT0iMTk4IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTI2IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTgwIiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjE2IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjI1IiB5PSIxOTgiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjciIHk9IjIwNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI0NSIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjU0IiB5PSIyMDciIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNjMiIHk9IjIwNyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI4MSIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjExNyIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEzNSIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE2MiIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE3MSIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4OSIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIwNyIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIzNCIgeT0iMjA3IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIyMTYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjIxNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIyMTYiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjIxNiIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEwOCIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEyNiIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE0NCIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE3MSIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4MCIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIxNiIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMjE2IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIyMjUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjIyNSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIyMjUiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjIyNSIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI5OSIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjEzNSIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE1MyIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE2MiIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE4OSIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjE5OCIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIyNSIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjIzNCIgeT0iMjI1IiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjI3IiB5PSIyMzQiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iODEiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMDgiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxMTciIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNDQiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxNzEiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIxODkiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMTYiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyMzQiIHk9IjIzNCIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSIyNyIgeT0iMjQzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjM2IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNDUiIHk9IjI0MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI1NCIgeT0iMjQzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9IjYzIiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iNzIiIHk9IjI0MyIgd2lkdGg9IjkiIGhlaWdodD0iOSIvPgo8cmVjdCB4PSI4MSIgeT0iMjQzIiB3aWR0aD0iOSIgaGVpZ2h0PSI5Ii8+CjxyZWN0IHg9Ijk5IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTE3IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTI2IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTUzIiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTgwIiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMTk4IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KPHJlY3QgeD0iMjA3IiB5PSIyNDMiIHdpZHRoPSI5IiBoZWlnaHQ9IjkiLz4KICA8L2c+Cjwvc3ZnPg==" alt="Scan to open portfolio" class="qr-img"/>
+          </div>
+          <div class="qr-label">
+            <div class="qr-title">Scan to Open Portfolio</div>
+            <div class="qr-url">maharanay22.github.io</div>
+          </div>
+        </div>
+      </div>
   </div>
 </section>
+
+<!-- ════ QR CODE SECTION ════ -->
+<section id="qr" style="padding:80px 0;border-bottom:1px solid var(--border)">
+  <div class="wrap">
+    <div class="qr-wrap">
+      <!-- LEFT: info -->
+      <div class="qr-left">
+        <div class="eyebrow" style="color:var(--neon4)">
+          <div class="eyebrow-line" style="background:var(--neon4)"></div>
+          Scan & Connect
+          <div class="eyebrow-line" style="background:var(--neon4)"></div>
+        </div>
+        <h2 class="qr-title">One scan.<br/><span class="qr-hl">Instant access.</span></h2>
+        <p class="qr-desc">
+          Point your phone camera at the QR code to open this portfolio instantly.
+          Share it at conferences, events, or anywhere you want to make an impression.
+        </p>
+        <div class="qr-url">
+          <span class="qr-url-label">// profile_url</span>
+          <span class="qr-url-val">maharanay22.github.io</span>
+        </div>
+        <div class="qr-actions">
+          <button class="btn btn-neon" onclick="downloadQR()"><span>↓ Download QR</span></button>
+          <button class="btn btn-ghost" onclick="copyURL()"><span id="copy-txt">⎘ Copy URL</span></button>
+        </div>
+      </div>
+
+      <!-- RIGHT: QR code -->
+      <div class="qr-right">
+        <div class="qr-card-outer">
+          <div class="qr-card-inner">
+            <div class="qr-card-top">
+              <div class="qr-logo-text">maha.yadavalli()</div>
+              <div class="qr-tagline">Data & AI Architect</div>
+            </div>
+            <div class="qr-canvas-wrap">
+              <div id="qr-code"></div>
+            </div>
+            <div class="qr-card-bottom">
+              <div class="qr-scan-hint">📱 scan to open profile</div>
+              <div class="qr-domain">maharanay22.github.io</div>
+            </div>
+          </div>
+          <!-- glow rings -->
+          <div class="qr-ring qr-r1"></div>
+          <div class="qr-ring qr-r2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QR Code library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <!-- FOOTER -->
 <footer>
@@ -2267,6 +2472,100 @@ window.addEventListener('touchstart', () => {
   document.getElementById('cursor-ring').style.display = 'none';
   document.body.style.cursor = 'auto';
 }, { once: true });
+
+/* ═══ QR CODE ═══ */
+window.addEventListener('load', function() {
+  const qrEl = document.getElementById('qr-code');
+  if (!qrEl) return;
+
+  function initQR() {
+    if (typeof QRCode === 'undefined') {
+      setTimeout(initQR, 300);
+      return;
+    }
+    try {
+      new QRCode(qrEl, {
+        text: 'https://maharanay22.github.io',
+        width: 180,
+        height: 180,
+        colorDark: '#000000',
+        colorLight: '#ffffff',
+        correctLevel: QRCode.CorrectLevel.H
+      });
+    } catch(e) { console.log('QR init error:', e); }
+  }
+  initQR();
+});
+
+function downloadQR() {
+  const canvas = document.querySelector('#qr-code canvas');
+  if (!canvas) { alert('QR code is still loading, please try again in a second.'); return; }
+
+  // Create a styled canvas with branding
+  const out = document.createElement('canvas');
+  out.width = 400; out.height = 480;
+  const ctx = out.getContext('2d');
+
+  // Dark background
+  ctx.fillStyle = '#050d1a';
+  ctx.fillRect(0, 0, 400, 480);
+
+  // Top gradient bar
+  const grad = ctx.createLinearGradient(0, 0, 400, 0);
+  grad.addColorStop(0, '#00fff7');
+  grad.addColorStop(0.5, '#ffcc00');
+  grad.addColorStop(1, '#bf00ff');
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, 400, 3);
+
+  // Name
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Maha Rana Yadavalli', 200, 50);
+
+  // Title
+  ctx.fillStyle = '#7a9abb';
+  ctx.font = '13px monospace';
+  ctx.fillText('Data & AI Architect', 200, 74);
+
+  // White QR background
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(90, 95, 220, 220);
+
+  // Draw QR
+  ctx.drawImage(canvas, 100, 105, 200, 200);
+
+  // URL
+  ctx.fillStyle = '#00fff7';
+  ctx.font = '13px monospace';
+  ctx.fillText('maharanay22.github.io', 200, 360);
+
+  // Scan hint
+  ctx.fillStyle = '#4a6a8a';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('Scan to view portfolio', 200, 385);
+
+  // Bottom bar
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 477, 400, 3);
+
+  // Download
+  const link = document.createElement('a');
+  link.download = 'maha-yadavalli-qr.png';
+  link.href = out.toDataURL('image/png');
+  link.click();
+}
+
+function copyURL() {
+  navigator.clipboard.writeText('https://maharanay22.github.io').then(() => {
+    const btn = document.getElementById('copy-txt');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.textContent = '⎘ Copy URL'; }, 2000);
+  }).catch(() => {
+    prompt('Copy this URL:', 'https://maharanay22.github.io');
+  });
+}
 </script>
 </body>
 </html>
