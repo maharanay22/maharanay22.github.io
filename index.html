@@ -2146,10 +2146,10 @@ textarea{resize:vertical;min-height:90px}
         Body: "Hi {{from_name}}, thank you for reaching out to Informatik Data Solutions..."
    4. Replace the 3 values below with your actual IDs from emailjs.com dashboard
 ════════════════════════════════ */
-const EJS_PUBLIC_KEY   = 'YOUR_PUBLIC_KEY';      // Account → API Keys
-const EJS_SERVICE_ID   = 'YOUR_SERVICE_ID';      // Email Services → Service ID
-const EJS_TEMPLATE_NOTIFY  = 'consult_notify';   // Template ID for notification to you
-const EJS_TEMPLATE_CONFIRM = 'consult_confirm';  // Template ID for auto-reply to visitor
+const EJS_PUBLIC_KEY   = 'uDAlNCrChI0s-pu89';
+const EJS_SERVICE_ID   = 'service_7avbgbk';
+const EJS_TEMPLATE_NOTIFY  = 'template_np4l24r';
+const EJS_TEMPLATE_CONFIRM = 'template_l98t61s';
 
 emailjs.init({ publicKey: EJS_PUBLIC_KEY });
 
@@ -2185,12 +2185,13 @@ async function sendConsult(e) {
   };
 
   try {
-    // Send notification to Maha
+    // Send notification to Maha + HR
     await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_NOTIFY, {
       ...params,
-      to_email: atob('bXlhZGF2YWxsaUBpbmZvZGF0YXNvbC5jb20=')
+      to_email: atob('bXlhZGF2YWxsaUBpbmZvZGF0YXNvbC5jb20='),
+      cc_email: atob('aHJAaW5mb2RhdGFzb2wuY29t')
     });
-    // Send confirmation to visitor
+    // Send confirmation auto-reply to visitor
     await emailjs.send(EJS_SERVICE_ID, EJS_TEMPLATE_CONFIRM, params);
 
     // Show success
