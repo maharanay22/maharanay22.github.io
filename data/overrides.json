@@ -1,0 +1,30 @@
+{
+ "repos": {
+  "pandas-dev/pandas": {
+   "icon": "🐼",
+   "category": "data analysis",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "tags": ["Arrow dtypes", "Reductions", "String regex"]
+  },
+  "mlflow/mlflow": {
+   "name": "MLflow",
+   "icon": "🧪",
+   "category": "ai engineering",
+   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+   "tags": ["AI Gateway", "Streaming", "GenAI Eval"]
+  },
+  "BerriAI/litellm": {
+   "name": "LiteLLM",
+   "icon": "🚅",
+   "category": "ai gateway",
+   "about": "AI gateway that lets apps call 100+ LLM providers like OpenAI, Anthropic and Bedrock through one API, with cost tracking and load balancing.",
+   "tags": ["Anthropic", "Streaming", "Tool Calls"]
+  }
+ },
+ "proofs": {
+  "https://github.com/BerriAI/litellm/pull/45147": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
+  "https://github.com/mlflow/mlflow/pull/26439": "6 new test cases fail on master with ValidationError and pass with the fix",
+  "https://github.com/mlflow/mlflow/pull/26538": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
+  "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix"
+ }
+}
