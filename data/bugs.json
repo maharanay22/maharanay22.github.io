@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-08T22:09:55Z",
+ "generated_at": "2026-10-08T22:11:19Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -66,472 +66,11 @@
  "items": [
   {
    "kind": "fix",
-   "repo": "mlflow/mlflow",
-   "status": "triage",
-   "title": "mlflow.genai.evaluate fails for scorers that return NumPy scalars (np.bool_, np.int64, ...)",
-   "date": "2026-10-08",
-   "merged_at": null,
-   "reported": true,
-   "pr": {
-    "number": 26539,
-    "url": "https://github.com/mlflow/mlflow/pull/26539"
-   },
-   "issue": {
-    "number": 26495,
-    "url": "https://github.com/mlflow/mlflow/issues/26495"
-   },
-   "proof": "10 new test cases fail on master and pass with the fix",
-   "files": [
-    {
-     "path": "mlflow/genai/evaluation/utils.py",
-     "lines": [
-      [
-       "h",
-       "@@ -13,6 +13,7 @@"
-      ],
-      [
-       "c",
-       "    AgentEvaluationReserverKey,"
-      ],
-      [
-       "c",
-       ")"
-      ],
-      [
-       "c",
-       "from mlflow.genai.scorers import Scorer"
-      ],
-      [
-       "a",
-       "from mlflow.genai.scorers.base import _to_python_scalar"
-      ],
-      [
-       "c",
-       "from mlflow.models import EvaluationMetric"
-      ],
-      [
-       "c",
-       "from mlflow.tracing.constant import AssessmentMetadataKey"
-      ],
-      [
-       "c",
-       "from mlflow.tracing.utils.search import traces_to_df"
-      ],
-      [
-       "h",
-       "@@ -367,6 +368,8 @@"
-      ],
-      [
-       "c",
-       "    if value is None:"
-      ],
-      [
-       "c",
-       "        return []"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "    value = _to_python_scalar(value)"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "    # Primitives are valid metric values"
-      ],
-      [
-       "c",
-       "    if isinstance(value, (int, float, bool, str)):"
-      ],
-      [
-       "c",
-       "        return ["
-      ]
-     ],
-     "truncated": false,
-     "additions": 3,
-     "deletions": 0
-    },
-    {
-     "path": "mlflow/genai/scorers/aggregation.py",
-     "lines": [
-      [
-       "h",
-       "@@ -76,7 +76,7 @@"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "def _cast_assessment_value_to_float(assessment: Feedback) -> float | None:"
-      ],
-      [
-       "c",
-       "    \"\"\"Cast the value of an assessment to a float.\"\"\""
-      ],
-      [
-       "d",
-       "    if isinstance(assessment.value, (int, float, bool)):"
-      ],
-      [
-       "a",
-       "    if isinstance(assessment.value, (int, float, bool, np.number, np.bool_)):"
-      ],
-      [
-       "c",
-       "        return float(assessment.value)"
-      ],
-      [
-       "c",
-       "    elif ("
-      ],
-      [
-       "c",
-       "        isinstance(assessment.value, str)"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 1
-    },
-    {
-     "path": "mlflow/genai/scorers/base.py",
-     "lines": [
-      [
-       "h",
-       "@@ -119,6 +119,18 @@"
-      ],
-      [
-       "c",
-       "AggregationFunc = Callable[[list[float]], float]  # List of per-row value -> aggregated value"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "def _to_python_scalar(value: Any) -> Any:"
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    Convert a NumPy scalar (e.g. ``np.bool_``, ``np.int64``), which is not a subclass of the"
-      ],
-      [
-       "a",
-       "    matching Python primitive, to that primitive. NumPy is looked up lazily so this module"
-      ],
-      [
-       "a",
-       "    stays importable without it."
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    np = sys.modules.get(\"numpy\")"
-      ],
-      [
-       "a",
-       "    if np is not None and isinstance(value, np.generic):"
-      ],
-      [
-       "a",
-       "        return value.item()"
-      ],
-      [
-       "a",
-       "    return value"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "def _extract_scorer_value(result: Any) -> Any:"
-      ],
-      [
-       "c",
-       "    \"\"\"Reduce a sub-scorer's return to a single aggregatable value."
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -923,7 +935,7 @@"
-      ],
-      [
-       "c",
-       "        # Filter to only the parameters the function actually expects"
-      ],
-      [
-       "c",
-       "        sig = inspect.signature(self.__call__)"
-      ],
-      [
-       "c",
-       "        filtered = {k: v for k, v in merged.items() if k in sig.parameters}"
-      ],
-      [
-       "d",
-       "        result = self(**filtered)"
-      ],
-      [
-       "a",
-       "        result = _to_python_scalar(self(**filtered))"
-      ],
-      [
-       "c",
-       "        if not ("
-      ],
-      [
-       "c",
-       "            # TODO: Replace 'Assessment' with 'Feedback' once we migrate from the agent eval harness"
-      ],
-      [
-       "c",
-       "            isinstance(result, (int, float, bool, str, Assessment, LegacyAssessment))"
-      ]
-     ],
-     "truncated": false,
-     "additions": 13,
-     "deletions": 1
-    }
-   ],
-   "id": 12
-  },
-  {
-   "kind": "fix",
-   "repo": "mlflow/mlflow",
-   "status": "triage",
-   "title": "AI Gateway Anthropic and Gemini adapters raise KeyError for tools without description or parameters",
-   "date": "2026-10-08",
-   "merged_at": null,
-   "reported": true,
-   "pr": {
-    "number": 26538,
-    "url": "https://github.com/mlflow/mlflow/pull/26538"
-   },
-   "issue": {
-    "number": 26491,
-    "url": "https://github.com/mlflow/mlflow/issues/26491"
-   },
-   "proof": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
-   "files": [
-    {
-     "path": "mlflow/gateway/providers/anthropic.py",
-     "lines": [
-      [
-       "h",
-       "@@ -266,11 +266,16 @@"
-      ],
-      [
-       "c",
-       "                    )"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "                tool_function = tool[\"function\"]"
-      ],
-      [
-       "d",
-       "                converted_tools.append({"
-      ],
-      [
-       "a",
-       "                # `description` and `parameters` are optional in OpenAI tool definitions,"
-      ],
-      [
-       "a",
-       "                # but Anthropic requires `input_schema`, so default to a no-argument schema."
-      ],
-      [
-       "a",
-       "                converted_tool = {"
-      ],
-      [
-       "c",
-       "                    \"name\": tool_function[\"name\"],"
-      ],
-      [
-       "d",
-       "                    \"description\": tool_function[\"description\"],"
-      ],
-      [
-       "d",
-       "                    \"input_schema\": tool_function[\"parameters\"],"
-      ],
-      [
-       "d",
-       "                })"
-      ],
-      [
-       "a",
-       "                    \"input_schema\": tool_function.get(\"parameters\")"
-      ],
-      [
-       "a",
-       "                    or {\"type\": \"object\", \"properties\": {}},"
-      ],
-      [
-       "a",
-       "                }"
-      ],
-      [
-       "a",
-       "                if description := tool_function.get(\"description\"):"
-      ],
-      [
-       "a",
-       "                    converted_tool[\"description\"] = description"
-      ],
-      [
-       "a",
-       "                converted_tools.append(converted_tool)"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "            payload[\"tools\"] = converted_tools"
-      ],
-      [
-       "c",
-       ""
-      ]
-     ],
-     "truncated": false,
-     "additions": 9,
-     "deletions": 4
-    },
-    {
-     "path": "mlflow/gateway/providers/gemini.py",
-     "lines": [
-      [
-       "h",
-       "@@ -262,11 +262,14 @@"
-      ],
-      [
-       "c",
-       "                    )"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "                tool_function = tool[\"function\"]"
-      ],
-      [
-       "d",
-       "                function_declarations.append({"
-      ],
-      [
-       "d",
-       "                    \"name\": tool_function[\"name\"],"
-      ],
-      [
-       "d",
-       "                    \"description\": tool_function[\"description\"],"
-      ],
-      [
-       "d",
-       "                    \"parametersJsonSchema\": tool_function[\"parameters\"],"
-      ],
-      [
-       "d",
-       "                })"
-      ],
-      [
-       "a",
-       "                # `description` and `parameters` are optional in both OpenAI tool"
-      ],
-      [
-       "a",
-       "                # definitions and Gemini function declarations."
-      ],
-      [
-       "a",
-       "                function_declaration = {\"name\": tool_function[\"name\"]}"
-      ],
-      [
-       "a",
-       "                if description := tool_function.get(\"description\"):"
-      ],
-      [
-       "a",
-       "                    function_declaration[\"description\"] = description"
-      ],
-      [
-       "a",
-       "                if parameters := tool_function.get(\"parameters\"):"
-      ],
-      [
-       "a",
-       "                    function_declaration[\"parametersJsonSchema\"] = parameters"
-      ],
-      [
-       "a",
-       "                function_declarations.append(function_declaration)"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "            gemini_payload[\"tools\"] = [{\"functionDeclarations\": function_declarations}]"
-      ],
-      [
-       "c",
-       ""
-      ]
-     ],
-     "truncated": false,
-     "additions": 8,
-     "deletions": 5
-    }
-   ],
-   "id": 11
-  },
-  {
-   "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
    "title": "Make unitycatalog-ai importable on Windows",
    "date": "2026-10-08",
+   "created_at": "2026-10-08T22:06:02Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -806,7 +345,7 @@
      "deletions": 1
     }
    ],
-   "id": 10
+   "id": 12
   },
   {
    "kind": "fix",
@@ -814,6 +353,7 @@
    "status": "review",
    "title": "Accept previous tool call rounds as history in Anthropic and LiteLLM generate_tool_call_messages",
    "date": "2026-10-08",
+   "created_at": "2026-10-08T21:11:16Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -1032,7 +572,613 @@
      "deletions": 4
     }
    ],
+   "id": 11
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "triage",
+   "title": "mlflow.genai.evaluate fails for scorers that return NumPy scalars (np.bool_, np.int64, ...)",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T02:32:27Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 26539,
+    "url": "https://github.com/mlflow/mlflow/pull/26539"
+   },
+   "issue": {
+    "number": 26495,
+    "url": "https://github.com/mlflow/mlflow/issues/26495"
+   },
+   "proof": "10 new test cases fail on master and pass with the fix",
+   "files": [
+    {
+     "path": "mlflow/genai/evaluation/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -13,6 +13,7 @@"
+      ],
+      [
+       "c",
+       "    AgentEvaluationReserverKey,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from mlflow.genai.scorers import Scorer"
+      ],
+      [
+       "a",
+       "from mlflow.genai.scorers.base import _to_python_scalar"
+      ],
+      [
+       "c",
+       "from mlflow.models import EvaluationMetric"
+      ],
+      [
+       "c",
+       "from mlflow.tracing.constant import AssessmentMetadataKey"
+      ],
+      [
+       "c",
+       "from mlflow.tracing.utils.search import traces_to_df"
+      ],
+      [
+       "h",
+       "@@ -367,6 +368,8 @@"
+      ],
+      [
+       "c",
+       "    if value is None:"
+      ],
+      [
+       "c",
+       "        return []"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    value = _to_python_scalar(value)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    # Primitives are valid metric values"
+      ],
+      [
+       "c",
+       "    if isinstance(value, (int, float, bool, str)):"
+      ],
+      [
+       "c",
+       "        return ["
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 0
+    },
+    {
+     "path": "mlflow/genai/scorers/aggregation.py",
+     "lines": [
+      [
+       "h",
+       "@@ -76,7 +76,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _cast_assessment_value_to_float(assessment: Feedback) -> float | None:"
+      ],
+      [
+       "c",
+       "    \"\"\"Cast the value of an assessment to a float.\"\"\""
+      ],
+      [
+       "d",
+       "    if isinstance(assessment.value, (int, float, bool)):"
+      ],
+      [
+       "a",
+       "    if isinstance(assessment.value, (int, float, bool, np.number, np.bool_)):"
+      ],
+      [
+       "c",
+       "        return float(assessment.value)"
+      ],
+      [
+       "c",
+       "    elif ("
+      ],
+      [
+       "c",
+       "        isinstance(assessment.value, str)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "mlflow/genai/scorers/base.py",
+     "lines": [
+      [
+       "h",
+       "@@ -119,6 +119,18 @@"
+      ],
+      [
+       "c",
+       "AggregationFunc = Callable[[list[float]], float]  # List of per-row value -> aggregated value"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _to_python_scalar(value: Any) -> Any:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Convert a NumPy scalar (e.g. ``np.bool_``, ``np.int64``), which is not a subclass of the"
+      ],
+      [
+       "a",
+       "    matching Python primitive, to that primitive. NumPy is looked up lazily so this module"
+      ],
+      [
+       "a",
+       "    stays importable without it."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    np = sys.modules.get(\"numpy\")"
+      ],
+      [
+       "a",
+       "    if np is not None and isinstance(value, np.generic):"
+      ],
+      [
+       "a",
+       "        return value.item()"
+      ],
+      [
+       "a",
+       "    return value"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def _extract_scorer_value(result: Any) -> Any:"
+      ],
+      [
+       "c",
+       "    \"\"\"Reduce a sub-scorer's return to a single aggregatable value."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -923,7 +935,7 @@"
+      ],
+      [
+       "c",
+       "        # Filter to only the parameters the function actually expects"
+      ],
+      [
+       "c",
+       "        sig = inspect.signature(self.__call__)"
+      ],
+      [
+       "c",
+       "        filtered = {k: v for k, v in merged.items() if k in sig.parameters}"
+      ],
+      [
+       "d",
+       "        result = self(**filtered)"
+      ],
+      [
+       "a",
+       "        result = _to_python_scalar(self(**filtered))"
+      ],
+      [
+       "c",
+       "        if not ("
+      ],
+      [
+       "c",
+       "            # TODO: Replace 'Assessment' with 'Feedback' once we migrate from the agent eval harness"
+      ],
+      [
+       "c",
+       "            isinstance(result, (int, float, bool, str, Assessment, LegacyAssessment))"
+      ]
+     ],
+     "truncated": false,
+     "additions": 13,
+     "deletions": 1
+    }
+   ],
+   "id": 10
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "triage",
+   "title": "AI Gateway Anthropic and Gemini adapters raise KeyError for tools without description or parameters",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T02:32:23Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 26538,
+    "url": "https://github.com/mlflow/mlflow/pull/26538"
+   },
+   "issue": {
+    "number": 26491,
+    "url": "https://github.com/mlflow/mlflow/issues/26491"
+   },
+   "proof": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
+   "files": [
+    {
+     "path": "mlflow/gateway/providers/anthropic.py",
+     "lines": [
+      [
+       "h",
+       "@@ -266,11 +266,16 @@"
+      ],
+      [
+       "c",
+       "                    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                tool_function = tool[\"function\"]"
+      ],
+      [
+       "d",
+       "                converted_tools.append({"
+      ],
+      [
+       "a",
+       "                # `description` and `parameters` are optional in OpenAI tool definitions,"
+      ],
+      [
+       "a",
+       "                # but Anthropic requires `input_schema`, so default to a no-argument schema."
+      ],
+      [
+       "a",
+       "                converted_tool = {"
+      ],
+      [
+       "c",
+       "                    \"name\": tool_function[\"name\"],"
+      ],
+      [
+       "d",
+       "                    \"description\": tool_function[\"description\"],"
+      ],
+      [
+       "d",
+       "                    \"input_schema\": tool_function[\"parameters\"],"
+      ],
+      [
+       "d",
+       "                })"
+      ],
+      [
+       "a",
+       "                    \"input_schema\": tool_function.get(\"parameters\")"
+      ],
+      [
+       "a",
+       "                    or {\"type\": \"object\", \"properties\": {}},"
+      ],
+      [
+       "a",
+       "                }"
+      ],
+      [
+       "a",
+       "                if description := tool_function.get(\"description\"):"
+      ],
+      [
+       "a",
+       "                    converted_tool[\"description\"] = description"
+      ],
+      [
+       "a",
+       "                converted_tools.append(converted_tool)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            payload[\"tools\"] = converted_tools"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 9,
+     "deletions": 4
+    },
+    {
+     "path": "mlflow/gateway/providers/gemini.py",
+     "lines": [
+      [
+       "h",
+       "@@ -262,11 +262,14 @@"
+      ],
+      [
+       "c",
+       "                    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                tool_function = tool[\"function\"]"
+      ],
+      [
+       "d",
+       "                function_declarations.append({"
+      ],
+      [
+       "d",
+       "                    \"name\": tool_function[\"name\"],"
+      ],
+      [
+       "d",
+       "                    \"description\": tool_function[\"description\"],"
+      ],
+      [
+       "d",
+       "                    \"parametersJsonSchema\": tool_function[\"parameters\"],"
+      ],
+      [
+       "d",
+       "                })"
+      ],
+      [
+       "a",
+       "                # `description` and `parameters` are optional in both OpenAI tool"
+      ],
+      [
+       "a",
+       "                # definitions and Gemini function declarations."
+      ],
+      [
+       "a",
+       "                function_declaration = {\"name\": tool_function[\"name\"]}"
+      ],
+      [
+       "a",
+       "                if description := tool_function.get(\"description\"):"
+      ],
+      [
+       "a",
+       "                    function_declaration[\"description\"] = description"
+      ],
+      [
+       "a",
+       "                if parameters := tool_function.get(\"parameters\"):"
+      ],
+      [
+       "a",
+       "                    function_declaration[\"parametersJsonSchema\"] = parameters"
+      ],
+      [
+       "a",
+       "                function_declarations.append(function_declaration)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            gemini_payload[\"tools\"] = [{\"functionDeclarations\": function_declarations}]"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 5
+    }
+   ],
    "id": 9
+  },
+  {
+   "kind": "fix",
+   "repo": "BerriAI/litellm",
+   "status": "review",
+   "title": "Anthropic streaming with response_format and tools reports finish_reason \"stop\" when a user tool is called",
+   "date": "2026-10-07",
+   "created_at": "2026-10-07T19:42:29Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 45147,
+    "url": "https://github.com/BerriAI/litellm/pull/45147"
+   },
+   "issue": {
+    "number": 45082,
+    "url": "https://github.com/BerriAI/litellm/issues/45082"
+   },
+   "proof": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
+   "files": [
+    {
+     "path": "litellm/llms/anthropic/chat/handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -573,6 +573,7 @@"
+      ],
+      [
+       "c",
+       "        self.is_response_format_tool: bool = False"
+      ],
+      [
+       "c",
+       "        # Track if we've converted any response_format tools (affects finish_reason)"
+      ],
+      [
+       "c",
+       "        self.converted_response_format_tool: bool = False"
+      ],
+      [
+       "a",
+       "        self.streamed_user_tool_call: bool = False"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        # For handling partial JSON chunks from fragmentation"
+      ],
+      [
+       "c",
+       "        # See: https://github.com/BerriAI/litellm/issues/17473"
+      ],
+      [
+       "h",
+       "@@ -1071,6 +1072,7 @@"
+      ],
+      [
+       "c",
+       "            # (per Anthropic's fine-grained streaming pattern)"
+      ],
+      [
+       "c",
+       "            tool_name: Final = tool_use.get(\"function\", {}).get(\"name\", \"\")"
+      ],
+      [
+       "c",
+       "            self.is_response_format_tool = tool_name == RESPONSE_FORMAT_TOOL_NAME"
+      ],
+      [
+       "a",
+       "            self.streamed_user_tool_call = self.streamed_user_tool_call or not self.is_response_format_tool"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        # Convert tool to content if we're tracking a response_format tool"
+      ],
+      [
+       "c",
+       "        if self.is_response_format_tool:"
+      ],
+      [
+       "h",
+       "@@ -1095,9 +1097,9 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        message_delta: Final = MessageBlockDelta(**chunk)"
+      ],
+      [
+       "c",
+       "        finish_reason = map_finish_reason(finish_reason=message_delta[\"delta\"].get(\"stop_reason\", \"stop\") or \"stop\")"
+      ],
+      [
+       "d",
+       "        # Override finish_reason to \"stop\" if we converted response_format tools"
+      ],
+      [
+       "a",
+       "        # Override finish_reason to \"stop\" if we converted response_format tools and no user tool was called"
+      ],
+      [
+       "c",
+       "        # (matches OpenAI behavior and non-streaming Anthropic implementation)"
+      ],
+      [
+       "d",
+       "        if self.converted_response_format_tool:"
+      ],
+      [
+       "a",
+       "        if self.converted_response_format_tool and not self.streamed_user_tool_call:"
+      ],
+      [
+       "c",
+       "            finish_reason = \"stop\""
+      ],
+      [
+       "c",
+       "        usage: Final = ("
+      ],
+      [
+       "c",
+       "            self._handle_usage(anthropic_usage_chunk=message_delta[\"usage\"]) if \"usage\" in message_delta else None"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 2
+    }
+   ],
+   "id": 8
   },
   {
    "kind": "fix",
@@ -1040,6 +1186,7 @@
    "status": "review",
    "title": "str.replace/contains/match/count with \\w, \\d, \\s, \\b only match ASCII for default str dtype",
    "date": "2026-10-07",
+   "created_at": "2026-10-07T03:07:59Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -1309,147 +1456,6 @@
      "deletions": 5
     }
    ],
-   "id": 8
-  },
-  {
-   "kind": "fix",
-   "repo": "BerriAI/litellm",
-   "status": "review",
-   "title": "Anthropic streaming with response_format and tools reports finish_reason \"stop\" when a user tool is called",
-   "date": "2026-10-07",
-   "merged_at": null,
-   "reported": true,
-   "pr": {
-    "number": 45147,
-    "url": "https://github.com/BerriAI/litellm/pull/45147"
-   },
-   "issue": {
-    "number": 45082,
-    "url": "https://github.com/BerriAI/litellm/issues/45082"
-   },
-   "proof": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
-   "files": [
-    {
-     "path": "litellm/llms/anthropic/chat/handler.py",
-     "lines": [
-      [
-       "h",
-       "@@ -573,6 +573,7 @@"
-      ],
-      [
-       "c",
-       "        self.is_response_format_tool: bool = False"
-      ],
-      [
-       "c",
-       "        # Track if we've converted any response_format tools (affects finish_reason)"
-      ],
-      [
-       "c",
-       "        self.converted_response_format_tool: bool = False"
-      ],
-      [
-       "a",
-       "        self.streamed_user_tool_call: bool = False"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        # For handling partial JSON chunks from fragmentation"
-      ],
-      [
-       "c",
-       "        # See: https://github.com/BerriAI/litellm/issues/17473"
-      ],
-      [
-       "h",
-       "@@ -1071,6 +1072,7 @@"
-      ],
-      [
-       "c",
-       "            # (per Anthropic's fine-grained streaming pattern)"
-      ],
-      [
-       "c",
-       "            tool_name: Final = tool_use.get(\"function\", {}).get(\"name\", \"\")"
-      ],
-      [
-       "c",
-       "            self.is_response_format_tool = tool_name == RESPONSE_FORMAT_TOOL_NAME"
-      ],
-      [
-       "a",
-       "            self.streamed_user_tool_call = self.streamed_user_tool_call or not self.is_response_format_tool"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        # Convert tool to content if we're tracking a response_format tool"
-      ],
-      [
-       "c",
-       "        if self.is_response_format_tool:"
-      ],
-      [
-       "h",
-       "@@ -1095,9 +1097,9 @@"
-      ],
-      [
-       "c",
-       "        \"\"\""
-      ],
-      [
-       "c",
-       "        message_delta: Final = MessageBlockDelta(**chunk)"
-      ],
-      [
-       "c",
-       "        finish_reason = map_finish_reason(finish_reason=message_delta[\"delta\"].get(\"stop_reason\", \"stop\") or \"stop\")"
-      ],
-      [
-       "d",
-       "        # Override finish_reason to \"stop\" if we converted response_format tools"
-      ],
-      [
-       "a",
-       "        # Override finish_reason to \"stop\" if we converted response_format tools and no user tool was called"
-      ],
-      [
-       "c",
-       "        # (matches OpenAI behavior and non-streaming Anthropic implementation)"
-      ],
-      [
-       "d",
-       "        if self.converted_response_format_tool:"
-      ],
-      [
-       "a",
-       "        if self.converted_response_format_tool and not self.streamed_user_tool_call:"
-      ],
-      [
-       "c",
-       "            finish_reason = \"stop\""
-      ],
-      [
-       "c",
-       "        usage: Final = ("
-      ],
-      [
-       "c",
-       "            self._handle_usage(anthropic_usage_chunk=message_delta[\"usage\"]) if \"usage\" in message_delta else None"
-      ]
-     ],
-     "truncated": false,
-     "additions": 4,
-     "deletions": 2
-    }
-   ],
    "id": 7
   },
   {
@@ -1458,6 +1464,7 @@
    "status": "review",
    "title": "DataFrame.all/any(skipna=False) raises TypeError for bool[pyarrow] column with NA",
    "date": "2026-10-06",
+   "created_at": "2026-10-06T21:55:25Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -1587,6 +1594,7 @@
    "status": "scout",
    "title": "dump_input_data fails for every dict input (iterates keys instead of items)",
    "date": "2026-10-06",
+   "created_at": "2026-10-06T18:30:49Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -1607,6 +1615,7 @@
    "status": "scout",
    "title": "search_logged_models status filters never match on the SQL store",
    "date": "2026-10-06",
+   "created_at": "2026-10-06T18:30:47Z",
    "merged_at": null,
    "reported": true,
    "pr": {
@@ -1627,6 +1636,7 @@
    "status": "merged",
    "title": "Series.mode(dropna=False) raises TypeError for nullable boolean dtype",
    "date": "2026-10-05",
+   "created_at": "2026-10-05T20:41:19Z",
    "merged_at": "2026-10-06",
    "reported": true,
    "pr": {
@@ -1692,6 +1702,7 @@
    "status": "merged",
    "title": "AI Gateway Mistral provider drops token usage from streaming chat responses, so streamed requests record no cost",
    "date": "2026-10-05",
+   "created_at": "2026-10-05T14:10:43Z",
    "merged_at": "2026-10-06",
    "reported": true,
    "pr": {
@@ -1833,6 +1844,7 @@
    "status": "merged",
    "title": "AI Gateway Databricks provider fails on streaming chunks with list `delta.content` (e.g. reasoning models)",
    "date": "2026-10-05",
+   "created_at": "2026-10-05T14:10:41Z",
    "merged_at": "2026-10-06",
    "reported": true,
    "pr": {
