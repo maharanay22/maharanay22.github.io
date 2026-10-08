@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-08T15:48:08Z",
+ "generated_at": "2026-10-08T21:18:42Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,7 +14,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28313,
+   "stars": 28317,
    "forks": 6434
   },
   {
@@ -29,8 +29,19 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49936,
-   "forks": 20476
+   "stars": 49939,
+   "forks": 20475
+  },
+  {
+   "full": "unitycatalog/unitycatalog",
+   "name": "unitycatalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open, Multi-modal Catalog for Data & AI",
+   "icon": "📦",
+   "category": "Java",
+   "tags": [],
+   "stars": 3553,
+   "forks": 678
   },
   {
    "full": "BerriAI/litellm",
@@ -44,8 +55,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60372,
-   "forks": 12143
+   "stars": 60387,
+   "forks": 12153
   }
  ],
  "items": [
@@ -308,7 +319,7 @@
      "deletions": 1
     }
    ],
-   "id": 10
+   "id": 11
   },
   {
    "kind": "fix",
@@ -507,6 +518,232 @@
      "truncated": false,
      "additions": 8,
      "deletions": 5
+    }
+   ],
+   "id": 10
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Accept previous tool call rounds as history in Anthropic and LiteLLM generate_tool_call_messages",
+   "date": "2026-10-08",
+   "merged_at": null,
+   "reported": false,
+   "pr": {
+    "number": 1966,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1966"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -3,7 +3,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, Field, ValidationError"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from anthropic.types import ContentBlock, Message, MessageParam, ToolUseBlock"
+      ],
+      [
+       "a",
+       "from anthropic.types import ContentBlock, Message, ToolUseBlock"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.base import BaseFunctionClient"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.function_processing_utils import construct_original_function_name"
+      ],
+      [
+       "h",
+       "@@ -16,7 +16,8 @@"
+      ],
+      [
+       "c",
+       "    role: str = Field("
+      ],
+      [
+       "c",
+       "        ..., description=\"The role of the message sender, e.g., 'user' or 'assistant'.\""
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "d",
+       "    content: Union[str, List[MessageParam], List[ContentBlock]] = Field("
+      ],
+      [
+       "a",
+       "    # Dict blocks (e.g. `tool_result` blocks from a previous tool call round) pass through unchanged"
+      ],
+      [
+       "a",
+       "    content: Union[str, List[Union[Dict[str, Any], ContentBlock]]] = Field("
+      ],
+      [
+       "c",
+       "        ...,"
+      ],
+      [
+       "c",
+       "        description=\"The content of the message, whether from an original user question or an assistant response.\","
+      ],
+      [
+       "c",
+       "    )"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    },
+    {
+     "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,7 +1,7 @@"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "c",
+       "from typing import Any, Optional, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from pydantic import BaseModel, Field, ValidationError"
+      ],
+      [
+       "a",
+       "from pydantic import BaseModel, ConfigDict, Field, ValidationError"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from litellm.types.utils import ChatCompletionMessageToolCall, Choices, Message"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.client import BaseFunctionClient"
+      ],
+      [
+       "h",
+       "@@ -12,12 +12,16 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "class ConversationMessage(BaseModel):"
+      ],
+      [
+       "a",
+       "    # Keep fields such as `tool_calls`, `tool_call_id` and `name` so the history can be sent back as-is"
+      ],
+      [
+       "a",
+       "    model_config = ConfigDict(extra=\"allow\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    role: str = Field("
+      ],
+      [
+       "c",
+       "        ..., description=\"The role of the message sender, e.g., 'user' or 'assistant'.\""
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "d",
+       "    content: str = Field("
+      ],
+      [
+       "d",
+       "        ...,"
+      ],
+      [
+       "d",
+       "        description=\"The content of the message, e.g. original user question or an assistant response.\","
+      ],
+      [
+       "a",
+       "    content: Optional[Union[str, list[Any]]] = Field("
+      ],
+      [
+       "a",
+       "        default=None,"
+      ],
+      [
+       "a",
+       "        description=\"The content of the message, e.g. original user question or an assistant response. \""
+      ],
+      [
+       "a",
+       "        \"It is None for an assistant message that only requests tool calls.\","
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def to_dict(self) -> dict[str, Any]:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 4
     }
    ],
    "id": 9
