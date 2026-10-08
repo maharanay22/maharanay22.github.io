@@ -42,6 +42,28 @@
     "Tool Calling",
     "Windows"
    ]
+  },
+  "databricks/dbt-databricks": {
+   "name": "dbt-databricks",
+   "icon": "🧱",
+   "category": "data transformation",
+   "about": "The official dbt adapter for Databricks. It turns dbt models into Databricks SQL: tables, views, incremental merges, comments and constraints.",
+   "tags": [
+    "dbt",
+    "Delta Lake",
+    "SQL DDL"
+   ]
+  },
+  "databricks/databricks-sql-python": {
+   "name": "Databricks SQL Connector",
+   "icon": "🔌",
+   "category": "database driver",
+   "about": "The official Python connector for Databricks SQL warehouses and clusters. Used by apps, BI tools, SQLAlchemy and pandas to run queries.",
+   "tags": [
+    "Python DB-API",
+    "CloudFetch",
+    "Arrow"
+   ]
   }
  },
  "proofs": {
@@ -50,6 +72,10 @@
   "https://github.com/mlflow/mlflow/pull/26538": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
   "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix",
   "https://github.com/unitycatalog/unitycatalog/pull/1966": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
-  "https://github.com/unitycatalog/unitycatalog/pull/1967": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed"
+  "https://github.com/unitycatalog/unitycatalog/pull/1967": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed",
+  "https://github.com/databricks/dbt-databricks/pull/1709": "13 new tests fail on main with wrong or unterminated COMMENT literals; also confirmed by rendering the macros with dbt run-operation",
+  "https://github.com/databricks/dbt-databricks/pull/1710": "7 of 8 new tests fail on main with unquoted struct field names; plain names stay unchanged",
+  "https://github.com/databricks/databricks-sql-python/pull/977": "On Windows 11, 196 of 200 fast downloads crashed with ZeroDivisionError on main; 200 of 200 succeed with the fix",
+  "https://github.com/databricks/databricks-sql-python/pull/979": "New tests fail on main and pass with the fix on both pandas 2.3.3 and 3.0.6; about 5 ms per million rows"
  }
 }
