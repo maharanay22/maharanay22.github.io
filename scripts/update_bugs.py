@@ -143,7 +143,7 @@ def main():
         title_src = (issue or ref or {}).get("title") or pr["title"]
         items.append({
             "kind": "fix", "repo": repo, "status": status, "title": clean_title(title_src),
-            "date": pr["createdAt"][:10], "merged_at": (pr["mergedAt"] or "")[:10] or None,
+            "date": pr["createdAt"][:10], "created_at": pr["createdAt"], "merged_at": (pr["mergedAt"] or "")[:10] or None,
             "reported": issue_num is None or bool(issue) or ((ref or {}).get("author") or {}).get("login") == LOGIN,
             "pr": {"number": pr["number"], "url": pr["url"]},
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
@@ -159,12 +159,12 @@ def main():
         status = "scout" if fixed_by_other else ("open" if issue["state"] == "OPEN" else "closed")
         items.append({
             "kind": "report", "repo": repo, "status": status, "title": clean_title(issue["title"]),
-            "date": issue["createdAt"][:10], "merged_at": None, "reported": True,
+            "date": issue["createdAt"][:10], "created_at": issue["createdAt"], "merged_at": None, "reported": True,
             "pr": {"number": closer["number"], "url": closer["url"]} if fixed_by_other else None,
             "issue": {"number": num, "url": issue["url"]}, "proof": None, "files": [],
         })
 
-    items.sort(key=lambda x: (x["date"], x["pr"]["number"] if x["pr"] else 0), reverse=True)
+    items.sort(key=lambda x: x["created_at"], reverse=True)
     for i, item in enumerate(reversed(items), 1):
         item["id"] = i
     data = {
