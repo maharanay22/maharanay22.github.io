@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bug Hunter Quest Log · Maha Rana Yadavalli</title>
+<meta name="description" content="Open source bugs found and fixed in pandas, MLflow and LiteLLM.">
+<meta property="og:title" content="Bug Hunter Quest Log · Maha Rana Yadavalli">
+<meta property="og:description" content="10 bugs found, 8 fixes written, 3 merged across pandas, MLflow and LiteLLM.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Syne:wght@700;800&display=swap">
+<style>
+:root{
+  --c0:#020510;--c1:#0a0f2e;--c2:#0f1640;
+  --neon1:#00fff7;--neon2:#bf00ff;--neon3:#ff006e;--neon4:#ffcc00;--neon5:#00ff88;--neon6:#ff6b35;
+  --text:#e8f4ff;--muted:#7f9bb8;--line:rgba(0,255,247,0.14);
+  --display:'Syne',system-ui,sans-serif;--mono:'Fira Code',ui-monospace,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--c0);color:var(--text);font-family:var(--mono);font-size:15px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+a{color:inherit}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(10px);animation:orb var(--d) ease-in-out infinite alternate}
+.o1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,255,247,.16),transparent 70%);top:-140px;right:-140px;--d:12s}
+.o2{width:440px;height:440px;background:radial-gradient(circle,rgba(191,0,255,.14),transparent 70%);bottom:-120px;left:-120px;--d:15s}
+.o3{width:320px;height:320px;background:radial-gradient(circle,rgba(255,0,110,.11),transparent 70%);top:45%;left:45%;--d:10s}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,247,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,247,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 75%)}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+@keyframes orb{to{transform:translate(40px,30px) scale(1.08)}}
+@keyframes neonPulse{0%,100%{text-shadow:0 0 10px var(--neon1),0 0 28px rgba(0,255,247,.5)}50%{text-shadow:0 0 18px var(--neon1),0 0 50px rgba(0,255,247,.75)}}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes fill{from{width:0}}
+@keyframes blink{50%{opacity:0}}
+@keyframes ping{75%,100%{transform:scale(2.2);opacity:0}}
+
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:28px 72px;display:grid;gap:40px}
+nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:.02em;text-decoration:none;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon1));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite}
+.back{font-size:.8rem;color:var(--neon1);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:999px;transition:box-shadow .2s,border-color .2s}
+.back:hover,.back:focus-visible{border-color:var(--neon1);box-shadow:0 0 18px rgba(0,255,247,.35);outline:none}
+
+.hero{display:grid;gap:14px}
+.tag{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--neon5);background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.3);padding:5px 12px;border-radius:999px}
+.dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--neon5);flex-shrink:0}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--neon5);animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,7vw,4.2rem);line-height:1.02;margin:0;text-wrap:balance}
+h1 .glow{color:var(--neon1);animation:neonPulse 3s ease-in-out infinite}
+h1 .grad{background:linear-gradient(135deg,var(--neon2),var(--neon3) 55%,var(--neon4));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:0;color:var(--muted);max-width:62ch}
+.lede b{color:var(--text);font-weight:500}
+.cursor{display:inline-block;width:.6em;height:1.05em;vertical-align:-.15em;background:var(--neon1);box-shadow:0 0 10px var(--neon1);animation:blink 1s steps(1) infinite;margin-left:4px}
+
+.player{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:20px;border-radius:16px;background:linear-gradient(var(--c1),var(--c1)) padding-box,linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3)) border-box;border:1px solid transparent;box-shadow:0 0 40px rgba(0,255,247,.08)}
+.lvl{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 30% 30%,rgba(0,255,247,.25),rgba(191,0,255,.15) 60%,transparent 70%);border:2px solid var(--neon1);box-shadow:0 0 22px rgba(0,255,247,.45),inset 0 0 18px rgba(0,255,247,.25)}
+.lvl small{display:block;font-size:.62rem;letter-spacing:.2em;color:var(--muted)}
+.lvl strong{font-family:var(--display);font-size:2.2rem;line-height:1;color:var(--neon1)}
+.pmain{min-width:0;display:grid;gap:10px}
+.prow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.85rem}
+.prow .rank{font-family:var(--display);font-size:1.15rem;color:var(--text)}
+.prow .xpnum{color:var(--neon4);font-variant-numeric:tabular-nums}
+.bar{height:14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:var(--w);border-radius:999px;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));box-shadow:0 0 14px rgba(0,255,247,.6);animation:fill 1.6s cubic-bezier(.2,.8,.2,1)}
+.xprules{font-size:.72rem;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.stat{padding:16px;border-radius:12px;background:rgba(10,15,46,.75);border:1px solid var(--line);display:grid;gap:4px;transition:transform .2s,box-shadow .2s}
+.stat:hover{transform:translateY(-3px)}
+.stat b{font-family:var(--display);font-size:2.1rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.s-done b{color:var(--neon5);text-shadow:0 0 16px rgba(0,255,136,.55)} .s-done:hover{box-shadow:0 0 24px rgba(0,255,136,.25)}
+.s-boss b{color:var(--neon1);text-shadow:0 0 16px rgba(0,255,247,.55)} .s-boss:hover{box-shadow:0 0 24px rgba(0,255,247,.25)}
+.s-lock b{color:var(--neon4);text-shadow:0 0 16px rgba(255,204,0,.5)} .s-lock:hover{box-shadow:0 0 24px rgba(255,204,0,.22)}
+.s-scout b{color:var(--neon3);text-shadow:0 0 16px rgba(255,0,110,.5)} .s-scout:hover{box-shadow:0 0 24px rgba(255,0,110,.22)}
+
+.ach{display:grid;gap:12px}
+.ach h2,.quests h2{font-family:var(--display);font-size:1.35rem;margin:0;display:flex;align-items:center;gap:12px}
+.ach h2::after,.quests h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(10,15,46,.8);border:1px solid var(--line);font-size:.8rem}
+.badge .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:.8rem;color:var(--c0);font-weight:800}
+.badge small{display:block;color:var(--muted);font-size:.68rem}
+
+.quests{display:grid;gap:14px}
+.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.state{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border-radius:6px;border:1px solid currentColor}
+.qnote{margin:0;color:var(--muted);font-size:.82rem;max-width:72ch}
+.list{display:grid;gap:10px}
+.q{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:center;padding:16px 18px 16px 22px;border-radius:12px;background:rgba(10,15,46,.82);border:1px solid var(--line);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+.q::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--qc);box-shadow:0 0 14px var(--qc)}
+.q:hover{transform:translateX(4px);border-color:var(--qc);box-shadow:0 0 26px color-mix(in srgb,var(--qc) 25%,transparent)}
+.qmain{min-width:0;display:grid;gap:4px}
+.qmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.72rem}
+.repo{padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.04em}
+.r-pandas{color:#d9b3ff;background:rgba(191,0,255,.16)}
+.r-mlflow{color:#7ffcff;background:rgba(0,255,247,.12)}
+.r-litellm{color:#ffb3d1;background:rgba(255,0,110,.15)}
+.xp{color:var(--neon4)}
+.qtitle{font-size:.92rem;color:var(--text)}
+.qtitle code{color:var(--neon1);font-family:var(--mono);font-size:.95em}
+.qlinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.qlinks a{font-size:.78rem;text-decoration:none;padding:5px 10px;border-radius:7px;border:1px solid var(--line);color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums;transition:border-color .2s,box-shadow .2s,color .2s}
+.qlinks a span{color:var(--muted)}
+.qlinks a:hover,.qlinks a:focus-visible{border-color:var(--qc);color:var(--qc);box-shadow:0 0 14px color-mix(in srgb,var(--qc) 35%,transparent);outline:none}
+
+.done{--qc:var(--neon5)} .boss{--qc:var(--neon1)} .lock{--qc:var(--neon4)} .scout{--qc:var(--neon3)}
+.st-done{color:var(--neon5)} .st-boss{color:var(--neon1)} .st-lock{color:var(--neon4)} .st-scout{color:var(--neon3)}
+
+footer{color:var(--muted);font-size:.75rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+footer a{color:var(--neon1)}
+
+@media (max-width:720px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .q{grid-template-columns:1fr}
+  .qlinks{justify-content:flex-start}
+}
+@media (max-width:440px){
+  .player{grid-template-columns:1fr;justify-items:start}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="scan"></div></div>
+
+<div class="wrap">
+  <nav>
+    <a class="logo" href="https://maharanay22.github.io/">MAHA.DEV</a>
+    <a class="back" href="https://maharanay22.github.io/">&larr; back to profile</a>
+  </nav>
+
+  <header class="hero">
+    <span class="tag"><span class="dot"></span>open source · quest log</span>
+    <h1><span class="glow">Bug Hunter</span><br><span class="grad">Quest Log</span></h1>
+    <p class="lede">Real bugs found, reproduced and fixed in <b>pandas</b>, <b>MLflow</b> and <b>LiteLLM</b>. Every quest links to the GitHub issue and the pull request with the fix<span class="cursor" aria-hidden="true"></span></p>
+  </header>
+
+  <section class="player" aria-label="Player stats">
+    <div class="lvl"><div><small>LEVEL</small><strong>4</strong></div></div>
+    <div class="pmain">
+      <div class="prow"><span class="rank">Bug Hunter · 3 repos</span><span class="xpnum">3,100 XP · 100 / 1,000 to Lv 5</span></div>
+      <div class="bar" role="img" aria-label="10 percent of the way to level 5"><i style="--w:10%"></i></div>
+      <div class="xprules">+100 XP per bug reported · +150 per fix written · +300 per fix merged · 1,000 XP per level</div>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Quest totals">
+    <div class="stat s-done"><b>3</b><span>Quests complete</span></div>
+    <div class="stat s-boss"><b>3</b><span>Boss fights</span></div>
+    <div class="stat s-lock"><b>2</b><span>Gates locked</span></div>
+    <div class="stat s-scout"><b>2</b><span>Scout intel</span></div>
+  </section>
+
+  <section class="ach">
+    <h2>Achievements</h2>
+    <div class="badges">
+      <div class="badge"><span class="ic" style="background:var(--neon5);box-shadow:0 0 14px var(--neon5)">1st</span><div>First Merge<small>pandas #70515</small></div></div>
+      <div class="badge"><span class="ic" style="background:var(--neon1);box-shadow:0 0 14px var(--neon1)">x3</span><div>Triple Threat<small>fixes in 3 projects</small></div></div>
+      <div class="badge"><span class="ic" style="background:var(--neon2);box-shadow:0 0 14px var(--neon2)">10</span><div>Sharp Eye<small>10 bugs reported</small></div></div>
+      <div class="badge"><span class="ic" style="background:var(--neon4);box-shadow:0 0 14px var(--neon4)">x2</span><div>Double Merge<small>2 MLflow merges in one day</small></div></div>
+    </div>
+  </section>
+
+  <section class="quests">
+    <div class="qhead"><h2>Quests complete</h2></div>
+    <div class="qhead"><span class="state st-done">merged</span><p class="qnote">Fix accepted and shipped in the project</p></div>
+    <div class="list">
+      <article class="q done">
+        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+550 XP</span></div><div class="qtitle"><code>Series.mode(dropna=False)</code> crashed on nullable boolean data</div></div>
+        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70487"><span>issue</span> #70487</a><a href="https://github.com/pandas-dev/pandas/pull/70515"><span>PR</span> #70515</a></div>
+      </article>
+      <article class="q done">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+550 XP</span></div><div class="qtitle">Databricks gateway broke on streamed chunks with list-style content</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26397"><span>issue</span> #26397</a><a href="https://github.com/mlflow/mlflow/pull/26439"><span>PR</span> #26439</a></div>
+      </article>
+      <article class="q done">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+550 XP</span></div><div class="qtitle">Mistral gateway dropped token usage when streaming, so no cost was recorded</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26399"><span>issue</span> #26399</a><a href="https://github.com/mlflow/mlflow/pull/26440"><span>PR</span> #26440</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="quests">
+    <div class="qhead"><h2>Boss fights</h2></div>
+    <div class="qhead"><span class="state st-boss">in review</span><p class="qnote">All checks pass. Waiting for a maintainer to review</p></div>
+    <div class="list">
+      <article class="q boss">
+        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+250 XP</span></div><div class="qtitle"><code>any</code> / <code>all(skipna=False)</code> crashed on pyarrow columns with NA</div></div>
+        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70685"><span>issue</span> #70685</a><a href="https://github.com/pandas-dev/pandas/pull/70723"><span>PR</span> #70723</a></div>
+      </article>
+      <article class="q boss">
+        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+250 XP</span></div><div class="qtitle">String regex <code>\w</code> <code>\d</code> <code>\s</code> <code>\b</code> only matched ASCII on pyarrow strings</div></div>
+        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70770"><span>issue</span> #70770</a><a href="https://github.com/pandas-dev/pandas/pull/70773"><span>PR</span> #70773</a></div>
+      </article>
+      <article class="q boss">
+        <div class="qmain"><div class="qmeta"><span class="repo r-litellm">LiteLLM</span><span class="xp">+250 XP</span></div><div class="qtitle">Anthropic streaming reported <code>"stop"</code> instead of <code>"tool_calls"</code></div></div>
+        <div class="qlinks"><a href="https://github.com/BerriAI/litellm/issues/45082"><span>issue</span> #45082</a><a href="https://github.com/BerriAI/litellm/pull/45147"><span>PR</span> #45147</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="quests">
+    <div class="qhead"><h2>Gates locked</h2></div>
+    <div class="qhead"><span class="state st-lock">awaiting triage</span><p class="qnote">Fix and tests are ready. MLflow opens the gate once a maintainer labels the issue <code style="color:var(--neon4)">ready</code></p></div>
+    <div class="list">
+      <article class="q lock">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+250 XP</span></div><div class="qtitle">Anthropic and Gemini gateways crashed on tools without a description or parameters</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26491"><span>issue</span> #26491</a><a href="https://github.com/mlflow/mlflow/pull/26538"><span>PR</span> #26538</a></div>
+      </article>
+      <article class="q lock">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+250 XP</span></div><div class="qtitle"><code>genai.evaluate</code> failed when a scorer returned a NumPy value</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26495"><span>issue</span> #26495</a><a href="https://github.com/mlflow/mlflow/pull/26539"><span>PR</span> #26539</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="quests">
+    <div class="qhead"><h2>Scout intel</h2></div>
+    <div class="qhead"><span class="state st-scout">reported</span><p class="qnote">Found and reported. Another contributor shipped the fix</p></div>
+    <div class="list">
+      <article class="q scout">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+100 XP</span></div><div class="qtitle"><code>search_logged_models</code> status filters never matched on the SQL store</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26494"><span>issue</span> #26494</a><a href="https://github.com/mlflow/mlflow/pull/26512"><span>fix</span> #26512</a></div>
+      </article>
+      <article class="q scout">
+        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+100 XP</span></div><div class="qtitle"><code>dump_input_data</code> failed on dict inputs</div></div>
+        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26496"><span>issue</span> #26496</a><a href="https://github.com/mlflow/mlflow/pull/26519"><span>fix</span> #26519</a></div>
+      </article>
+    </div>
+  </section>
+
+  <footer><span>Status as of October 8, 2026</span><a href="https://github.com/maharanay22">github.com/maharanay22</a></footer>
+</div>
+</body>
+</html>
