@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-08T21:18:42Z",
+ "generated_at": "2026-10-08T22:09:55Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -15,7 +15,7 @@
     "GenAI Eval"
    ],
    "stars": 28317,
-   "forks": 6434
+   "forks": 6433
   },
   {
    "full": "pandas-dev/pandas",
@@ -34,14 +34,18 @@
   },
   {
    "full": "unitycatalog/unitycatalog",
-   "name": "unitycatalog",
+   "name": "Unity Catalog",
    "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open, Multi-modal Catalog for Data & AI",
-   "icon": "📦",
-   "category": "Java",
-   "tags": [],
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ],
    "stars": 3553,
-   "forks": 678
+   "forks": 679
   },
   {
    "full": "BerriAI/litellm",
@@ -55,7 +59,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60387,
+   "stars": 60389,
    "forks": 12153
   }
  ],
@@ -319,7 +323,7 @@
      "deletions": 1
     }
    ],
-   "id": 11
+   "id": 12
   },
   {
    "kind": "fix",
@@ -520,6 +524,288 @@
      "deletions": 5
     }
    ],
+   "id": 11
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Make unitycatalog-ai importable on Windows",
+   "date": "2026-10-08",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1967,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1967"
+   },
+   "issue": null,
+   "proof": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed",
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
+     "lines": [
+      [
+       "h",
+       "@@ -55,3 +55,9 @@"
+      ],
+      [
+       "c",
+       "IMPORT_DISALLOWED_MESSAGE_TEMPLATE = ("
+      ],
+      [
+       "c",
+       "    \"The import of module '{module_name}' is restricted. {import_disallowed_message}\""
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "SANDBOX_UNSUPPORTED_MESSAGE = ("
+      ],
+      [
+       "a",
+       "    \"The 'sandbox' execution mode runs functions in a forked subprocess, but the 'fork' start \""
+      ],
+      [
+       "a",
+       "    \"method is not available on this platform (for example, Windows). \""
+      ],
+      [
+       "a",
+       "    \"Set execution_mode='local' in your function client to execute functions in the current process.\""
+      ],
+      [
+       "a",
+       ")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 0
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,11 +1,15 @@"
+      ],
+      [
+       "c",
+       "import asyncio"
+      ],
+      [
+       "c",
+       "import builtins"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "d",
+       "import resource"
+      ],
+      [
+       "a",
+       "import multiprocessing"
+      ],
+      [
+       "c",
+       "import traceback"
+      ],
+      [
+       "d",
+       "from multiprocessing import get_context"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "try:"
+      ],
+      [
+       "a",
+       "    import resource"
+      ],
+      [
+       "a",
+       "except ImportError:  # Not available on Windows"
+      ],
+      [
+       "a",
+       "    resource = None"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.envs.executor_env_vars import ("
+      ],
+      [
+       "c",
+       "    EXECUTOR_DISALLOWED_MODULES,"
+      ],
+      [
+       "c",
+       "    EXECUTOR_MAX_CPU_TIME_LIMIT,"
+      ],
+      [
+       "h",
+       "@@ -18,6 +22,7 @@"
+      ],
+      [
+       "c",
+       "    MB_CONVERSION,"
+      ],
+      [
+       "c",
+       "    NO_OUTPUT_MESSAGE,"
+      ],
+      [
+       "c",
+       "    OPEN_DISALLOWED_MESSAGE,"
+      ],
+      [
+       "a",
+       "    SANDBOX_UNSUPPORTED_MESSAGE,"
+      ],
+      [
+       "c",
+       "    TERMINATED_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    TIMEOUT_ERROR_MESSAGE,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "h",
+       "@@ -44,6 +49,9 @@"
+      ],
+      [
+       "c",
+       "        cpu_time_limit: Maximum CPU time in seconds."
+      ],
+      [
+       "c",
+       "        memory_limit: Maximum memory in MB."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ]
+     ],
+     "truncated": true,
+     "additions": 14,
+     "deletions": 3
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
+     "lines": [
+      [
+       "h",
+       "@@ -49,11 +49,18 @@"
+      ],
+      [
+       "c",
+       "    function_name = _extract_function_name(function_source)"
+      ],
+      [
+       "c",
+       "    function_source = textwrap.dedent(function_source)"
+      ],
+      [
+       "c",
+       "    script = f\"\"\""
+      ],
+      [
+       "d",
+       "import sys, base64, cloudpickle, json, traceback, asyncio, resource, os"
+      ],
+      [
+       "a",
+       "import sys, base64, cloudpickle, json, traceback, asyncio, os"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "try:"
+      ],
+      [
+       "a",
+       "    import resource"
+      ],
+      [
+       "a",
+       "except ImportError:"
+      ],
+      [
+       "a",
+       "    resource = None"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{function_source}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _limit_resources():"
+      ],
+      [
+       "a",
+       "    if resource is None:"
+      ],
+      [
+       "a",
+       "        return"
+      ],
+      [
+       "c",
+       "    try:"
+      ],
+      [
+       "c",
+       "        resource.setrlimit(resource.RLIMIT_CPU, ({cpu_time_limit}, {cpu_time_limit}))"
+      ],
+      [
+       "c",
+       "    except Exception as e:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 1
+    }
+   ],
    "id": 10
   },
   {
@@ -529,13 +815,13 @@
    "title": "Accept previous tool call rounds as history in Anthropic and LiteLLM generate_tool_call_messages",
    "date": "2026-10-08",
    "merged_at": null,
-   "reported": false,
+   "reported": true,
    "pr": {
     "number": 1966,
     "url": "https://github.com/unitycatalog/unitycatalog/pull/1966"
    },
    "issue": null,
-   "proof": null,
+   "proof": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
    "files": [
     {
      "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
