@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-08T22:11:19Z",
+ "generated_at": "2026-10-08T22:36:34Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -33,6 +33,36 @@
    "forks": 20475
   },
   {
+   "full": "databricks/databricks-sql-python",
+   "name": "Databricks SQL Connector",
+   "url": "https://github.com/databricks/databricks-sql-python",
+   "about": "The official Python connector for Databricks SQL warehouses and clusters. Used by apps, BI tools, SQLAlchemy and pandas to run queries.",
+   "icon": "🔌",
+   "category": "database driver",
+   "tags": [
+    "Python DB-API",
+    "CloudFetch",
+    "Arrow"
+   ],
+   "stars": 235,
+   "forks": 159
+  },
+  {
+   "full": "databricks/dbt-databricks",
+   "name": "dbt-databricks",
+   "url": "https://github.com/databricks/dbt-databricks",
+   "about": "The official dbt adapter for Databricks. It turns dbt models into Databricks SQL: tables, views, incremental merges, comments and constraints.",
+   "icon": "🧱",
+   "category": "data transformation",
+   "tags": [
+    "dbt",
+    "Delta Lake",
+    "SQL DDL"
+   ],
+   "stars": 380,
+   "forks": 221
+  },
+  {
    "full": "unitycatalog/unitycatalog",
    "name": "Unity Catalog",
    "url": "https://github.com/unitycatalog/unitycatalog",
@@ -59,11 +89,726 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60389,
-   "forks": 12153
+   "stars": 60390,
+   "forks": 12154
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "databricks/databricks-sql-python",
+   "status": "review",
+   "title": "NaN in FLOAT/DOUBLE columns is returned as None (same as NULL) when pandas is enabled",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T22:36:01Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 979,
+    "url": "https://github.com/databricks/databricks-sql-python/pull/979"
+   },
+   "issue": {
+    "number": 978,
+    "url": "https://github.com/databricks/databricks-sql-python/issues/978"
+   },
+   "proof": "New tests fail on main and pass with the fix on both pandas 2.3.3 and 3.0.6; about 5 ms per million rows",
+   "files": [
+    {
+     "path": "src/databricks/sql/result_set.py",
+     "lines": [
+      [
+       "h",
+       "@@ -8,6 +8,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "try:"
+      ],
+      [
+       "c",
+       "    import pyarrow"
+      ],
+      [
+       "a",
+       "    import pyarrow.compute"
+      ],
+      [
+       "c",
+       "except ImportError:"
+      ],
+      [
+       "c",
+       "    pyarrow = None"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -130,6 +131,14 @@"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        res = df.to_numpy(na_value=None, dtype=\"object\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        # The nullable float dtypes turn IEEE NaN into NA, which would make it"
+      ],
+      [
+       "a",
+       "        # indistinguishable from SQL NULL, so restore NaN values from Arrow."
+      ],
+      [
+       "a",
+       "        for i, field in enumerate(table_renamed.schema):"
+      ],
+      [
+       "a",
+       "            if pyarrow.types.is_floating(field.type):"
+      ],
+      [
+       "a",
+       "                is_nan = pyarrow.compute.is_nan(table_renamed.column(i))"
+      ],
+      [
+       "a",
+       "                res[is_nan.fill_null(False).to_numpy(), i] = float(\"nan\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "        return [ResultRow(*v) for v in res]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    @property"
+      ]
+     ],
+     "truncated": false,
+     "additions": 9,
+     "deletions": 0
+    }
+   ],
+   "id": 16
+  },
+  {
+   "kind": "fix",
+   "repo": "databricks/databricks-sql-python",
+   "status": "review",
+   "title": "Avoid ZeroDivisionError when a CloudFetch download takes no measurable time",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T22:35:48Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 977,
+    "url": "https://github.com/databricks/databricks-sql-python/pull/977"
+   },
+   "issue": null,
+   "proof": "On Windows 11, 196 of 200 fast downloads crashed with ZeroDivisionError on main; 200 of 200 succeed with the fix",
+   "files": [
+    {
+     "path": "src/databricks/sql/cloudfetch/downloader.py",
+     "lines": [
+      [
+       "h",
+       "@@ -100,7 +100,7 @@"
+      ],
+      [
+       "c",
+       "            self.link, self.settings.link_expiry_buffer_secs"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        start_time = time.time()"
+      ],
+      [
+       "a",
+       "        start_time = time.perf_counter()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        with self._http_client.request_context("
+      ],
+      [
+       "c",
+       "            method=HttpMethod.GET,"
+      ],
+      [
+       "h",
+       "@@ -113,7 +113,7 @@"
+      ],
+      [
+       "c",
+       "            compressed_data = response.data"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        # Log download metrics"
+      ],
+      [
+       "d",
+       "        download_duration = time.time() - start_time"
+      ],
+      [
+       "a",
+       "        download_duration = time.perf_counter() - start_time"
+      ],
+      [
+       "c",
+       "        self._log_download_metrics("
+      ],
+      [
+       "c",
+       "            self.link.fileLink, len(compressed_data), download_duration"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "h",
+       "@@ -148,8 +148,13 @@"
+      ],
+      [
+       "c",
+       "        self, url: str, bytes_downloaded: int, duration_seconds: float"
+      ],
+      [
+       "c",
+       "    ):"
+      ],
+      [
+       "c",
+       "        \"\"\"Log download speed metrics at INFO/WARN levels.\"\"\""
+      ],
+      [
+       "d",
+       "        # Calculate speed in MB/s (ensure float division for precision)"
+      ],
+      [
+       "d",
+       "        speed_mbps = (float(bytes_downloaded) / (1024 * 1024)) / duration_seconds"
+      ],
+      [
+       "a",
+       "        # Calculate speed in MB/s (ensure float division for precision). A download"
+      ],
+      [
+       "a",
+       "        # that finishes within the clock resolution has no measurable duration."
+      ],
+      [
+       "a",
+       "        speed_mbps = ("
+      ],
+      [
+       "a",
+       "            (float(bytes_downloaded) / (1024 * 1024)) / duration_seconds"
+      ],
+      [
+       "a",
+       "            if duration_seconds > 0"
+      ],
+      [
+       "a",
+       "            else float(\"inf\")"
+      ]
+     ],
+     "truncated": true,
+     "additions": 9,
+     "deletions": 4
+    }
+   ],
+   "id": 15
+  },
+  {
+   "kind": "fix",
+   "repo": "databricks/dbt-databricks",
+   "status": "review",
+   "title": "Quote struct field names that need it in column types",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T22:35:13Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1710,
+    "url": "https://github.com/databricks/dbt-databricks/pull/1710"
+   },
+   "issue": null,
+   "proof": "7 of 8 new tests fail on main with unquoted struct field names; plain names stay unchanged",
+   "files": [
+    {
+     "path": "dbt/adapters/databricks/column.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,11 +1,22 @@"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "a",
+       "import re"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "c",
+       "from typing import Any, ClassVar, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from dbt.adapters.spark.column import SparkColumn"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from dbt.adapters.databricks.utils import quote"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "# Mirrors Spark's QuotingUtils.quoteIfNeeded, so ordinary field names stay unquoted."
+      ],
+      [
+       "a",
+       "_UNQUOTED_FIELD_NAME = re.compile(r\"[A-Za-z_][A-Za-z0-9_]*\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _quote_field_name_if_needed(name: str) -> str:"
+      ],
+      [
+       "a",
+       "    if _UNQUOTED_FIELD_NAME.fullmatch(name):"
+      ],
+      [
+       "a",
+       "        return name"
+      ],
+      [
+       "a",
+       "    escaped = name.replace(\"`\", \"``\")"
+      ],
+      [
+       "a",
+       "    return f\"`{escaped}`\""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "@dataclass"
+      ],
+      [
+       "c",
+       "class DatabricksColumn(SparkColumn):"
+      ],
+      [
+       "h",
+       "@@ -82,7 +93,7 @@"
+      ],
+      [
+       "c",
+       "            fields = type_info.get(\"fields\", [])"
+      ],
+      [
+       "c",
+       "            field_strs = []"
+      ],
+      [
+       "c",
+       "            for field in fields:"
+      ],
+      [
+       "d",
+       "                field_name = field.get(\"name\")"
+      ],
+      [
+       "a",
+       "                field_name = _quote_field_name_if_needed(field.get(\"name\"))"
+      ],
+      [
+       "c",
+       "                field_type = cls._parse_type_from_json(field.get(\"type\"))"
+      ]
+     ],
+     "truncated": true,
+     "additions": 12,
+     "deletions": 1
+    }
+   ],
+   "id": 14
+  },
+  {
+   "kind": "fix",
+   "repo": "databricks/dbt-databricks",
+   "status": "review",
+   "title": "Escape backslashes in description comments",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T22:35:10Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1709,
+    "url": "https://github.com/databricks/dbt-databricks/pull/1709"
+   },
+   "issue": null,
+   "proof": "13 new tests fail on main with wrong or unterminated COMMENT literals; also confirmed by rendering the macros with dbt run-operation",
+   "files": [
+    {
+     "path": "dbt/adapters/databricks/column.py",
+     "lines": [
+      [
+       "h",
+       "@@ -170,7 +170,7 @@"
+      ],
+      [
+       "c",
+       "        if self.not_null:"
+      ],
+      [
+       "c",
+       "            column_str += \" NOT NULL\""
+      ],
+      [
+       "c",
+       "        if self.comment:"
+      ],
+      [
+       "d",
+       "            comment = self.comment.replace(\"'\", \"\\\\'\")"
+      ],
+      [
+       "a",
+       "            comment = self.comment.replace(\"\\\\\", \"\\\\\\\\\").replace(\"'\", \"\\\\'\")"
+      ],
+      [
+       "c",
+       "            column_str += f\" COMMENT '{comment}'\""
+      ],
+      [
+       "c",
+       "        if self.mask:"
+      ],
+      [
+       "c",
+       "            column_str += f\" MASK {self.mask['function']}\""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "dbt/include/databricks/macros/adapters/persist_docs.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -2,8 +2,7 @@"
+      ],
+      [
+       "c",
+       "  {% set file_format = adapter.resolve_file_format(config) %}"
+      ],
+      [
+       "c",
+       "  {% if file_format in ['delta', 'hudi'] %}"
+      ],
+      [
+       "c",
+       "    {% for column in column_dict.values() %}"
+      ],
+      [
+       "d",
+       "      {% set comment = column['description'] %}"
+      ],
+      [
+       "d",
+       "      {% set escaped_comment = comment | replace('\\'', '\\\\\\'') %}"
+      ],
+      [
+       "a",
+       "      {% set escaped_comment = escape_comment(column['description']) %}"
+      ],
+      [
+       "c",
+       "      {% set column_path = relation.render() ~ '.' ~ adapter.quote(column['name']) %}"
+      ],
+      [
+       "c",
+       "      {{ run_query_as(comment_on_column_sql(column_path, escaped_comment), 'alter_column_comment', fetch_result=False) }}"
+      ],
+      [
+       "c",
+       "    {% endfor %}"
+      ],
+      [
+       "h",
+       "@@ -43,13 +42,13 @@"
+      ],
+      [
+       "c",
+       "{% endmacro %}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{% macro alter_relation_comment_sql(relation, description) %}"
+      ],
+      [
+       "d",
+       "COMMENT ON {{ relation.type.render().upper() }} {{ relation.render() }} IS '{{ description | replace(\"'\", \"\\\\'\") }}'"
+      ],
+      [
+       "a",
+       "COMMENT ON {{ relation.type.render().upper() }} {{ relation.render() }} IS '{{ escape_comment(description) }}'"
+      ],
+      [
+       "c",
+       "{% endmacro %}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{% macro alter_column_comments(relation, column_dict) %}"
+      ],
+      [
+       "c",
+       "  {% for column, comment in column_dict.items() %}"
+      ],
+      [
+       "c",
+       "    {{ log('Updating comment for column ' ~ column ~ ' with comment ' ~ comment) }}"
+      ],
+      [
+       "d",
+       "    {% set escaped_comment = comment | replace('\\'', '\\\\\\'') %}"
+      ],
+      [
+       "a",
+       "    {% set escaped_comment = escape_comment(comment) %}"
+      ],
+      [
+       "c",
+       "    {% set column_path = relation.render() ~ '.' ~ adapter.quote(column) %}"
+      ],
+      [
+       "c",
+       "    {{ run_query_as(comment_on_column_sql(column_path, escaped_comment), 'main', fetch_result=False) }}"
+      ],
+      [
+       "c",
+       "  {% endfor %}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 4
+    },
+    {
+     "path": "dbt/include/databricks/macros/materializations/seeds/helpers.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -81,7 +81,7 @@"
+      ],
+      [
+       "c",
+       "            {%- set column_name = (col_name | string) -%}"
+      ],
+      [
+       "c",
+       "            {%- set column_comment_clause = \"\" -%}"
+      ],
+      [
+       "c",
+       "            {%- if column_comment and col_name in model.columns.keys() -%}   "
+      ],
+      [
+       "d",
+       "              {%- set comment = model.columns[col_name]['description'] | replace(\"'\", \"\\\\'\") -%}"
+      ],
+      [
+       "a",
+       "              {%- set comment = escape_comment(model.columns[col_name]['description']) -%}"
+      ],
+      [
+       "c",
+       "              {%- if comment and comment != \"\" -%}"
+      ],
+      [
+       "c",
+       "                {%- set column_comment_clause = \"comment '\" ~ comment ~ \"'\" -%}"
+      ],
+      [
+       "c",
+       "              {%- endif -%}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "dbt/include/databricks/macros/relations/comment.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -3,7 +3,7 @@"
+      ],
+      [
+       "c",
+       "  {%- if raw_persist_docs is mapping -%}"
+      ],
+      [
+       "c",
+       "    {%- set raw_relation = raw_persist_docs.get('relation', false) -%}"
+      ],
+      [
+       "c",
+       "      {%- if raw_relation and model.description -%}"
+      ],
+      [
+       "d",
+       "      comment '{{ model.description | replace(\"'\", \"\\\\'\") }}'"
+      ],
+      [
+       "a",
+       "      comment '{{ escape_comment(model.description) }}'"
+      ],
+      [
+       "c",
+       "      {%- endif -%}"
+      ],
+      [
+       "c",
+       "  {%- elif raw_persist_docs -%}"
+      ],
+      [
+       "c",
+       "    {{ exceptions.raise_compiler_error(\"Invalid value provided for 'persist_docs'. Expected dict but got value: \" ~ raw_persist_docs) }}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "dbt/include/databricks/macros/relations/components/comment.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,10 @@"
+      ],
+      [
+       "a",
+       "{%- macro escape_comment(comment) -%}"
+      ],
+      [
+       "a",
+       "  {#-- escape backslashes first so they cannot merge with the apostrophe escape below --#}"
+      ],
+      [
+       "a",
+       "  {{ return(comment | replace(\"\\\\\", \"\\\\\\\\\") | replace(\"'\", \"\\\\'\")) }}"
+      ],
+      [
+       "a",
+       "{%- endmacro -%}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "{%- macro get_create_sql_comment(comment) -%}"
+      ]
+     ],
+     "truncated": true,
+     "additions": 6,
+     "deletions": 2
+    }
+   ],
+   "id": 13
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
