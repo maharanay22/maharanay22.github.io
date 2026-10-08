@@ -144,7 +144,7 @@ def main():
         items.append({
             "kind": "fix", "repo": repo, "status": status, "title": clean_title(title_src),
             "date": pr["createdAt"][:10], "merged_at": (pr["mergedAt"] or "")[:10] or None,
-            "reported": bool(issue) or ((ref or {}).get("author") or {}).get("login") == LOGIN,
+            "reported": issue_num is None or bool(issue) or ((ref or {}).get("author") or {}).get("login") == LOGIN,
             "pr": {"number": pr["number"], "url": pr["url"]},
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
             "proof": OVERRIDES.get("proofs", {}).get(pr["url"]),

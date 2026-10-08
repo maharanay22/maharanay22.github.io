@@ -4,27 +4,52 @@
    "icon": "🐼",
    "category": "data analysis",
    "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "tags": ["Arrow dtypes", "Reductions", "String regex"]
+   "tags": [
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
+   ]
   },
   "mlflow/mlflow": {
    "name": "MLflow",
    "icon": "🧪",
    "category": "ai engineering",
    "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "tags": ["AI Gateway", "Streaming", "GenAI Eval"]
+   "tags": [
+    "AI Gateway",
+    "Streaming",
+    "GenAI Eval"
+   ]
   },
   "BerriAI/litellm": {
    "name": "LiteLLM",
    "icon": "🚅",
    "category": "ai gateway",
    "about": "AI gateway that lets apps call 100+ LLM providers like OpenAI, Anthropic and Bedrock through one API, with cost tracking and load balancing.",
-   "tags": ["Anthropic", "Streaming", "Tool Calls"]
+   "tags": [
+    "Anthropic",
+    "Streaming",
+    "Tool Calls"
+   ]
+  },
+  "unitycatalog/unitycatalog": {
+   "name": "Unity Catalog",
+   "icon": "🗂️",
+   "category": "data governance",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ]
   }
  },
  "proofs": {
   "https://github.com/BerriAI/litellm/pull/45147": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
   "https://github.com/mlflow/mlflow/pull/26439": "6 new test cases fail on master with ValidationError and pass with the fix",
   "https://github.com/mlflow/mlflow/pull/26538": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
-  "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix"
+  "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix",
+  "https://github.com/unitycatalog/unitycatalog/pull/1966": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
+  "https://github.com/unitycatalog/unitycatalog/pull/1967": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed"
  }
 }
