@@ -4,236 +4,496 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bug Hunter Quest Log · Maha Rana Yadavalli</title>
-<meta name="description" content="Open source bugs found and fixed in pandas, MLflow and LiteLLM.">
+<meta name="description" content="Open source bugs found and fixed in pandas, MLflow and LiteLLM, with the real code diffs.">
 <meta property="og:title" content="Bug Hunter Quest Log · Maha Rana Yadavalli">
 <meta property="og:description" content="10 bugs found, 8 fixes written, 3 merged across pandas, MLflow and LiteLLM.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Syne:wght@700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap">
 <style>
 :root{
-  --c0:#020510;--c1:#0a0f2e;--c2:#0f1640;
+  --c0:#03060f;--c1:#0a0f24;--c2:#10173a;--c3:#151e4a;
   --neon1:#00fff7;--neon2:#bf00ff;--neon3:#ff006e;--neon4:#ffcc00;--neon5:#00ff88;--neon6:#ff6b35;
-  --text:#e8f4ff;--muted:#7f9bb8;--line:rgba(0,255,247,0.14);
-  --display:'Syne',system-ui,sans-serif;--mono:'Fira Code',ui-monospace,Consolas,monospace;
+  --text:#e8f4ff;--muted:#8199b4;--dim:#4f6683;--line:rgba(0,255,247,.13);--line2:rgba(0,255,247,.28);
+  --add:#00ff88;--add-bg:rgba(0,255,136,.09);--del:#ff4d8d;--del-bg:rgba(255,0,110,.10);
+  --display:'Chakra Petch',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--c0);color:var(--text);font-family:var(--mono);font-size:15px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+body{background:var(--c0);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden;min-height:100vh}
+::selection{background:var(--neon2);color:#fff}
 a{color:inherit}
+button{font:inherit;color:inherit}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
 .bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(10px);animation:orb var(--d) ease-in-out infinite alternate}
-.o1{width:520px;height:520px;background:radial-gradient(circle,rgba(0,255,247,.16),transparent 70%);top:-140px;right:-140px;--d:12s}
-.o2{width:440px;height:440px;background:radial-gradient(circle,rgba(191,0,255,.14),transparent 70%);bottom:-120px;left:-120px;--d:15s}
-.o3{width:320px;height:320px;background:radial-gradient(circle,rgba(255,0,110,.11),transparent 70%);top:45%;left:45%;--d:10s}
-.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,255,247,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,247,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 30%,#000 30%,transparent 75%)}
-.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+.grid{position:absolute;inset:-48px;background-image:linear-gradient(rgba(0,255,247,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,247,.05) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 50% 20%,#000 25%,transparent 70%);animation:gridmove 20s linear infinite}
+.orb{position:absolute;border-radius:50%;animation:orb var(--d) ease-in-out infinite alternate}
+.o1{width:560px;height:560px;background:radial-gradient(circle,rgba(0,255,247,.13),transparent 70%);top:-180px;right:-160px;--d:12s}
+.o2{width:480px;height:480px;background:radial-gradient(circle,rgba(191,0,255,.13),transparent 70%);bottom:-160px;left:-160px;--d:15s}
+.scan{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 1px,transparent 1px 3px)}
+@keyframes gridmove{to{transform:translateY(48px)}}
 @keyframes orb{to{transform:translate(40px,30px) scale(1.08)}}
-@keyframes neonPulse{0%,100%{text-shadow:0 0 10px var(--neon1),0 0 28px rgba(0,255,247,.5)}50%{text-shadow:0 0 18px var(--neon1),0 0 50px rgba(0,255,247,.75)}}
-@keyframes shimmer{to{background-position:200% center}}
-@keyframes fill{from{width:0}}
 @keyframes blink{50%{opacity:0}}
-@keyframes ping{75%,100%{transform:scale(2.2);opacity:0}}
+@keyframes ping{75%,100%{transform:scale(2.3);opacity:0}}
+@keyframes glitch{0%,92%,100%{transform:none;text-shadow:0 0 18px rgba(0,255,247,.55)}93%{transform:translate(-2px,1px);text-shadow:-3px 0 var(--neon3),3px 0 var(--neon1)}95%{transform:translate(2px,-1px);text-shadow:3px 0 var(--neon2),-3px 0 var(--neon4)}97%{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}}
 
-.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding-inline:16px;padding-block:28px 72px;display:grid;gap:40px}
-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:.02em;text-decoration:none;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon1));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite}
-.back{font-size:.8rem;color:var(--neon1);text-decoration:none;border:1px solid var(--line);padding:6px 12px;border-radius:999px;transition:box-shadow .2s,border-color .2s}
-.back:hover,.back:focus-visible{border-color:var(--neon1);box-shadow:0 0 18px rgba(0,255,247,.35);outline:none}
+.wrap{position:relative;z-index:1;max-width:1080px;margin:0 auto;padding-inline:16px;padding-block:18px 80px;display:grid;gap:34px}
 
-.hero{display:grid;gap:14px}
-.tag{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--neon5);background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.3);padding:5px 12px;border-radius:999px}
+/* window chrome */
+.topbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(10,15,36,.8);backdrop-filter:blur(6px)}
+.lights{display:flex;gap:7px}
+.lights i{width:11px;height:11px;border-radius:50%;display:block}
+.lights i:nth-child(1){background:#ff5f57}.lights i:nth-child(2){background:#febc2e}.lights i:nth-child(3){background:#28c840}
+.path{font-size:12px;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.path b{color:var(--neon1);font-weight:500}
+.branch{color:var(--neon2)}
+.back{font-size:12px;color:var(--neon1);text-decoration:none;border:1px solid var(--line2);padding:4px 10px;border-radius:7px;transition:box-shadow .2s,background .2s}
+.back:hover,.back:focus-visible{background:rgba(0,255,247,.08);box-shadow:0 0 16px rgba(0,255,247,.3);outline:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.35fr 1fr;gap:22px;align-items:stretch}
+.intro{display:grid;gap:16px;align-content:start}
+.tag{display:inline-flex;align-items:center;gap:10px;width:max-content;max-width:100%;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--neon5);background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.3);padding:5px 12px;border-radius:999px}
 .dot{position:relative;width:8px;height:8px;border-radius:50%;background:var(--neon5);flex-shrink:0}
 .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--neon5);animation:ping 1.5s cubic-bezier(0,0,.2,1) infinite}
-h1{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,7vw,4.2rem);line-height:1.02;margin:0;text-wrap:balance}
-h1 .glow{color:var(--neon1);animation:neonPulse 3s ease-in-out infinite}
-h1 .grad{background:linear-gradient(135deg,var(--neon2),var(--neon3) 55%,var(--neon4));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lede{margin:0;color:var(--muted);max-width:62ch}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,6.4vw,4.4rem);line-height:.98;margin:0;letter-spacing:.01em;text-transform:uppercase}
+h1 .l1{display:block;color:var(--neon1);animation:glitch 6s infinite}
+h1 .l2{display:block;background:linear-gradient(90deg,var(--neon2),var(--neon3) 50%,var(--neon4));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{margin:0;color:var(--muted);max-width:56ch;font-size:13.5px}
 .lede b{color:var(--text);font-weight:500}
-.cursor{display:inline-block;width:.6em;height:1.05em;vertical-align:-.15em;background:var(--neon1);box-shadow:0 0 10px var(--neon1);animation:blink 1s steps(1) infinite;margin-left:4px}
+.kbd-hint{font-size:11.5px;color:var(--dim)}
+kbd{font-family:var(--mono);font-size:11px;padding:1px 6px;border-radius:5px;border:1px solid var(--line2);border-bottom-width:2px;color:var(--neon1);background:rgba(0,255,247,.05)}
 
-.player{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;padding:20px;border-radius:16px;background:linear-gradient(var(--c1),var(--c1)) padding-box,linear-gradient(135deg,var(--neon1),var(--neon2),var(--neon3)) border-box;border:1px solid transparent;box-shadow:0 0 40px rgba(0,255,247,.08)}
-.lvl{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;text-align:center;background:radial-gradient(circle at 30% 30%,rgba(0,255,247,.25),rgba(191,0,255,.15) 60%,transparent 70%);border:2px solid var(--neon1);box-shadow:0 0 22px rgba(0,255,247,.45),inset 0 0 18px rgba(0,255,247,.25)}
-.lvl small{display:block;font-size:.62rem;letter-spacing:.2em;color:var(--muted)}
-.lvl strong{font-family:var(--display);font-size:2.2rem;line-height:1;color:var(--neon1)}
-.pmain{min-width:0;display:grid;gap:10px}
-.prow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:.85rem}
-.prow .rank{font-family:var(--display);font-size:1.15rem;color:var(--text)}
-.prow .xpnum{color:var(--neon4);font-variant-numeric:tabular-nums}
-.bar{height:14px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
-.bar i{display:block;height:100%;width:var(--w);border-radius:999px;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));box-shadow:0 0 14px rgba(0,255,247,.6);animation:fill 1.6s cubic-bezier(.2,.8,.2,1)}
-.xprules{font-size:.72rem;color:var(--muted)}
+.term{border-radius:12px;border:1px solid var(--line2);background:linear-gradient(180deg,rgba(16,23,58,.95),rgba(6,10,26,.97));box-shadow:0 0 0 1px rgba(191,0,255,.12),0 20px 60px rgba(0,0,0,.5),0 0 50px rgba(0,255,247,.07);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.term-h{display:flex;align-items:center;gap:10px;padding:9px 12px;border-bottom:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+.term-b{padding:14px 16px;font-size:12.5px;line-height:1.75;min-height:236px;white-space:pre-wrap;word-break:break-word}
+.p{color:var(--neon5)} .c{color:var(--neon1)} .y{color:var(--neon4)} .m{color:var(--neon2)} .r{color:var(--neon3)} .g{color:var(--muted)}
+.caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.2em;background:var(--neon1);box-shadow:0 0 8px var(--neon1);animation:blink 1s steps(1) infinite}
 
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.stat{padding:16px;border-radius:12px;background:rgba(10,15,46,.75);border:1px solid var(--line);display:grid;gap:4px;transition:transform .2s,box-shadow .2s}
-.stat:hover{transform:translateY(-3px)}
-.stat b{font-family:var(--display);font-size:2.1rem;line-height:1;font-variant-numeric:tabular-nums}
-.stat span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.s-done b{color:var(--neon5);text-shadow:0 0 16px rgba(0,255,136,.55)} .s-done:hover{box-shadow:0 0 24px rgba(0,255,136,.25)}
-.s-boss b{color:var(--neon1);text-shadow:0 0 16px rgba(0,255,247,.55)} .s-boss:hover{box-shadow:0 0 24px rgba(0,255,247,.25)}
-.s-lock b{color:var(--neon4);text-shadow:0 0 16px rgba(255,204,0,.5)} .s-lock:hover{box-shadow:0 0 24px rgba(255,204,0,.22)}
-.s-scout b{color:var(--neon3);text-shadow:0 0 16px rgba(255,0,110,.5)} .s-scout:hover{box-shadow:0 0 24px rgba(255,0,110,.22)}
+/* player */
+.player{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;padding:18px 20px;border-radius:14px;background:linear-gradient(var(--c1),var(--c1)) padding-box,linear-gradient(120deg,var(--neon1),var(--neon2),var(--neon3),var(--neon4)) border-box;border:1px solid transparent}
+.ring{position:relative;width:96px;height:96px}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring .trk{fill:none;stroke:rgba(255,255,255,.07);stroke-width:7}
+.ring .val{fill:none;stroke:url(#ringg);stroke-width:7;stroke-linecap:round;stroke-dasharray:264;stroke-dashoffset:264;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 0 6px rgba(0,255,247,.7))}
+.ring .lv{position:absolute;inset:0;display:grid;place-items:center;text-align:center;line-height:1}
+.ring small{display:block;font-size:9px;letter-spacing:.24em;color:var(--muted)}
+.ring strong{font-family:var(--display);font-size:2.3rem;color:var(--neon1);text-shadow:0 0 14px rgba(0,255,247,.6)}
+.pmain{min-width:0;display:grid;gap:8px}
+.rank{font-family:var(--display);font-size:1.35rem;font-weight:700;letter-spacing:.03em}
+.rank span{color:var(--neon4)}
+.xpline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.xpline b{color:var(--neon4);font-weight:500;font-variant-numeric:tabular-nums}
+.bar{height:12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);overflow:hidden}
+.bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--neon1),var(--neon2),var(--neon3));box-shadow:0 0 12px rgba(0,255,247,.6);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.rules{font-size:11px;color:var(--dim)}
+.counts{display:grid;grid-template-columns:repeat(2,auto);gap:4px 18px;font-size:11.5px;color:var(--muted)}
+.counts b{font-family:var(--display);font-size:1.5rem;line-height:1.1;display:block;font-variant-numeric:tabular-nums}
+.counts .k1 b{color:var(--neon5)} .counts .k2 b{color:var(--neon1)} .counts .k3 b{color:var(--neon4)} .counts .k4 b{color:var(--neon3)}
 
-.ach{display:grid;gap:12px}
-.ach h2,.quests h2{font-family:var(--display);font-size:1.35rem;margin:0;display:flex;align-items:center;gap:12px}
-.ach h2::after,.quests h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
-.badges{display:flex;flex-wrap:wrap;gap:10px}
-.badge{display:flex;align-items:center;gap:10px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(10,15,46,.8);border:1px solid var(--line);font-size:.8rem}
-.badge .ic{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:.8rem;color:var(--c0);font-weight:800}
-.badge small{display:block;color:var(--muted);font-size:.68rem}
+/* section heads */
+h2{font-family:var(--display);font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;margin:0;display:flex;align-items:center;gap:12px}
+h2 .hash{color:var(--neon2)}
+h2::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line2),transparent)}
 
+/* achievements */
+.ach{display:grid;gap:14px}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.badge{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;background:rgba(10,15,36,.85);border:1px solid var(--line);transition:transform .2s,border-color .2s,box-shadow .2s;cursor:default}
+.badge:hover,.badge:focus-visible{transform:translateY(-3px);border-color:var(--bc);box-shadow:0 0 22px color-mix(in srgb,var(--bc) 30%,transparent);outline:none}
+.hex{width:40px;height:44px;flex-shrink:0;display:grid;place-items:center;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--bc);color:var(--c0);font-family:var(--display);font-weight:700;font-size:13px}
+.badge .bt{display:grid;gap:1px;min-width:0}
+.badge .bt b{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:.02em}
+.badge .bt small{color:var(--muted);font-size:11px}
+.badge.locked{--bc:#3a4762}
+.badge.locked .hex{background:repeating-linear-gradient(45deg,#2a3550 0 5px,#222c44 5px 10px);color:var(--muted)}
+.badge.locked .bt b{color:var(--muted)}
+.mini{height:4px;border-radius:9px;background:rgba(255,255,255,.07);overflow:hidden;margin-top:4px}
+.mini i{display:block;height:100%;background:var(--neon4)}
+
+/* controls */
 .quests{display:grid;gap:14px}
-.qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.state{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border-radius:6px;border:1px solid currentColor}
-.qnote{margin:0;color:var(--muted);font-size:.82rem;max-width:72ch}
+.controls{display:grid;gap:10px;position:sticky;top:0;z-index:5;padding:10px;margin:0 -10px;border-radius:12px;background:rgba(3,6,15,.86);backdrop-filter:blur(8px)}
+.tabs,.repos{display:flex;gap:8px;flex-wrap:wrap}
+.tab,.chip{cursor:pointer;border:1px solid var(--line);background:rgba(10,15,36,.8);padding:6px 12px;border-radius:8px;font-size:12px;display:inline-flex;gap:8px;align-items:center;transition:border-color .15s,background .15s,box-shadow .15s,color .15s}
+.tab .n{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
+.tab:hover,.chip:hover{border-color:var(--line2)}
+.tab:focus-visible,.chip:focus-visible,.search input:focus-visible{outline:2px solid var(--neon1);outline-offset:2px}
+.tab[aria-pressed="true"]{border-color:var(--tc,var(--neon1));color:var(--tc,var(--neon1));background:color-mix(in srgb,var(--tc,var(--neon1)) 10%,transparent);box-shadow:0 0 16px color-mix(in srgb,var(--tc,var(--neon1)) 25%,transparent)}
+.tab[aria-pressed="true"] .n{color:inherit}
+.chip[aria-pressed="true"]{border-color:var(--rc);color:var(--rc);background:color-mix(in srgb,var(--rc) 12%,transparent)}
+.row2{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.search{display:flex;align-items:center;gap:8px;flex:1;min-width:220px;max-width:380px;border:1px solid var(--line);border-radius:8px;padding:0 10px;background:rgba(10,15,36,.8)}
+.search span{color:var(--neon5);font-size:12px}
+.search input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;font-size:12.5px;padding:7px 0}
+.search input:focus{outline:none}
+.search kbd{flex-shrink:0}
+
+/* quest cards */
 .list{display:grid;gap:10px}
-.q{position:relative;display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:center;padding:16px 18px 16px 22px;border-radius:12px;background:rgba(10,15,46,.82);border:1px solid var(--line);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
-.q::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--qc);box-shadow:0 0 14px var(--qc)}
-.q:hover{transform:translateX(4px);border-color:var(--qc);box-shadow:0 0 26px color-mix(in srgb,var(--qc) 25%,transparent)}
-.qmain{min-width:0;display:grid;gap:4px}
-.qmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.72rem}
-.repo{padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.04em}
-.r-pandas{color:#d9b3ff;background:rgba(191,0,255,.16)}
-.r-mlflow{color:#7ffcff;background:rgba(0,255,247,.12)}
-.r-litellm{color:#ffb3d1;background:rgba(255,0,110,.15)}
+.q{--qc:var(--neon1);position:relative;border-radius:12px;background:rgba(10,15,36,.88);border:1px solid var(--line);overflow:hidden;transition:border-color .2s,box-shadow .2s;animation:rise .35s ease both}
+.q::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--qc);box-shadow:0 0 12px var(--qc)}
+.q:hover,.q.open{border-color:color-mix(in srgb,var(--qc) 55%,transparent);box-shadow:0 0 26px color-mix(in srgb,var(--qc) 16%,transparent)}
+.q.merged{--qc:var(--neon5)} .q.review{--qc:var(--neon1)} .q.locked{--qc:var(--neon4)} .q.scout{--qc:var(--neon3)}
+.qbtn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;width:100%;padding:14px 16px 14px 18px;cursor:pointer}
+.qbtn:focus-visible{outline:2px solid var(--qc);outline-offset:-2px;border-radius:12px}
+.qid{font-family:var(--display);font-size:13px;color:var(--dim);font-variant-numeric:tabular-nums;width:28px}
+.qmain{min-width:0;display:grid;gap:5px}
+.qmeta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px}
+.st{letter-spacing:.12em;text-transform:uppercase;color:var(--qc);border:1px solid color-mix(in srgb,var(--qc) 50%,transparent);padding:1px 7px;border-radius:5px}
+.repo{padding:1px 8px;border-radius:5px;font-weight:500}
+.r-pandas{color:#dcb8ff;background:rgba(191,0,255,.16)} .r-mlflow{color:#86fdff;background:rgba(0,255,247,.11)} .r-litellm{color:#ffb8d4;background:rgba(255,0,110,.15)}
 .xp{color:var(--neon4)}
-.qtitle{font-size:.92rem;color:var(--text)}
-.qtitle code{color:var(--neon1);font-family:var(--mono);font-size:.95em}
-.qlinks{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.qlinks a{font-size:.78rem;text-decoration:none;padding:5px 10px;border-radius:7px;border:1px solid var(--line);color:var(--text);white-space:nowrap;font-variant-numeric:tabular-nums;transition:border-color .2s,box-shadow .2s,color .2s}
-.qlinks a span{color:var(--muted)}
-.qlinks a:hover,.qlinks a:focus-visible{border-color:var(--qc);color:var(--qc);box-shadow:0 0 14px color-mix(in srgb,var(--qc) 35%,transparent);outline:none}
+.qtitle{font-size:13.5px;line-height:1.5}
+.qtitle code{color:var(--neon1);font-family:var(--mono)}
+.chev{color:var(--muted);transition:transform .25s,color .2s;font-size:13px}
+.q.open .chev{transform:rotate(90deg);color:var(--qc)}
+.qbody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.q.open .qbody{grid-template-rows:1fr}
+.qin{overflow:hidden;min-width:0}
+.qin-pad{padding:0 16px 16px 18px;display:grid;gap:12px}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.links a{font-size:12px;text-decoration:none;padding:5px 10px;border-radius:7px;border:1px solid var(--line2);white-space:nowrap;transition:background .15s,box-shadow .15s,color .15s}
+.links a:hover,.links a:focus-visible{color:var(--qc);border-color:var(--qc);box-shadow:0 0 14px color-mix(in srgb,var(--qc) 35%,transparent);outline:none}
+.links a .g{margin-right:4px}
+.proof{font-size:12px;color:var(--muted);border-left:2px solid var(--neon5);padding-left:10px}
+.proof b{color:var(--neon5);font-weight:500}
+.diff{border-radius:9px;border:1px solid var(--line);background:#050915;overflow:hidden}
+.dh{display:flex;justify-content:space-between;gap:10px;padding:7px 12px;font-size:11.5px;color:var(--muted);border-bottom:1px solid var(--line);background:rgba(16,23,58,.6)}
+.dh .fp{color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.dh .st2{white-space:nowrap}.dh .st2 .a{color:var(--add)}.dh .st2 .d{color:var(--del)}
+.code{overflow-x:auto;font-size:12px;line-height:1.6;padding:6px 0}
+.ln{display:grid;grid-template-columns:22px 1fr;white-space:pre;min-width:max-content;padding-right:14px}
+.ln .s{text-align:center;color:var(--dim);user-select:none}
+.ln.a{background:var(--add-bg)} .ln.a .s{color:var(--add)} .ln.a .t{color:#c9ffe4}
+.ln.d{background:var(--del-bg)} .ln.d .s{color:var(--del)} .ln.d .t{color:#ffc9dc}
+.ln.h{color:var(--neon2);font-style:italic}
+.ln.c .t{color:#9fb3cc}
+.note{font-size:12px;color:var(--muted)}
+.empty{padding:26px;text-align:center;color:var(--muted);border:1px dashed var(--line2);border-radius:12px}
 
-.done{--qc:var(--neon5)} .boss{--qc:var(--neon1)} .lock{--qc:var(--neon4)} .scout{--qc:var(--neon3)}
-.st-done{color:var(--neon5)} .st-boss{color:var(--neon1)} .st-lock{color:var(--neon4)} .st-scout{color:var(--neon3)}
+/* console */
+.console{border-radius:12px;border:1px solid var(--line2);background:#050915;overflow:hidden}
+.con-out{max-height:260px;overflow:auto;padding:12px 14px;font-size:12.5px;line-height:1.7;white-space:pre-wrap;word-break:break-word}
+.con-in{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);background:rgba(16,23,58,.5)}
+.con-in label{color:var(--neon5);font-size:12.5px;white-space:nowrap}
+.con-in input{flex:1;min-width:0;background:transparent;border:0;color:var(--text);font:inherit;font-size:12.5px;caret-color:var(--neon1)}
+.con-in input:focus{outline:none}
+.console:focus-within{box-shadow:0 0 26px rgba(0,255,247,.15)}
+.cmds{display:flex;gap:6px;flex-wrap:wrap}
+.cmds button{cursor:pointer;font-size:11.5px;padding:3px 9px;border-radius:6px;border:1px solid var(--line);background:rgba(10,15,36,.8);color:var(--muted)}
+.cmds button:hover,.cmds button:focus-visible{color:var(--neon1);border-color:var(--neon1);outline:none}
 
-footer{color:var(--muted);font-size:.75rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:18px}
+footer{color:var(--dim);font-size:11.5px;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px}
 footer a{color:var(--neon1)}
 
-@media (max-width:720px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-  .q{grid-template-columns:1fr}
-  .qlinks{justify-content:flex-start}
-}
-@media (max-width:440px){
-  .player{grid-template-columns:1fr;justify-items:start}
-}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation:none!important;transition:none!important}
-}
+@media (max-width:860px){.hero{grid-template-columns:1fr}.player{grid-template-columns:auto 1fr}.counts{grid-column:1 / -1;grid-template-columns:repeat(4,auto);justify-content:start}}
+@media (max-width:520px){.player{grid-template-columns:1fr}.counts{grid-template-columns:repeat(2,auto)}.qbtn{grid-template-columns:1fr auto}.qid{display:none}.term-b{min-height:0}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="scan"></div></div>
+<div class="bg" aria-hidden="true"><div class="grid"></div><div class="orb o1"></div><div class="orb o2"></div><div class="scan"></div></div>
 
 <div class="wrap">
-  <nav>
-    <a class="logo" href="https://maharanay22.github.io/">MAHA.DEV</a>
-    <a class="back" href="https://maharanay22.github.io/">&larr; back to profile</a>
-  </nav>
+  <div class="topbar">
+    <div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="path">~/maha/<b>bug-hunter</b> <span class="branch">(main)</span> · quest-log.md</div>
+    <a class="back" href="https://maharanay22.github.io/">cd ~/profile</a>
+  </div>
 
-  <header class="hero">
-    <span class="tag"><span class="dot"></span>open source · quest log</span>
-    <h1><span class="glow">Bug Hunter</span><br><span class="grad">Quest Log</span></h1>
-    <p class="lede">Real bugs found, reproduced and fixed in <b>pandas</b>, <b>MLflow</b> and <b>LiteLLM</b>. Every quest links to the GitHub issue and the pull request with the fix<span class="cursor" aria-hidden="true"></span></p>
-  </header>
+  <section class="hero">
+    <div class="intro">
+      <span class="tag"><span class="dot"></span>open source · quest log</span>
+      <h1><span class="l1">Bug Hunter</span><span class="l2">Quest Log</span></h1>
+      <p class="lede">Real bugs found, reproduced and fixed in <b>pandas</b>, <b>MLflow</b> and <b>LiteLLM</b>. Open any quest to see the exact diff that fixed it, plus links to the issue and pull request</p>
+      <p class="kbd-hint"><kbd>/</kbd> search &nbsp; <kbd>1</kbd>-<kbd>5</kbd> filter &nbsp; <kbd>`</kbd> console &nbsp; <kbd>Enter</kbd> open quest</p>
+    </div>
+    <div class="term" aria-label="Bug hunter summary">
+      <div class="term-h"><div class="lights" aria-hidden="true"><i></i><i></i><i></i></div>bughunt — zsh</div>
+      <div class="term-b" id="typed"><span class="p">$</span> bughunt --stats
+<span class="g">scanning pandas, mlflow, litellm ...</span>
+<span class="c">10</span> bugs found · <span class="c">8</span> fixes written · <span class="p">3</span> merged
+<span class="p">$</span> bughunt --rank
+<span class="y">LV.4 BUG HUNTER</span>  3,100 XP  <span class="m">[■□□□□□□□□□]</span> 10%
+<span class="p">$</span> git log --author=maharanay22 --grep=fix | head -3
+<span class="y">4b3b8a9</span> fix(anthropic): keep tool_calls finish_reason
+<span class="y">5f0d347</span> Handle tools without description or parameters
+<span class="y">92f5504</span> Accept NumPy scalar values returned by GenAI scorers
+<span class="p">$</span> <span class="caret"></span></div>
+    </div>
+  </section>
 
   <section class="player" aria-label="Player stats">
-    <div class="lvl"><div><small>LEVEL</small><strong>4</strong></div></div>
+    <div class="ring">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><defs><linearGradient id="ringg" x1="0" x2="1"><stop offset="0" stop-color="#00fff7"/><stop offset=".5" stop-color="#bf00ff"/><stop offset="1" stop-color="#ff006e"/></linearGradient></defs><circle class="trk" cx="50" cy="50" r="42"/><circle class="val" id="ringval" cx="50" cy="50" r="42"/></svg>
+      <div class="lv"><div><small>LEVEL</small><strong>4</strong></div></div>
+    </div>
     <div class="pmain">
-      <div class="prow"><span class="rank">Bug Hunter · 3 repos</span><span class="xpnum">3,100 XP · 100 / 1,000 to Lv 5</span></div>
-      <div class="bar" role="img" aria-label="10 percent of the way to level 5"><i style="--w:10%"></i></div>
-      <div class="xprules">+100 XP per bug reported · +150 per fix written · +300 per fix merged · 1,000 XP per level</div>
+      <div class="rank">Bug Hunter <span>· 3 repos conquered</span></div>
+      <div class="xpline"><span><b data-count="3100">3,100</b> XP</span><span>100 / 1,000 XP to LV.5</span></div>
+      <div class="bar" role="img" aria-label="10 percent of the way to level 5"><i id="xpbar"></i></div>
+      <div class="rules">+100 XP per bug reported · +150 per fix written · +300 per fix merged</div>
+    </div>
+    <div class="counts">
+      <div class="k1"><b data-count="3">3</b>merged</div>
+      <div class="k2"><b data-count="3">3</b>in review</div>
+      <div class="k3"><b data-count="2">2</b>locked</div>
+      <div class="k4"><b data-count="2">2</b>scouted</div>
     </div>
   </section>
 
-  <section class="stats" aria-label="Quest totals">
-    <div class="stat s-done"><b>3</b><span>Quests complete</span></div>
-    <div class="stat s-boss"><b>3</b><span>Boss fights</span></div>
-    <div class="stat s-lock"><b>2</b><span>Gates locked</span></div>
-    <div class="stat s-scout"><b>2</b><span>Scout intel</span></div>
-  </section>
-
-  <section class="ach">
-    <h2>Achievements</h2>
+  <section class="ach" aria-labelledby="ach-h">
+    <h2 id="ach-h"><span class="hash">#</span>Achievements</h2>
     <div class="badges">
-      <div class="badge"><span class="ic" style="background:var(--neon5);box-shadow:0 0 14px var(--neon5)">1st</span><div>First Merge<small>pandas #70515</small></div></div>
-      <div class="badge"><span class="ic" style="background:var(--neon1);box-shadow:0 0 14px var(--neon1)">x3</span><div>Triple Threat<small>fixes in 3 projects</small></div></div>
-      <div class="badge"><span class="ic" style="background:var(--neon2);box-shadow:0 0 14px var(--neon2)">10</span><div>Sharp Eye<small>10 bugs reported</small></div></div>
-      <div class="badge"><span class="ic" style="background:var(--neon4);box-shadow:0 0 14px var(--neon4)">x2</span><div>Double Merge<small>2 MLflow merges in one day</small></div></div>
+      <div class="badge" tabindex="0" style="--bc:var(--neon5)"><div class="hex">1st</div><div class="bt"><b>First Blood</b><small>first merge · pandas #70515</small></div></div>
+      <div class="badge" tabindex="0" style="--bc:var(--neon1)"><div class="hex">x3</div><div class="bt"><b>Triple Threat</b><small>fixes sent to 3 projects</small></div></div>
+      <div class="badge" tabindex="0" style="--bc:var(--neon2)"><div class="hex">10</div><div class="bt"><b>Sharp Eye</b><small>10 bugs reported</small></div></div>
+      <div class="badge" tabindex="0" style="--bc:var(--neon4)"><div class="hex">x2</div><div class="bt"><b>Double Kill</b><small>2 MLflow merges in one day</small></div></div>
+      <div class="badge locked" tabindex="0"><div class="hex">5</div><div class="bt"><b>Merge Master</b><small>merge 5 fixes · 3/5</small><div class="mini"><i style="width:60%"></i></div></div></div>
+      <div class="badge locked" tabindex="0"><div class="hex">3P</div><div class="bt"><b>Grand Slam</b><small>merged in 3 projects · 2/3</small><div class="mini"><i style="width:66%"></i></div></div></div>
     </div>
   </section>
 
-  <section class="quests">
-    <div class="qhead"><h2>Quests complete</h2></div>
-    <div class="qhead"><span class="state st-done">merged</span><p class="qnote">Fix accepted and shipped in the project</p></div>
-    <div class="list">
-      <article class="q done">
-        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+550 XP</span></div><div class="qtitle"><code>Series.mode(dropna=False)</code> crashed on nullable boolean data</div></div>
-        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70487"><span>issue</span> #70487</a><a href="https://github.com/pandas-dev/pandas/pull/70515"><span>PR</span> #70515</a></div>
-      </article>
-      <article class="q done">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+550 XP</span></div><div class="qtitle">Databricks gateway broke on streamed chunks with list-style content</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26397"><span>issue</span> #26397</a><a href="https://github.com/mlflow/mlflow/pull/26439"><span>PR</span> #26439</a></div>
-      </article>
-      <article class="q done">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+550 XP</span></div><div class="qtitle">Mistral gateway dropped token usage when streaming, so no cost was recorded</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26399"><span>issue</span> #26399</a><a href="https://github.com/mlflow/mlflow/pull/26440"><span>PR</span> #26440</a></div>
-      </article>
+  <section class="quests" aria-labelledby="q-h">
+    <h2 id="q-h"><span class="hash">#</span>Quests</h2>
+    <div class="controls">
+      <div class="tabs" role="group" aria-label="Filter by status">
+        <button class="tab" data-status="all" aria-pressed="true">all <span class="n" data-n="all"></span></button>
+        <button class="tab" data-status="merged" aria-pressed="false" style="--tc:var(--neon5)">merged <span class="n" data-n="merged"></span></button>
+        <button class="tab" data-status="review" aria-pressed="false" style="--tc:var(--neon1)">in review <span class="n" data-n="review"></span></button>
+        <button class="tab" data-status="locked" aria-pressed="false" style="--tc:var(--neon4)">locked <span class="n" data-n="locked"></span></button>
+        <button class="tab" data-status="scout" aria-pressed="false" style="--tc:var(--neon3)">scouted <span class="n" data-n="scout"></span></button>
+      </div>
+      <div class="row2">
+        <div class="repos" role="group" aria-label="Filter by project">
+          <button class="chip" data-repo="pandas" aria-pressed="false" style="--rc:#dcb8ff">pandas</button>
+          <button class="chip" data-repo="mlflow" aria-pressed="false" style="--rc:#86fdff">mlflow</button>
+          <button class="chip" data-repo="litellm" aria-pressed="false" style="--rc:#ffb8d4">litellm</button>
+        </div>
+        <label class="search"><span>grep</span><input id="search" type="search" placeholder="streaming, regex, numpy..." autocomplete="off"><kbd>/</kbd></label>
+      </div>
     </div>
+    <p class="note" id="legend"></p>
+    <div class="list" id="list"></div>
   </section>
 
-  <section class="quests">
-    <div class="qhead"><h2>Boss fights</h2></div>
-    <div class="qhead"><span class="state st-boss">in review</span><p class="qnote">All checks pass. Waiting for a maintainer to review</p></div>
-    <div class="list">
-      <article class="q boss">
-        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+250 XP</span></div><div class="qtitle"><code>any</code> / <code>all(skipna=False)</code> crashed on pyarrow columns with NA</div></div>
-        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70685"><span>issue</span> #70685</a><a href="https://github.com/pandas-dev/pandas/pull/70723"><span>PR</span> #70723</a></div>
-      </article>
-      <article class="q boss">
-        <div class="qmain"><div class="qmeta"><span class="repo r-pandas">pandas</span><span class="xp">+250 XP</span></div><div class="qtitle">String regex <code>\w</code> <code>\d</code> <code>\s</code> <code>\b</code> only matched ASCII on pyarrow strings</div></div>
-        <div class="qlinks"><a href="https://github.com/pandas-dev/pandas/issues/70770"><span>issue</span> #70770</a><a href="https://github.com/pandas-dev/pandas/pull/70773"><span>PR</span> #70773</a></div>
-      </article>
-      <article class="q boss">
-        <div class="qmain"><div class="qmeta"><span class="repo r-litellm">LiteLLM</span><span class="xp">+250 XP</span></div><div class="qtitle">Anthropic streaming reported <code>"stop"</code> instead of <code>"tool_calls"</code></div></div>
-        <div class="qlinks"><a href="https://github.com/BerriAI/litellm/issues/45082"><span>issue</span> #45082</a><a href="https://github.com/BerriAI/litellm/pull/45147"><span>PR</span> #45147</a></div>
-      </article>
+  <section class="ach" aria-labelledby="con-h">
+    <h2 id="con-h"><span class="hash">#</span>Console</h2>
+    <div class="console">
+      <div class="con-out" id="conout" aria-live="polite"></div>
+      <div class="con-in"><label for="conin">guest@maha:~$</label><input id="conin" type="text" autocomplete="off" spellcheck="false" placeholder="type help and press Enter"></div>
     </div>
+    <div class="cmds" aria-label="Example commands"><button data-cmd="help">help</button><button data-cmd="ls merged">ls merged</button><button data-cmd="open 6">open 6</button><button data-cmd="xp">xp</button><button data-cmd="repo pandas">repo pandas</button><button data-cmd="sudo merge">sudo merge</button></div>
   </section>
 
-  <section class="quests">
-    <div class="qhead"><h2>Gates locked</h2></div>
-    <div class="qhead"><span class="state st-lock">awaiting triage</span><p class="qnote">Fix and tests are ready. MLflow opens the gate once a maintainer labels the issue <code style="color:var(--neon4)">ready</code></p></div>
-    <div class="list">
-      <article class="q lock">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+250 XP</span></div><div class="qtitle">Anthropic and Gemini gateways crashed on tools without a description or parameters</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26491"><span>issue</span> #26491</a><a href="https://github.com/mlflow/mlflow/pull/26538"><span>PR</span> #26538</a></div>
-      </article>
-      <article class="q lock">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+250 XP</span></div><div class="qtitle"><code>genai.evaluate</code> failed when a scorer returned a NumPy value</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26495"><span>issue</span> #26495</a><a href="https://github.com/mlflow/mlflow/pull/26539"><span>PR</span> #26539</a></div>
-      </article>
-    </div>
-  </section>
-
-  <section class="quests">
-    <div class="qhead"><h2>Scout intel</h2></div>
-    <div class="qhead"><span class="state st-scout">reported</span><p class="qnote">Found and reported. Another contributor shipped the fix</p></div>
-    <div class="list">
-      <article class="q scout">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+100 XP</span></div><div class="qtitle"><code>search_logged_models</code> status filters never matched on the SQL store</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26494"><span>issue</span> #26494</a><a href="https://github.com/mlflow/mlflow/pull/26512"><span>fix</span> #26512</a></div>
-      </article>
-      <article class="q scout">
-        <div class="qmain"><div class="qmeta"><span class="repo r-mlflow">MLflow</span><span class="xp">+100 XP</span></div><div class="qtitle"><code>dump_input_data</code> failed on dict inputs</div></div>
-        <div class="qlinks"><a href="https://github.com/mlflow/mlflow/issues/26496"><span>issue</span> #26496</a><a href="https://github.com/mlflow/mlflow/pull/26519"><span>fix</span> #26519</a></div>
-      </article>
-    </div>
-  </section>
-
-  <footer><span>Status as of October 8, 2026</span><a href="https://github.com/maharanay22">github.com/maharanay22</a></footer>
+  <footer><span>status as of 2026-10-08 · built by Maha Rana Yadavalli</span><a href="https://github.com/maharanay22">github.com/maharanay22</a></footer>
 </div>
+
+<script type="application/json" id="quests">[{"id": 1, "repo": "pandas", "status": "merged", "xp": 550, "title": "`Series.mode(dropna=False)` crashed on nullable boolean data", "issue": ["https://github.com/pandas-dev/pandas/issues/70487", "#70487"], "pr": ["https://github.com/pandas-dev/pandas/pull/70515", "PR #70515"], "files": [{"path": "pandas/core/algorithms.py", "lines": [["h", "@@ -1212,7 +1212,7 @@"], ["c", "    if res_mask is None:"], ["c", "        res_mask = np.zeros(npresult.shape, dtype=np.bool_)"], ["c", "    else:"], ["d", "        return npresult, res_mask"], ["a", "        return _reconstruct_data(npresult, original.dtype, original), res_mask"], ["c", ""], ["c", "    try:"], ["c", "        npresult = safe_sort(npresult)"]]}]}, {"id": 2, "repo": "mlflow", "status": "merged", "xp": 550, "title": "Databricks gateway broke on streamed chunks with list-style content", "issue": ["https://github.com/mlflow/mlflow/issues/26397", "#26397"], "pr": ["https://github.com/mlflow/mlflow/pull/26439", "PR #26439"], "proof": "6 new test cases fail on master with ValidationError and pass with the fix", "files": [{"path": "mlflow/gateway/providers/databricks.py", "lines": [["h", "@@ -67,6 +67,20 @@"], ["c", "                msg[\"content\"] = cls._normalize_content(msg.get(\"content\"))"], ["c", "        return super().model_to_chat(resp, config)"], ["c", ""], ["a", "    @classmethod"], ["a", "    def model_to_chat_streaming("], ["a", "        cls, resp: dict[str, Any], config: EndpointConfig"], ["a", "    ) -> chat.StreamResponsePayload:"], ["a", "        # Streaming deltas can also carry a list of typed parts (e.g. a \"reasoning\""], ["a", "        # part), but the stream schema only accepts string content, so keep the text."], ["a", "        for choice in resp.get(\"choices\", []):"], ["a", "            delta = choice.get(\"delta\") or {}"], ["a", "            if isinstance(content := delta.get(\"content\"), list):"], ["a", "                delta[\"content\"] = ("], ["a", "                    \"\".join(p.get(\"text\", \"\") for p in content if p.get(\"type\") == \"text\") or None"], ["a", "                )"], ["a", "        return super().model_to_chat_streaming(resp, config)"], ["a", ""], ["c", ""], ["c", "class DatabricksProvider(OpenAICompatibleProvider):"], ["c", "    \"\"\"Databricks provider using the Databricks SDK for authentication."]]}]}, {"id": 3, "repo": "mlflow", "status": "merged", "xp": 550, "title": "Mistral gateway dropped token usage when streaming, so no cost was recorded", "issue": ["https://github.com/mlflow/mlflow/issues/26399", "#26399"], "pr": ["https://github.com/mlflow/mlflow/pull/26440", "PR #26440"], "files": [{"path": "mlflow/gateway/providers/mistral.py", "lines": [["h", "@@ -109,9 +109,18 @@"], ["c", "        #       },"], ["c", "        #       \"finish_reason\": \"string\" | null,"], ["c", "        #     }"], ["d", "        #   ]"], ["a", "        #   ],"], ["a", "        #   \"usage\": {...}  # only in the final chunk"], ["c", "        # }"], ["c", "        # ```"], ["a", "        usage = None"], ["a", "        if usage_data := resp.get(\"usage\"):"], ["a", "            usage = chat_schema.ChatUsage("], ["a", "                prompt_tokens=usage_data.get(\"prompt_tokens\"),"], ["a", "                completion_tokens=usage_data.get(\"completion_tokens\"),"], ["a", "                total_tokens=usage_data.get(\"total_tokens\"),"], ["a", "            )"], ["a", ""], ["c", "        return chat_schema.StreamResponsePayload("], ["c", "            id=resp[\"id\"],"], ["c", "            object=resp[\"object\"],"], ["h", "@@ -132,6 +141,7 @@"], ["c", "                )"], ["c", "                for c in resp[\"choices\"]"], ["c", "            ],"], ["a", "            usage=usage,"], ["c", "        )"], ["c", ""], ["c", "    @classmethod"]]}]}, {"id": 4, "repo": "pandas", "status": "review", "xp": 250, "title": "`any` / `all(skipna=False)` crashed on pyarrow columns with NA", "issue": ["https://github.com/pandas-dev/pandas/issues/70685", "#70685"], "pr": ["https://github.com/pandas-dev/pandas/pull/70723", "PR #70723"], "files": [{"path": "pandas/core/frame.py", "lines": [["h", "@@ -17137,7 +17140,11 @@"], ["c", "        res = df._mgr.reduce(blk_func)"], ["c", "        out = df._constructor_from_mgr(res, axes=res.axes).iloc[0]"], ["c", "        out.name = None"], ["d", "        if out_dtype is not None and out.dtype != \"boolean\":"], ["a", "        if out_dtype is not None and not ("], ["a", "            isinstance(out.dtype, ExtensionDtype) and out.dtype._is_boolean"], ["a", "        ):"], ["a", "            # Keep nullable boolean results (e.g. \"boolean\", \"bool[pyarrow]\"),"], ["a", "            # which can hold NA when skipna=False"], ["c", "            out = out.astype(out_dtype)"], ["c", "        elif name not in [\"any\", \"all\"] and any("], ["c", "            dtype == object for dtype in df._blk_dtypes"]]}]}, {"id": 5, "repo": "pandas", "status": "review", "xp": 250, "title": "String regex `\\w` `\\d` `\\s` `\\b` only matched ASCII on pyarrow strings", "issue": ["https://github.com/pandas-dev/pandas/issues/70770", "#70770"], "pr": ["https://github.com/pandas-dev/pandas/pull/70773", "PR #70773"], "files": [{"path": "pandas/core/arrays/_arrow_string_mixins.py", "lines": [["h", "@@ excerpt @@"], ["a", "    def _needs_python_regex(self, pat: str | re.Pattern[str]) -> bool:"], ["a", "        \"\"\""], ["a", "        Whether a regex operation must use Python's ``re`` instead of pyarrow."], ["a", "        \"\"\""], ["a", "        if self._has_unsupported_regex(pat):"], ["a", "            return True"], ["a", "        # all-ASCII data keeps the faster pyarrow path; min_count=0 so that an"], ["a", "        #  empty or all-null array also reports True"], ["a", "        return ("], ["a", "            self._has_unicode_sensitive_regex(pat)"], ["a", "            and not pc.all(pc.string_is_ascii(self._pa_array), min_count=0).as_py()"], ["a", "        )"], ["a", ""]]}, {"path": "pandas/core/arrays/string_arrow.py", "lines": [["h", "@@ -450,7 +450,7 @@"], ["c", "        if ("], ["c", "            flags"], ["c", "            or self._is_re_pattern_with_flags(pat)"], ["d", "            or (regex and self._has_unsupported_regex(pat))"], ["a", "            or (regex and self._needs_python_regex(pat))"], ["c", "            # a compiled pattern is not a valid literal; defer to the object path"], ["c", "            or (not regex and isinstance(pat, re.Pattern))"], ["c", "        ):"]]}]}, {"id": 6, "repo": "litellm", "status": "review", "xp": 250, "title": "Anthropic streaming reported `\"stop\"` instead of `\"tool_calls\"`", "issue": ["https://github.com/BerriAI/litellm/issues/45082", "#45082"], "pr": ["https://github.com/BerriAI/litellm/pull/45147", "PR #45147"], "proof": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times", "files": [{"path": "litellm/llms/anthropic/chat/handler.py", "lines": [["h", "@@ -573,6 +573,7 @@"], ["c", "        self.is_response_format_tool: bool = False"], ["c", "        # Track if we've converted any response_format tools (affects finish_reason)"], ["c", "        self.converted_response_format_tool: bool = False"], ["a", "        self.streamed_user_tool_call: bool = False"], ["c", ""], ["c", "        # For handling partial JSON chunks from fragmentation"], ["c", "        # See: https://github.com/BerriAI/litellm/issues/17473"], ["h", "@@ -1071,6 +1072,7 @@"], ["c", "            # (per Anthropic's fine-grained streaming pattern)"], ["c", "            tool_name: Final = tool_use.get(\"function\", {}).get(\"name\", \"\")"], ["c", "            self.is_response_format_tool = tool_name == RESPONSE_FORMAT_TOOL_NAME"], ["a", "            self.streamed_user_tool_call = self.streamed_user_tool_call or not self.is_response_format_tool"], ["c", ""], ["c", "        # Convert tool to content if we're tracking a response_format tool"], ["c", "        if self.is_response_format_tool:"], ["h", "@@ -1095,9 +1097,9 @@"], ["c", "        \"\"\""], ["c", "        message_delta: Final = MessageBlockDelta(**chunk)"], ["c", "        finish_reason = map_finish_reason(finish_reason=message_delta[\"delta\"].get(\"stop_reason\", \"stop\") or \"stop\")"], ["d", "        # Override finish_reason to \"stop\" if we converted response_format tools"], ["a", "        # Override finish_reason to \"stop\" if we converted response_format tools and no user tool was called"], ["c", "        # (matches OpenAI behavior and non-streaming Anthropic implementation)"], ["d", "        if self.converted_response_format_tool:"], ["a", "        if self.converted_response_format_tool and not self.streamed_user_tool_call:"], ["c", "            finish_reason = \"stop\""], ["c", "        usage: Final = ("], ["c", "            self._handle_usage(anthropic_usage_chunk=message_delta[\"usage\"]) if \"usage\" in message_delta else None"]]}]}, {"id": 7, "repo": "mlflow", "status": "locked", "xp": 250, "title": "Anthropic and Gemini gateways crashed on tools without a description or parameters", "issue": ["https://github.com/mlflow/mlflow/issues/26491", "#26491"], "pr": ["https://github.com/mlflow/mlflow/pull/26538", "PR #26538"], "proof": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix", "files": [{"path": "mlflow/gateway/providers/anthropic.py", "lines": [["h", "@@ -266,11 +266,16 @@"], ["c", "                    )"], ["c", ""], ["c", "                tool_function = tool[\"function\"]"], ["d", "                converted_tools.append({"], ["a", "                # `description` and `parameters` are optional in OpenAI tool definitions,"], ["a", "                # but Anthropic requires `input_schema`, so default to a no-argument schema."], ["a", "                converted_tool = {"], ["c", "                    \"name\": tool_function[\"name\"],"], ["d", "                    \"description\": tool_function[\"description\"],"], ["d", "                    \"input_schema\": tool_function[\"parameters\"],"], ["d", "                })"], ["a", "                    \"input_schema\": tool_function.get(\"parameters\")"], ["a", "                    or {\"type\": \"object\", \"properties\": {}},"], ["a", "                }"], ["a", "                if description := tool_function.get(\"description\"):"], ["a", "                    converted_tool[\"description\"] = description"], ["a", "                converted_tools.append(converted_tool)"], ["c", ""], ["c", "            payload[\"tools\"] = converted_tools"]]}, {"path": "mlflow/gateway/providers/gemini.py", "lines": [["h", "@@ -262,11 +262,14 @@"], ["c", "                    )"], ["c", ""], ["c", "                tool_function = tool[\"function\"]"], ["d", "                function_declarations.append({"], ["d", "                    \"name\": tool_function[\"name\"],"], ["d", "                    \"description\": tool_function[\"description\"],"], ["d", "                    \"parametersJsonSchema\": tool_function[\"parameters\"],"], ["d", "                })"], ["a", "                # `description` and `parameters` are optional in both OpenAI tool"], ["a", "                # definitions and Gemini function declarations."], ["a", "                function_declaration = {\"name\": tool_function[\"name\"]}"], ["a", "                if description := tool_function.get(\"description\"):"], ["a", "                    function_declaration[\"description\"] = description"], ["a", "                if parameters := tool_function.get(\"parameters\"):"], ["a", "                    function_declaration[\"parametersJsonSchema\"] = parameters"], ["a", "                function_declarations.append(function_declaration)"], ["c", ""], ["c", "            gemini_payload[\"tools\"] = [{\"functionDeclarations\": function_declarations}]"]]}]}, {"id": 8, "repo": "mlflow", "status": "locked", "xp": 250, "title": "`genai.evaluate` failed when a scorer returned a NumPy value", "issue": ["https://github.com/mlflow/mlflow/issues/26495", "#26495"], "pr": ["https://github.com/mlflow/mlflow/pull/26539", "PR #26539"], "proof": "10 new test cases fail on master and pass with the fix", "files": [{"path": "mlflow/genai/scorers/base.py", "lines": [["h", "@@ -119,6 +119,18 @@"], ["c", "AggregationFunc = Callable[[list[float]], float]  # List of per-row value -> aggregated value"], ["c", ""], ["c", ""], ["a", "def _to_python_scalar(value: Any) -> Any:"], ["a", "    \"\"\""], ["a", "    Convert a NumPy scalar (e.g. ``np.bool_``, ``np.int64``), which is not a subclass of the"], ["a", "    matching Python primitive, to that primitive. NumPy is looked up lazily so this module"], ["a", "    stays importable without it."], ["a", "    \"\"\""], ["a", "    np = sys.modules.get(\"numpy\")"], ["a", "    if np is not None and isinstance(value, np.generic):"], ["a", "        return value.item()"], ["a", "    return value"], ["a", ""], ["a", ""], ["c", "def _extract_scorer_value(result: Any) -> Any:"], ["c", "    \"\"\"Reduce a sub-scorer's return to a single aggregatable value."], ["h", "@@ -923,7 +935,7 @@"], ["c", "        # Filter to only the parameters the function actually expects"], ["c", "        sig = inspect.signature(self.__call__)"], ["c", "        filtered = {k: v for k, v in merged.items() if k in sig.parameters}"], ["d", "        result = self(**filtered)"], ["a", "        result = _to_python_scalar(self(**filtered))"], ["c", "        if not ("], ["c", "            # TODO: Replace 'Assessment' with 'Feedback' once we migrate from the agent eval harness"], ["c", "            isinstance(result, (int, float, bool, str, Assessment, LegacyAssessment))"]]}, {"path": "mlflow/genai/scorers/aggregation.py", "lines": [["h", "@@ -76,7 +76,7 @@"], ["c", ""], ["c", "def _cast_assessment_value_to_float(assessment: Feedback) -> float | None:"], ["c", "    \"\"\"Cast the value of an assessment to a float.\"\"\""], ["d", "    if isinstance(assessment.value, (int, float, bool)):"], ["a", "    if isinstance(assessment.value, (int, float, bool, np.number, np.bool_)):"], ["c", "        return float(assessment.value)"], ["c", "    elif ("], ["c", "        isinstance(assessment.value, str)"]]}]}, {"id": 9, "repo": "mlflow", "status": "scout", "xp": 100, "title": "`search_logged_models` status filters never matched on the SQL store", "issue": ["https://github.com/mlflow/mlflow/issues/26494", "#26494"], "pr": ["https://github.com/mlflow/mlflow/pull/26512", "fix #26512"], "files": []}, {"id": 10, "repo": "mlflow", "status": "scout", "xp": 100, "title": "`dump_input_data` failed on dict inputs", "issue": ["https://github.com/mlflow/mlflow/issues/26496", "#26496"], "pr": ["https://github.com/mlflow/mlflow/pull/26519", "fix #26519"], "files": []}]</script>
+<script>
+(() => {
+  const QUESTS = JSON.parse(document.getElementById("quests").textContent);
+  const LABEL = {merged: "merged", review: "in review", locked: "locked", scout: "scouted"};
+  const NOTE = {
+    all: "Click a quest to expand it and see the code diff",
+    merged: "Fix accepted and shipped in the project",
+    review: "All checks pass. Waiting for a maintainer to review",
+    locked: "Fix and tests are ready. MLflow reopens the PR once a maintainer labels the issue ready",
+    scout: "Found and reported. Another contributor shipped the fix",
+  };
+  const REPO = {pandas: "pandas", mlflow: "MLflow", litellm: "LiteLLM"};
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const state = {status: "all", repo: null, q: ""};
+  const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; };
+
+  const titleNode = (title) => {
+    const span = el("span", "qtitle");
+    title.split("`").forEach((part, i) => span.append(i % 2 ? el("code", null, part) : document.createTextNode(part)));
+    return span;
+  };
+
+  const diffNode = (file) => {
+    const box = el("div", "diff");
+    const head = el("div", "dh");
+    const adds = file.lines.filter(l => l[0] === "a").length;
+    const dels = file.lines.filter(l => l[0] === "d").length;
+    head.append(el("span", "fp", file.path));
+    const st = el("span", "st2"); st.append(el("span", "a", "+" + adds), " ", el("span", "d", "-" + dels));
+    head.append(st);
+    const code = el("div", "code");
+    file.lines.forEach(([k, t]) => {
+      const row = el("div", "ln " + k);
+      row.append(el("span", "s", k === "a" ? "+" : k === "d" ? "-" : ""), el("span", "t", t));
+      code.append(row);
+    });
+    box.append(head, code);
+    return box;
+  };
+
+  const list = document.getElementById("list");
+  const cards = QUESTS.map(q => {
+    const card = el("article", "q " + q.status);
+    card.dataset.id = q.id;
+    const btn = el("button", "qbtn");
+    btn.setAttribute("aria-expanded", "false");
+    const meta = el("div", "qmeta");
+    meta.append(el("span", "st", LABEL[q.status]), el("span", "repo r-" + q.repo, REPO[q.repo]), el("span", "xp", "+" + q.xp + " XP"));
+    const main = el("div", "qmain"); main.append(meta, titleNode(q.title));
+    btn.append(el("span", "qid", "#" + String(q.id).padStart(2, "0")), main, el("span", "chev", "▸"));
+    const body = el("div", "qbody"); const inner = el("div", "qin"); const pad = el("div", "qin-pad");
+    const links = el("div", "links");
+    [[q.issue, "issue"], [q.pr, q.status === "scout" ? "fix" : "pr"]].forEach(([[href, label], kind]) => {
+      const a = el("a"); a.href = href; a.target = "_blank"; a.rel = "noopener";
+      a.append(el("span", "g", kind === "issue" ? "issue" : kind === "fix" ? "fixed in" : "pull"), label.replace(/^(PR|fix) /, ""));
+      links.append(a);
+    });
+    pad.append(links);
+    if (q.proof) { const p = el("div", "proof"); p.append(el("b", null, "proof: "), q.proof); pad.append(p); }
+    if (q.files.length) q.files.forEach(f => pad.append(diffNode(f)));
+    else pad.append(el("div", "note", "Reported with a reproduction. The fix was written by another contributor."));
+    inner.append(pad); body.append(inner);
+    card.append(btn, body);
+    btn.addEventListener("click", () => toggle(card));
+    card.search = (q.title + " " + q.repo + " " + LABEL[q.status] + " " + q.files.map(f => f.path + " " + f.lines.map(l => l[1]).join(" ")).join(" ")).toLowerCase();
+    card.quest = q;
+    list.append(card);
+    return card;
+  });
+  const empty = el("div", "empty", "No quests match. Try another filter or clear the search");
+  empty.hidden = true; list.append(empty);
+
+  function toggle(card, force) {
+    const open = force === undefined ? !card.classList.contains("open") : force;
+    card.classList.toggle("open", open);
+    card.querySelector(".qbtn").setAttribute("aria-expanded", String(open));
+  }
+
+  const matches = (c, s) => (s.status === "all" || c.quest.status === s.status) && (!s.repo || c.quest.repo === s.repo) && (!s.q || c.search.includes(s.q));
+  function render() {
+    let shown = 0;
+    cards.forEach(c => { const ok = matches(c, state); c.hidden = !ok; if (ok) shown++; });
+    empty.hidden = shown > 0;
+    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.status === state.status)));
+    document.querySelectorAll(".chip").forEach(t => t.setAttribute("aria-pressed", String(t.dataset.repo === state.repo)));
+    document.querySelectorAll("[data-n]").forEach(n => {
+      const s = {...state, status: n.dataset.n};
+      n.textContent = cards.filter(c => matches(c, s)).length;
+    });
+    document.getElementById("legend").textContent = NOTE[state.status];
+  }
+  function setStatus(s) { state.status = s; render(); }
+  function setRepo(r) { state.repo = r; render(); }
+
+  document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => setStatus(t.dataset.status)));
+  document.querySelectorAll(".chip").forEach(t => t.addEventListener("click", () => setRepo(state.repo === t.dataset.repo ? null : t.dataset.repo)));
+  const search = document.getElementById("search");
+  search.addEventListener("input", () => { state.q = search.value.trim().toLowerCase(); render(); });
+  render();
+
+  // console
+  const out = document.getElementById("conout");
+  const input = document.getElementById("conin");
+  const history = []; let hi = 0;
+  const print = (parts) => {
+    const line = el("div");
+    (Array.isArray(parts) ? parts : [[parts]]).forEach(([t, c]) => line.append(c ? el("span", c, t) : document.createTextNode(t)));
+    out.append(line); out.scrollTop = out.scrollHeight;
+  };
+  const counts = () => QUESTS.reduce((a, q) => (a[q.status] = (a[q.status] || 0) + 1, a), {});
+  const COMMANDS = {
+    help: () => {
+      [["help", "show this list"], ["ls [merged|review|locked|scout]", "list quests and filter the board"], ["open <n>", "expand quest n and jump to it"], ["repo <pandas|mlflow|litellm|all>", "filter by project"], ["grep <word>", "search quests and diffs"], ["xp", "show level and XP breakdown"], ["achievements", "list achievements"], ["whoami", "about the player"], ["clear", "clear the console"]]
+        .forEach(([c, d]) => print([[c.padEnd(34), "c"], [d, "g"]]));
+    },
+    ls: (arg) => {
+      const s = arg && LABEL[arg] ? arg : "all";
+      if (arg && !LABEL[arg] && arg !== "all") return print([["ls: unknown status '" + arg + "'. use merged, review, locked or scout", "r"]]);
+      setStatus(s);
+      QUESTS.filter(q => s === "all" || q.status === s).forEach(q => print([["#" + String(q.id).padStart(2, "0") + " ", "y"], [LABEL[q.status].padEnd(10), "c"], [REPO[q.repo].padEnd(9), "m"], [q.title.replaceAll("`", "")]]));
+    },
+    open: (arg) => {
+      const card = cards.find(c => String(c.quest.id) === String(parseInt(arg, 10)));
+      if (!card) return print([["open: no quest #" + (arg || "?") + ". try ls", "r"]]);
+      state.status = "all"; state.repo = null; state.q = ""; search.value = ""; render();
+      toggle(card, true);
+      card.scrollIntoView({behavior: reduce ? "auto" : "smooth", block: "center"});
+      print([["opened #" + card.quest.id + ": ", "p"], [card.quest.title.replaceAll("`", "")]]);
+    },
+    repo: (arg) => {
+      if (arg === "all" || !arg) { setRepo(null); return print([["showing all projects", "p"]]); }
+      if (!REPO[arg]) return print([["repo: unknown project '" + arg + "'", "r"]]);
+      setRepo(arg); print([["filtered to " + REPO[arg], "p"]]);
+    },
+    grep: (arg) => { search.value = arg || ""; state.q = (arg || "").toLowerCase(); render(); print([[(cards.filter(c => !c.hidden).length) + " quest(s) match '" + (arg || "") + "'", "p"]]); },
+    xp: () => {
+      const c = counts();
+      print([["LV.4 BUG HUNTER", "y"], ["  3,100 XP, 100 / 1,000 to LV.5"]]);
+      print([["  10 reported x 100 = 1,000", "g"]]);
+      print([["   8 fixes   x 150 = 1,200", "g"]]);
+      print([["   3 merged  x 300 =   900", "g"]]);
+      print([["  merged " + c.merged + " · review " + c.review + " · locked " + c.locked + " · scouted " + c.scout, "c"]]);
+    },
+    achievements: () => document.querySelectorAll(".badge").forEach(b => print([[b.classList.contains("locked") ? "[ locked ] " : "[unlocked] ", b.classList.contains("locked") ? "g" : "p"], [b.querySelector("b").textContent + " · "], [b.querySelector("small").textContent, "g"]])),
+    whoami: () => print([["Maha Rana Yadavalli", "c"], [" · Data & AI Architect · open source bug hunter in pandas, MLflow and LiteLLM"]]),
+    clear: () => { out.textContent = ""; },
+    sudo: (arg) => print([["sudo: permission denied. only maintainers can " + (arg || "do that") + ". nice try", "r"]]),
+  };
+  function run(raw) {
+    const cmd = raw.trim(); if (!cmd) return;
+    history.push(cmd); hi = history.length;
+    print([["guest@maha:~$ ", "p"], [cmd]]);
+    const [name, ...rest] = cmd.split(/\s+/);
+    const fn = COMMANDS[name.toLowerCase()];
+    if (fn) fn(rest.join(" ").toLowerCase()); else print([["command not found: " + name + ". type help", "r"]]);
+  }
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") { run(input.value); input.value = ""; }
+    else if (e.key === "ArrowUp" && history.length) { hi = Math.max(0, hi - 1); input.value = history[hi]; e.preventDefault(); }
+    else if (e.key === "ArrowDown" && history.length) { hi = Math.min(history.length, hi + 1); input.value = history[hi] || ""; e.preventDefault(); }
+  });
+  document.querySelectorAll(".cmds button").forEach(b => b.addEventListener("click", () => { run(b.dataset.cmd); input.focus({preventScroll: true}); }));
+  print([["welcome, guest. type ", "g"], ["help", "c"], [" to see what you can do", "g"]]);
+
+  // keyboard shortcuts
+  document.addEventListener("keydown", e => {
+    const typing = /INPUT|TEXTAREA/.test(document.activeElement.tagName);
+    if (typing) { if (e.key === "Escape") document.activeElement.blur(); return; }
+    if (e.key === "/") { e.preventDefault(); search.focus(); }
+    else if (e.key === "`") { e.preventDefault(); input.focus(); }
+    else if (/^[1-5]$/.test(e.key)) setStatus(["all", "merged", "review", "locked", "scout"][+e.key - 1]);
+  });
+
+  // intro motion
+  const go = () => {
+    document.getElementById("xpbar").style.width = "10%";
+    document.getElementById("ringval").style.strokeDashoffset = String(264 * 0.9);
+  };
+  if (reduce) { go(); return; }
+  requestAnimationFrame(() => requestAnimationFrame(go));
+  document.querySelectorAll("[data-count]").forEach(n => {
+    const end = +n.dataset.count, t0 = performance.now(), dur = 1400;
+    const step = (t) => { const p = Math.min(1, (t - t0) / dur); n.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))).toLocaleString("en-US"); if (p < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+  const typed = document.getElementById("typed");
+  const nodes = [...typed.childNodes].map(n => n.cloneNode(true));
+  typed.textContent = "";
+  let i = 0;
+  const typeNext = () => {
+    if (i >= nodes.length) return;
+    const node = nodes[i++];
+    if (node.nodeType === 3 || node.classList.contains("caret")) { typed.append(node); return setTimeout(typeNext, node.nodeType === 3 && node.textContent.includes("\n") ? 120 : 30); }
+    const text = node.textContent; const target = node.cloneNode(false); typed.append(target);
+    let k = 0;
+    const tick = () => { target.textContent = text.slice(0, ++k); if (k < text.length) setTimeout(tick, 14); else setTimeout(typeNext, 40); };
+    tick();
+  };
+  typeNext();
+})();
+</script>
 </body>
 </html>
