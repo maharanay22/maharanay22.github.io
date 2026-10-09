@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T14:40:27Z",
+ "generated_at": "2026-10-09T15:38:39Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,7 +14,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28329,
+   "stars": 28330,
    "forks": 6436
   },
   {
@@ -74,8 +74,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49940,
-   "forks": 20479
+   "stars": 49943,
+   "forks": 20480
   },
   {
    "full": "BerriAI/litellm",
@@ -89,8 +89,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60497,
-   "forks": 12175
+   "stars": 60510,
+   "forks": 12176
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -109,6 +109,149 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Key the function cache by full name and stop memoizing results",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T15:38:16Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1971,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1971"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -4,7 +4,7 @@"
+      ],
+      [
+       "c",
+       "import decimal"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "from enum import Enum"
+      ],
+      [
+       "d",
+       "from functools import lru_cache, partial, wraps"
+      ],
+      [
+       "a",
+       "from functools import partial, wraps"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable, Dict, List, Optional, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import nest_asyncio"
+      ],
+      [
+       "h",
+       "@@ -862,13 +862,14 @@"
+      ],
+      [
+       "c",
+       "        applies parameter defaults, and caches the function for future calls."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        parameters = process_function_parameter_defaults(function_info, parameters)"
+      ],
+      [
+       "d",
+       "        if function_info.name in self.func_cache:"
+      ],
+      [
+       "d",
+       "            func = self.func_cache[function_info.name]"
+      ],
+      [
+       "a",
+       "        if function_info.full_name in self.func_cache:"
+      ],
+      [
+       "a",
+       "            func = self.func_cache[function_info.full_name]"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "c",
+       "            python_function = get_callable_definition(function_info)"
+      ],
+      [
+       "d",
+       "            exec(python_function, self.func_cache)"
+      ],
+      [
+       "d",
+       "            func = self.func_cache[function_info.name]"
+      ],
+      [
+       "d",
+       "            self.func_cache[function_info.name] = lru_cache()(func)"
+      ],
+      [
+       "a",
+       "            namespace = {}"
+      ],
+      [
+       "a",
+       "            exec(python_function, namespace)"
+      ],
+      [
+       "a",
+       "            func = namespace[function_info.name]"
+      ],
+      [
+       "a",
+       "            self.func_cache[function_info.full_name] = func"
+      ],
+      [
+       "c",
+       "        return func, parameters"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    @override"
+      ]
+     ],
+     "truncated": false,
+     "additions": 7,
+     "deletions": 6
+    }
+   ],
+   "id": 25
+  },
   {
    "kind": "fix",
    "repo": "BerriAI/litellm",
