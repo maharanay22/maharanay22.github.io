@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T22:28:17Z",
+ "generated_at": "2026-10-09T23:59:58Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,7 +14,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28329,
+   "stars": 28330,
    "forks": 6436
   },
   {
@@ -74,7 +74,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49972,
+   "stars": 49981,
    "forks": 20483
   },
   {
@@ -89,7 +89,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60623,
+   "stars": 60649,
    "forks": 12186
   },
   {
