@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T20:34:04Z",
+ "generated_at": "2026-10-09T21:50:03Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,7 +14,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28328,
+   "stars": 28329,
    "forks": 6436
   },
   {
@@ -74,7 +74,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49960,
+   "stars": 49967,
    "forks": 20482
   },
   {
@@ -89,8 +89,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60588,
-   "forks": 12179
+   "stars": 60611,
+   "forks": 12184
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -109,6 +109,292 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "ApiClient(...) raises \"RuntimeError: no running event loop\" outside async code",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T21:49:13Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1975,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1975"
+   },
+   "issue": {
+    "number": 1974,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/1974"
+   },
+   "proof": "README quickstart crashed with RuntimeError: no running event loop on unitycatalog-client 0.6.0; works with the fix, Java client and docs output byte-identical",
+   "files": [
+    {
+     "path": "build.sbt",
+     "lines": [
+      [
+       "h",
+       "@@ -314,7 +314,8 @@"
+      ],
+      [
+       "c",
+       "            OpenApiSpec("
+      ],
+      [
+       "c",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"all.yaml\").getAbsolutePath,"
+      ],
+      [
+       "c",
+       "              packageName = s\"$artifactNamePrefix.client\","
+      ],
+      [
+       "d",
+       "              additionalProperties = commonProps"
+      ],
+      [
+       "a",
+       "              additionalProperties = commonProps,"
+      ],
+      [
+       "a",
+       "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath"
+      ],
+      [
+       "c",
+       "            ),"
+      ],
+      [
+       "c",
+       "            OpenApiSpec("
+      ],
+      [
+       "c",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"delta.yaml\").getAbsolutePath,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    },
+    {
+     "path": "clients/python/build/templates/asyncio/rest.mustache",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,205 @@"
+      ],
+      [
+       "a",
+       "{{! Copied from OpenAPI Generator v7.11.0 (python/asyncio/rest.mustache), which creates the aiohttp"
+      ],
+      [
+       "a",
+       "    ClientSession lazily on the first request so ApiClient can be constructed outside a running event loop."
+      ],
+      [
+       "a",
+       "    Delete this override once project/plugins.sbt uses sbt-openapi-generator 7.11.0 or newer. }}"
+      ],
+      [
+       "a",
+       "# coding: utf-8"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{>partial_header}}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "import io"
+      ],
+      [
+       "a",
+       "import json"
+      ],
+      [
+       "a",
+       "import re"
+      ],
+      [
+       "a",
+       "import ssl"
+      ],
+      [
+       "a",
+       "from typing import Optional, Union"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "import aiohttp"
+      ],
+      [
+       "a",
+       "import aiohttp_retry"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "from {{packageName}}.exceptions import ApiException, ApiValueError"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "RESTResponseType = aiohttp.ClientResponse"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE'})"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "class RESTResponse(io.IOBase):"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    def __init__(self, resp) -> None:"
+      ],
+      [
+       "a",
+       "        self.response = resp"
+      ],
+      [
+       "a",
+       "        self.status = resp.status"
+      ],
+      [
+       "a",
+       "        self.reason = resp.reason"
+      ],
+      [
+       "a",
+       "        self.data = None"
+      ]
+     ],
+     "truncated": true,
+     "additions": 205,
+     "deletions": 0
+    },
+    {
+     "path": "project/OpenApiHelper.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -7,6 +7,7 @@"
+      ],
+      [
+       "c",
+       "  apiPackage: String = null,"
+      ],
+      [
+       "c",
+       "  modelPackage: String = null,"
+      ],
+      [
+       "c",
+       "  packageName: String = null,"
+      ],
+      [
+       "a",
+       "  templateDir: String = null,"
+      ],
+      [
+       "c",
+       "  additionalProperties: Map[String, String] = Map.empty,"
+      ],
+      [
+       "c",
+       "  globalProperties: Map[String, String] = Map.empty"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "h",
+       "@@ -25,11 +26,12 @@"
+      ],
+      [
+       "c",
+       " *"
+      ],
+      [
+       "c",
+       " * Differences from the plugin:"
+      ],
+      [
+       "c",
+       " * - Added: loop over multiple specs, packageName parameter (for Python),"
+      ],
+      [
+       "a",
+       " *   optional templateDir (for per-spec template overrides),"
+      ],
+      [
+       "c",
+       " *   per-instance suppression of test/metadata generation via"
+      ],
+      [
+       "c",
+       " *   setGeneratorPropertyDefault (equivalent to the plugin's"
+      ],
+      [
+       "c",
+       " *   openApiGenerateModelTests := SettingDisabled)."
+      ],
+      [
+       "c",
+       " * - Removed: ~30 config knobs not needed here (verbose, validateSpec,"
+      ],
+      [
+       "d",
+       " *   skipOverwrite, templateDir, auth, gitHost, importMappings,"
+      ],
+      [
+       "a",
+       " *   skipOverwrite, auth, gitHost, importMappings,"
+      ],
+      [
+       "c",
+       " *   typeMappings, etc.). These all have sensible defaults in"
+      ]
+     ],
+     "truncated": true,
+     "additions": 4,
+     "deletions": 1
+    }
+   ],
+   "id": 26
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -166,7 +452,7 @@
       ],
       [
        "h",
-       "@@ -862,13 +862,14 @@"
+       "@@ -865,13 +865,14 @@"
       ],
       [
        "c",
@@ -1387,7 +1673,7 @@
      "lines": [
       [
        "h",
-       "@@ -892,7 +892,7 @@"
+       "@@ -895,7 +895,7 @@"
       ],
       [
        "c",
@@ -1423,7 +1709,7 @@
       ],
       [
        "h",
-       "@@ -933,7 +933,7 @@"
+       "@@ -936,7 +936,7 @@"
       ],
       [
        "c",
