@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T15:39:10Z",
+ "generated_at": "2026-10-09T20:04:47Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,7 +14,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28330,
+   "stars": 28328,
    "forks": 6436
   },
   {
@@ -74,8 +74,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49943,
-   "forks": 20480
+   "stars": 49957,
+   "forks": 20482
   },
   {
    "full": "BerriAI/litellm",
@@ -89,8 +89,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60510,
-   "forks": 12176
+   "stars": 60584,
+   "forks": 12178
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -543,7 +543,7 @@
      "lines": [
       [
        "h",
-       "@@ -43,7 +43,7 @@"
+       "@@ -42,7 +42,7 @@"
       ],
       [
        "c",
@@ -579,7 +579,7 @@
       ],
       [
        "h",
-       "@@ -622,10 +622,7 @@"
+       "@@ -621,10 +621,7 @@"
       ],
       [
        "c",
@@ -635,11 +635,11 @@
      "lines": [
       [
        "h",
-       "@@ -37,6 +37,7 @@"
+       "@@ -38,6 +38,7 @@"
       ],
       [
        "c",
-       "    _resolve_type_alias,"
+       "    _get_model_fields,"
       ],
       [
        "c",
@@ -667,7 +667,7 @@
       ],
       [
        "h",
-       "@@ -321,7 +322,7 @@"
+       "@@ -407,7 +408,7 @@"
       ],
       [
        "c",
@@ -703,7 +703,7 @@
       ],
       [
        "h",
-       "@@ -469,7 +470,7 @@"
+       "@@ -555,7 +556,7 @@"
       ],
       [
        "c",
@@ -727,7 +727,7 @@
       ],
       [
        "c",
-       "            annotation = _strip_annotated(_resolve_type_alias(field.annotation))"
+       "            annotation, metadata = _get_field_annotation_and_metadata(field)"
       ],
       [
        "c",
@@ -735,11 +735,11 @@
       ],
       [
        "c",
-       "            if is_union_origin(get_origin(annotation)) and _union_is_complex("
+       "            if is_union_origin(get_origin(annotation)) and _union_is_complex(annotation, metadata, self._init_state):"
       ],
       [
        "h",
-       "@@ -581,13 +582,7 @@"
+       "@@ -663,13 +664,7 @@"
       ],
       [
        "c",
@@ -3748,55 +3748,7 @@
      "lines": [
       [
        "h",
-       "@@ -17056,7 +17056,10 @@"
-      ],
-      [
-       "c",
-       "                        result = bvalues._reduce(name, axis=0, skipna=skipna, **kwds)"
-      ],
-      [
-       "c",
-       "                    if result is not None:"
-      ],
-      [
-       "c",
-       "                        out = df._constructor_sliced(result, index=df.index, copy=False)"
-      ],
-      [
-       "d",
-       "                        if out_dtype is not None and out.dtype != \"boolean\":"
-      ],
-      [
-       "a",
-       "                        if out_dtype is not None and not ("
-      ],
-      [
-       "a",
-       "                            isinstance(out.dtype, ExtensionDtype)"
-      ],
-      [
-       "a",
-       "                            and out.dtype._is_boolean"
-      ],
-      [
-       "a",
-       "                        ):"
-      ],
-      [
-       "c",
-       "                            out = out.astype(out_dtype)"
-      ],
-      [
-       "c",
-       "                        return out"
-      ],
-      [
-       "c",
-       "                # GH#51474: block-wise axis=1 reduction avoiding an expensive"
-      ],
-      [
-       "h",
-       "@@ -17137,7 +17140,11 @@"
+       "@@ -17137,7 +17137,10 @@"
       ],
       [
        "c",
@@ -3816,23 +3768,19 @@
       ],
       [
        "a",
-       "        if out_dtype is not None and not ("
+       "        if out_dtype is not None and out.dtype.kind != \"b\" and not out.isna().any():"
       ],
       [
        "a",
-       "            isinstance(out.dtype, ExtensionDtype) and out.dtype._is_boolean"
+       "            # Keep boolean results that can hold NA when skipna=False (e.g."
       ],
       [
        "a",
-       "        ):"
+       "            # \"boolean\", \"bool[pyarrow]\"), and object results mixing such"
       ],
       [
        "a",
-       "            # Keep nullable boolean results (e.g. \"boolean\", \"bool[pyarrow]\"),"
-      ],
-      [
-       "a",
-       "            # which can hold NA when skipna=False"
+       "            # dtypes that hold NA, since NA can't be cast to bool"
       ],
       [
        "c",
@@ -3848,8 +3796,8 @@
       ]
      ],
      "truncated": false,
-     "additions": 9,
-     "deletions": 2
+     "additions": 4,
+     "deletions": 1
     }
    ],
    "id": 6
