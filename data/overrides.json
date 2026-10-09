@@ -94,6 +94,7 @@
   "https://github.com/databricks/databricks-sql-python/pull/982": "Iterating 20,000 rows: 16.1 s on main, 0.10 s with the fix",
   "https://github.com/databricks/dbt-databricks/pull/1711": "7 new tests fail on main with positional TABLE inserts below DBR 18; DBR 18+ output unchanged",
   "https://github.com/unitycatalog/unitycatalog/pull/1969": "False, 0, 0.0 and empty string results fail on main (replaced by the no-output message) and pass with the fix",
-  "https://github.com/unitycatalog/unitycatalog/pull/1970": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected"
+  "https://github.com/unitycatalog/unitycatalog/pull/1970": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected",
+  "https://github.com/unitycatalog/unitycatalog/pull/1971": "Same-named functions in two schemas returned [120, 120, 120, 120] on main instead of [120, 15, 120, 15]; list arguments crashed on the 2nd call"
  }
 }
