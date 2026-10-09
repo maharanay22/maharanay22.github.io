@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T21:50:03Z",
+ "generated_at": "2026-10-09T22:28:17Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -74,8 +74,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49967,
-   "forks": 20482
+   "stars": 49972,
+   "forks": 20483
   },
   {
    "full": "BerriAI/litellm",
@@ -89,8 +89,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60611,
-   "forks": 12184
+   "stars": 60623,
+   "forks": 12186
   },
   {
    "full": "pydantic/pydantic-settings",
