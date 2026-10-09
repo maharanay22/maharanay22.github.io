@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T09:00:17Z",
+ "generated_at": "2026-10-09T14:39:03Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,23 +14,23 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28320,
-   "forks": 6435
+   "stars": 28329,
+   "forks": 6436
   },
   {
-   "full": "pandas-dev/pandas",
-   "name": "pandas",
-   "url": "https://github.com/pandas-dev/pandas",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "icon": "🐼",
-   "category": "data analysis",
+   "full": "unitycatalog/unitycatalog",
+   "name": "Unity Catalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
    "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
    ],
-   "stars": 49940,
-   "forks": 20479
+   "stars": 3553,
+   "forks": 680
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -63,19 +63,19 @@
    "forks": 221
   },
   {
-   "full": "unitycatalog/unitycatalog",
-   "name": "Unity Catalog",
-   "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "icon": "🗂️",
-   "category": "data governance",
+   "full": "pandas-dev/pandas",
+   "name": "pandas",
+   "url": "https://github.com/pandas-dev/pandas",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "icon": "🐼",
+   "category": "data analysis",
    "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
    ],
-   "stars": 3553,
-   "forks": 679
+   "stars": 49940,
+   "forks": 20479
   },
   {
    "full": "BerriAI/litellm",
@@ -89,11 +89,1389 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60423,
-   "forks": 12163
+   "stars": 60497,
+   "forks": 12175
+  },
+  {
+   "full": "pydantic/pydantic-settings",
+   "name": "pydantic-settings",
+   "url": "https://github.com/pydantic/pydantic-settings",
+   "about": "Settings management using pydantic",
+   "icon": "📦",
+   "category": "Python",
+   "tags": [
+    "pydantic",
+    "configuration",
+    "environment"
+   ],
+   "stars": 1471,
+   "forks": 219
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "BerriAI/litellm",
+   "status": "review",
+   "title": "Keep internal callbacks when litellm_settings.callbacks is a single string",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T14:36:16Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 45599,
+    "url": "https://github.com/BerriAI/litellm/pull/45599"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "litellm/proxy/common_utils/callback_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -404,15 +404,15 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            PrometheusLogger._mount_metrics_endpoint()"
+      ],
+      [
+       "c",
+       "    else:"
+      ],
+      [
+       "d",
+       "        litellm.callbacks = ["
+      ],
+      [
+       "a",
+       "        litellm.callbacks.append("
+      ],
+      [
+       "c",
+       "            _loaded_callback_or_raise("
+      ],
+      [
+       "c",
+       "                entry=value,"
+      ],
+      [
+       "c",
+       "                loaded=get_instance_fn("
+      ],
+      [
+       "c",
+       "                    value=value,"
+      ],
+      [
+       "c",
+       "                    config_file_path=config_file_path,"
+      ],
+      [
+       "c",
+       "                ),"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "d",
+       "        ]"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "c",
+       "    verbose_proxy_logger.debug(\"%s Initialized Callbacks - %s %s\", blue_color_code, litellm.callbacks, reset_color_code)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    }
+   ],
+   "id": 24
+  },
+  {
+   "kind": "fix",
+   "repo": "pydantic/pydantic-settings",
+   "status": "review",
+   "title": "CliApp.run raises TypeError for BaseModel commands on pydantic 2.14",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T14:16:54Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1024,
+    "url": "https://github.com/pydantic/pydantic-settings/pull/1024"
+   },
+   "issue": {
+    "number": 1023,
+    "url": "https://github.com/pydantic/pydantic-settings/issues/1023"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "pydantic_settings/main.py",
+     "lines": [
+      [
+       "h",
+       "@@ -14,9 +14,9 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import ConfigDict"
+      ],
+      [
+       "c",
+       "from pydantic._internal._config import config_keys"
+      ],
+      [
+       "d",
+       "from pydantic._internal._signature import _field_name_for_signature"
+      ],
+      [
+       "d",
+       "from pydantic._internal._utils import deep_update, is_model_class"
+      ],
+      [
+       "a",
+       "from pydantic._internal._utils import deep_update, is_model_class, is_valid_identifier"
+      ],
+      [
+       "c",
+       "from pydantic.dataclasses import is_pydantic_dataclass"
+      ],
+      [
+       "a",
+       "from pydantic.fields import FieldInfo"
+      ],
+      [
+       "c",
+       "from pydantic.main import BaseModel"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from .exceptions import SettingsError"
+      ],
+      [
+       "h",
+       "@@ -744,6 +744,14 @@"
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _field_name_for_init(field_name: str, field_info: FieldInfo, validate_by_alias: bool) -> str:"
+      ],
+      [
+       "a",
+       "    if validate_by_alias:"
+      ],
+      [
+       "a",
+       "        for alias in (field_info.alias, field_info.validation_alias):"
+      ],
+      [
+       "a",
+       "            if isinstance(alias, str) and is_valid_identifier(alias):"
+      ],
+      [
+       "a",
+       "                return alias"
+      ],
+      [
+       "a",
+       "    return field_name"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "class CliApp:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    A utility class for running Pydantic `BaseSettings`, `BaseModel`, or `pydantic.dataclasses.dataclass` as"
+      ],
+      [
+       "h",
+       "@@ -878,9 +886,11 @@"
+      ],
+      [
+       "c",
+       "                _init_kwargs=model_init_data,"
+      ],
+      [
+       "c",
+       "            )"
+      ]
+     ],
+     "truncated": true,
+     "additions": 13,
+     "deletions": 3
+    }
+   ],
+   "id": 23
+  },
+  {
+   "kind": "report",
+   "repo": "mlflow/mlflow",
+   "status": "open",
+   "title": "Async logging (`synchronous=False`) applies writes for the same run out of order",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T14:00:41Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 26605,
+    "url": "https://github.com/mlflow/mlflow/issues/26605"
+   },
+   "proof": null,
+   "files": [],
+   "id": 22
+  },
+  {
+   "kind": "fix",
+   "repo": "pydantic/pydantic-settings",
+   "status": "review",
+   "title": "Environment variables and secrets for aliased fields are ignored with validate_by_alias=False on pydantic 2.14",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T14:00:14Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1022,
+    "url": "https://github.com/pydantic/pydantic-settings/pull/1022"
+   },
+   "issue": {
+    "number": 1021,
+    "url": "https://github.com/pydantic/pydantic-settings/issues/1021"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "pydantic_settings/main.py",
+     "lines": [
+      [
+       "h",
+       "@@ -43,7 +43,7 @@"
+      ],
+      [
+       "c",
+       "    YamlConfigSettingsSource,"
+      ],
+      [
+       "c",
+       "    get_subcommand,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "d",
+       "from .sources.utils import InitState, _get_alias_names, _warn_if_field_info_incomplete"
+      ],
+      [
+       "a",
+       "from .sources.utils import InitState, _get_alias_names, _validate_by_name_enabled, _warn_if_field_info_incomplete"
+      ],
+      [
+       "c",
+       "from .utils import _settings_debug_enabled, logger"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "T = TypeVar('T')"
+      ],
+      [
+       "h",
+       "@@ -622,10 +622,7 @@"
+      ],
+      [
+       "c",
+       "                _warn_if_field_info_incomplete(field_info, field_name, init_state)"
+      ],
+      [
+       "c",
+       "                alias_names, *_ = _get_alias_names(field_name, field_info)"
+      ],
+      [
+       "c",
+       "                matchable_names = set(alias_names)"
+      ],
+      [
+       "d",
+       "                include_name = settings_cls.model_config.get("
+      ],
+      [
+       "d",
+       "                    'populate_by_name', False"
+      ],
+      [
+       "d",
+       "                ) or settings_cls.model_config.get('validate_by_name', False)"
+      ],
+      [
+       "d",
+       "                if include_name:"
+      ],
+      [
+       "a",
+       "                if _validate_by_name_enabled(settings_cls.model_config):"
+      ],
+      [
+       "c",
+       "                    matchable_names.add(field_name)"
+      ],
+      [
+       "c",
+       "                init_kwarg_name = init_kwarg_names & matchable_names"
+      ],
+      [
+       "c",
+       "                state_kwarg_name = state_kwarg_names & matchable_names"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 5
+    },
+    {
+     "path": "pydantic_settings/sources/base.py",
+     "lines": [
+      [
+       "h",
+       "@@ -37,6 +37,7 @@"
+      ],
+      [
+       "c",
+       "    _resolve_type_alias,"
+      ],
+      [
+       "c",
+       "    _strip_annotated,"
+      ],
+      [
+       "c",
+       "    _union_is_complex,"
+      ],
+      [
+       "a",
+       "    _validate_by_name_enabled,"
+      ],
+      [
+       "c",
+       "    _warn_if_field_info_incomplete,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -321,7 +322,7 @@"
+      ],
+      [
+       "c",
+       "    ):"
+      ],
+      [
+       "c",
+       "        super().__init__(settings_cls, _init_state)"
+      ],
+      [
+       "c",
+       "        case_sensitive = self.config.get('case_sensitive', False)"
+      ],
+      [
+       "d",
+       "        include_name = self.config.get('populate_by_name', False) or self.config.get('validate_by_name', False)"
+      ],
+      [
+       "a",
+       "        include_name = _validate_by_name_enabled(self.config)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        def normalize(name: str) -> str:"
+      ],
+      [
+       "c",
+       "            # When case_sensitive is False, matching is done on lower-cased names."
+      ],
+      [
+       "h",
+       "@@ -469,7 +470,7 @@"
+      ],
+      [
+       "c",
+       "            else:  # string validation alias"
+      ],
+      [
+       "c",
+       "                field_info.append((v_alias, self._apply_case_sensitive(env_prefix + v_alias), False))"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        if not v_alias or self.config.get('populate_by_name', False) or self.config.get('validate_by_name', False):"
+      ],
+      [
+       "a",
+       "        if not v_alias or _validate_by_name_enabled(self.config):"
+      ],
+      [
+       "c",
+       "            annotation = _strip_annotated(_resolve_type_alias(field.annotation))"
+      ],
+      [
+       "c",
+       "            env_prefix = self.env_prefix if self.env_prefix_target in ('variable', 'all') else ''"
+      ],
+      [
+       "c",
+       "            if is_union_origin(get_origin(annotation)) and _union_is_complex("
+      ],
+      [
+       "h",
+       "@@ -581,13 +582,7 @@"
+      ],
+      [
+       "c",
+       "            A tuple that contains the value, preferred key and a flag to determine whether value is complex."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        field_value, field_key, value_is_complex = self.get_field_value(field, field_name)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 4,
+     "deletions": 9
+    },
+    {
+     "path": "pydantic_settings/sources/providers/cli.py",
+     "lines": [
+      [
+       "h",
+       "@@ -70,6 +70,7 @@"
+      ],
+      [
+       "c",
+       "    _get_model_fields,"
+      ],
+      [
+       "c",
+       "    _is_function,"
+      ],
+      [
+       "c",
+       "    _strip_annotated,"
+      ],
+      [
+       "a",
+       "    _validate_by_name_enabled,"
+      ],
+      [
+       "c",
+       "    parse_env_vars,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from .env import EnvSettingsSource"
+      ],
+      [
+       "h",
+       "@@ -1089,8 +1090,7 @@"
+      ]
+     ],
+     "truncated": true,
+     "additions": 2,
+     "deletions": 2
+    }
+   ],
+   "id": 21
+  },
+  {
+   "kind": "fix",
+   "repo": "databricks/databricks-sql-python",
+   "status": "review",
+   "title": "Iterating a cursor or calling fetchone() in a loop is 100x+ slower than fetchall() (affects SQLAlchemy)",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T13:59:48Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 982,
+    "url": "https://github.com/databricks/databricks-sql-python/pull/982"
+   },
+   "issue": {
+    "number": 981,
+    "url": "https://github.com/databricks/databricks-sql-python/issues/981"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "src/databricks/sql/backend/kernel/result_set.py",
+     "lines": [
+      [
+       "h",
+       "@@ -32,7 +32,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "from collections import deque"
+      ],
+      [
+       "d",
+       "from typing import Any, Deque, List, Optional, TYPE_CHECKING, cast"
+      ],
+      [
+       "a",
+       "from typing import Any, Deque, List, TYPE_CHECKING, cast"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import pyarrow"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -190,37 +190,35 @@"
+      ],
+      [
+       "c",
+       "    # ----- Arrow fetches -----"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def fetchall_arrow(self) -> pyarrow.Table:"
+      ],
+      [
+       "d",
+       "        return self._drain()"
+      ],
+      [
+       "a",
+       "        buffered = self._take_buffered_table()"
+      ],
+      [
+       "a",
+       "        table = self._drain()"
+      ],
+      [
+       "a",
+       "        if buffered is None:"
+      ],
+      [
+       "a",
+       "            return table"
+      ],
+      [
+       "a",
+       "        return pyarrow.concat_tables([buffered, table])"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def fetchmany_arrow(self, size: int) -> pyarrow.Table:"
+      ],
+      [
+       "c",
+       "        if size < 0:"
+      ],
+      [
+       "c",
+       "            raise ValueError(f\"fetchmany_arrow size must be >= 0, got {size}\")"
+      ],
+      [
+       "c",
+       "        if size == 0:"
+      ],
+      [
+       "c",
+       "            return pyarrow.Table.from_batches([], schema=self._schema)"
+      ],
+      [
+       "d",
+       "        self._ensure_buffered(size)"
+      ],
+      [
+       "d",
+       "        return self._take_buffered(size)"
+      ],
+      [
+       "a",
+       "        buffered = self._take_buffered_table(size)"
+      ],
+      [
+       "a",
+       "        n_remaining = size if buffered is None else size - buffered.num_rows"
+      ],
+      [
+       "a",
+       "        self._ensure_buffered(n_remaining)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 19,
+     "deletions": 21
+    },
+    {
+     "path": "src/databricks/sql/backend/sea/result_set.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,6 @@"
+      ],
+      [
+       "c",
+       "from __future__ import annotations"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from typing import Any, List, Optional, TYPE_CHECKING"
+      ],
+      [
+       "a",
+       "from typing import Any, List, Optional, TYPE_CHECKING, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -19,6 +19,7 @@"
+      ],
+      [
+       "c",
+       "from databricks.sql.backend.sea.queue import JsonQueue, SeaResultSetQueueFactory"
+      ],
+      [
+       "c",
+       "from databricks.sql.backend.types import ExecuteResponse"
+      ],
+      [
+       "c",
+       "from databricks.sql.result_set import ResultSet"
+      ],
+      [
+       "a",
+       "from databricks.sql.utils import concat_table_chunks"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -160,10 +161,11 @@"
+      ],
+      [
+       "c",
+       "        if size < 0:"
+      ],
+      [
+       "c",
+       "            raise ValueError(f\"size argument for fetchmany is {size} but must be >= 0\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        results = self.results.next_n_rows(size)"
+      ],
+      [
+       "a",
+       "        buffered = self._take_buffered_table(size) or []"
+      ],
+      [
+       "a",
+       "        results = self.results.next_n_rows(size - len(buffered))"
+      ],
+      [
+       "c",
+       "        self._next_row_index += len(results)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        return results"
+      ],
+      [
+       "a",
+       "        return buffered + results"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def fetchall_json(self) -> List[List[str]]:"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ]
+     ],
+     "truncated": true,
+     "additions": 36,
+     "deletions": 51
+    }
+   ],
+   "id": 20
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Accept integer arguments for FLOAT, DOUBLE and DECIMAL parameters",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T13:59:18Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1970,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1970"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -27,7 +27,10 @@"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.execution_utils import ExecutionMode, load_function_from_string"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.function_processing_utils import process_function_parameter_defaults"
+      ],
+      [
+       "d",
+       "from unitycatalog.ai.core.utils.type_utils import column_type_to_python_type"
+      ],
+      [
+       "a",
+       "from unitycatalog.ai.core.utils.type_utils import ("
+      ],
+      [
+       "a",
+       "    column_type_to_python_type,"
+      ],
+      [
+       "a",
+       "    is_value_of_column_type,"
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.validation_utils import ("
+      ],
+      [
+       "c",
+       "    FullFunctionName,"
+      ],
+      [
+       "c",
+       "    validate_function_name_length,"
+      ],
+      [
+       "h",
+       "@@ -847,7 +850,7 @@"
+      ],
+      [
+       "c",
+       "        value_python_type = column_type_to_python_type("
+      ],
+      [
+       "c",
+       "            param_info.type_name, mapping=SQL_TYPE_TO_PYTHON_TYPE_MAPPING_UC_OSS"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "d",
+       "        if not isinstance(value, value_python_type):"
+      ],
+      [
+       "a",
+       "        if not is_value_of_column_type(value, param_info.type_name, value_python_type):"
+      ],
+      [
+       "c",
+       "            raise ValueError("
+      ],
+      [
+       "c",
+       "                f\"Parameter {param_info.name} should be of type {param_info.type_name} \""
+      ],
+      [
+       "c",
+       "                f\"(corresponding python type {value_python_type}), but got {type(value)}\""
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 2
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/databricks.py",
+     "lines": [
+      [
+       "h",
+       "@@ -42,6 +42,7 @@"
+      ],
+      [
+       "c",
+       "    column_type_to_python_type,"
+      ],
+      [
+       "c",
+       "    convert_timedelta_to_interval_str,"
+      ],
+      [
+       "c",
+       "    is_time_type,"
+      ],
+      [
+       "a",
+       "    is_value_of_column_type,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.validation_utils import ("
+      ],
+      [
+       "c",
+       "    FullFunctionName,"
+      ],
+      [
+       "h",
+       "@@ -620,7 +621,7 @@"
+      ],
+      [
+       "c",
+       "        if value_python_type is Variant:"
+      ],
+      [
+       "c",
+       "            Variant.validate(value)"
+      ],
+      [
+       "c",
+       "            return"
+      ],
+      [
+       "d",
+       "        if not isinstance(value, value_python_type):"
+      ],
+      [
+       "a",
+       "        if not is_value_of_column_type(value, param_info.type_name.value, value_python_type):"
+      ],
+      [
+       "c",
+       "            raise ValueError("
+      ],
+      [
+       "c",
+       "                f\"Parameter {param_info.name} should be of type {param_info.type_name.value} \""
+      ],
+      [
+       "c",
+       "                f\"(corresponding python type {value_python_type}), but got {type(value)}\""
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/type_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -91,6 +91,27 @@"
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "INT_COMPATIBLE_COLUMN_TYPES = frozenset({\"FLOAT\", \"DOUBLE\", \"DECIMAL\"})"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def is_value_of_column_type(value: Any, column_type: str, python_type: Any) -> bool:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Check whether a parameter value is acceptable for a SQL column type."
+      ],
+      [
+       "a",
+       "    Integers are accepted for FLOAT, DOUBLE and DECIMAL columns because JSON (and therefore"
+      ],
+      [
+       "a",
+       "    LLM tool call arguments) does not distinguish `2` from `2.0`. Booleans are rejected"
+      ],
+      [
+       "a",
+       "    for those columns even though `bool` is a subclass of `int` in Python."
+      ],
+      [
+       "a",
+       "    Args:"
+      ],
+      [
+       "a",
+       "        value (Any): The parameter value."
+      ],
+      [
+       "a",
+       "        column_type (str): The SQL column type name."
+      ],
+      [
+       "a",
+       "        python_type (Any): The python type (or tuple of types) mapped to the column type."
+      ],
+      [
+       "a",
+       "    Returns:"
+      ],
+      [
+       "a",
+       "        bool: True if the value is acceptable for the column type, False otherwise."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    if column_type in INT_COMPATIBLE_COLUMN_TYPES and isinstance(value, int):"
+      ],
+      [
+       "a",
+       "        return not isinstance(value, bool)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 21,
+     "deletions": 0
+    }
+   ],
+   "id": 19
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep falsy function results instead of replacing them with the no-output message",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T13:59:16Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1969,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1969"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -892,7 +892,7 @@"
+      ],
+      [
+       "c",
+       "            raise NotImplementedError("
+      ],
+      [
+       "c",
+       "                f\"Execution mode {self.execution_mode} is not supported for function execution.\""
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "d",
+       "        if not result:"
+      ],
+      [
+       "a",
+       "        if result is None:"
+      ],
+      [
+       "c",
+       "            result = NO_OUTPUT_MESSAGE"
+      ],
+      [
+       "c",
+       "        return FunctionExecutionResult(format=\"SCALAR\", value=result)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -933,7 +933,7 @@"
+      ],
+      [
+       "c",
+       "            raise NotImplementedError("
+      ],
+      [
+       "c",
+       "                f\"Execution mode {self.execution_mode} is not supported for function execution.\""
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "d",
+       "        if not result:"
+      ],
+      [
+       "a",
+       "        if result is None:"
+      ],
+      [
+       "c",
+       "            result = NO_OUTPUT_MESSAGE"
+      ],
+      [
+       "c",
+       "        return FunctionExecutionResult(format=\"SCALAR\", value=result)"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    }
+   ],
+   "id": 18
+  },
+  {
+   "kind": "fix",
+   "repo": "databricks/dbt-databricks",
+   "status": "review",
+   "title": "replace_where emits INSERT … BY NAME … REPLACE WHERE rejected by all-purpose compute yet parses on DBSQL",
+   "date": "2026-10-09",
+   "created_at": "2026-10-09T13:57:54Z",
+   "merged_at": null,
+   "reported": false,
+   "pr": {
+    "number": 1711,
+    "url": "https://github.com/databricks/dbt-databricks/pull/1711"
+   },
+   "issue": {
+    "number": 1532,
+    "url": "https://github.com/databricks/dbt-databricks/issues/1532"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "dbt/include/databricks/macros/materializations/incremental/strategies.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -71,6 +71,29 @@"
+      ],
+      [
+       "c",
+       "    {%- endif -%}"
+      ],
+      [
+       "c",
+       "{% endmacro %}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "{% macro select_list_in_target_order(source_relation, target_relation) %}"
+      ],
+      [
+       "a",
+       "    {#-- Projects the source onto the target's column order, matching names case-insensitively"
+      ],
+      [
+       "a",
+       "         and filling target columns the source lacks with NULL, for positional inserts. --#}"
+      ],
+      [
+       "a",
+       "    {%- set source_columns = adapter.get_columns_in_relation(source_relation) | map(attribute=\"name\") | list -%}"
+      ],
+      [
+       "a",
+       "    {%- set dest_columns = adapter.get_columns_in_relation(target_relation) | map(attribute=\"name\") | list -%}"
+      ],
+      [
+       "a",
+       "    {%- set select_columns = [] -%}"
+      ],
+      [
+       "a",
+       "    {%- for dest_col in dest_columns -%}"
+      ],
+      [
+       "a",
+       "        {%- set dest_col_lower = dest_col | lower -%}"
+      ],
+      [
+       "a",
+       "        {%- set matched_col = namespace(value=none) -%}"
+      ],
+      [
+       "a",
+       "        {%- for src_col in source_columns -%}"
+      ],
+      [
+       "a",
+       "            {%- if src_col | lower == dest_col_lower and matched_col.value is none -%}"
+      ],
+      [
+       "a",
+       "                {%- set matched_col.value = src_col -%}"
+      ],
+      [
+       "a",
+       "            {%- endif -%}"
+      ],
+      [
+       "a",
+       "        {%- endfor -%}"
+      ],
+      [
+       "a",
+       "        {%- if matched_col.value is not none -%}"
+      ],
+      [
+       "a",
+       "            {%- do select_columns.append(adapter.quote(matched_col.value)) -%}"
+      ],
+      [
+       "a",
+       "        {%- else -%}"
+      ],
+      [
+       "a",
+       "            {%- do select_columns.append('NULL as ' ~ adapter.quote(dest_col)) -%}"
+      ],
+      [
+       "a",
+       "        {%- endif -%}"
+      ],
+      [
+       "a",
+       "    {%- endfor -%}"
+      ],
+      [
+       "a",
+       "    {{- select_columns | join(', ') -}}"
+      ],
+      [
+       "a",
+       "{% endmacro %}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "{% macro get_insert_replace_on_sql(source_relation, target_relation) %}"
+      ],
+      [
+       "c",
+       "    {%- set partition_by = config.get('partition_by') -%}"
+      ],
+      [
+       "c",
+       "    {%- set liquid_clustered_by = config.get('liquid_clustered_by') -%}"
+      ]
+     ],
+     "truncated": true,
+     "additions": 31,
+     "deletions": 20
+    }
+   ],
+   "id": 17
+  },
   {
    "kind": "fix",
    "repo": "databricks/databricks-sql-python",
