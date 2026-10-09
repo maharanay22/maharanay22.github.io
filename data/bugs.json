@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T14:39:03Z",
+ "generated_at": "2026-10-09T14:40:27Z",
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -96,13 +96,13 @@
    "full": "pydantic/pydantic-settings",
    "name": "pydantic-settings",
    "url": "https://github.com/pydantic/pydantic-settings",
-   "about": "Settings management using pydantic",
-   "icon": "📦",
-   "category": "Python",
+   "about": "Official Pydantic add-on for loading app settings from environment variables, .env files, secrets and the command line, used widely with FastAPI.",
+   "icon": "⚙️",
+   "category": "configuration",
    "tags": [
-    "pydantic",
-    "configuration",
-    "environment"
+    "Pydantic 2.14",
+    "Env Vars",
+    "CLI"
    ],
    "stars": 1471,
    "forks": 219
@@ -123,7 +123,7 @@
     "url": "https://github.com/BerriAI/litellm/pull/45599"
    },
    "issue": null,
-   "proof": null,
+   "proof": "Live proxy with real Claude calls: budget never enforced on main (200, 200, 200); with the fix 200 then 422 budget_exceeded",
    "files": [
     {
      "path": "litellm/proxy/common_utils/callback_utils.py",
@@ -225,7 +225,7 @@
     "number": 1023,
     "url": "https://github.com/pydantic/pydantic-settings/issues/1023"
    },
-   "proof": null,
+   "proof": "On pydantic 2.14, 27 test failures on main drop to the 6 Windows-only symlink tests with the fix",
    "files": [
     {
      "path": "pydantic_settings/main.py",
@@ -393,7 +393,7 @@
     "number": 1021,
     "url": "https://github.com/pydantic/pydantic-settings/issues/1021"
    },
-   "proof": null,
+   "proof": "Env var and secrets tests fail on main with pydantic 2.14 and pass with the fix on both 2.13.5 and 2.14",
    "files": [
     {
      "path": "pydantic_settings/main.py",
@@ -679,7 +679,7 @@
     "number": 981,
     "url": "https://github.com/databricks/databricks-sql-python/issues/981"
    },
-   "proof": null,
+   "proof": "Iterating 20,000 rows: 16.1 s on main, 0.10 s with the fix",
    "files": [
     {
      "path": "src/databricks/sql/backend/kernel/result_set.py",
@@ -954,7 +954,7 @@
     "url": "https://github.com/unitycatalog/unitycatalog/pull/1970"
    },
    "issue": null,
-   "proof": null,
+   "proof": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected",
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -1237,7 +1237,7 @@
     "url": "https://github.com/unitycatalog/unitycatalog/pull/1969"
    },
    "issue": null,
-   "proof": null,
+   "proof": "False, 0, 0.0 and empty string results fail on main (replaced by the no-output message) and pass with the fix",
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -1339,7 +1339,7 @@
     "number": 1532,
     "url": "https://github.com/databricks/dbt-databricks/issues/1532"
    },
-   "proof": null,
+   "proof": "7 new tests fail on main with positional TABLE inserts below DBR 18; DBR 18+ output unchanged",
    "files": [
     {
      "path": "dbt/include/databricks/macros/materializations/incremental/strategies.sql",
