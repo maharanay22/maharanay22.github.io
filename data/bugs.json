@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T02:11:38Z",
+ "generated_at": "2026-10-10T02:53:39Z",
  "stages": [
   "reported",
   "fix sent",
@@ -96,8 +96,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60694,
-   "forks": 12192
+   "stars": 60703,
+   "forks": 12194
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -113,9 +113,187 @@
    ],
    "stars": 1471,
    "forks": 219
+  },
+  {
+   "full": "delta-io/delta",
+   "name": "Delta Lake",
+   "url": "https://github.com/delta-io/delta",
+   "about": "The open table format behind the lakehouse: ACID transactions, time travel and schema evolution on top of Parquet, used with Apache Spark",
+   "icon": "🔺",
+   "category": "lakehouse storage",
+   "tags": [
+    "Spark",
+    "Scala",
+    "Lakehouse"
+   ],
+   "stars": 9039,
+   "forks": 2195
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta",
+   "status": "review",
+   "title": "[Spark] ReplaceWhere fails with BETWEEEN on partitioned columns",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T02:50:59Z",
+   "merged_at": null,
+   "reported": false,
+   "pr": {
+    "number": 7838,
+    "url": "https://github.com/delta-io/delta/pull/7838"
+   },
+   "issue": {
+    "number": 4776,
+    "url": "https://github.com/delta-io/delta/issues/4776"
+   },
+   "proof": "New DeltaSuite test fails on master with the INTERNAL_ERROR from the issue and passes with the fix; compiles on Spark 4.0, 4.1 and 4.2",
+   "files": [
+    {
+     "path": "spark/src/main/scala/org/apache/spark/sql/delta/DeltaLog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -49,8 +49,10 @@"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.{FileSourceOptions, TableIdentifier}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.analysis.{Resolver, UnresolvedAttribute}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.catalog.{BucketSpec, CatalogStatistics, CatalogTable}"
+      ],
+      [
+       "d",
+       "import org.apache.spark.sql.catalyst.expressions.{And, Attribute, Cast, Expression, Literal}"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.catalyst.expressions.{And, Attribute, Cast, CommonExpressionRef}"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.catalyst.expressions.{Expression, Literal, With}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.catalyst.trees.TreePattern.{COMMON_EXPR_REF, WITH_EXPRESSION}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.util.FailFastMode"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.execution.datasources._"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.expressions.UserDefinedFunction"
+      ],
+      [
+       "h",
+       "@@ -1371,6 +1373,7 @@"
+      ],
+      [
+       "c",
+       "      partitionFilters: Seq[Expression],"
+      ],
+      [
+       "c",
+       "      partitionColumnPrefixes: Seq[String] = Nil): Seq[Expression] = {"
+      ],
+      [
+       "c",
+       "    partitionFilters"
+      ],
+      [
+       "a",
+       "      .map(inlineCommonExpressions)"
+      ],
+      [
+       "c",
+       "      .map(_.transformUp {"
+      ],
+      [
+       "c",
+       "      case a: Attribute =>"
+      ],
+      [
+       "c",
+       "        // If we have a special column name, e.g. `a.a`, then an UnresolvedAttribute returns"
+      ],
+      [
+       "h",
+       "@@ -1391,4 +1394,13 @@"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "    })"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  private def inlineCommonExpressions(filter: Expression): Expression ="
+      ],
+      [
+       "a",
+       "    filter.transformUpWithPruning(_.containsPattern(WITH_EXPRESSION)) {"
+      ],
+      [
+       "a",
+       "      case With(child, defs) =>"
+      ],
+      [
+       "a",
+       "        val defsById = defs.map(d => d.id -> d.child).toMap"
+      ],
+      [
+       "a",
+       "        child.transformWithPruning(_.containsPattern(COMMON_EXPR_REF)) {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 13,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T02:50:40Z",
+    "updated_at": "2026-10-10T02:50:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
+   "id": 27
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
