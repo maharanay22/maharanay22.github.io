@@ -79,7 +79,7 @@
     "delta-io/delta": {
       "name": "Delta Lake",
       "icon": "🔺",
-      "category": "Lakehouse storage",
+      "category": "lakehouse storage",
       "about": "The open table format behind the lakehouse: ACID transactions, time travel and schema evolution on top of Parquet, used with Apache Spark",
       "tags": [
         "Spark",
