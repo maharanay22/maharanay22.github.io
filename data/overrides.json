@@ -86,6 +86,17 @@
         "Scala",
         "Lakehouse"
       ]
+    },
+    "delta-io/delta-rs": {
+      "name": "delta-rs",
+      "icon": "🦀",
+      "category": "lakehouse storage",
+      "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
+      "tags": [
+        "Rust",
+        "Python",
+        "Data Loss"
+      ]
     }
   },
   "proofs": {
@@ -108,6 +119,9 @@
     "https://github.com/unitycatalog/unitycatalog/pull/1970": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected",
     "https://github.com/unitycatalog/unitycatalog/pull/1971": "Same-named functions in two schemas returned [120, 120, 120, 120] on main instead of [120, 15, 120, 15]; list arguments crashed on the 2nd call",
     "https://github.com/unitycatalog/unitycatalog/pull/1975": "README quickstart crashed with RuntimeError: no running event loop on unitycatalog-client 0.6.0; works with the fix, Java client and docs output byte-identical",
-    "https://github.com/delta-io/delta/pull/7838": "New DeltaSuite test fails on master with the INTERNAL_ERROR from the issue and passes with the fix; compiles on Spark 4.0, 4.1 and 4.2"
+    "https://github.com/delta-io/delta/pull/7838": "New DeltaSuite test fails on master with the INTERNAL_ERROR from the issue and passes with the fix; compiles on Spark 4.0, 4.1 and 4.2",
+    "https://github.com/delta-io/delta-rs/pull/4839": "New vacuum test fails on main because a full vacuum would delete a deletion vector file still in use, and passes with the fix; all 35 vacuum tests pass",
+    "https://github.com/delta-io/delta-rs/pull/4841": "Scan and optimize tests read 1816-03-29 instead of 9999-12-31 on main and pass with the fix; 165 DataFusion integration tests pass",
+    "https://github.com/delta-io/delta-rs/pull/4843": "New load_cdf test fails on main with Object not found for an escaped partition and passes with the fix; 1314 library tests pass"
   }
 }
