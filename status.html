@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Open Bug Tracker · Maha Rana Yadavalli</title>
+<meta name="description" content="Live status of every open bug fix by Maha Rana Yadavalli: stage, tests, review and who needs to act next."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --c0:#020510; --panel:rgba(255,255,255,0.03); --line:rgba(0,255,247,0.12);
+  --neon1:#00fff7; --neon2:#bf00ff; --neon3:#ff006e; --neon4:#ffcc00; --neon5:#00ff88;
+  --text:#e8f4ff; --muted:#5a7a9a; --muted2:#8aaabb;
+}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--c0);color:var(--text);font-family:'Fira Code',monospace;font-size:14px;line-height:1.5;min-height:100vh;
+  background-image:radial-gradient(circle at 10% 0%,rgba(191,0,255,0.10),transparent 40%),radial-gradient(circle at 90% 10%,rgba(0,255,247,0.08),transparent 40%)}
+a{color:inherit}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 16px 60px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--neon1);text-decoration:none}
+.toplinks{display:flex;gap:16px;font-size:0.72rem}
+.toplinks a{color:var(--muted2);text-decoration:none;border-bottom:1px solid transparent}
+.toplinks a:hover{color:var(--neon1);border-color:var(--neon1)}
+.prompt{font-size:0.75rem;color:var(--muted2);margin-bottom:6px}
+.prompt b{color:var(--neon5);font-weight:500}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(1.8rem,5vw,3rem);line-height:1.05;margin-bottom:8px}
+h1 span{background:linear-gradient(90deg,var(--neon2),var(--neon3));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted2);font-size:0.75rem;margin-bottom:24px}
+.sub b{color:var(--text);font-weight:500}
+
+.cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:22px}
+.card{background:var(--panel);border:1px solid var(--line);padding:14px 16px;text-align:left;color:var(--text);font-family:inherit;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.card:hover,.card.on{border-color:currentColor;box-shadow:0 0 18px rgba(0,255,247,0.15)}
+.card b{display:block;font-family:'Syne',sans-serif;font-size:1.9rem;line-height:1;margin-bottom:8px}
+.card span{display:block;font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted2)}
+.k-all{color:var(--text)} .k-you{color:var(--neon3)} .k-maint{color:var(--neon1)} .k-blocked{color:var(--neon4)} .k-merged{color:var(--neon5)}
+
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.controls input,.controls select{font-family:inherit;font-size:0.72rem;background:var(--panel);border:1px solid var(--line);color:var(--text);padding:8px 10px;min-width:0}
+.controls input{flex:1 1 220px}
+.controls select{flex:0 1 220px}
+.controls input:focus,.controls select:focus{outline:none;border-color:var(--neon1)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:0.62rem;color:var(--muted2);margin-bottom:12px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+
+.group{margin-bottom:22px}
+.group h2{font-family:'Syne',sans-serif;font-size:0.95rem;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.group h2 small{font-family:'Fira Code',monospace;font-weight:400;font-size:0.65rem;color:var(--muted2)}
+.table{border:1px solid var(--line);background:rgba(2,5,16,0.6)}
+.head,.row{display:grid;grid-template-columns:minmax(0,1.6fr) 200px 120px minmax(0,1.5fr) 104px 86px;gap:16px;align-items:center;padding:12px 16px}
+.head{font-size:0.56rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line)}
+.row{border-bottom:1px solid rgba(0,255,247,0.06);border-left:3px solid transparent}
+.row:last-child{border-bottom:none}
+.row:hover{background:rgba(0,255,247,0.035)}
+.row.w-you{border-left-color:var(--neon3)} .row.w-maintainers{border-left-color:var(--neon1)} .row.w-nobody{border-left-color:var(--neon5)}
+.bug{min-width:0}
+.bug .t{font-size:0.75rem;color:#fff;overflow-wrap:anywhere}
+.bug .l{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:5px;font-size:0.62rem}
+.bug .l a{color:var(--muted2);text-decoration:none;border-bottom:1px dotted var(--muted)}
+.bug .l a:hover{color:var(--neon1);border-color:var(--neon1)}
+code{color:var(--neon1)}
+.stages{display:flex;align-items:flex-start}
+.stg{flex:1;position:relative;text-align:center;font-size:0.46rem;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase}
+.stg::before{content:'';position:absolute;top:5px;left:-50%;width:100%;height:2px;background:rgba(138,170,187,0.2)}
+.stg:first-child::before{display:none}
+.stg i{position:relative;display:block;width:12px;height:12px;margin:0 auto 5px;border-radius:50%;border:2px solid rgba(138,170,187,0.35);background:var(--c0)}
+.stg.done i{background:var(--neon5);border-color:var(--neon5)}
+.stg.done::before,.stg.cur::before{background:var(--neon5)}
+.stg.done{color:var(--muted2)}
+.stg.cur i{border-color:var(--sc);background:var(--sc);box-shadow:0 0 10px var(--sc)}
+.stg.cur{color:var(--sc);font-weight:600}
+.chips{display:flex;flex-direction:column;gap:4px;font-size:0.6rem}
+.chip{display:inline-block;padding:2px 6px;border:1px solid currentColor;white-space:nowrap;width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.ok{color:var(--neon5)} .bad{color:var(--neon3)} .warn{color:var(--neon4)} .info{color:var(--neon1)} .dim{color:var(--muted2)}
+.next{font-size:0.7rem;overflow-wrap:anywhere}
+.who{display:inline-block;font-size:0.56rem;letter-spacing:0.12em;text-transform:uppercase;padding:4px 7px;border:1px solid currentColor;white-space:nowrap}
+.who.you{color:var(--neon3);background:rgba(255,0,110,0.08)} .who.maintainers{color:var(--neon1)} .who.nobody{color:var(--neon5)}
+.age{font-size:0.62rem;color:var(--muted2);line-height:1.6}
+.age b{color:var(--text);font-weight:500}
+.empty,.loading{padding:30px;text-align:center;color:var(--muted2);font-size:0.75rem}
+.foot{margin-top:30px;font-size:0.62rem;color:var(--muted);text-align:center}
+.panels{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;gap:14px;margin-bottom:26px}
+.panel{border:1px solid var(--line);background:rgba(2,5,16,0.6);padding:16px 18px;min-width:0}
+.panel h2{font-family:'Syne',sans-serif;font-size:0.95rem;margin-bottom:10px;display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.panel h2 small{font-family:'Fira Code',monospace;font-weight:400;font-size:0.62rem;color:var(--muted2)}
+.panel.todo{border-color:rgba(255,0,110,0.35)}
+.todo-item,.fb{display:block;padding:10px 0;border-top:1px solid rgba(0,255,247,0.07);text-decoration:none;color:inherit}
+.todo-item:first-of-type,.fb:first-of-type{border-top:none}
+.todo-item b{display:block;font-size:0.72rem;color:#fff;font-weight:500;overflow-wrap:anywhere}
+.todo-item span{display:block;font-size:0.66rem;color:var(--neon3);margin-top:3px;overflow-wrap:anywhere}
+.todo-item:hover b,.fb:hover .fb-text{color:var(--neon1)}
+.allclear{font-size:0.72rem;color:var(--neon5);padding:6px 0;line-height:1.7}
+.allclear small{display:block;color:var(--muted2);font-size:0.64rem}
+.fb-meta{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:0.6rem;color:var(--muted2)}
+.fb-meta b{color:var(--text);font-weight:500}
+.badge{font-size:0.52rem;letter-spacing:0.1em;text-transform:uppercase;padding:2px 6px;border:1px solid currentColor}
+.badge.new{color:var(--neon3);background:rgba(255,0,110,0.08)} .badge.done{color:var(--neon5)} .badge.maint{color:var(--neon4)}
+.fb-text{font-size:0.68rem;color:var(--text);margin-top:5px;line-height:1.6;overflow-wrap:anywhere;transition:color .2s}
+.more{margin-top:6px;background:none;border:none;font-family:inherit;font-size:0.6rem;color:var(--muted2);cursor:pointer;padding:0;text-align:left;border-bottom:1px dotted var(--muted)}
+.more:hover{color:var(--neon1)}
+.thread{grid-column:1/-1;border-left:2px solid var(--line);padding-left:12px;margin-top:2px}
+.thread .fb{padding:8px 0}
+@media(max-width:860px){.panels{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:1020px){
+  .cards{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .head{display:none}
+  .row{grid-template-columns:minmax(0,1fr) auto;gap:10px 14px}
+  .bug{grid-column:1/2} .whocell{grid-column:2/3;grid-row:1/2;text-align:right}
+  .stagecell,.chips,.next,.age{grid-column:1/3}
+  .chips{flex-direction:row;flex-wrap:wrap}
+}
+@media(max-width:560px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card b{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <a class="brand" href="https://maharanay22.github.io/">maha.yadavalli()</a>
+    <div class="toplinks"><a href="bugs.html">bug fixes</a><a href="bugs.html#progress">achievements</a><a href="https://github.com/maharanay22">github</a></div>
+  </div>
+  <div class="prompt"><b>maha@github</b>:~/open-source$ status --open</div>
+  <h1>Open Bug <span>Tracker</span></h1>
+  <p class="sub" id="sub">Loading the latest status from GitHub...</p>
+
+  <div class="cards" id="cards"></div>
+  <div class="panels">
+    <div class="panel todo"><h2>Your to-do <small id="todo-n"></small></h2><div id="todo"></div></div>
+    <div class="panel"><h2>Latest reviewer comments <small>newest first</small></h2><div id="feed"></div></div>
+  </div>
+  <div class="controls">
+    <input id="q" type="search" placeholder="search bugs, projects or PR numbers" aria-label="Search bugs">
+    <select id="proj" aria-label="Project"><option value="">all projects</option></select>
+    <select id="group" aria-label="Group by"><option value="project">group by project</option><option value="who">group by who acts next</option><option value="none">no grouping</option></select>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--neon3)"></i>your move</span>
+    <span><i style="background:var(--neon1)"></i>waiting on maintainers</span>
+    <span><i style="background:var(--neon5)"></i>done</span>
+    <span>stages: reported &rarr; fix sent &rarr; tests &rarr; review &rarr; merged</span>
+  </div>
+  <div id="list"><div class="loading">loading...</div></div>
+  <div class="foot" id="foot"></div>
+</div>
+<script>
+var STAGE_COLOR = {action:'var(--neon3)', waiting:'var(--neon1)', done:'var(--neon5)'};
+var WHO_LABEL = {you:'your move', maintainers:'maintainers', nobody:'no action'};
+var WHO_ORDER = {you:0, maintainers:1, nobody:2};
+var CHECK_CLASS = {passing:'ok', failing:'bad', running:'info', 'not started':'warn'};
+var REVIEW_CLASS = {approved:'ok', 'changes requested':'warn', 'community approved':'ok', 'bot approved':'info', commented:'info', waiting:'dim'};
+var OPEN = {review:1, triage:1, open:1};
+
+function el(tag, cls, text){ var n=document.createElement(tag); if(cls) n.className=cls; if(text!=null) n.textContent=text; return n; }
+function withCode(tag, cls, text){ var n=el(tag,cls); String(text).split('`').forEach(function(p,i){ n.append(i%2 ? el('code',null,p) : document.createTextNode(p)); }); return n; }
+function link(text, href){ var a=el('a',null,text); a.href=href; a.target='_blank'; a.rel='noopener'; return a; }
+function ago(iso){
+  if(!iso) return '';
+  var m=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/60000));
+  if(m<60) return m+'m ago'; var h=Math.round(m/60); if(h<48) return h+'h ago'; return Math.round(h/24)+'d ago';
+}
+function fbNode(f, label){
+  var a=el('a','fb'); a.href=f.url; a.target='_blank'; a.rel='noopener';
+  var meta=el('div','fb-meta'); meta.append(el('b',null,f.who));
+  if(f.maintainer) meta.append(el('span','badge maint','maintainer'));
+  meta.append(el('span',null,f.kind+(f.path?' on '+f.path.split('/').pop():'')), el('span',null,ago(f.at)));
+  if(label) meta.append(el('span',null,label));
+  meta.append(el('span','badge '+(f.answered?'done':'new'), f.answered?'answered':'needs reply'));
+  a.append(meta, withCode('div','fb-text',f.text||'(no text)'));
+  return a;
+}
+function days(iso){ return Math.max(0, Math.floor((Date.now()-new Date(iso).getTime())/86400000)); }
+function stageBar(stages, t){
+  var bar=el('div','stages'); bar.style.setProperty('--sc', STAGE_COLOR[t.state]||'var(--neon1)');
+  stages.forEach(function(name,i){
+    var n=i+1, cls = n<t.stage || (n===t.stage && t.state==='done') ? 'done' : n===t.stage ? 'cur' : '';
+    var s=el('div','stg '+cls); s.append(el('i'), document.createTextNode(name)); bar.append(s);
+  });
+  bar.setAttribute('role','img'); bar.setAttribute('aria-label','stage '+t.stage+' of '+stages.length+': '+stages[t.stage-1]);
+  return bar;
+}
+
+var loadedAt=null;
+function load(first){
+  return fetch('data/bugs.json',{cache:'no-cache'}).then(function(r){ return r.json(); }).then(function(d){
+    if(first){ loadedAt=d.generated_at; render(d); } else if(d.generated_at!==loadedAt){ location.reload(); }
+  });
+}
+load(true).catch(function(){ document.getElementById('list').innerHTML='<div class="empty">Could not load the bug data. Refresh the page to try again.</div>'; });
+setInterval(function(){ if(!document.hidden) load(false).catch(function(){}); }, 300000);
+
+function render(data){
+  var stages=data.stages||['reported','fix sent','tests','review','merged'];
+  var repoName={}; data.repos.forEach(function(r){ repoName[r.full]=r.name; });
+  var tracked=data.items.filter(function(i){ return i.track; });
+  var open=tracked.filter(function(i){ return OPEN[i.status]; });
+  var merged=tracked.filter(function(i){ return i.status==='merged'; });
+  var blocked=open.filter(function(i){ var c=i.track.checks; return i.status==='triage' || c==='failing' || c==='not started'; });
+
+  document.getElementById('sub').innerHTML='';
+  var sub=document.getElementById('sub');
+  sub.append(el('b',null,String(open.length)), ' open bugs across ', el('b',null,String(new Set(open.map(function(i){return i.repo;})).size)),
+    ' projects. Data checked from GitHub every 5 minutes, last change ', el('b',null,ago(data.generated_at)), '.');
+
+  var filters={
+    all:{label:'open bugs', cls:'k-all', test:function(){ return true; }},
+    you:{label:'your move', cls:'k-you', test:function(i){ return i.track.waiting_on==='you'; }},
+    maint:{label:'waiting on maintainers', cls:'k-maint', test:function(i){ return i.track.waiting_on==='maintainers'; }},
+    blocked:{label:'tests not run or blocked', cls:'k-blocked', test:function(i){ return blocked.indexOf(i)>=0; }}
+  };
+  var state={k:'all', q:'', proj:'', group:'project'};
+  try{ state.group = localStorage.getItem('tracker-group') || 'project'; }catch(e){}
+  var cards=document.getElementById('cards');
+  Object.keys(filters).forEach(function(k){
+    var f=filters[k], c=el('button','card '+f.cls); c.dataset.k=k;
+    c.append(el('b',null,String(open.filter(f.test).length)), el('span',null,f.label));
+    c.addEventListener('click',function(){ state.k = state.k===k && k!=='all' ? 'all' : k; draw(); });
+    cards.append(c);
+  });
+  var repoLabel=function(i){ return repoName[i.repo]+' '+(i.pr?'#'+i.pr.number:'#'+i.issue.number); };
+  var todoList=open.filter(function(i){ return i.track.waiting_on==='you' || (i.track.feedback||[]).some(function(f){ return !f.answered; }); });
+  var todo=document.getElementById('todo'); document.getElementById('todo-n').textContent=todoList.length+' item'+(todoList.length===1?'':'s');
+  if(!todoList.length){
+    var ok=el('div','allclear','Nothing needs you right now. Every open bug is waiting on maintainers.');
+    ok.append(el('small',null,'When a reviewer comments, asks for changes or a test fails, it shows up here.'));
+    todo.append(ok);
+  }
+  todoList.forEach(function(i){
+    var a=el('a','todo-item'); a.href=(i.pr||i.issue).url; a.target='_blank'; a.rel='noopener';
+    a.append(withCode('b',null,repoLabel(i)+': '+i.title), withCode('span',null,i.track.next)); todo.append(a);
+  });
+  var feed=document.getElementById('feed');
+  var allFb=[]; open.forEach(function(i){ (i.track.feedback||[]).forEach(function(f){ allFb.push({f:f, i:i}); }); });
+  allFb.sort(function(a,b){ return a.f.at<b.f.at?1:-1; });
+  if(!allFb.length) feed.append(el('div','allclear','No reviewer comments on open bugs yet'));
+  allFb.slice(0,6).forEach(function(x){ feed.append(fbNode(x.f, repoLabel(x.i))); });
+
+  var m=el('a','card k-merged'); m.href='bugs.html#fixes'; m.append(el('b',null,String(merged.length)), el('span',null,'merged (see all)')); cards.append(m);
+
+  var proj=document.getElementById('proj');
+  Array.from(new Set(open.map(function(i){ return i.repo; }))).sort(function(a,b){ return repoName[a].localeCompare(repoName[b]); }).forEach(function(r){
+    var o=el('option',null,repoName[r]+' ('+open.filter(function(i){return i.repo===r;}).length+')'); o.value=r; proj.append(o);
+  });
+  var q=document.getElementById('q'), grp=document.getElementById('group'); grp.value=state.group;
+  q.addEventListener('input',function(){ state.q=q.value.trim().toLowerCase(); draw(); });
+  proj.addEventListener('change',function(){ state.proj=proj.value; draw(); });
+  grp.addEventListener('change',function(){ state.group=grp.value; try{ localStorage.setItem('tracker-group',grp.value); }catch(e){} draw(); });
+
+  function row(i){
+    var t=i.track, r=el('div','row w-'+t.waiting_on);
+    var bug=el('div','bug'); bug.append(withCode('div','t',i.title));
+    var l=el('div','l'); l.append(el('span','dim',repoName[i.repo]));
+    if(i.pr) l.append(link((i.kind==='report'?'fixed in #':'PR #')+i.pr.number, i.pr.url));
+    if(i.issue) l.append(link('issue #'+i.issue.number, i.issue.url));
+    bug.append(l);
+    var sc=el('div','stagecell'); sc.append(stageBar(stages,t));
+    var chips=el('div','chips');
+    if(t.checks) chips.append(el('span','chip '+(CHECK_CLASS[t.checks]||'dim'),'tests: '+t.checks));
+    if(t.review) chips.append(el('span','chip '+(REVIEW_CLASS[t.review]||'dim'),'review: '+t.review));
+    if(t.conflicts) chips.append(el('span','chip bad','merge conflict'));
+    var who=el('div','whocell'); who.append(el('span','who '+t.waiting_on, WHO_LABEL[t.waiting_on]));
+    var age=el('div','age'); age.append(el('b',null,days(i.created_at)+'d'), ' open', el('br'), 'updated '+ago(t.updated_at));
+    if(t.last_comment){ age.append(el('br'), 'last: '+t.last_comment.who); }
+    r.append(bug, sc, chips, withCode('div','next',t.next), who, age);
+    var fb=t.feedback||[];
+    if(fb.length){
+      var pending=fb.filter(function(f){ return !f.answered; }).length;
+      var btn=el('button','more', (pending? pending+' need'+(pending===1?'s':'')+' reply, ':'')+fb.length+' reviewer comment'+(fb.length===1?'':'s')+' \u25be');
+      btn.setAttribute('aria-expanded','false');
+      var th=el('div','thread'); th.hidden=true; fb.forEach(function(f){ th.append(fbNode(f)); });
+      btn.addEventListener('click',function(){ th.hidden=!th.hidden; btn.setAttribute('aria-expanded',String(!th.hidden)); });
+      bug.append(btn); r.append(th);
+    }
+    return r;
+  }
+  function table(items){
+    var tb=el('div','table'), h=el('div','head');
+    ['bug','stage','checks','next step','waiting on','age'].forEach(function(x){ h.append(el('div',null,x)); });
+    tb.append(h); items.forEach(function(i){ tb.append(row(i)); }); return tb;
+  }
+  function draw(){
+    cards.querySelectorAll('button.card').forEach(function(c){ c.classList.toggle('on', c.dataset.k===state.k && state.k!=='all'); });
+    var f=filters[state.k];
+    var items=open.filter(function(i){
+      if(!f.test(i)) return false;
+      if(state.proj && i.repo!==state.proj) return false;
+      if(!state.q) return true;
+      var hay=[i.title, repoName[i.repo], i.repo, i.track.next, i.pr?'#'+i.pr.number:'', i.issue?'#'+i.issue.number:''].join(' ').toLowerCase();
+      return hay.indexOf(state.q)>=0;
+    }).sort(function(a,b){ return WHO_ORDER[a.track.waiting_on]-WHO_ORDER[b.track.waiting_on] || (a.created_at<b.created_at?-1:1); });
+    var list=document.getElementById('list'); list.textContent='';
+    if(!items.length){ list.append(el('div','empty','No open bugs match this filter')); return; }
+    if(state.group==='none'){ list.append(table(items)); return; }
+    var keyOf = state.group==='who' ? function(i){ return i.track.waiting_on; } : function(i){ return i.repo; };
+    var labelOf = state.group==='who' ? function(k){ return k==='you' ? 'Your move' : k==='maintainers' ? 'Waiting on maintainers' : 'No action needed'; } : function(k){ return repoName[k]; };
+    var keys=[]; items.forEach(function(i){ var k=keyOf(i); if(keys.indexOf(k)<0) keys.push(k); });
+    if(state.group==='project') keys.sort(function(a,b){ return labelOf(a).localeCompare(labelOf(b)); });
+    keys.forEach(function(k){
+      var g=el('div','group'), its=items.filter(function(i){ return keyOf(i)===k; });
+      var h=el('h2',null,labelOf(k)); h.append(el('small',null,its.length+' open')); g.append(h, table(its)); list.append(g);
+    });
+  }
+  draw();
+  document.getElementById('foot').textContent='Built from public GitHub data for @'+data.login+'. Last data change '+new Date(data.generated_at).toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+}
+</script>
+</body>
+</html>

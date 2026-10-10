@@ -35,14 +35,17 @@ query($q: String!, $after: String) {
         number title url state merged mergedAt createdAt closedAt updatedAt body reviewDecision mergeable
         repository { %s }
         closingIssuesReferences(first: 5) { nodes { number url title state author { login } } }
-        comments(last: 15) { nodes { body createdAt authorAssociation author { login __typename } } }
+        comments(last: 15) { nodes { body createdAt url authorAssociation author { login __typename } } }
         latestReviews(first: 10) { nodes { state submittedAt authorAssociation author { login __typename } } }
+        reviews(last: 10) { nodes { body state submittedAt url authorAssociation author { login __typename } } }
+        reviewThreads(last: 30) { nodes { isResolved comments(first: 1) { nodes { body createdAt url path authorAssociation author { login __typename } } } } }
         commits(last: 1) { nodes { commit { committedDate statusCheckRollup { state } } } }
       }
       ... on Issue {
         number title url state stateReason createdAt closedAt updatedAt
         repository { %s }
         labels(first: 10) { nodes { name } }
+        comments(last: 15) { nodes { body createdAt url authorAssociation author { login __typename } } }
         timelineItems(itemTypes: [CLOSED_EVENT], last: 1) {
           nodes { ... on ClosedEvent { closer { __typename ... on PullRequest { number url merged author { login } } } } }
         }
@@ -139,6 +142,40 @@ def plan(state, waiting_on, next_step):
     return {"state": state, "waiting_on": waiting_on, "next": next_step}
 
 
+def excerpt(body, limit=320):
+    text = re.sub(r"<!--.*?-->", "", body or "", flags=re.S)
+    text = re.sub(r"```.*?```", " [code] ", text, flags=re.S)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
+
+
+def feedback(node, last_mine):
+    """Recent human feedback from other people, newest first, marked answered if we acted after it."""
+    entries = []
+    for c in node["comments"]["nodes"]:
+        entries.append(("comment", c, None))
+    for r in (node.get("reviews") or {}).get("nodes", []):
+        if (r["body"] or "").strip() or r["state"] == "CHANGES_REQUESTED":
+            entries.append(("review " + r["state"].lower().replace("_", " "), r, None))
+    for t in (node.get("reviewThreads") or {}).get("nodes", []):
+        first = (t["comments"]["nodes"] or [None])[0]
+        if first:
+            entries.append(("inline comment", first, t["isResolved"]))
+    out = []
+    for kind, c, resolved in entries:
+        if is_bot(c["author"]) or c["author"]["login"] == LOGIN:
+            continue
+        at = c.get("createdAt") or c.get("submittedAt")
+        out.append({
+            "kind": kind, "who": c["author"]["login"], "at": at, "url": c["url"],
+            "maintainer": c["authorAssociation"] in MAINTAINER, "path": c.get("path"),
+            "text": excerpt(c["body"]) or ("Requested changes" if "changes" in kind else ""),
+            "answered": bool(resolved) or at < last_mine,
+        })
+    out.sort(key=lambda f: f["at"], reverse=True)
+    return out[:6]
+
+
 def track_pr(pr, status):
     """Work out where a fix stands and who has to act next."""
     commit = (pr["commits"]["nodes"] or [{}])[0].get("commit") or {}
@@ -150,7 +187,6 @@ def track_pr(pr, status):
     mine = [c for c in human if c["author"]["login"] == LOGIN]
     others = [c for c in human if c["author"]["login"] != LOGIN]
     my_last = max([c["createdAt"] for c in mine] + [last_push])
-    unanswered = [c for c in others if c["createdAt"] > my_last]
     approvals = [r for r in reviews if r["state"] == "APPROVED"]
     maint_ok = [r["author"]["login"] for r in approvals if r["authorAssociation"] in MAINTAINER]
     community_ok = [r["author"]["login"] for r in approvals if r["authorAssociation"] not in MAINTAINER]
@@ -160,12 +196,15 @@ def track_pr(pr, status):
               "commented" if reviews or others else "waiting")
     last_other = max(others, key=lambda c: c["createdAt"]) if others else None
     info = {
+        "feedback": feedback(pr, my_last),
         "stage": 4 if checks == "passing" else 3, "checks": checks, "review": review,
         "approved_by": maint_ok + community_ok, "last_push": last_push,
         "updated_at": pr["updatedAt"], "conflicts": pr.get("mergeable") == "CONFLICTING",
         "last_comment": {"who": last_other["author"]["login"], "at": last_other["createdAt"],
                          "maintainer": last_other["authorAssociation"] in MAINTAINER} if last_other else None,
     }
+    if status != "review":
+        info["feedback"] = [{**f, "answered": True} for f in info["feedback"]]
     if status == "merged":
         return {**info, "stage": 5, "checks": "passing", "review": "approved",
                 **plan("done", "nobody", "Merged. It ships in the project's next release")}
@@ -179,8 +218,10 @@ def track_pr(pr, status):
         if last_push > max(r["submittedAt"] for r in changes) or (mine and mine[-1]["createdAt"] > max(r["submittedAt"] for r in changes)):
             return {**info, **plan("waiting", "maintainers", f"Requested changes are pushed. Waiting for {who} to look again")}
         return {**info, **plan("action", "you", f"{who} asked for changes. Update the PR")}
-    if unanswered:
-        return {**info, **plan("action", "you", f"{unanswered[-1]['author']['login']} commented. Reply on the PR")}
+    pending = [f for f in info["feedback"] if not f["answered"]]
+    if pending:
+        kind = "left review comments" if any(f["kind"] != "comment" for f in pending) else "commented"
+        return {**info, **plan("action", "you", f"{pending[0]['who']} {kind}. Reply or update the PR")}
     if info["conflicts"]:
         return {**info, **plan("action", "you", "The branch conflicts with main. Rebase it")}
     if checks == "failing":
@@ -199,7 +240,8 @@ def track_pr(pr, status):
 
 
 def track_report(issue, status):
-    base = {"stage": 1, "checks": None, "review": None, "approved_by": [], "last_push": None,
+    mine = [c["createdAt"] for c in issue["comments"]["nodes"] if c["author"] and c["author"]["login"] == LOGIN]
+    base = {"feedback": feedback(issue, max(mine + [issue["createdAt"]])), "stage": 1, "checks": None, "review": None, "approved_by": [], "last_push": None,
             "updated_at": issue["updatedAt"], "conflicts": False, "last_comment": None}
     if status == "scout":
         return {**base, "stage": 5, **plan("done", "nobody", "Another contributor's fix was merged")}

@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T13:46:21Z",
+ "generated_at": "2026-10-10T13:49:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -126,7 +126,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60869,
+   "stars": 60870,
    "forks": 12209
   },
   {
@@ -163,6 +163,7 @@
    "proof": null,
    "files": [],
    "track": {
+    "feedback": [],
     "stage": 1,
     "checks": null,
     "review": null,
@@ -238,6 +239,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -401,6 +403,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -564,6 +567,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -855,6 +859,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -974,6 +979,18 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "ion-elgreco",
+      "at": "2026-10-10T07:04:08Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4841#issuecomment-6094933049",
+      "maintainer": true,
+      "path": null,
+      "text": "Could you add a querybuildr test in Python,?",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
@@ -1269,6 +1286,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -1432,6 +1450,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -1731,6 +1750,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -1887,6 +1907,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "failing",
     "review": "waiting",
@@ -1999,6 +2020,18 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "VANDRANKI",
+      "at": "2026-10-09T23:40:11Z",
+      "url": "https://github.com/BerriAI/litellm/pull/45599#pullrequestreview-5476383764",
+      "maintainer": false,
+      "path": null,
+      "text": "Community review. I am not a maintainer, so this does not clear the merge gate. I read the diff (callback_utils.py plus the new test) and ran it on the PR head (branch checked out locally, Python 3.13, run with `--noconftest`). What the change does: in `initialize_callbacks_on_proxy`, the non-list branch (a single str…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
     "review": "community approved",
@@ -2164,6 +2197,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "bot approved",
@@ -2195,6 +2229,7 @@
    "proof": null,
    "files": [],
    "track": {
+    "feedback": [],
     "stage": 1,
     "checks": null,
     "review": null,
@@ -2494,6 +2529,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -2785,6 +2821,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -3081,6 +3118,28 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "tdas",
+      "at": "2026-10-09T20:12:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1970#issuecomment-6088485597",
+      "maintainer": false,
+      "path": null,
+      "text": "All good. tests passed. merging! thank you!",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "tdas",
+      "at": "2026-10-09T15:02:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1970#issuecomment-6083524464",
+      "maintainer": false,
+      "path": null,
+      "text": "LGTM. lets see whether tests pass.",
+      "answered": true
+     }
+    ],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -3199,6 +3258,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "failing",
     "review": "waiting",
@@ -3362,6 +3422,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -3497,6 +3558,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -3657,6 +3719,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -3817,6 +3880,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -4129,6 +4193,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "not started",
     "review": "waiting",
@@ -4425,6 +4490,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 3,
     "checks": "failing",
     "review": "waiting",
@@ -4665,6 +4731,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -4940,6 +5007,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 2,
     "checks": "failing",
     "review": "waiting",
@@ -5155,6 +5223,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 2,
     "checks": "failing",
     "review": "waiting",
@@ -5310,6 +5379,7 @@
     }
    ],
    "track": {
+    "feedback": [],
     "stage": 4,
     "checks": "passing",
     "review": "waiting",
@@ -5601,6 +5671,38 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "review changes requested",
+      "who": "rhshadrach",
+      "at": "2026-10-10T11:31:42Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#pullrequestreview-5478752755",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the PR! Instead of introducing a 2nd walk of the regex, I think we can avoid the duplicate code and get better performance by adding a method `_regex_nodes` that returns all the nodes (op and arg as a tuple) we need to check. Then checking for unsupported regex becomes: [code] and these nodes can be reused…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "rhshadrach",
+      "at": "2026-10-10T11:20:03Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4237442115",
+      "maintainer": true,
+      "path": "doc/source/whatsnew/v3.2.0.rst",
+      "text": "I think we can shorten this a little by removing `, unlike the Unicode-aware matching of Python's ``re`` used for ``object`` dtype`.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "rhshadrach",
+      "at": "2026-10-10T11:18:33Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4237438474",
+      "maintainer": true,
+      "path": "pandas/core/arrays/_arrow_string_mixins.py",
+      "text": "For `\\s` this is not sufficient to get the same behavior between pyarrow-backed str and object. With this PR: [code] I'm okay with not handling this here, we can just open an issue to track.",
+      "answered": true
+     }
+    ],
     "stage": 3,
     "checks": "running",
     "review": "changes requested",
@@ -5692,6 +5794,48 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "review changes requested",
+      "who": "jbrockmendel",
+      "at": "2026-10-09T17:37:26Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#pullrequestreview-5473368085",
+      "maintainer": true,
+      "path": null,
+      "text": "What do you get for [code]",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-09T17:37:13Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#discussion_r4232871857",
+      "maintainer": true,
+      "path": "doc/source/whatsnew/v3.2.0.rst",
+      "text": "Does the dtype part of this depend on the presence of missing values?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-09T17:36:21Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#discussion_r4232864970",
+      "maintainer": true,
+      "path": "pandas/core/frame.py",
+      "text": "i think dtype.kind == \"b\" is simpler?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-09T17:35:44Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#discussion_r4232859526",
+      "maintainer": true,
+      "path": "pandas/core/frame.py",
+      "text": "is this branch covered?",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
     "review": "changes requested",
@@ -5726,6 +5870,7 @@
    "proof": null,
    "files": [],
    "track": {
+    "feedback": [],
     "stage": 5,
     "checks": null,
     "review": null,
@@ -5760,6 +5905,7 @@
    "proof": null,
    "files": [],
    "track": {
+    "feedback": [],
     "stage": 5,
     "checks": null,
     "review": null,
@@ -5839,6 +5985,28 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-06T17:19:28Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70515#issuecomment-6021607603",
+      "maintainer": true,
+      "path": null,
+      "text": "thanks @maharanay22",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-06T15:43:20Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70515#issuecomment-6019909590",
+      "maintainer": true,
+      "path": null,
+      "text": "LGTM ping on green",
+      "answered": true
+     }
+    ],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -6000,6 +6168,18 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "aaronteo-db",
+      "at": "2026-10-06T12:48:15Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26440#pullrequestreview-5428568504",
+      "maintainer": true,
+      "path": null,
+      "text": "lgtm! thanks for your contribution",
+      "answered": true
+     }
+    ],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -6127,6 +6307,18 @@
     }
    ],
    "track": {
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "aaronteo-db",
+      "at": "2026-10-06T13:02:23Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26439#pullrequestreview-5428741836",
+      "maintainer": true,
+      "path": null,
+      "text": "lgtm! thanks for your contribution",
+      "answered": true
+     }
+    ],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
