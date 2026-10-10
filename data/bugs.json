@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T18:56:48Z",
+ "generated_at": "2026-10-10T20:37:31Z",
  "stages": [
   "reported",
   "fix sent",
@@ -40,6 +40,21 @@
    "forks": 680
   },
   {
+   "full": "pandas-dev/pandas",
+   "name": "pandas",
+   "url": "https://github.com/pandas-dev/pandas",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "icon": "🐼",
+   "category": "data analysis",
+   "tags": [
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
+   ],
+   "stars": 49993,
+   "forks": 20483
+  },
+  {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
    "url": "https://github.com/delta-io/delta-rs",
@@ -68,21 +83,6 @@
    ],
    "stars": 9040,
    "forks": 2197
-  },
-  {
-   "full": "pandas-dev/pandas",
-   "name": "pandas",
-   "url": "https://github.com/pandas-dev/pandas",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "icon": "🐼",
-   "category": "data analysis",
-   "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
-   ],
-   "stars": 49993,
-   "forks": 20483
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60892,
-   "forks": 12212
+   "stars": 60899,
+   "forks": 12215
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -146,6 +146,298 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "pandas-dev/pandas",
+   "status": "review",
+   "title": "str.contains/match/fullmatch/count with \\s on pyarrow-backed strings miss \\v and \\x1c-\\x1f",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T20:31:48Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 71025,
+    "url": "https://github.com/pandas-dev/pandas/pull/71025"
+   },
+   "issue": {
+    "number": 70991,
+    "url": "https://github.com/pandas-dev/pandas/issues/70991"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "pandas/core/arrays/_arrow_string_mixins.py",
+     "lines": [
+      [
+       "h",
+       "@@ -28,6 +28,77 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    from pandas._typing import Scalar"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "# The characters ``\\s`` matches in a Python ``re`` str pattern, i.e. those for which"
+      ],
+      [
+       "a",
+       "#  str.isspace() is True. RE2's ``\\s`` only matches ``[\\t\\n\\f\\r ]``."
+      ],
+      [
+       "a",
+       "_PYTHON_WHITESPACE = ("
+      ],
+      [
+       "a",
+       "    \"\\t\\n\\x0b\\x0c\\r\\x1c\\x1d\\x1e\\x1f \\x85\\xa0\\u1680\""
+      ],
+      [
+       "a",
+       "    \"\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\""
+      ],
+      [
+       "a",
+       "    \"\\u2028\\u2029\\u202f\\u205f\\u3000\""
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "a",
+       "# RE2's POSIX classes, e.g. \"[:alpha:]\", which may appear inside a set"
+      ],
+      [
+       "a",
+       "_POSIX_CLASS = re.compile(r\"\\[:\\^?[a-z]+:\\]\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _re2_escape(chars: str) -> str:"
+      ],
+      [
+       "a",
+       "    return \"\".join(f\"\\\\x{{{ord(char):X}}}\" for char in chars)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _re2_set(chars: str, negate: bool) -> str:"
+      ],
+      [
+       "a",
+       "    if not chars:"
+      ],
+      [
+       "a",
+       "        # RE2 has no empty set"
+      ],
+      [
+       "a",
+       "        return r\"[\\x00-\\x{10FFFF}]\" if negate else r\"[^\\x00-\\x{10FFFF}]\""
+      ],
+      [
+       "a",
+       "    return f\"[{'^' if negate else ''}{_re2_escape(chars)}]\""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _scan_set(pattern: str, start: int) -> tuple[list[str], int] | None:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Split the body of the set opened by the \"[\" at ``start`` into its tokens."
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 112,
+     "deletions": 0
+    },
+    {
+     "path": "pandas/core/arrays/arrow/array.py",
+     "lines": [
+      [
+       "h",
+       "@@ -3998,7 +3998,9 @@"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "c",
+       "            return self._convert_int_result(self._apply_re_fallback(func, pa_type))"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        result = pc.count_substring_regex(self._pa_array, pat, ignore_case=not case)"
+      ],
+      [
+       "a",
+       "        result = pc.count_substring_regex("
+      ],
+      [
+       "a",
+       "            self._pa_array, self._with_python_whitespace(pat), ignore_case=not case"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "c",
+       "        return self._convert_int_result(result)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def _str_replace("
+      ],
+      [
+       "h",
+       "@@ -4112,7 +4114,7 @@"
+      ],
+      [
+       "c",
+       "                return extract_group(next(iter(groups)))"
+      ],
+      [
+       "c",
+       "            return {col: extract_group(col) for col in groups}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        result = pc.extract_regex(self._pa_array, pat)"
+      ],
+      [
+       "a",
+       "        result = pc.extract_regex(self._pa_array, self._with_python_whitespace(pat))"
+      ],
+      [
+       "c",
+       "        if expand:"
+      ],
+      [
+       "c",
+       "            return {"
+      ],
+      [
+       "c",
+       "                col: self._from_pyarrow_array(pc.struct_field(result, [i]))"
+      ],
+      [
+       "h",
+       "@@ -4180,14 +4182,18 @@"
+      ],
+      [
+       "c",
+       "        if pat is None:"
+      ],
+      [
+       "c",
+       "            split_func = pc.utf8_split_whitespace"
+      ],
+      [
+       "c",
+       "        elif regex is True:"
+      ],
+      [
+       "d",
+       "            split_func = functools.partial(pc.split_pattern_regex, pattern=pat)"
+      ],
+      [
+       "a",
+       "            split_func = functools.partial("
+      ],
+      [
+       "a",
+       "                pc.split_pattern_regex, pattern=self._with_python_whitespace(pat)"
+      ],
+      [
+       "a",
+       "            )"
+      ],
+      [
+       "c",
+       "        elif regex is False:"
+      ],
+      [
+       "c",
+       "            split_func = functools.partial(pc.split_pattern, pattern=pat)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 10,
+     "deletions": 4
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T19:52:22Z",
+    "updated_at": "2026-10-10T20:36:29Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 35
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -216,38 +508,6 @@
     "state": "waiting",
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
-   },
-   "id": 35
-  },
-  {
-   "kind": "report",
-   "repo": "pandas-dev/pandas",
-   "status": "open",
-   "title": "str.contains/match/fullmatch/count with \\s on pyarrow-backed strings miss \\v and \\x1c-\\x1f",
-   "date": "2026-10-10",
-   "created_at": "2026-10-10T13:33:45Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 70991,
-    "url": "https://github.com/pandas-dev/pandas/issues/70991"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-10T13:33:54Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
    },
    "id": 34
   },
@@ -6087,7 +6347,7 @@
      "jbrockmendel"
     ],
     "last_push": "2026-10-05T19:49:24Z",
-    "updated_at": "2026-10-06T17:19:28Z",
+    "updated_at": "2026-10-10T20:32:19Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
