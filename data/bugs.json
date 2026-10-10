@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T13:49:04Z",
+ "generated_at": "2026-10-10T14:45:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -67,7 +67,7 @@
     "String regex"
    ],
    "stars": 49989,
-   "forks": 20484
+   "forks": 20482
   },
   {
    "full": "delta-io/delta-rs",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60870,
-   "forks": 12209
+   "stars": 60876,
+   "forks": 12210
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -991,12 +991,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T13:41:28Z",
-    "updated_at": "2026-10-10T13:44:16Z",
+    "updated_at": "2026-10-10T14:26:11Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -1005,7 +1005,7 @@
     },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 29
   },
@@ -5703,8 +5703,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-10T13:27:44Z",
