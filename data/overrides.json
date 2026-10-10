@@ -1,101 +1,113 @@
 {
- "repos": {
-  "pandas-dev/pandas": {
-   "icon": "🐼",
-   "category": "data analysis",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
-   ]
+  "repos": {
+    "pandas-dev/pandas": {
+      "icon": "🐼",
+      "category": "data analysis",
+      "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+      "tags": [
+        "Arrow dtypes",
+        "Reductions",
+        "String regex"
+      ]
+    },
+    "mlflow/mlflow": {
+      "name": "MLflow",
+      "icon": "🧪",
+      "category": "ai engineering",
+      "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+      "tags": [
+        "AI Gateway",
+        "Streaming",
+        "GenAI Eval"
+      ]
+    },
+    "BerriAI/litellm": {
+      "name": "LiteLLM",
+      "icon": "🚅",
+      "category": "ai gateway",
+      "about": "AI gateway that lets apps call 100+ LLM providers like OpenAI, Anthropic and Bedrock through one API, with cost tracking and load balancing.",
+      "tags": [
+        "Anthropic",
+        "Streaming",
+        "Tool Calls"
+      ]
+    },
+    "unitycatalog/unitycatalog": {
+      "name": "Unity Catalog",
+      "icon": "🗂️",
+      "category": "data governance",
+      "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+      "tags": [
+        "AI Agents",
+        "Tool Calling",
+        "Windows"
+      ]
+    },
+    "databricks/dbt-databricks": {
+      "name": "dbt-databricks",
+      "icon": "🧱",
+      "category": "data transformation",
+      "about": "The official dbt adapter for Databricks. It turns dbt models into Databricks SQL: tables, views, incremental merges, comments and constraints.",
+      "tags": [
+        "dbt",
+        "Delta Lake",
+        "SQL DDL"
+      ]
+    },
+    "databricks/databricks-sql-python": {
+      "name": "Databricks SQL Connector",
+      "icon": "🔌",
+      "category": "database driver",
+      "about": "The official Python connector for Databricks SQL warehouses and clusters. Used by apps, BI tools, SQLAlchemy and pandas to run queries.",
+      "tags": [
+        "Python DB-API",
+        "CloudFetch",
+        "Arrow"
+      ]
+    },
+    "pydantic/pydantic-settings": {
+      "name": "pydantic-settings",
+      "icon": "⚙️",
+      "category": "configuration",
+      "about": "Official Pydantic add-on for loading app settings from environment variables, .env files, secrets and the command line, used widely with FastAPI.",
+      "tags": [
+        "Pydantic 2.14",
+        "Env Vars",
+        "CLI"
+      ]
+    },
+    "delta-io/delta": {
+      "name": "Delta Lake",
+      "icon": "🔺",
+      "category": "Lakehouse storage",
+      "about": "The open table format behind the lakehouse: ACID transactions, time travel and schema evolution on top of Parquet, used with Apache Spark",
+      "tags": [
+        "Spark",
+        "Scala",
+        "Lakehouse"
+      ]
+    }
   },
-  "mlflow/mlflow": {
-   "name": "MLflow",
-   "icon": "🧪",
-   "category": "ai engineering",
-   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "tags": [
-    "AI Gateway",
-    "Streaming",
-    "GenAI Eval"
-   ]
-  },
-  "BerriAI/litellm": {
-   "name": "LiteLLM",
-   "icon": "🚅",
-   "category": "ai gateway",
-   "about": "AI gateway that lets apps call 100+ LLM providers like OpenAI, Anthropic and Bedrock through one API, with cost tracking and load balancing.",
-   "tags": [
-    "Anthropic",
-    "Streaming",
-    "Tool Calls"
-   ]
-  },
-  "unitycatalog/unitycatalog": {
-   "name": "Unity Catalog",
-   "icon": "🗂️",
-   "category": "data governance",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
-   ]
-  },
-  "databricks/dbt-databricks": {
-   "name": "dbt-databricks",
-   "icon": "🧱",
-   "category": "data transformation",
-   "about": "The official dbt adapter for Databricks. It turns dbt models into Databricks SQL: tables, views, incremental merges, comments and constraints.",
-   "tags": [
-    "dbt",
-    "Delta Lake",
-    "SQL DDL"
-   ]
-  },
-  "databricks/databricks-sql-python": {
-   "name": "Databricks SQL Connector",
-   "icon": "🔌",
-   "category": "database driver",
-   "about": "The official Python connector for Databricks SQL warehouses and clusters. Used by apps, BI tools, SQLAlchemy and pandas to run queries.",
-   "tags": [
-    "Python DB-API",
-    "CloudFetch",
-    "Arrow"
-   ]
-  },
-  "pydantic/pydantic-settings": {
-   "name": "pydantic-settings",
-   "icon": "⚙️",
-   "category": "configuration",
-   "about": "Official Pydantic add-on for loading app settings from environment variables, .env files, secrets and the command line, used widely with FastAPI.",
-   "tags": [
-    "Pydantic 2.14",
-    "Env Vars",
-    "CLI"
-   ]
+  "proofs": {
+    "https://github.com/BerriAI/litellm/pull/45147": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
+    "https://github.com/mlflow/mlflow/pull/26439": "6 new test cases fail on master with ValidationError and pass with the fix",
+    "https://github.com/mlflow/mlflow/pull/26538": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
+    "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix",
+    "https://github.com/unitycatalog/unitycatalog/pull/1966": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
+    "https://github.com/unitycatalog/unitycatalog/pull/1967": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed",
+    "https://github.com/databricks/dbt-databricks/pull/1709": "13 new tests fail on main with wrong or unterminated COMMENT literals; also confirmed by rendering the macros with dbt run-operation",
+    "https://github.com/databricks/dbt-databricks/pull/1710": "7 of 8 new tests fail on main with unquoted struct field names; plain names stay unchanged",
+    "https://github.com/databricks/databricks-sql-python/pull/977": "On Windows 11, 196 of 200 fast downloads crashed with ZeroDivisionError on main; 200 of 200 succeed with the fix",
+    "https://github.com/databricks/databricks-sql-python/pull/979": "New tests fail on main and pass with the fix on both pandas 2.3.3 and 3.0.6; about 5 ms per million rows",
+    "https://github.com/pydantic/pydantic-settings/pull/1022": "Env var and secrets tests fail on main with pydantic 2.14 and pass with the fix on both 2.13.5 and 2.14",
+    "https://github.com/pydantic/pydantic-settings/pull/1024": "On pydantic 2.14, 27 test failures on main drop to the 6 Windows-only symlink tests with the fix",
+    "https://github.com/BerriAI/litellm/pull/45599": "Live proxy with real Claude calls: budget never enforced on main (200, 200, 200); with the fix 200 then 422 budget_exceeded",
+    "https://github.com/databricks/databricks-sql-python/pull/982": "Iterating 20,000 rows: 16.1 s on main, 0.10 s with the fix",
+    "https://github.com/databricks/dbt-databricks/pull/1711": "7 new tests fail on main with positional TABLE inserts below DBR 18; DBR 18+ output unchanged",
+    "https://github.com/unitycatalog/unitycatalog/pull/1969": "False, 0, 0.0 and empty string results fail on main (replaced by the no-output message) and pass with the fix",
+    "https://github.com/unitycatalog/unitycatalog/pull/1970": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected",
+    "https://github.com/unitycatalog/unitycatalog/pull/1971": "Same-named functions in two schemas returned [120, 120, 120, 120] on main instead of [120, 15, 120, 15]; list arguments crashed on the 2nd call",
+    "https://github.com/unitycatalog/unitycatalog/pull/1975": "README quickstart crashed with RuntimeError: no running event loop on unitycatalog-client 0.6.0; works with the fix, Java client and docs output byte-identical",
+    "https://github.com/delta-io/delta/pull/7838": "New DeltaSuite test fails on master with the INTERNAL_ERROR from the issue and passes with the fix; compiles on Spark 4.0, 4.1 and 4.2"
   }
- },
- "proofs": {
-  "https://github.com/BerriAI/litellm/pull/45147": "Live runs on Claude Sonnet 5.5: finish_reason went from \"stop\" to \"tool_calls\", 3 of 3 times",
-  "https://github.com/mlflow/mlflow/pull/26439": "6 new test cases fail on master with ValidationError and pass with the fix",
-  "https://github.com/mlflow/mlflow/pull/26538": "6 new test cases fail on master with KeyError, 178 gateway tests pass with the fix",
-  "https://github.com/mlflow/mlflow/pull/26539": "10 new test cases fail on master and pass with the fix",
-  "https://github.com/unitycatalog/unitycatalog/pull/1966": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
-  "https://github.com/unitycatalog/unitycatalog/pull/1967": "On Windows 11, importing the client fails on main with \"No module named 'resource'\" and works with the fix; LiteLLM tests go from 2 errors to 11 passed",
-  "https://github.com/databricks/dbt-databricks/pull/1709": "13 new tests fail on main with wrong or unterminated COMMENT literals; also confirmed by rendering the macros with dbt run-operation",
-  "https://github.com/databricks/dbt-databricks/pull/1710": "7 of 8 new tests fail on main with unquoted struct field names; plain names stay unchanged",
-  "https://github.com/databricks/databricks-sql-python/pull/977": "On Windows 11, 196 of 200 fast downloads crashed with ZeroDivisionError on main; 200 of 200 succeed with the fix",
-  "https://github.com/databricks/databricks-sql-python/pull/979": "New tests fail on main and pass with the fix on both pandas 2.3.3 and 3.0.6; about 5 ms per million rows",
-  "https://github.com/pydantic/pydantic-settings/pull/1022": "Env var and secrets tests fail on main with pydantic 2.14 and pass with the fix on both 2.13.5 and 2.14",
-  "https://github.com/pydantic/pydantic-settings/pull/1024": "On pydantic 2.14, 27 test failures on main drop to the 6 Windows-only symlink tests with the fix",
-  "https://github.com/BerriAI/litellm/pull/45599": "Live proxy with real Claude calls: budget never enforced on main (200, 200, 200); with the fix 200 then 422 budget_exceeded",
-  "https://github.com/databricks/databricks-sql-python/pull/982": "Iterating 20,000 rows: 16.1 s on main, 0.10 s with the fix",
-  "https://github.com/databricks/dbt-databricks/pull/1711": "7 new tests fail on main with positional TABLE inserts below DBR 18; DBR 18+ output unchanged",
-  "https://github.com/unitycatalog/unitycatalog/pull/1969": "False, 0, 0.0 and empty string results fail on main (replaced by the no-output message) and pass with the fix",
-  "https://github.com/unitycatalog/unitycatalog/pull/1970": "An OpenAI tool call sending {\"radius\": 2} crashes on main and works with the fix; True is still rejected",
-  "https://github.com/unitycatalog/unitycatalog/pull/1971": "Same-named functions in two schemas returned [120, 120, 120, 120] on main instead of [120, 15, 120, 15]; list arguments crashed on the 2nd call",
-  "https://github.com/unitycatalog/unitycatalog/pull/1975": "README quickstart crashed with RuntimeError: no running event loop on unitycatalog-client 0.6.0; works with the fix, Java client and docs output byte-identical"
- }
 }
