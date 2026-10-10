@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T02:53:39Z",
+ "generated_at": "2026-10-10T03:07:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -38,6 +38,21 @@
    ],
    "stars": 3553,
    "forks": 680
+  },
+  {
+   "full": "delta-io/delta-rs",
+   "name": "delta-rs",
+   "url": "https://github.com/delta-io/delta-rs",
+   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
+   "icon": "🦀",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "Data Loss"
+   ],
+   "stars": 3329,
+   "forks": 679
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -96,7 +111,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60703,
+   "stars": 60711,
    "forks": 12194
   },
   {
@@ -131,6 +146,707 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "load_cdf fails with \"Object not found\" for partition values that need escaping (regression in 1.6.3)",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T03:06:55Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4843,
+    "url": "https://github.com/delta-io/delta-rs/pull/4843"
+   },
+   "issue": {
+    "number": 4842,
+    "url": "https://github.com/delta-io/delta-rs/issues/4842"
+   },
+   "proof": "New load_cdf test fails on main with Object not found for an escaped partition and passes with the fix; 1314 library tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -7,6 +7,7 @@"
+      ],
+      [
+       "c",
+       "use crate::{DeltaResult, DeltaTableError};"
+      ],
+      [
+       "c",
+       "use arrow_array::{Array, BooleanArray, RecordBatch, RecordBatchOptions};"
+      ],
+      [
+       "c",
+       "use arrow_schema::{DataType, Field, Schema, SchemaRef};"
+      ],
+      [
+       "a",
+       "use chrono::{TimeZone, Utc};"
+      ],
+      [
+       "c",
+       "use datafusion::common::ScalarValue;"
+      ],
+      [
+       "c",
+       "use datafusion::datasource::listing::PartitionedFile;"
+      ],
+      [
+       "c",
+       "use datafusion::datasource::physical_plan::ParquetFileReaderFactory;"
+      ],
+      [
+       "h",
+       "@@ -18,6 +19,7 @@"
+      ],
+      [
+       "c",
+       "use datafusion::physical_plan::metrics::ExecutionPlanMetricsSet;"
+      ],
+      [
+       "c",
+       "use delta_kernel::Engine;"
+      ],
+      [
+       "c",
+       "use delta_kernel::actions::deletion_vector::{DeletionVectorDescriptor, DeletionVectorStorageType};"
+      ],
+      [
+       "a",
+       "use object_store::ObjectMeta;"
+      ],
+      [
+       "c",
+       "use object_store::path::Path;"
+      ],
+      [
+       "c",
+       "use parquet::arrow::arrow_reader::{ArrowReaderOptions, RowSelection, RowSelector};"
+      ],
+      [
+       "c",
+       "use parquet::file::metadata::{PageIndexPolicy, ParquetMetaData};"
+      ],
+      [
+       "h",
+       "@@ -181,13 +183,28 @@"
+      ],
+      [
+       "c",
+       "    ];"
+      ],
+      [
+       "c",
+       "    part_values.extend_from_slice(table_partition_values);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    let part_file = PartitionedFile::new(&pair.add.path, pair.add.size as u64)"
+      ],
+      [
+       "a",
+       "    let part_file = partitioned_file(Path::parse(&pair.add.path)?, pair.add.size as u64)"
+      ],
+      [
+       "c",
+       "        .with_partition_values(part_values.clone())"
+      ],
+      [
+       "c",
+       "        .with_extension(access_plan);"
+      ],
+      [
+       "c",
+       "    groups.entry(part_values).or_default().push(part_file);"
+      ],
+      [
+       "c",
+       "    Ok(())"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "/// Build a [`PartitionedFile`] from an object store [`Path`]."
+      ],
+      [
+       "a",
+       "///"
+      ]
+     ],
+     "truncated": true,
+     "additions": 19,
+     "deletions": 2
+    },
+    {
+     "path": "crates/core/src/operations/load_cdf.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -40,6 +40,7 @@"
+      ],
+      [
+       "c",
+       "use datafusion::physical_plan::union::UnionExec;"
+      ],
+      [
+       "c",
+       "use datafusion_datasource::PartitionedFile;"
+      ],
+      [
+       "c",
+       "use delta_kernel::table_features::ColumnMappingMode;"
+      ],
+      [
+       "a",
+       "use object_store::path::Path;"
+      ],
+      [
+       "c",
+       "use std::collections::HashMap;"
+      ],
+      [
+       "c",
+       "use std::sync::Arc;"
+      ],
+      [
+       "c",
+       "use std::time::SystemTime;"
+      ],
+      [
+       "h",
+       "@@ -507,8 +508,9 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                let mut new_part_values = spec_partition_values.clone();"
+      ],
+      [
+       "c",
+       "                new_part_values.extend(partition_values);"
+      ],
+      [
+       "d",
+       "                let mut part_file = PartitionedFile::new(action.path(), action.size()? as u64)"
+      ],
+      [
+       "d",
+       "                    .with_partition_values(new_part_values.clone());"
+      ],
+      [
+       "a",
+       "                let mut part_file ="
+      ],
+      [
+       "a",
+       "                    partitioned_file(Path::parse(action.path())?, action.size()? as u64)"
+      ],
+      [
+       "a",
+       "                        .with_partition_values(new_part_values.clone());"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                if let Some(access_plan) = create_file_scan_plan("
+      ],
+      [
+       "c",
+       "                    Arc::clone(&self.log_store.engine()),"
+      ],
+      [
+       "h",
+       "@@ -1622,6 +1624,54 @@"
+      ],
+      [
+       "c",
+       "        Ok(())"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_load_cdf_with_escaped_partition_values() -> TestResult {"
+      ],
+      [
+       "a",
+       "        let delta_schema = TestSchemas::simple();"
+      ],
+      [
+       "a",
+       "        let table: DeltaTable = DeltaTable::new_in_memory()"
+      ],
+      [
+       "a",
+       "            .create()"
+      ],
+      [
+       "a",
+       "            .with_columns(delta_schema.fields().cloned())"
+      ]
+     ],
+     "truncated": true,
+     "additions": 52,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T03:00:38Z",
+    "updated_at": "2026-10-10T03:07:11Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 30
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "INT96 timestamps outside 1677-2262 wrap to 1816 when read through DataFusion, and optimize persists the wrong value",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T03:06:51Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4841,
+    "url": "https://github.com/delta-io/delta-rs/pull/4841"
+   },
+   "issue": {
+    "number": 4840,
+    "url": "https://github.com/delta-io/delta-rs/issues/4840"
+   },
+   "proof": "Scan and optimize tests read 1816-03-29 instead of 9999-12-31 on main and pass with the fix; 165 DataFusion integration tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/datafile/properties.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -14,12 +14,17 @@"
+      ],
+      [
+       "c",
+       "impl ReaderProperties {"
+      ],
+      [
+       "c",
+       "    /// Build DataFusion's `TableParquetOptions` for a `ParquetSource`, inheriting"
+      ],
+      [
+       "c",
+       "    /// the session's parquet execution settings."
+      ],
+      [
+       "a",
+       "    ///"
+      ],
+      [
+       "a",
+       "    /// INT96 timestamps are read as microseconds, the precision of Delta timestamps,"
+      ],
+      [
+       "a",
+       "    /// unless the session sets `coerce_int96`."
+      ],
+      [
+       "c",
+       "    pub fn to_table_parquet_options("
+      ],
+      [
+       "c",
+       "        &self,"
+      ],
+      [
+       "c",
+       "        session: &dyn datafusion::catalog::Session,"
+      ],
+      [
+       "c",
+       "    ) -> datafusion::config::TableParquetOptions {"
+      ],
+      [
+       "a",
+       "        let mut global = session.config().options().execution.parquet.clone();"
+      ],
+      [
+       "a",
+       "        global.coerce_int96.get_or_insert_with(|| \"us\".to_string());"
+      ],
+      [
+       "c",
+       "        datafusion::config::TableParquetOptions {"
+      ],
+      [
+       "d",
+       "            global: session.config().options().execution.parquet.clone(),"
+      ],
+      [
+       "a",
+       "            global,"
+      ],
+      [
+       "c",
+       "            ..Default::default()"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "    }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T02:48:16Z",
+    "updated_at": "2026-10-10T03:07:04Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 29
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "vacuum(full=True) deletes deletion vector files that are still referenced, making the table unreadable",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T03:06:48Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4839,
+    "url": "https://github.com/delta-io/delta-rs/pull/4839"
+   },
+   "issue": {
+    "number": 4838,
+    "url": "https://github.com/delta-io/delta-rs/issues/4838"
+   },
+   "proof": "New vacuum test fails on main because a full vacuum would delete a deletion vector file still in use, and passes with the fix; all 35 vacuum tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1,10 +1,9 @@"
+      ],
+      [
+       "c",
+       "use std::collections::HashMap;"
+      ],
+      [
+       "c",
+       "use std::sync::Arc;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "use crate::DeltaResult;"
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::cdf::{CHANGE_TYPE_COL, CdcDataSpec, FileAction, ResolvedPair};"
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::{get_null_of_arrow_type, to_correct_scalar_value};"
+      ],
+      [
+       "d",
+       "use crate::kernel::StorageType;"
+      ],
+      [
+       "d",
+       "use crate::{DeltaResult, DeltaTableError};"
+      ],
+      [
+       "c",
+       "use arrow_array::{Array, BooleanArray, RecordBatch, RecordBatchOptions};"
+      ],
+      [
+       "c",
+       "use arrow_schema::{DataType, Field, Schema, SchemaRef};"
+      ],
+      [
+       "c",
+       "use datafusion::common::ScalarValue;"
+      ],
+      [
+       "h",
+       "@@ -17,7 +16,7 @@"
+      ],
+      [
+       "c",
+       "use datafusion::physical_expr::PhysicalExpr;"
+      ],
+      [
+       "c",
+       "use datafusion::physical_plan::metrics::ExecutionPlanMetricsSet;"
+      ],
+      [
+       "c",
+       "use delta_kernel::Engine;"
+      ],
+      [
+       "d",
+       "use delta_kernel::actions::deletion_vector::{DeletionVectorDescriptor, DeletionVectorStorageType};"
+      ],
+      [
+       "a",
+       "use delta_kernel::actions::deletion_vector::DeletionVectorDescriptor;"
+      ],
+      [
+       "c",
+       "use object_store::path::Path;"
+      ],
+      [
+       "c",
+       "use parquet::arrow::arrow_reader::{ArrowReaderOptions, RowSelection, RowSelector};"
+      ],
+      [
+       "c",
+       "use parquet::file::metadata::{PageIndexPolicy, ParquetMetaData};"
+      ],
+      [
+       "h",
+       "@@ -314,26 +313,6 @@"
+      ],
+      [
+       "c",
+       "    Ok(pruned)"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "impl TryInto<DeletionVectorDescriptor> for crate::kernel::DeletionVectorDescriptor {"
+      ],
+      [
+       "d",
+       "    type Error = DeltaTableError;"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "    fn try_into(self) -> DeltaResult<DeletionVectorDescriptor> {"
+      ],
+      [
+       "d",
+       "        let storage_type = match self.storage_type {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 2,
+     "deletions": 23
+    },
+    {
+     "path": "crates/core/src/kernel/models/actions.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -935,6 +935,30 @@"
+      ],
+      [
+       "c",
+       "    pub cardinality: i64,"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "impl TryFrom<DeletionVectorDescriptor>"
+      ],
+      [
+       "a",
+       "    for delta_kernel::actions::deletion_vector::DeletionVectorDescriptor"
+      ],
+      [
+       "a",
+       "{"
+      ],
+      [
+       "a",
+       "    type Error = delta_kernel::Error;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    fn try_from(dv: DeletionVectorDescriptor) -> Result<Self, Self::Error> {"
+      ],
+      [
+       "a",
+       "        use delta_kernel::actions::deletion_vector::DeletionVectorStorageType;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        let storage_type = match dv.storage_type {"
+      ],
+      [
+       "a",
+       "            StorageType::UuidRelativePath => DeletionVectorStorageType::PersistedRelative,"
+      ],
+      [
+       "a",
+       "            StorageType::Inline => DeletionVectorStorageType::Inline,"
+      ],
+      [
+       "a",
+       "            StorageType::AbsolutePath => DeletionVectorStorageType::PersistedAbsolute,"
+      ],
+      [
+       "a",
+       "        };"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Self::try_new("
+      ],
+      [
+       "a",
+       "            storage_type,"
+      ],
+      [
+       "a",
+       "            dv.path_or_inline_dv,"
+      ],
+      [
+       "a",
+       "            dv.offset,"
+      ],
+      [
+       "a",
+       "            dv.size_in_bytes,"
+      ],
+      [
+       "a",
+       "            dv.cardinality,"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "#[derive(Serialize, Deserialize, Debug, Clone, Default)]"
+      ],
+      [
+       "c",
+       "#[serde(rename_all = \"camelCase\")]"
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T02:36:59Z",
+    "updated_at": "2026-10-10T03:07:01Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 28
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta",
