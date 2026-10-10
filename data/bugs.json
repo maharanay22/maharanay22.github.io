@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T13:44:31Z",
+ "generated_at": "2026-10-10T13:46:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -974,12 +974,12 @@
     }
    ],
    "track": {
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T13:41:28Z",
-    "updated_at": "2026-10-10T13:44:03Z",
+    "updated_at": "2026-10-10T13:44:16Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -987,8 +987,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 29
   },
