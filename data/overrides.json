@@ -125,6 +125,8 @@
     "https://github.com/delta-io/delta-rs/pull/4843": "New load_cdf test fails on main with Object not found for an escaped partition and passes with the fix; 1314 library tests pass",
     "https://github.com/delta-io/delta/pull/7840": "Clone test fails on master with TypeError because clone returns a raw py4j object, and passes with the fix; also revives two clone tests that had never run",
     "https://github.com/delta-io/delta/pull/7841": "CREATE, CTAS, REPLACE and DeltaTableBuilder with CLUSTER BY (A, B.C) fail on master and pass with the fix; case-sensitive mode still rejects it",
-    "https://github.com/delta-io/delta/pull/7843": "Generated column test fails on master with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN and passes with the fix; no other changes across GeneratedColumnSuite and CheckConstraintsSuite"
+    "https://github.com/delta-io/delta/pull/7843": "Generated column test fails on master with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN and passes with the fix; no other changes across GeneratedColumnSuite and CheckConstraintsSuite",
+    "https://github.com/delta-io/delta-rs/pull/4850": "New Python test shows count() returns 10 for 8 real rows and 100 for 98 on main, and matches a full scan with the fix; Rust test checks the restored deletion_vector column against the log",
+    "https://github.com/delta-io/delta-rs/pull/4847": "Removing one stale numpy pin turns the four failing Python CI jobs (PySpark, PyArrow latest, LakeFS, Unity Catalog) green"
   }
 }
