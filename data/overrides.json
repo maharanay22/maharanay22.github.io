@@ -122,6 +122,9 @@
     "https://github.com/delta-io/delta/pull/7838": "New DeltaSuite test fails on master with the INTERNAL_ERROR from the issue and passes with the fix; compiles on Spark 4.0, 4.1 and 4.2",
     "https://github.com/delta-io/delta-rs/pull/4839": "New vacuum test fails on main because a full vacuum would delete a deletion vector file still in use, and passes with the fix; all 35 vacuum tests pass",
     "https://github.com/delta-io/delta-rs/pull/4841": "Scan and optimize tests read 1816-03-29 instead of 9999-12-31 on main and pass with the fix; 165 DataFusion integration tests pass",
-    "https://github.com/delta-io/delta-rs/pull/4843": "New load_cdf test fails on main with Object not found for an escaped partition and passes with the fix; 1314 library tests pass"
+    "https://github.com/delta-io/delta-rs/pull/4843": "New load_cdf test fails on main with Object not found for an escaped partition and passes with the fix; 1314 library tests pass",
+    "https://github.com/delta-io/delta/pull/7840": "Clone test fails on master with TypeError because clone returns a raw py4j object, and passes with the fix; also revives two clone tests that had never run",
+    "https://github.com/delta-io/delta/pull/7841": "CREATE, CTAS, REPLACE and DeltaTableBuilder with CLUSTER BY (A, B.C) fail on master and pass with the fix; case-sensitive mode still rejects it",
+    "https://github.com/delta-io/delta/pull/7843": "Generated column test fails on master with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN and passes with the fix; no other changes across GeneratedColumnSuite and CheckConstraintsSuite"
   }
 }
