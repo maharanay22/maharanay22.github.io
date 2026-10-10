@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T04:03:30Z",
+ "generated_at": "2026-10-10T08:36:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28331,
-   "forks": 6437
+   "stars": 28333,
+   "forks": 6439
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,8 +51,8 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9039,
-   "forks": 2196
+   "stars": 9040,
+   "forks": 2197
   },
   {
    "full": "delta-io/delta-rs",
@@ -67,7 +67,7 @@
     "Data Loss"
    ],
    "stars": 3329,
-   "forks": 679
+   "forks": 680
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -111,8 +111,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49985,
-   "forks": 20483
+   "stars": 49987,
+   "forks": 20484
   },
   {
    "full": "BerriAI/litellm",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60736,
-   "forks": 12197
+   "stars": 60819,
+   "forks": 12204
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -141,7 +141,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1471,
+   "stars": 1472,
    "forks": 219
   }
  ],
@@ -945,15 +945,19 @@
    "track": {
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T02:48:16Z",
-    "updated_at": "2026-10-10T03:07:04Z",
+    "updated_at": "2026-10-10T07:04:08Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "ion-elgreco",
+     "at": "2026-10-10T07:04:08Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "ion-elgreco commented. Reply on the PR"
    },
    "id": 29
   },
