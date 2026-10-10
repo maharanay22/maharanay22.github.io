@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T22:15:00Z",
+ "generated_at": "2026-10-10T22:24:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -127,7 +127,7 @@
     "Tool Calls"
    ],
    "stars": 60903,
-   "forks": 12216
+   "forks": 12215
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -424,8 +424,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T22:05:26Z",
@@ -433,8 +433,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 36
   },
