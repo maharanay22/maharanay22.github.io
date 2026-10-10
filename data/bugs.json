@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T14:45:13Z",
+ "generated_at": "2026-10-10T15:23:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28335,
+   "stars": 28336,
    "forks": 6440
   },
   {
@@ -37,6 +37,21 @@
     "Windows"
    ],
    "stars": 3553,
+   "forks": 680
+  },
+  {
+   "full": "delta-io/delta-rs",
+   "name": "delta-rs",
+   "url": "https://github.com/delta-io/delta-rs",
+   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
+   "icon": "🦀",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "Data Loss"
+   ],
+   "stars": 3329,
    "forks": 680
   },
   {
@@ -67,22 +82,7 @@
     "String regex"
    ],
    "stars": 49989,
-   "forks": 20482
-  },
-  {
-   "full": "delta-io/delta-rs",
-   "name": "delta-rs",
-   "url": "https://github.com/delta-io/delta-rs",
-   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
-   "icon": "🦀",
-   "category": "lakehouse storage",
-   "tags": [
-    "Rust",
-    "Python",
-    "Data Loss"
-   ],
-   "stars": 3329,
-   "forks": 680
+   "forks": 20483
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -126,7 +126,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60876,
+   "stars": 60878,
    "forks": 12210
   },
   {
@@ -146,6 +146,79 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Drop the numpy 1.26.4 pin from the pyspark dependency group",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T15:22:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4847,
+    "url": "https://github.com/delta-io/delta-rs/pull/4847"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "python/pyproject.toml",
+     "lines": [
+      [
+       "h",
+       "@@ -115,7 +115,6 @@"
+      ],
+      [
+       "c",
+       "    \"pyspark==4.0.1\","
+      ],
+      [
+       "c",
+       "    \"delta-spark\","
+      ],
+      [
+       "c",
+       "    \"pandas<3\","
+      ],
+      [
+       "d",
+       "    \"numpy==1.26.4\", # pyspark is not compatible with latest numpy"
+      ],
+      [
+       "c",
+       "]"
+      ],
+      [
+       "c",
+       "other = ["
+      ],
+      [
+       "c",
+       "    \"azure-storage-blob==12.20.0\","
+      ]
+     ],
+     "truncated": false,
+     "additions": 0,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T15:17:02Z",
+    "updated_at": "2026-10-10T15:22:52Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 35
+  },
   {
    "kind": "report",
    "repo": "pandas-dev/pandas",
@@ -996,7 +1069,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T13:41:28Z",
-    "updated_at": "2026-10-10T14:26:11Z",
+    "updated_at": "2026-10-10T14:48:22Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
