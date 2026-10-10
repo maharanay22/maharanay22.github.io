@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T03:07:56Z",
+ "generated_at": "2026-10-10T04:03:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -38,6 +38,21 @@
    ],
    "stars": 3553,
    "forks": 680
+  },
+  {
+   "full": "delta-io/delta",
+   "name": "Delta Lake",
+   "url": "https://github.com/delta-io/delta",
+   "about": "The open table format behind the lakehouse: ACID transactions, time travel and schema evolution on top of Parquet, used with Apache Spark",
+   "icon": "🔺",
+   "category": "lakehouse storage",
+   "tags": [
+    "Spark",
+    "Scala",
+    "Lakehouse"
+   ],
+   "stars": 9039,
+   "forks": 2196
   },
   {
    "full": "delta-io/delta-rs",
@@ -111,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60711,
-   "forks": 12194
+   "stars": 60736,
+   "forks": 12197
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -128,24 +143,410 @@
    ],
    "stars": 1471,
    "forks": 219
-  },
-  {
-   "full": "delta-io/delta",
-   "name": "Delta Lake",
-   "url": "https://github.com/delta-io/delta",
-   "about": "The open table format behind the lakehouse: ACID transactions, time travel and schema evolution on top of Parquet, used with Apache Spark",
-   "icon": "🔺",
-   "category": "lakehouse storage",
-   "tags": [
-    "Spark",
-    "Scala",
-    "Lakehouse"
-   ],
-   "stars": 9039,
-   "forks": 2195
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta",
+   "status": "review",
+   "title": "[Spark] Generated column using BETWEEN fails with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T04:02:54Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 7843,
+    "url": "https://github.com/delta-io/delta/pull/7843"
+   },
+   "issue": {
+    "number": 7842,
+    "url": "https://github.com/delta-io/delta/issues/7842"
+   },
+   "proof": "Generated column test fails on master with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN and passes with the fix; no other changes across GeneratedColumnSuite and CheckConstraintsSuite",
+   "files": [
+    {
+     "path": "spark/src/main/scala/org/apache/spark/sql/delta/AllowedUserProvidedExpressions.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -298,6 +298,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    // predicates"
+      ],
+      [
+       "c",
+       "    expression[And](\"and\"),"
+      ],
+      [
+       "a",
+       "    expression[Between](\"between\"),"
+      ],
+      [
+       "c",
+       "    expression[In](\"in\"),"
+      ],
+      [
+       "c",
+       "    expression[Not](\"not\"),"
+      ],
+      [
+       "c",
+       "    expression[Or](\"or\"),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T03:10:14Z",
+    "updated_at": "2026-10-10T04:02:55Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
+   "id": 33
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta",
+   "status": "review",
+   "title": "DeltaTable.clusterBy case sensitive which is inconsistent with document",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T04:02:51Z",
+   "merged_at": null,
+   "reported": false,
+   "pr": {
+    "number": 7841,
+    "url": "https://github.com/delta-io/delta/pull/7841"
+   },
+   "issue": {
+    "number": 4806,
+    "url": "https://github.com/delta-io/delta/issues/4806"
+   },
+   "proof": "CREATE, CTAS, REPLACE and DeltaTableBuilder with CLUSTER BY (A, B.C) fail on master and pass with the fix; case-sensitive mode still rejects it",
+   "files": [
+    {
+     "path": "spark/src/main/scala/org/apache/spark/sql/delta/DeltaAnalysis.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -38,6 +38,7 @@"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.files.{TahoeFileIndex, TahoeLogFileIndex}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.metering.DeltaLogging"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.schema.SchemaUtils"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.delta.skipping.clustering.temp.{ClusterByTransform => TempClusterByTransform}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.sources._"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.sources.DeltaSQLConf.AllowAutomaticWideningMode"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.delta.util.AnalysisHelper"
+      ],
+      [
+       "h",
+       "@@ -126,6 +127,21 @@"
+      ],
+      [
+       "c",
+       "        a"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    // Spark normalizes the columns of PARTITIONED BY against the table schema, but not the"
+      ],
+      [
+       "a",
+       "    // columns of Delta's CLUSTER BY transform."
+      ],
+      [
+       "a",
+       "    case create: V2CreateTablePlan if create.childrenResolved =>"
+      ],
+      [
+       "a",
+       "      val resolver = session.sessionState.conf.resolver"
+      ],
+      [
+       "a",
+       "      val partitioning = create.partitioning.map {"
+      ],
+      [
+       "a",
+       "        case TempClusterByTransform(columnNames) =>"
+      ],
+      [
+       "a",
+       "          TempClusterByTransform(columnNames.map { column =>"
+      ],
+      [
+       "a",
+       "            create.tableSchema.findNestedField(column.fieldNames.toSeq, resolver = resolver)"
+      ],
+      [
+       "a",
+       "              .map { case (path, field) => FieldReference(path :+ field.name) }"
+      ],
+      [
+       "a",
+       "              .getOrElse(column)"
+      ],
+      [
+       "a",
+       "          })"
+      ],
+      [
+       "a",
+       "        case transform => transform"
+      ],
+      [
+       "a",
+       "      }"
+      ],
+      [
+       "a",
+       "      if (partitioning == create.partitioning) create else create.withPartitioning(partitioning)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    /**"
+      ],
+      [
+       "c",
+       "     * Handling create table like when a delta target (provider)"
+      ],
+      [
+       "c",
+       "     * is provided explicitly or when the source table is a delta table"
+      ]
+     ],
+     "truncated": false,
+     "additions": 16,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T03:42:58Z",
+    "updated_at": "2026-10-10T04:02:51Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
+   "id": 32
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta",
+   "status": "review",
+   "title": "[Spark] Python DeltaTable.clone, cloneAtVersion and cloneAtTimestamp return a py4j JavaObject instead of a DeltaTable",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T04:02:48Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 7840,
+    "url": "https://github.com/delta-io/delta/pull/7840"
+   },
+   "issue": {
+    "number": 7839,
+    "url": "https://github.com/delta-io/delta/issues/7839"
+   },
+   "proof": "Clone test fails on master with TypeError because clone returns a raw py4j object, and passes with the fix; also revives two clone tests that had never run",
+   "files": [
+    {
+     "path": "python/delta/tables.py",
+     "lines": [
+      [
+       "h",
+       "@@ -754,7 +754,8 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        DeltaTable._verify_clone_types(target, isShallow, replace, properties)"
+      ],
+      [
+       "d",
+       "        return self._jdt.clone(target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        jdt = self._jdt.clone(target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        return DeltaTable(self._spark, jdt)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def cloneAtVersion(  # type: ignore[no-untyped-def]"
+      ],
+      [
+       "c",
+       "        self, version, target, isShallow=False, replace=False, properties=None"
+      ],
+      [
+       "h",
+       "@@ -784,7 +785,8 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        DeltaTable._verify_clone_types(target, isShallow, replace, properties, version=version)"
+      ],
+      [
+       "d",
+       "        return self._jdt.cloneAtVersion(version, target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        jdt = self._jdt.cloneAtVersion(version, target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        return DeltaTable(self._spark, jdt)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def cloneAtTimestamp(  # type: ignore[no-untyped-def]"
+      ],
+      [
+       "c",
+       "        self, timestamp, target, isShallow=False, replace=False, properties=None"
+      ],
+      [
+       "h",
+       "@@ -818,7 +820,8 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        DeltaTable._verify_clone_types(target, isShallow, replace, properties, timestamp)"
+      ],
+      [
+       "d",
+       "        return self._jdt.cloneAtTimestamp(timestamp, target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        jdt = self._jdt.cloneAtTimestamp(timestamp, target, isShallow, replace, properties)"
+      ],
+      [
+       "a",
+       "        return DeltaTable(self._spark, jdt)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    @classmethod"
+      ],
+      [
+       "c",
+       "    def _verify_clone_types("
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T03:38:53Z",
+    "updated_at": "2026-10-10T04:02:49Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
+   "id": 31
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
