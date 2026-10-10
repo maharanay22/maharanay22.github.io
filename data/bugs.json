@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T15:23:13Z",
+ "generated_at": "2026-10-10T18:56:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28336,
+   "stars": 28337,
    "forks": 6440
   },
   {
@@ -52,7 +52,7 @@
     "Data Loss"
    ],
    "stars": 3329,
-   "forks": 680
+   "forks": 681
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49989,
+   "stars": 49993,
    "forks": 20483
   },
   {
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60878,
-   "forks": 12210
+   "stars": 60892,
+   "forks": 12212
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -205,17 +205,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T15:17:02Z",
-    "updated_at": "2026-10-10T15:22:52Z",
+    "updated_at": "2026-10-10T16:32:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 35
   },
