@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T20:37:31Z",
+ "generated_at": "2026-10-10T22:15:00Z",
  "stages": [
   "reported",
   "fix sent",
@@ -40,21 +40,6 @@
    "forks": 680
   },
   {
-   "full": "pandas-dev/pandas",
-   "name": "pandas",
-   "url": "https://github.com/pandas-dev/pandas",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "icon": "🐼",
-   "category": "data analysis",
-   "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
-   ],
-   "stars": 49993,
-   "forks": 20483
-  },
-  {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
    "url": "https://github.com/delta-io/delta-rs",
@@ -68,6 +53,21 @@
    ],
    "stars": 3329,
    "forks": 681
+  },
+  {
+   "full": "pandas-dev/pandas",
+   "name": "pandas",
+   "url": "https://github.com/pandas-dev/pandas",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "icon": "🐼",
+   "category": "data analysis",
+   "tags": [
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
+   ],
+   "stars": 49993,
+   "forks": 20483
   },
   {
    "full": "delta-io/delta",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60899,
-   "forks": 12215
+   "stars": 60903,
+   "forks": 12216
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -146,6 +146,298 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "DeltaTable.count() ignores deletion vectors and returns more rows than the table has",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T22:14:19Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4850,
+    "url": "https://github.com/delta-io/delta-rs/pull/4850"
+   },
+   "issue": {
+    "number": 4849,
+    "url": "https://github.com/delta-io/delta-rs/issues/4849"
+   },
+   "proof": "New Python test shows count() returns 10 for 8 real rows and 100 for 98 on main, and matches a full scan with the fix; Rust test checks the restored deletion_vector column against the log",
+   "files": [
+    {
+     "path": "crates/core/src/table/state.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -9,7 +9,9 @@"
+      ],
+      [
+       "c",
+       "use arrow_select::coalesce::BatchCoalescer;"
+      ],
+      [
+       "c",
+       "use delta_kernel::engine::arrow_conversion::{TryIntoArrow, TryIntoKernel};"
+      ],
+      [
+       "c",
+       "use delta_kernel::expressions::column_expr_ref;"
+      ],
+      [
+       "a",
+       "use delta_kernel::scan::scan_row_schema;"
+      ],
+      [
+       "c",
+       "use delta_kernel::schema::{SchemaRef as KernelSchemaRef, StructField};"
+      ],
+      [
+       "a",
+       "use delta_kernel::table_features::TableFeature;"
+      ],
+      [
+       "c",
+       "use delta_kernel::table_properties::TableProperties;"
+      ],
+      [
+       "c",
+       "use delta_kernel::{EvaluationHandler, Expression};"
+      ],
+      [
+       "c",
+       "use futures::stream::BoxStream;"
+      ],
+      [
+       "h",
+       "@@ -185,6 +187,9 @@"
+      ],
+      [
+       "c",
+       "    ///   (if available)."
+      ],
+      [
+       "c",
+       "    /// * `partition.{partition column name}` (matches column type): value of"
+      ],
+      [
+       "c",
+       "    ///   partition the file corresponds to."
+      ],
+      [
+       "a",
+       "    /// * `deletion_vector.{field}`: the file's deletion vector descriptor, with"
+      ],
+      [
+       "a",
+       "    ///   `cardinality` (Int64) being the number of deleted rows. Only present when"
+      ],
+      [
+       "a",
+       "    ///   the table supports deletion vectors, and null for files without one."
+      ],
+      [
+       "c",
+       "    pub fn add_actions_table("
+      ],
+      [
+       "c",
+       "        &self,"
+      ],
+      [
+       "c",
+       "        flatten: bool,"
+      ],
+      [
+       "h",
+       "@@ -229,6 +234,9 @@"
+      ],
+      [
+       "c",
+       "    ///   (if available)."
+      ],
+      [
+       "c",
+       "    /// * `partition.{partition column name}` (matches column type): value of"
+      ],
+      [
+       "c",
+       "    ///   partition the file corresponds to."
+      ],
+      [
+       "a",
+       "    /// * `deletion_vector.{field}`: the file's deletion vector descriptor, with"
+      ],
+      [
+       "a",
+       "    ///   `cardinality` (Int64) being the number of deleted rows. Only present when"
+      ],
+      [
+       "a",
+       "    ///   the table supports deletion vectors, and null for files without one."
+      ],
+      [
+       "c",
+       "    pub(crate) fn add_actions_table("
+      ],
+      [
+       "c",
+       "        &self,"
+      ],
+      [
+       "c",
+       "        flatten: bool,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 83,
+     "deletions": 0
+    },
+    {
+     "path": "python/deltalake/table.py",
+     "lines": [
+      [
+       "h",
+       "@@ -786,21 +786,27 @@"
+      ],
+      [
+       "c",
+       "        This requires that add actions have been added to the Delta table with"
+      ],
+      [
+       "c",
+       "        per-file statistics enabled. Because this is an optional field this"
+      ],
+      [
+       "c",
+       "        \"count\" will be less than or equal to the true row count of the table."
+      ],
+      [
+       "a",
+       "        Rows marked as deleted by deletion vectors are not counted."
+      ],
+      [
+       "c",
+       "        In order to get an exact number of rows a full table scan must happen"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            The approximate number of rows for this specific table"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "d",
+       "        total_rows = 0"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "        for value in self.get_add_actions().column(\"num_records\").to_pylist():"
+      ],
+      [
+       "d",
+       "            # Add action file statistics are optional and so while most modern"
+      ],
+      [
+       "d",
+       "            # tables are _likely_ to have this information it is not"
+      ],
+      [
+       "d",
+       "            # guaranteed."
+      ],
+      [
+       "d",
+       "            if value is not None:"
+      ],
+      [
+       "d",
+       "                total_rows += value"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "        return total_rows"
+      ],
+      [
+       "a",
+       "        actions = self.get_add_actions(flatten=True)"
+      ],
+      [
+       "a",
+       "        num_records: list[int | None] = actions.column(\"num_records\").to_pylist()"
+      ],
+      [
+       "a",
+       "        deleted_rows: list[int | None]"
+      ],
+      [
+       "a",
+       "        if \"deletion_vector.cardinality\" in actions.column_names:"
+      ],
+      [
+       "a",
+       "            deleted_rows = actions.column(\"deletion_vector.cardinality\").to_pylist()"
+      ],
+      [
+       "a",
+       "        else:"
+      ],
+      [
+       "a",
+       "            deleted_rows = [None] * len(num_records)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        # Add action file statistics are optional and so while most modern"
+      ],
+      [
+       "a",
+       "        # tables are _likely_ to have this information it is not guaranteed."
+      ]
+     ],
+     "truncated": true,
+     "additions": 20,
+     "deletions": 10
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-10T22:05:26Z",
+    "updated_at": "2026-10-10T22:14:32Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 36
+  },
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
@@ -452,7 +744,7 @@
     "url": "https://github.com/delta-io/delta-rs/pull/4847"
    },
    "issue": null,
-   "proof": null,
+   "proof": "Removing one stale numpy pin turns the four failing Python CI jobs (PySpark, PyArrow latest, LakeFS, Unity Catalog) green",
    "files": [
     {
      "path": "python/pyproject.toml",
@@ -502,7 +794,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T15:17:02Z",
-    "updated_at": "2026-10-10T16:32:33Z",
+    "updated_at": "2026-10-10T20:54:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2241,17 +2533,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-09T20:46:46Z",
-    "updated_at": "2026-10-10T01:15:27Z",
+    "last_push": "2026-10-10T20:44:03Z",
+    "updated_at": "2026-10-10T20:44:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 25
   },
@@ -3592,17 +3884,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-09T20:46:43Z",
-    "updated_at": "2026-10-10T01:15:26Z",
+    "last_push": "2026-10-10T20:44:02Z",
+    "updated_at": "2026-10-10T20:44:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 18
   },
@@ -4058,7 +4350,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-08T22:25:59Z",
-    "updated_at": "2026-10-08T22:35:48Z",
+    "updated_at": "2026-10-10T20:44:28Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4532,7 +4824,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-08T22:35:21Z",
-    "updated_at": "2026-10-08T22:35:23Z",
+    "updated_at": "2026-10-10T20:44:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4824,17 +5116,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-09T20:46:41Z",
-    "updated_at": "2026-10-10T01:15:25Z",
+    "last_push": "2026-10-10T20:44:00Z",
+    "updated_at": "2026-10-10T20:44:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 12
   },
