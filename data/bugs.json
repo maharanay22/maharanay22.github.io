@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-10T08:36:57Z",
+ "generated_at": "2026-10-10T13:34:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28333,
-   "forks": 6439
+   "stars": 28335,
+   "forks": 6440
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -53,6 +53,21 @@
    ],
    "stars": 9040,
    "forks": 2197
+  },
+  {
+   "full": "pandas-dev/pandas",
+   "name": "pandas",
+   "url": "https://github.com/pandas-dev/pandas",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "icon": "🐼",
+   "category": "data analysis",
+   "tags": [
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
+   ],
+   "stars": 49989,
+   "forks": 20484
   },
   {
    "full": "delta-io/delta-rs",
@@ -100,21 +115,6 @@
    "forks": 221
   },
   {
-   "full": "pandas-dev/pandas",
-   "name": "pandas",
-   "url": "https://github.com/pandas-dev/pandas",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "icon": "🐼",
-   "category": "data analysis",
-   "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
-   ],
-   "stars": 49987,
-   "forks": 20484
-  },
-  {
    "full": "BerriAI/litellm",
    "name": "LiteLLM",
    "url": "https://github.com/BerriAI/litellm",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60819,
-   "forks": 12204
+   "stars": 60868,
+   "forks": 12208
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -141,11 +141,42 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1472,
+   "stars": 1475,
    "forks": 219
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "pandas-dev/pandas",
+   "status": "open",
+   "title": "str.contains/match/fullmatch/count with \\s on pyarrow-backed strings miss \\v and \\x1c-\\x1f",
+   "date": "2026-10-10",
+   "created_at": "2026-10-10T13:33:45Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 70991,
+    "url": "https://github.com/pandas-dev/pandas/issues/70991"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-10T13:33:54Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 34
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta",
@@ -5317,128 +5348,128 @@
      "lines": [
       [
        "h",
-       "@@ -107,6 +107,75 @@"
+       "@@ -50,12 +50,12 @@"
       ],
       [
        "c",
-       "            return False"
-      ],
-      [
-       "c",
-       "        return has_unsupported_code(tokens)"
+       "        raise NotImplementedError"
       ],
       [
        "c",
        ""
       ],
       [
-       "a",
+       "c",
        "    @staticmethod"
       ],
       [
-       "a",
-       "    def _has_unicode_sensitive_regex(pat: str | re.Pattern[str]) -> bool:"
+       "d",
+       "    def _has_unsupported_regex(pat: str | re.Pattern[str]) -> bool:"
       ],
       [
        "a",
+       "    def _regex_nodes(pat: str | re.Pattern[str]) -> list[tuple[Any, Any]]:"
+      ],
+      [
+       "c",
        "        \"\"\""
       ],
       [
-       "a",
-       "        Determine if regex pattern uses ``\\\\w``, ``\\\\d``, ``\\\\s`` or ``\\\\b``"
+       "d",
+       "        Determine if regex pattern contains features not supported by RE2 / pyarrow."
       ],
       [
        "a",
-       "        (or their negations), which only match ASCII characters in RE2 / pyarrow"
+       "        Parse a regex pattern into a flat list of its (op, arg) nodes."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        This includes lookaround (lookahead or lookbehind) assertions and"
+      ],
+      [
+       "d",
+       "        backreferences."
       ],
       [
        "a",
-       "        but are Unicode-aware in Python's ``re``."
+       "        Nodes nested in groups, branches, repeats and character classes are"
       ],
       [
        "a",
+       "        included."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Parameters"
+      ],
+      [
+       "c",
+       "        ----------"
+      ],
+      [
+       "h",
+       "@@ -64,8 +64,9 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns"
+      ],
+      [
+       "c",
+       "        -------"
+      ],
+      [
+       "d",
+       "        bool"
+      ],
+      [
+       "d",
+       "            Whether `pat` contains a lookahead or lookbehind."
+      ],
+      [
+       "a",
+       "        list[tuple[Any, Any]]"
+      ],
+      [
+       "a",
+       "            The nodes of `pat`, or an empty list if Python's ``re`` cannot"
+      ],
+      [
+       "a",
+       "            parse it."
+      ],
+      [
+       "c",
        "        \"\"\""
       ],
       [
-       "a",
-       "        from re import _parser  # type: ignore[attr-defined]"
+       "c",
+       "        try:"
       ],
       [
-       "a",
-       ""
+       "c",
+       "            # error: Module \"re\" has no attribute \"_parser\""
       ],
       [
-       "a",
-       "        categories = {"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_WORD,"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_NOT_WORD,"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_DIGIT,"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_NOT_DIGIT,"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_SPACE,"
-      ],
-      [
-       "a",
-       "            _parser.CATEGORY_NOT_SPACE,"
-      ],
-      [
-       "a",
-       "        }"
-      ],
-      [
-       "a",
-       "        boundaries = {_parser.AT_BOUNDARY, _parser.AT_NON_BOUNDARY}"
-      ],
-      [
-       "a",
-       "        repeats = {"
-      ],
-      [
-       "a",
-       "            _parser.MAX_REPEAT,"
-      ],
-      [
-       "a",
-       "            _parser.MIN_REPEAT,"
-      ],
-      [
-       "a",
-       "            _parser.POSSESSIVE_REPEAT,"
-      ],
-      [
-       "a",
-       "        }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "        def uses_unicode_class(tokens) -> bool:"
-      ],
-      [
-       "a",
-       "            for op_code, argument in tokens:"
+       "h",
+       "@@ -78,34 +79,66 @@"
       ]
      ],
      "truncated": true,
-     "additions": 69,
-     "deletions": 0
+     "additions": 58,
+     "deletions": 25
     },
     {
      "path": "pandas/core/arrays/string_arrow.py",
@@ -5570,17 +5601,17 @@
     }
    ],
    "track": {
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "stage": 3,
+    "checks": "running",
+    "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-07T02:59:37Z",
-    "updated_at": "2026-10-09T15:22:48Z",
+    "last_push": "2026-10-10T13:27:44Z",
+    "updated_at": "2026-10-10T13:33:47Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Requested changes are pushed. Waiting for rhshadrach to look again"
    },
    "id": 7
   },
