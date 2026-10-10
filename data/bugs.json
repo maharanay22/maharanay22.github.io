@@ -1,6 +1,13 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-09T23:59:58Z",
+ "generated_at": "2026-10-10T02:10:55Z",
+ "stages": [
+  "reported",
+  "fix sent",
+  "tests",
+  "review",
+  "merged"
+ ],
  "repos": [
   {
    "full": "mlflow/mlflow",
@@ -14,8 +21,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28330,
-   "forks": 6436
+   "stars": 28331,
+   "forks": 6437
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -74,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49981,
+   "stars": 49985,
    "forks": 20483
   },
   {
@@ -89,8 +96,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60649,
-   "forks": 12186
+   "stars": 60693,
+   "forks": 12192
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -393,6 +400,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T21:47:05Z",
+    "updated_at": "2026-10-09T21:49:14Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 26
   },
   {
@@ -536,6 +556,19 @@
      "deletions": 6
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T20:46:46Z",
+    "updated_at": "2026-10-10T01:15:27Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+   },
    "id": 25
   },
   {
@@ -635,6 +668,21 @@
      "deletions": 2
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "community approved",
+    "approved_by": [
+     "VANDRANKI"
+    ],
+    "last_push": "2026-10-09T14:28:27Z",
+    "updated_at": "2026-10-10T01:08:53Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+   },
    "id": 24
   },
   {
@@ -785,6 +833,19 @@
      "deletions": 3
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "bot approved",
+    "approved_by": [],
+    "last_push": "2026-10-09T14:13:08Z",
+    "updated_at": "2026-10-10T01:15:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 23
   },
   {
@@ -803,6 +864,19 @@
    },
    "proof": null,
    "files": [],
+   "track": {
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-09T14:08:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
    "id": 22
   },
   {
@@ -1089,6 +1163,19 @@
      "deletions": 2
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T17:10:24Z",
+    "updated_at": "2026-10-10T01:15:29Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 21
   },
   {
@@ -1367,6 +1454,19 @@
      "deletions": 51
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T01:39:20Z",
+    "updated_at": "2026-10-09T13:59:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 20
   },
   {
@@ -1650,6 +1750,25 @@
      "deletions": 0
     }
    ],
+   "track": {
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "tdas"
+    ],
+    "last_push": "2026-10-09T01:34:46Z",
+    "updated_at": "2026-10-09T20:35:43Z",
+    "conflicts": false,
+    "last_comment": {
+     "who": "tdas",
+     "at": "2026-10-09T20:12:59Z",
+     "maintainer": false
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
+   },
    "id": 19
   },
   {
@@ -1749,6 +1868,19 @@
      "deletions": 2
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T20:46:43Z",
+    "updated_at": "2026-10-10T01:15:26Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+   },
    "id": 18
   },
   {
@@ -1899,6 +2031,19 @@
      "deletions": 20
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T13:57:57Z",
+    "updated_at": "2026-10-09T13:57:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
    "id": 17
   },
   {
@@ -2021,6 +2166,19 @@
      "deletions": 0
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-08T22:22:39Z",
+    "updated_at": "2026-10-08T22:36:01Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 16
   },
   {
@@ -2168,6 +2326,19 @@
      "deletions": 4
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-08T22:25:59Z",
+    "updated_at": "2026-10-08T22:35:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 15
   },
   {
@@ -2315,6 +2486,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-08T22:35:23Z",
+    "updated_at": "2026-10-08T22:35:25Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
    "id": 14
   },
   {
@@ -2614,6 +2798,19 @@
      "deletions": 2
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "not started",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-08T22:35:21Z",
+    "updated_at": "2026-10-08T22:35:23Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
+   },
    "id": 13
   },
   {
@@ -2897,6 +3094,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T20:46:41Z",
+    "updated_at": "2026-10-10T01:15:25Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+   },
    "id": 12
   },
   {
@@ -3124,6 +3334,19 @@
      "deletions": 4
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-09T20:46:24Z",
+    "updated_at": "2026-10-09T20:46:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 11
   },
   {
@@ -3386,6 +3609,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 2,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-06T18:20:11Z",
+    "updated_at": "2026-10-08T02:32:42Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+   },
    "id": 10
   },
   {
@@ -3588,6 +3824,19 @@
      "deletions": 5
     }
    ],
+   "track": {
+    "stage": 2,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-06T15:58:50Z",
+    "updated_at": "2026-10-08T02:32:39Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+   },
    "id": 9
   },
   {
@@ -3730,6 +3979,19 @@
      "deletions": 2
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-07T19:56:02Z",
+    "updated_at": "2026-10-08T02:12:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 8
   },
   {
@@ -4008,6 +4270,19 @@
      "deletions": 5
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-07T02:59:37Z",
+    "updated_at": "2026-10-09T15:22:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
    "id": 7
   },
   {
@@ -4086,6 +4361,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 4,
+    "checks": "passing",
+    "review": "changes requested",
+    "approved_by": [],
+    "last_push": "2026-10-09T18:08:29Z",
+    "updated_at": "2026-10-10T01:32:51Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Requested changes are pushed. Waiting for jbrockmendel to look again"
+   },
    "id": 6
   },
   {
@@ -4107,6 +4395,19 @@
    },
    "proof": null,
    "files": [],
+   "track": {
+    "stage": 5,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-07T13:02:34Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Another contributor's fix was merged"
+   },
    "id": 5
   },
   {
@@ -4128,6 +4429,19 @@
    },
    "proof": null,
    "files": [],
+   "track": {
+    "stage": 5,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-07T07:27:19Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Another contributor's fix was merged"
+   },
    "id": 4
   },
   {
@@ -4194,6 +4508,25 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "jbrockmendel"
+    ],
+    "last_push": "2026-10-05T19:49:24Z",
+    "updated_at": "2026-10-06T17:19:28Z",
+    "conflicts": false,
+    "last_comment": {
+     "who": "jbrockmendel",
+     "at": "2026-10-06T17:19:28Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
+   },
    "id": 3
   },
   {
@@ -4336,6 +4669,19 @@
      "deletions": 1
     }
    ],
+   "track": {
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [],
+    "last_push": "2026-10-06T12:51:52Z",
+    "updated_at": "2026-10-06T14:39:15Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
+   },
    "id": 2
   },
   {
@@ -4450,6 +4796,21 @@
      "deletions": 0
     }
    ],
+   "track": {
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "aaronteo-db"
+    ],
+    "last_push": "2026-10-06T13:16:40Z",
+    "updated_at": "2026-10-06T14:36:22Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
+   },
    "id": 1
   }
  ]
