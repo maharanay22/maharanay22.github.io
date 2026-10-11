@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T16:10:58Z",
+ "generated_at": "2026-10-11T16:52:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50017,
-   "forks": 20483
+   "stars": 50018,
+   "forks": 20484
   },
   {
    "full": "delta-io/delta",
@@ -146,6 +146,298 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Vacuum deletes files still referenced by unexpired tombstones on tables with deletion vectors, breaking time travel",
+   "date": "2026-10-11",
+   "created_at": "2026-10-11T16:51:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4858,
+    "url": "https://github.com/delta-io/delta-rs/pull/4858"
+   },
+   "issue": {
+    "number": 4857,
+    "url": "https://github.com/delta-io/delta-rs/issues/4857"
+   },
+   "proof": "New vacuum test deletes a data file still needed for time travel (twice) on current code and keeps every file of unexpired tombstones with the fix; time travel to the older version reads correctly; 36 vacuum and 130 snapshot tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1,10 +1,9 @@"
+      ],
+      [
+       "c",
+       "use std::collections::HashMap;"
+      ],
+      [
+       "c",
+       "use std::sync::Arc;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "use crate::DeltaResult;"
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::cdf::{CHANGE_TYPE_COL, CdcDataSpec, FileAction, ResolvedPair};"
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::{get_null_of_arrow_type, to_correct_scalar_value};"
+      ],
+      [
+       "d",
+       "use crate::kernel::StorageType;"
+      ],
+      [
+       "d",
+       "use crate::{DeltaResult, DeltaTableError};"
+      ],
+      [
+       "c",
+       "use arrow_array::{Array, BooleanArray, RecordBatch, RecordBatchOptions};"
+      ],
+      [
+       "c",
+       "use arrow_schema::{DataType, Field, Schema, SchemaRef};"
+      ],
+      [
+       "c",
+       "use datafusion::common::ScalarValue;"
+      ],
+      [
+       "h",
+       "@@ -17,7 +16,7 @@"
+      ],
+      [
+       "c",
+       "use datafusion::physical_expr::PhysicalExpr;"
+      ],
+      [
+       "c",
+       "use datafusion::physical_plan::metrics::ExecutionPlanMetricsSet;"
+      ],
+      [
+       "c",
+       "use delta_kernel::Engine;"
+      ],
+      [
+       "d",
+       "use delta_kernel::actions::deletion_vector::{DeletionVectorDescriptor, DeletionVectorStorageType};"
+      ],
+      [
+       "a",
+       "use delta_kernel::actions::deletion_vector::DeletionVectorDescriptor;"
+      ],
+      [
+       "c",
+       "use object_store::path::Path;"
+      ],
+      [
+       "c",
+       "use parquet::arrow::arrow_reader::{ArrowReaderOptions, RowSelection, RowSelector};"
+      ],
+      [
+       "c",
+       "use parquet::file::metadata::{PageIndexPolicy, ParquetMetaData};"
+      ],
+      [
+       "h",
+       "@@ -314,26 +313,6 @@"
+      ],
+      [
+       "c",
+       "    Ok(pruned)"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "impl TryInto<DeletionVectorDescriptor> for crate::kernel::DeletionVectorDescriptor {"
+      ],
+      [
+       "d",
+       "    type Error = DeltaTableError;"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "    fn try_into(self) -> DeltaResult<DeletionVectorDescriptor> {"
+      ],
+      [
+       "d",
+       "        let storage_type = match self.storage_type {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 2,
+     "deletions": 23
+    },
+    {
+     "path": "crates/core/src/kernel/models/actions.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -935,6 +935,30 @@"
+      ],
+      [
+       "c",
+       "    pub cardinality: i64,"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "impl TryFrom<DeletionVectorDescriptor>"
+      ],
+      [
+       "a",
+       "    for delta_kernel::actions::deletion_vector::DeletionVectorDescriptor"
+      ],
+      [
+       "a",
+       "{"
+      ],
+      [
+       "a",
+       "    type Error = delta_kernel::Error;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    fn try_from(dv: DeletionVectorDescriptor) -> Result<Self, Self::Error> {"
+      ],
+      [
+       "a",
+       "        use delta_kernel::actions::deletion_vector::DeletionVectorStorageType;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        let storage_type = match dv.storage_type {"
+      ],
+      [
+       "a",
+       "            StorageType::UuidRelativePath => DeletionVectorStorageType::PersistedRelative,"
+      ],
+      [
+       "a",
+       "            StorageType::Inline => DeletionVectorStorageType::Inline,"
+      ],
+      [
+       "a",
+       "            StorageType::AbsolutePath => DeletionVectorStorageType::PersistedAbsolute,"
+      ],
+      [
+       "a",
+       "        };"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Self::try_new("
+      ],
+      [
+       "a",
+       "            storage_type,"
+      ],
+      [
+       "a",
+       "            dv.path_or_inline_dv,"
+      ],
+      [
+       "a",
+       "            dv.offset,"
+      ],
+      [
+       "a",
+       "            dv.size_in_bytes,"
+      ],
+      [
+       "a",
+       "            dv.cardinality,"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "#[derive(Serialize, Deserialize, Debug, Clone, Default)]"
+      ],
+      [
+       "c",
+       "#[serde(rename_all = \"camelCase\")]"
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-11T16:41:15Z",
+    "updated_at": "2026-10-11T16:51:52Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 39
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -296,8 +588,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-11T16:01:45Z",
@@ -305,8 +597,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 38
   },
