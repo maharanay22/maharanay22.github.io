@@ -127,6 +127,7 @@
     "https://github.com/delta-io/delta/pull/7841": "CREATE, CTAS, REPLACE and DeltaTableBuilder with CLUSTER BY (A, B.C) fail on master and pass with the fix; case-sensitive mode still rejects it",
     "https://github.com/delta-io/delta/pull/7843": "Generated column test fails on master with DELTA_UNSUPPORTED_EXPRESSION_GENERATED_COLUMN and passes with the fix; no other changes across GeneratedColumnSuite and CheckConstraintsSuite",
     "https://github.com/delta-io/delta-rs/pull/4850": "New Python test shows count() returns 10 for 8 real rows and 100 for 98 on main, and matches a full scan with the fix; Rust test checks the restored deletion_vector column against the log",
-    "https://github.com/delta-io/delta-rs/pull/4847": "Removing one stale numpy pin turns the four failing Python CI jobs (PySpark, PyArrow latest, LakeFS, Unity Catalog) green"
+    "https://github.com/delta-io/delta-rs/pull/4847": "Removing one stale numpy pin turns the four failing Python CI jobs (PySpark, PyArrow latest, LakeFS, Unity Catalog) green",
+    "https://github.com/delta-io/delta-rs/pull/4854": "Appending naive timestamps to a UTC column now fails with a clear SchemaMismatchError naming the column instead of 'Table features must be specified'; Rust and Python tests show the old message on main and the new one with the fix"
   }
 }
