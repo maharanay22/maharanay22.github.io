@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T19:15:34Z",
+ "generated_at": "2026-10-11T22:48:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50017,
-   "forks": 20483
+   "stars": 50021,
+   "forks": 20484
   },
   {
    "full": "delta-io/delta",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60969,
-   "forks": 12225
+   "stars": 60978,
+   "forks": 12231
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 8
   },
