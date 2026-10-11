@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T01:10:52Z",
+ "generated_at": "2026-10-11T01:31:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,21 +25,6 @@
    "forks": 6440
   },
   {
-   "full": "unitycatalog/unitycatalog",
-   "name": "Unity Catalog",
-   "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "icon": "🗂️",
-   "category": "data governance",
-   "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
-   ],
-   "stars": 3553,
-   "forks": 680
-  },
-  {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
    "url": "https://github.com/delta-io/delta-rs",
@@ -53,6 +38,21 @@
    ],
    "stars": 3329,
    "forks": 681
+  },
+  {
+   "full": "unitycatalog/unitycatalog",
+   "name": "Unity Catalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ],
+   "stars": 3553,
+   "forks": 680
   },
   {
    "full": "pandas-dev/pandas",
@@ -126,7 +126,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60916,
+   "stars": 60919,
    "forks": 12216
   },
   {
@@ -146,6 +146,210 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Error for naive timestamps written into a timestamp column points at table features instead of the column type",
+   "date": "2026-10-11",
+   "created_at": "2026-10-11T01:31:08Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4854,
+    "url": "https://github.com/delta-io/delta-rs/pull/4854"
+   },
+   "issue": {
+    "number": 4853,
+    "url": "https://github.com/delta-io/delta-rs/issues/4853"
+   },
+   "proof": "Appending naive timestamps to a UTC column now fails with a clear SchemaMismatchError naming the column instead of 'Table features must be specified'; Rust and Python tests show the old message on main and the new one with the fix",
+   "files": [
+    {
+     "path": "crates/core/src/operations/write/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -62,7 +62,7 @@"
+      ],
+      [
+       "c",
+       "use crate::errors::{DeltaResult, DeltaTableError};"
+      ],
+      [
+       "c",
+       "use crate::kernel::schema::cast::normalize_for_delta;"
+      ],
+      [
+       "c",
+       "use crate::kernel::transaction::{CommitBuilder, CommitProperties, PROTOCOL, TableReference};"
+      ],
+      [
+       "d",
+       "use crate::kernel::{Action, EagerSnapshot, StructType};"
+      ],
+      [
+       "a",
+       "use crate::kernel::{Action, DataType, EagerSnapshot, StructType};"
+      ],
+      [
+       "c",
+       "use crate::logstore::LogStoreRef;"
+      ],
+      [
+       "c",
+       "use crate::logstore::with_operation;"
+      ],
+      [
+       "c",
+       "use crate::protocol::{DeltaOperation, SaveMode};"
+      ],
+      [
+       "h",
+       "@@ -426,7 +426,12 @@"
+      ],
+      [
+       "c",
+       "                PROTOCOL.can_write_to(snapshot)?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                if self.schema_mode.is_none() {"
+      ],
+      [
+       "d",
+       "                    PROTOCOL.check_can_write_timestamp_ntz(snapshot, &schema)?;"
+      ],
+      [
+       "a",
+       "                    PROTOCOL"
+      ],
+      [
+       "a",
+       "                        .check_can_write_timestamp_ntz(snapshot, &schema)"
+      ],
+      [
+       "a",
+       "                        .map_err(|err| {"
+      ],
+      [
+       "a",
+       "                            timestamp_ntz_into_timestamp_mismatch(&schema, &snapshot.schema())"
+      ],
+      [
+       "a",
+       "                                .unwrap_or_else(|| err.into())"
+      ],
+      [
+       "a",
+       "                        })?;"
+      ],
+      [
+       "c",
+       "                    #[cfg(feature = \"nanosecond-timestamps\")]"
+      ],
+      [
+       "c",
+       "                    PROTOCOL.check_can_write_timestamp_nanos(snapshot, &schema)?;"
+      ],
+      [
+       "c",
+       "                    PROTOCOL.check_can_write_variant(snapshot, &schema)?;"
+      ],
+      [
+       "h",
+       "@@ -474,6 +479,28 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "fn timestamp_ntz_into_timestamp_mismatch("
+      ],
+      [
+       "a",
+       "    input: &StructType,"
+      ],
+      [
+       "a",
+       "    table: &StructType,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 139,
+     "deletions": 3
+    },
+    {
+     "path": "python/src/error.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -46,6 +46,7 @@"
+      ],
+      [
+       "c",
+       "        DeltaTableError::Io { source } => PyIOError::new_err(source.to_string()),"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        DeltaTableError::Arrow { source } => arrow_to_py(source),"
+      ],
+      [
+       "a",
+       "        DeltaTableError::SchemaMismatch { .. } => SchemaMismatchError::new_err(err.to_string()),"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        // catch all"
+      ],
+      [
+       "c",
+       "        _ => DeltaError::new_err(err.to_string()),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-11T01:30:03Z",
+    "updated_at": "2026-10-11T01:31:25Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 37
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -6011,11 +6215,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 8
   },
