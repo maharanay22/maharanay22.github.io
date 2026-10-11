@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T16:52:21Z",
+ "generated_at": "2026-10-11T18:59:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28342,
+   "stars": 28344,
    "forks": 6440
   },
   {
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50018,
-   "forks": 20484
+   "stars": 50017,
+   "forks": 20483
   },
   {
    "full": "delta-io/delta",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60964,
-   "forks": 12222
+   "stars": 60970,
+   "forks": 12225
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -424,8 +424,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-11T16:41:15Z",
@@ -433,8 +433,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 39
   },
