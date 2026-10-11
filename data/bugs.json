@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T18:59:02Z",
+ "generated_at": "2026-10-11T19:15:34Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28344,
+   "stars": 28345,
    "forks": 6440
   },
   {
@@ -126,7 +126,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60970,
+   "stars": 60969,
    "forks": 12225
   },
   {
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 8
   },
