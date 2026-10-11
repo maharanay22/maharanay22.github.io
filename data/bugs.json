@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T07:16:11Z",
+ "generated_at": "2026-10-11T14:11:53Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28338,
-   "forks": 6441
+   "stars": 28342,
+   "forks": 6442
   },
   {
    "full": "delta-io/delta-rs",
@@ -36,7 +36,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3329,
+   "stars": 3330,
    "forks": 681
   },
   {
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 49995,
-   "forks": 20483
+   "stars": 50015,
+   "forks": 20482
   },
   {
    "full": "delta-io/delta",
@@ -126,7 +126,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60941,
+   "stars": 60952,
    "forks": 12219
   },
   {
@@ -142,7 +142,7 @@
     "CLI"
    ],
    "stars": 1475,
-   "forks": 219
+   "forks": 220
   }
  ],
  "items": [
