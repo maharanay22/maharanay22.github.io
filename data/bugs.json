@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T01:31:42Z",
+ "generated_at": "2026-10-11T07:16:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28336,
-   "forks": 6440
+   "stars": 28338,
+   "forks": 6441
   },
   {
    "full": "delta-io/delta-rs",
@@ -67,7 +67,7 @@
     "String regex"
    ],
    "stars": 49995,
-   "forks": 20484
+   "forks": 20483
   },
   {
    "full": "delta-io/delta",
@@ -82,7 +82,7 @@
     "Lakehouse"
    ],
    "stars": 9040,
-   "forks": 2197
+   "forks": 2196
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60919,
-   "forks": 12216
+   "stars": 60941,
+   "forks": 12219
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -336,8 +336,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-11T01:30:03Z",
@@ -345,8 +345,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 37
   },
@@ -6215,11 +6215,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 8
   },
@@ -6537,7 +6537,7 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-10T13:27:44Z",
-    "updated_at": "2026-10-10T13:33:47Z",
+    "updated_at": "2026-10-11T01:36:41Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
