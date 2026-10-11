@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-11T14:11:53Z",
+ "generated_at": "2026-10-11T16:10:58Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,21 +9,6 @@
   "merged"
  ],
  "repos": [
-  {
-   "full": "mlflow/mlflow",
-   "name": "MLflow",
-   "url": "https://github.com/mlflow/mlflow",
-   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "icon": "🧪",
-   "category": "ai engineering",
-   "tags": [
-    "AI Gateway",
-    "Streaming",
-    "GenAI Eval"
-   ],
-   "stars": 28342,
-   "forks": 6442
-  },
   {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
@@ -38,6 +23,21 @@
    ],
    "stars": 3330,
    "forks": 681
+  },
+  {
+   "full": "mlflow/mlflow",
+   "name": "MLflow",
+   "url": "https://github.com/mlflow/mlflow",
+   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+   "icon": "🧪",
+   "category": "ai engineering",
+   "tags": [
+    "AI Gateway",
+    "Streaming",
+    "GenAI Eval"
+   ],
+   "stars": 28342,
+   "forks": 6440
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50015,
-   "forks": 20482
+   "stars": 50017,
+   "forks": 20483
   },
   {
    "full": "delta-io/delta",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60952,
-   "forks": 12219
+   "stars": 60964,
+   "forks": 12222
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -146,6 +146,170 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "load_cdf returns 1816 dates for INT96 timestamps outside the nanosecond range",
+   "date": "2026-10-11",
+   "created_at": "2026-10-11T16:10:14Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4856,
+    "url": "https://github.com/delta-io/delta-rs/pull/4856"
+   },
+   "issue": {
+    "number": 4855,
+    "url": "https://github.com/delta-io/delta-rs/issues/4855"
+   },
+   "proof": "New load_cdf test on a Spark-written INT96 table returns 1816 dates on main and the real 9999-12-31 values with the fix; all 26 load_cdf tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/operations/load_cdf.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -11,6 +11,7 @@"
+      ],
+      [
+       "c",
+       "//! let df = ctx.read_table(provider).await?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use crate::DeltaTableError;"
+      ],
+      [
+       "a",
+       "use crate::datafile::ReaderProperties;"
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::{"
+      ],
+      [
+       "c",
+       "    DataFusionMixins, DeltaSessionExt, extract_partition_only_predicate,"
+      ],
+      [
+       "c",
+       "};"
+      ],
+      [
+       "h",
+       "@@ -26,7 +27,6 @@"
+      ],
+      [
+       "c",
+       "use datafusion::catalog::Session;"
+      ],
+      [
+       "c",
+       "use datafusion::common::DFSchema;"
+      ],
+      [
+       "c",
+       "use datafusion::common::ScalarValue;"
+      ],
+      [
+       "d",
+       "use datafusion::config::TableParquetOptions;"
+      ],
+      [
+       "c",
+       "use datafusion::datasource::memory::DataSourceExec;"
+      ],
+      [
+       "c",
+       "use datafusion::datasource::physical_plan::parquet::CachedParquetFileReaderFactory;"
+      ],
+      [
+       "c",
+       "use datafusion::datasource::physical_plan::{FileGroup, FileScanConfigBuilder, ParquetSource};"
+      ],
+      [
+       "h",
+       "@@ -607,10 +607,11 @@"
+      ],
+      [
+       "c",
+       "        let remove_table_schema = TableSchema::builder(Arc::clone(&add_remove_file_schema))"
+      ],
+      [
+       "c",
+       "            .with_table_partition_cols(add_remove_partition_fields)"
+      ],
+      [
+       "c",
+       "            .build();"
+      ],
+      [
+       "d",
+       "        let parquet_options = TableParquetOptions {"
+      ],
+      [
+       "d",
+       "            global: session.config().options().execution.parquet.clone(),"
+      ],
+      [
+       "d",
+       "            ..Default::default()"
+      ],
+      [
+       "d",
+       "        };"
+      ],
+      [
+       "a",
+       "        let mut parquet_options = ReaderProperties::default().to_table_parquet_options(session);"
+      ],
+      [
+       "a",
+       "        parquet_options"
+      ],
+      [
+       "a",
+       "            .global"
+      ],
+      [
+       "a",
+       "            .coerce_int96"
+      ],
+      [
+       "a",
+       "            .get_or_insert_with(|| \"us\".to_string());"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 52,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-11T16:01:45Z",
+    "updated_at": "2026-10-11T16:10:28Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 38
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
