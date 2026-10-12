@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-12T08:46:59Z",
+ "generated_at": "2026-10-12T18:15:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3330,
+   "stars": 3332,
    "forks": 681
   },
   {
@@ -36,8 +36,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28348,
-   "forks": 6440
+   "stars": 28351,
+   "forks": 6441
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50026,
-   "forks": 20487
+   "stars": 50032,
+   "forks": 20491
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9040,
+   "stars": 9039,
    "forks": 2198
   },
   {
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61024,
-   "forks": 12238
+   "stars": 61071,
+   "forks": 12252
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -141,8 +141,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1475,
-   "forks": 220
+   "stars": 1477,
+   "forks": 221
   }
  ],
  "items": [
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 8
   },
