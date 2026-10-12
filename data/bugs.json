@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-12T01:53:39Z",
+ "generated_at": "2026-10-12T08:46:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,8 +36,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28346,
-   "forks": 6441
+   "stars": 28348,
+   "forks": 6440
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50023,
-   "forks": 20486
+   "stars": 50026,
+   "forks": 20487
   },
   {
    "full": "delta-io/delta",
@@ -82,7 +82,7 @@
     "Lakehouse"
    ],
    "stars": 9040,
-   "forks": 2196
+   "forks": 2198
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 60982,
-   "forks": 12234
+   "stars": 61024,
+   "forks": 12238
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 8
   },
