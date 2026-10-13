@@ -97,6 +97,17 @@
         "Python",
         "Data Loss"
       ]
+    },
+    "mindsdb/engine": {
+      "name": "MindsDB",
+      "icon": "🧠",
+      "category": "AI data platform",
+      "about": "Open-source query engine that connects AI to databases like PostgreSQL, SQL Server, Databricks and MongoDB through federated SQL",
+      "tags": [
+        "PostgreSQL",
+        "Databricks",
+        "Connectors"
+      ]
     }
   },
   "proofs": {
@@ -132,6 +143,8 @@
     "https://github.com/delta-io/delta-rs/pull/4856": "New load_cdf test on a Spark-written INT96 table returns 1816 dates on main and the real 9999-12-31 values with the fix; all 26 load_cdf tests pass",
     "https://github.com/delta-io/delta-rs/pull/4858": "New vacuum test deletes a data file still needed for time travel (twice) on current code and keeps every file of unexpired tombstones with the fix; time travel to the older version reads correctly; 36 vacuum and 130 snapshot tests pass",
     "https://github.com/unitycatalog/unitycatalog/pull/1987": "Against a local UC server, date, timestamp and base64 arguments sent as JSON fail on main and return 10, 5 and 5 with the fix; 18 new tests fail before and pass after",
-    "https://github.com/unitycatalog/unitycatalog/pull/1988": "Creating Decimal and timedelta functions fails on main; with the fix they create and run on a local server (with_tax -> '13.75', to_decimal -> Decimal('3.25'))"
+    "https://github.com/unitycatalog/unitycatalog/pull/1988": "Creating Decimal and timedelta functions fails on main; with the fix they create and run on a local server (with_tax -> '13.75', to_decimal -> Decimal('3.25'))",
+    "https://github.com/mindsdb/engine/pull/8": "Against a real PostgreSQL 16, native UPDATE, DELETE, CREATE, SHOW and EXPLAIN fail on main with 'syntax error at or near' and succeed with the fix; SELECT still streams",
+    "https://github.com/mindsdb/engine/pull/9": "In a fresh install the Databricks handler fails to import and its 39 tests are skipped on main; with the fix it loads and all 39 tests pass"
   }
 }
