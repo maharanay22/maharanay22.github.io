@@ -27,7 +27,7 @@ REPO_FIELDS = """
 """
 QUERY = """
 query($q: String!, $after: String) {
-  search(query: $q, type: ISSUE, first: 50, after: $after) {
+  search(query: $q, type: ISSUE, first: 15, after: $after) {
     pageInfo { hasNextPage endCursor }
     nodes {
       __typename
