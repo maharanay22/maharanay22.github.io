@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-12T18:15:59Z",
+ "generated_at": "2026-10-13T00:51:16Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,8 +36,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28351,
-   "forks": 6441
+   "stars": 28353,
+   "forks": 6443
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -52,7 +52,7 @@
     "Windows"
    ],
    "stars": 3553,
-   "forks": 680
+   "forks": 681
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50032,
-   "forks": 20491
+   "stars": 50042,
+   "forks": 20495
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9039,
+   "stars": 9041,
    "forks": 2198
   },
   {
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61071,
-   "forks": 12252
+   "stars": 61092,
+   "forks": 12260
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 8
   },
