@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-13T00:51:16Z",
+ "generated_at": "2026-10-13T07:18:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3332,
-   "forks": 681
+   "stars": 3336,
+   "forks": 682
   },
   {
    "full": "mlflow/mlflow",
@@ -36,8 +36,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28353,
-   "forks": 6443
+   "stars": 28360,
+   "forks": 6444
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50042,
-   "forks": 20495
+   "stars": 50046,
+   "forks": 20498
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9041,
+   "stars": 9042,
    "forks": 2198
   },
   {
@@ -112,7 +112,7 @@
     "SQL DDL"
    ],
    "stars": 380,
-   "forks": 221
+   "forks": 222
   },
   {
    "full": "BerriAI/litellm",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61092,
-   "forks": 12260
+   "stars": 61113,
+   "forks": 12273
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -6671,11 +6671,11 @@
     "approved_by": [],
     "last_push": "2026-10-07T19:56:02Z",
     "updated_at": "2026-10-08T02:12:30Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 8
   },
