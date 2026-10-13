@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-13T14:22:36Z",
+ "generated_at": "2026-10-13T14:55:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,6 +9,21 @@
   "merged"
  ],
  "repos": [
+  {
+   "full": "unitycatalog/unitycatalog",
+   "name": "Unity Catalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ],
+   "stars": 3553,
+   "forks": 683
+  },
   {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
@@ -40,21 +55,6 @@
    "forks": 6447
   },
   {
-   "full": "unitycatalog/unitycatalog",
-   "name": "Unity Catalog",
-   "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "icon": "🗂️",
-   "category": "data governance",
-   "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
-   ],
-   "stars": 3553,
-   "forks": 683
-  },
-  {
    "full": "pandas-dev/pandas",
    "name": "pandas",
    "url": "https://github.com/pandas-dev/pandas",
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50054,
+   "stars": 50053,
    "forks": 20501
   },
   {
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61147,
-   "forks": 12293
+   "stars": 61148,
+   "forks": 12292
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -142,10 +142,366 @@
     "CLI"
    ],
    "stars": 1477,
-   "forks": 222
+   "forks": 223
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "create_python_function fails for Decimal and timedelta types in the OSS client",
+   "date": "2026-10-13",
+   "created_at": "2026-10-13T14:54:34Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1988,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1988"
+   },
+   "issue": {
+    "number": 1986,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/1986"
+   },
+   "proof": "Creating Decimal and timedelta functions fails on main; with the fix they create and run on a local server (with_tax -> '13.75', to_decimal -> Decimal('3.25'))",
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1096,7 +1096,7 @@"
+      ],
+      [
+       "c",
+       "    if ("
+      ],
+      [
+       "c",
+       "        column_type == \"INTERVAL\""
+      ],
+      [
+       "c",
+       "        and isinstance(param, datetime.timedelta)"
+      ],
+      [
+       "d",
+       "        and param_type_text != \"interval day to second\""
+      ],
+      [
+       "a",
+       "        and param_type_text.lower() != \"interval day to second\""
+      ],
+      [
+       "c",
+       "    ):"
+      ],
+      [
+       "c",
+       "        raise ValueError("
+      ],
+      [
+       "c",
+       "            f\"Invalid interval type text: {param_type_text}, expecting 'interval day to second', \""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,7 @@"
+      ],
+      [
+       "c",
+       "import ast"
+      ],
+      [
+       "c",
+       "import inspect"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "a",
+       "import re"
+      ],
+      [
+       "c",
+       "import warnings"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "c",
+       "from textwrap import dedent, fill, indent"
+      ],
+      [
+       "h",
+       "@@ -714,7 +715,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    sql_return_type = validate_return_type(func_name, type_hints)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    base_return_type_name = sql_return_type.split(\"<\", 1)[0]"
+      ],
+      [
+       "a",
+       "    base_return_type_name = re.split(r\"[<( ]\", sql_return_type, maxsplit=1)[0]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    docstring = inspect.getdoc(func)"
+      ],
+      [
+       "c",
+       "    if not docstring:"
+      ],
+      [
+       "h",
+       "@@ -751,7 +752,7 @@"
+      ],
+      [
+       "c",
+       "            error_message = generate_type_hint_error_message(param_name, param_hint, e)"
+      ],
+      [
+       "c",
+       "            raise ValueError(error_message) from e"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        base_type_name = sql_type.split(\"<\", 1)[0]"
+      ],
+      [
+       "a",
+       "        base_type_name = re.split(r\"[<( ]\", sql_type, maxsplit=1)[0]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        param_comment = docstring_info.params.get(param_name)"
+      ],
+      [
+       "c",
+       "        if param_comment:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-12T02:44:34Z",
+    "updated_at": "2026-10-13T14:54:35Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 41
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "OSS function client rejects JSON-typed DATE, BINARY and DECIMAL arguments and passes TIMESTAMP strings through unconverted",
+   "date": "2026-10-13",
+   "created_at": "2026-10-13T14:53:15Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 1987,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1987"
+   },
+   "issue": {
+    "number": 1985,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/1985"
+   },
+   "proof": "Against a local UC server, date, timestamp and base64 arguments sent as JSON fail on main and return 10, 5 and 5 with the fix; 18 new tests fail before and pass after",
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,5 +1,6 @@"
+      ],
+      [
+       "c",
+       "import asyncio"
+      ],
+      [
+       "c",
+       "import atexit"
+      ],
+      [
+       "a",
+       "import base64"
+      ],
+      [
+       "c",
+       "import datetime"
+      ],
+      [
+       "c",
+       "import decimal"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "h",
+       "@@ -846,6 +847,13 @@"
+      ],
+      [
+       "c",
+       "    def _validate_param_type(self, value: Any, param_info: FunctionParameterInfo) -> None:"
+      ],
+      [
+       "c",
+       "        if value is None and param_info.parameter_default == \"NULL\":"
+      ],
+      [
+       "c",
+       "            return"
+      ],
+      [
+       "a",
+       "        try:"
+      ],
+      [
+       "a",
+       "            value = convert_json_argument(value, param_info.type_name)"
+      ],
+      [
+       "a",
+       "        except (ValueError, decimal.InvalidOperation) as e:"
+      ],
+      [
+       "a",
+       "            raise ValueError("
+      ],
+      [
+       "a",
+       "                f\"Parameter {param_info.name} should be of type {param_info.type_name}, \""
+      ],
+      [
+       "a",
+       "                f\"but got invalid value {value!r}: {e}\""
+      ],
+      [
+       "a",
+       "            ) from e"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        value_python_type = column_type_to_python_type("
+      ],
+      [
+       "c",
+       "            param_info.type_name, mapping=SQL_TYPE_TO_PYTHON_TYPE_MAPPING_UC_OSS"
+      ],
+      [
+       "h",
+       "@@ -864,6 +872,12 @@"
+      ],
+      [
+       "c",
+       "        Extracts or dynamically constructs the function from the FunctionInfo,"
+      ],
+      [
+       "c",
+       "        applies parameter defaults, and caches the function for future calls."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "a",
+       "        input_params = (function_info.input_params and function_info.input_params.parameters) or []"
+      ],
+      [
+       "a",
+       "        param_types = {param.name: param.type_name for param in input_params}"
+      ],
+      [
+       "a",
+       "        parameters = {"
+      ],
+      [
+       "a",
+       "            name: convert_json_argument(value, param_types.get(name))"
+      ],
+      [
+       "a",
+       "            for name, value in (parameters or {}).items()"
+      ]
+     ],
+     "truncated": true,
+     "additions": 37,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-12T02:46:31Z",
+    "updated_at": "2026-10-13T14:53:21Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 40
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -166,99 +522,111 @@
    "proof": "New vacuum test deletes a data file still needed for time travel (twice) on current code and keeps every file of unexpired tombstones with the fix; time travel to the older version reads correctly; 36 vacuum and 130 snapshot tests pass",
    "files": [
     {
-     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "path": "crates/core/src/kernel/snapshot/iterators.rs",
      "lines": [
       [
        "h",
-       "@@ -1,10 +1,9 @@"
+       "@@ -332,22 +332,7 @@"
       ],
       [
        "c",
-       "use std::collections::HashMap;"
+       "            .files"
       ],
       [
        "c",
-       "use std::sync::Arc;"
+       "            .column_by_name(FIELD_NAME_DELETION_VECTOR)"
+      ],
+      [
+       "c",
+       "            .and_then(|col| col.as_struct_opt())?;"
+      ],
+      [
+       "d",
+       "        if dv_col.null_count() == dv_col.len() {"
+      ],
+      [
+       "d",
+       "            return None;"
+      ],
+      [
+       "d",
+       "        }"
+      ],
+      [
+       "d",
+       "        dv_col"
+      ],
+      [
+       "d",
+       "            .is_valid(self.index)"
+      ],
+      [
+       "d",
+       "            .then(|| {"
+      ],
+      [
+       "d",
+       "                let storage_col ="
+      ],
+      [
+       "d",
+       "                    dv_col.column(*DV_FIELD_INDICES.get(DV_FIELD_STORAGE_TYPE).unwrap());"
+      ],
+      [
+       "d",
+       "                storage_col"
+      ],
+      [
+       "d",
+       "                    .is_valid(self.index)"
+      ],
+      [
+       "d",
+       "                    .then_some(DeletionVectorView {"
+      ],
+      [
+       "d",
+       "                        data: dv_col,"
+      ],
+      [
+       "d",
+       "                        index: self.index,"
+      ],
+      [
+       "d",
+       "                    })"
+      ],
+      [
+       "d",
+       "            })"
+      ],
+      [
+       "d",
+       "            .flatten()"
+      ],
+      [
+       "a",
+       "        DeletionVectorView::try_new(dv_col, self.index)"
+      ],
+      [
+       "c",
+       "    }"
       ],
       [
        "c",
        ""
       ],
       [
-       "a",
-       "use crate::DeltaResult;"
-      ],
-      [
        "c",
-       "use crate::delta_datafusion::cdf::{CHANGE_TYPE_COL, CdcDataSpec, FileAction, ResolvedPair};"
-      ],
-      [
-       "c",
-       "use crate::delta_datafusion::{get_null_of_arrow_type, to_correct_scalar_value};"
-      ],
-      [
-       "d",
-       "use crate::kernel::StorageType;"
-      ],
-      [
-       "d",
-       "use crate::{DeltaResult, DeltaTableError};"
-      ],
-      [
-       "c",
-       "use arrow_array::{Array, BooleanArray, RecordBatch, RecordBatchOptions};"
-      ],
-      [
-       "c",
-       "use arrow_schema::{DataType, Field, Schema, SchemaRef};"
-      ],
-      [
-       "c",
-       "use datafusion::common::ScalarValue;"
+       "    /// Internal API"
       ],
       [
        "h",
-       "@@ -17,7 +16,7 @@"
+       "@@ -486,7 +471,18 @@"
       ],
       [
        "c",
-       "use datafusion::physical_expr::PhysicalExpr;"
-      ],
-      [
-       "c",
-       "use datafusion::physical_plan::metrics::ExecutionPlanMetricsSet;"
-      ],
-      [
-       "c",
-       "use delta_kernel::Engine;"
-      ],
-      [
-       "d",
-       "use delta_kernel::actions::deletion_vector::{DeletionVectorDescriptor, DeletionVectorStorageType};"
-      ],
-      [
-       "a",
-       "use delta_kernel::actions::deletion_vector::DeletionVectorDescriptor;"
-      ],
-      [
-       "c",
-       "use object_store::path::Path;"
-      ],
-      [
-       "c",
-       "use parquet::arrow::arrow_reader::{ArrowReaderOptions, RowSelection, RowSelector};"
-      ],
-      [
-       "c",
-       "use parquet::file::metadata::{PageIndexPolicy, ParquetMetaData};"
-      ],
-      [
-       "h",
-       "@@ -314,26 +313,6 @@"
-      ],
-      [
-       "c",
-       "    Ok(pruned)"
+       "    index: usize,"
       ],
       [
        "c",
@@ -270,63 +638,75 @@
       ],
       [
        "d",
-       "impl TryInto<DeletionVectorDescriptor> for crate::kernel::DeletionVectorDescriptor {"
+       "impl DeletionVectorView<'_> {"
       ],
       [
-       "d",
-       "    type Error = DeltaTableError;"
-      ],
-      [
-       "d",
-       ""
-      ],
-      [
-       "d",
-       "    fn try_into(self) -> DeltaResult<DeletionVectorDescriptor> {"
-      ],
-      [
-       "d",
-       "        let storage_type = match self.storage_type {"
+       "a",
+       "impl<'a> DeletionVectorView<'a> {"
       ]
      ],
      "truncated": true,
-     "additions": 2,
-     "deletions": 23
+     "additions": 13,
+     "deletions": 17
     },
     {
-     "path": "crates/core/src/kernel/models/actions.rs",
+     "path": "crates/core/src/kernel/snapshot/iterators/tombstones.rs",
      "lines": [
       [
        "h",
-       "@@ -935,6 +935,30 @@"
+       "@@ -7,7 +7,8 @@"
       ],
       [
        "c",
-       "    pub cardinality: i64,"
+       "use delta_kernel::{actions::Remove, schema::ToSchema};"
       ],
       [
        "c",
-       "}"
+       "use percent_encoding::percent_decode_str;"
       ],
       [
        "c",
        ""
       ],
       [
-       "a",
-       "impl TryFrom<DeletionVectorDescriptor>"
+       "d",
+       "use crate::kernel::snapshot::iterators::get_string_value;"
       ],
       [
        "a",
-       "    for delta_kernel::actions::deletion_vector::DeletionVectorDescriptor"
+       "use crate::kernel::DeletionVectorDescriptor;"
       ],
       [
        "a",
-       "{"
+       "use crate::kernel::snapshot::iterators::{DeletionVectorView, get_string_value};"
       ],
       [
-       "a",
-       "    type Error = delta_kernel::Error;"
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// A lightweight, cloneable view over a single tombstone (`Remove` action) row."
+      ],
+      [
+       "c",
+       "///"
+      ],
+      [
+       "h",
+       "@@ -71,4 +72,16 @@"
+      ],
+      [
+       "c",
+       "            .as_primitive_opt::<Int64Type>()"
+      ],
+      [
+       "c",
+       "            .map(|a| a.value(self.index))"
+      ],
+      [
+       "c",
+       "    }"
       ],
       [
        "a",
@@ -334,92 +714,76 @@
       ],
       [
        "a",
-       "    fn try_from(dv: DeletionVectorDescriptor) -> Result<Self, Self::Error> {"
+       "    /// Returns the deletion vector of the removed file, if it had one."
       ],
       [
        "a",
-       "        use delta_kernel::actions::deletion_vector::DeletionVectorStorageType;"
+       "    pub fn deletion_vector_descriptor(&self) -> Option<DeletionVectorDescriptor> {"
       ],
       [
        "a",
-       ""
+       "        static FIELD_INDEX: LazyLock<usize> = LazyLock::new(|| {"
       ],
       [
        "a",
-       "        let storage_type = match dv.storage_type {"
+       "            Remove::to_schema()"
       ],
       [
        "a",
-       "            StorageType::UuidRelativePath => DeletionVectorStorageType::PersistedRelative,"
+       "                .field_with_index(\"deletionVector\")"
       ],
       [
        "a",
-       "            StorageType::Inline => DeletionVectorStorageType::Inline,"
+       "                .unwrap()"
       ],
       [
        "a",
-       "            StorageType::AbsolutePath => DeletionVectorStorageType::PersistedAbsolute,"
+       "                .0"
       ],
       [
        "a",
-       "        };"
+       "        });"
       ],
       [
        "a",
-       ""
+       "        let dv_col = self.data.column(*FIELD_INDEX).as_struct_opt()?;"
       ],
       [
        "a",
-       "        Self::try_new("
-      ],
-      [
-       "a",
-       "            storage_type,"
-      ],
-      [
-       "a",
-       "            dv.path_or_inline_dv,"
-      ],
-      [
-       "a",
-       "            dv.offset,"
-      ],
-      [
-       "a",
-       "            dv.size_in_bytes,"
-      ],
-      [
-       "a",
-       "            dv.cardinality,"
-      ],
-      [
-       "a",
-       "        )"
+       "        DeletionVectorView::try_new(dv_col, self.index).map(|dv| dv.descriptor())"
       ],
       [
        "a",
        "    }"
       ],
       [
-       "a",
+       "c",
        "}"
-      ],
+      ]
+     ],
+     "truncated": false,
+     "additions": 14,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/operations/vacuum.rs",
+     "lines": [
       [
-       "a",
-       ""
+       "h",
+       "@@ -40,8 +40,8 @@"
       ],
       [
        "c",
-       "#[derive(Serialize, Deserialize, Debug, Clone, Default)]"
+       "use crate::errors::{DeltaResult, DeltaTableError};"
       ],
       [
        "c",
-       "#[serde(rename_all = \"camelCase\")]"
+       "use crate::kernel::transaction::{CommitBuilder, CommitProperties};"
       ]
      ],
      "truncated": true,
-     "additions": 24,
-     "deletions": 0
+     "additions": 147,
+     "deletions": 66
     }
    ],
    "track": {
@@ -428,13 +792,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-11T16:41:15Z",
-    "updated_at": "2026-10-11T16:51:52Z",
-    "conflicts": true,
+    "last_push": "2026-10-13T14:14:04Z",
+    "updated_at": "2026-10-13T14:40:24Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 39
   },
@@ -809,11 +1173,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "DeltaTable.count() ignores deletion vectors and returns more rows than the table has",
    "date": "2026-10-10",
    "created_at": "2026-10-10T22:14:19Z",
-   "merged_at": null,
+   "merged_at": "2026-10-13",
    "reported": true,
    "pr": {
     "number": 4850,
@@ -1084,19 +1448,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 5,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "rtyler"
     ],
     "last_push": "2026-10-13T14:13:08Z",
-    "updated_at": "2026-10-13T14:13:12Z",
+    "updated_at": "2026-10-13T14:36:56Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by rtyler. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 36
   },
@@ -1906,11 +2270,11 @@
      "lines": [
       [
        "h",
-       "@@ -7,6 +7,7 @@"
+       "@@ -6,6 +6,7 @@"
       ],
       [
        "c",
-       "use crate::{DeltaResult, DeltaTableError};"
+       "use crate::delta_datafusion::{get_null_of_arrow_type, to_correct_scalar_value};"
       ],
       [
        "c",
@@ -1938,7 +2302,7 @@
       ],
       [
        "h",
-       "@@ -18,6 +19,7 @@"
+       "@@ -17,6 +18,7 @@"
       ],
       [
        "c",
@@ -1950,7 +2314,7 @@
       ],
       [
        "c",
-       "use delta_kernel::actions::deletion_vector::{DeletionVectorDescriptor, DeletionVectorStorageType};"
+       "use delta_kernel::actions::deletion_vector::DeletionVectorDescriptor;"
       ],
       [
        "a",
@@ -1970,7 +2334,7 @@
       ],
       [
        "h",
-       "@@ -181,13 +183,28 @@"
+       "@@ -180,13 +182,28 @@"
       ],
       [
        "c",
@@ -2164,13 +2528,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-10T03:00:38Z",
-    "updated_at": "2026-10-10T03:07:11Z",
-    "conflicts": true,
+    "last_push": "2026-10-13T14:14:01Z",
+    "updated_at": "2026-10-13T14:25:13Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 30
   },
@@ -2298,7 +2662,7 @@
      "rtyler"
     ],
     "last_push": "2026-10-13T14:12:00Z",
-    "updated_at": "2026-10-13T14:12:48Z",
+    "updated_at": "2026-10-13T14:52:00Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -2596,7 +2960,7 @@
      "rtyler"
     ],
     "last_push": "2026-10-13T13:48:11Z",
-    "updated_at": "2026-10-13T14:15:09Z",
+    "updated_at": "2026-10-13T14:42:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -3508,11 +3872,11 @@
     "approved_by": [],
     "last_push": "2026-10-09T14:13:08Z",
     "updated_at": "2026-10-10T01:15:59Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
