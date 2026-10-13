@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-13T07:18:47Z",
+ "generated_at": "2026-10-13T14:22:36Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3336,
+   "stars": 3339,
    "forks": 682
   },
   {
@@ -36,8 +36,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28360,
-   "forks": 6444
+   "stars": 28370,
+   "forks": 6447
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -52,7 +52,7 @@
     "Windows"
    ],
    "stars": 3553,
-   "forks": 681
+   "forks": 683
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50046,
-   "forks": 20498
+   "stars": 50054,
+   "forks": 20501
   },
   {
    "full": "delta-io/delta",
@@ -112,7 +112,7 @@
     "SQL DDL"
    ],
    "stars": 380,
-   "forks": 222
+   "forks": 223
   },
   {
    "full": "BerriAI/litellm",
@@ -126,8 +126,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61113,
-   "forks": 12273
+   "stars": 61147,
+   "forks": 12293
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -142,7 +142,7 @@
     "CLI"
    ],
    "stars": 1477,
-   "forks": 221
+   "forks": 222
   }
  ],
  "items": [
@@ -430,11 +430,11 @@
     "approved_by": [],
     "last_push": "2026-10-11T16:41:15Z",
     "updated_at": "2026-10-11T16:51:52Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 39
   },
@@ -592,8 +592,8 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-11T16:01:45Z",
-    "updated_at": "2026-10-11T16:10:28Z",
+    "last_push": "2026-10-13T14:13:30Z",
+    "updated_at": "2026-10-13T14:14:27Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -796,8 +796,8 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-11T01:30:03Z",
-    "updated_at": "2026-10-11T01:31:25Z",
+    "last_push": "2026-10-13T14:13:28Z",
+    "updated_at": "2026-10-13T14:14:24Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1084,17 +1084,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-10T22:05:26Z",
-    "updated_at": "2026-10-10T22:14:32Z",
+    "stage": 3,
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-10-13T14:13:08Z",
+    "updated_at": "2026-10-13T14:13:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by rtyler. Waiting to be merged"
    },
    "id": 36
   },
@@ -1393,11 +1395,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Drop the numpy 1.26.4 pin from the pyspark dependency group",
    "date": "2026-10-10",
    "created_at": "2026-10-10T15:22:39Z",
-   "merged_at": null,
+   "merged_at": "2026-10-13",
    "reported": true,
    "pr": {
     "number": 4847,
@@ -1448,18 +1450,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "adamreeve",
+      "at": "2026-10-13T09:27:05Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4847#pullrequestreview-5501470674",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the fix @maharanay22!",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-10T15:17:02Z",
-    "updated_at": "2026-10-10T20:54:35Z",
+    "review": "approved",
+    "approved_by": [
+     "adamreeve"
+    ],
+    "last_push": "2026-10-13T07:56:41Z",
+    "updated_at": "2026-10-13T09:29:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 34
   },
@@ -2151,11 +2166,11 @@
     "approved_by": [],
     "last_push": "2026-10-10T03:00:38Z",
     "updated_at": "2026-10-10T03:07:11Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 30
   },
@@ -2277,11 +2292,13 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-10-10T13:41:28Z",
-    "updated_at": "2026-10-10T14:48:22Z",
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-10-13T14:12:00Z",
+    "updated_at": "2026-10-13T14:12:48Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -2290,18 +2307,18 @@
     },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Approved by rtyler. Waiting to be merged"
    },
    "id": 29
   },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "vacuum(full=True) deletes deletion vector files that are still referenced, making the table unreadable",
    "date": "2026-10-10",
    "created_at": "2026-10-10T03:06:48Z",
-   "merged_at": null,
+   "merged_at": "2026-10-13",
    "reported": true,
    "pr": {
     "number": 4839,
@@ -2446,7 +2463,7 @@
      "lines": [
       [
        "h",
-       "@@ -935,6 +935,30 @@"
+       "@@ -929,6 +929,30 @@"
       ],
       [
        "c",
@@ -2572,17 +2589,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-10T02:36:59Z",
-    "updated_at": "2026-10-10T03:07:01Z",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-10-13T13:48:11Z",
+    "updated_at": "2026-10-13T14:15:09Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 28
   },
