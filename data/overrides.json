@@ -130,6 +130,8 @@
     "https://github.com/delta-io/delta-rs/pull/4847": "Removing one stale numpy pin turns the four failing Python CI jobs (PySpark, PyArrow latest, LakeFS, Unity Catalog) green",
     "https://github.com/delta-io/delta-rs/pull/4854": "Appending naive timestamps to a UTC column now fails with a clear SchemaMismatchError naming the column instead of 'Table features must be specified'; Rust and Python tests show the old message on main and the new one with the fix",
     "https://github.com/delta-io/delta-rs/pull/4856": "New load_cdf test on a Spark-written INT96 table returns 1816 dates on main and the real 9999-12-31 values with the fix; all 26 load_cdf tests pass",
-    "https://github.com/delta-io/delta-rs/pull/4858": "New vacuum test deletes a data file still needed for time travel (twice) on current code and keeps every file of unexpired tombstones with the fix; time travel to the older version reads correctly; 36 vacuum and 130 snapshot tests pass"
+    "https://github.com/delta-io/delta-rs/pull/4858": "New vacuum test deletes a data file still needed for time travel (twice) on current code and keeps every file of unexpired tombstones with the fix; time travel to the older version reads correctly; 36 vacuum and 130 snapshot tests pass",
+    "https://github.com/unitycatalog/unitycatalog/pull/1987": "Against a local UC server, date, timestamp and base64 arguments sent as JSON fail on main and return 10, 5 and 5 with the fix; 18 new tests fail before and pass after",
+    "https://github.com/unitycatalog/unitycatalog/pull/1988": "Creating Decimal and timedelta functions fails on main; with the fix they create and run on a local server (with_tax -> '13.75', to_decimal -> Decimal('3.25'))"
   }
 }
