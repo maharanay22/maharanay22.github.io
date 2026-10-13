@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-13T15:10:35Z",
+ "generated_at": "2026-10-13T15:50:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3339,
+   "stars": 3340,
    "forks": 682
   },
   {
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28370,
-   "forks": 6447
+   "forks": 6448
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50053,
+   "stars": 50052,
    "forks": 20501
   },
   {
@@ -115,6 +115,21 @@
    "forks": 223
   },
   {
+   "full": "mindsdb/engine",
+   "name": "MindsDB",
+   "url": "https://github.com/mindsdb/engine",
+   "about": "Open-source query engine that connects AI to databases like PostgreSQL, SQL Server, Databricks and MongoDB through federated SQL",
+   "icon": "🧠",
+   "category": "AI data platform",
+   "tags": [
+    "PostgreSQL",
+    "Databricks",
+    "Connectors"
+   ],
+   "stars": 25,
+   "forks": 11
+  },
+  {
    "full": "BerriAI/litellm",
    "name": "LiteLLM",
    "url": "https://github.com/BerriAI/litellm",
@@ -126,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61149,
-   "forks": 12292
+   "stars": 61150,
+   "forks": 12294
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -146,6 +161,287 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Add databricks-sqlalchemy to the Databricks handler requirements",
+   "date": "2026-10-13",
+   "created_at": "2026-10-13T15:48:51Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 9,
+    "url": "https://github.com/mindsdb/engine/pull/9"
+   },
+   "issue": null,
+   "proof": "In a fresh install the Databricks handler fails to import and its 39 tests are skipped on main; with the fix it loads and all 39 tests pass",
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-12T19:02:16Z",
+    "updated_at": "2026-10-13T15:49:10Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 43
+  },
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Fix PostgreSQL native queries other than SELECT failing with server-side cursor",
+   "date": "2026-10-13",
+   "created_at": "2026-10-13T15:48:49Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 8,
+    "url": "https://github.com/mindsdb/engine/pull/8"
+   },
+   "issue": null,
+   "proof": "Against a real PostgreSQL 16, native UPDATE, DELETE, CREATE, SHOW and EXPLAIN fail on main with 'syntax error at or near' and succeed with the fix; SELECT still streams",
+   "files": [
+    {
+     "path": "mindsdb/api/executor/sql_query/steps/fetch_dataframe.py",
+     "lines": [
+      [
+       "h",
+       "@@ -16,7 +16,7 @@"
+      ],
+      [
+       "c",
+       "from mindsdb.api.executor.exceptions import UnknownError"
+      ],
+      [
+       "c",
+       "from mindsdb.interfaces.query_context.context_controller import query_context_controller"
+      ],
+      [
+       "c",
+       "from mindsdb.integrations.utilities.query_traversal import query_traversal"
+      ],
+      [
+       "d",
+       "from mindsdb.integrations.libs.response import TableResponse"
+      ],
+      [
+       "a",
+       "from mindsdb.integrations.libs.response import TableResponse, OkResponse"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from .base import BaseStepCall"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -92,7 +92,9 @@"
+      ],
+      [
+       "c",
+       "        if query is None:"
+      ],
+      [
+       "c",
+       "            table_alias = (self.context.get(\"database\"), \"result\", \"result\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "            response: TableResponse = dn.query(step.raw_query, session=self.session)"
+      ],
+      [
+       "a",
+       "            response: TableResponse | OkResponse = dn.query(step.raw_query, session=self.session)"
+      ],
+      [
+       "a",
+       "            if isinstance(response, OkResponse):"
+      ],
+      [
+       "a",
+       "                return ResultSet(affected_rows=response.affected_rows)"
+      ],
+      [
+       "c",
+       "            df = response.data_frame"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "c",
+       "            if isinstance(step.query, (Union, Intersect)):"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 2
+    },
+    {
+     "path": "mindsdb/integrations/handlers/postgres_handler/postgres_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -305,8 +305,8 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def native_query(self, query: str, params=None, stream: bool = True, **kwargs) -> DataHandlerResponse:"
+      ],
+      [
+       "c",
+       "        \"\"\"Executes a SQL query on the PostgreSQL database and returns the result."
+      ],
+      [
+       "d",
+       "        NOTE: 'INSERT' (and may be some else) queries can not be executed on the server side,"
+      ],
+      [
+       "d",
+       "        but there are fallbackto client side execution."
+      ],
+      [
+       "a",
+       "        NOTE: only SELECT and VALUES queries can be executed on the server side,"
+      ],
+      [
+       "a",
+       "        other queries fall back to client side execution."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Args:"
+      ],
+      [
+       "c",
+       "            query (str): The SQL query to be executed."
+      ],
+      [
+       "h",
+       "@@ -383,14 +383,10 @@"
+      ],
+      [
+       "c",
+       "            try:"
+      ],
+      [
+       "c",
+       "                try:"
+      ],
+      [
+       "c",
+       "                    cursor.execute(query)"
+      ],
+      [
+       "d",
+       "                except psycopg.errors.SyntaxError as e:"
+      ],
+      [
+       "d",
+       "                    # NOTE: INSERT queries cannot be executed server-side. When they fail, they produce a syntax error"
+      ],
+      [
+       "d",
+       "                    # that always starts with the text below, regardless of the INSERT query format."
+      ],
+      [
+       "d",
+       "                    lower_e = str(e).lower()"
+      ],
+      [
+       "d",
+       "                    if not lower_e.startswith('syntax error at or near \"insert\"') and not lower_e.startswith("
+      ],
+      [
+       "d",
+       "                        'syntax error at or near \"drop\"'"
+      ],
+      [
+       "d",
+       "                    ):"
+      ],
+      [
+       "d",
+       "                        raise"
+      ],
+      [
+       "a",
+       "                except (psycopg.errors.SyntaxError, psycopg.errors.FeatureNotSupported):"
+      ],
+      [
+       "a",
+       "                    # NOTE: a server-side cursor is created with 'DECLARE ... CURSOR FOR <query>', which accepts only"
+      ],
+      [
+       "a",
+       "                    # SELECT and VALUES. Any other statement (INSERT, UPDATE, CREATE, SHOW, EXPLAIN, etc) is rejected"
+      ],
+      [
+       "a",
+       "                    # before it runs, so it is safe to execute it again with a client side cursor."
+      ],
+      [
+       "c",
+       "                    connection.rollback()"
+      ],
+      [
+       "c",
+       "                    return self._execute_client_side(query=query)"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 10
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-12T18:47:58Z",
+    "updated_at": "2026-10-13T15:49:02Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 42
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -324,8 +620,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-12T02:44:34Z",
@@ -333,8 +629,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 41
   },
@@ -488,8 +784,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-12T02:46:31Z",
@@ -497,8 +793,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 40
   },
@@ -793,7 +1089,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-13T14:14:04Z",
-    "updated_at": "2026-10-13T14:40:24Z",
+    "updated_at": "2026-10-13T15:49:36Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3707,7 +4003,7 @@
      "VANDRANKI"
     ],
     "last_push": "2026-10-09T14:28:27Z",
-    "updated_at": "2026-10-10T01:08:53Z",
+    "updated_at": "2026-10-13T15:35:59Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3719,7 +4015,7 @@
   {
    "kind": "fix",
    "repo": "pydantic/pydantic-settings",
-   "status": "review",
+   "status": "closed",
    "title": "CliApp.run raises TypeError for BaseModel commands on pydantic 2.14",
    "date": "2026-10-09",
    "created_at": "2026-10-09T14:16:54Z",
@@ -3866,17 +4162,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 2,
     "checks": "passing",
     "review": "bot approved",
     "approved_by": [],
     "last_push": "2026-10-09T14:13:08Z",
-    "updated_at": "2026-10-10T01:15:59Z",
+    "updated_at": "2026-10-13T15:48:20Z",
     "conflicts": true,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 23
   },
@@ -4152,47 +4448,47 @@
      "deletions": 9
     },
     {
-     "path": "pydantic_settings/sources/providers/cli.py",
+     "path": "pydantic_settings/sources/providers/azure.py",
      "lines": [
       [
        "h",
-       "@@ -70,6 +70,7 @@"
+       "@@ -12,7 +12,14 @@"
       ],
       [
        "c",
-       "    _get_model_fields,"
+       "from typing_inspection.introspection import is_union_origin"
       ],
       [
        "c",
-       "    _is_function,"
+       ""
       ],
       [
        "c",
-       "    _strip_annotated,"
+       "from ...utils import _lenient_issubclass"
+      ],
+      [
+       "d",
+       "from ..utils import InitState, _get_model_fields, _parse_env_none_str, _resolve_type_alias, _strip_annotated"
       ],
       [
        "a",
-       "    _validate_by_name_enabled,"
+       "from ..utils import ("
       ],
       [
-       "c",
-       "    parse_env_vars,"
+       "a",
+       "    InitState,"
       ],
       [
-       "c",
-       ")"
+       "a",
+       "    _get_model_fields,"
       ],
       [
-       "c",
-       "from .env import EnvSettingsSource"
-      ],
-      [
-       "h",
-       "@@ -1089,8 +1090,7 @@"
+       "a",
+       "    _parse_env_none_str,"
       ]
      ],
      "truncated": true,
-     "additions": 2,
+     "additions": 9,
      "deletions": 2
     }
    ],
@@ -4200,10 +4496,10 @@
     "feedback": [],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "bot approved",
     "approved_by": [],
-    "last_push": "2026-10-09T17:10:24Z",
-    "updated_at": "2026-10-10T01:15:29Z",
+    "last_push": "2026-10-13T15:37:08Z",
+    "updated_at": "2026-10-13T15:40:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -7048,17 +7344,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-13T15:03:45Z",
-    "updated_at": "2026-10-13T15:06:11Z",
+    "updated_at": "2026-10-13T15:35:57Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 8
   },
