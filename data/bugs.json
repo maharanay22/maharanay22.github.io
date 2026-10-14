@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-14T09:47:17Z",
+ "generated_at": "2026-10-14T14:43:58Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28376,
+   "stars": 28380,
    "forks": 6450
   },
   {
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50061,
-   "forks": 20514
+   "stars": 50026,
+   "forks": 20515
   },
   {
    "full": "delta-io/delta",
@@ -82,7 +82,7 @@
     "Lakehouse"
    ],
    "stars": 9044,
-   "forks": 2200
+   "forks": 2201
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61213,
-   "forks": 12322
+   "stars": 61235,
+   "forks": 12329
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,8 +156,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1477,
-   "forks": 227
+   "stars": 1478,
+   "forks": 228
   }
  ],
  "items": [
@@ -1452,17 +1452,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-13T14:13:28Z",
-    "updated_at": "2026-10-13T14:14:24Z",
+    "last_push": "2026-10-14T14:06:22Z",
+    "updated_at": "2026-10-14T14:34:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 37
   },
