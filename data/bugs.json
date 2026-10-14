@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-14T18:59:27Z",
+ "generated_at": "2026-10-14T22:14:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28382,
-   "forks": 6450
+   "stars": 28384,
+   "forks": 6448
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50029,
-   "forks": 20515
+   "stars": 50038,
+   "forks": 20520
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61254,
-   "forks": 12334
+   "stars": 61261,
+   "forks": 12342
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -1254,11 +1254,11 @@
     "approved_by": [],
     "last_push": "2026-10-13T14:13:30Z",
     "updated_at": "2026-10-13T14:14:27Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 38
   },
