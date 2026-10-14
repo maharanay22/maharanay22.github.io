@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-14T14:43:58Z",
+ "generated_at": "2026-10-14T18:59:27Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3553,
+   "stars": 3554,
    "forks": 683
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28380,
+   "stars": 28382,
    "forks": 6450
   },
   {
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50026,
+   "stars": 50029,
    "forks": 20515
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61235,
-   "forks": 12329
+   "stars": 61254,
+   "forks": 12334
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -1457,7 +1457,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-14T14:06:22Z",
-    "updated_at": "2026-10-14T14:34:57Z",
+    "updated_at": "2026-10-14T14:52:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -2837,11 +2837,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "INT96 timestamps outside 1677-2262 wrap to 1816 when read through DataFusion, and optimize persists the wrong value",
    "date": "2026-10-10",
    "created_at": "2026-10-10T03:06:51Z",
-   "merged_at": null,
+   "merged_at": "2026-10-14",
    "reported": true,
    "pr": {
     "number": 4841,
@@ -2951,23 +2951,23 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "rtyler"
     ],
-    "last_push": "2026-10-13T17:38:31Z",
-    "updated_at": "2026-10-13T17:38:34Z",
+    "last_push": "2026-10-14T15:38:23Z",
+    "updated_at": "2026-10-14T16:19:46Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
      "at": "2026-10-10T07:04:08Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by rtyler. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 29
   },
@@ -7207,7 +7207,7 @@
   {
    "kind": "fix",
    "repo": "BerriAI/litellm",
-   "status": "review",
+   "status": "closed",
    "title": "Anthropic streaming with response_format and tools reports finish_reason \"stop\" when a user tool is called",
    "date": "2026-10-07",
    "created_at": "2026-10-07T19:42:29Z",
@@ -7345,18 +7345,33 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "mateo-berri",
+      "at": "2026-10-14T18:34:09Z",
+      "url": "https://github.com/BerriAI/litellm/pull/45147#issuecomment-6175532215",
+      "maintainer": false,
+      "path": null,
+      "text": "Thanks for this. #46331 landed the same fix in the stream handler, keeping finish_reason tool_calls next to a user tool call, so closing as superseded",
+      "answered": true
+     }
+    ],
+    "stage": 2,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-13T15:03:45Z",
-    "updated_at": "2026-10-13T15:35:57Z",
+    "updated_at": "2026-10-14T18:34:10Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "mateo-berri",
+     "at": "2026-10-14T18:34:09Z",
+     "maintainer": false
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 8
   },
