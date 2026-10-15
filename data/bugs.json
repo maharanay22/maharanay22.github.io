@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-15T05:12:49Z",
+ "generated_at": "2026-10-15T10:02:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3554,
+   "stars": 3553,
    "forks": 683
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28389,
+   "stars": 28393,
    "forks": 6449
   },
   {
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50041,
-   "forks": 20521
+   "stars": 50043,
+   "forks": 20522
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9044,
+   "stars": 9045,
    "forks": 2201
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61277,
-   "forks": 12353
+   "stars": 61296,
+   "forks": 12366
   },
   {
    "full": "pydantic/pydantic-settings",
