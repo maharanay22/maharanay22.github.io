@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-14T22:14:38Z",
+ "generated_at": "2026-10-15T00:27:53Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28384,
+   "stars": 28386,
    "forks": 6448
   },
   {
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50038,
+   "stars": 50039,
    "forks": 20520
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61261,
+   "stars": 61263,
    "forks": 12342
   },
   {
@@ -1186,7 +1186,7 @@
       ],
       [
        "h",
-       "@@ -607,10 +607,11 @@"
+       "@@ -607,10 +607,7 @@"
       ],
       [
        "c",
@@ -1218,31 +1218,31 @@
       ],
       [
        "a",
-       "        let mut parquet_options = ReaderProperties::default().to_table_parquet_options(session);"
+       "        let parquet_options = ReaderProperties::default().to_table_parquet_options(session);"
       ],
       [
-       "a",
-       "        parquet_options"
-      ],
-      [
-       "a",
-       "            .global"
-      ],
-      [
-       "a",
-       "            .coerce_int96"
-      ],
-      [
-       "a",
-       "            .get_or_insert_with(|| \"us\".to_string());"
+       "c",
+       "        let metadata_size_hint = parquet_options.global.metadata_size_hint;"
       ],
       [
        "c",
        ""
+      ],
+      [
+       "c",
+       "        let mut cdc_source = ParquetSource::new(cdc_table_schema)"
+      ],
+      [
+       "h",
+       "@@ -844,6 +841,52 @@"
+      ],
+      [
+       "c",
+       "        Ok((temp_dir, table))"
       ]
      ],
      "truncated": true,
-     "additions": 52,
+     "additions": 48,
      "deletions": 5
     }
    ],
@@ -1252,13 +1252,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-13T14:13:30Z",
-    "updated_at": "2026-10-13T14:14:27Z",
-    "conflicts": true,
+    "last_push": "2026-10-15T00:15:36Z",
+    "updated_at": "2026-10-15T00:25:40Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 38
   },
