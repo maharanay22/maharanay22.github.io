@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-15T10:02:33Z",
+ "generated_at": "2026-10-15T14:57:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3341,
+   "stars": 3342,
    "forks": 684
   },
   {
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3553,
-   "forks": 683
+   "forks": 684
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28393,
-   "forks": 6449
+   "stars": 28397,
+   "forks": 6453
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50043,
-   "forks": 20522
+   "stars": 50045,
+   "forks": 20521
   },
   {
    "full": "delta-io/delta",
@@ -81,7 +81,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9045,
+   "stars": 9044,
    "forks": 2201
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61296,
-   "forks": 12366
+   "stars": 61317,
+   "forks": 12376
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1478,
-   "forks": 228
+   "forks": 229
   }
  ],
  "items": [
@@ -1393,11 +1393,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "load_cdf returns 1816 dates for INT96 timestamps outside the nanosecond range",
    "date": "2026-10-11",
    "created_at": "2026-10-11T16:10:14Z",
-   "merged_at": null,
+   "merged_at": "2026-10-15",
    "reported": true,
    "pr": {
     "number": 4856,
@@ -1540,17 +1540,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-15T00:15:36Z",
-    "updated_at": "2026-10-15T00:25:40Z",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-10-15T13:41:27Z",
+    "updated_at": "2026-10-15T14:28:30Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 38
   },
