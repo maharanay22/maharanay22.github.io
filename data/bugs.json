@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-15T03:55:14Z",
+ "generated_at": "2026-10-15T05:12:49Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3341,
-   "forks": 683
+   "forks": 684
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28388,
+   "stars": 28389,
    "forks": 6449
   },
   {
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50040,
+   "stars": 50041,
    "forks": 20521
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61275,
-   "forks": 12350
+   "stars": 61277,
+   "forks": 12353
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -439,17 +439,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-15T03:52:01Z",
-    "updated_at": "2026-10-15T03:54:30Z",
+    "updated_at": "2026-10-15T03:54:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 44
   },
