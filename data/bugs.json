@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-15T00:27:53Z",
+ "generated_at": "2026-10-15T03:55:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,21 +9,6 @@
   "merged"
  ],
  "repos": [
-  {
-   "full": "unitycatalog/unitycatalog",
-   "name": "Unity Catalog",
-   "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "icon": "🗂️",
-   "category": "data governance",
-   "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
-   ],
-   "stars": 3554,
-   "forks": 683
-  },
   {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
@@ -40,6 +25,21 @@
    "forks": 683
   },
   {
+   "full": "unitycatalog/unitycatalog",
+   "name": "Unity Catalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ],
+   "stars": 3554,
+   "forks": 683
+  },
+  {
    "full": "mlflow/mlflow",
    "name": "MLflow",
    "url": "https://github.com/mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28386,
-   "forks": 6448
+   "stars": 28388,
+   "forks": 6449
   },
   {
    "full": "pandas-dev/pandas",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50039,
-   "forks": 20520
+   "stars": 50040,
+   "forks": 20521
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61263,
-   "forks": 12342
+   "stars": 61275,
+   "forks": 12350
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,298 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "delete() removes every row and QueryBuilder returns non-matching rows for some partition predicates",
+   "date": "2026-10-15",
+   "created_at": "2026-10-15T03:54:29Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4881,
+    "url": "https://github.com/delta-io/delta-rs/pull/4881"
+   },
+   "issue": {
+    "number": 4880,
+    "url": "https://github.com/delta-io/delta-rs/issues/4880"
+   },
+   "proof": "On 1.6.6, DELETE WHERE p + 1 = 2 deletes all 4 rows (Spark deletes 1); with the fix delta-rs matches Spark on every case; 22 Rust and 13 Python tests fail before and pass after, 1350 lib tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/engine/expressions/to_kernel.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -23,6 +23,51 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "/// Returns true when kernel file skipping selects exactly the files whose partition values"
+      ],
+      [
+       "a",
+       "/// satisfy `expr` under SQL semantics."
+      ],
+      [
+       "a",
+       "///"
+      ],
+      [
+       "a",
+       "/// Kernel file skipping is best effort: it keeps every file for any term it cannot evaluate"
+      ],
+      [
+       "a",
+       "/// (arithmetic, `IS NOT DISTINCT FROM`, `IS NULL` over a comparison, NULL literals, ...). Only"
+      ],
+      [
+       "a",
+       "/// comparisons between a partition column and a non-null literal, `IS [NOT] NULL` on a partition"
+      ],
+      [
+       "a",
+       "/// column and `IN` lists of non-null literals, combined with `AND` / `OR`, are evaluated exactly."
+      ],
+      [
+       "a",
+       "pub(crate) fn is_exact_partition_predicate(expr: &Expr, partition_columns: &[String]) -> bool {"
+      ],
+      [
+       "a",
+       "    let is_partition_column ="
+      ],
+      [
+       "a",
+       "        |expr: &Expr| matches!(expr, Expr::Column(c) if partition_columns.contains(&c.name));"
+      ],
+      [
+       "a",
+       "    let is_non_null_literal = |expr: &Expr| matches!(expr, Expr::Literal(v, _) if !v.is_null());"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    match expr {"
+      ],
+      [
+       "a",
+       "        Expr::BinaryExpr(BinaryExpr {"
+      ],
+      [
+       "a",
+       "            left,"
+      ],
+      [
+       "a",
+       "            op: Operator::And | Operator::Or,"
+      ],
+      [
+       "a",
+       "            right,"
+      ],
+      [
+       "a",
+       "        }) => {"
+      ],
+      [
+       "a",
+       "            is_exact_partition_predicate(left, partition_columns)"
+      ],
+      [
+       "a",
+       "                && is_exact_partition_predicate(right, partition_columns)"
+      ],
+      [
+       "a",
+       "        }"
+      ],
+      [
+       "a",
+       "        Expr::BinaryExpr(BinaryExpr {"
+      ],
+      [
+       "a",
+       "            left,"
+      ],
+      [
+       "a",
+       "            op:"
+      ],
+      [
+       "a",
+       "                Operator::Eq"
+      ],
+      [
+       "a",
+       "                | Operator::NotEq"
+      ]
+     ],
+     "truncated": true,
+     "additions": 79,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/delta_datafusion/table_provider/next/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1644,6 +1644,72 @@"
+      ],
+      [
+       "c",
+       "        Ok(())"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[rstest::rstest]"
+      ],
+      [
+       "a",
+       "    #[case::case_when(\"CASE WHEN p = 1 THEN true ELSE false END\", &[1])]"
+      ],
+      [
+       "a",
+       "    #[case::not_coalesce(\"NOT coalesce(q > 'a', false)\", &[0, 2])]"
+      ],
+      [
+       "a",
+       "    #[case::partition_and_null_comparison(\"p = 1 AND x = NULL\", &[])]"
+      ],
+      [
+       "a",
+       "    #[case::not_in_with_null(\"x NOT IN (1, NULL)\", &[])]"
+      ],
+      [
+       "a",
+       "    #[case::eq(\"p = 1\", &[1])]"
+      ],
+      [
+       "a",
+       "    #[case::in_list(\"p IN (0, 1)\", &[0, 1])]"
+      ],
+      [
+       "a",
+       "    #[case::is_null(\"p IS NULL\", &[2])]"
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_partition_filters_follow_sql_semantics("
+      ],
+      [
+       "a",
+       "        #[case] filter: &str,"
+      ],
+      [
+       "a",
+       "        #[case] expected: &[i64],"
+      ],
+      [
+       "a",
+       "    ) -> TestResult {"
+      ],
+      [
+       "a",
+       "        let schema = Arc::new(ArrowSchema::new(vec!["
+      ],
+      [
+       "a",
+       "            ArrowField::new(\"id\", ArrowDataType::Int64, true),"
+      ],
+      [
+       "a",
+       "            ArrowField::new(\"x\", ArrowDataType::Int64, true),"
+      ],
+      [
+       "a",
+       "            ArrowField::new(\"p\", ArrowDataType::Int32, true),"
+      ],
+      [
+       "a",
+       "            ArrowField::new(\"q\", ArrowDataType::Utf8, true),"
+      ],
+      [
+       "a",
+       "        ]));"
+      ],
+      [
+       "a",
+       "        let batch = RecordBatch::try_new("
+      ],
+      [
+       "a",
+       "            schema,"
+      ],
+      [
+       "a",
+       "            vec!["
+      ],
+      [
+       "a",
+       "                Arc::new(Int64Array::from(vec![0, 1, 2, 3])),"
+      ],
+      [
+       "a",
+       "                Arc::new(Int64Array::from(vec![Some(0), Some(1), Some(2), None])),"
+      ],
+      [
+       "a",
+       "                Arc::new(Int32Array::from(vec![Some(0), Some(1), None, Some(2)])),"
+      ],
+      [
+       "a",
+       "                Arc::new(StringArray::from(vec!["
+      ]
+     ],
+     "truncated": true,
+     "additions": 66,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-15T03:52:01Z",
+    "updated_at": "2026-10-15T03:54:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 44
+  },
   {
    "kind": "fix",
    "repo": "mindsdb/engine",
