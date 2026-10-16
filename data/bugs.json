@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T15:45:47Z",
+ "generated_at": "2026-10-16T18:00:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "GenAI Eval"
    ],
    "stars": 28415,
-   "forks": 6459
+   "forks": 6461
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -66,8 +66,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50140,
-   "forks": 20521
+   "stars": 50141,
+   "forks": 20524
   },
   {
    "full": "delta-io/delta",
@@ -82,7 +82,7 @@
     "Lakehouse"
    ],
    "stars": 9045,
-   "forks": 2201
+   "forks": 2200
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -111,7 +111,7 @@
     "Delta Lake",
     "SQL DDL"
    ],
-   "stars": 381,
+   "stars": 382,
    "forks": 223
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61387,
-   "forks": 12414
+   "stars": 61394,
+   "forks": 12416
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -439,17 +439,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-16T15:04:49Z",
-    "updated_at": "2026-10-16T15:44:59Z",
+    "updated_at": "2026-10-16T15:45:22Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 46
   },
@@ -715,17 +715,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-16T14:25:21Z",
     "updated_at": "2026-10-16T15:22:58Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 45
   },
@@ -879,17 +879,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-16T15:19:37Z",
     "updated_at": "2026-10-16T15:22:37Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 44
   },
@@ -2486,9 +2486,9 @@
     "updated_at": "2026-10-14T14:52:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "One test job failed because the CI worker crashed (unrelated S3 test). Waiting for a maintainer to re-run it"
    },
    "id": 36
   },
@@ -5786,13 +5786,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-09T01:39:20Z",
-    "updated_at": "2026-10-09T13:59:48Z",
-    "conflicts": true,
+    "last_push": "2026-10-16T17:04:11Z",
+    "updated_at": "2026-10-16T17:05:37Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -6523,13 +6523,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-08T22:22:39Z",
-    "updated_at": "2026-10-08T22:36:01Z",
-    "conflicts": true,
+    "last_push": "2026-10-16T17:04:09Z",
+    "updated_at": "2026-10-16T17:05:38Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -6684,13 +6684,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-08T22:25:59Z",
-    "updated_at": "2026-10-16T00:33:53Z",
-    "conflicts": true,
+    "last_push": "2026-10-16T17:04:07Z",
+    "updated_at": "2026-10-16T17:05:54Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
@@ -7709,7 +7709,7 @@
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
-   "status": "triage",
+   "status": "closed",
    "title": "mlflow.genai.evaluate fails for scorers that return NumPy scalars (np.bool_, np.int64, ...)",
    "date": "2026-10-08",
    "created_at": "2026-10-08T02:32:27Z",
@@ -7969,16 +7969,16 @@
    "track": {
     "feedback": [],
     "stage": 2,
-    "checks": "failing",
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-06T18:20:11Z",
     "updated_at": "2026-10-16T15:22:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Replaced by #26805 (opened after the issue was marked ready)"
    },
    "id": 10
   },
@@ -8185,7 +8185,7 @@
    "track": {
     "feedback": [],
     "stage": 2,
-    "checks": "failing",
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-06T15:58:50Z",

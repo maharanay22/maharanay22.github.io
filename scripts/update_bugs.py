@@ -39,7 +39,7 @@ query($q: String!, $after: String) {
         latestReviews(first: 10) { nodes { state submittedAt authorAssociation author { login __typename } } }
         reviews(last: 10) { nodes { body state submittedAt url authorAssociation author { login __typename } } }
         reviewThreads(last: 30) { nodes { isResolved comments(first: 1) { nodes { body createdAt url path authorAssociation author { login __typename } } } } }
-        commits(last: 1) { nodes { commit { committedDate statusCheckRollup { state } } } }
+        commits(last: 1) { nodes { commit { committedDate statusCheckRollup { state contexts(first: 100) { nodes { __typename ... on CheckRun { name conclusion } ... on StatusContext { context state } } } } } } }
       }
       ... on Issue {
         number title url state stateReason createdAt closedAt updatedAt
@@ -176,10 +176,29 @@ def feedback(node, last_mine):
     return out[:6]
 
 
+def apply_note(url, status, replaced_by, track):
+    if replaced_by:
+        return {**track, **plan("done", "nobody", f"Replaced by {replaced_by}")}
+    note = OVERRIDES.get("notes", {}).get(url)
+    if note and status == "review":
+        return {**track, **note}
+    return track
+
+
 def track_pr(pr, status):
     """Work out where a fix stands and who has to act next."""
     commit = (pr["commits"]["nodes"] or [{}])[0].get("commit") or {}
-    checks = CHECKS.get(((commit.get("statusCheckRollup") or {}).get("state") or "NONE").lower(), "running")
+    rollup = commit.get("statusCheckRollup") or {}
+    checks = CHECKS.get((rollup.get("state") or "NONE").lower(), "running")
+    failed = {
+        n.get("name") or n.get("context")
+        for n in (rollup.get("contexts") or {}).get("nodes", [])
+        if (n.get("conclusion") or n.get("state") or "").upper() in ("FAILURE", "ERROR")
+    }
+    approval_gates = set(OVERRIDES.get("approval_checks", {}).get(pr["repository"]["nameWithOwner"], []))
+    only_gate_failed = checks == "failing" and failed and failed <= approval_gates
+    if only_gate_failed:
+        checks = "passing"
     last_push = commit.get("committedDate") or pr["createdAt"]
     reviews = [r for r in pr["latestReviews"]["nodes"] if not is_bot(r["author"])]
     bot_ok = any(is_bot(r["author"]) and r["state"] == "APPROVED" for r in pr["latestReviews"]["nodes"])
@@ -231,6 +250,8 @@ def track_pr(pr, status):
         return {**info, **plan("action", "you", "Some tests failed. Check the logs")}
     if maint_ok:
         return {**info, **plan("waiting", "maintainers", f"Approved by {', '.join(maint_ok)}. Waiting to be merged")}
+    if only_gate_failed:
+        return {**info, **plan("waiting", "maintainers", "Tests pass. A maintainer's approval is required before it can merge")}
     if checks == "not started":
         return {**info, **plan("waiting", "maintainers", "Waiting for a maintainer to start the tests and review")}
     if checks == "running":
@@ -274,6 +295,9 @@ def main():
             status = "triage"
         else:
             status = "closed"
+        replaced_by = OVERRIDES.get("superseded", {}).get(pr["url"])
+        if replaced_by:
+            status = "closed"
         title_src = (issue or ref or {}).get("title") or pr["title"]
         items.append({
             "kind": "fix", "repo": repo, "status": status, "title": clean_title(title_src),
@@ -283,7 +307,7 @@ def main():
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
             "proof": OVERRIDES.get("proofs", {}).get(pr["url"]),
             "files": fix_diffs(repo, pr["number"]),
-            "track": track_pr(pr, status),
+            "track": apply_note(pr["url"], status, replaced_by, track_pr(pr, status)),
         })
 
     for (repo, num), issue in my_issues.items():
