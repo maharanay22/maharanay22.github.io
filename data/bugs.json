@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T18:00:14Z",
+ "generated_at": "2026-10-16T18:07:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28415,
+   "stars": 28416,
    "forks": 6461
   },
   {
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50141,
+   "stars": 50129,
    "forks": 20524
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61394,
+   "stars": 61393,
    "forks": 12416
   },
   {
@@ -161,6 +161,314 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Decimal min/max statistics are rounded through f64, so exact-match filters and deletes skip files that contain the row",
+   "date": "2026-10-16",
+   "created_at": "2026-10-16T18:07:08Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4895,
+    "url": "https://github.com/delta-io/delta-rs/pull/4895"
+   },
+   "issue": {
+    "number": 4894,
+    "url": "https://github.com/delta-io/delta-rs/issues/4894"
+   },
+   "proof": "decimal(38,18) stats written as 1.1234567890123457 on 1.6.6 make exact lookups miss 100/100 and DELETE remove 0 rows, also in Spark; with the fix stats are exact, lookups miss 0/100 and Spark returns the row",
+   "files": [
+    {
+     "path": "crates/core/Cargo.toml",
+     "lines": [
+      [
+       "h",
+       "@@ -51,7 +51,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "# serde"
+      ],
+      [
+       "c",
+       "serde = { workspace = true, features = [\"derive\"] }"
+      ],
+      [
+       "d",
+       "serde_json = { workspace = true }"
+      ],
+      [
+       "a",
+       "serde_json = { workspace = true, features = [\"raw_value\"] }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "# \"stdlib\""
+      ],
+      [
+       "c",
+       "bytes = { workspace = true }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/kernel/scalars.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -65,7 +65,7 @@"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// Formats an unscaled decimal value with a positive scale, e.g. `-105` with scale 2 as `-1.05`."
+      ],
+      [
+       "d",
+       "fn serialize_scaled_decimal(value: i128, scale: u8) -> String {"
+      ],
+      [
+       "a",
+       "pub(crate) fn serialize_scaled_decimal(value: i128, scale: u8) -> String {"
+      ],
+      [
+       "c",
+       "    let scalar_multiple = 10_u128.pow(scale as u32);"
+      ],
+      [
+       "c",
+       "    let abs = value.unsigned_abs();"
+      ],
+      [
+       "c",
+       "    let sign = if value < 0 { \"-\" } else { \"\" };"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/operations/delete.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -718,7 +718,7 @@"
+      ],
+      [
+       "c",
+       "        get_arrow_schema, get_delta_schema, get_record_batch, setup_table_with_configuration,"
+      ],
+      [
+       "c",
+       "    };"
+      ],
+      [
+       "c",
+       "    use crate::{DeltaResult, DeltaTable, TableProperty};"
+      ],
+      [
+       "d",
+       "    use arrow::array::Int32Array;"
+      ],
+      [
+       "a",
+       "    use arrow::array::{Decimal128Array, Int32Array};"
+      ],
+      [
+       "c",
+       "    use arrow::datatypes::TimestampMicrosecondType;"
+      ],
+      [
+       "c",
+       "    use arrow::datatypes::{Field, Schema};"
+      ],
+      [
+       "c",
+       "    use arrow::record_batch::RecordBatch;"
+      ],
+      [
+       "h",
+       "@@ -1187,6 +1187,42 @@"
+      ],
+      [
+       "c",
+       "        assert_batches_sorted_eq!(&expected, &actual);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[rstest]"
+      ],
+      [
+       "a",
+       "    #[case::min_with_scale_18(18, 1_123_456_789_012_345_678, 2_500_000_000_000_000_000)]"
+      ],
+      [
+       "a",
+       "    #[case::max_above_i64_with_scale_0(0, 10_000_000_000_000_000_000, 1)]"
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_delete_exact_decimal_match("
+      ],
+      [
+       "a",
+       "        #[case] scale: i8,"
+      ],
+      [
+       "a",
+       "        #[case] target: i128,"
+      ],
+      [
+       "a",
+       "        #[case] other: i128,"
+      ],
+      [
+       "a",
+       "    ) {"
+      ],
+      [
+       "a",
+       "        let schema = Arc::new(Schema::new(vec!["
+      ],
+      [
+       "a",
+       "            Field::new(\"id\", DataType::Int32, false),"
+      ],
+      [
+       "a",
+       "            Field::new(\"amount\", DataType::Decimal128(38, scale), false),"
+      ],
+      [
+       "a",
+       "        ]));"
+      ],
+      [
+       "a",
+       "        let amounts = Decimal128Array::from(vec![target, other])"
+      ],
+      [
+       "a",
+       "            .with_precision_and_scale(38, scale)"
+      ],
+      [
+       "a",
+       "            .unwrap();"
+      ],
+      [
+       "a",
+       "        let batch = RecordBatch::try_new("
+      ]
+     ],
+     "truncated": true,
+     "additions": 37,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/writer/stats.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -19,11 +19,12 @@"
+      ],
+      [
+       "c",
+       "    basic::TimeUnit,"
+      ],
+      [
+       "c",
+       "    file::{metadata::RowGroupMetaData, statistics::Statistics},"
+      ],
+      [
+       "c",
+       "};"
+      ],
+      [
+       "a",
+       "use serde_json::value::RawValue;"
+      ],
+      [
+       "c",
+       "use tracing::warn;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use super::*;"
+      ],
+      [
+       "d",
+       "use crate::kernel::{Add, scalars::ScalarExt};"
+      ],
+      [
+       "d",
+       "use crate::protocol::{ColumnValueStat, Stats};"
+      ],
+      [
+       "a",
+       "use crate::kernel::Add;"
+      ],
+      [
+       "a",
+       "use crate::kernel::scalars::{ScalarExt, serialize_scaled_decimal};"
+      ]
+     ],
+     "truncated": true,
+     "additions": 231,
+     "deletions": 197
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-16T14:31:38Z",
+    "updated_at": "2026-10-16T18:07:24Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 47
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
