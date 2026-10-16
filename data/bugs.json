@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T15:23:59Z",
+ "generated_at": "2026-10-16T15:45:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50139,
+   "stars": 50140,
    "forks": 20521
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61385,
+   "stars": 61387,
    "forks": 12414
   },
   {
@@ -161,6 +161,298 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Predicates with a fractional literal on an integer or decimal column are rounded to the column type, so delete/update/merge/add_constraint act on the wrong rows",
+   "date": "2026-10-16",
+   "created_at": "2026-10-16T15:44:57Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4893,
+    "url": "https://github.com/delta-io/delta-rs/pull/4893"
+   },
+   "issue": {
+    "number": 4892,
+    "url": "https://github.com/delta-io/delta-rs/issues/4892"
+   },
+   "proof": "On 1.6.6, delete('qty < 8.5') on [7,8,9] keeps 8 and add_constraint('qty >= 8.5') is stored as 'qty >= 8'; with the fix results match Spark; 16 behavior tests fail on main and pass, 1361 lib tests pass",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1,13 +1,16 @@"
+      ],
+      [
+       "c",
+       "use std::sync::Arc;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "use arrow_schema::DataType;"
+      ],
+      [
+       "c",
+       "use datafusion::common::DFSchemaRef;"
+      ],
+      [
+       "c",
+       "use datafusion::common::tree_node::{Transformed, TreeNode as _};"
+      ],
+      [
+       "c",
+       "use datafusion::error::Result;"
+      ],
+      [
+       "c",
+       "use datafusion::logical_expr::expr::InList;"
+      ],
+      [
+       "c",
+       "use datafusion::logical_expr::simplify::SimplifyContext;"
+      ],
+      [
+       "d",
+       "use datafusion::logical_expr::{BinaryExpr, Expr, ExprSchemable as _};"
+      ],
+      [
+       "a",
+       "use datafusion::logical_expr::type_coercion::binary::comparison_coercion;"
+      ],
+      [
+       "a",
+       "use datafusion::logical_expr::{BinaryExpr, Expr, ExprSchemable as _, cast};"
+      ],
+      [
+       "c",
+       "use datafusion::logical_expr_common::operator::Operator;"
+      ],
+      [
+       "c",
+       "use datafusion::optimizer::simplify_expressions::ExprSimplifier;"
+      ],
+      [
+       "a",
+       "use datafusion::scalar::ScalarValue;"
+      ],
+      [
+       "c",
+       "use datafusion::{catalog::Session, common::DFSchema};"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use crate::{DeltaResult, delta_datafusion::expr::parse_predicate_expression};"
+      ],
+      [
+       "h",
+       "@@ -23,12 +26,21 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "impl Expression {"
+      ],
+      [
+       "c",
+       "    pub(crate) fn resolve(&self, session: &dyn Session, schema: DFSchemaRef) -> Result<Expr> {"
+      ],
+      [
+       "a",
+       "        self.resolve_with(session, schema, LossyLiterals::WidenColumn)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    pub(crate) fn resolve_with("
+      ],
+      [
+       "a",
+       "        &self,"
+      ],
+      [
+       "a",
+       "        session: &dyn Session,"
+      ],
+      [
+       "a",
+       "        schema: DFSchemaRef,"
+      ],
+      [
+       "a",
+       "        lossy: LossyLiterals,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 230,
+     "deletions": 69
+    },
+    {
+     "path": "crates/core/src/operations/constraints.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -10,8 +10,8 @@"
+      ],
+      [
+       "c",
+       "use futures::future::BoxFuture;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use crate::delta_datafusion::{"
+      ],
+      [
+       "d",
+       "    DataValidationExec, DeltaScanNext, DeltaSessionExt, Expression, constraints_to_exprs,"
+      ],
+      [
+       "d",
+       "    create_session, expr::fmt_expr_to_sql, into_expr,"
+      ],
+      [
+       "a",
+       "    DataValidationExec, DeltaScanNext, DeltaSessionExt, Expression, LossyLiterals,"
+      ],
+      [
+       "a",
+       "    constraints_to_exprs, create_session, expr::fmt_expr_to_sql,"
+      ],
+      [
+       "c",
+       "};"
+      ],
+      [
+       "c",
+       "use crate::kernel::transaction::{CommitBuilder, CommitProperties};"
+      ],
+      [
+       "c",
+       "use crate::kernel::{"
+      ],
+      [
+       "h",
+       "@@ -136,15 +136,17 @@"
+      ],
+      [
+       "c",
+       "                let proivider = DeltaScanNext::builder()"
+      ],
+      [
+       "c",
+       "                    .with_snapshot(snapshot.snapshot().clone())"
+      ],
+      [
+       "c",
+       "                    .await?;"
+      ],
+      [
+       "d",
+       "                let schema = proivider.schema().to_dfschema()?;"
+      ],
+      [
+       "a",
+       "                let schema = proivider.schema().to_dfschema_ref()?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "                // Create an Hashmap of the name to the processed expression"
+      ],
+      [
+       "c",
+       "                let mut constraints_sql_mapper = HashMap::with_capacity(this.check_constraints.len());"
+      ],
+      [
+       "c",
+       "                for (name, _) in configuration_key_mapper.iter() {"
+      ],
+      [
+       "d",
+       "                    let converted_expr = into_expr("
+      ],
+      [
+       "d",
+       "                        this.check_constraints[name].clone(),"
+      ],
+      [
+       "d",
+       "                        &schema,"
+      ],
+      [
+       "a",
+       "                    // Keep lossy literal comparisons as written: the stored SQL is read back by"
+      ],
+      [
+       "a",
+       "                    // other engines, which must not see delta-rs specific casts."
+      ],
+      [
+       "a",
+       "                    let converted_expr = this.check_constraints[name].resolve_with("
+      ],
+      [
+       "c",
+       "                        session.as_ref(),"
+      ],
+      [
+       "a",
+       "                        schema.clone(),"
+      ],
+      [
+       "a",
+       "                        LossyLiterals::Keep,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 48,
+     "deletions": 6
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-16T15:04:49Z",
+    "updated_at": "2026-10-16T15:44:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 46
+  },
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
