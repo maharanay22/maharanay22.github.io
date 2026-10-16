@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T09:37:10Z",
+ "generated_at": "2026-10-16T14:16:44Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28410,
-   "forks": 6456
+   "stars": 28412,
+   "forks": 6458
   },
   {
    "full": "pandas-dev/pandas",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61371,
-   "forks": 12402
+   "stars": 61380,
+   "forks": 12412
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1481,
+   "stars": 1480,
    "forks": 232
   }
  ],
@@ -4487,13 +4487,24 @@
    "proof": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "tanghaoji",
+      "at": "2026-10-16T13:14:39Z",
+      "url": "https://github.com/mlflow/mlflow/issues/26605#issuecomment-6216299783",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 Thanks for the clear report and repro. Confirmed on master, and I agree this is worth fixing: a tag silently ending up with a stale value is the worst kind of failure, and `MLFLOW_ENABLE_ASYNC_LOGGING` turns async on for `set_tag` without a per-call opt-in. Two notes before you open the PR. **Scope is nar…",
+      "answered": false
+     }
+    ],
     "stage": 1,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-10-09T14:08:48Z",
+    "updated_at": "2026-10-16T13:14:49Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
