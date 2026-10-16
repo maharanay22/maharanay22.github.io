@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T14:16:44Z",
+ "generated_at": "2026-10-16T15:23:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,6 +25,21 @@
    "forks": 686
   },
   {
+   "full": "mlflow/mlflow",
+   "name": "MLflow",
+   "url": "https://github.com/mlflow/mlflow",
+   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+   "icon": "🧪",
+   "category": "ai engineering",
+   "tags": [
+    "AI Gateway",
+    "Streaming",
+    "GenAI Eval"
+   ],
+   "stars": 28415,
+   "forks": 6459
+  },
+  {
    "full": "unitycatalog/unitycatalog",
    "name": "Unity Catalog",
    "url": "https://github.com/unitycatalog/unitycatalog",
@@ -40,21 +55,6 @@
    "forks": 685
   },
   {
-   "full": "mlflow/mlflow",
-   "name": "MLflow",
-   "url": "https://github.com/mlflow/mlflow",
-   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "icon": "🧪",
-   "category": "ai engineering",
-   "tags": [
-    "AI Gateway",
-    "Streaming",
-    "GenAI Eval"
-   ],
-   "stars": 28412,
-   "forks": 6458
-  },
-  {
    "full": "pandas-dev/pandas",
    "name": "pandas",
    "url": "https://github.com/pandas-dev/pandas",
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50136,
+   "stars": 50139,
    "forks": 20521
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61380,
-   "forks": 12412
+   "stars": 61385,
+   "forks": 12414
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,446 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "mlflow.genai.evaluate fails for scorers that return NumPy scalars (np.bool_, np.int64, ...)",
+   "date": "2026-10-16",
+   "created_at": "2026-10-16T15:22:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 26805,
+    "url": "https://github.com/mlflow/mlflow/pull/26805"
+   },
+   "issue": {
+    "number": 26495,
+    "url": "https://github.com/mlflow/mlflow/issues/26495"
+   },
+   "proof": "A scorer returning np.bool_ fails on master and returns True with the fix; 10 new tests fail on master and pass with the fix",
+   "files": [
+    {
+     "path": "mlflow/genai/evaluation/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -13,6 +13,7 @@"
+      ],
+      [
+       "c",
+       "    AgentEvaluationReserverKey,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from mlflow.genai.scorers import Scorer"
+      ],
+      [
+       "a",
+       "from mlflow.genai.scorers.base import _to_python_scalar"
+      ],
+      [
+       "c",
+       "from mlflow.genai.scorers.scorer_utils import get_scorer_definition_digest"
+      ],
+      [
+       "c",
+       "from mlflow.models import EvaluationMetric"
+      ],
+      [
+       "c",
+       "from mlflow.tracing.constant import AssessmentMetadataKey"
+      ],
+      [
+       "h",
+       "@@ -368,6 +369,8 @@"
+      ],
+      [
+       "c",
+       "    if value is None:"
+      ],
+      [
+       "c",
+       "        return []"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    value = _to_python_scalar(value)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    # Primitives are valid metric values"
+      ],
+      [
+       "c",
+       "    if isinstance(value, (int, float, bool, str)):"
+      ],
+      [
+       "c",
+       "        return ["
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 0
+    },
+    {
+     "path": "mlflow/genai/scorers/aggregation.py",
+     "lines": [
+      [
+       "h",
+       "@@ -76,7 +76,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _cast_assessment_value_to_float(assessment: Feedback) -> float | None:"
+      ],
+      [
+       "c",
+       "    \"\"\"Cast the value of an assessment to a float.\"\"\""
+      ],
+      [
+       "d",
+       "    if isinstance(assessment.value, (int, float, bool)):"
+      ],
+      [
+       "a",
+       "    if isinstance(assessment.value, (int, float, bool, np.number, np.bool_)):"
+      ],
+      [
+       "c",
+       "        return float(assessment.value)"
+      ],
+      [
+       "c",
+       "    elif ("
+      ],
+      [
+       "c",
+       "        isinstance(assessment.value, str)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "mlflow/genai/scorers/base.py",
+     "lines": [
+      [
+       "h",
+       "@@ -138,6 +138,18 @@"
+      ],
+      [
+       "c",
+       "AggregationFunc = Callable[[list[float]], float]  # List of per-row value -> aggregated value"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _to_python_scalar(value: Any) -> Any:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Convert a NumPy scalar (e.g. ``np.bool_``, ``np.int64``), which is not a subclass of the"
+      ],
+      [
+       "a",
+       "    matching Python primitive, to that primitive. NumPy is looked up lazily so this module"
+      ],
+      [
+       "a",
+       "    stays importable without it."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    np = sys.modules.get(\"numpy\")"
+      ],
+      [
+       "a",
+       "    if np is not None and isinstance(value, np.generic):"
+      ],
+      [
+       "a",
+       "        return value.item()"
+      ],
+      [
+       "a",
+       "    return value"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def _extract_scorer_value(result: Any) -> Any:"
+      ],
+      [
+       "c",
+       "    \"\"\"Reduce a sub-scorer's return to a single aggregatable value."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -991,7 +1003,7 @@"
+      ],
+      [
+       "c",
+       "        # Filter to only the parameters the function actually expects"
+      ],
+      [
+       "c",
+       "        sig = inspect.signature(self.__call__)"
+      ],
+      [
+       "c",
+       "        filtered = {k: v for k, v in merged.items() if k in sig.parameters}"
+      ],
+      [
+       "d",
+       "        result = self(**filtered)"
+      ],
+      [
+       "a",
+       "        result = _to_python_scalar(self(**filtered))"
+      ],
+      [
+       "c",
+       "        if not ("
+      ],
+      [
+       "c",
+       "            # TODO: Replace 'Assessment' with 'Feedback' once we migrate from the agent eval harness"
+      ],
+      [
+       "c",
+       "            isinstance(result, (int, float, bool, str, Assessment, LegacyAssessment))"
+      ]
+     ],
+     "truncated": false,
+     "additions": 13,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-16T14:25:21Z",
+    "updated_at": "2026-10-16T15:22:58Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 45
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Async logging (`synchronous=False`) applies writes for the same run out of order",
+   "date": "2026-10-16",
+   "created_at": "2026-10-16T15:22:09Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 26804,
+    "url": "https://github.com/mlflow/mlflow/pull/26804"
+   },
+   "issue": {
+    "number": 26605,
+    "url": "https://github.com/mlflow/mlflow/issues/26605"
+   },
+   "proof": "Issue repro shows a stale tag in 10/10 runs on master and 0/10 with the fix; metric throughput unchanged (1.01 s for 200 batches on a simulated 50 ms backend)",
+   "files": [
+    {
+     "path": "mlflow/utils/async_logging/async_logging_queue.py",
+     "lines": [
+      [
+       "h",
+       "@@ -7,9 +7,10 @@"
+      ],
+      [
+       "c",
+       "import enum"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "import threading"
+      ],
+      [
+       "a",
+       "from collections import deque"
+      ],
+      [
+       "c",
+       "from concurrent.futures import ThreadPoolExecutor"
+      ],
+      [
+       "c",
+       "from queue import Empty, Queue"
+      ],
+      [
+       "d",
+       "from typing import Callable"
+      ],
+      [
+       "a",
+       "from typing import Callable, Iterable"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from mlflow.entities.metric import Metric"
+      ],
+      [
+       "c",
+       "from mlflow.entities.param import Param"
+      ],
+      [
+       "h",
+       "@@ -63,6 +64,8 @@"
+      ],
+      [
+       "c",
+       "        self._queue = Queue()"
+      ],
+      [
+       "c",
+       "        self._lock = threading.RLock()"
+      ],
+      [
+       "c",
+       "        self._logging_func = logging_func"
+      ],
+      [
+       "a",
+       "        self._pending_batches_by_run: dict[str, deque[RunBatch]] = {}"
+      ],
+      [
+       "a",
+       "        self._pending_batches_lock = threading.Lock()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        self._stop_data_logging_thread_event = threading.Event()"
+      ],
+      [
+       "c",
+       "        self._status = QueueStatus.IDLE"
+      ],
+      [
+       "h",
+       "@@ -194,32 +197,73 @@"
+      ],
+      [
+       "c",
+       "            # Ignore empty queue exception"
+      ],
+      [
+       "c",
+       "            return"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        def logging_func(run_batch):"
+      ],
+      [
+       "a",
+       "        for run_batch in run_batches:"
+      ],
+      [
+       "a",
+       "            self._submit_batch(run_batch)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    def _submit_batch(self, run_batch: RunBatch) -> None:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 71,
+     "deletions": 23
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-16T15:19:37Z",
+    "updated_at": "2026-10-16T15:22:37Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 44
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -451,7 +891,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 44
+   "id": 43
   },
   {
    "kind": "fix",
@@ -483,7 +923,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 43
+   "id": 42
   },
   {
    "kind": "fix",
@@ -732,7 +1172,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 42
+   "id": 41
   },
   {
    "kind": "fix",
@@ -924,7 +1364,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 41
+   "id": 40
   },
   {
    "kind": "fix",
@@ -1088,7 +1528,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 40
+   "id": 39
   },
   {
    "kind": "fix",
@@ -1388,7 +1828,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 39
+   "id": 38
   },
   {
    "kind": "fix",
@@ -1554,7 +1994,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 38
+   "id": 37
   },
   {
    "kind": "fix",
@@ -1758,7 +2198,7 @@
     "waiting_on": "you",
     "next": "Some tests failed. Check the logs"
    },
-   "id": 37
+   "id": 36
   },
   {
    "kind": "fix",
@@ -2052,7 +2492,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 36
+   "id": 35
   },
   {
    "kind": "fix",
@@ -2344,7 +2784,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 35
+   "id": 34
   },
   {
    "kind": "fix",
@@ -2430,7 +2870,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 34
+   "id": 33
   },
   {
    "kind": "fix",
@@ -2506,7 +2946,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 33
+   "id": 32
   },
   {
    "kind": "fix",
@@ -2670,7 +3110,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 32
+   "id": 31
   },
   {
    "kind": "fix",
@@ -2834,7 +3274,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 31
+   "id": 30
   },
   {
    "kind": "fix",
@@ -3126,7 +3566,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 30
+   "id": 29
   },
   {
    "kind": "fix",
@@ -3263,7 +3703,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 29
+   "id": 28
   },
   {
    "kind": "fix",
@@ -3557,7 +3997,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 28
+   "id": 27
   },
   {
    "kind": "fix",
@@ -3721,7 +4161,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 27
+   "id": 26
   },
   {
    "kind": "fix",
@@ -4021,7 +4461,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 26
+   "id": 25
   },
   {
    "kind": "fix",
@@ -4178,7 +4618,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 25
+   "id": 24
   },
   {
    "kind": "fix",
@@ -4304,7 +4744,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
-   "id": 24
+   "id": 23
   },
   {
    "kind": "fix",
@@ -4467,49 +4907,6 @@
     "state": "done",
     "waiting_on": "nobody",
     "next": "Closed without merging"
-   },
-   "id": 23
-  },
-  {
-   "kind": "report",
-   "repo": "mlflow/mlflow",
-   "status": "open",
-   "title": "Async logging (`synchronous=False`) applies writes for the same run out of order",
-   "date": "2026-10-09",
-   "created_at": "2026-10-09T14:00:41Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 26605,
-    "url": "https://github.com/mlflow/mlflow/issues/26605"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "tanghaoji",
-      "at": "2026-10-16T13:14:39Z",
-      "url": "https://github.com/mlflow/mlflow/issues/26605#issuecomment-6216299783",
-      "maintainer": true,
-      "path": null,
-      "text": "@maharanay22 Thanks for the clear report and repro. Confirmed on master, and I agree this is worth fixing: a tag silently ending up with a stale value is the worst kind of failure, and `MLFLOW_ENABLE_ASYNC_LOGGING` turns async on for `set_tag` without a per-call opt-in. Two notes before you open the PR. **Scope is nar…",
-      "answered": false
-     }
-    ],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-16T13:14:49Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
    },
    "id": 22
   },
@@ -7284,7 +7681,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-06T18:20:11Z",
-    "updated_at": "2026-10-08T02:32:42Z",
+    "updated_at": "2026-10-16T15:22:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
