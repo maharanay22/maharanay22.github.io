@@ -146,6 +146,8 @@
     "https://github.com/unitycatalog/unitycatalog/pull/1988": "Creating Decimal and timedelta functions fails on main; with the fix they create and run on a local server (with_tax -> '13.75', to_decimal -> Decimal('3.25'))",
     "https://github.com/mindsdb/engine/pull/8": "Against a real PostgreSQL 16, native UPDATE, DELETE, CREATE, SHOW and EXPLAIN fail on main with 'syntax error at or near' and succeed with the fix; SELECT still streams",
     "https://github.com/mindsdb/engine/pull/9": "In a fresh install the Databricks handler fails to import and its 39 tests are skipped on main; with the fix it loads and all 39 tests pass",
-    "https://github.com/delta-io/delta-rs/pull/4881": "On 1.6.6, DELETE WHERE p + 1 = 2 deletes all 4 rows (Spark deletes 1); with the fix delta-rs matches Spark on every case; 22 Rust and 13 Python tests fail before and pass after, 1350 lib tests pass"
+    "https://github.com/delta-io/delta-rs/pull/4881": "On 1.6.6, DELETE WHERE p + 1 = 2 deletes all 4 rows (Spark deletes 1); with the fix delta-rs matches Spark on every case; 22 Rust and 13 Python tests fail before and pass after, 1350 lib tests pass",
+    "https://github.com/mlflow/mlflow/pull/26804": "Issue repro shows a stale tag in 10/10 runs on master and 0/10 with the fix; metric throughput unchanged (1.01 s for 200 batches on a simulated 50 ms backend)",
+    "https://github.com/mlflow/mlflow/pull/26805": "A scorer returning np.bool_ fails on master and returns True with the fix; 10 new tests fail on master and pass with the fix"
   }
 }
