@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T04:55:30Z",
+ "generated_at": "2026-10-16T09:37:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3343,
-   "forks": 685
+   "forks": 686
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28404,
+   "stars": 28410,
    "forks": 6456
   },
   {
@@ -66,7 +66,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50074,
+   "stars": 50136,
    "forks": 20521
   },
   {
@@ -97,7 +97,7 @@
     "Arrow"
    ],
    "stars": 236,
-   "forks": 159
+   "forks": 160
   },
   {
    "full": "databricks/dbt-databricks",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61356,
-   "forks": 12395
+   "stars": 61371,
+   "forks": 12402
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,8 +156,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1479,
-   "forks": 230
+   "stars": 1481,
+   "forks": 232
   }
  ],
  "items": [
