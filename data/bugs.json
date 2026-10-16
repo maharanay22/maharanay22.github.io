@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-15T22:08:36Z",
+ "generated_at": "2026-10-16T00:28:43Z",
  "stages": [
   "reported",
   "fix sent",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28400,
-   "forks": 6455
+   "forks": 6456
   },
   {
    "full": "pandas-dev/pandas",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61333,
-   "forks": 12388
+   "stars": 61338,
+   "forks": 12390
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -5088,11 +5088,11 @@
     "approved_by": [],
     "last_push": "2026-10-09T01:39:20Z",
     "updated_at": "2026-10-09T13:59:48Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -5825,11 +5825,11 @@
     "approved_by": [],
     "last_push": "2026-10-08T22:22:39Z",
     "updated_at": "2026-10-08T22:36:01Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -5986,11 +5986,11 @@
     "approved_by": [],
     "last_push": "2026-10-08T22:25:59Z",
     "updated_at": "2026-10-10T20:44:28Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
