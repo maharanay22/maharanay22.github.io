@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-17T10:55:42Z",
+ "generated_at": "2026-10-17T14:08:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28422,
+   "stars": 28423,
    "forks": 6463
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50139,
-   "forks": 20527
+   "stars": 50143,
+   "forks": 20529
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9046,
+   "stars": 9047,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61426,
-   "forks": 12427
+   "stars": 61434,
+   "forks": 12425
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1481,
+   "stars": 1482,
    "forks": 232
   }
  ],
@@ -738,18 +738,55 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "rtyler",
+      "at": "2026-10-17T13:50:13Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4897#issuecomment-6234671004",
+      "maintainer": true,
+      "path": null,
+      "text": "> Good catch, thanks. I'll keep our binary search for regular tables and only use the kernel lookup when in-commit timestamps are enabled @maharanay22 Please hold off for a little bit, we don't run stock upstream delta-kernel-rs. Let me see if fixing this function in the kernel codebase is simple enough to where wee c…",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "rtyler",
+      "at": "2026-10-17T13:45:01Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4897#issuecomment-6234611573",
+      "maintainer": true,
+      "path": null,
+      "text": "> @rtyler I just check the kernel code, but they do linear search for modification timestamps, while we do binary search. This would be a large penalty for performance on most tables. Maybe we can only use their version_as_of for in commit timestamped tables, and keep our version for modification timestamps **deep sig…",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "ion-elgreco",
+      "at": "2026-10-17T13:32:26Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4897#issuecomment-6234480882",
+      "maintainer": true,
+      "path": null,
+      "text": "@rtyler I just check the kernel code, but they do linear search for modification timestamps, while we do binary search. This would be a large penalty for performance on most tables. Maybe we can only use their version_as_of for in commit timestamped tables, and keep our version for modification timestamps",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
     "last_push": "2026-10-17T01:00:48Z",
-    "updated_at": "2026-10-17T01:38:27Z",
+    "updated_at": "2026-10-17T14:00:44Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "rtyler",
+     "at": "2026-10-17T13:50:13Z",
+     "maintainer": true
+    },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by rtyler. Waiting to be merged"
    },
    "id": 56
   },
@@ -1907,18 +1944,39 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review changes requested",
+      "who": "rtyler",
+      "at": "2026-10-17T12:57:33Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4895#pullrequestreview-5557848342",
+      "maintainer": true,
+      "path": null,
+      "text": "Requested changes",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "rtyler",
+      "at": "2026-10-17T12:55:17Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4895#discussion_r4302725994",
+      "maintainer": true,
+      "path": "crates/core/src/writer/stats.rs",
+      "text": "I think you have (or your agent has 😄 ) certainly identified incorrect behavior here. The introduction of FileStats _feels_ like too much to me however considering the nature of the bug that you are identifying. The problem as far as I understand it is that the behavior of stats computation was using **rounding**, but…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-16T14:31:38Z",
-    "updated_at": "2026-10-16T18:07:24Z",
+    "updated_at": "2026-10-17T13:41:45Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "rtyler asked for changes. Update the PR"
    },
    "id": 47
   },
@@ -2657,11 +2715,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "delete() removes every row and QueryBuilder returns non-matching rows for some partition predicates",
    "date": "2026-10-15",
    "created_at": "2026-10-15T03:54:29Z",
-   "merged_at": null,
+   "merged_at": "2026-10-17",
    "reported": true,
    "pr": {
     "number": 4881,
@@ -2932,17 +2990,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
     "last_push": "2026-10-16T02:15:52Z",
-    "updated_at": "2026-10-16T02:49:43Z",
+    "updated_at": "2026-10-17T13:14:45Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 43
   },
