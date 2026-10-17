@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-16T23:43:48Z",
+ "generated_at": "2026-10-17T00:55:03Z",
  "stages": [
   "reported",
   "fix sent",
@@ -55,6 +55,21 @@
    "forks": 687
   },
   {
+   "full": "mindsdb/engine",
+   "name": "MindsDB",
+   "url": "https://github.com/mindsdb/engine",
+   "about": "Open-source query engine that connects AI to databases like PostgreSQL, SQL Server, Databricks and MongoDB through federated SQL",
+   "icon": "🧠",
+   "category": "AI data platform",
+   "tags": [
+    "PostgreSQL",
+    "Databricks",
+    "Connectors"
+   ],
+   "stars": 25,
+   "forks": 11
+  },
+  {
    "full": "pandas-dev/pandas",
    "name": "pandas",
    "url": "https://github.com/pandas-dev/pandas",
@@ -67,7 +82,7 @@
     "String regex"
    ],
    "stars": 50134,
-   "forks": 20526
+   "forks": 20527
   },
   {
    "full": "delta-io/delta",
@@ -115,21 +130,6 @@
    "forks": 223
   },
   {
-   "full": "mindsdb/engine",
-   "name": "MindsDB",
-   "url": "https://github.com/mindsdb/engine",
-   "about": "Open-source query engine that connects AI to databases like PostgreSQL, SQL Server, Databricks and MongoDB through federated SQL",
-   "icon": "🧠",
-   "category": "AI data platform",
-   "tags": [
-    "PostgreSQL",
-    "Databricks",
-    "Connectors"
-   ],
-   "stars": 25,
-   "forks": 11
-  },
-  {
    "full": "BerriAI/litellm",
    "name": "LiteLLM",
    "url": "https://github.com/BerriAI/litellm",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61401,
+   "stars": 61400,
    "forks": 12423
   },
   {
@@ -161,6 +161,771 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Bracket-quote the database name in SQL Server catalog queries",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T00:53:51Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 14,
+    "url": "https://github.com/mindsdb/engine/pull/14"
+   },
+   "issue": null,
+   "proof": "Hyphenated database names like sqldb-prod-eastus broke SHOW TABLES and the data catalog (6 queries failed to parse); now bracket-quoted",
+   "files": [
+    {
+     "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -181,6 +181,11 @@"
+      ],
+      [
+       "c",
+       "        if self.is_connected is True:"
+      ],
+      [
+       "c",
+       "            self.disconnect()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    @property"
+      ],
+      [
+       "a",
+       "    def _quoted_database(self) -> str:"
+      ],
+      [
+       "a",
+       "        \"\"\"The database name as a bracket-quoted T-SQL identifier, so names like 'sqldb-prod' work in queries.\"\"\""
+      ],
+      [
+       "a",
+       "        return \"[\" + str(self.database).replace(\"]\", \"]]\") + \"]\""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    def connect(self):"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        Establishes a connection to a Microsoft SQL Server database."
+      ],
+      [
+       "h",
+       "@@ -448,7 +453,7 @@"
+      ],
+      [
+       "c",
+       "                table_schema,"
+      ],
+      [
+       "c",
+       "                table_name,"
+      ],
+      [
+       "c",
+       "                table_type"
+      ],
+      [
+       "d",
+       "            FROM {self.database}.INFORMATION_SCHEMA.TABLES"
+      ],
+      [
+       "a",
+       "            FROM {self._quoted_database}.INFORMATION_SCHEMA.TABLES"
+      ],
+      [
+       "c",
+       "            WHERE TABLE_TYPE in ('BASE TABLE', 'VIEW')"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        if self.schema:"
+      ],
+      [
+       "h",
+       "@@ -514,17 +519,17 @@"
+      ],
+      [
+       "c",
+       "                t.TABLE_TYPE as table_type,"
+      ],
+      [
+       "c",
+       "                CAST(ep.value AS NVARCHAR(MAX)) as table_description,"
+      ],
+      [
+       "c",
+       "                SUM(p.rows) as row_count"
+      ],
+      [
+       "d",
+       "            FROM {self.database}.INFORMATION_SCHEMA.TABLES t"
+      ],
+      [
+       "d",
+       "            LEFT JOIN {self.database}.sys.tables st "
+      ],
+      [
+       "a",
+       "            FROM {self._quoted_database}.INFORMATION_SCHEMA.TABLES t"
+      ],
+      [
+       "a",
+       "            LEFT JOIN {self._quoted_database}.sys.tables st "
+      ],
+      [
+       "c",
+       "                ON t.TABLE_NAME = st.name"
+      ]
+     ],
+     "truncated": true,
+     "additions": 28,
+     "deletions": 23
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:44:47Z",
+    "updated_at": "2026-10-17T00:53:51Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 52
+  },
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Escape values in the SQL Server ODBC connection string",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T00:53:47Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 13,
+    "url": "https://github.com/mindsdb/engine/pull/13"
+   },
+   "issue": null,
+   "proof": "Password \"Xy;9}Encrypt=no\" broke the ODBC string (real driver: \"Invalid connection string attribute\"); now escaped as one value",
+   "files": [
+    {
+     "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -150,6 +150,24 @@"
+      ],
+      [
+       "c",
+       "    return Response(RESPONSE_TYPE.TABLE, data_frame=data_frame, mysql_types=mysql_types)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _odbc_value(value: Any) -> str:"
+      ],
+      [
+       "a",
+       "    \"\"\"Escape a value for an ODBC connection string."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    A value that contains ';', '{' or '}', or that starts or ends with a space, is wrapped in braces"
+      ],
+      [
+       "a",
+       "    with every '}' doubled, so it can't end the attribute early or add other attributes."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Args:"
+      ],
+      [
+       "a",
+       "        value (Any): the attribute value."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Returns:"
+      ],
+      [
+       "a",
+       "        str: the value, safe to use after 'KEY='."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    value = str(value)"
+      ],
+      [
+       "a",
+       "    if any(char in value for char in \";{}\") or value != value.strip():"
+      ],
+      [
+       "a",
+       "        return \"{\" + value.replace(\"}\", \"}}\") + \"}\""
+      ],
+      [
+       "a",
+       "    return value"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "class SqlServerHandler(MetaDatabaseHandler):"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    This handler handles connection and execution of the Microsoft SQL Server statements."
+      ],
+      [
+       "h",
+       "@@ -252,19 +270,19 @@"
+      ],
+      [
+       "c",
+       "        password = self.connection_args.get(\"password\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        conn_str_parts = ["
+      ],
+      [
+       "d",
+       "            f\"DRIVER={{{driver}}}\","
+      ]
+     ],
+     "truncated": true,
+     "additions": 25,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:52:13Z",
+    "updated_at": "2026-10-17T00:53:47Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 51
+  },
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Keep Databricks integer columns exact when they contain NULLs",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T00:53:33Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 12,
+    "url": "https://github.com/mindsdb/engine/pull/12"
+   },
+   "issue": null,
+   "proof": "Databricks BIGINT 9007199254740993 with a NULL in the column came back as 9007199254740992.0; now exact Int64",
+   "files": [
+    {
+     "path": "mindsdb/integrations/handlers/databricks_handler/databricks_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -54,6 +54,32 @@"
+      ],
+      [
+       "c",
+       "    return identifier"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _make_data_frame(result: List[Tuple], columns: List[str]) -> pd.DataFrame:"
+      ],
+      [
+       "a",
+       "    \"\"\"Build a DataFrame from query rows, keeping integer and boolean columns that contain NULLs exact."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Without this, pandas turns an integer column with a NULL into float64, which loses precision above 2**53."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Args:"
+      ],
+      [
+       "a",
+       "        result (List[Tuple]): rows returned by the cursor."
+      ],
+      [
+       "a",
+       "        columns (List[str]): column names."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Returns:"
+      ],
+      [
+       "a",
+       "        pd.DataFrame: the query result."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    data_frame = pd.DataFrame(result, columns=columns)"
+      ],
+      [
+       "a",
+       "    for index in range(len(columns)):"
+      ],
+      [
+       "a",
+       "        dtype = data_frame.dtypes.iloc[index]"
+      ],
+      [
+       "a",
+       "        if pd.api.types.is_integer_dtype(dtype) or pd.api.types.is_bool_dtype(dtype):"
+      ],
+      [
+       "a",
+       "            continue"
+      ],
+      [
+       "a",
+       "        values = [row[index] for row in result]"
+      ],
+      [
+       "a",
+       "        value_types = {type(value) for value in values if value is not None}"
+      ],
+      [
+       "a",
+       "        if value_types == {int}:"
+      ],
+      [
+       "a",
+       "            data_frame.isetitem(index, pd.array(values, dtype=\"Int64\"))"
+      ],
+      [
+       "a",
+       "        elif value_types == {bool}:"
+      ],
+      [
+       "a",
+       "            data_frame.isetitem(index, pd.array(values, dtype=\"boolean\"))"
+      ],
+      [
+       "a",
+       "    return data_frame"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 27,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:39:34Z",
+    "updated_at": "2026-10-17T00:53:33Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 50
+  },
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Keep SQL Server integer columns exact when they contain NULLs",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T00:53:30Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11,
+    "url": "https://github.com/mindsdb/engine/pull/11"
+   },
+   "issue": null,
+   "proof": "SQL Server bigint 9007199254740993 with a NULL in the column came back as 9007199254740992.0 typed FLOAT; now exact and typed INT",
+   "files": [
+    {
+     "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,5 +1,6 @@"
+      ],
+      [
+       "c",
+       "from typing import Any, Union, TYPE_CHECKING"
+      ],
+      [
+       "c",
+       "import datetime"
+      ],
+      [
+       "a",
+       "import decimal"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import pymssql"
+      ],
+      [
+       "c",
+       "from pymssql import OperationalError"
+      ],
+      [
+       "h",
+       "@@ -59,6 +60,38 @@"
+      ],
+      [
+       "c",
+       "    return MYSQL_DATA_TYPE.VARCHAR"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "# pyodbc reports the Python type of each column in cursor.description[1]"
+      ],
+      [
+       "a",
+       "_ODBC_PYTHON_TYPES = {"
+      ],
+      [
+       "a",
+       "    bool: MYSQL_DATA_TYPE.TINYINT,"
+      ],
+      [
+       "a",
+       "    int: MYSQL_DATA_TYPE.INT,"
+      ],
+      [
+       "a",
+       "    float: MYSQL_DATA_TYPE.FLOAT,"
+      ],
+      [
+       "a",
+       "    decimal.Decimal: MYSQL_DATA_TYPE.DECIMAL,"
+      ],
+      [
+       "a",
+       "    datetime.datetime: MYSQL_DATA_TYPE.DATETIME,"
+      ],
+      [
+       "a",
+       "    datetime.date: MYSQL_DATA_TYPE.DATE,"
+      ],
+      [
+       "a",
+       "    datetime.time: MYSQL_DATA_TYPE.TIME,"
+      ],
+      [
+       "a",
+       "    str: MYSQL_DATA_TYPE.TEXT,"
+      ],
+      [
+       "a",
+       "    bytes: MYSQL_DATA_TYPE.BINARY,"
+      ],
+      [
+       "a",
+       "    bytearray: MYSQL_DATA_TYPE.BINARY,"
+      ],
+      [
+       "a",
+       "}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _nullable_dtype(values: list[Any]) -> str | None:"
+      ],
+      [
+       "a",
+       "    \"\"\"Pick a pandas nullable dtype for integer or bit values, so NULLs don't turn the column into float or object."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Args:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 50,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:37:04Z",
+    "updated_at": "2026-10-17T00:53:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 49
+  },
+  {
+   "kind": "fix",
+   "repo": "mindsdb/engine",
+   "status": "review",
+   "title": "Fail the PostgreSQL connection when the configured schema doesn't exist",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T00:53:26Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 10,
+    "url": "https://github.com/mindsdb/engine/pull/10"
+   },
+   "issue": null,
+   "proof": "Real PostgreSQL 16: schema \"sales\" (real one is \"Sales\") used to silently read public.orders (999 instead of 1); now the connection fails with a clear error",
+   "files": [
+    {
+     "path": "mindsdb/integrations/handlers/postgres_handler/postgres_handler.py",
+     "lines": [
+      [
+       "h",
+       "@@ -221,11 +221,19 @@"
+      ],
+      [
+       "c",
+       "            schema = self.connection_args.get(\"schema\")"
+      ],
+      [
+       "c",
+       "            if schema:"
+      ],
+      [
+       "c",
+       "                with self.connection.cursor() as cur:"
+      ],
+      [
+       "a",
+       "                    cur.execute(\"SELECT 1 FROM pg_namespace WHERE nspname = %s;\", (schema,))"
+      ],
+      [
+       "a",
+       "                    if cur.fetchone() is None:"
+      ],
+      [
+       "a",
+       "                        raise psycopg.errors.InvalidSchemaName("
+      ],
+      [
+       "a",
+       "                            f'Schema \"{schema}\" does not exist in database \"{self.database}\". '"
+      ],
+      [
+       "a",
+       "                            \"Schema names are case-sensitive.\""
+      ],
+      [
+       "a",
+       "                        )"
+      ],
+      [
+       "c",
+       "                    cur.execute(f'SET search_path TO \"{schema}\", public;')"
+      ],
+      [
+       "c",
+       "                self.connection.commit()"
+      ],
+      [
+       "c",
+       "            return self.connection"
+      ],
+      [
+       "c",
+       "        except psycopg.Error as e:"
+      ],
+      [
+       "c",
+       "            logger.error(f\"Error connecting to PostgreSQL {self.database}, {e}!\")"
+      ],
+      [
+       "a",
+       "            if self.is_connected:"
+      ],
+      [
+       "a",
+       "                self.connection.close()"
+      ],
+      [
+       "c",
+       "            self.is_connected = False"
+      ],
+      [
+       "c",
+       "            raise"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:33:56Z",
+    "updated_at": "2026-10-17T00:53:26Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 48
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
