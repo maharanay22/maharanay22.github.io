@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-17T19:28:23Z",
+ "generated_at": "2026-10-17T21:41:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28426,
+   "stars": 28429,
    "forks": 6467
   },
   {
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50148,
+   "stars": 50152,
    "forks": 20533
   },
   {
@@ -127,7 +127,7 @@
     "SQL DDL"
    ],
    "stars": 382,
-   "forks": 224
+   "forks": 225
   },
   {
    "full": "BerriAI/litellm",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61444,
-   "forks": 12432
+   "stars": 61445,
+   "forks": 12431
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1482,
-   "forks": 231
+   "forks": 230
   }
  ],
  "items": [
