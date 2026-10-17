@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-17T17:12:29Z",
+ "generated_at": "2026-10-17T19:28:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28426,
-   "forks": 6464
+   "forks": 6467
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50146,
-   "forks": 20531
+   "stars": 50148,
+   "forks": 20533
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61439,
-   "forks": 12429
+   "stars": 61444,
+   "forks": 12432
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1482,
-   "forks": 232
+   "forks": 231
   }
  ],
  "items": [
@@ -10576,6 +10576,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-17T18:53:49Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#issuecomment-6238983229",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the PR. Our review queue is backed up right now. To help us get to this sooner, could you run it through pandas-review? It's an agent skill that reviews a PR the way a maintainer would and ends with a verdict. We're considering making it part of the contributing guidelines (GH-70954). Claude Code: from your…",
+      "answered": false
+     },
+     {
       "kind": "review changes requested",
       "who": "jbrockmendel",
       "at": "2026-10-09T17:37:26Z",
@@ -10621,9 +10631,13 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-09T18:08:29Z",
-    "updated_at": "2026-10-10T01:32:51Z",
+    "updated_at": "2026-10-17T18:53:50Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "jbrockmendel",
+     "at": "2026-10-17T18:53:49Z",
+     "maintainer": true
+    },
     "state": "waiting",
     "waiting_on": "maintainers",
     "next": "Requested changes are pushed. Waiting for jbrockmendel to look again"
