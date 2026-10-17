@@ -150,7 +150,12 @@
     "https://github.com/mlflow/mlflow/pull/26804": "Issue repro shows a stale tag in 10/10 runs on master and 0/10 with the fix; metric throughput unchanged (1.01 s for 200 batches on a simulated 50 ms backend)",
     "https://github.com/mlflow/mlflow/pull/26805": "A scorer returning np.bool_ fails on master and returns True with the fix; 10 new tests fail on master and pass with the fix",
     "https://github.com/delta-io/delta-rs/pull/4893": "On 1.6.6, delete('qty < 8.5') on [7,8,9] keeps 8 and add_constraint('qty >= 8.5') is stored as 'qty >= 8'; with the fix results match Spark; 16 behavior tests fail on main and pass, 1361 lib tests pass",
-    "https://github.com/delta-io/delta-rs/pull/4895": "decimal(38,18) stats written as 1.1234567890123457 on 1.6.6 make exact lookups miss 100/100 and DELETE remove 0 rows, also in Spark; with the fix stats are exact, lookups miss 0/100 and Spark returns the row"
+    "https://github.com/delta-io/delta-rs/pull/4895": "decimal(38,18) stats written as 1.1234567890123457 on 1.6.6 make exact lookups miss 100/100 and DELETE remove 0 rows, also in Spark; with the fix stats are exact, lookups miss 0/100 and Spark returns the row",
+    "https://github.com/mindsdb/engine/pull/10": "Real PostgreSQL 16: schema \"sales\" (real one is \"Sales\") used to silently read public.orders (999 instead of 1); now the connection fails with a clear error",
+    "https://github.com/mindsdb/engine/pull/11": "SQL Server bigint 9007199254740993 with a NULL in the column came back as 9007199254740992.0 typed FLOAT; now exact and typed INT",
+    "https://github.com/mindsdb/engine/pull/12": "Databricks BIGINT 9007199254740993 with a NULL in the column came back as 9007199254740992.0; now exact Int64",
+    "https://github.com/mindsdb/engine/pull/13": "Password \"Xy;9}Encrypt=no\" broke the ODBC string (real driver: \"Invalid connection string attribute\"); now escaped as one value",
+    "https://github.com/mindsdb/engine/pull/14": "Hyphenated database names like sqldb-prod-eastus broke SHOW TABLES and the data catalog (6 queries failed to parse); now bracket-quoted"
   },
   "approval_checks": {
     "mlflow/mlflow": [
