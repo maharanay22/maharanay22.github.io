@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-17T00:55:03Z",
+ "generated_at": "2026-10-17T01:37:08Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,21 +25,6 @@
    "forks": 686
   },
   {
-   "full": "mlflow/mlflow",
-   "name": "MLflow",
-   "url": "https://github.com/mlflow/mlflow",
-   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "icon": "🧪",
-   "category": "ai engineering",
-   "tags": [
-    "AI Gateway",
-    "Streaming",
-    "GenAI Eval"
-   ],
-   "stars": 28420,
-   "forks": 6465
-  },
-  {
    "full": "unitycatalog/unitycatalog",
    "name": "Unity Catalog",
    "url": "https://github.com/unitycatalog/unitycatalog",
@@ -53,6 +38,21 @@
    ],
    "stars": 3553,
    "forks": 687
+  },
+  {
+   "full": "mlflow/mlflow",
+   "name": "MLflow",
+   "url": "https://github.com/mlflow/mlflow",
+   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+   "icon": "🧪",
+   "category": "ai engineering",
+   "tags": [
+    "AI Gateway",
+    "Streaming",
+    "GenAI Eval"
+   ],
+   "stars": 28420,
+   "forks": 6465
   },
   {
    "full": "mindsdb/engine",
@@ -161,6 +161,102 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "OSS create_python_function drops element types from type_json for list and dict parameters",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T01:05:20Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2006,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2006"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-17T01:05:23Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 55
+  },
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "OpenAI toolkit sets `strict` from the last parameter only",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T01:05:10Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2005,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2005"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-17T01:05:12Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 54
+  },
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "create_python_function rejects PEP 604 optional hints like `str | None`",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T01:05:02Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2004,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2004"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-17T01:05:04Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 53
+  },
   {
    "kind": "fix",
    "repo": "mindsdb/engine",
