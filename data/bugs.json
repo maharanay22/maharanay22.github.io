@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-17T01:37:08Z",
+ "generated_at": "2026-10-17T06:13:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28420,
-   "forks": 6465
+   "stars": 28419,
+   "forks": 6464
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50134,
-   "forks": 20527
+   "stars": 50136,
+   "forks": 20525
   },
   {
    "full": "delta-io/delta",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61400,
+   "stars": 61406,
    "forks": 12423
   },
   {
@@ -161,6 +161,598 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Lite vacuum never deletes the deletion vector files of expired tombstones",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T01:38:22Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4899,
+    "url": "https://github.com/delta-io/delta-rs/pull/4899"
+   },
+   "issue": {
+    "number": 4898,
+    "url": "https://github.com/delta-io/delta-rs/issues/4898"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "crates/core/src/kernel/snapshot/iterators.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -332,22 +332,7 @@"
+      ],
+      [
+       "c",
+       "            .files"
+      ],
+      [
+       "c",
+       "            .column_by_name(FIELD_NAME_DELETION_VECTOR)"
+      ],
+      [
+       "c",
+       "            .and_then(|col| col.as_struct_opt())?;"
+      ],
+      [
+       "d",
+       "        if dv_col.null_count() == dv_col.len() {"
+      ],
+      [
+       "d",
+       "            return None;"
+      ],
+      [
+       "d",
+       "        }"
+      ],
+      [
+       "d",
+       "        dv_col"
+      ],
+      [
+       "d",
+       "            .is_valid(self.index)"
+      ],
+      [
+       "d",
+       "            .then(|| {"
+      ],
+      [
+       "d",
+       "                let storage_col ="
+      ],
+      [
+       "d",
+       "                    dv_col.column(*DV_FIELD_INDICES.get(DV_FIELD_STORAGE_TYPE).unwrap());"
+      ],
+      [
+       "d",
+       "                storage_col"
+      ],
+      [
+       "d",
+       "                    .is_valid(self.index)"
+      ],
+      [
+       "d",
+       "                    .then_some(DeletionVectorView {"
+      ],
+      [
+       "d",
+       "                        data: dv_col,"
+      ],
+      [
+       "d",
+       "                        index: self.index,"
+      ],
+      [
+       "d",
+       "                    })"
+      ],
+      [
+       "d",
+       "            })"
+      ],
+      [
+       "d",
+       "            .flatten()"
+      ],
+      [
+       "a",
+       "        DeletionVectorView::try_new(dv_col, self.index)"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    /// Internal API"
+      ],
+      [
+       "h",
+       "@@ -486,7 +471,18 @@"
+      ],
+      [
+       "c",
+       "    index: usize,"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "impl DeletionVectorView<'_> {"
+      ],
+      [
+       "a",
+       "impl<'a> DeletionVectorView<'a> {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 13,
+     "deletions": 17
+    },
+    {
+     "path": "crates/core/src/kernel/snapshot/iterators/tombstones.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -7,7 +7,8 @@"
+      ],
+      [
+       "c",
+       "use delta_kernel::{actions::Remove, schema::ToSchema};"
+      ],
+      [
+       "c",
+       "use percent_encoding::percent_decode_str;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "use crate::kernel::snapshot::iterators::get_string_value;"
+      ],
+      [
+       "a",
+       "use crate::kernel::DeletionVectorDescriptor;"
+      ],
+      [
+       "a",
+       "use crate::kernel::snapshot::iterators::{DeletionVectorView, get_string_value};"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// A lightweight, cloneable view over a single tombstone (`Remove` action) row."
+      ],
+      [
+       "c",
+       "///"
+      ],
+      [
+       "h",
+       "@@ -71,4 +72,16 @@"
+      ],
+      [
+       "c",
+       "            .as_primitive_opt::<Int64Type>()"
+      ],
+      [
+       "c",
+       "            .map(|a| a.value(self.index))"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    /// Returns the deletion vector of the removed file, if it had one."
+      ],
+      [
+       "a",
+       "    pub fn deletion_vector_descriptor(&self) -> Option<DeletionVectorDescriptor> {"
+      ],
+      [
+       "a",
+       "        static FIELD_INDEX: LazyLock<usize> = LazyLock::new(|| {"
+      ],
+      [
+       "a",
+       "            Remove::to_schema()"
+      ],
+      [
+       "a",
+       "                .field_with_index(\"deletionVector\")"
+      ],
+      [
+       "a",
+       "                .unwrap()"
+      ],
+      [
+       "a",
+       "                .0"
+      ],
+      [
+       "a",
+       "        });"
+      ],
+      [
+       "a",
+       "        let dv_col = self.data.column(*FIELD_INDEX).as_struct_opt()?;"
+      ],
+      [
+       "a",
+       "        DeletionVectorView::try_new(dv_col, self.index).map(|dv| dv.descriptor())"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 14,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/operations/vacuum.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -40,8 +40,8 @@"
+      ],
+      [
+       "c",
+       "use crate::errors::{DeltaResult, DeltaTableError};"
+      ],
+      [
+       "c",
+       "use crate::kernel::transaction::{CommitBuilder, CommitProperties};"
+      ]
+     ],
+     "truncated": true,
+     "additions": 199,
+     "deletions": 77
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T01:36:37Z",
+    "updated_at": "2026-10-17T01:38:37Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 57
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Time travel by timestamp ignores in-commit timestamps",
+   "date": "2026-10-17",
+   "created_at": "2026-10-17T01:38:13Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4897,
+    "url": "https://github.com/delta-io/delta-rs/pull/4897"
+   },
+   "issue": {
+    "number": 4896,
+    "url": "https://github.com/delta-io/delta-rs/issues/4896"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "crates/core/src/kernel/snapshot/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -23,6 +23,8 @@"
+      ],
+      [
+       "c",
+       "use delta_kernel::actions::{Remove, Sidecar};"
+      ],
+      [
+       "c",
+       "use delta_kernel::engine::arrow_conversion::TryIntoArrow as _;"
+      ],
+      [
+       "c",
+       "use delta_kernel::engine::arrow_data::ArrowEngineData;"
+      ],
+      [
+       "a",
+       "use delta_kernel::history_manager::error::{LogHistoryError, NearestTimestamp};"
+      ],
+      [
+       "a",
+       "use delta_kernel::history_manager::{HistoryCommitType, get_earliest_commit, latest_version_as_of};"
+      ],
+      [
+       "c",
+       "use delta_kernel::path::{LogPathFileType, ParsedLogPath};"
+      ],
+      [
+       "c",
+       "use delta_kernel::scan::scan_row_schema;"
+      ],
+      [
+       "c",
+       "use delta_kernel::schema::derive_macro_utils::ToDataType;"
+      ],
+      [
+       "h",
+       "@@ -1111,6 +1113,50 @@"
+      ],
+      [
+       "c",
+       "                .map_err(|e| DeltaTableError::GenericError { source: e.into() })??;"
+      ],
+      [
+       "c",
+       "        Ok(metadata)"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    /// The latest version committed at or before `timestamp` (milliseconds since the Unix epoch)."
+      ],
+      [
+       "a",
+       "    ///"
+      ],
+      [
+       "a",
+       "    /// Commits made while in-commit timestamps are enabled are compared by their"
+      ],
+      [
+       "a",
+       "    /// `inCommitTimestamp`, earlier commits by the modification time of their log file. A"
+      ],
+      [
+       "a",
+       "    /// timestamp before the earliest available commit resolves to that commit."
+      ],
+      [
+       "a",
+       "    pub(crate) async fn version_at_timestamp("
+      ],
+      [
+       "a",
+       "        &self,"
+      ],
+      [
+       "a",
+       "        log_store: &dyn LogStore,"
+      ],
+      [
+       "a",
+       "        timestamp: i64,"
+      ],
+      [
+       "a",
+       "    ) -> DeltaResult<Version> {"
+      ],
+      [
+       "a",
+       "        let engine = log_store.engine();"
+      ],
+      [
+       "a",
+       "        let inner = self.inner.clone();"
+      ],
+      [
+       "a",
+       "        let version = spawn_blocking_with_span(move || {"
+      ],
+      [
+       "a",
+       "            match latest_version_as_of("
+      ],
+      [
+       "a",
+       "                &inner,"
+      ],
+      [
+       "a",
+       "                engine.as_ref(),"
+      ]
+     ],
+     "truncated": true,
+     "additions": 46,
+     "deletions": 0
+    },
+    {
+     "path": "crates/core/src/table/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1,27 +1,23 @@"
+      ],
+      [
+       "c",
+       "//! Delta Table read and write implementation"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "use std::cmp::{Ordering, min};"
+      ],
+      [
+       "c",
+       "use std::fmt;"
+      ],
+      [
+       "c",
+       "use std::fmt::Formatter;"
+      ],
+      [
+       "c",
+       "use std::sync::Arc;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use chrono::{DateTime, Utc};"
+      ],
+      [
+       "c",
+       "use delta_kernel::expressions::PredicateRef;"
+      ],
+      [
+       "a",
+       "use futures::TryStreamExt;"
+      ],
+      [
+       "c",
+       "use futures::future::ready;"
+      ],
+      [
+       "c",
+       "use futures::stream::{BoxStream, once};"
+      ],
+      [
+       "d",
+       "use futures::{StreamExt, TryStreamExt};"
+      ],
+      [
+       "d",
+       "use object_store::{ObjectStore, ObjectStoreExt as _, path::Path};"
+      ],
+      [
+       "a",
+       "use object_store::path::Path;"
+      ],
+      [
+       "c",
+       "use serde::de::{Error, SeqAccess, Visitor};"
+      ],
+      [
+       "c",
+       "use serde::ser::SerializeSeq;"
+      ],
+      [
+       "c",
+       "use serde::{Deserialize, Deserializer, Serialize, Serializer};"
+      ],
+      [
+       "c",
+       "use url::Url;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use self::state::DeltaTableState;"
+      ],
+      [
+       "d",
+       "use crate::kernel::{CommitInfo, DataCheck, LogicalFileView, Version};"
+      ],
+      [
+       "d",
+       "use crate::logstore::{"
+      ],
+      [
+       "d",
+       "    LogStoreConfig, LogStoreExt, LogStoreRef, ObjectStoreRef, commit_uri_from_version,"
+      ],
+      [
+       "d",
+       "    extract_version_from_filename,"
+      ],
+      [
+       "d",
+       "};"
+      ],
+      [
+       "a",
+       "use crate::kernel::{CommitInfo, DataCheck, LogicalFileView, Snapshot, Version};"
+      ],
+      [
+       "a",
+       "use crate::logstore::{LogStoreConfig, LogStoreRef, ObjectStoreRef};"
+      ],
+      [
+       "c",
+       "use crate::partitions::FilterLiteral;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 59,
+     "deletions": 113
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T01:00:48Z",
+    "updated_at": "2026-10-17T01:38:27Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 56
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
