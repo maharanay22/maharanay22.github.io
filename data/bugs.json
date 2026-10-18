@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-18T17:51:14Z",
+ "generated_at": "2026-10-18T19:58:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28440,
-   "forks": 6474
+   "forks": 6475
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50154,
+   "stars": 50153,
    "forks": 20545
   },
   {
@@ -112,7 +112,7 @@
     "Arrow"
    ],
    "stars": 236,
-   "forks": 160
+   "forks": 161
   },
   {
    "full": "databricks/dbt-databricks",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61494,
+   "stars": 61499,
    "forks": 12456
   },
   {
@@ -161,6 +161,442 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "OSS create_python_function drops element types from type_json for list and dict parameters",
+   "date": "2026-10-18",
+   "created_at": "2026-10-18T18:14:56Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2013,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2013"
+   },
+   "issue": {
+    "number": 2006,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2006"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,6 @@"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "d",
+       "from typing import TYPE_CHECKING, Any, Callable, List"
+      ],
+      [
+       "a",
+       "from typing import TYPE_CHECKING, Any, Callable, Dict, List, Tuple, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.callable_utils import ("
+      ],
+      [
+       "c",
+       "    FunctionMetadata,"
+      ],
+      [
+       "h",
+       "@@ -99,6 +99,46 @@"
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _split_map_types(inner: str) -> Tuple[str, str]:"
+      ],
+      [
+       "a",
+       "    depth = 0"
+      ],
+      [
+       "a",
+       "    for i, char in enumerate(inner):"
+      ],
+      [
+       "a",
+       "        if char in \"<(\":"
+      ],
+      [
+       "a",
+       "            depth += 1"
+      ],
+      [
+       "a",
+       "        elif char in \">)\":"
+      ],
+      [
+       "a",
+       "            depth -= 1"
+      ],
+      [
+       "a",
+       "        elif char == \",\" and depth == 0:"
+      ],
+      [
+       "a",
+       "            return inner[:i].strip(), inner[i + 1 :].strip()"
+      ],
+      [
+       "a",
+       "    raise ValueError(f\"Invalid MAP type: MAP<{inner}>\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _sql_type_to_type_json(sql_type: str) -> Union[str, Dict[str, Any]]:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Converts a SQL type such as ARRAY<MAP<STRING, LONG>> into the Spark-style type JSON"
+      ],
+      [
+       "a",
+       "    used in a parameter's type_json, keeping the element, key and value types."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Args:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 42,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T01:00:27Z",
+    "updated_at": "2026-10-18T18:14:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 57
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "OpenAI toolkit sets `strict` from the last parameter only",
+   "date": "2026-10-18",
+   "created_at": "2026-10-18T17:54:23Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2012,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2012"
+   },
+   "issue": {
+    "number": 2005,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2005"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -276,13 +276,14 @@"
+      ],
+      [
+       "c",
+       "    fields = {}"
+      ],
+      [
+       "c",
+       "    for param_info in param_infos:"
+      ],
+      [
+       "c",
+       "        pydantic_field = param_info_to_pydantic_type(param_info, strict=strict)"
+      ],
+      [
+       "a",
+       "        strict = strict and pydantic_field.strict"
+      ],
+      [
+       "c",
+       "        fields[param_info.name] = ("
+      ],
+      [
+       "c",
+       "            pydantic_field.pydantic_type,"
+      ],
+      [
+       "c",
+       "            Field(default=pydantic_field.default, description=pydantic_field.description),"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "c",
+       "    model = create_model(params_name, **fields, __config__={\"extra\": \"forbid\"})"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    return PydanticFunctionInputParams(pydantic_model=model, strict=pydantic_field.strict)"
+      ],
+      [
+       "a",
+       "    return PydanticFunctionInputParams(pydantic_model=model, strict=strict)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def supported_param_info_types():"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T01:01:07Z",
+    "updated_at": "2026-10-18T17:54:24Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 56
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "create_python_function rejects PEP 604 optional hints like `str | None`",
+   "date": "2026-10-18",
+   "created_at": "2026-10-18T17:53:43Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2011,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2011"
+   },
+   "issue": {
+    "number": 2004,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2004"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -4,6 +4,7 @@"
+      ],
+      [
+       "c",
+       "import warnings"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "c",
+       "from textwrap import dedent, fill, indent"
+      ],
+      [
+       "a",
+       "from types import UnionType"
+      ],
+      [
+       "c",
+       "from typing import ("
+      ],
+      [
+       "c",
+       "    Any,"
+      ],
+      [
+       "c",
+       "    Callable,"
+      ],
+      [
+       "h",
+       "@@ -211,8 +212,8 @@"
+      ],
+      [
+       "c",
+       "    Returns:"
+      ],
+      [
+       "c",
+       "        The corresponding SQL type."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "d",
+       "    if hasattr(hint, \"__origin__\") and hint.__origin__ is Union:"
+      ],
+      [
+       "d",
+       "        non_none_types = [t for t in hint.__args__ if t is not type(None)]"
+      ],
+      [
+       "a",
+       "    if get_origin(hint) in (Union, UnionType):"
+      ],
+      [
+       "a",
+       "        non_none_types = [t for t in get_args(hint) if t is not type(None)]"
+      ],
+      [
+       "c",
+       "        if len(non_none_types) == 1:"
+      ],
+      [
+       "c",
+       "            return python_type_to_sql_type(non_none_types[0])"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "h",
+       "@@ -333,14 +334,14 @@"
+      ],
+      [
+       "c",
+       "    args = get_args(type_hint)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    if default is None:"
+      ],
+      [
+       "d",
+       "        if origin is Union and type(None) in args:"
+      ],
+      [
+       "a",
+       "        if origin in (Union, UnionType) and type(None) in args:"
+      ],
+      [
+       "c",
+       "            return True"
+      ],
+      [
+       "c",
+       "        elif type_hint is type(None):"
+      ],
+      [
+       "c",
+       "            return True"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "c",
+       "            return False"
+      ]
+     ],
+     "truncated": true,
+     "additions": 6,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-17T00:35:23Z",
+    "updated_at": "2026-10-18T17:53:44Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 55
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -459,7 +895,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 57
+   "id": 54
   },
   {
    "kind": "fix",
@@ -787,102 +1223,6 @@
     "state": "waiting",
     "waiting_on": "maintainers",
     "next": "Approved by rtyler. Waiting to be merged"
-   },
-   "id": 56
-  },
-  {
-   "kind": "report",
-   "repo": "unitycatalog/unitycatalog",
-   "status": "open",
-   "title": "OSS create_python_function drops element types from type_json for list and dict parameters",
-   "date": "2026-10-17",
-   "created_at": "2026-10-17T01:05:20Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 2006,
-    "url": "https://github.com/unitycatalog/unitycatalog/issues/2006"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-17T01:05:23Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
-   },
-   "id": 55
-  },
-  {
-   "kind": "report",
-   "repo": "unitycatalog/unitycatalog",
-   "status": "open",
-   "title": "OpenAI toolkit sets `strict` from the last parameter only",
-   "date": "2026-10-17",
-   "created_at": "2026-10-17T01:05:10Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 2005,
-    "url": "https://github.com/unitycatalog/unitycatalog/issues/2005"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-17T01:05:12Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
-   },
-   "id": 54
-  },
-  {
-   "kind": "report",
-   "repo": "unitycatalog/unitycatalog",
-   "status": "open",
-   "title": "create_python_function rejects PEP 604 optional hints like `str | None`",
-   "date": "2026-10-17",
-   "created_at": "2026-10-17T01:05:02Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 2004,
-    "url": "https://github.com/unitycatalog/unitycatalog/issues/2004"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-17T01:05:04Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
    },
    "id": 53
   },
@@ -2537,14 +2877,14 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "aaronteo-db"
     ],
     "last_push": "2026-10-18T17:07:52Z",
-    "updated_at": "2026-10-18T17:24:33Z",
+    "updated_at": "2026-10-18T18:18:25Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4889,18 +5229,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "jbrockmendel",
+      "at": "2026-10-18T18:49:35Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6253749809",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the PR. Our review queue is backed up right now. To help us get to this sooner, could you run it through pandas-review? It's an agent skill that reviews a PR the way a maintainer would and ends with a verdict. We're considering making it part of the contributing guidelines (GH-70954). Claude Code: from your…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T19:52:22Z",
-    "updated_at": "2026-10-10T20:36:29Z",
+    "updated_at": "2026-10-18T18:49:35Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "jbrockmendel",
+     "at": "2026-10-18T18:49:35Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jbrockmendel commented. Reply or update the PR"
    },
    "id": 34
   },
@@ -10623,8 +10978,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-17T23:25:22Z",
@@ -10770,8 +11125,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-18T00:39:24Z",
