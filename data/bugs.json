@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-18T01:29:40Z",
+ "generated_at": "2026-10-18T14:52:51Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3343,
-   "forks": 686
+   "forks": 688
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3553,
+   "stars": 3551,
    "forks": 687
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28429,
-   "forks": 6468
+   "stars": 28438,
+   "forks": 6472
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50151,
-   "forks": 20533
+   "stars": 50154,
+   "forks": 20538
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9047,
+   "stars": 9049,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61450,
-   "forks": 12436
+   "stars": 61484,
+   "forks": 12455
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,8 +156,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1482,
-   "forks": 230
+   "stars": 1483,
+   "forks": 231
   }
  ],
  "items": [
@@ -6284,7 +6284,7 @@
      "lines": [
       [
        "h",
-       "@@ -314,7 +314,8 @@"
+       "@@ -314,7 +314,10 @@"
       ],
       [
        "c",
@@ -6308,6 +6308,14 @@
       ],
       [
        "a",
+       "              // Overrides python/asyncio/rest.mustache with the v7.11.0 version. See the header of"
+      ],
+      [
+       "a",
+       "              // build/templates/asyncio/rest.mustache for when to remove it."
+      ],
+      [
+       "a",
        "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath"
       ],
       [
@@ -6324,7 +6332,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
+     "additions": 4,
      "deletions": 1
     },
     {
@@ -6332,7 +6340,7 @@
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,205 @@"
+       "@@ -0,0 +1,207 @@"
       ],
       [
        "a",
@@ -6344,7 +6352,15 @@
       ],
       [
        "a",
-       "    Delete this override once project/plugins.sbt uses sbt-openapi-generator 7.11.0 or newer. }}"
+       "    Delete this override when upgrading sbt-openapi-generator in project/plugins.sbt to 7.11.0 or newer."
+      ],
+      [
+       "a",
+       "    That upgrade also needs a fix for the Java native client, which from 7.11.0 (still in 7.26.0) decodes"
+      ],
+      [
+       "a",
+       "    sync responses with the JVM default charset instead of UTF-8. }}"
       ],
       [
        "a",
@@ -6441,18 +6457,10 @@
       [
        "a",
        "        self.status = resp.status"
-      ],
-      [
-       "a",
-       "        self.reason = resp.reason"
-      ],
-      [
-       "a",
-       "        self.data = None"
       ]
      ],
      "truncated": true,
-     "additions": 205,
+     "additions": 207,
      "deletions": 0
     },
     {
@@ -6529,14 +6537,6 @@
       [
        "d",
        " *   skipOverwrite, templateDir, auth, gitHost, importMappings,"
-      ],
-      [
-       "a",
-       " *   skipOverwrite, auth, gitHost, importMappings,"
-      ],
-      [
-       "c",
-       " *   typeMappings, etc.). These all have sensible defaults in"
       ]
      ],
      "truncated": true,
@@ -6545,18 +6545,63 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:26:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505897",
+      "maintainer": true,
+      "path": "clients/python/build/templates/asyncio/rest.mustache",
+      "text": "A plain bump to 7.11.0+ won't be enough to retire this. From 7.11.0 on (still true in 7.26.0), the Java `native` client decodes sync responses with `new String(readAllBytes())`, i.e. the JVM default charset, which is the regression you hit. Can we say that here so whoever upgrades knows what else has to move? A tracki…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:26:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505901",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "Someone bumping the plugin has no pointer to this override. Can we add one here, and a matching note next to the version in `project/plugins.sbt`? [code] (ai assisted)",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:26:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505902",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "The retry client is lazy too (created on the first GET, closed in `close()`), but neither test sets `retries`, so if it went back to eager creation nothing would fail. Can we add a small case with `retries` set: `api_client.rest_client.pool_manager` and `retry_client` are `None` before the first call, both are set aft…",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T07:44:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6247269584",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "failing",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-09T21:47:05Z",
-    "updated_at": "2026-10-09T21:49:14Z",
+    "last_push": "2026-10-18T14:44:56Z",
+    "updated_at": "2026-10-18T14:45:45Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T07:44:18Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 25
   },
@@ -8023,18 +8068,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:30:17Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6248259823",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T20:44:02Z",
-    "updated_at": "2026-10-10T20:44:10Z",
+    "updated_at": "2026-10-18T09:30:18Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T09:30:17Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 18
   },
@@ -9411,7 +9471,7 @@
       ],
       [
        "h",
-       "@@ -12,12 +12,16 @@"
+       "@@ -12,19 +12,20 @@"
       ],
       [
        "c",
@@ -9454,20 +9514,16 @@
        "    content: str = Field("
       ],
       [
-       "d",
+       "a",
+       "    content: Optional[Union[str, list[Any]]] = Field("
+      ],
+      [
+       "c",
        "        ...,"
       ],
       [
        "d",
        "        description=\"The content of the message, e.g. original user question or an assistant response.\","
-      ],
-      [
-       "a",
-       "    content: Optional[Union[str, list[Any]]] = Field("
-      ],
-      [
-       "a",
-       "        default=None,"
       ],
       [
        "a",
@@ -9488,26 +9544,89 @@
       [
        "c",
        "    def to_dict(self) -> dict[str, Any]:"
+      ],
+      [
+       "d",
+       "        return {"
+      ],
+      [
+       "d",
+       "            \"role\": self.role,"
       ]
      ],
-     "truncated": false,
+     "truncated": true,
      "additions": 8,
-     "deletions": 4
+     "deletions": 7
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529445",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+      "text": "With `extra=\"allow\"` and `content` defaulting to `None`, only `role` is required now. So `{\"role\": \"user\", \"contnet\": \"hi\"}` validates: the typo becomes an extra field, `content` is `None`, and the UC functions run before the provider rejects the request. Can we keep the field required but nullable (`Field(..., ...)`)…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529448",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/tests/test_litellm_utils.py",
+      "text": "Neither test file (here or Anthropic) has a case asserting `ValueError(\"Invalid conversation history format\")`. This PR loosens validation in both integrations (`Dict[str, Any]` blocks, `extra=\"allow\"`), so nothing would fail if it ended up accepting everything. Can you add a negative test per integration? For example…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529449",
+      "maintainer": true,
+      "path": "ai/integrations/anthropic/tests/test_anthropic_utils.py",
+      "text": "The history here is all dicts, so the `ContentBlock` side of the union isn't tested. That's the path where an object gets converted to a dict. Can you add a `TextBlock(...)` object to the history and check it comes back as a dict?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529450",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+      "text": "nit: The new comment says history \"can be sent back as-is\", but `to_dict()` still returns only `role` and `content`, so it drops the fields this PR keeps. Nothing in `ai/` calls it. Can it just `return self.model_dump()` so the two can't disagree?",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T07:53:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6247342827",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "failing",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-09T20:46:24Z",
-    "updated_at": "2026-10-16T00:33:51Z",
+    "last_push": "2026-10-18T14:42:52Z",
+    "updated_at": "2026-10-18T14:43:40Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T07:53:23Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 11
   },
@@ -10488,7 +10607,7 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-10T13:27:44Z",
-    "updated_at": "2026-10-11T01:36:41Z",
+    "updated_at": "2026-10-18T03:34:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10583,7 +10702,7 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the PR. Our review queue is backed up right now. To help us get to this sooner, could you run it through pandas-review? It's an agent skill that reviews a PR the way a maintainer would and ends with a verdict. We're considering making it part of the contributing guidelines (GH-70954). Claude Code: from your…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review changes requested",
@@ -10631,7 +10750,7 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-09T18:08:29Z",
-    "updated_at": "2026-10-17T18:53:50Z",
+    "updated_at": "2026-10-18T03:34:04Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
