@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-18T14:52:51Z",
+ "generated_at": "2026-10-18T17:51:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28438,
-   "forks": 6472
+   "stars": 28440,
+   "forks": 6474
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50154,
-   "forks": 20538
+   "forks": 20545
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9049,
+   "stars": 9048,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61484,
-   "forks": 12455
+   "stars": 61494,
+   "forks": 12456
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -2476,7 +2476,7 @@
       ],
       [
        "h",
-       "@@ -991,7 +1003,7 @@"
+       "@@ -991,7 +1003,11 @@"
       ],
       [
        "c",
@@ -2499,36 +2499,57 @@
        "        result = _to_python_scalar(self(**filtered))"
       ],
       [
+       "a",
+       "        # Feedback values are JSON-serialized when logged, which fails for NumPy scalars"
+      ],
+      [
+       "a",
+       "        for feedback in result if isinstance(result, list) else [result]:"
+      ],
+      [
+       "a",
+       "            if isinstance(feedback, Feedback):"
+      ],
+      [
+       "a",
+       "                feedback.value = _to_python_scalar(feedback.value)"
+      ],
+      [
        "c",
        "        if not ("
-      ],
-      [
-       "c",
-       "            # TODO: Replace 'Assessment' with 'Feedback' once we migrate from the agent eval harness"
-      ],
-      [
-       "c",
-       "            isinstance(result, (int, float, bool, str, Assessment, LegacyAssessment))"
       ]
      ],
-     "truncated": false,
-     "additions": 13,
+     "truncated": true,
+     "additions": 17,
      "deletions": 1
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-16T14:25:21Z",
-    "updated_at": "2026-10-16T15:22:58Z",
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "aaronteo-db",
+      "at": "2026-10-18T17:10:38Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26805#pullrequestreview-5564003471",
+      "maintainer": true,
+      "path": null,
+      "text": "lgtm. thanks for your contribution @maharanay22",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "aaronteo-db"
+    ],
+    "last_push": "2026-10-18T17:07:52Z",
+    "updated_at": "2026-10-18T17:24:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "next": "Approved by aaronteo-db. Waiting to be merged"
    },
    "id": 45
   },
@@ -6592,7 +6613,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T14:44:56Z",
-    "updated_at": "2026-10-18T14:45:45Z",
+    "updated_at": "2026-10-18T15:37:00Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -9617,7 +9638,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T14:42:52Z",
-    "updated_at": "2026-10-18T14:43:40Z",
+    "updated_at": "2026-10-18T15:36:51Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -10317,7 +10338,39 @@
      "lines": [
       [
        "h",
-       "@@ -50,12 +50,12 @@"
+       "@@ -25,6 +25,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "if TYPE_CHECKING:"
+      ],
+      [
+       "c",
+       "    from collections.abc import Callable"
+      ],
+      [
+       "a",
+       "    from types import ModuleType"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    from pandas._typing import Scalar"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -50,12 +51,24 @@"
       ],
       [
        "c",
@@ -10334,6 +10387,54 @@
       [
        "d",
        "    def _has_unsupported_regex(pat: str | re.Pattern[str]) -> bool:"
+      ],
+      [
+       "a",
+       "    def _re_parser() -> ModuleType:"
+      ],
+      [
+       "a",
+       "        try:"
+      ],
+      [
+       "a",
+       "            # error: Module \"re\" has no attribute \"_parser\""
+      ],
+      [
+       "a",
+       "            from re import _parser  # type: ignore[attr-defined]"
+      ],
+      [
+       "a",
+       "        except Exception as err:"
+      ],
+      [
+       "a",
+       "            raise type(err)("
+      ],
+      [
+       "a",
+       "                \"Incompatible version for regex; you will need to upgrade pandas \""
+      ],
+      [
+       "a",
+       "                \"or downgrade Python\""
+      ],
+      [
+       "a",
+       "            ) from err"
+      ],
+      [
+       "a",
+       "        return _parser"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    @staticmethod"
       ],
       [
        "a",
@@ -10354,91 +10455,11 @@
       [
        "c",
        ""
-      ],
-      [
-       "d",
-       "        This includes lookaround (lookahead or lookbehind) assertions and"
-      ],
-      [
-       "d",
-       "        backreferences."
-      ],
-      [
-       "a",
-       "        Nodes nested in groups, branches, repeats and character classes are"
-      ],
-      [
-       "a",
-       "        included."
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        Parameters"
-      ],
-      [
-       "c",
-       "        ----------"
-      ],
-      [
-       "h",
-       "@@ -64,8 +64,9 @@"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        Returns"
-      ],
-      [
-       "c",
-       "        -------"
-      ],
-      [
-       "d",
-       "        bool"
-      ],
-      [
-       "d",
-       "            Whether `pat` contains a lookahead or lookbehind."
-      ],
-      [
-       "a",
-       "        list[tuple[Any, Any]]"
-      ],
-      [
-       "a",
-       "            The nodes of `pat`, or an empty list if Python's ``re`` cannot"
-      ],
-      [
-       "a",
-       "            parse it."
-      ],
-      [
-       "c",
-       "        \"\"\""
-      ],
-      [
-       "c",
-       "        try:"
-      ],
-      [
-       "c",
-       "            # error: Module \"re\" has no attribute \"_parser\""
-      ],
-      [
-       "h",
-       "@@ -78,34 +79,66 @@"
       ]
      ],
      "truncated": true,
-     "additions": 58,
-     "deletions": 25
+     "additions": 74,
+     "deletions": 39
     },
     {
      "path": "pandas/core/arrays/string_arrow.py",
@@ -10602,12 +10623,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-10T13:27:44Z",
-    "updated_at": "2026-10-18T03:34:19Z",
+    "last_push": "2026-10-17T23:25:22Z",
+    "updated_at": "2026-10-18T17:07:16Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10640,7 +10661,7 @@
      "lines": [
       [
        "h",
-       "@@ -17137,7 +17137,10 @@"
+       "@@ -17137,7 +17137,11 @@"
       ],
       [
        "c",
@@ -10660,19 +10681,23 @@
       ],
       [
        "a",
-       "        if out_dtype is not None and out.dtype.kind != \"b\" and not out.isna().any():"
+       "        if ("
       ],
       [
        "a",
-       "            # Keep boolean results that can hold NA when skipna=False (e.g."
+       "            out_dtype is not None"
       ],
       [
        "a",
-       "            # \"boolean\", \"bool[pyarrow]\"), and object results mixing such"
+       "            and out.dtype != \"boolean\""
       ],
       [
        "a",
-       "            # dtypes that hold NA, since NA can't be cast to bool"
+       "            and not any(isinstance(dtype, ArrowDtype) for dtype in df._blk_dtypes)"
+      ],
+      [
+       "a",
+       "        ):"
       ],
       [
        "c",
@@ -10688,7 +10713,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 4,
+     "additions": 5,
      "deletions": 1
     }
    ],
@@ -10745,12 +10770,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-09T18:08:29Z",
-    "updated_at": "2026-10-18T03:34:04Z",
+    "last_push": "2026-10-18T00:39:24Z",
+    "updated_at": "2026-10-18T17:07:15Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
