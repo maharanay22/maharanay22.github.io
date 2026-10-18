@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-18T19:58:54Z",
+ "generated_at": "2026-10-18T22:23:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50153,
+   "stars": 50155,
    "forks": 20545
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61499,
+   "stars": 61504,
    "forks": 12456
   },
   {
@@ -3809,18 +3809,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:08:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#issuecomment-6255750636",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-12T02:44:34Z",
-    "updated_at": "2026-10-13T14:54:35Z",
+    "updated_at": "2026-10-18T22:08:23Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T22:08:23Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 40
   },
@@ -3973,18 +3988,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:04:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6255714156",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-12T02:46:31Z",
-    "updated_at": "2026-10-13T14:53:21Z",
+    "updated_at": "2026-10-18T22:04:47Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T22:04:47Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 39
   },
@@ -4976,7 +5006,51 @@
      "lines": [
       [
        "h",
-       "@@ -28,6 +28,77 @@"
+       "@@ -1,6 +1,9 @@"
+      ],
+      [
+       "c",
+       "from __future__ import annotations"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from functools import partial"
+      ],
+      [
+       "a",
+       "from functools import ("
+      ],
+      [
+       "a",
+       "    lru_cache,"
+      ],
+      [
+       "a",
+       "    partial,"
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "c",
+       "import re"
+      ],
+      [
+       "c",
+       "from typing import ("
+      ],
+      [
+       "c",
+       "    TYPE_CHECKING,"
+      ],
+      [
+       "h",
+       "@@ -28,6 +31,99 @@"
       ],
       [
        "c",
@@ -5049,55 +5123,11 @@
       [
        "a",
        ""
-      ],
-      [
-       "a",
-       "def _re2_set(chars: str, negate: bool) -> str:"
-      ],
-      [
-       "a",
-       "    if not chars:"
-      ],
-      [
-       "a",
-       "        # RE2 has no empty set"
-      ],
-      [
-       "a",
-       "        return r\"[\\x00-\\x{10FFFF}]\" if negate else r\"[^\\x00-\\x{10FFFF}]\""
-      ],
-      [
-       "a",
-       "    return f\"[{'^' if negate else ''}{_re2_escape(chars)}]\""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "def _scan_set(pattern: str, start: int) -> tuple[list[str], int] | None:"
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    Split the body of the set opened by the \"[\" at ``start`` into its tokens."
-      ],
-      [
-       "a",
-       ""
       ]
      ],
      "truncated": true,
-     "additions": 112,
-     "deletions": 0
+     "additions": 138,
+     "deletions": 1
     },
     {
      "path": "pandas/core/arrays/arrow/array.py",
@@ -5238,24 +5268,24 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the PR. Our review queue is backed up right now. To help us get to this sooner, could you run it through pandas-review? It's an agent skill that reviews a PR the way a maintainer would and ends with a verdict. We're considering making it part of the contributing guidelines (GH-70954). Claude Code: from your…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-10T19:52:22Z",
-    "updated_at": "2026-10-18T18:49:35Z",
+    "last_push": "2026-10-18T19:58:13Z",
+    "updated_at": "2026-10-18T21:05:11Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-18T18:49:35Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "jbrockmendel commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 34
   },
@@ -8446,6 +8476,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-18T22:06:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#pullrequestreview-5565265430",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the fix! Switching to `is None` is correct and matches `executor/local.py` and `executor/local_subprocess.py`. A few comments on the tests inline. One thing to add to the description: a function that returns `\"\"` now sends an empty string to the LLM instead of the no-output message. That's the right behavio…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:06:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#discussion_r4308965243",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "What does this add over `test_no_output_function_local` and `test_no_output_function_sandbox` right above? They already cover the `None` case. If you keep it, can you split it into a sync test and an async test, so a failure shows which path broke? Also, please assert against the literal string, as the neighboring tes…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:06:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#discussion_r4308965247",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "nit: the description says `[]` and `{}` were also affected, but these cases don't cover them. Can you add an `ARRAY` case and a `MAP` case, or narrow the description?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:06:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#discussion_r4308965250",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "nit: the `uc_client` fixture also does `await uc_api_client.close()`. Can you mirror that here?",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-10-18T09:30:17Z",
@@ -8461,7 +8531,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T20:44:02Z",
-    "updated_at": "2026-10-18T09:30:18Z",
+    "updated_at": "2026-10-18T22:06:00Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -8470,7 +8540,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 18
   },
@@ -9691,18 +9761,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:02:08Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#issuecomment-6255688384",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T20:44:00Z",
-    "updated_at": "2026-10-10T20:44:10Z",
+    "updated_at": "2026-10-18T22:02:08Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-18T22:02:08Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 12
   },
