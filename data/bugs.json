@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T05:05:21Z",
+ "generated_at": "2026-10-19T10:44:16Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3342,
+   "stars": 3343,
    "forks": 688
   },
   {
@@ -36,8 +36,8 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3553,
-   "forks": 687
+   "stars": 3554,
+   "forks": 688
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28443,
-   "forks": 6477
+   "stars": 28446,
+   "forks": 6479
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50216,
-   "forks": 20547
+   "stars": 50229,
+   "forks": 20552
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9048,
+   "stars": 9049,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61524,
-   "forks": 12464
+   "stars": 61552,
+   "forks": 12472
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -3811,6 +3811,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-19T05:44:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#pullrequestreview-5567386345",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the fix! The split change and the case-insensitive interval check look right to me, and nested types like `ARRAY<DECIMAL(38, 18)>` still resolve to `ARRAY`. A few comments inline, none blocking.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T05:44:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#discussion_r4310680252",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "This also changes `type_json` for these two types: `create_parameter_info` in `callable_utils_oss.py` builds `type_json[\"type\"]` from `base_type_name.lower()`, so it becomes `\"decimal\"` / `\"interval\"` and the precision is only kept in `type_text`. The existing test data in `test_oss_client.py` puts the full type there…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T05:44:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#discussion_r4310680255",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "nit: the same expression is repeated at line 755, and `validate_input_parameter` in `client.py` already derives the base name for `DECIMAL`/`INTERVAL` a different way. Can we extract a small `_base_type_name(sql_type)` helper so the two call sites here don't drift?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T05:44:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#discussion_r4310680259",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "Can we add a unit test for this next to `test_validate_param_invalid_interval`? Right now only the `shift_time` server round trip covers the upper-case path. Something like: [code]",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T05:44:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#discussion_r4310680266",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "nit: if an early case fails, the later ones never run and the report doesn't say which function broke. Can we use `@pytest.mark.parametrize` like the other tests in this file?",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-10-18T22:08:23Z",
@@ -3826,7 +3876,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-12T02:44:34Z",
-    "updated_at": "2026-10-18T22:08:23Z",
+    "updated_at": "2026-10-19T05:44:43Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -3835,7 +3885,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 40
   },
@@ -3990,13 +4040,63 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
+      "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-10-18T22:04:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6255714156",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#pullrequestreview-5567531633",
       "maintainer": true,
       "path": null,
-      "text": "/review",
+      "text": "[AI Assisted] The conversion helper is small and sensible, and the tests check what the function body actually receives through both sync and async paths. Two things need fixing before merge: defaults skip conversion (regresses previously working calls), and DECIMAL accepts non-finite values. Details inline. nit: now…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798104",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] blocker: defaults are added after conversion, so they stay unconverted. A DECIMAL default `\"0.5\"` comes back from `ast.literal_eval` as a `float`, a DATE default as a `str`. With `a` (no default) and `b` (default `0.5`) and body `return str(a + b)`, calling with `{\"a\": 2}` used to return `2.5`; now it's…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798113",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Why convert twice? Here we convert a deep copy only for validation, and `_prepare_function_and_params` converts again. Two places that have to stay in sync. Can we convert once (after defaults) in the OSS execute path and validate the typed values? That would also fix the defaults issue.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798120",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] `Decimal(str(value))` accepts `\"NaN\"`, `\"Infinity\"`, `\"sNaN\"`, and JSON can produce `float(\"inf\")`/`nan`. SQL DECIMAL can't represent any of these, and `sNaN` only fails on the first arithmetic inside the user's function, far from the bad input. Should we reject `not result.is_finite()`? Please add these…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798127",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] TIMESTAMP_NTZ with a `Z`/offset becomes a tz-aware datetime here, which contradicts NTZ. Should NTZ reject offsets instead? Either way, can the docstring state the behavior?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798137",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] What is this actually testing? `Parameter x .*{type_name}` also matches the pre-existing type-mismatch message, so every row would pass even if the conversion were removed. The `True` DECIMAL row is rejected by the old type check, not the new code. Can we match on `but got invalid value` so this proves t…",
       "answered": false
      }
     ],
@@ -4005,7 +4105,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-12T02:46:31Z",
-    "updated_at": "2026-10-18T22:04:47Z",
+    "updated_at": "2026-10-19T06:07:36Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -4014,7 +4114,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 39
   },
@@ -7014,11 +7114,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Key the function cache by full name and stop memoizing results",
    "date": "2026-10-09",
    "created_at": "2026-10-09T15:38:16Z",
-   "merged_at": null,
+   "merged_at": "2026-10-19",
    "reported": true,
    "pr": {
     "number": 1971,
@@ -7153,18 +7253,75 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-10-19T08:41:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#pullrequestreview-5568941773",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] LGTM, thanks for the fix! Keying by full name, giving each definition its own namespace and dropping `lru_cache` all look right on the local and sandbox paths (sandbox forks, so the callable is never pickled). nit: `func_cache` is a public attribute, and its keys change from short names to full names. Re…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T08:41:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#discussion_r4311842805",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] Nice test. Since `fold` is recursive, it covers both bugs: with only the key fixed and the namespace still shared, `s1.fold` would call `s2.fold` inside the recursion and return 50 instead of 120.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T08:41:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#discussion_r4311842821",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Not a blocker, and it predates this PR, but now that keys are full names, can we evict on delete with `self.func_cache.pop(function_name, None)` in `delete_function_async`? Today create, execute, delete, then create again without `replace=True` still runs the old callable on the next execute. One catch:…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T08:41:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#discussion_r4311842835",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] nit: nothing checks that a repeated call reuses the cached callable, so a change that re-`exec`s on every call would still pass these tests. Could you assert `func_cache[full_name]` is the same object after a second call?",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T05:52:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#issuecomment-6260648118",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-10T20:44:03Z",
-    "updated_at": "2026-10-10T20:44:10Z",
+    "updated_at": "2026-10-19T08:43:06Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-19T05:52:01Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 24
   },
@@ -9763,13 +9920,63 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
+      "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-10-18T22:02:08Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#issuecomment-6255688384",
+      "at": "2026-10-19T06:06:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#discussion_r4310793424",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_executor.py",
+      "text": "What does this prove about the guard? `_limit_resources` already wraps each `setrlimit` in `try/except Exception`, so if `if resource is None: return` is removed, `None.setrlimit` raises `AttributeError`, gets caught and logged, and this test still passes. Can we assert nothing is logged, e.g. run under `caplog.at_lev…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#discussion_r4310793433",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_subprocess_executor.py",
+      "text": "Same question here: without the guard, the `except` writes \"unable to set RLIMIT_CPU\" to stderr and the test still passes. This one matters more, since `run_in_sandbox_subprocess` logs any subprocess stderr at ERROR, so a missing guard would mean an ERROR log on every local call on Windows. Can we add `assert capsys.r…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#discussion_r4310793438",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
+      "text": "Since this steers users from `sandbox` to `local`, can we say what they give up? `local` also drops the import and `open` restrictions, not just the resource limits. Something like \"...to execute functions in the current process, without sandbox restrictions.\"",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#discussion_r4310793444",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+      "text": "Not a blocker, but lets follow up: `UnitycatalogFunctionClient` defaults to `execution_mode=\"sandbox\"`, so on Windows a default client constructs fine and then every call returns this message as the function result. In toolkit setups that string goes to the LLM, and the developer may never see it. A one-time `_logger.…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#discussion_r4310793447",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_executor.py",
+      "text": "nit: this explicit `undo()` is load-bearing (it must run before the reload so the real `resource` is imported again). A short comment would keep someone from removing it as redundant with monkeypatch's auto-teardown.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#pullrequestreview-5567524669",
       "maintainer": true,
       "path": null,
-      "text": "/review",
+      "text": "Thanks for the fix, this is small and in the right place. The fork check failing closed with a clear message (instead of crashing, or silently running unrestricted) is the right call. A few comments inline, none blocking.",
       "answered": false
      }
     ],
@@ -9778,7 +9985,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-10T20:44:00Z",
-    "updated_at": "2026-10-18T22:02:08Z",
+    "updated_at": "2026-10-19T06:06:35Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -9787,7 +9994,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 12
   },
