@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T00:22:53Z",
+ "generated_at": "2026-10-19T02:03:20Z",
  "stages": [
   "reported",
   "fix sent",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50155,
-   "forks": 20545
+   "forks": 20546
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61509,
-   "forks": 12459
+   "stars": 61513,
+   "forks": 12460
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -178,7 +178,7 @@
     "number": 2006,
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2006"
    },
-   "proof": null,
+   "proof": "A list[int] parameter reached OpenAI tools as \"items\": {}; it now carries integer items and dict values keep their number type",
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
@@ -342,7 +342,7 @@
     "number": 2005,
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2005"
    },
-   "proof": null,
+   "proof": "tag_day(d DATE, label STRING) got strict: True from the OpenAI toolkit because only the last parameter counted; it now gets strict: False",
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
@@ -450,7 +450,7 @@
     "number": 2004,
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2004"
    },
-   "proof": null,
+   "proof": "A function typed `str | None` was rejected with \"type str | None is not supported\" while Optional[str] worked; both now produce the same SQL",
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
@@ -614,7 +614,7 @@
     "number": 4898,
     "url": "https://github.com/delta-io/delta-rs/issues/4898"
    },
-   "proof": null,
+   "proof": "Lite vacuum deleted the data file but left its deletion_vector_*.bin behind forever and listed the file twice; with the fix both files are deleted once, matching Spark VACUUM LITE",
    "files": [
     {
      "path": "crates/core/src/kernel/snapshot/iterators.rs",
@@ -914,7 +914,7 @@
     "number": 4896,
     "url": "https://github.com/delta-io/delta-rs/issues/4896"
    },
-   "proof": null,
+   "proof": "On a copied table with in-commit timestamps, time travel to each commit's timestamp returned version 0 (empty) every time; with the fix each timestamp loads its own version, matching Spark",
    "files": [
     {
      "path": "crates/core/src/kernel/snapshot/mod.rs",
@@ -2008,7 +2008,7 @@
     "number": 4894,
     "url": "https://github.com/delta-io/delta-rs/issues/4894"
    },
-   "proof": "decimal(38,18) stats written as 1.1234567890123457 on 1.6.6 make exact lookups miss 100/100 and DELETE remove 0 rows, also in Spark; with the fix stats are exact, lookups miss 0/100 and Spark returns the row",
+   "proof": "decimal(38,18) stats written as 1.1234567890123457 made exact lookups and DELETE miss the row, also in Spark; now the min is rounded down and the max up, so the range always contains the data and DELETE removes the row",
    "files": [
     {
      "path": "crates/core/src/operations/delete.rs",
@@ -4999,7 +4999,7 @@
     "number": 70991,
     "url": "https://github.com/pandas-dev/pandas/issues/70991"
    },
-   "proof": null,
+   "proof": "\\s missed whitespace like \"\u000b\" and \" \" on pyarrow strings (and \\S matched them); now both follow Python's re",
    "files": [
     {
      "path": "pandas/core/arrays/_arrow_string_mixins.py",
@@ -10771,7 +10771,7 @@
     "number": 70770,
     "url": "https://github.com/pandas-dev/pandas/issues/70770"
    },
-   "proof": null,
+   "proof": "str.replace(r\"[^\\w\\s]\", \"\") on pyarrow strings turned \"café crème\" into \"caf crme\"; now matches Python's re: \"café crème\"",
    "files": [
     {
      "path": "pandas/core/arrays/_arrow_string_mixins.py",
@@ -11094,7 +11094,7 @@
     "number": 70685,
     "url": "https://github.com/pandas-dev/pandas/issues/70685"
    },
-   "proof": null,
+   "proof": "DataFrame.any(skipna=False) on a bool[pyarrow] column with NA raised TypeError; now returns NA, and frames without pyarrow columns behave exactly as before",
    "files": [
     {
      "path": "pandas/core/frame.py",
@@ -11315,7 +11315,7 @@
     "number": 70487,
     "url": "https://github.com/pandas-dev/pandas/issues/70487"
    },
-   "proof": null,
+   "proof": "Series.mode(dropna=False) on nullable boolean data raised TypeError; now returns the mode including NA, listed in the pandas 3.2.0 release notes",
    "files": [
     {
      "path": "pandas/core/algorithms.py",
@@ -11422,7 +11422,7 @@
     "number": 26399,
     "url": "https://github.com/mlflow/mlflow/issues/26399"
    },
-   "proof": null,
+   "proof": "Mistral streaming responses through the MLflow AI Gateway lost token usage; now the usage is passed through in the final chunk",
    "files": [
     {
      "path": "mlflow/gateway/providers/mistral.py",
