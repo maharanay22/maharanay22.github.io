@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T02:03:20Z",
+ "generated_at": "2026-10-19T02:05:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -4999,7 +4999,7 @@
     "number": 70991,
     "url": "https://github.com/pandas-dev/pandas/issues/70991"
    },
-   "proof": "\\s missed whitespace like \"\u000b\" and \" \" on pyarrow strings (and \\S matched them); now both follow Python's re",
+   "proof": "\\s missed whitespace like \"\\x0b\" and \"\\xa0\" on pyarrow strings (and \\S matched them); now both follow Python's re",
    "files": [
     {
      "path": "pandas/core/arrays/_arrow_string_mixins.py",
