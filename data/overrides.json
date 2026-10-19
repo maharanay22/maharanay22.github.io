@@ -164,7 +164,7 @@
     "https://github.com/pandas-dev/pandas/pull/70515": "Series.mode(dropna=False) on nullable boolean data raised TypeError; now returns the mode including NA, listed in the pandas 3.2.0 release notes",
     "https://github.com/pandas-dev/pandas/pull/70723": "DataFrame.any(skipna=False) on a bool[pyarrow] column with NA raised TypeError; now returns NA, and frames without pyarrow columns behave exactly as before",
     "https://github.com/pandas-dev/pandas/pull/70773": "str.replace(r\"[^\\w\\s]\", \"\") on pyarrow strings turned \"café crème\" into \"caf crme\"; now matches Python's re: \"café crème\"",
-    "https://github.com/pandas-dev/pandas/pull/71025": "\\s missed whitespace like \"\u000b\" and \" \" on pyarrow strings (and \\S matched them); now both follow Python's re",
+    "https://github.com/pandas-dev/pandas/pull/71025": "\\s missed whitespace like \"\\x0b\" and \"\\xa0\" on pyarrow strings (and \\S matched them); now both follow Python's re",
     "https://github.com/mlflow/mlflow/pull/26440": "Mistral streaming responses through the MLflow AI Gateway lost token usage; now the usage is passed through in the final chunk"
   },
   "approval_checks": {
