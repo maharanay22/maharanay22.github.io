@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T17:13:21Z",
+ "generated_at": "2026-10-19T21:36:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3554,
-   "forks": 688
+   "forks": 689
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28450,
-   "forks": 6483
+   "stars": 28452,
+   "forks": 6481
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50237,
-   "forks": 20557
+   "stars": 50238,
+   "forks": 20561
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61573,
-   "forks": 12479
+   "stars": 61580,
+   "forks": 12484
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -310,29 +310,44 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#issuecomment-6274777135",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-17T01:00:27Z",
-    "updated_at": "2026-10-18T18:14:57Z",
+    "updated_at": "2026-10-19T18:51:49Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-19T18:51:49Z",
+     "maintainer": true
+    },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 57
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "OpenAI toolkit sets `strict` from the last parameter only",
    "date": "2026-10-18",
    "created_at": "2026-10-18T17:54:23Z",
-   "merged_at": null,
+   "merged_at": "2026-10-19",
    "reported": true,
    "pr": {
     "number": 2012,
@@ -418,29 +433,46 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2012#issuecomment-6274774966",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-17T01:01:07Z",
-    "updated_at": "2026-10-18T17:54:24Z",
+    "updated_at": "2026-10-19T19:57:17Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-19T18:51:42Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 56
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "create_python_function rejects PEP 604 optional hints like `str | None`",
    "date": "2026-10-18",
    "created_at": "2026-10-18T17:53:43Z",
-   "merged_at": null,
+   "merged_at": "2026-10-19",
    "reported": true,
    "pr": {
     "number": 2011,
@@ -582,18 +614,35 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2011#issuecomment-6274772774",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-17T00:35:23Z",
-    "updated_at": "2026-10-18T17:53:44Z",
+    "updated_at": "2026-10-19T19:56:28Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-19T18:51:35Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 55
   },
@@ -1183,7 +1232,7 @@
       "maintainer": true,
       "path": null,
       "text": "@ion-elgreco I believe that the kernel implementation is going to be faster than the legacy implementation that deltalake-core has here because while there is a quasi-binary search happening there is a secondary I/O call with `object_store.head` happening in the legacy implementation. The kernel implementation in cont…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -1216,14 +1265,14 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "approved",
     "approved_by": [
      "rtyler"
     ],
-    "last_push": "2026-10-17T01:00:48Z",
-    "updated_at": "2026-10-19T12:44:12Z",
+    "last_push": "2026-10-19T18:06:56Z",
+    "updated_at": "2026-10-19T18:57:12Z",
     "conflicts": false,
     "last_comment": {
      "who": "rtyler",
@@ -1232,7 +1281,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "rtyler commented. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 53
   },
@@ -3011,7 +3060,7 @@
       ],
       [
        "h",
-       "@@ -194,32 +197,73 @@"
+       "@@ -194,32 +197,83 @@"
       ],
       [
        "c",
@@ -3047,7 +3096,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 71,
+     "additions": 81,
      "deletions": 23
     }
    ],
@@ -3061,7 +3110,7 @@
       "maintainer": true,
       "path": "mlflow/utils/async_logging/async_logging_queue.py",
       "text": "This branch, and the drain-finished → entry deleted → next batch creates a fresh deque and task path, aren't exercised by any test; nothing in the module makes `submit` raise. Could you add one with `submit` patched to `side_effect=RuntimeError(...)` that asserts the batch's `exception` is set and `_pending_batches_by…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3071,7 +3120,7 @@
       "maintainer": true,
       "path": "mlflow/utils/async_logging/async_logging_queue.py",
       "text": "Non-blocking: this loop holds a pool worker until the run's deque is empty. With as many runs under sustained tag/param traffic as there are workers (10 by default), every worker becomes a drain loop and metric-only batches and other runs sit in the executor queue instead of being interleaved as on master. If you want…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3081,7 +3130,7 @@
       "maintainer": true,
       "path": "mlflow/utils/async_logging/async_logging_queue.py",
       "text": "Nit: the docstring explains the ordering requirement for tags but not why params take this path too (the PR description calls them immutable). Worth stating the reason so nobody optimizes params out later, e.g. that serializing keeps it deterministic which of two conflicting `log_param` calls stores the value and whic…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3091,7 +3140,7 @@
       "maintainer": true,
       "path": "tests/utils/test_async_logging_queue.py",
       "text": "Nit: on the fixed code no later batch can log while batch `\"0\"` is in flight, so this always waits the full timeout and each parametrized case costs about 2 s. On master batch `\"1\"` completes within milliseconds, so a 0.2 s window detects the regression just as reliably. -- Claude Code drafted, reviewed before post",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3101,7 +3150,7 @@
       "maintainer": true,
       "path": "tests/utils/test_async_logging_queue.py",
       "text": "Nit: this test and `test_metric_only_batches_of_same_run_are_logged_concurrently` need at least two pool workers, so they wait 5 s and fail if `MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE=1` is exported in the environment (the workaround the issue itself recommends). `monkeypatch.delenv(\"MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE\"…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3111,20 +3160,20 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks, this matches the shape suggested on the issue, and I verified it locally: the repro goes from `wrong final tag in 10/10 runs` on master to `0/10` here, the new fluent regression test fails on master and passes on this branch, ruff/clint are clean, and metric-only throughput is unchanged (200 metric batches on…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-16T15:19:37Z",
-    "updated_at": "2026-10-19T12:28:49Z",
+    "last_push": "2026-10-19T18:23:57Z",
+    "updated_at": "2026-10-19T18:25:35Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "tanghaoji left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 44
   },
@@ -3803,7 +3852,55 @@
       ],
       [
        "h",
-       "@@ -714,7 +715,7 @@"
+       "@@ -693,6 +694,11 @@"
+      ],
+      [
+       "c",
+       "    return sql_body"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _base_type_name(sql_type: str) -> str:"
+      ],
+      [
+       "a",
+       "    \"\"\"Returns the base type name, e.g. DECIMAL for DECIMAL(38, 18) and ARRAY for ARRAY<LONG>.\"\"\""
+      ],
+      [
+       "a",
+       "    return re.split(r\"[<( ]\", sql_type, maxsplit=1)[0]"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def extract_function_metadata(func: Callable[..., Any]) -> FunctionMetadata:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    Extracts metadata from a Python function necessary for SQL function generation."
+      ],
+      [
+       "h",
+       "@@ -714,7 +720,7 @@"
       ],
       [
        "c",
@@ -3823,7 +3920,7 @@
       ],
       [
        "a",
-       "    base_return_type_name = re.split(r\"[<( ]\", sql_return_type, maxsplit=1)[0]"
+       "    base_return_type_name = _base_type_name(sql_return_type)"
       ],
       [
        "c",
@@ -3839,43 +3936,11 @@
       ],
       [
        "h",
-       "@@ -751,7 +752,7 @@"
-      ],
-      [
-       "c",
-       "            error_message = generate_type_hint_error_message(param_name, param_hint, e)"
-      ],
-      [
-       "c",
-       "            raise ValueError(error_message) from e"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "        base_type_name = sql_type.split(\"<\", 1)[0]"
-      ],
-      [
-       "a",
-       "        base_type_name = re.split(r\"[<( ]\", sql_type, maxsplit=1)[0]"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        param_comment = docstring_info.params.get(param_name)"
-      ],
-      [
-       "c",
-       "        if param_comment:"
+       "@@ -751,7 +757,7 @@"
       ]
      ],
-     "truncated": false,
-     "additions": 3,
+     "truncated": true,
+     "additions": 8,
      "deletions": 2
     }
    ],
@@ -3889,7 +3954,7 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the fix! The split change and the case-insensitive interval check look right to me, and nested types like `ARRAY<DECIMAL(38, 18)>` still resolve to `ARRAY`. A few comments inline, none blocking.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3899,7 +3964,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "This also changes `type_json` for these two types: `create_parameter_info` in `callable_utils_oss.py` builds `type_json[\"type\"]` from `base_type_name.lower()`, so it becomes `\"decimal\"` / `\"interval\"` and the precision is only kept in `type_text`. The existing test data in `test_oss_client.py` puts the full type there…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3909,7 +3974,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "nit: the same expression is repeated at line 755, and `validate_input_parameter` in `client.py` already derives the base name for `DECIMAL`/`INTERVAL` a different way. Can we extract a small `_base_type_name(sql_type)` helper so the two call sites here don't drift?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3919,7 +3984,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "Can we add a unit test for this next to `test_validate_param_invalid_interval`? Right now only the `shift_time` server round trip covers the upper-case path. Something like: [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3929,7 +3994,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "nit: if an early case fails, the later ones never run and the report doesn't say which function broke. Can we use `@pytest.mark.parametrize` like the other tests in this file?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -3939,15 +4004,15 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-12T02:44:34Z",
-    "updated_at": "2026-10-19T05:44:43Z",
+    "last_push": "2026-10-19T18:18:42Z",
+    "updated_at": "2026-10-19T18:25:15Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -3956,7 +4021,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 40
   },
@@ -3979,6 +4044,106 @@
    },
    "proof": "Against a local UC server, date, timestamp and base64 arguments sent as JSON fail on main and return 10, 5 and 5 with the fix; 18 new tests fail before and pass after",
    "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/base.py",
+     "lines": [
+      [
+       "h",
+       "@@ -179,7 +179,7 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        with self._lock:"
+      ],
+      [
+       "c",
+       "            function_info = self.get_function(function_name, **kwargs)"
+      ],
+      [
+       "d",
+       "            parameters = parameters or {}"
+      ],
+      [
+       "a",
+       "            parameters = self._prepare_parameters(function_info, parameters or {})"
+      ],
+      [
+       "c",
+       "            self.validate_input_params(function_info.input_params, parameters)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            if kwargs.get(\"enable_retriever_tracing\", False) and has_retriever_signature("
+      ],
+      [
+       "h",
+       "@@ -191,6 +191,13 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            return self._execute_uc_function(function_info, parameters, **kwargs)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    def _prepare_parameters(self, function_info: Any, parameters: Dict[str, Any]) -> Dict[str, Any]:"
+      ],
+      [
+       "a",
+       "        \"\"\""
+      ],
+      [
+       "a",
+       "        Return the arguments to validate and execute the function with. Defaults to the passed"
+      ],
+      [
+       "a",
+       "        parameters unchanged."
+      ],
+      [
+       "a",
+       "        \"\"\""
+      ],
+      [
+       "a",
+       "        return parameters"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    @abstractmethod"
+      ],
+      [
+       "c",
+       "    def _execute_uc_function("
+      ],
+      [
+       "c",
+       "        self, function_info: Any, parameters: Dict[str, Any], **kwargs: Any"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 1
+    },
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
      "lines": [
@@ -4012,74 +4177,66 @@
       ],
       [
        "h",
-       "@@ -846,6 +847,13 @@"
+       "@@ -857,22 +858,35 @@"
       ],
       [
        "c",
-       "    def _validate_param_type(self, value: Any, param_info: FunctionParameterInfo) -> None:"
+       "            )"
       ],
       [
        "c",
-       "        if value is None and param_info.parameter_default == \"NULL\":"
-      ],
-      [
-       "c",
-       "            return"
-      ],
-      [
-       "a",
-       "        try:"
-      ],
-      [
-       "a",
-       "            value = convert_json_argument(value, param_info.type_name)"
-      ],
-      [
-       "a",
-       "        except (ValueError, decimal.InvalidOperation) as e:"
-      ],
-      [
-       "a",
-       "            raise ValueError("
-      ],
-      [
-       "a",
-       "                f\"Parameter {param_info.name} should be of type {param_info.type_name}, \""
-      ],
-      [
-       "a",
-       "                f\"but got invalid value {value!r}: {e}\""
-      ],
-      [
-       "a",
-       "            ) from e"
+       "        validate_param(value, param_info.type_name, param_info.type_text)"
       ],
       [
        "c",
        ""
       ],
       [
-       "c",
-       "        value_python_type = column_type_to_python_type("
+       "d",
+       "    def _prepare_function_and_params("
       ],
       [
-       "c",
-       "            param_info.type_name, mapping=SQL_TYPE_TO_PYTHON_TYPE_MAPPING_UC_OSS"
+       "d",
+       "        self, function_info: FunctionInfo, parameters: Optional[dict[str, Any]] = None"
       ],
       [
-       "h",
-       "@@ -864,6 +872,12 @@"
+       "d",
+       "    ) -> tuple[Callable[..., Any], dict[str, Any]]:"
       ],
       [
-       "c",
-       "        Extracts or dynamically constructs the function from the FunctionInfo,"
+       "a",
+       "    @override"
       ],
       [
-       "c",
-       "        applies parameter defaults, and caches the function for future calls."
+       "a",
+       "    def _prepare_parameters("
       ],
       [
-       "c",
+       "a",
+       "        self, function_info: FunctionInfo, parameters: dict[str, Any]"
+      ],
+      [
+       "a",
+       "    ) -> dict[str, Any]:"
+      ],
+      [
+       "a",
+       "        \"\"\""
+      ],
+      [
+       "a",
+       "        Applies parameter defaults, then converts every argument from its JSON form with"
+      ],
+      [
+       "a",
+       "        `convert_json_argument`, so the function gets the same type whether the caller passed"
+      ],
+      [
+       "a",
+       "        the argument or it came from the default."
+      ],
+      [
+       "a",
        "        \"\"\""
       ],
       [
@@ -4092,20 +4249,28 @@
       ],
       [
        "a",
-       "        parameters = {"
+       "        arguments = process_function_parameter_defaults(function_info, parameters)"
       ],
       [
        "a",
-       "            name: convert_json_argument(value, param_types.get(name))"
+       "        return {"
       ],
       [
        "a",
-       "            for name, value in (parameters or {}).items()"
+       "            name: convert_json_argument(name, value, param_types.get(name))"
+      ],
+      [
+       "a",
+       "            for name, value in arguments.items()"
+      ],
+      [
+       "a",
+       "        }"
       ]
      ],
      "truncated": true,
-     "additions": 37,
-     "deletions": 0
+     "additions": 74,
+     "deletions": 15
     }
    ],
    "track": {
@@ -4118,7 +4283,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The conversion helper is small and sensible, and the tests check what the function body actually receives through both sync and async paths. Two things need fixing before merge: defaults skip conversion (regresses previously working calls), and DECIMAL accepts non-finite values. Details inline. nit: now…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4128,7 +4293,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] blocker: defaults are added after conversion, so they stay unconverted. A DECIMAL default `\"0.5\"` comes back from `ast.literal_eval` as a `float`, a DATE default as a `str`. With `a` (no default) and `b` (default `0.5`) and body `return str(a + b)`, calling with `{\"a\": 2}` used to return `2.5`; now it's…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4138,7 +4303,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Why convert twice? Here we convert a deep copy only for validation, and `_prepare_function_and_params` converts again. Two places that have to stay in sync. Can we convert once (after defaults) in the OSS execute path and validate the typed values? That would also fix the defaults issue.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4148,7 +4313,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `Decimal(str(value))` accepts `\"NaN\"`, `\"Infinity\"`, `\"sNaN\"`, and JSON can produce `float(\"inf\")`/`nan`. SQL DECIMAL can't represent any of these, and `sNaN` only fails on the first arithmetic inside the user's function, far from the bad input. Should we reject `not result.is_finite()`? Please add these…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4158,7 +4323,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] TIMESTAMP_NTZ with a `Z`/offset becomes a tz-aware datetime here, which contradicts NTZ. Should NTZ reject offsets instead? Either way, can the docstring state the behavior?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4168,16 +4333,16 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] What is this actually testing? `Parameter x .*{type_name}` also matches the pre-existing type-mismatch message, so every row would pass even if the conversion were removed. The `True` DECIMAL row is rejected by the old type check, not the new code. Can we match on `but got invalid value` so this proves t…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-12T02:46:31Z",
-    "updated_at": "2026-10-19T06:07:36Z",
-    "conflicts": false,
+    "last_push": "2026-10-19T18:24:29Z",
+    "updated_at": "2026-10-19T18:25:46Z",
+    "conflicts": true,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-18T22:04:47Z",
@@ -4185,7 +4350,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 39
   },
@@ -7124,6 +7289,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-10-19T19:54:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#pullrequestreview-5576949897",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] LGTM, thanks for addressing the comments. One nit inline, and please file the tracking issue for the generator upgrade.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T19:54:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4318196386",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "[AI Assisted] nit: can we close in a `finally` like the first test? If `list_catalogs()` or an assert fails, `close()` never runs and pytest adds an \"Unclosed client session\" warning on top of the real failure. [code]",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6274767377",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-18T09:26:40Z",
@@ -7152,33 +7347,25 @@
       "path": "clients/python/tests/test_api_client.py",
       "text": "The retry client is lazy too (created on the first GET, closed in `close()`), but neither test sets `retries`, so if it went back to eager creation nothing would fail. Can we add a small case with `retries` set: `api_client.rest_client.pool_manager` and `retry_client` are `None` before the first call, both are set aft…",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-18T07:44:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6247269584",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 3,
     "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-18T14:44:56Z",
-    "updated_at": "2026-10-18T15:37:00Z",
+    "updated_at": "2026-10-19T19:54:51Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T07:44:18Z",
+     "at": "2026-10-19T18:51:18Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 25
   },
@@ -8704,6 +8891,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:52:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6274782568",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-18T22:06:00Z",
@@ -8759,16 +8956,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-10-18T23:45:14Z",
+    "updated_at": "2026-10-19T18:52:06Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T09:30:17Z",
+     "at": "2026-10-19T18:52:06Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 18
   },
@@ -9728,7 +9925,7 @@
      "lines": [
       [
        "h",
-       "@@ -55,3 +55,9 @@"
+       "@@ -55,3 +55,10 @@"
       ],
       [
        "c",
@@ -9760,7 +9957,11 @@
       ],
       [
        "a",
-       "    \"Set execution_mode='local' in your function client to execute functions in the current process.\""
+       "    \"Set execution_mode='local' in your function client to execute functions in the current \""
+      ],
+      [
+       "a",
+       "    \"process, without sandbox restrictions.\""
       ],
       [
        "a",
@@ -9768,7 +9969,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 6,
+     "additions": 7,
      "deletions": 0
     },
     {
@@ -9977,13 +10178,9 @@
       [
        "c",
        "        resource.setrlimit(resource.RLIMIT_CPU, ({cpu_time_limit}, {cpu_time_limit}))"
-      ],
-      [
-       "c",
-       "    except Exception as e:"
       ]
      ],
-     "truncated": false,
+     "truncated": true,
      "additions": 8,
      "deletions": 1
     }
@@ -9998,7 +10195,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_executor.py",
       "text": "What does this prove about the guard? `_limit_resources` already wraps each `setrlimit` in `try/except Exception`, so if `if resource is None: return` is removed, `None.setrlimit` raises `AttributeError`, gets caught and logged, and this test still passes. Can we assert nothing is logged, e.g. run under `caplog.at_lev…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10008,7 +10205,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
       "text": "Same question here: without the guard, the `except` writes \"unable to set RLIMIT_CPU\" to stderr and the test still passes. This one matters more, since `run_in_sandbox_subprocess` logs any subprocess stderr at ERROR, so a missing guard would mean an ERROR log on every local call on Windows. Can we add `assert capsys.r…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10018,7 +10215,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
       "text": "Since this steers users from `sandbox` to `local`, can we say what they give up? `local` also drops the import and `open` restrictions, not just the resource limits. Something like \"...to execute functions in the current process, without sandbox restrictions.\"",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10028,7 +10225,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
       "text": "Not a blocker, but lets follow up: `UnitycatalogFunctionClient` defaults to `execution_mode=\"sandbox\"`, so on Windows a default client constructs fine and then every call returns this message as the function result. In toolkit setups that string goes to the LLM, and the developer may never see it. A one-time `_logger.…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10038,7 +10235,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_executor.py",
       "text": "nit: this explicit `undo()` is load-bearing (it must run before the reload so the real `resource` is imported again). A short comment would keep someone from removing it as redundant with monkeypatch's auto-teardown.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -10048,15 +10245,15 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the fix, this is small and in the right place. The fork check failing closed with a clear message (instead of crashing, or silently running unrestricted) is the right call. A few comments inline, none blocking.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-10T20:44:00Z",
-    "updated_at": "2026-10-19T06:06:35Z",
+    "last_push": "2026-10-19T18:14:15Z",
+    "updated_at": "2026-10-19T18:25:22Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -10065,18 +10262,18 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 12
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Accept previous tool call rounds as history in Anthropic and LiteLLM generate_tool_call_messages",
    "date": "2026-10-08",
    "created_at": "2026-10-08T21:11:16Z",
-   "merged_at": null,
+   "merged_at": "2026-10-19",
    "reported": true,
    "pr": {
     "number": 1966,
@@ -10301,6 +10498,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6274764498",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-18T09:35:30Z",
@@ -10351,21 +10558,23 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-18T14:42:52Z",
-    "updated_at": "2026-10-18T15:36:51Z",
+    "updated_at": "2026-10-19T19:51:47Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T07:53:23Z",
+     "at": "2026-10-19T18:51:09Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 11
   },
