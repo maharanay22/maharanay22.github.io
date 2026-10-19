@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T10:44:16Z",
+ "generated_at": "2026-10-19T17:13:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3343,
+   "stars": 3344,
    "forks": 688
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28446,
-   "forks": 6479
+   "stars": 28450,
+   "forks": 6483
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50229,
-   "forks": 20552
+   "stars": 50237,
+   "forks": 20557
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9049,
+   "stars": 9051,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61552,
-   "forks": 12472
+   "stars": 61573,
+   "forks": 12479
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1483,
+   "stars": 1484,
    "forks": 230
   }
  ],
@@ -1178,6 +1178,16 @@
      {
       "kind": "comment",
       "who": "rtyler",
+      "at": "2026-10-19T12:44:12Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4897#issuecomment-6267502271",
+      "maintainer": true,
+      "path": null,
+      "text": "@ion-elgreco I believe that the kernel implementation is going to be faster than the legacy implementation that deltalake-core has here because while there is a quasi-binary search happening there is a secondary I/O call with `object_store.head` happening in the legacy implementation. The kernel implementation in cont…",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "rtyler",
       "at": "2026-10-17T13:50:13Z",
       "url": "https://github.com/delta-io/delta-rs/pull/4897#issuecomment-6234671004",
       "maintainer": true,
@@ -1213,16 +1223,16 @@
      "rtyler"
     ],
     "last_push": "2026-10-17T01:00:48Z",
-    "updated_at": "2026-10-17T14:00:44Z",
+    "updated_at": "2026-10-19T12:44:12Z",
     "conflicts": false,
     "last_comment": {
      "who": "rtyler",
-     "at": "2026-10-17T13:50:13Z",
+     "at": "2026-10-19T12:44:12Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by rtyler. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "rtyler commented. Reply or update the PR"
    },
    "id": 53
   },
@@ -2015,7 +2025,7 @@
      "lines": [
       [
        "h",
-       "@@ -718,7 +718,7 @@"
+       "@@ -716,7 +716,7 @@"
       ],
       [
        "c",
@@ -2051,7 +2061,7 @@
       ],
       [
        "h",
-       "@@ -1187,6 +1187,42 @@"
+       "@@ -1185,6 +1185,42 @@"
       ],
       [
        "c",
@@ -2290,12 +2300,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-17T14:21:07Z",
-    "updated_at": "2026-10-17T14:41:38Z",
+    "last_push": "2026-10-19T12:12:45Z",
+    "updated_at": "2026-10-19T12:44:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3042,18 +3052,79 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:36Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#discussion_r4312962069",
+      "maintainer": true,
+      "path": "mlflow/utils/async_logging/async_logging_queue.py",
+      "text": "This branch, and the drain-finished → entry deleted → next batch creates a fresh deque and task path, aren't exercised by any test; nothing in the module makes `submit` raise. Could you add one with `submit` patched to `side_effect=RuntimeError(...)` that asserts the batch's `exception` is set and `_pending_batches_by…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:36Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#discussion_r4312962073",
+      "maintainer": true,
+      "path": "mlflow/utils/async_logging/async_logging_queue.py",
+      "text": "Non-blocking: this loop holds a pool worker until the run's deque is empty. With as many runs under sustained tag/param traffic as there are workers (10 by default), every worker becomes a drain loop and metric-only batches and other runs sit in the executor queue instead of being interleaved as on master. If you want…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:36Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#discussion_r4312962076",
+      "maintainer": true,
+      "path": "mlflow/utils/async_logging/async_logging_queue.py",
+      "text": "Nit: the docstring explains the ordering requirement for tags but not why params take this path too (the PR description calls them immutable). Worth stating the reason so nobody optimizes params out later, e.g. that serializing keeps it deterministic which of two conflicting `log_param` calls stores the value and whic…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:36Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#discussion_r4312962080",
+      "maintainer": true,
+      "path": "tests/utils/test_async_logging_queue.py",
+      "text": "Nit: on the fixed code no later batch can log while batch `\"0\"` is in flight, so this always waits the full timeout and each parametrized case costs about 2 s. On master batch `\"1\"` completes within milliseconds, so a 0.2 s window detects the regression just as reliably. -- Claude Code drafted, reviewed before post",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:36Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#discussion_r4312962083",
+      "maintainer": true,
+      "path": "tests/utils/test_async_logging_queue.py",
+      "text": "Nit: this test and `test_metric_only_batches_of_same_run_are_logged_concurrently` need at least two pool workers, so they wait 5 s and fail if `MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE=1` is exported in the environment (the workaround the issue itself recommends). `monkeypatch.delenv(\"MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE\"…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "tanghaoji",
+      "at": "2026-10-19T10:51:35Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#pullrequestreview-5570473306",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks, this matches the shape suggested on the issue, and I verified it locally: the repro goes from `wrong final tag in 10/10 runs` on master to `0/10` here, the new fluent regression test fails on master and passes on this branch, ruff/clint are clean, and metric-only throughput is unchanged (200 metric batches on…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-16T15:19:37Z",
-    "updated_at": "2026-10-16T15:22:37Z",
+    "updated_at": "2026-10-19T12:28:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "tanghaoji left review comments. Reply or update the PR"
    },
    "id": 44
   },
@@ -10577,7 +10648,7 @@
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
-   "status": "triage",
+   "status": "review",
    "title": "AI Gateway Anthropic and Gemini adapters raise KeyError for tools without description or parameters",
    "date": "2026-10-08",
    "created_at": "2026-10-08T02:32:23Z",
@@ -10776,17 +10847,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 2,
+    "stage": 4,
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-06T15:58:50Z",
-    "updated_at": "2026-10-08T02:32:39Z",
+    "updated_at": "2026-10-19T15:17:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 9
   },
