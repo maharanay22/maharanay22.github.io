@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-20T00:39:56Z",
+ "generated_at": "2026-10-20T03:38:17Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,21 +9,6 @@
   "merged"
  ],
  "repos": [
-  {
-   "full": "delta-io/delta-rs",
-   "name": "delta-rs",
-   "url": "https://github.com/delta-io/delta-rs",
-   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
-   "icon": "🦀",
-   "category": "lakehouse storage",
-   "tags": [
-    "Rust",
-    "Python",
-    "Data Loss"
-   ],
-   "stars": 3344,
-   "forks": 688
-  },
   {
    "full": "unitycatalog/unitycatalog",
    "name": "Unity Catalog",
@@ -40,6 +25,21 @@
    "forks": 689
   },
   {
+   "full": "delta-io/delta-rs",
+   "name": "delta-rs",
+   "url": "https://github.com/delta-io/delta-rs",
+   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
+   "icon": "🦀",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "Data Loss"
+   ],
+   "stars": 3344,
+   "forks": 688
+  },
+  {
    "full": "mlflow/mlflow",
    "name": "MLflow",
    "url": "https://github.com/mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28452,
-   "forks": 6482
+   "stars": 28454,
+   "forks": 6483
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50240,
+   "stars": 50258,
    "forks": 20560
   },
   {
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9052,
+   "stars": 9053,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61588,
-   "forks": 12485
+   "stars": 61603,
+   "forks": 12486
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -162,6 +162,70 @@
  ],
  "items": [
   {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Upgrade sbt-openapi-generator and drop the Python asyncio rest.mustache override",
+   "date": "2026-10-20",
+   "created_at": "2026-10-20T02:46:09Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2026,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2026"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-20T02:46:09Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 59
+  },
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Warn at UnitycatalogFunctionClient init when sandbox mode is selected on a platform without fork",
+   "date": "2026-10-20",
+   "created_at": "2026-10-20T02:43:21Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2025,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2025"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-20T02:43:21Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 58
+  },
+  {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
@@ -178,14 +242,114 @@
     "number": 2006,
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2006"
    },
-   "proof": "A list[int] parameter reached OpenAI tools as \"items\": {}; it now carries integer items and dict values keep their number type",
+   "proof": "A list[int] parameter reached OpenAI tools as \"items\": {}; it now carries integer items. Nested types also failed to register on the server (type_json column was varchar(255)); the column is widened and a 369 character type now registers and executes",
    "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1024,17 +1024,17 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _split_generic_types(s: str) -> list[str]:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "d",
+       "    Split a generic type string into its components, ignoring commas inside nested generics."
+      ],
+      [
+       "d",
+       "    For example, \"STRING, ARRAY<STRING>, MAP<STRING, INT>\" becomes"
+      ],
+      [
+       "d",
+       "    [\"STRING\", \"ARRAY<STRING>\", \"MAP<STRING, INT>\"]."
+      ],
+      [
+       "a",
+       "    Split a generic type string into its components, ignoring commas inside nested generics"
+      ],
+      [
+       "a",
+       "    and type parameters. For example, \"STRING, MAP<STRING, INT>, DECIMAL(38, 18)\" becomes"
+      ],
+      [
+       "a",
+       "    [\"STRING\", \"MAP<STRING, INT>\", \"DECIMAL(38, 18)\"]."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    parts = []"
+      ],
+      [
+       "c",
+       "    current_chars = []"
+      ],
+      [
+       "c",
+       "    depth = 0"
+      ],
+      [
+       "c",
+       "    for ch in s:"
+      ],
+      [
+       "d",
+       "        if ch == \"<\":"
+      ],
+      [
+       "a",
+       "        if ch in \"<(\":"
+      ],
+      [
+       "c",
+       "            depth += 1"
+      ],
+      [
+       "d",
+       "        elif ch == \">\":"
+      ],
+      [
+       "a",
+       "        elif ch in \">)\":"
+      ],
+      [
+       "c",
+       "            depth -= 1"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        if ch == \",\" and depth == 0:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 5
+    },
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
      "lines": [
       [
        "h",
-       "@@ -1,6 +1,6 @@"
+       "@@ -1,9 +1,10 @@"
       ],
       [
        "c",
@@ -201,7 +365,7 @@
       ],
       [
        "a",
-       "from typing import TYPE_CHECKING, Any, Callable, Dict, List, Tuple, Union"
+       "from typing import TYPE_CHECKING, Any, Callable, Dict, List, Union"
       ],
       [
        "c",
@@ -216,8 +380,24 @@
        "    FunctionMetadata,"
       ],
       [
+       "a",
+       "    _split_generic_types,"
+      ],
+      [
+       "c",
+       "    extract_function_metadata,"
+      ],
+      [
+       "c",
+       "    extract_wrapped_functions,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
        "h",
-       "@@ -99,6 +99,46 @@"
+       "@@ -99,6 +100,34 @@"
       ],
       [
        "c",
@@ -229,54 +409,6 @@
       ],
       [
        "c",
-       ""
-      ],
-      [
-       "a",
-       "def _split_map_types(inner: str) -> Tuple[str, str]:"
-      ],
-      [
-       "a",
-       "    depth = 0"
-      ],
-      [
-       "a",
-       "    for i, char in enumerate(inner):"
-      ],
-      [
-       "a",
-       "        if char in \"<(\":"
-      ],
-      [
-       "a",
-       "            depth += 1"
-      ],
-      [
-       "a",
-       "        elif char in \">)\":"
-      ],
-      [
-       "a",
-       "            depth -= 1"
-      ],
-      [
-       "a",
-       "        elif char == \",\" and depth == 0:"
-      ],
-      [
-       "a",
-       "            return inner[:i].strip(), inner[i + 1 :].strip()"
-      ],
-      [
-       "a",
-       "    raise ValueError(f\"Invalid MAP type: MAP<{inner}>\")"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
        ""
       ],
       [
@@ -302,11 +434,79 @@
       [
        "a",
        "    Args:"
+      ],
+      [
+       "a",
+       "        sql_type: The SQL type text of the parameter."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Returns:"
+      ],
+      [
+       "a",
+       "        The type name for a scalar type, or a nested dict for an ARRAY or MAP type."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    if sql_type.startswith(\"ARRAY<\"):"
+      ],
+      [
+       "a",
+       "        return {"
+      ],
+      [
+       "a",
+       "            \"type\": \"array\","
       ]
      ],
      "truncated": true,
-     "additions": 42,
+     "additions": 31,
      "deletions": 2
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/FunctionParameterInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -46,7 +46,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"type_text\", nullable = false)"
+      ],
+      [
+       "c",
+       "  private String typeText;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"type_json\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"type_json\", length = 16777215)"
+      ],
+      [
+       "c",
+       "  private String typeJson;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 1,
+     "deletions": 1
     }
    ],
    "track": {
@@ -319,7 +519,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the fix, the nested shape matches what `uc_type_json_to_pydantic_type` reads. Main concern is that the larger `type_json` no longer fits the server column; a few smaller notes inline.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -329,7 +529,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] Have you tried registering a function with a nested collection against a real server? `FunctionParameterInfoDAO.typeJson` is `@Column(name = \"type_json\")` with no length, so it is `varchar(255)`, and this value now carries the whole type tree plus the name and comment. `dict[str, list[dict[str, list[floa…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -339,7 +539,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] One more behavior change worth calling out in the description: collections used to be a bare `\"array\"` / `\"map\"`, both in `JSON_SCHEMA_TYPE`, so they counted as strict. Now the leaf is checked, so `list[datetime.date]` or `dict[str, Decimal]` flips the OpenAI tool to `strict=false`. Probably more correct…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -349,7 +549,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] `callable_utils.py` already has `_split_generic_types` doing the same depth-tracking split (it ignores `()`, so it has the `DECIMAL(38, 18)` bug you fixed here). Can we reuse/fix that one instead of adding a second splitter? Also, did you consider building `type_json` from the Python type in the same wal…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -359,7 +559,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_callable_utils_oss.py",
       "text": "[AI Assisted] What proves the one deliberate behavior change? `rates` is dropped by `*_`, so nothing asserts that `dict[Decimal, int]` / `dict[int, float]` now raise \"Only support STRING key type for MAP\". Can we assert that `TypeError`, and look parameters up by name rather than position? Also, `weights={\"a\": \"x\"}` b…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -369,15 +569,15 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 3,
     "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-17T01:00:27Z",
-    "updated_at": "2026-10-19T23:00:49Z",
+    "last_push": "2026-10-20T02:34:13Z",
+    "updated_at": "2026-10-20T02:49:59Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -386,7 +586,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 57
   },
@@ -999,11 +1199,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Time travel by timestamp ignores in-commit timestamps",
    "date": "2026-10-17",
    "created_at": "2026-10-17T01:38:13Z",
-   "merged_at": null,
+   "merged_at": "2026-10-20",
    "reported": true,
    "pr": {
     "number": 4897,
@@ -1315,23 +1515,23 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 5,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "rtyler"
     ],
-    "last_push": "2026-10-19T18:06:56Z",
-    "updated_at": "2026-10-19T18:57:12Z",
+    "last_push": "2026-10-20T01:52:50Z",
+    "updated_at": "2026-10-20T02:34:16Z",
     "conflicts": false,
     "last_comment": {
      "who": "rtyler",
      "at": "2026-10-19T12:44:12Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 53
   },
@@ -3218,7 +3418,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:23:57Z",
-    "updated_at": "2026-10-19T18:25:35Z",
+    "updated_at": "2026-10-20T02:42:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4062,7 +4262,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:18:42Z",
-    "updated_at": "2026-10-19T23:22:08Z",
+    "updated_at": "2026-10-20T02:42:58Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -4391,7 +4591,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:24:29Z",
-    "updated_at": "2026-10-19T23:22:28Z",
+    "updated_at": "2026-10-20T02:42:34Z",
     "conflicts": true,
     "last_comment": {
      "who": "yili-db",
@@ -7132,7 +7332,7 @@
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,207 @@"
+       "@@ -0,0 +1,206 @@"
       ],
       [
        "a",
@@ -7144,15 +7344,11 @@
       ],
       [
        "a",
-       "    Delete this override when upgrading sbt-openapi-generator in project/plugins.sbt to 7.11.0 or newer."
+       "    Delete this override when sbt-openapi-generator in project/plugins.sbt is upgraded, see"
       ],
       [
        "a",
-       "    That upgrade also needs a fix for the Java native client, which from 7.11.0 (still in 7.26.0) decodes"
-      ],
-      [
-       "a",
-       "    sync responses with the JVM default charset instead of UTF-8. }}"
+       "    https://github.com/unitycatalog/unitycatalog/issues/2026 for what else that upgrade needs. }}"
       ],
       [
        "a",
@@ -7249,10 +7445,14 @@
       [
        "a",
        "        self.status = resp.status"
+      ],
+      [
+       "a",
+       "        self.reason = resp.reason"
       ]
      ],
      "truncated": true,
-     "additions": 207,
+     "additions": 206,
      "deletions": 0
     },
     {
@@ -7346,7 +7546,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] LGTM, thanks for addressing the comments. One nit inline, and please file the tracking issue for the generator upgrade.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -7356,7 +7556,7 @@
       "maintainer": true,
       "path": "clients/python/tests/test_api_client.py",
       "text": "[AI Assisted] nit: can we close in a `finally` like the first test? If `list_catalogs()` or an assert fails, `close()` never runs and pytest adds an \"Unclosed client session\" warning on top of the real failure. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -7366,7 +7566,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -7405,8 +7605,8 @@
     "approved_by": [
      "yili-db"
     ],
-    "last_push": "2026-10-18T14:44:56Z",
-    "updated_at": "2026-10-19T19:54:51Z",
+    "last_push": "2026-10-20T02:46:32Z",
+    "updated_at": "2026-10-20T02:46:38Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -7415,7 +7615,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 25
   },
@@ -9006,7 +9206,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-10-19T23:08:50Z",
+    "updated_at": "2026-10-20T02:51:25Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -10303,7 +10503,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:14:15Z",
-    "updated_at": "2026-10-19T23:22:21Z",
+    "updated_at": "2026-10-20T02:43:22Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
