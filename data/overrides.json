@@ -160,7 +160,7 @@
     "https://github.com/delta-io/delta-rs/pull/4899": "Lite vacuum deleted the data file but left its deletion_vector_*.bin behind forever and listed the file twice; with the fix both files are deleted once, matching Spark VACUUM LITE",
     "https://github.com/unitycatalog/unitycatalog/pull/2011": "A function typed `str | None` was rejected with \"type str | None is not supported\" while Optional[str] worked; both now produce the same SQL",
     "https://github.com/unitycatalog/unitycatalog/pull/2012": "tag_day(d DATE, label STRING) got strict: True from the OpenAI toolkit because only the last parameter counted; it now gets strict: False",
-    "https://github.com/unitycatalog/unitycatalog/pull/2013": "A list[int] parameter reached OpenAI tools as \"items\": {}; it now carries integer items and dict values keep their number type",
+    "https://github.com/unitycatalog/unitycatalog/pull/2013": "A list[int] parameter reached OpenAI tools as \"items\": {}; it now carries integer items. Nested types also failed to register on the server (type_json column was varchar(255)); the column is widened and a 369 character type now registers and executes",
     "https://github.com/pandas-dev/pandas/pull/70515": "Series.mode(dropna=False) on nullable boolean data raised TypeError; now returns the mode including NA, listed in the pandas 3.2.0 release notes",
     "https://github.com/pandas-dev/pandas/pull/70723": "DataFrame.any(skipna=False) on a bool[pyarrow] column with NA raised TypeError; now returns NA, and frames without pyarrow columns behave exactly as before",
     "https://github.com/pandas-dev/pandas/pull/70773": "str.replace(r\"[^\\w\\s]\", \"\") on pyarrow strings turned \"café crème\" into \"caf crme\"; now matches Python's re: \"café crème\"",
