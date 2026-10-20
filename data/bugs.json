@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-20T10:18:01Z",
+ "generated_at": "2026-10-20T15:13:22Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3554,
-   "forks": 689
+   "stars": 3555,
+   "forks": 690
   },
   {
    "full": "delta-io/delta-rs",
@@ -37,7 +37,7 @@
     "Data Loss"
    ],
    "stars": 3344,
-   "forks": 688
+   "forks": 690
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28462,
-   "forks": 6483
+   "stars": 28465,
+   "forks": 6487
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50239,
-   "forks": 20567
+   "stars": 50246,
+   "forks": 20569
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61640,
-   "forks": 12503
+   "stars": 61655,
+   "forks": 12512
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1484,
+   "stars": 1485,
    "forks": 230
   }
  ],
@@ -2603,8 +2603,8 @@
     "checks": "failing",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-19T12:12:45Z",
-    "updated_at": "2026-10-19T12:44:17Z",
+    "last_push": "2026-10-20T12:41:17Z",
+    "updated_at": "2026-10-20T13:38:27Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -5096,7 +5096,7 @@
      "lines": [
       [
        "h",
-       "@@ -62,7 +62,7 @@"
+       "@@ -63,7 +63,7 @@"
       ],
       [
        "c",
@@ -5132,7 +5132,7 @@
       ],
       [
        "h",
-       "@@ -426,7 +426,12 @@"
+       "@@ -444,7 +444,12 @@"
       ],
       [
        "c",
@@ -5188,7 +5188,7 @@
       ],
       [
        "h",
-       "@@ -474,6 +479,28 @@"
+       "@@ -492,6 +497,23 @@"
       ],
       [
        "c",
@@ -5216,7 +5216,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 139,
+     "additions": 52,
      "deletions": 3
     },
     {
@@ -5264,10 +5264,12 @@
     "feedback": [],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-14T14:06:22Z",
-    "updated_at": "2026-10-14T14:52:14Z",
+    "review": "approved",
+    "approved_by": [
+     "ion-elgreco"
+    ],
+    "last_push": "2026-10-20T13:17:39Z",
+    "updated_at": "2026-10-20T14:09:39Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -8711,11 +8713,11 @@
     "approved_by": [],
     "last_push": "2026-10-16T17:04:11Z",
     "updated_at": "2026-10-16T17:05:37Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -9513,11 +9515,11 @@
     "approved_by": [],
     "last_push": "2026-10-16T17:04:09Z",
     "updated_at": "2026-10-16T17:05:38Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -9674,11 +9676,11 @@
     "approved_by": [],
     "last_push": "2026-10-16T17:04:07Z",
     "updated_at": "2026-10-16T17:05:54Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
