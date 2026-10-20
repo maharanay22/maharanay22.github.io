@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-19T21:36:10Z",
+ "generated_at": "2026-10-20T00:39:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28452,
-   "forks": 6481
+   "forks": 6482
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50238,
-   "forks": 20561
+   "stars": 50240,
+   "forks": 20560
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9051,
+   "stars": 9052,
    "forks": 2200
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61580,
-   "forks": 12484
+   "stars": 61588,
+   "forks": 12485
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -312,6 +312,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#pullrequestreview-5578768541",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the fix, the nested shape matches what `uc_type_json_to_pydantic_type` reads. Main concern is that the larger `type_json` no longer fits the server column; a few smaller notes inline.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730290",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
+      "text": "[AI Assisted] Have you tried registering a function with a nested collection against a real server? `FunctionParameterInfoDAO.typeJson` is `@Column(name = \"type_json\")` with no length, so it is `varchar(255)`, and this value now carries the whole type tree plus the name and comment. `dict[str, list[dict[str, list[floa…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730298",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
+      "text": "[AI Assisted] One more behavior change worth calling out in the description: collections used to be a bare `\"array\"` / `\"map\"`, both in `JSON_SCHEMA_TYPE`, so they counted as strict. Now the leaf is checked, so `list[datetime.date]` or `dict[str, Decimal]` flips the OpenAI tool to `strict=false`. Probably more correct…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730309",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
+      "text": "[AI Assisted] `callable_utils.py` already has `_split_generic_types` doing the same depth-tracking split (it ignores `()`, so it has the `DECIMAL(38, 18)` bug you fixed here). Can we reuse/fix that one instead of adding a second splitter? Also, did you consider building `type_json` from the Python type in the same wal…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730316",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_callable_utils_oss.py",
+      "text": "[AI Assisted] What proves the one deliberate behavior change? `rates` is dropped by `*_`, so nothing asserts that `dict[Decimal, int]` / `dict[int, float]` now raise \"Only support STRING key type for MAP\". Can we assert that `TypeError`, and look parameters up by name rather than position? Also, `weights={\"a\": \"x\"}` b…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-10-19T18:51:49Z",
@@ -327,7 +377,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-17T01:00:27Z",
-    "updated_at": "2026-10-19T18:51:49Z",
+    "updated_at": "2026-10-19T23:00:49Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -336,7 +386,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 57
   },
@@ -3947,6 +3997,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:22:08Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#issuecomment-6279535224",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T05:44:43Z",
@@ -3995,16 +4055,6 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "nit: if an early case fails, the later ones never run and the report doesn't say which function broke. Can we use `@pytest.mark.parametrize` like the other tests in this file?",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-18T22:08:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#issuecomment-6255750636",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -4012,16 +4062,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:18:42Z",
-    "updated_at": "2026-10-19T18:25:15Z",
+    "updated_at": "2026-10-19T23:22:08Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T22:08:23Z",
+     "at": "2026-10-19T23:22:08Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 40
   },
@@ -4276,6 +4326,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:22:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6279538412",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T06:07:35Z",
@@ -4324,16 +4384,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] TIMESTAMP_NTZ with a `Z`/offset becomes a tz-aware datetime here, which contradicts NTZ. Should NTZ reject offsets instead? Either way, can the docstring state the behavior?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-19T06:07:35Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798137",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] What is this actually testing? `Parameter x .*{type_name}` also matches the pre-existing type-mismatch message, so every row would pass even if the conversion were removed. The `True` DECIMAL row is rejected by the old type check, not the new code. Can we match on `but got invalid value` so this proves t…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -4341,16 +4391,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:24:29Z",
-    "updated_at": "2026-10-19T18:25:46Z",
+    "updated_at": "2026-10-19T23:22:28Z",
     "conflicts": true,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T22:04:47Z",
+     "at": "2026-10-19T23:22:28Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 39
   },
@@ -8891,6 +8941,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-19T23:08:50Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#pullrequestreview-5578828401",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks, the test changes look good, and your reason for keeping the async `None` case makes sense. Since the sandbox executor maps `None` itself, nothing else reaches that check. One last thing, on the description: - Testing still lists only `False`, `0`, `0.0` and `\"\"` \"plus a `None` case\". Can you add…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-10-19T18:52:06Z",
@@ -8939,16 +8999,6 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "nit: the `uc_client` fixture also does `await uc_api_client.close()`. Can you mirror that here?",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-18T09:30:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6248259823",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -8956,7 +9006,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-10-19T18:52:06Z",
+    "updated_at": "2026-10-19T23:08:50Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -8965,7 +9015,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 18
   },
@@ -10188,6 +10238,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:22:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#issuecomment-6279536777",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-19T06:06:35Z",
@@ -10236,16 +10296,6 @@
       "path": "ai/core/tests/core/test_local_executor.py",
       "text": "nit: this explicit `undo()` is load-bearing (it must run before the reload so the real `resource` is imported again). A short comment would keep someone from removing it as redundant with monkeypatch's auto-teardown.",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-10-19T06:06:34Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#pullrequestreview-5567524669",
-      "maintainer": true,
-      "path": null,
-      "text": "Thanks for the fix, this is small and in the right place. The fork check failing closed with a clear message (instead of crashing, or silently running unrestricted) is the right call. A few comments inline, none blocking.",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -10253,16 +10303,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:14:15Z",
-    "updated_at": "2026-10-19T18:25:22Z",
+    "updated_at": "2026-10-19T23:22:21Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-18T22:02:08Z",
+     "at": "2026-10-19T23:22:21Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 12
   },
