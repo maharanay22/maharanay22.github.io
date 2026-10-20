@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-20T15:13:22Z",
+ "generated_at": "2026-10-20T19:22:36Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28465,
-   "forks": 6487
+   "stars": 28467,
+   "forks": 6491
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50246,
-   "forks": 20569
+   "stars": 50247,
+   "forks": 20578
   },
   {
    "full": "delta-io/delta",
@@ -112,7 +112,7 @@
     "Arrow"
    ],
    "stars": 236,
-   "forks": 161
+   "forks": 162
   },
   {
    "full": "databricks/dbt-databricks",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61655,
-   "forks": 12512
+   "stars": 61667,
+   "forks": 12520
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1485,
-   "forks": 230
+   "forks": 231
   }
  ],
  "items": [
@@ -4007,11 +4007,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "create_python_function fails for Decimal and timedelta types in the OSS client",
    "date": "2026-10-13",
    "created_at": "2026-10-13T14:54:34Z",
-   "merged_at": null,
+   "merged_at": "2026-10-20",
    "reported": true,
    "pr": {
     "number": 1988,
@@ -4206,7 +4206,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -4259,21 +4259,23 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-19T18:18:42Z",
-    "updated_at": "2026-10-20T02:42:58Z",
+    "updated_at": "2026-10-20T18:06:44Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-19T23:22:08Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 40
   },
@@ -4530,6 +4532,16 @@
      {
       "kind": "comment",
       "who": "yili-db",
+      "at": "2026-10-20T18:13:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6297871010",
+      "maintainer": true,
+      "path": null,
+      "text": "Please rebase",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
       "at": "2026-10-19T23:22:28Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6279538412",
       "maintainer": true,
@@ -4576,16 +4588,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `Decimal(str(value))` accepts `\"NaN\"`, `\"Infinity\"`, `\"sNaN\"`, and JSON can produce `float(\"inf\")`/`nan`. SQL DECIMAL can't represent any of these, and `sNaN` only fails on the first arithmetic inside the user's function, far from the bad input. Should we reject `not result.is_finite()`? Please add these…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-19T06:07:35Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798127",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] TIMESTAMP_NTZ with a `Z`/offset becomes a tz-aware datetime here, which contradicts NTZ. Should NTZ reject offsets instead? Either way, can the docstring state the behavior?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -4593,11 +4595,11 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-19T18:24:29Z",
-    "updated_at": "2026-10-20T02:42:34Z",
+    "updated_at": "2026-10-20T18:13:41Z",
     "conflicts": true,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-19T23:22:28Z",
+     "at": "2026-10-20T18:13:41Z",
      "maintainer": true
     },
     "state": "action",
@@ -7543,6 +7545,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-20T18:59:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6298802675",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-10-19T19:54:54Z",
@@ -7591,16 +7603,6 @@
       "path": "build.sbt",
       "text": "Someone bumping the plugin has no pointer to this override. Can we add one here, and a matching note next to the version in `project/plugins.sbt`? [code] (ai assisted)",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-18T09:26:40Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505902",
-      "maintainer": true,
-      "path": "clients/python/tests/test_api_client.py",
-      "text": "The retry client is lazy too (created on the first GET, closed in `close()`), but neither test sets `retries`, so if it went back to eager creation nothing would fail. Can we add a small case with `retries` set: `api_client.rest_client.pool_manager` and `retry_client` are `None` before the first call, both are set aft…",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -7610,16 +7612,16 @@
      "yili-db"
     ],
     "last_push": "2026-10-20T02:46:32Z",
-    "updated_at": "2026-10-20T02:46:38Z",
+    "updated_at": "2026-10-20T18:59:37Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-19T18:51:18Z",
+     "at": "2026-10-20T18:59:37Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 25
   },
@@ -10161,11 +10163,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Make unitycatalog-ai importable on Windows",
    "date": "2026-10-08",
    "created_at": "2026-10-08T22:06:02Z",
-   "merged_at": null,
+   "merged_at": "2026-10-20",
    "reported": true,
    "pr": {
     "number": 1967,
@@ -10449,7 +10451,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10502,21 +10504,23 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-19T18:14:15Z",
-    "updated_at": "2026-10-20T02:43:22Z",
+    "updated_at": "2026-10-20T18:28:10Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-19T23:22:21Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 12
   },
