@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-20T19:22:36Z",
+ "generated_at": "2026-10-20T22:15:08Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28467,
+   "stars": 28470,
    "forks": 6491
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50247,
-   "forks": 20578
+   "stars": 50241,
+   "forks": 20580
   },
   {
    "full": "delta-io/delta",
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9053,
-   "forks": 2200
+   "forks": 2201
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61667,
-   "forks": 12520
+   "stars": 61671,
+   "forks": 12526
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -514,6 +514,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-10-20T20:16:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#pullrequestreview-5591144683",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks, all four earlier comments are addressed. Two small follow-ups inline.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-20T20:16:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4329827761",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/function/BaseFunctionCRUDTest.java",
+      "text": "[AI Assisted] Can we avoid a third copy of the `CreateFunction` builder? Making `param1`'s `typeJson` in `testFunctionCRUD` longer than 255 chars would cover this, since its get already asserts `isEqualTo(functionInfo)`. E.g. a 300-char `metadata.comment` inside the `typeJson` string (not `.comment(...)`, since the pa…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-20T20:16:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4329827778",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "[AI Assisted] The description says this also fixes `_parse_sql_data_type` for `MAP<STRING, DECIMAL(38, 18)>` (it used to come out as `dict[str, decimal(38]`). Can you add `(\"MAP<STRING, DECIMAL(38, 18)>\", \"dict[str, decimal(38, 18)]\")` to `test_parse_full_sql_data_type_for_return_types` so that is locked in?",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-10-19T23:00:48Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#pullrequestreview-5578768541",
       "maintainer": true,
@@ -540,44 +570,14 @@
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] One more behavior change worth calling out in the description: collections used to be a bare `\"array\"` / `\"map\"`, both in `JSON_SCHEMA_TYPE`, so they counted as strict. Now the leaf is checked, so `list[datetime.date]` or `dict[str, Decimal]` flips the OpenAI tool to `strict=false`. Probably more correct…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:00:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730309",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
-      "text": "[AI Assisted] `callable_utils.py` already has `_split_generic_types` doing the same depth-tracking split (it ignores `()`, so it has the `DECIMAL(38, 18)` bug you fixed here). Can we reuse/fix that one instead of adding a second splitter? Also, did you consider building `type_json` from the Python type in the same wal…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:00:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730316",
-      "maintainer": true,
-      "path": "ai/core/tests/core/test_callable_utils_oss.py",
-      "text": "[AI Assisted] What proves the one deliberate behavior change? `rates` is dropped by `*_`, so nothing asserts that `dict[Decimal, int]` / `dict[int, float]` now raise \"Only support STRING key type for MAP\". Can we assert that `TypeError`, and look parameters up by name rather than position? Also, `weights={\"a\": \"x\"}` b…",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:51:49Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#issuecomment-6274777135",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 3,
     "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-20T02:34:13Z",
-    "updated_at": "2026-10-20T02:49:59Z",
+    "last_push": "2026-10-20T20:53:42Z",
+    "updated_at": "2026-10-20T22:14:13Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -4431,7 +4431,7 @@
       ],
       [
        "h",
-       "@@ -857,22 +858,35 @@"
+       "@@ -857,23 +858,36 @@"
       ],
       [
        "c",
@@ -4523,8 +4523,8 @@
       ]
      ],
      "truncated": true,
-     "additions": 74,
-     "deletions": 15
+     "additions": 75,
+     "deletions": 16
     }
    ],
    "track": {
@@ -4537,7 +4537,7 @@
       "maintainer": true,
       "path": null,
       "text": "Please rebase",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -4547,7 +4547,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -4590,21 +4590,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-19T18:24:29Z",
-    "updated_at": "2026-10-20T18:13:41Z",
-    "conflicts": true,
+    "last_push": "2026-10-20T20:32:54Z",
+    "updated_at": "2026-10-20T22:14:11Z",
+    "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-20T18:13:41Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 39
   },
@@ -5854,6 +5854,16 @@
     "feedback": [
      {
       "kind": "comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-20T21:34:39Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6302014213",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 this seems quite complicated. I assume a simpler solution would simply be to always fallback to the python `re` implementation when `\\s` is present (i.e. skip the \"is all ascii\" step for this case), at the cost of slower performance?",
+      "answered": false
+     },
+     {
+      "kind": "comment",
       "who": "jbrockmendel",
       "at": "2026-10-18T18:49:35Z",
       "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6253749809",
@@ -5863,21 +5873,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T19:58:13Z",
-    "updated_at": "2026-10-18T21:05:11Z",
+    "updated_at": "2026-10-20T21:34:39Z",
     "conflicts": false,
     "last_comment": {
-     "who": "jbrockmendel",
-     "at": "2026-10-18T18:49:35Z",
+     "who": "jorisvandenbossche",
+     "at": "2026-10-20T21:34:39Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jorisvandenbossche commented. Reply or update the PR"
    },
    "id": 34
   },
@@ -11778,6 +11788,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-20T21:30:37Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4330535232",
+      "maintainer": true,
+      "path": "pandas/core/arrays/_arrow_string_mixins.py",
+      "text": "[code] ?",
+      "answered": false
+     },
+     {
+      "kind": "review approved",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-20T21:18:55Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#pullrequestreview-5591702305",
+      "maintainer": true,
+      "path": null,
+      "text": "This looks good to me! (note to self for a follow-up: also test `findall()`/`split()`/`extract()`, which should already work fine since those always use the python implementation)",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-20T21:18:50Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4330432243",
+      "maintainer": true,
+      "path": "pandas/tests/strings/test_strings.py",
+      "text": "Can you move this a little bit up to the `count` related tests?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-20T21:03:05Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4330288501",
+      "maintainer": true,
+      "path": "pandas/tests/strings/test_find_replace.py",
+      "text": "[code] So there is actually a replacement for this case as well?",
+      "answered": false
+     },
+     {
       "kind": "review changes requested",
       "who": "rhshadrach",
       "at": "2026-10-10T11:31:42Z",
@@ -11796,29 +11846,19 @@
       "path": "doc/source/whatsnew/v3.2.0.rst",
       "text": "I think we can shorten this a little by removing `, unlike the Unicode-aware matching of Python's ``re`` used for ``object`` dtype`.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "rhshadrach",
-      "at": "2026-10-10T11:18:33Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4237438474",
-      "maintainer": true,
-      "path": "pandas/core/arrays/_arrow_string_mixins.py",
-      "text": "For `\\s` this is not sufficient to get the same behavior between pyarrow-backed str and object. With this PR: [code] I'm okay with not handling this here, we can just open an issue to track.",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "changes requested",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-17T23:25:22Z",
-    "updated_at": "2026-10-18T17:07:16Z",
+    "updated_at": "2026-10-20T21:30:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Requested changes are pushed. Waiting for rhshadrach to look again"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jorisvandenbossche left review comments. Reply or update the PR"
    },
    "id": 7
   },
