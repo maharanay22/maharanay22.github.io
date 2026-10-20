@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-20T05:22:48Z",
+ "generated_at": "2026-10-20T10:18:01Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28454,
+   "stars": 28462,
    "forks": 6483
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50252,
-   "forks": 20560
+   "stars": 50239,
+   "forks": 20567
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61613,
-   "forks": 12488
+   "stars": 61640,
+   "forks": 12503
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -3205,11 +3205,11 @@
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
-   "status": "review",
+   "status": "merged",
    "title": "Async logging (`synchronous=False`) applies writes for the same run out of order",
    "date": "2026-10-16",
    "created_at": "2026-10-16T15:22:09Z",
-   "merged_at": null,
+   "merged_at": "2026-10-20",
    "reported": true,
    "pr": {
     "number": 26804,
@@ -3353,6 +3353,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "tanghaoji",
+      "at": "2026-10-20T06:25:57Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26804#pullrequestreview-5581471250",
+      "maintainer": true,
+      "path": null,
+      "text": "Verified locally on the final head: ruff/clint clean, the async queue tests pass three runs in a row and with a one-worker pool, the escaping-exception probe no longer strands later batches or hangs shutdown, metric-only throughput matches master, and the issue's repro prints `wrong final tag in 0/10 runs`. I pushed t…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "tanghaoji",
       "at": "2026-10-19T10:51:36Z",
@@ -3401,29 +3411,21 @@
       "path": "tests/utils/test_async_logging_queue.py",
       "text": "Nit: this test and `test_metric_only_batches_of_same_run_are_logged_concurrently` need at least two pool workers, so they wait 5 s and fail if `MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE=1` is exported in the environment (the workaround the issue itself recommends). `monkeypatch.delenv(\"MLFLOW_ASYNC_LOGGING_THREADPOOL_SIZE\"…",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "tanghaoji",
-      "at": "2026-10-19T10:51:35Z",
-      "url": "https://github.com/mlflow/mlflow/pull/26804#pullrequestreview-5570473306",
-      "maintainer": true,
-      "path": null,
-      "text": "Thanks, this matches the shape suggested on the issue, and I verified it locally: the repro goes from `wrong final tag in 10/10 runs` on master to `0/10` here, the new fluent regression test fails on master and passes on this branch, ruff/clint are clean, and metric-only throughput is unchanged (200 metric batches on…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-10-19T18:23:57Z",
-    "updated_at": "2026-10-20T02:42:32Z",
+    "review": "approved",
+    "approved_by": [
+     "tanghaoji"
+    ],
+    "last_push": "2026-10-20T06:23:08Z",
+    "updated_at": "2026-10-20T09:55:08Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 44
   },
