@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-21T10:38:50Z",
+ "generated_at": "2026-10-21T15:39:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Data Loss"
    ],
    "stars": 3343,
-   "forks": 690
+   "forks": 691
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28476,
-   "forks": 6494
+   "stars": 28478,
+   "forks": 6495
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50230,
-   "forks": 20584
+   "stars": 50235,
+   "forks": 20588
   },
   {
    "full": "delta-io/delta",
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9053,
-   "forks": 2201
+   "forks": 2202
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61709,
-   "forks": 12535
+   "stars": 61729,
+   "forks": 12542
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1487,
-   "forks": 231
+   "forks": 232
   }
  ],
  "items": [
@@ -2895,8 +2895,8 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-16T15:04:49Z",
-    "updated_at": "2026-10-16T15:45:22Z",
+    "last_push": "2026-10-21T12:12:19Z",
+    "updated_at": "2026-10-21T13:03:03Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11512,11 +11512,11 @@
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
-   "status": "review",
+   "status": "merged",
    "title": "str.replace/contains/match/count with \\w, \\d, \\s, \\b only match ASCII for default str dtype",
    "date": "2026-10-07",
    "created_at": "2026-10-07T03:07:59Z",
-   "merged_at": null,
+   "merged_at": "2026-10-21",
    "reported": true,
    "pr": {
     "number": 70773,
@@ -11790,12 +11790,22 @@
      {
       "kind": "comment",
       "who": "jorisvandenbossche",
+      "at": "2026-10-21T11:26:53Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#issuecomment-6314770224",
+      "maintainer": true,
+      "path": null,
+      "text": "Failures in the nightly/dev builds will be fixed by https://github.com/pandas-dev/pandas/pull/71421. Thanks @maharanay22!",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
       "at": "2026-10-21T10:12:26Z",
       "url": "https://github.com/pandas-dev/pandas/pull/70773#issuecomment-6313474690",
       "maintainer": true,
       "path": null,
       "text": "(pushed a small commit to address my minor comments myself, as I want to include this in the upcoming release)",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11836,33 +11846,23 @@
       "path": "pandas/tests/strings/test_find_replace.py",
       "text": "[code] So there is actually a replacement for this case as well?",
       "answered": true
-     },
-     {
-      "kind": "review dismissed",
-      "who": "rhshadrach",
-      "at": "2026-10-10T11:31:42Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/70773#pullrequestreview-5478752755",
-      "maintainer": true,
-      "path": null,
-      "text": "Thanks for the PR! Instead of introducing a 2nd walk of the regex, I think we can avoid the duplicate code and get better performance by adding a method `_regex_nodes` that returns all the nodes (op and arg as a tuple) we need to check. Then checking for unsupported regex becomes: [code] and these nodes can be reused…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
-    "review": "commented",
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
     "approved_by": [],
     "last_push": "2026-10-21T10:11:20Z",
-    "updated_at": "2026-10-21T10:13:03Z",
+    "updated_at": "2026-10-21T11:27:06Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
-     "at": "2026-10-21T10:12:26Z",
+     "at": "2026-10-21T11:26:53Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "jorisvandenbossche commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 7
   },
