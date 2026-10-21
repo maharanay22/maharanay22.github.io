@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-21T19:40:16Z",
+ "generated_at": "2026-10-21T22:48:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28480,
-   "forks": 6495
+   "stars": 28481,
+   "forks": 6496
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50239,
-   "forks": 20590
+   "stars": 50241,
+   "forks": 20588
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61740,
-   "forks": 12550
+   "stars": 61751,
+   "forks": 12554
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -5862,7 +5862,7 @@
       "maintainer": true,
       "path": null,
       "text": "@maharanay22 this seems quite complicated. I assume a simpler solution would simply be to always fallback to the python `re` implementation when `\\s` is present (i.e. skip the \"is all ascii\" step for this case), at the cost of slower performance?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -5880,8 +5880,8 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T19:58:13Z",
-    "updated_at": "2026-10-20T21:34:39Z",
-    "conflicts": false,
+    "updated_at": "2026-10-21T21:41:04Z",
+    "conflicts": true,
     "last_comment": {
      "who": "jorisvandenbossche",
      "at": "2026-10-20T21:34:39Z",
@@ -5889,7 +5889,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "jorisvandenbossche commented. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 34
   },
