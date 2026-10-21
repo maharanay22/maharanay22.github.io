@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-21T05:44:20Z",
+ "generated_at": "2026-10-21T10:38:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3344,
+   "stars": 3343,
    "forks": 690
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28472,
-   "forks": 6492
+   "stars": 28476,
+   "forks": 6494
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50226,
-   "forks": 20582
+   "stars": 50230,
+   "forks": 20584
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61691,
-   "forks": 12529
+   "stars": 61709,
+   "forks": 12535
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -11661,7 +11661,7 @@
      "lines": [
       [
        "h",
-       "@@ -450,7 +450,7 @@"
+       "@@ -461,7 +461,7 @@"
       ],
       [
        "c",
@@ -11697,7 +11697,7 @@
       ],
       [
        "h",
-       "@@ -471,7 +471,7 @@"
+       "@@ -482,7 +482,7 @@"
       ],
       [
        "c",
@@ -11733,7 +11733,7 @@
       ],
       [
        "h",
-       "@@ -488,7 +488,7 @@"
+       "@@ -499,7 +499,7 @@"
       ],
       [
        "c",
@@ -11769,7 +11769,7 @@
       ],
       [
        "h",
-       "@@ -513,7 +513,7 @@"
+       "@@ -524,7 +524,7 @@"
       ],
       [
        "c",
@@ -11788,6 +11788,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-21T10:12:26Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70773#issuecomment-6313474690",
+      "maintainer": true,
+      "path": null,
+      "text": "(pushed a small commit to address my minor comments myself, as I want to include this in the upcoming release)",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "jorisvandenbossche",
       "at": "2026-10-20T21:30:37Z",
@@ -11795,7 +11805,7 @@
       "maintainer": true,
       "path": "pandas/core/arrays/_arrow_string_mixins.py",
       "text": "[code] ?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -11805,7 +11815,7 @@
       "maintainer": true,
       "path": null,
       "text": "This looks good to me! (note to self for a follow-up: also test `findall()`/`split()`/`extract()`, which should already work fine since those always use the python implementation)",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11815,7 +11825,7 @@
       "maintainer": true,
       "path": "pandas/tests/strings/test_strings.py",
       "text": "Can you move this a little bit up to the `count` related tests?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11825,10 +11835,10 @@
       "maintainer": true,
       "path": "pandas/tests/strings/test_find_replace.py",
       "text": "[code] So there is actually a replacement for this case as well?",
-      "answered": false
+      "answered": true
      },
      {
-      "kind": "review changes requested",
+      "kind": "review dismissed",
       "who": "rhshadrach",
       "at": "2026-10-10T11:31:42Z",
       "url": "https://github.com/pandas-dev/pandas/pull/70773#pullrequestreview-5478752755",
@@ -11836,29 +11846,23 @@
       "path": null,
       "text": "Thanks for the PR! Instead of introducing a 2nd walk of the regex, I think we can avoid the duplicate code and get better performance by adding a method `_regex_nodes` that returns all the nodes (op and arg as a tuple) we need to check. Then checking for unsupported regex becomes: [code] and these nodes can be reused…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "rhshadrach",
-      "at": "2026-10-10T11:20:03Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/70773#discussion_r4237442115",
-      "maintainer": true,
-      "path": "doc/source/whatsnew/v3.2.0.rst",
-      "text": "I think we can shorten this a little by removing `, unlike the Unicode-aware matching of Python's ``re`` used for ``object`` dtype`.",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-17T23:25:22Z",
-    "updated_at": "2026-10-20T21:30:38Z",
+    "last_push": "2026-10-21T10:11:20Z",
+    "updated_at": "2026-10-21T10:13:03Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "jorisvandenbossche",
+     "at": "2026-10-21T10:12:26Z",
+     "maintainer": true
+    },
     "state": "action",
     "waiting_on": "you",
-    "next": "jorisvandenbossche left review comments. Reply or update the PR"
+    "next": "jorisvandenbossche commented. Reply or update the PR"
    },
    "id": 7
   },
