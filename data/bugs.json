@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-22T01:02:20Z",
+ "generated_at": "2026-10-22T06:05:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3343,
+   "stars": 3344,
    "forks": 691
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28481,
-   "forks": 6496
+   "stars": 28482,
+   "forks": 6497
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50240,
-   "forks": 20589
+   "stars": 50241,
+   "forks": 20590
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61752,
-   "forks": 12556
+   "stars": 61767,
+   "forks": 12561
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -512,6 +512,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-22T01:48:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#issuecomment-6330719285",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-20T20:16:31Z",
@@ -560,16 +570,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] Have you tried registering a function with a nested collection against a real server? `FunctionParameterInfoDAO.typeJson` is `@Column(name = \"type_json\")` with no length, so it is `varchar(255)`, and this value now carries the whole type tree plus the name and comment. `dict[str, list[dict[str, list[floa…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:00:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730298",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
-      "text": "[AI Assisted] One more behavior change worth calling out in the description: collections used to be a bare `\"array\"` / `\"map\"`, both in `JSON_SCHEMA_TYPE`, so they counted as strict. Now the leaf is checked, so `list[datetime.date]` or `dict[str, Decimal]` flips the OpenAI tool to `strict=false`. Probably more correct…",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -577,16 +577,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-20T20:53:42Z",
-    "updated_at": "2026-10-20T22:25:17Z",
+    "updated_at": "2026-10-22T04:48:19Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-19T18:51:49Z",
+     "at": "2026-10-22T01:48:39Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 57
   },
@@ -5857,6 +5857,16 @@
      {
       "kind": "comment",
       "who": "jorisvandenbossche",
+      "at": "2026-10-22T05:51:58Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6333801081",
+      "maintainer": true,
+      "path": null,
+      "text": "Yes, let's take the simpler version for now (we can explore translating regex patterns later)",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
       "at": "2026-10-20T21:34:39Z",
       "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6302014213",
       "maintainer": true,
@@ -5880,16 +5890,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T19:58:13Z",
-    "updated_at": "2026-10-21T21:41:04Z",
+    "updated_at": "2026-10-22T05:51:58Z",
     "conflicts": true,
     "last_comment": {
      "who": "jorisvandenbossche",
-     "at": "2026-10-20T21:34:39Z",
+     "at": "2026-10-22T05:51:58Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "jorisvandenbossche commented. Reply or update the PR"
    },
    "id": 34
   },
