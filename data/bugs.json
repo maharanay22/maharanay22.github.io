@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-22T06:05:29Z",
+ "generated_at": "2026-10-22T11:46:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28482,
-   "forks": 6497
+   "stars": 28492,
+   "forks": 6499
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50241,
-   "forks": 20590
+   "stars": 50239,
+   "forks": 20566
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61767,
-   "forks": 12561
+   "stars": 61801,
+   "forks": 12565
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,8 +156,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1487,
-   "forks": 232
+   "stars": 1486,
+   "forks": 233
   }
  ],
  "items": [
@@ -5891,7 +5891,7 @@
     "approved_by": [],
     "last_push": "2026-10-18T19:58:13Z",
     "updated_at": "2026-10-22T05:51:58Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
      "at": "2026-10-22T05:51:58Z",
@@ -11335,18 +11335,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "joshuawong-db",
+      "at": "2026-10-22T07:56:25Z",
+      "url": "https://github.com/mlflow/mlflow/pull/26538#pullrequestreview-5610932679",
+      "maintainer": true,
+      "path": null,
+      "text": "LGTM",
+      "answered": false
+     }
+    ],
+    "stage": 3,
+    "checks": "failing",
+    "review": "approved",
+    "approved_by": [
+     "joshuawong-db"
+    ],
     "last_push": "2026-10-06T15:58:50Z",
-    "updated_at": "2026-10-19T15:17:11Z",
+    "updated_at": "2026-10-22T08:20:54Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "joshuawong-db left review comments. Reply or update the PR"
    },
    "id": 9
   },
