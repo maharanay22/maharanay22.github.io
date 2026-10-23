@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-23T17:06:45Z",
+ "generated_at": "2026-10-23T20:27:40Z",
  "stages": [
   "reported",
   "fix sent",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50248,
-   "forks": 20575
+   "stars": 50252,
+   "forks": 20576
   },
   {
    "full": "delta-io/delta",
@@ -126,7 +126,7 @@
     "Delta Lake",
     "SQL DDL"
    ],
-   "stars": 383,
+   "stars": 384,
    "forks": 225
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61906,
-   "forks": 12606
+   "stars": 61914,
+   "forks": 12614
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -5729,6 +5729,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-23T17:08:12Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#pullrequestreview-5631817497",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the update!",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-23T17:08:01Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#discussion_r4362214092",
+      "maintainer": true,
+      "path": "pandas/tests/strings/test_strings.py",
+      "text": "This can be included in the `test_needs_python_regex_unsupported_code` test above, now?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-23T17:06:08Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#discussion_r4362197044",
+      "maintainer": true,
+      "path": "pandas/tests/strings/test_find_replace.py",
+      "text": "Can you use the `any_string_dtype` fixture instead, like the test above?",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "jorisvandenbossche",
       "at": "2026-10-22T05:51:58Z",
@@ -5764,16 +5794,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-22T16:47:52Z",
-    "updated_at": "2026-10-23T01:26:14Z",
+    "updated_at": "2026-10-23T17:08:12Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
      "at": "2026-10-22T05:51:58Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jorisvandenbossche left review comments. Reply or update the PR"
    },
    "id": 34
   },
@@ -7505,10 +7535,11 @@
     "checks": "failing",
     "review": "approved",
     "approved_by": [
-     "yili-db"
+     "yili-db",
+     "tdas"
     ],
     "last_push": "2026-10-20T02:46:32Z",
-    "updated_at": "2026-10-22T17:40:32Z",
+    "updated_at": "2026-10-23T18:59:24Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
