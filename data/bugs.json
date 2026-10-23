@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-23T20:27:40Z",
+ "generated_at": "2026-10-23T23:25:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3344,
+   "stars": 3343,
    "forks": 690
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28511,
+   "stars": 28512,
    "forks": 6510
   },
   {
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50252,
+   "stars": 50258,
    "forks": 20576
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61914,
-   "forks": 12614
+   "stars": 61921,
+   "forks": 12616
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -11935,7 +11935,7 @@
     "approved_by": [],
     "last_push": "2026-10-18T00:39:24Z",
     "updated_at": "2026-10-18T17:07:15Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
