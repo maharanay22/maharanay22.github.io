@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-22T23:22:40Z",
+ "generated_at": "2026-10-23T01:45:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28499,
+   "stars": 28501,
    "forks": 6501
   },
   {
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50245,
+   "stars": 50244,
    "forks": 20567
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61836,
-   "forks": 12579
+   "stars": 61839,
+   "forks": 12580
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -5764,7 +5764,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-22T16:47:52Z",
-    "updated_at": "2026-10-22T17:21:55Z",
+    "updated_at": "2026-10-23T01:26:14Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
@@ -8605,17 +8605,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-22T18:01:02Z",
     "updated_at": "2026-10-22T18:06:08Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 20
   },
@@ -11904,7 +11904,7 @@
     "approved_by": [],
     "last_push": "2026-10-18T00:39:24Z",
     "updated_at": "2026-10-18T17:07:15Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
