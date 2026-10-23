@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-23T06:36:01Z",
+ "generated_at": "2026-10-23T12:07:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28505,
-   "forks": 6503
+   "stars": 28510,
+   "forks": 6504
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50245,
-   "forks": 20568
+   "stars": 50247,
+   "forks": 20571
   },
   {
    "full": "delta-io/delta",
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9053,
-   "forks": 2202
+   "forks": 2203
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61868,
-   "forks": 12589
+   "stars": 61893,
+   "forks": 12593
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,8 +156,8 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1487,
-   "forks": 234
+   "stars": 1488,
+   "forks": 236
   }
  ],
  "items": [
