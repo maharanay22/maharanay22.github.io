@@ -165,7 +165,10 @@
     "https://github.com/pandas-dev/pandas/pull/70723": "DataFrame.any(skipna=False) on a bool[pyarrow] column with NA raised TypeError; now returns NA, and frames without pyarrow columns behave exactly as before",
     "https://github.com/pandas-dev/pandas/pull/70773": "str.replace(r\"[^\\w\\s]\", \"\") on pyarrow strings turned \"café crème\" into \"caf crme\"; now matches Python's re: \"café crème\"",
     "https://github.com/pandas-dev/pandas/pull/71025": "\\s missed whitespace like \"\\x0b\" and \"\\xa0\" on pyarrow strings (and \\S matched them); now both follow Python's re",
-    "https://github.com/mlflow/mlflow/pull/26440": "Mistral streaming responses through the MLflow AI Gateway lost token usage; now the usage is passed through in the final chunk"
+    "https://github.com/mlflow/mlflow/pull/26440": "Mistral streaming responses through the MLflow AI Gateway lost token usage; now the usage is passed through in the final chunk",
+    "https://github.com/delta-io/delta-rs/pull/4945": "Enabling deletion vectors on a column-mapped table dropped columnMapping: every value read as NULL and Spark rejected the table; with the fix Spark and delta-rs read the same rows",
+    "https://github.com/delta-io/delta-rs/pull/4947": "After a DV delete, a partition DELETE or RESTORE made load_cdf report deleted ids 2,3 instead of the live 0,1,4..9; now matches Spark table_changes exactly",
+    "https://github.com/delta-io/delta-rs/pull/4949": "load_cdf aborted the Python process on a DV change in a multi row group file; now returns the same deletes as Spark"
   },
   "approval_checks": {
     "mlflow/mlflow": [
