@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-24T17:28:33Z",
+ "generated_at": "2026-10-24T18:28:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3558,
+   "stars": 3559,
    "forks": 691
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28516,
+   "stars": 28518,
    "forks": 6516
   },
   {
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50258,
-   "forks": 20580
+   "forks": 20582
   },
   {
    "full": "delta-io/delta",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61966,
+   "stars": 61968,
    "forks": 12636
   },
   {
@@ -444,7 +444,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-23T08:50:22Z",
-    "updated_at": "2026-10-24T00:47:57Z",
+    "updated_at": "2026-10-24T18:26:59Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -941,7 +941,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-24T16:00:20Z",
-    "updated_at": "2026-10-24T16:01:11Z",
+    "updated_at": "2026-10-24T17:48:07Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3681,18 +3681,29 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "ethan-tyler",
+      "at": "2026-10-24T18:10:00Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4893#discussion_r4368013541",
+      "maintainer": true,
+      "path": "crates/core/src/delta_datafusion/utils.rs",
+      "text": "You still need to cast the literals here. For `Float32 = Int64(16_777_217)`, the round trip check fails and `common_type` is `Float32` which returns with mismatched types. A partition only delete then errors in the kernel. Keep the column as is and cast the literals to `common_type`.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-21T12:12:19Z",
-    "updated_at": "2026-10-21T13:03:03Z",
+    "updated_at": "2026-10-24T18:10:10Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "ethan-tyler left review comments. Reply or update the PR"
    },
    "id": 46
   },
