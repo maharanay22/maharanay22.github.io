@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-24T15:50:01Z",
+ "generated_at": "2026-10-24T17:28:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3343,
+   "stars": 3344,
    "forks": 690
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28515,
+   "stars": 28516,
    "forks": 6516
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61959,
+   "stars": 61966,
    "forks": 12636
   },
   {
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1488,
+   "stars": 1490,
    "forks": 237
   }
  ],
@@ -849,7 +849,7 @@
       ],
       [
        "h",
-       "@@ -316,6 +329,58 @@"
+       "@@ -316,6 +329,55 @@"
       ],
       [
        "c",
@@ -873,7 +873,7 @@
       ],
       [
        "a",
-       "    fn upgrade_to_reader_features(mut self) -> Self {"
+       "    fn upgrade_to_reader_features(&mut self) {"
       ],
       [
        "a",
@@ -881,7 +881,7 @@
       ],
       [
        "a",
-       "            return self;"
+       "            return;"
       ],
       [
        "a",
@@ -903,7 +903,7 @@
       "maintainer": true,
       "path": "crates/core/src/kernel/models/actions.rs",
       "text": "When adding test utility functions like these two, please also include rustdoc on what their intent should be for future test writers",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -913,7 +913,7 @@
       "maintainer": true,
       "path": "crates/core/src/kernel/models/actions.rs",
       "text": "Method chaining like this is kind of the only reason to have these functions return `Self`, but I don't think this is worth it for the API",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -923,7 +923,7 @@
       "maintainer": true,
       "path": "crates/core/src/kernel/models/actions.rs",
       "text": "This approach of taking `mut self` and then returning `Self` is unnecessary IMHO, there's no need in the callers to reassign `self`. If it's beneficial to take `mut self` then the return of the function should help the caller understand either: * did this change our features, i.e. return `bool` * what features changed…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -933,20 +933,20 @@
       "maintainer": true,
       "path": "crates/core/src/kernel/models/actions.rs",
       "text": "This expression I personally find rather confusing to reason through, then again I am not a large language model 😄 This is not a request to change this code specifically, but I tend to prefer that we use for loops and conditionals rather than complex fluid expressions of this nature since I find that humans are better…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-24T11:36:49Z",
-    "updated_at": "2026-10-24T12:19:49Z",
+    "last_push": "2026-10-24T16:00:20Z",
+    "updated_at": "2026-10-24T16:01:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "rtyler left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 60
   },
