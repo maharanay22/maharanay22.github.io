@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-23T23:25:38Z",
+ "generated_at": "2026-10-24T00:49:19Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,21 +9,6 @@
   "merged"
  ],
  "repos": [
-  {
-   "full": "unitycatalog/unitycatalog",
-   "name": "Unity Catalog",
-   "url": "https://github.com/unitycatalog/unitycatalog",
-   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
-   "icon": "🗂️",
-   "category": "data governance",
-   "tags": [
-    "AI Agents",
-    "Tool Calling",
-    "Windows"
-   ],
-   "stars": 3557,
-   "forks": 690
-  },
   {
    "full": "delta-io/delta-rs",
    "name": "delta-rs",
@@ -40,6 +25,21 @@
    "forks": 690
   },
   {
+   "full": "unitycatalog/unitycatalog",
+   "name": "Unity Catalog",
+   "url": "https://github.com/unitycatalog/unitycatalog",
+   "about": "Open source data and AI catalog for tables, files, functions and models. Its AI package turns catalog functions into tools for LLM agents.",
+   "icon": "🗂️",
+   "category": "data governance",
+   "tags": [
+    "AI Agents",
+    "Tool Calling",
+    "Windows"
+   ],
+   "stars": 3557,
+   "forks": 690
+  },
+  {
    "full": "mlflow/mlflow",
    "name": "MLflow",
    "url": "https://github.com/mlflow/mlflow",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28512,
-   "forks": 6510
+   "forks": 6512
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50258,
+   "stars": 50259,
    "forks": 20576
   },
   {
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61921,
+   "stars": 61924,
    "forks": 12616
   },
   {
@@ -161,6 +161,754 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "load_cdf panics on a deletion vector change in a parquet file with more than one row group",
+   "date": "2026-10-24",
+   "created_at": "2026-10-24T00:47:42Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4949,
+    "url": "https://github.com/delta-io/delta-rs/pull/4949"
+   },
+   "issue": {
+    "number": 4948,
+    "url": "https://github.com/delta-io/delta-rs/issues/4948"
+   },
+   "proof": "load_cdf aborted the Python process on a DV change in a multi row group file; now returns the same deletes as Spark",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -329,7 +329,9 @@"
+      ],
+      [
+       "c",
+       "    let rg_end = rg_start + num_rows as u64;"
+      ],
+      [
+       "c",
+       "    let mut selectors = Vec::new();"
+      ],
+      [
+       "c",
+       "    let mut cursor = rg_start;"
+      ],
+      [
+       "d",
+       "    for idx in marked.iter() {"
+      ],
+      [
+       "a",
+       "    let mut marked_rows = marked.iter();"
+      ],
+      [
+       "a",
+       "    marked_rows.advance_to(rg_start);"
+      ],
+      [
+       "a",
+       "    for idx in marked_rows.take_while(|&idx| idx < rg_end) {"
+      ],
+      [
+       "c",
+       "        selectors.push(RowSelector {"
+      ],
+      [
+       "c",
+       "            row_count: (idx - cursor) as usize,"
+      ],
+      [
+       "c",
+       "            skip: keep_marked,"
+      ],
+      [
+       "h",
+       "@@ -704,4 +706,90 @@"
+      ],
+      [
+       "c",
+       "            \"constant `false` must prune even a Remove without partition metadata: {kept:?}\""
+      ],
+      [
+       "c",
+       "        );"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    /// Row offsets that a row group's access plan reads, plus the number of rows it covers."
+      ],
+      [
+       "a",
+       "    fn selected_offsets(access: RowGroupAccess) -> (usize, Vec<usize>) {"
+      ],
+      [
+       "a",
+       "        let RowGroupAccess::Selection(selection) = access else {"
+      ],
+      [
+       "a",
+       "            panic!(\"expected a row selection\");"
+      ],
+      [
+       "a",
+       "        };"
+      ],
+      [
+       "a",
+       "        let mut covered = 0;"
+      ],
+      [
+       "a",
+       "        let mut selected = Vec::new();"
+      ],
+      [
+       "a",
+       "        for selector in selection.iter() {"
+      ],
+      [
+       "a",
+       "            if !selector.skip {"
+      ],
+      [
+       "a",
+       "                selected.extend(covered..covered + selector.row_count);"
+      ],
+      [
+       "a",
+       "            }"
+      ],
+      [
+       "a",
+       "            covered += selector.row_count;"
+      ],
+      [
+       "a",
+       "        }"
+      ],
+      [
+       "a",
+       "        (covered, selected)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 89,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/operations/load_cdf.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1671,6 +1671,40 @@"
+      ],
+      [
+       "c",
+       "        Ok(())"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    /// The fixture's only data file has three row groups of 100 rows each. Version 2 deletes"
+      ],
+      [
+       "a",
+       "    /// rows 5, 150 and 299 with a deletion vector and version 3 deletes rows 99, 100 and 200,"
+      ],
+      [
+       "a",
+       "    /// so every row group and both edges of each row group boundary are covered. The expected"
+      ],
+      [
+       "a",
+       "    /// rows match Spark's `table_changes` for the same versions."
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_cdf_with_dv_on_multi_row_group_file() -> TestResult {"
+      ],
+      [
+       "a",
+       "        let ctx = SessionContext::new();"
+      ],
+      [
+       "a",
+       "        let table_path = Path::new(\"../test/tests/data/cdf-table-dv-multi-row-group\");"
+      ],
+      [
+       "a",
+       "        let table_uri = Url::from_directory_path(std::fs::canonicalize(table_path)?).unwrap();"
+      ],
+      [
+       "a",
+       "        let table = DeltaTable::try_from_url(table_uri).await?;"
+      ],
+      [
+       "a",
+       "        let builder = table.scan_cdf().with_starting_version(2);"
+      ],
+      [
+       "a",
+       "        ctx.register_table(\"cdf\", Arc::new(DeltaCdfTableProvider::try_new(builder)?))?;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        let batches = ctx"
+      ],
+      [
+       "a",
+       "            .sql(\"SELECT id, _change_type, _commit_version FROM cdf\")"
+      ],
+      [
+       "a",
+       "            .await?"
+      ],
+      [
+       "a",
+       "            .collect()"
+      ],
+      [
+       "a",
+       "            .await?;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        assert_batches_sorted_eq! {["
+      ],
+      [
+       "a",
+       "            \"+-----+--------------+-----------------+\","
+      ],
+      [
+       "a",
+       "            \"| id  | _change_type | _commit_version |\","
+      ],
+      [
+       "a",
+       "            \"+-----+--------------+-----------------+\","
+      ],
+      [
+       "a",
+       "            \"| 100 | delete       | 3               |\","
+      ],
+      [
+       "a",
+       "            \"| 150 | delete       | 2               |\","
+      ],
+      [
+       "a",
+       "            \"| 200 | delete       | 3               |\","
+      ]
+     ],
+     "truncated": true,
+     "additions": 34,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-23T08:50:22Z",
+    "updated_at": "2026-10-24T00:47:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 62
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "load_cdf returns the deleted rows instead of the live rows when a file with a deletion vector is removed or restored",
+   "date": "2026-10-24",
+   "created_at": "2026-10-24T00:47:36Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4947,
+    "url": "https://github.com/delta-io/delta-rs/pull/4947"
+   },
+   "issue": {
+    "number": 4946,
+    "url": "https://github.com/delta-io/delta-rs/issues/4946"
+   },
+   "proof": "After a DV delete, a partition DELETE or RESTORE made load_cdf report deleted ids 2,3 instead of the live 0,1,4..9; now matches Spark table_changes exactly",
+   "files": [
+    {
+     "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -166,6 +166,7 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    let access_plan = access_plan_for_selection("
+      ],
+      [
+       "c",
+       "        selection,"
+      ],
+      [
+       "a",
+       "        true,"
+      ],
+      [
+       "c",
+       "        &pair.add.path,"
+      ],
+      [
+       "c",
+       "        pair.add.size as u64,"
+      ],
+      [
+       "c",
+       "        Arc::clone(&cache),"
+      ],
+      [
+       "h",
+       "@@ -407,6 +408,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "async fn access_plan_for_selection("
+      ],
+      [
+       "c",
+       "    selection: roaring::RoaringTreemap,"
+      ],
+      [
+       "a",
+       "    keep_marked: bool,"
+      ],
+      [
+       "c",
+       "    file_path_str: &str,"
+      ],
+      [
+       "c",
+       "    file_size: u64,"
+      ],
+      [
+       "c",
+       "    cache: Arc<CachedParquetFileReaderFactory>,"
+      ],
+      [
+       "h",
+       "@@ -417,12 +419,14 @@"
+      ],
+      [
+       "c",
+       "    Ok(access_plan_from_treemap("
+      ],
+      [
+       "c",
+       "        &selection,"
+      ],
+      [
+       "c",
+       "        &parquet_metadata,"
+      ],
+      [
+       "d",
+       "        true,"
+      ],
+      [
+       "a",
+       "        keep_marked,"
+      ],
+      [
+       "c",
+       "    ))"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// This function is a side effect of having 2 separate types of data at points in the scan"
+      ],
+      [
+       "c",
+       "/// process, but this exists for any actions that aren't paired up add/remove actions."
+      ],
+      [
+       "a",
+       "/// The deletion vector of such an action marks the rows that are not part of the file, so the"
+      ],
+      [
+       "a",
+       "/// plan reads the unmarked rows."
+      ],
+      [
+       "c",
+       "pub async fn create_file_scan_plan<F: FileAction>("
+      ]
+     ],
+     "truncated": true,
+     "additions": 6,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/operations/load_cdf.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1808,6 +1808,136 @@"
+      ],
+      [
+       "c",
+       "        Ok(())"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    /// Version 1 of this fixture writes rows 0 to 9 to one file and version 2 deletes rows 2"
+      ],
+      [
+       "a",
+       "    /// and 3 with a deletion vector. Every later commit removes or re-adds that file without"
+      ],
+      [
+       "a",
+       "    /// change data files, so its change rows are the eight rows that were live in the file."
+      ],
+      [
+       "a",
+       "    /// The expected rows match Spark's `table_changes` for the same versions."
+      ],
+      [
+       "a",
+       "    async fn read_unpaired_dv_action_changes("
+      ],
+      [
+       "a",
+       "        starting_version: Version,"
+      ],
+      [
+       "a",
+       "        ending_version: Version,"
+      ],
+      [
+       "a",
+       "    ) -> Result<Vec<RecordBatch>, Box<dyn std::error::Error>> {"
+      ],
+      [
+       "a",
+       "        let ctx = SessionContext::new();"
+      ],
+      [
+       "a",
+       "        let table_path = Path::new(\"../test/tests/data/cdf-table-dv-unpaired-actions\");"
+      ],
+      [
+       "a",
+       "        let table_uri = Url::from_directory_path(std::fs::canonicalize(table_path)?).unwrap();"
+      ],
+      [
+       "a",
+       "        let builder = DeltaTable::try_from_url(table_uri)"
+      ],
+      [
+       "a",
+       "            .await?"
+      ],
+      [
+       "a",
+       "            .scan_cdf()"
+      ],
+      [
+       "a",
+       "            .with_starting_version(starting_version)"
+      ],
+      [
+       "a",
+       "            .with_ending_version(ending_version);"
+      ],
+      [
+       "a",
+       "        ctx.register_table(\"cdf\", Arc::new(DeltaCdfTableProvider::try_new(builder)?))?;"
+      ],
+      [
+       "a",
+       "        Ok(ctx"
+      ],
+      [
+       "a",
+       "            .sql(\"SELECT id, _change_type, _commit_version FROM cdf\")"
+      ],
+      [
+       "a",
+       "            .await?"
+      ],
+      [
+       "a",
+       "            .collect()"
+      ],
+      [
+       "a",
+       "            .await?)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_cdf_partition_delete_after_dv_delete() -> TestResult {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 130,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-23T08:57:49Z",
+    "updated_at": "2026-10-24T00:47:53Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 61
+  },
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Enabling deletion vectors (or any table feature) on a column-mapped table drops columnMapping from the protocol, and reads return NULLs",
+   "date": "2026-10-24",
+   "created_at": "2026-10-24T00:47:31Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4945,
+    "url": "https://github.com/delta-io/delta-rs/pull/4945"
+   },
+   "issue": {
+    "number": 4944,
+    "url": "https://github.com/delta-io/delta-rs/issues/4944"
+   },
+   "proof": "Enabling deletion vectors on a column-mapped table dropped columnMapping: every value read as NULL and Spark rejected the table; with the fix Spark and delta-rs read the same rows",
+   "files": [
+    {
+     "path": "crates/core/src/kernel/models/actions.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -253,6 +253,19 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "/// Features that legacy protocol versions above delta-rs's default `(1, 2)` imply, with the lowest"
+      ],
+      [
+       "a",
+       "/// reader and writer versions that imply each one, as in the \"Reader Version Requirements\" and"
+      ],
+      [
+       "a",
+       "/// \"Writer Version Requirements\" tables of PROTOCOL.md. `appendOnly` and `invariants` (writer"
+      ],
+      [
+       "a",
+       "/// version 2) are left out so that tables upgraded from the default keep their current feature"
+      ],
+      [
+       "a",
+       "/// lists; [`writer_features_for_version`] adds both when properties move a table to writer 7."
+      ],
+      [
+       "a",
+       "const LEGACY_IMPLIED_FEATURES: [(i32, i32, TableFeature); 5] = ["
+      ],
+      [
+       "a",
+       "    (1, 3, TableFeature::CheckConstraints),"
+      ],
+      [
+       "a",
+       "    (1, 4, TableFeature::ChangeDataFeed),"
+      ],
+      [
+       "a",
+       "    (1, 4, TableFeature::GeneratedColumns),"
+      ],
+      [
+       "a",
+       "    (2, 5, TableFeature::ColumnMapping),"
+      ],
+      [
+       "a",
+       "    (1, 6, TableFeature::IdentityColumns),"
+      ],
+      [
+       "a",
+       "];"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "#[derive(Serialize, Deserialize, Debug, Clone, PartialEq, Eq)]"
+      ],
+      [
+       "c",
+       "#[serde(rename_all = \"camelCase\")]"
+      ],
+      [
+       "c",
+       "/// Temporary Shim to facilitate adoption of kernel protocol."
+      ],
+      [
+       "h",
+       "@@ -313,6 +326,58 @@"
+      ],
+      [
+       "c",
+       "            .expect(\"Failed to convert Protocol to a kernel implementation\")"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    /// Moves a legacy reader protocol to reader version 3, listing the reader features that its"
+      ],
+      [
+       "a",
+       "    /// version implied, so that moving to table features keeps them supported"
+      ],
+      [
+       "a",
+       "    fn upgrade_to_reader_features(mut self) -> Self {"
+      ],
+      [
+       "a",
+       "        if self.min_reader_version >= 3 {"
+      ],
+      [
+       "a",
+       "            return self;"
+      ],
+      [
+       "a",
+       "        }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 234,
+     "deletions": 23
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-23T07:16:27Z",
+    "updated_at": "2026-10-24T00:47:50Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 60
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -5736,7 +6484,7 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the update!",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -5746,7 +6494,7 @@
       "maintainer": true,
       "path": "pandas/tests/strings/test_strings.py",
       "text": "This can be included in the `test_needs_python_regex_unsupported_code` test above, now?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -5756,7 +6504,7 @@
       "maintainer": true,
       "path": "pandas/tests/strings/test_find_replace.py",
       "text": "Can you use the `any_string_dtype` fixture instead, like the test above?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -5789,21 +6537,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-22T16:47:52Z",
-    "updated_at": "2026-10-23T17:08:12Z",
+    "last_push": "2026-10-24T00:36:48Z",
+    "updated_at": "2026-10-24T00:40:38Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
      "at": "2026-10-22T05:51:58Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "jorisvandenbossche left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 34
   },
@@ -11820,7 +12568,7 @@
      "lines": [
       [
        "h",
-       "@@ -17137,7 +17137,11 @@"
+       "@@ -17168,7 +17168,11 @@"
       ],
       [
        "c",
@@ -11929,13 +12677,13 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-18T00:39:24Z",
-    "updated_at": "2026-10-18T17:07:15Z",
-    "conflicts": true,
+    "last_push": "2026-10-23T02:01:16Z",
+    "updated_at": "2026-10-24T00:32:56Z",
+    "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
