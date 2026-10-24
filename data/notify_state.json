@@ -1,0 +1,593 @@
+{
+ "https://github.com/BerriAI/litellm/pull/45147": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "mateo-berri@2026-10-14T18:34:09Z",
+  "last_comment_who": "mateo-berri",
+  "status": "closed",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/BerriAI/litellm/pull/45599": {
+  "approved_by": [
+   "VANDRANKI"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/databricks/databricks-sql-python/pull/977": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/databricks/databricks-sql-python/pull/979": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/databricks/databricks-sql-python/pull/982": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/databricks/dbt-databricks/pull/1709": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/databricks/dbt-databricks/pull/1710": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/databricks/dbt-databricks/pull/1711": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4839": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4841": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "ion-elgreco@2026-10-10T07:04:08Z",
+  "last_comment_who": "ion-elgreco",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4843": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4847": {
+  "approved_by": [
+   "adamreeve"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4850": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4854": {
+  "approved_by": [
+   "ion-elgreco"
+  ],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4856": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4858": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4881": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4893": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4895": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4897": {
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "rtyler@2026-10-19T12:44:12Z",
+  "last_comment_who": "rtyler",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4899": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4945": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4947": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/4949": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta/pull/7838": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta/pull/7840": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta/pull/7841": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta/pull/7843": {
+  "approved_by": [],
+  "checks": "not started",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/10": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/11": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/12": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/13": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/14": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/8": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mindsdb/engine/pull/9": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mlflow/mlflow/pull/26439": {
+  "approved_by": [
+   "aaronteo-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26440": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26512": {
+  "approved_by": [],
+  "checks": null,
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "scout",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26519": {
+  "approved_by": [],
+  "checks": null,
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "scout",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26538": {
+  "approved_by": [
+   "joshuawong-db"
+  ],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/mlflow/mlflow/pull/26539": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "closed",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26804": {
+  "approved_by": [
+   "tanghaoji"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/26805": {
+  "approved_by": [
+   "aaronteo-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/pandas-dev/pandas/pull/70515": {
+  "approved_by": [
+   "jbrockmendel"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "jbrockmendel@2026-10-06T17:19:28Z",
+  "last_comment_who": "jbrockmendel",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/pandas-dev/pandas/pull/70723": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": "jbrockmendel@2026-10-17T18:53:49Z",
+  "last_comment_who": "jbrockmendel",
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/pandas-dev/pandas/pull/70773": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "jorisvandenbossche@2026-10-21T11:26:53Z",
+  "last_comment_who": "jorisvandenbossche",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/pandas-dev/pandas/pull/71025": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": "jorisvandenbossche@2026-10-22T05:51:58Z",
+  "last_comment_who": "jorisvandenbossche",
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/pydantic/pydantic-settings/pull/1022": {
+  "approved_by": [
+   "hramezani"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/pydantic/pydantic-settings/pull/1024": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": true,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "closed",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1966": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T18:51:09Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1967": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T23:22:21Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1969": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T18:52:06Z",
+  "last_comment_who": "yili-db",
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1970": {
+  "approved_by": [
+   "tdas"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "tdas@2026-10-09T20:12:59Z",
+  "last_comment_who": "tdas",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1971": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T05:52:01Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1975": {
+  "approved_by": [
+   "tdas",
+   "yili-db"
+  ],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-22T17:40:32Z",
+  "last_comment_who": "yili-db",
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1987": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-20T18:13:41Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/1988": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T23:22:08Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2011": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T18:51:35Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2012": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-19T18:51:42Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2013": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "yili-db@2026-10-22T01:48:39Z",
+  "last_comment_who": "yili-db",
+  "status": "merged",
+  "waiting_on": "nobody"
+ }
+}
