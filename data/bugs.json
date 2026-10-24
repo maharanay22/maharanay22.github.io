@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-24T11:57:34Z",
+ "generated_at": "2026-10-24T13:21:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3558,
-   "forks": 690
+   "forks": 691
   },
   {
    "full": "mlflow/mlflow",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50256,
-   "forks": 20581
+   "forks": 20582
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61947,
-   "forks": 12633
+   "stars": 61952,
+   "forks": 12634
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -894,18 +894,59 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "rtyler",
+      "at": "2026-10-24T11:56:50Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4945#discussion_r4367044120",
+      "maintainer": true,
+      "path": "crates/core/src/kernel/models/actions.rs",
+      "text": "When adding test utility functions like these two, please also include rustdoc on what their intent should be for future test writers",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "rtyler",
+      "at": "2026-10-24T11:54:58Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4945#discussion_r4367040112",
+      "maintainer": true,
+      "path": "crates/core/src/kernel/models/actions.rs",
+      "text": "Method chaining like this is kind of the only reason to have these functions return `Self`, but I don't think this is worth it for the API",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "rtyler",
+      "at": "2026-10-24T11:53:57Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4945#discussion_r4367037807",
+      "maintainer": true,
+      "path": "crates/core/src/kernel/models/actions.rs",
+      "text": "This approach of taking `mut self` and then returning `Self` is unnecessary IMHO, there's no need in the callers to reassign `self`. If it's beneficial to take `mut self` then the return of the function should help the caller understand either: * did this change our features, i.e. return `bool` * what features changed…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "rtyler",
+      "at": "2026-10-24T11:51:19Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4945#discussion_r4367030498",
+      "maintainer": true,
+      "path": "crates/core/src/kernel/models/actions.rs",
+      "text": "This expression I personally find rather confusing to reason through, then again I am not a large language model 😄 This is not a request to change this code specifically, but I tend to prefer that we use for loops and conditionals rather than complex fluid expressions of this nature since I find that humans are better…",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-24T11:36:49Z",
-    "updated_at": "2026-10-24T11:53:47Z",
+    "updated_at": "2026-10-24T12:19:49Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "rtyler left review comments. Reply or update the PR"
    },
    "id": 60
   },

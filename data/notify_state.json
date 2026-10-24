@@ -213,7 +213,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/delta-io/delta-rs/pull/4947": {
   "approved_by": [],
