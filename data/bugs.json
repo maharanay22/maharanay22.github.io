@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-24T18:28:07Z",
+ "generated_at": "2026-10-24T20:51:51Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3559,
-   "forks": 691
+   "forks": 692
   },
   {
    "full": "mlflow/mlflow",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28518,
+   "stars": 28519,
    "forks": 6516
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50258,
-   "forks": 20582
+   "stars": 50261,
+   "forks": 20586
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 61968,
-   "forks": 12636
+   "stars": 61972,
+   "forks": 12637
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -162,13 +162,45 @@
  ],
  "items": [
   {
+   "kind": "report",
+   "repo": "pandas-dev/pandas",
+   "status": "open",
+   "title": "ffill/bfill on a pyarrow-backed column without missing values returns a view, so modifying the result changes the original",
+   "date": "2026-10-24",
+   "created_at": "2026-10-24T20:03:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 71515,
+    "url": "https://github.com/pandas-dev/pandas/issues/71515"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-10-24T20:12:24Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 63
+  },
+  {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "load_cdf panics on a deletion vector change in a parquet file with more than one row group",
    "date": "2026-10-24",
    "created_at": "2026-10-24T00:47:42Z",
-   "merged_at": null,
+   "merged_at": "2026-10-24",
    "reported": true,
    "pr": {
     "number": 4949,
@@ -438,18 +470,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "ethan-tyler",
+      "at": "2026-10-24T18:33:38Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4949#pullrequestreview-5639436683",
+      "maintainer": true,
+      "path": null,
+      "text": "ltgm - thanks for the fix @maharanay22",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-10-23T08:50:22Z",
-    "updated_at": "2026-10-24T18:26:59Z",
+    "review": "approved",
+    "approved_by": [
+     "ethan-tyler"
+    ],
+    "last_push": "2026-10-24T18:33:13Z",
+    "updated_at": "2026-10-24T19:05:32Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 62
   },
@@ -735,8 +780,8 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-23T08:57:49Z",
-    "updated_at": "2026-10-24T00:47:53Z",
+    "last_push": "2026-10-24T18:34:22Z",
+    "updated_at": "2026-10-24T18:57:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3548,7 +3593,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 230,
+     "additions": 254,
      "deletions": 69
     },
     {
@@ -3690,20 +3735,20 @@
       "maintainer": true,
       "path": "crates/core/src/delta_datafusion/utils.rs",
       "text": "You still need to cast the literals here. For `Float32 = Int64(16_777_217)`, the round trip check fails and `common_type` is `Float32` which returns with mismatched types. A partition only delete then errors in the kernel. Keep the column as is and cast the literals to `common_type`.",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-21T12:12:19Z",
-    "updated_at": "2026-10-24T18:10:10Z",
+    "last_push": "2026-10-24T18:50:44Z",
+    "updated_at": "2026-10-24T19:59:31Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "ethan-tyler left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 46
   },

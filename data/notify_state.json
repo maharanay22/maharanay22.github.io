@@ -225,13 +225,15 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4949": {
-  "approved_by": [],
+  "approved_by": [
+   "ethan-tyler"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
