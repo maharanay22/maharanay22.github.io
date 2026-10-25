@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-25T19:38:55Z",
+ "generated_at": "2026-10-25T21:13:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28528,
-   "forks": 6525
+   "stars": 28530,
+   "forks": 6526
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50273,
+   "stars": 50275,
    "forks": 20597
   },
   {
@@ -126,7 +126,7 @@
     "Delta Lake",
     "SQL DDL"
    ],
-   "stars": 384,
+   "stars": 385,
    "forks": 226
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62021,
-   "forks": 12666
+   "stars": 62027,
+   "forks": 12668
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1490,
+   "stars": 1491,
    "forks": 237
   }
  ],
