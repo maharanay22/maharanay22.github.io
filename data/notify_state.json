@@ -530,12 +530,12 @@
    "tdas",
    "yili-db"
   ],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": "yili-db@2026-10-22T17:40:32Z",
   "last_comment_who": "yili-db",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1987": {
   "approved_by": [
