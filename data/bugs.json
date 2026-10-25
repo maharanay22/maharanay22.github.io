@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-25T11:52:59Z",
+ "generated_at": "2026-10-25T15:37:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3346,
+   "stars": 3347,
    "forks": 691
   },
   {
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28525,
+   "stars": 28526,
    "forks": 6524
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50268,
-   "forks": 20591
+   "stars": 50269,
+   "forks": 20594
   },
   {
    "full": "delta-io/delta",
@@ -127,7 +127,7 @@
     "SQL DDL"
    ],
    "stars": 384,
-   "forks": 225
+   "forks": 226
   },
   {
    "full": "BerriAI/litellm",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62002,
-   "forks": 12649
+   "stars": 62011,
+   "forks": 12655
   },
   {
    "full": "pydantic/pydantic-settings",
