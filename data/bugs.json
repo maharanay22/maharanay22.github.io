@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-25T01:16:32Z",
+ "generated_at": "2026-10-25T01:18:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28521,
-   "forks": 6517
+   "forks": 6518
   },
   {
    "full": "mindsdb/engine",
