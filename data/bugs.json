@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-26T13:56:54Z",
+ "generated_at": "2026-10-26T16:37:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28538,
-   "forks": 6531
+   "stars": 28542,
+   "forks": 6533
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50292,
-   "forks": 20612
+   "forks": 20613
   },
   {
    "full": "delta-io/delta",
@@ -127,7 +127,7 @@
     "SQL DDL"
    ],
    "stars": 386,
-   "forks": 226
+   "forks": 227
   },
   {
    "full": "BerriAI/litellm",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62063,
-   "forks": 12698
+   "stars": 62074,
+   "forks": 12700
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -178,13 +178,34 @@
    "proof": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-26T14:41:43Z",
+      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6418838327",
+      "maintainer": true,
+      "path": null,
+      "text": "And a PR would certainly be welcome",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-10-26T14:39:31Z",
+      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6418786722",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 thanks for the report!",
+      "answered": false
+     }
+    ],
     "stage": 1,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-10-24T20:12:24Z",
+    "updated_at": "2026-10-26T14:41:43Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
