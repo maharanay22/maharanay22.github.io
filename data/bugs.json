@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-26T19:51:31Z",
+ "generated_at": "2026-10-26T23:31:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3349,
+   "stars": 3350,
    "forks": 690
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28543,
-   "forks": 6534
+   "stars": 28546,
+   "forks": 6535
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50293,
-   "forks": 20614
+   "stars": 50302,
+   "forks": 20617
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62080,
-   "forks": 12707
+   "stars": 62083,
+   "forks": 12713
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1492,
+   "stars": 1493,
    "forks": 240
   }
  ],
@@ -1051,13 +1051,16 @@
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
-   "status": "open",
+   "status": "scout",
    "title": "Warn at UnitycatalogFunctionClient init when sandbox mode is selected on a platform without fork",
    "date": "2026-10-20",
    "created_at": "2026-10-20T02:43:21Z",
    "merged_at": null,
    "reported": true,
-   "pr": null,
+   "pr": {
+    "number": 2048,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2048"
+   },
    "issue": {
     "number": 2025,
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2025"
@@ -1066,17 +1069,17 @@
    "files": [],
    "track": {
     "feedback": [],
-    "stage": 1,
+    "stage": 5,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-10-20T02:43:21Z",
+    "updated_at": "2026-10-26T21:11:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Another contributor's fix was merged"
    },
    "id": 58
   },
