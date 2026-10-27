@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T02:24:43Z",
+ "generated_at": "2026-10-27T05:07:55Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3563,
-   "forks": 692
+   "forks": 691
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28547,
-   "forks": 6535
+   "stars": 28548,
+   "forks": 6536
   },
   {
    "full": "mindsdb/engine",
@@ -67,7 +67,7 @@
     "Connectors"
    ],
    "stars": 25,
-   "forks": 11
+   "forks": 10
   },
   {
    "full": "pandas-dev/pandas",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62095,
-   "forks": 12712
+   "stars": 62108,
+   "forks": 12710
   },
   {
    "full": "pydantic/pydantic-settings",
