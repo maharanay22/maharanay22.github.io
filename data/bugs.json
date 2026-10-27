@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T16:41:41Z",
+ "generated_at": "2026-10-27T19:42:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28559,
-   "forks": 6537
+   "stars": 28561,
+   "forks": 6538
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50313,
+   "stars": 50315,
    "forks": 20627
   },
   {
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9058,
-   "forks": 2203
+   "forks": 2204
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62161,
-   "forks": 12730
+   "stars": 62170,
+   "forks": 12736
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -181,6 +181,16 @@
     "feedback": [
      {
       "kind": "comment",
+      "who": "ryan1234814",
+      "at": "2026-10-27T16:51:48Z",
+      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6448029619",
+      "maintainer": false,
+      "path": null,
+      "text": "/take",
+      "answered": false
+     },
+     {
+      "kind": "comment",
       "who": "jorisvandenbossche",
       "at": "2026-10-26T14:41:43Z",
       "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6418838327",
@@ -205,7 +215,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-10-26T14:41:43Z",
+    "updated_at": "2026-10-27T16:51:59Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1007,7 +1017,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-24T16:00:20Z",
-    "updated_at": "2026-10-24T17:48:07Z",
+    "updated_at": "2026-10-27T17:42:48Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
