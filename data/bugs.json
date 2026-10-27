@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T08:17:18Z",
+ "generated_at": "2026-10-27T10:36:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3350,
-   "forks": 691
+   "forks": 692
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28553,
-   "forks": 6536
+   "stars": 28555,
+   "forks": 6535
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50307,
-   "forks": 20622
+   "forks": 20621
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9057,
+   "stars": 9058,
    "forks": 2203
   },
   {
@@ -127,7 +127,7 @@
     "SQL DDL"
    ],
    "stars": 387,
-   "forks": 227
+   "forks": 228
   },
   {
    "full": "BerriAI/litellm",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62131,
-   "forks": 12721
+   "stars": 62141,
+   "forks": 12726
   },
   {
    "full": "pydantic/pydantic-settings",
