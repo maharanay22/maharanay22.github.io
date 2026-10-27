@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T21:21:42Z",
+ "generated_at": "2026-10-27T23:15:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3350,
-   "forks": 692
+   "forks": 693
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28562,
+   "stars": 28563,
    "forks": 6540
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50320,
-   "forks": 20629
+   "stars": 50326,
+   "forks": 20632
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62174,
-   "forks": 12740
+   "stars": 62182,
+   "forks": 12743
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -162,65 +162,90 @@
  ],
  "items": [
   {
-   "kind": "report",
+   "kind": "fix",
    "repo": "pandas-dev/pandas",
-   "status": "open",
+   "status": "review",
    "title": "ffill/bfill on a pyarrow-backed column without missing values returns a view, so modifying the result changes the original",
-   "date": "2026-10-24",
-   "created_at": "2026-10-24T20:03:39Z",
+   "date": "2026-10-27",
+   "created_at": "2026-10-27T21:46:52Z",
    "merged_at": null,
    "reported": true,
-   "pr": null,
+   "pr": {
+    "number": 71745,
+    "url": "https://github.com/pandas-dev/pandas/pull/71745"
+   },
    "issue": {
     "number": 71515,
     "url": "https://github.com/pandas-dev/pandas/issues/71515"
    },
    "proof": null,
-   "files": [],
+   "files": [
+    {
+     "path": "pandas/core/arrays/arrow/array.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1934,7 +1934,9 @@"
+      ],
+      [
+       "c",
+       "        copy: bool = True,"
+      ],
+      [
+       "c",
+       "    ) -> Self:"
+      ],
+      [
+       "c",
+       "        if not self._hasna:"
+      ],
+      [
+       "d",
+       "            return self"
+      ],
+      [
+       "a",
+       "            if not copy:"
+      ],
+      [
+       "a",
+       "                return self"
+      ],
+      [
+       "a",
+       "            return self._from_pyarrow_array(self._pa_array)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        if limit is None and limit_area is None:"
+      ],
+      [
+       "c",
+       "            method = missing.clean_fill_method(method)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    }
+   ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "ryan1234814",
-      "at": "2026-10-27T16:51:48Z",
-      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6448029619",
-      "maintainer": false,
-      "path": null,
-      "text": "/take",
-      "answered": false
-     },
-     {
-      "kind": "comment",
-      "who": "jorisvandenbossche",
-      "at": "2026-10-26T14:41:43Z",
-      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6418838327",
-      "maintainer": true,
-      "path": null,
-      "text": "And a PR would certainly be welcome",
-      "answered": false
-     },
-     {
-      "kind": "comment",
-      "who": "jorisvandenbossche",
-      "at": "2026-10-26T14:39:31Z",
-      "url": "https://github.com/pandas-dev/pandas/issues/71515#issuecomment-6418786722",
-      "maintainer": true,
-      "path": null,
-      "text": "@maharanay22 thanks for the report!",
-      "answered": false
-     }
-    ],
-    "stage": 1,
-    "checks": null,
-    "review": null,
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
     "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-10-27T16:51:59Z",
+    "last_push": "2026-10-24T20:04:22Z",
+    "updated_at": "2026-10-27T21:48:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 63
   },
@@ -12814,7 +12839,7 @@
     "approved_by": [],
     "last_push": "2026-10-23T02:01:16Z",
     "updated_at": "2026-10-24T00:32:56Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
