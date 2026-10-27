@@ -428,7 +428,7 @@
  "https://github.com/pandas-dev/pandas/pull/70723": {
   "approved_by": [],
   "checks": "failing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": "jbrockmendel@2026-10-17T18:53:49Z",
   "last_comment_who": "jbrockmendel",
   "status": "review",

@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T19:42:02Z",
+ "generated_at": "2026-10-27T21:21:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3563,
-   "forks": 691
+   "forks": 692
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28561,
-   "forks": 6538
+   "stars": 28562,
+   "forks": 6540
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50315,
-   "forks": 20627
+   "stars": 50320,
+   "forks": 20629
   },
   {
    "full": "delta-io/delta",
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9058,
-   "forks": 2204
+   "forks": 2205
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62170,
-   "forks": 12736
+   "stars": 62174,
+   "forks": 12740
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1492,
-   "forks": 240
+   "forks": 241
   }
  ],
  "items": [
@@ -12814,7 +12814,7 @@
     "approved_by": [],
     "last_push": "2026-10-23T02:01:16Z",
     "updated_at": "2026-10-24T00:32:56Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
