@@ -235,6 +235,15 @@
   "status": "merged",
   "waiting_on": "nobody"
  },
+ "https://github.com/delta-io/delta-rs/pull/4975": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
   "checks": "not started",
@@ -428,7 +437,7 @@
  "https://github.com/pandas-dev/pandas/pull/70723": {
   "approved_by": [],
   "checks": "failing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": "jbrockmendel@2026-10-17T18:53:49Z",
   "last_comment_who": "jbrockmendel",
   "status": "review",
@@ -449,6 +458,15 @@
   "conflicts": false,
   "last_comment": "jorisvandenbossche@2026-10-22T05:51:58Z",
   "last_comment_who": "jorisvandenbossche",
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/pandas-dev/pandas/pull/71745": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
   "status": "review",
   "waiting_on": "you"
  },

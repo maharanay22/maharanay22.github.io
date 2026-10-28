@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-28T00:59:18Z",
+ "generated_at": "2026-10-28T01:24:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28563,
-   "forks": 6540
+   "stars": 28562,
+   "forks": 6541
   },
   {
    "full": "mindsdb/engine",
@@ -67,7 +67,7 @@
     "Connectors"
    ],
    "stars": 25,
-   "forks": 10
+   "forks": 11
   },
   {
    "full": "pandas-dev/pandas",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50326,
-   "forks": 20634
+   "forks": 20635
   },
   {
    "full": "delta-io/delta",
