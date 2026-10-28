@@ -171,7 +171,8 @@
     "https://github.com/delta-io/delta-rs/pull/4949": "load_cdf aborted the Python process on a DV change in a multi row group file; now returns the same deletes as Spark",
     "https://github.com/pandas-dev/pandas/issues/71515": "ffill() on a str column without NA returned a view: editing the result changed the original (regression from 2.3); on the 3.1.1 milestone, maintainer asked for the PR and closed a duplicate in favour of this one",
     "https://github.com/unitycatalog/unitycatalog/issues/2025": "Follow-up requested by the maintainer in #1967 review: warn once at client start when sandbox mode cannot run on the platform",
-    "https://github.com/unitycatalog/unitycatalog/issues/2026": "Tracking issue requested by the maintainer in #1975 review: upgrade the OpenAPI generator and drop the backported Python template"
+    "https://github.com/unitycatalog/unitycatalog/issues/2026": "Tracking issue requested by the maintainer in #1975 review: upgrade the OpenAPI generator and drop the backported Python template",
+    "https://github.com/delta-io/delta-rs/pull/4975": "On Spark tables partitioned by non-ASCII values (Zürich, 東京) delta-rs DELETE deleted nothing and UPDATE/MERGE/OPTIMIZE duplicated rows because removes never matched their adds; now all 7 operations match Spark and Spark VACUUM cleans up"
   },
   "approval_checks": {
     "mlflow/mlflow": [
