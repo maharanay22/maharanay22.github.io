@@ -239,10 +239,10 @@
   "approved_by": [],
   "checks": "passing",
   "conflicts": false,
-  "last_comment": null,
-  "last_comment_who": null,
+  "last_comment": "ion-elgreco@2026-10-28T19:09:06Z",
+  "last_comment_who": "ion-elgreco",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
