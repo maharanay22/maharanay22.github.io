@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-27T23:15:54Z",
+ "generated_at": "2026-10-28T00:59:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50326,
-   "forks": 20632
+   "forks": 20634
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62182,
-   "forks": 12743
+   "stars": 62187,
+   "forks": 12745
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,306 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "DELETE, UPDATE, MERGE, OPTIMIZE and overwrite corrupt Spark-written tables partitioned by non-ASCII strings",
+   "date": "2026-10-28",
+   "created_at": "2026-10-28T00:57:57Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 4975,
+    "url": "https://github.com/delta-io/delta-rs/pull/4975"
+   },
+   "issue": {
+    "number": 4974,
+    "url": "https://github.com/delta-io/delta-rs/issues/4974"
+   },
+   "proof": "On Spark tables partitioned by non-ASCII values (Zürich, 東京) delta-rs DELETE deleted nothing and UPDATE/MERGE/OPTIMIZE duplicated rows because removes never matched their adds; now all 7 operations match Spark and Spark VACUUM cleans up",
+   "files": [
+    {
+     "path": "crates/core/src/kernel/models/actions.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1003,15 +1003,15 @@"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// Represents a tombstone (deleted file) in the Delta log."
+      ],
+      [
+       "d",
+       "#[derive(Serialize, Deserialize, Debug, Clone, Eq, Default)]"
+      ],
+      [
+       "a",
+       "#[derive(Deserialize, Debug, Clone, Eq, Default)]"
+      ],
+      [
+       "c",
+       "#[serde(rename_all = \"camelCase\")]"
+      ],
+      [
+       "c",
+       "pub struct Remove {"
+      ],
+      [
+       "c",
+       "    /// A relative path to a data file from the root of the table or an absolute path to a file"
+      ],
+      [
+       "c",
+       "    /// that should be removed from the table. The path is a URI as specified by"
+      ],
+      [
+       "c",
+       "    /// [RFC 2396 URI Generic Syntax], which needs to be decoded to get the data file path."
+      ],
+      [
+       "c",
+       "    ///"
+      ],
+      [
+       "c",
+       "    /// [RFC 2396 URI Generic Syntax]: https://www.ietf.org/rfc/rfc2396.txt"
+      ],
+      [
+       "d",
+       "    #[serde(with = \"serde_path\")]"
+      ],
+      [
+       "a",
+       "    #[serde(deserialize_with = \"serde_path::deserialize\")]"
+      ],
+      [
+       "c",
+       "    pub path: String,"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    /// When `false` the records in the removed file must be contained"
+      ],
+      [
+       "h",
+       "@@ -1051,6 +1051,72 @@"
+      ],
+      [
+       "c",
+       "    /// First commit version in which an add action with the same path was committed to the table."
+      ],
+      [
+       "c",
+       "    #[serde(skip_serializing_if = \"Option::is_none\")]"
+      ],
+      [
+       "c",
+       "    pub default_row_commit_version: Option<i64>,"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    /// The `path` of the removed `add` action exactly as it is stored in the log."
+      ],
+      [
+       "a",
+       "    ///"
+      ],
+      [
+       "a",
+       "    /// Readers match a remove to its add by comparing the stored path strings, and writers do"
+      ],
+      [
+       "a",
+       "    /// not all escape paths the same way (Spark keeps non-ASCII characters as is). When set,"
+      ],
+      [
+       "a",
+       "    /// this string is written to the log as the remove's `path` instead of re-encoding"
+      ],
+      [
+       "a",
+       "    /// [`Remove::path`]. It is never read from the log."
+      ],
+      [
+       "a",
+       "    #[serde(skip)]"
+      ]
+     ],
+     "truncated": true,
+     "additions": 113,
+     "deletions": 2
+    },
+    {
+     "path": "crates/core/src/kernel/snapshot/iterators.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -127,7 +127,6 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    /// Returns the raw file path as stored in the log, without URL decoding."
+      ],
+      [
+       "d",
+       "    #[cfg(any(test, feature = \"datafusion\"))]"
+      ],
+      [
+       "c",
+       "    pub(crate) fn path_raw(&self) -> &str {"
+      ],
+      [
+       "c",
+       "        get_string_value("
+      ],
+      [
+       "c",
+       "            self.files"
+      ],
+      [
+       "h",
+       "@@ -380,7 +379,6 @@"
+      ],
+      [
+       "c",
+       "    /// Converts this file view into a Remove action for log operations."
+      ],
+      [
+       "c",
+       "    pub fn remove_action(&self, data_change: bool) -> Remove {"
+      ],
+      [
+       "c",
+       "        Remove {"
+      ],
+      [
+       "d",
+       "            // TODO use the raw (still encoded) path here once we reconciled serde ..."
+      ],
+      [
+       "c",
+       "            path: self.path().to_string(),"
+      ],
+      [
+       "c",
+       "            data_change,"
+      ],
+      [
+       "c",
+       "            deletion_timestamp: Some(Utc::now().timestamp_millis()),"
+      ],
+      [
+       "h",
+       "@@ -391,6 +389,7 @@"
+      ],
+      [
+       "c",
+       "            tags: None,"
+      ],
+      [
+       "c",
+       "            base_row_id: None,"
+      ],
+      [
+       "c",
+       "            default_row_commit_version: None,"
+      ],
+      [
+       "a",
+       "            log_path: Some(self.path_raw().to_string()),"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 2
+    },
+    {
+     "path": "crates/core/src/operations/filesystem_check.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -62,8 +62,9 @@"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "struct FileSystemCheckPlan {"
+      ],
+      [
+       "d",
+       "    /// Files that no longer exists in undlying ObjectStore but have active add actions"
+      ],
+      [
+       "d",
+       "    pub files_to_remove: Vec<Add>,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 15,
+     "deletions": 9
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-10-25T14:33:00Z",
+    "updated_at": "2026-10-28T00:58:18Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 64
+  },
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
@@ -6697,8 +6997,8 @@
     "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-24T00:36:48Z",
-    "updated_at": "2026-10-24T00:40:38Z",
+    "last_push": "2026-10-27T21:53:20Z",
+    "updated_at": "2026-10-28T00:23:46Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
@@ -12724,7 +13024,7 @@
      "lines": [
       [
        "h",
-       "@@ -17168,7 +17168,11 @@"
+       "@@ -17202,7 +17202,11 @@"
       ],
       [
        "c",
@@ -12837,8 +13137,8 @@
     "checks": "failing",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-23T02:01:16Z",
-    "updated_at": "2026-10-24T00:32:56Z",
+    "last_push": "2026-10-27T21:54:22Z",
+    "updated_at": "2026-10-28T00:26:35Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
