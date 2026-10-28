@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-28T15:53:43Z",
+ "generated_at": "2026-10-28T20:49:32Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3350,
+   "stars": 3351,
    "forks": 693
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28570,
-   "forks": 6540
+   "stars": 28575,
+   "forks": 6541
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50332,
-   "forks": 20644
+   "stars": 50334,
+   "forks": 20648
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9060,
+   "stars": 9063,
    "forks": 2206
   },
   {
@@ -127,7 +127,7 @@
     "SQL DDL"
    ],
    "stars": 387,
-   "forks": 228
+   "forks": 229
   },
   {
    "full": "BerriAI/litellm",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62240,
-   "forks": 12783
+   "stars": 62248,
+   "forks": 12791
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -446,18 +446,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "ion-elgreco",
+      "at": "2026-10-28T19:09:06Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4975#issuecomment-6478141285",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 would it be possible for future PRs to keep the PR descriptions short and to the point?",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-25T14:33:00Z",
-    "updated_at": "2026-10-28T00:58:18Z",
+    "updated_at": "2026-10-28T19:09:07Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "ion-elgreco",
+     "at": "2026-10-28T19:09:06Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "ion-elgreco commented. Reply or update the PR"
    },
    "id": 64
   },
