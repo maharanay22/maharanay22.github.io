@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-28T08:35:01Z",
+ "generated_at": "2026-10-28T08:56:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28563,
-   "forks": 6540
+   "stars": 28564,
+   "forks": 6541
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50328,
-   "forks": 20639
+   "forks": 20641
   },
   {
    "full": "delta-io/delta",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62216,
+   "stars": 62219,
    "forks": 12765
   },
   {
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1492,
-   "forks": 242
+   "forks": 243
   }
  ],
  "items": [
@@ -9846,11 +9846,11 @@
     "approved_by": [],
     "last_push": "2026-10-22T18:01:02Z",
     "updated_at": "2026-10-22T18:06:08Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -10648,11 +10648,11 @@
     "approved_by": [],
     "last_push": "2026-10-22T18:01:00Z",
     "updated_at": "2026-10-22T18:06:04Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -10809,11 +10809,11 @@
     "approved_by": [],
     "last_push": "2026-10-22T18:00:59Z",
     "updated_at": "2026-10-22T18:06:01Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
