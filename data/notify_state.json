@@ -242,7 +242,7 @@
   "last_comment": "ion-elgreco@2026-10-28T19:09:06Z",
   "last_comment_who": "ion-elgreco",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
@@ -441,7 +441,7 @@
   "last_comment": "jbrockmendel@2026-10-17T18:53:49Z",
   "last_comment_who": "jbrockmendel",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/pandas-dev/pandas/pull/70773": {
   "approved_by": [],
