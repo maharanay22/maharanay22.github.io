@@ -436,12 +436,12 @@
  },
  "https://github.com/pandas-dev/pandas/pull/70723": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": "jbrockmendel@2026-10-17T18:53:49Z",
   "last_comment_who": "jbrockmendel",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/pandas-dev/pandas/pull/70773": {
   "approved_by": [],
