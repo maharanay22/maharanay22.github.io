@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-28T21:06:55Z",
+ "generated_at": "2026-10-29T00:31:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28575,
-   "forks": 6541
+   "stars": 28577,
+   "forks": 6542
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50334,
-   "forks": 20648
+   "stars": 50337,
+   "forks": 20651
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62249,
-   "forks": 12793
+   "stars": 62250,
+   "forks": 12795
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -455,7 +455,7 @@
       "maintainer": true,
       "path": null,
       "text": "@maharanay22 would it be possible for future PRs to keep the PR descriptions short and to the point?",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
@@ -463,16 +463,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-25T14:33:00Z",
-    "updated_at": "2026-10-28T19:09:07Z",
+    "updated_at": "2026-10-28T22:30:32Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
      "at": "2026-10-28T19:09:06Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "ion-elgreco commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 64
   },
@@ -13098,6 +13098,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review changes requested",
+      "who": "jbrockmendel",
+      "at": "2026-10-28T21:16:29Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/70723#pullrequestreview-5689808052",
+      "maintainer": true,
+      "path": null,
+      "text": "What do/should you get for [code]",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "jbrockmendel",
       "at": "2026-10-17T18:53:49Z",
@@ -13153,16 +13163,16 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-27T21:54:22Z",
-    "updated_at": "2026-10-28T00:26:35Z",
+    "updated_at": "2026-10-28T21:16:30Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Requested changes are pushed. Waiting for jbrockmendel to look again"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jbrockmendel asked for changes. Update the PR"
    },
    "id": 6
   },
