@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-29T14:22:33Z",
+ "generated_at": "2026-10-29T19:13:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3566,
-   "forks": 692
+   "forks": 693
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28585,
-   "forks": 6546
+   "stars": 28586,
+   "forks": 6548
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50337,
-   "forks": 20661
+   "stars": 50250,
+   "forks": 20662
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9064,
+   "stars": 9063,
    "forks": 2206
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62309,
-   "forks": 12816
+   "stars": 62322,
+   "forks": 12822
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -13093,6 +13093,106 @@
      "truncated": false,
      "additions": 5,
      "deletions": 1
+    },
+    {
+     "path": "pandas/core/generic.py",
+     "lines": [
+      [
+       "h",
+       "@@ -11846,13 +11846,16 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        if self.ndim > 1 and axis is None:"
+      ],
+      [
+       "c",
+       "            # Reduce along one dimension then the other, to simplify DataFrame._reduce"
+      ],
+      [
+       "d",
+       "            res = self._logical_func("
+      ],
+      [
+       "d",
+       "                name, func, axis=0, bool_only=bool_only, skipna=skipna, **kwargs"
+      ],
+      [
+       "d",
+       "            )"
+      ],
+      [
+       "d",
+       "            # error: Item \"bool\" of \"Series | bool\" has no attribute \"_logical_func\""
+      ],
+      [
+       "d",
+       "            return res._logical_func(  # type: ignore[union-attr]"
+      ],
+      [
+       "d",
+       "                name, func, skipna=skipna, **kwargs"
+      ],
+      [
+       "a",
+       "            res = cast("
+      ],
+      [
+       "a",
+       "                \"Series\","
+      ],
+      [
+       "a",
+       "                self._logical_func("
+      ],
+      [
+       "a",
+       "                    name, func, axis=0, bool_only=bool_only, skipna=skipna, **kwargs"
+      ],
+      [
+       "a",
+       "                ),"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "a",
+       "            if res.dtype == object:"
+      ],
+      [
+       "a",
+       "                # ArrowDtype mixed with other extension columns gives object, maybe NA"
+      ],
+      [
+       "a",
+       "                res = res.astype(\"boolean\")"
+      ],
+      [
+       "a",
+       "            return res._logical_func(name, func, skipna=skipna, **kwargs)"
+      ],
+      [
+       "c",
+       "        elif axis is None:"
+      ],
+      [
+       "c",
+       "            axis = 0"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 9,
+     "deletions": 6
     }
    ],
    "track": {
@@ -13105,7 +13205,7 @@
       "maintainer": true,
       "path": null,
       "text": "What do/should you get for [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -13159,20 +13259,20 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-27T21:54:22Z",
-    "updated_at": "2026-10-28T21:16:30Z",
+    "last_push": "2026-10-28T22:54:04Z",
+    "updated_at": "2026-10-29T19:01:51Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
      "at": "2026-10-17T18:53:49Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "jbrockmendel asked for changes. Update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Requested changes are pushed. Waiting for jbrockmendel to look again"
    },
    "id": 6
   },
