@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-29T00:59:09Z",
+ "generated_at": "2026-10-29T06:25:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28577,
-   "forks": 6542
+   "stars": 28581,
+   "forks": 6543
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50337,
-   "forks": 20651
+   "stars": 50338,
+   "forks": 20654
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9063,
+   "stars": 9064,
    "forks": 2206
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62250,
-   "forks": 12796
+   "stars": 62273,
+   "forks": 12806
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -555,7 +555,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-24T20:04:22Z",
-    "updated_at": "2026-10-27T21:48:49Z",
+    "updated_at": "2026-10-29T01:10:36Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -9855,17 +9855,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-22T18:01:02Z",
-    "updated_at": "2026-10-22T18:06:08Z",
-    "conflicts": true,
+    "last_push": "2026-10-29T03:54:29Z",
+    "updated_at": "2026-10-29T04:04:48Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -10661,13 +10661,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-22T18:01:00Z",
-    "updated_at": "2026-10-22T18:06:04Z",
-    "conflicts": true,
+    "last_push": "2026-10-29T03:54:26Z",
+    "updated_at": "2026-10-29T04:04:46Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -10822,13 +10822,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-22T18:00:59Z",
-    "updated_at": "2026-10-22T18:06:01Z",
-    "conflicts": true,
+    "last_push": "2026-10-29T03:54:23Z",
+    "updated_at": "2026-10-29T04:04:43Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
