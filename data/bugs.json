@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-29T07:08:10Z",
+ "generated_at": "2026-10-29T13:34:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28582,
-   "forks": 6543
+   "stars": 28585,
+   "forks": 6546
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50338,
-   "forks": 20654
+   "forks": 20657
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62280,
-   "forks": 12808
+   "stars": 62303,
+   "forks": 12816
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1492,
-   "forks": 243
+   "forks": 244
   }
  ],
  "items": [
@@ -458,12 +458,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-25T14:33:00Z",
-    "updated_at": "2026-10-28T22:30:32Z",
+    "updated_at": "2026-10-29T08:06:24Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -472,7 +472,7 @@
     },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 64
   },
