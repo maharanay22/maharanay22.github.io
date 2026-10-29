@@ -237,7 +237,7 @@
  },
  "https://github.com/delta-io/delta-rs/pull/4975": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "failing",
   "conflicts": false,
   "last_comment": "ion-elgreco@2026-10-28T19:09:06Z",
   "last_comment_who": "ion-elgreco",
