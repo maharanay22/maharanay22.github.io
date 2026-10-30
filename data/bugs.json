@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-30T15:54:57Z",
+ "generated_at": "2026-10-30T19:24:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3351,
-   "forks": 694
+   "forks": 695
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28600,
-   "forks": 6550
+   "stars": 28602,
+   "forks": 6554
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50258,
-   "forks": 20683
+   "stars": 50259,
+   "forks": 20686
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62387,
-   "forks": 12851
+   "stars": 62397,
+   "forks": 12856
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1492,
+   "stars": 1493,
    "forks": 245
   }
  ],
@@ -6111,7 +6111,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 147,
+     "additions": 209,
      "deletions": 66
     }
    ],
@@ -6121,8 +6121,8 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-13T14:14:04Z",
-    "updated_at": "2026-10-22T17:33:13Z",
+    "last_push": "2026-10-30T18:44:29Z",
+    "updated_at": "2026-10-30T18:44:31Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
