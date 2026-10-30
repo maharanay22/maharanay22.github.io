@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-30T02:46:42Z",
+ "generated_at": "2026-10-30T07:08:58Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28589,
-   "forks": 6548
+   "stars": 28591,
+   "forks": 6550
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50256,
-   "forks": 20669
+   "forks": 20675
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62329,
-   "forks": 12829
+   "stars": 62340,
+   "forks": 12841
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -10591,7 +10591,7 @@
       ],
       [
        "h",
-       "@@ -130,6 +131,14 @@"
+       "@@ -130,6 +131,19 @@"
       ],
       [
        "c",
@@ -10623,15 +10623,35 @@
       ],
       [
        "a",
-       "            if pyarrow.types.is_floating(field.type):"
+       "            if not pyarrow.types.is_floating(field.type):"
       ],
       [
        "a",
-       "                is_nan = pyarrow.compute.is_nan(table_renamed.column(i))"
+       "                continue"
       ],
       [
        "a",
-       "                res[is_nan.fill_null(False).to_numpy(), i] = float(\"nan\")"
+       "            nan_mask = pyarrow.compute.is_nan(table_renamed.column(i))"
+      ],
+      [
+       "a",
+       "            if not pyarrow.compute.any(nan_mask).as_py():"
+      ],
+      [
+       "a",
+       "                continue"
+      ],
+      [
+       "a",
+       "            if nan_mask.null_count:"
+      ],
+      [
+       "a",
+       "                nan_mask = nan_mask.fill_null(False)"
+      ],
+      [
+       "a",
+       "            res[nan_mask.to_numpy(), i] = float(\"nan\")"
       ],
       [
        "a",
@@ -10651,18 +10671,29 @@
       ]
      ],
      "truncated": false,
-     "additions": 9,
+     "additions": 14,
      "deletions": 0
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "vuanhphung",
+      "at": "2026-10-30T03:00:06Z",
+      "url": "https://github.com/databricks/databricks-sql-python/pull/979#discussion_r4420038764",
+      "maintainer": true,
+      "path": "src/databricks/sql/result_set.py",
+      "text": "Thanks for the contribution! I think we should add some cheap optimization such as [code] to reduce the overhead of this conversion",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-29T03:54:26Z",
-    "updated_at": "2026-10-29T04:04:46Z",
+    "last_push": "2026-10-30T03:55:18Z",
+    "updated_at": "2026-10-30T03:55:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
