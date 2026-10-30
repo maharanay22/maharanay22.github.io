@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-30T14:10:44Z",
+ "generated_at": "2026-10-30T15:54:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28599,
-   "forks": 6549
+   "stars": 28600,
+   "forks": 6550
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50256,
-   "forks": 20680
+   "stars": 50258,
+   "forks": 20683
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62378,
-   "forks": 12850
+   "stars": 62387,
+   "forks": 12851
   },
   {
    "full": "pydantic/pydantic-settings",
