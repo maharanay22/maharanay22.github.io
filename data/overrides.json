@@ -176,7 +176,15 @@
   },
   "approval_checks": {
     "mlflow/mlflow": [
-      "check"
+      "check",
+      "protect",
+      "evaluate (1)"
+    ],
+    "pandas-dev/pandas": [
+      "Pyodide build"
+    ],
+    "unitycatalog/unitycatalog": [
+      "[Non Blocking] Spark tests (Spark 4.3.0-SNAPSHOT, Delta master-SNAPSHOT)"
     ]
   },
   "superseded": {

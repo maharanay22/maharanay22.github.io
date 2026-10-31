@@ -170,7 +170,7 @@ def feedback(node, last_mine):
             "kind": kind, "who": c["author"]["login"], "at": at, "url": c["url"],
             "maintainer": c["authorAssociation"] in MAINTAINER, "path": c.get("path"),
             "text": excerpt(c["body"]) or ("Requested changes" if "changes" in kind else ""),
-            "answered": bool(resolved) or at < last_mine,
+            "answered": bool(resolved) or at < last_mine or kind == "review approved",
         })
     out.sort(key=lambda f: f["at"], reverse=True)
     return out[:6]
