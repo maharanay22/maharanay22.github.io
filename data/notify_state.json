@@ -128,14 +128,15 @@
  },
  "https://github.com/delta-io/delta-rs/pull/4854": {
   "approved_by": [
-   "ion-elgreco"
+   "ion-elgreco",
+   "rtyler"
   ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4856": {
   "approved_by": [
@@ -150,12 +151,12 @@
  },
  "https://github.com/delta-io/delta-rs/pull/4858": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "failing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/delta-io/delta-rs/pull/4881": {
   "approved_by": [
@@ -178,13 +179,15 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4895": {
-  "approved_by": [],
-  "checks": "passing",
+  "approved_by": [
+   "rtyler"
+  ],
+  "checks": "failing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/delta-io/delta-rs/pull/4897": {
   "approved_by": [
