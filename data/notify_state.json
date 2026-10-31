@@ -130,7 +130,7 @@
   "approved_by": [
    "ion-elgreco"
   ],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -207,13 +207,15 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4945": {
-  "approved_by": [],
+  "approved_by": [
+   "rtyler"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4947": {
   "approved_by": [],
