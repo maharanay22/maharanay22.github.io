@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-10-31T11:12:29Z",
+ "generated_at": "2026-10-31T16:10:05Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28604,
-   "forks": 6557
+   "stars": 28609,
+   "forks": 6559
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50269,
-   "forks": 20696
+   "stars": 50270,
+   "forks": 20700
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62428,
-   "forks": 12869
+   "stars": 62439,
+   "forks": 12874
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -1164,11 +1164,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Enabling deletion vectors (or any table feature) on a column-mapped table drops columnMapping from the protocol, and reads return NULLs",
    "date": "2026-10-24",
    "created_at": "2026-10-24T00:47:31Z",
-   "merged_at": null,
+   "merged_at": "2026-10-31",
    "reported": true,
    "pr": {
     "number": 4945,
@@ -1352,17 +1352,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-10-24T16:00:20Z",
-    "updated_at": "2026-10-29T19:12:17Z",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-10-31T13:36:00Z",
+    "updated_at": "2026-10-31T15:58:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 60
   },
