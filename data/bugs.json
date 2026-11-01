@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-01T07:34:42Z",
+ "generated_at": "2026-11-01T09:31:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28610,
+   "stars": 28612,
    "forks": 6560
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62470,
-   "forks": 12887
+   "stars": 62477,
+   "forks": 12888
   },
   {
    "full": "pydantic/pydantic-settings",
