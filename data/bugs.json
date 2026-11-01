@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-01T15:11:36Z",
+ "generated_at": "2026-11-01T16:19:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28616,
-   "forks": 6560
+   "stars": 28617,
+   "forks": 6561
   },
   {
    "full": "mindsdb/engine",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62484,
-   "forks": 12899
+   "stars": 62488,
+   "forks": 12900
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -3811,17 +3811,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-10-31T23:31:54Z",
-    "updated_at": "2026-10-31T23:31:58Z",
+    "stage": 3,
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-11-01T16:11:40Z",
+    "updated_at": "2026-11-01T16:12:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by rtyler. Waiting to be merged"
    },
    "id": 47
   },
