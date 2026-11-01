@@ -151,12 +151,12 @@
  },
  "https://github.com/delta-io/delta-rs/pull/4858": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4881": {
   "approved_by": [
@@ -179,15 +179,13 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4895": {
-  "approved_by": [
-   "rtyler"
-  ],
-  "checks": "failing",
+  "approved_by": [],
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4897": {
   "approved_by": [
@@ -390,12 +388,12 @@
   "approved_by": [
    "joshuawong-db"
   ],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/mlflow/mlflow/pull/26539": {
   "approved_by": [],
@@ -459,21 +457,21 @@
  },
  "https://github.com/pandas-dev/pandas/pull/71025": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": "jorisvandenbossche@2026-10-22T05:51:58Z",
   "last_comment_who": "jorisvandenbossche",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/pandas-dev/pandas/pull/71745": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/pydantic/pydantic-settings/pull/1022": {
   "approved_by": [
@@ -519,7 +517,7 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1969": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": "yili-db@2026-10-19T18:52:06Z",
   "last_comment_who": "yili-db",
