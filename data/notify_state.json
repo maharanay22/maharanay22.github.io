@@ -472,8 +472,8 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "closed",
+  "waiting_on": "nobody"
  },
  "https://github.com/pydantic/pydantic-settings/pull/1022": {
   "approved_by": [
@@ -524,7 +524,7 @@
   "last_comment": "yili-db@2026-10-19T18:52:06Z",
   "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1970": {
   "approved_by": [
