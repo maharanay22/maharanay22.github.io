@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-01T23:55:48Z",
+ "generated_at": "2026-11-02T05:38:39Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28618,
-   "forks": 6563
+   "stars": 28621,
+   "forks": 6565
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50285,
-   "forks": 20728
+   "stars": 50286,
+   "forks": 20731
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62500,
-   "forks": 12908
+   "stars": 62512,
+   "forks": 12915
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -156,7 +156,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1493,
+   "stars": 1494,
    "forks": 247
   }
  ],
@@ -479,7 +479,7 @@
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
-   "status": "review",
+   "status": "closed",
    "title": "ffill/bfill on a pyarrow-backed column without missing values returns a view, so modifying the result changes the original",
    "date": "2026-10-27",
    "created_at": "2026-10-27T21:46:52Z",
@@ -550,17 +550,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 2,
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-24T20:04:22Z",
-    "updated_at": "2026-10-29T01:10:36Z",
+    "updated_at": "2026-11-02T01:57:55Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 63
   },
@@ -1152,7 +1152,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-24T18:34:22Z",
-    "updated_at": "2026-10-24T18:57:40Z",
+    "updated_at": "2026-11-02T02:02:23Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4121,7 +4121,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-31T20:23:35Z",
-    "updated_at": "2026-10-31T20:58:29Z",
+    "updated_at": "2026-11-02T01:54:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -5220,7 +5220,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-13T15:57:03Z",
-    "updated_at": "2026-10-22T17:33:12Z",
+    "updated_at": "2026-11-02T02:02:48Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -7018,7 +7018,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-27T21:53:20Z",
-    "updated_at": "2026-10-28T00:23:46Z",
+    "updated_at": "2026-11-02T01:55:28Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
@@ -9107,7 +9107,7 @@
      "VANDRANKI"
     ],
     "last_push": "2026-10-09T14:28:27Z",
-    "updated_at": "2026-10-13T15:35:59Z",
+    "updated_at": "2026-11-02T02:03:18Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10305,7 +10305,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks, the test changes look good, and your reason for keeping the async `None` case makes sense. Since the sandbox executor maps `None` itself, nothing else reaches that check. One last thing, on the description: - Testing still lists only `False`, `0`, `0.0` and `\"\"` \"plus a `None` case\". Can you add…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -10315,7 +10315,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -10363,16 +10363,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-10-20T02:51:25Z",
+    "updated_at": "2026-11-02T02:01:13Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-19T18:52:06Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 18
   },
@@ -10698,7 +10698,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-30T03:55:18Z",
-    "updated_at": "2026-10-30T03:55:21Z",
+    "updated_at": "2026-11-02T02:01:52Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -12514,7 +12514,7 @@
      "joshuawong-db"
     ],
     "last_push": "2026-10-06T15:58:50Z",
-    "updated_at": "2026-10-22T08:20:54Z",
+    "updated_at": "2026-11-02T01:55:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -13299,7 +13299,7 @@
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-10-28T22:54:04Z",
-    "updated_at": "2026-10-29T19:01:51Z",
+    "updated_at": "2026-11-02T01:55:47Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
