@@ -49,11 +49,11 @@
  "https://github.com/databricks/dbt-databricks/pull/1709": {
   "approved_by": [],
   "checks": "not started",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/dbt-databricks/pull/1710": {
   "approved_by": [],
