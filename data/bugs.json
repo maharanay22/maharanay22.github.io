@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-02T06:06:39Z",
+ "generated_at": "2026-11-02T13:52:06Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,8 +36,8 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3567,
-   "forks": 692
+   "stars": 3568,
+   "forks": 693
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28622,
-   "forks": 6565
+   "stars": 28627,
+   "forks": 6569
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50286,
+   "stars": 50287,
    "forks": 20731
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62513,
-   "forks": 12915
+   "stars": 62551,
+   "forks": 12922
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1494,
-   "forks": 247
+   "forks": 248
   }
  ],
  "items": [
