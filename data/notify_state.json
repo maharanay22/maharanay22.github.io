@@ -49,11 +49,11 @@
  "https://github.com/databricks/dbt-databricks/pull/1709": {
   "approved_by": [],
   "checks": "not started",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/databricks/dbt-databricks/pull/1710": {
   "approved_by": [],
@@ -521,10 +521,10 @@
   "approved_by": [],
   "checks": "passing",
   "conflicts": false,
-  "last_comment": "yili-db@2026-10-19T18:52:06Z",
+  "last_comment": "yili-db@2026-11-03T19:00:07Z",
   "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1970": {
   "approved_by": [

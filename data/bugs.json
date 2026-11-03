@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-03T18:36:08Z",
+ "generated_at": "2026-11-03T21:00:55Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28649,
+   "stars": 28651,
    "forks": 6575
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50314,
-   "forks": 20710
+   "stars": 50316,
+   "forks": 20707
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62636,
-   "forks": 12982
+   "stars": 62638,
+   "forks": 12981
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -10298,6 +10298,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-03T19:00:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6612844827",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T23:08:50Z",
@@ -10346,16 +10356,6 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "nit: the description says `[]` and `{}` were also affected, but these cases don't cover them. Can you add an `ARRAY` case and a `MAP` case, or narrow the description?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-10-18T22:06:00Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#discussion_r4308965250",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "nit: the `uc_client` fixture also does `await uc_api_client.close()`. Can you mirror that here?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -10363,16 +10363,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-11-02T02:01:13Z",
+    "updated_at": "2026-11-03T19:00:07Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-10-19T18:52:06Z",
+     "at": "2026-11-03T19:00:07Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 18
   },
@@ -11050,7 +11050,7 @@
      "lines": [
       [
        "h",
-       "@@ -170,7 +170,7 @@"
+       "@@ -202,7 +202,7 @@"
       ],
       [
        "c",
@@ -11134,11 +11134,11 @@
       ],
       [
        "h",
-       "@@ -43,13 +42,13 @@"
+       "@@ -75,13 +74,13 @@"
       ],
       [
        "c",
-       "{% endmacro %}"
+       "{%- endmacro %}"
       ],
       [
        "c",
@@ -11206,7 +11206,7 @@
      "lines": [
       [
        "h",
-       "@@ -81,7 +81,7 @@"
+       "@@ -87,7 +87,7 @@"
       ],
       [
        "c",
@@ -11332,13 +11332,13 @@
     "checks": "not started",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-08T22:35:21Z",
-    "updated_at": "2026-10-22T17:33:16Z",
-    "conflicts": true,
+    "last_push": "2026-11-03T05:43:09Z",
+    "updated_at": "2026-11-03T19:54:39Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Waiting for a maintainer to start the tests and review"
    },
    "id": 13
   },
