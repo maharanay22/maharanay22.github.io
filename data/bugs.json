@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-03T21:00:55Z",
+ "generated_at": "2026-11-03T23:41:45Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3352,
-   "forks": 697
+   "forks": 696
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28651,
-   "forks": 6575
+   "stars": 28654,
+   "forks": 6574
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50316,
-   "forks": 20707
+   "stars": 50321,
+   "forks": 20706
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62638,
-   "forks": 12981
+   "stars": 62645,
+   "forks": 12983
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -479,7 +479,7 @@
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
-   "status": "closed",
+   "status": "review",
    "title": "ffill/bfill on a pyarrow-backed column without missing values returns a view, so modifying the result changes the original",
    "date": "2026-10-27",
    "created_at": "2026-10-27T21:46:52Z",
@@ -549,18 +549,29 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 2,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-11-03T21:39:31Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71745#discussion_r4460753095",
+      "maintainer": true,
+      "path": "pandas/core/arrays/arrow/array.py",
+      "text": "In other EAs, this is typically `return self.copy()`, but in case of the ArrowExtensionArray, returning a full copy is not needed?",
+      "answered": false
+     }
+    ],
+    "stage": 3,
+    "checks": "failing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-24T20:04:22Z",
-    "updated_at": "2026-11-02T01:57:55Z",
-    "conflicts": false,
+    "updated_at": "2026-11-03T21:39:31Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "done",
-    "waiting_on": "nobody",
-    "next": "Closed without merging"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jorisvandenbossche left review comments. Reply or update the PR"
    },
    "id": 63
   },
@@ -6955,6 +6966,36 @@
      {
       "kind": "review commented",
       "who": "jorisvandenbossche",
+      "at": "2026-11-03T21:57:29Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#pullrequestreview-5760002048",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the updates, some final comments",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-11-03T21:57:12Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#discussion_r4460925497",
+      "maintainer": true,
+      "path": "doc/source/whatsnew/v3.2.0.rst",
+      "text": "Can you move this to the 3.1.1 file? Also, to make it a bit less verbose, maybe use \"string methods using regex patterns\" instead of listing all functions, and \"PyArrow-backed string dtypes\" to indicate which dtypes are impacted",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-11-03T21:52:48Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71025#discussion_r4460883012",
+      "maintainer": true,
+      "path": "pandas/tests/strings/test_find_replace.py",
+      "text": "[code] (and then invert for the other pattern) That still hardcodes a bit more the expected behaviour (I know we want to match `re`'s behaviour, so it seems fine to test against it, but in general in the tests here we still hardcode the expected result for corner cases because some (or all) of the implementations use…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "jorisvandenbossche",
       "at": "2026-10-23T17:08:12Z",
       "url": "https://github.com/pandas-dev/pandas/pull/71025#pullrequestreview-5631817497",
       "maintainer": true,
@@ -6981,36 +7022,6 @@
       "path": "pandas/tests/strings/test_find_replace.py",
       "text": "Can you use the `any_string_dtype` fixture instead, like the test above?",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "jorisvandenbossche",
-      "at": "2026-10-22T05:51:58Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6333801081",
-      "maintainer": true,
-      "path": null,
-      "text": "Yes, let's take the simpler version for now (we can explore translating regex patterns later)",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "jorisvandenbossche",
-      "at": "2026-10-20T21:34:39Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6302014213",
-      "maintainer": true,
-      "path": null,
-      "text": "@maharanay22 this seems quite complicated. I assume a simpler solution would simply be to always fallback to the python `re` implementation when `\\s` is present (i.e. skip the \"is all ascii\" step for this case), at the cost of slower performance?",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "jbrockmendel",
-      "at": "2026-10-18T18:49:35Z",
-      "url": "https://github.com/pandas-dev/pandas/pull/71025#issuecomment-6253749809",
-      "maintainer": true,
-      "path": null,
-      "text": "Thanks for the PR. Our review queue is backed up right now. To help us get to this sooner, could you run it through pandas-review? It's an agent skill that reviews a PR the way a maintainer would and ends with a verdict. We're considering making it part of the contributing guidelines (GH-70954). Claude Code: from your…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -7018,16 +7029,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-27T21:53:20Z",
-    "updated_at": "2026-11-02T01:55:28Z",
+    "updated_at": "2026-11-03T21:57:30Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
      "at": "2026-10-22T05:51:58Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "jorisvandenbossche left review comments. Reply or update the PR"
    },
    "id": 34
   },
@@ -10201,11 +10212,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep falsy function results instead of replacing them with the no-output message",
    "date": "2026-10-09",
    "created_at": "2026-10-09T13:59:16Z",
-   "merged_at": null,
+   "merged_at": "2026-11-03",
    "reported": true,
    "pr": {
     "number": 1969,
@@ -10305,7 +10316,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -10358,21 +10369,23 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-10-18T23:03:47Z",
-    "updated_at": "2026-11-03T19:00:07Z",
+    "updated_at": "2026-11-03T21:21:28Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-03T19:00:07Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 18
   },
