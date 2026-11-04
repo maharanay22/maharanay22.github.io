@@ -249,6 +249,15 @@
   "status": "review",
   "waiting_on": "maintainers"
  },
+ "https://github.com/delta-io/delta-rs/pull/5019": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
   "checks": "not started",
@@ -458,22 +467,26 @@
   "waiting_on": "nobody"
  },
  "https://github.com/pandas-dev/pandas/pull/71025": {
-  "approved_by": [],
+  "approved_by": [
+   "jorisvandenbossche"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": "jorisvandenbossche@2026-10-22T05:51:58Z",
   "last_comment_who": "jorisvandenbossche",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/pandas-dev/pandas/pull/71745": {
-  "approved_by": [],
-  "checks": "failing",
-  "conflicts": true,
+  "approved_by": [
+   "jorisvandenbossche"
+  ],
+  "checks": "running",
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/pydantic/pydantic-settings/pull/1022": {
   "approved_by": [
