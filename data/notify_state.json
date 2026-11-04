@@ -464,16 +464,16 @@
   "last_comment": "jorisvandenbossche@2026-10-22T05:51:58Z",
   "last_comment_who": "jorisvandenbossche",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/pandas-dev/pandas/pull/71745": {
   "approved_by": [],
-  "checks": "passing",
-  "conflicts": false,
+  "checks": "failing",
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "closed",
-  "waiting_on": "nobody"
+  "status": "review",
+  "waiting_on": "you"
  },
  "https://github.com/pydantic/pydantic-settings/pull/1022": {
   "approved_by": [
@@ -518,13 +518,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1969": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": "yili-db@2026-11-03T19:00:07Z",
   "last_comment_who": "yili-db",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/1970": {
   "approved_by": [
