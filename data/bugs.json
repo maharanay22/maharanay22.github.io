@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T03:21:09Z",
+ "generated_at": "2026-11-04T04:05:58Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28655,
+   "stars": 28656,
    "forks": 6574
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62655,
-   "forks": 12991
+   "stars": 62659,
+   "forks": 12993
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,214 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "add_constraint commits even when a concurrent append wrote rows that violate it",
+   "date": "2026-11-04",
+   "created_at": "2026-11-04T04:04:40Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 5019,
+    "url": "https://github.com/delta-io/delta-rs/pull/5019"
+   },
+   "issue": {
+    "number": 5018,
+    "url": "https://github.com/delta-io/delta-rs/issues/5018"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "crates/core/src/operations/constraints.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -252,9 +252,10 @@"
+      ],
+      [
+       "c",
+       "    use datafusion::logical_expr::{col, lit};"
+      ],
+      [
+       "c",
+       "    use std::collections::HashMap;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    use crate::kernel::transaction::{CommitConflictError, TransactionError};"
+      ],
+      [
+       "c",
+       "    use crate::table::config::TablePropertiesExt as _;"
+      ],
+      [
+       "c",
+       "    use crate::writer::test_utils::{create_bare_table, get_arrow_schema, get_record_batch};"
+      ],
+      [
+       "d",
+       "    use crate::{DeltaResult, DeltaTable};"
+      ],
+      [
+       "a",
+       "    use crate::{DeltaResult, DeltaTable, DeltaTableError};"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    fn get_constraint(table: &DeltaTable, name: &str) -> String {"
+      ],
+      [
+       "c",
+       "        table"
+      ],
+      [
+       "h",
+       "@@ -575,4 +576,43 @@"
+      ],
+      [
+       "c",
+       "        assert!(err.is_err());"
+      ],
+      [
+       "c",
+       "        Ok(())"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_add_constraint_conflicts_with_concurrent_violating_append() -> DeltaResult<()> {"
+      ],
+      [
+       "a",
+       "        let table = create_bare_table()"
+      ],
+      [
+       "a",
+       "            .write(vec![get_record_batch(None, false)])"
+      ],
+      [
+       "a",
+       "            .await?;"
+      ],
+      [
+       "a",
+       "        let stale = table.clone();"
+      ],
+      [
+       "a",
+       "        let invalid_values: Vec<Arc<dyn Array>> = vec!["
+      ],
+      [
+       "a",
+       "            Arc::new(StringArray::from(vec![\"A\"])),"
+      ],
+      [
+       "a",
+       "            Arc::new(Int32Array::from(vec![-10])),"
+      ],
+      [
+       "a",
+       "            Arc::new(StringArray::from(vec![\"2021-02-02\"])),"
+      ],
+      [
+       "a",
+       "        ];"
+      ],
+      [
+       "a",
+       "        let batch = RecordBatch::try_new(get_arrow_schema(&None), invalid_values)?;"
+      ],
+      [
+       "a",
+       "        let mut appended = table.write(vec![batch]).await?;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 41,
+     "deletions": 1
+    },
+    {
+     "path": "crates/core/src/protocol/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -502,6 +502,8 @@"
+      ],
+      [
+       "c",
+       "        match self {"
+      ],
+      [
+       "c",
+       "            // Predicate is none -> Merge operation had to join full source and target"
+      ],
+      [
+       "c",
+       "            Self::Merge { predicate, .. } if predicate.is_none() => true,"
+      ],
+      [
+       "a",
+       "            // Validates every existing row against the new constraint"
+      ],
+      [
+       "a",
+       "            Self::AddConstraint { .. } => true,"
+      ],
+      [
+       "c",
+       "            _ => false,"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "    }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-04T04:03:35Z",
+    "updated_at": "2026-11-04T04:04:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 65
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
