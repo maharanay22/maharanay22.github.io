@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T09:15:39Z",
+ "generated_at": "2026-11-04T11:21:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3570,
+   "stars": 3571,
    "forks": 692
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28658,
-   "forks": 6576
+   "stars": 28657,
+   "forks": 6579
   },
   {
    "full": "mindsdb/engine",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62676,
-   "forks": 12999
+   "stars": 62681,
+   "forks": 13001
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -164,11 +164,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "add_constraint commits even when a concurrent append wrote rows that violate it",
    "date": "2026-11-04",
    "created_at": "2026-11-04T04:04:40Z",
-   "merged_at": null,
+   "merged_at": "2026-11-04",
    "reported": true,
    "pr": {
     "number": 5019,
@@ -354,18 +354,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "ion-elgreco",
+      "at": "2026-11-04T10:03:48Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/5019#pullrequestreview-5766658391",
+      "maintainer": true,
+      "path": null,
+      "text": "Good catch!",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "ion-elgreco"
+    ],
     "last_push": "2026-11-04T04:03:35Z",
-    "updated_at": "2026-11-04T04:13:48Z",
+    "updated_at": "2026-11-04T10:31:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 65
   },
@@ -687,11 +700,11 @@
   {
    "kind": "fix",
    "repo": "pandas-dev/pandas",
-   "status": "review",
+   "status": "merged",
    "title": "ffill/bfill on a pyarrow-backed column without missing values returns a view, so modifying the result changes the original",
    "date": "2026-10-27",
    "created_at": "2026-10-27T21:46:52Z",
-   "merged_at": null,
+   "merged_at": "2026-11-04",
    "reported": true,
    "pr": {
     "number": 71745,
@@ -769,19 +782,19 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 5,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "jorisvandenbossche"
     ],
     "last_push": "2026-11-04T09:08:26Z",
-    "updated_at": "2026-11-04T09:10:01Z",
+    "updated_at": "2026-11-04T10:21:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by jorisvandenbossche. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 63
   },
