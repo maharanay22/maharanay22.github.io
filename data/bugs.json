@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T11:21:59Z",
+ "generated_at": "2026-11-04T17:20:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3571,
-   "forks": 692
+   "forks": 693
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28657,
-   "forks": 6579
+   "stars": 28658,
+   "forks": 6581
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50323,
-   "forks": 20706
+   "stars": 50325,
+   "forks": 20705
   },
   {
    "full": "delta-io/delta",
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9066,
-   "forks": 2207
+   "forks": 2208
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62681,
-   "forks": 13001
+   "stars": 62697,
+   "forks": 13004
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -772,6 +772,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "jorisvandenbossche",
+      "at": "2026-11-04T12:54:35Z",
+      "url": "https://github.com/pandas-dev/pandas/pull/71745#issuecomment-6631137300",
+      "maintainer": true,
+      "path": null,
+      "text": "Manual backport -> https://github.com/pandas-dev/pandas/pull/71897",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "jorisvandenbossche",
       "at": "2026-11-03T21:39:31Z",
@@ -789,9 +799,13 @@
      "jorisvandenbossche"
     ],
     "last_push": "2026-11-04T09:08:26Z",
-    "updated_at": "2026-11-04T10:21:14Z",
+    "updated_at": "2026-11-04T12:54:35Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "jorisvandenbossche",
+     "at": "2026-11-04T12:54:35Z",
+     "maintainer": true
+    },
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -4356,11 +4370,11 @@
     "approved_by": [],
     "last_push": "2026-10-31T20:23:35Z",
     "updated_at": "2026-11-02T01:54:51Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 46
   },

@@ -172,11 +172,11 @@
  "https://github.com/delta-io/delta-rs/pull/4893": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/delta-io/delta-rs/pull/4895": {
   "approved_by": [
@@ -250,13 +250,15 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/5019": {
-  "approved_by": [],
+  "approved_by": [
+   "ion-elgreco"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
@@ -481,12 +483,12 @@
   "approved_by": [
    "jorisvandenbossche"
   ],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
-  "last_comment": null,
-  "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "last_comment": "jorisvandenbossche@2026-11-04T12:54:35Z",
+  "last_comment_who": "jorisvandenbossche",
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/pydantic/pydantic-settings/pull/1022": {
   "approved_by": [
