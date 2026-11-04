@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T01:23:27Z",
+ "generated_at": "2026-11-04T03:21:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28654,
+   "stars": 28655,
    "forks": 6574
   },
   {
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50321,
-   "forks": 20707
+   "forks": 20706
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62649,
-   "forks": 12985
+   "stars": 62655,
+   "forks": 12991
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -558,20 +558,20 @@
       "maintainer": true,
       "path": "pandas/core/arrays/arrow/array.py",
       "text": "In other EAs, this is typically `return self.copy()`, but in case of the ArrowExtensionArray, returning a full copy is not needed?",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 3,
     "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-24T20:04:22Z",
-    "updated_at": "2026-11-03T21:39:31Z",
-    "conflicts": true,
+    "last_push": "2026-11-04T02:45:58Z",
+    "updated_at": "2026-11-04T03:07:12Z",
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "jorisvandenbossche left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 63
   },
@@ -6971,7 +6971,7 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the updates, some final comments",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -6981,7 +6981,7 @@
       "maintainer": true,
       "path": "doc/source/whatsnew/v3.2.0.rst",
       "text": "Can you move this to the 3.1.1 file? Also, to make it a bit less verbose, maybe use \"string methods using regex patterns\" instead of listing all functions, and \"PyArrow-backed string dtypes\" to indicate which dtypes are impacted",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -6991,7 +6991,7 @@
       "maintainer": true,
       "path": "pandas/tests/strings/test_find_replace.py",
       "text": "[code] (and then invert for the other pattern) That still hardcodes a bit more the expected behaviour (I know we want to match `re`'s behaviour, so it seems fine to test against it, but in general in the tests here we still hardcode the expected result for corner cases because some (or all) of the implementations use…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -7024,12 +7024,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-27T21:53:20Z",
-    "updated_at": "2026-11-03T21:57:30Z",
+    "last_push": "2026-11-04T02:31:20Z",
+    "updated_at": "2026-11-04T02:42:05Z",
     "conflicts": false,
     "last_comment": {
      "who": "jorisvandenbossche",
@@ -7038,7 +7038,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "jorisvandenbossche left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 34
   },
