@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T23:41:17Z",
+ "generated_at": "2026-11-04T23:50:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62714,
+   "stars": 62715,
    "forks": 13011
   },
   {
@@ -161,6 +161,170 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Merge with only not-matched-by-source clauses duplicates target rows when source keys repeat",
+   "date": "2026-11-04",
+   "created_at": "2026-11-04T23:49:10Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 5025,
+    "url": "https://github.com/delta-io/delta-rs/pull/5025"
+   },
+   "issue": {
+    "number": 5024,
+    "url": "https://github.com/delta-io/delta-rs/issues/5024"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "crates/core/src/operations/merge/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1089,7 +1089,10 @@"
+      ],
+      [
+       "c",
+       "    // Apply the early filter only to file skipping."
+      ],
+      [
+       "c",
+       "    let file_skipping_predicates ="
+      ],
+      [
+       "c",
+       "        build_file_skipping_predicates(target_subset_filter, target_alias.as_deref());"
+      ],
+      [
+       "d",
+       "    let needs_duplicate_match_validation = !match_operations.is_empty();"
+      ],
+      [
+       "a",
+       "    // NOT MATCHED BY SOURCE clauses rewrite files that also hold matched rows, so every"
+      ],
+      [
+       "a",
+       "    // duplicate match of a target row would otherwise be copied out again"
+      ],
+      [
+       "a",
+       "    let needs_duplicate_match_validation ="
+      ],
+      [
+       "a",
+       "        !match_operations.is_empty() || !not_match_source_operations.is_empty();"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    let target_provider = {"
+      ],
+      [
+       "c",
+       "        let mut builder = DeltaScanNext::builder()"
+      ],
+      [
+       "h",
+       "@@ -5271,6 +5274,55 @@"
+      ],
+      [
+       "c",
+       "        assert_batches_sorted_eq!(&expected_cdf, &batches);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_merge_not_matched_by_source_keeps_one_copy_of_multiply_matched_row() {"
+      ],
+      [
+       "a",
+       "        let schema = get_arrow_schema(&None);"
+      ],
+      [
+       "a",
+       "        let table = setup_table(None).await;"
+      ],
+      [
+       "a",
+       "        let table = write_data(table, &schema).await;"
+      ],
+      [
+       "a",
+       "        let ctx = SessionContext::new();"
+      ],
+      [
+       "a",
+       "        let batch = RecordBatch::try_new("
+      ],
+      [
+       "a",
+       "            Arc::clone(&schema),"
+      ],
+      [
+       "a",
+       "            vec!["
+      ],
+      [
+       "a",
+       "                Arc::new(arrow::array::StringArray::from(vec![\"B\", \"B\", \"E\"])),"
+      ],
+      [
+       "a",
+       "                Arc::new(arrow::array::Int32Array::from(vec![11, 12, 50])),"
+      ],
+      [
+       "a",
+       "                Arc::new(arrow::array::StringArray::from(vec!["
+      ],
+      [
+       "a",
+       "                    \"2023-07-04\","
+      ],
+      [
+       "a",
+       "                    \"2023-07-05\","
+      ]
+     ],
+     "truncated": true,
+     "additions": 53,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-04T23:48:36Z",
+    "updated_at": "2026-11-04T23:49:11Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 66
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
