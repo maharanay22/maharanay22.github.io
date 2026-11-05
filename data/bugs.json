@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-04T23:58:41Z",
+ "generated_at": "2026-11-05T02:16:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28662,
+   "stars": 28668,
    "forks": 6582
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50339,
-   "forks": 20706
+   "stars": 50338,
+   "forks": 20707
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62715,
-   "forks": 13011
+   "stars": 62722,
+   "forks": 13012
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,170 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Merge with merge_schema ignores assignments to the new column and fills unchanged rows from the source",
+   "date": "2026-11-05",
+   "created_at": "2026-11-05T02:15:40Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 5027,
+    "url": "https://github.com/delta-io/delta-rs/pull/5027"
+   },
+   "issue": {
+    "number": 5026,
+    "url": "https://github.com/delta-io/delta-rs/issues/5026"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "crates/core/src/operations/merge/mod.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1361,12 +1361,6 @@"
+      ],
+      [
+       "c",
+       "        };"
+      ],
+      [
+       "c",
+       "        let mut null_target_column = None;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        let source_qualifier = match &source_alias {"
+      ],
+      [
+       "d",
+       "            Some(alias) => Some(TableReference::Bare {"
+      ],
+      [
+       "d",
+       "                table: alias.to_owned().into(),"
+      ],
+      [
+       "d",
+       "            }),"
+      ],
+      [
+       "d",
+       "            None => TableReference::none(),"
+      ],
+      [
+       "d",
+       "        };"
+      ],
+      [
+       "c",
+       "        let name = delta_field.name();"
+      ],
+      [
+       "c",
+       "        let kernel_arrow_type: DataType = delta_field.data_type().try_into_arrow()?;"
+      ],
+      [
+       "c",
+       "        let mut cast_type: DataType = target_arrow_schema"
+      ],
+      [
+       "h",
+       "@@ -1378,29 +1372,42 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        // Receive the correct column reference given that some columns are only in source table"
+      ],
+      [
+       "c",
+       "        let mut field_changed = false;"
+      ],
+      [
+       "d",
+       "        let column = if let Some(field) = snapshot.schema().field(name) {"
+      ],
+      [
+       "a",
+       "        let column = Column::new(qualifier.clone(), name);"
+      ],
+      [
+       "a",
+       "        let added_column_source = if let Some(field) = snapshot.schema().field(name) {"
+      ],
+      [
+       "c",
+       "            if field != delta_field {"
+      ],
+      [
+       "c",
+       "                // The field changed, e.g. a struct gained a field. Cast every branch, including"
+      ],
+      [
+       "c",
+       "                // the target value kept by rows that don't set it, to the merged type; missing"
+      ],
+      [
+       "c",
+       "                // nested fields become null."
+      ],
+      [
+       "c",
+       "                field_changed = true;"
+      ],
+      [
+       "c",
+       "                cast_type = kernel_arrow_type;"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "d",
+       "            Column::new(qualifier.clone(), name)"
+      ],
+      [
+       "a",
+       "            None"
+      ],
+      [
+       "c",
+       "        } else {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 84,
+     "deletions": 11
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-05T02:13:38Z",
+    "updated_at": "2026-11-05T02:15:42Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 67
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
