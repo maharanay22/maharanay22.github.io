@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-05T14:56:30Z",
+ "generated_at": "2026-11-05T15:29:15Z",
  "stages": [
   "reported",
   "fix sent",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50348,
-   "forks": 20707
+   "stars": 50352,
+   "forks": 20708
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62768,
-   "forks": 13035
+   "stars": 62770,
+   "forks": 13037
   },
   {
    "full": "pydantic/pydantic-settings",
