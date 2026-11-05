@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-05T15:29:15Z",
+ "generated_at": "2026-11-05T21:26:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3353,
+   "stars": 3354,
    "forks": 698
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28691,
-   "forks": 6587
+   "stars": 28694,
+   "forks": 6588
   },
   {
    "full": "mindsdb/engine",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50352,
-   "forks": 20708
+   "stars": 50379,
+   "forks": 20712
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9067,
+   "stars": 9068,
    "forks": 2209
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62770,
-   "forks": 13037
+   "stars": 62783,
+   "forks": 13050
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -10444,11 +10444,11 @@
     "approved_by": [],
     "last_push": "2026-10-29T03:54:29Z",
     "updated_at": "2026-10-29T04:04:48Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -11279,11 +11279,11 @@
     "approved_by": [],
     "last_push": "2026-10-30T03:55:18Z",
     "updated_at": "2026-11-02T02:01:52Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -11440,11 +11440,11 @@
     "approved_by": [],
     "last_push": "2026-10-29T03:54:23Z",
     "updated_at": "2026-10-29T04:04:43Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
