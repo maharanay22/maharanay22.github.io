@@ -260,6 +260,24 @@
   "status": "merged",
   "waiting_on": "nobody"
  },
+ "https://github.com/delta-io/delta-rs/pull/5025": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/delta-io/delta-rs/pull/5027": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
  "https://github.com/delta-io/delta/pull/7838": {
   "approved_by": [],
   "checks": "not started",
@@ -405,8 +423,8 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/mlflow/mlflow/pull/26539": {
   "approved_by": [],
