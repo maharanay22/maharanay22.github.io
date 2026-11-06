@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-06T10:54:50Z",
+ "generated_at": "2026-11-06T16:18:24Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28698,
-   "forks": 6587
+   "stars": 28697,
+   "forks": 6588
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50379,
+   "stars": 50439,
    "forks": 20718
   },
   {
@@ -97,7 +97,7 @@
     "Lakehouse"
    ],
    "stars": 9069,
-   "forks": 2209
+   "forks": 2210
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62818,
-   "forks": 13067
+   "stars": 62839,
+   "forks": 13073
   },
   {
    "full": "pydantic/pydantic-settings",
