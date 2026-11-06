@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-06T16:18:24Z",
+ "generated_at": "2026-11-06T17:59:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3354,
-   "forks": 699
+   "forks": 700
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28697,
+   "stars": 28698,
    "forks": 6588
   },
   {
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50439,
-   "forks": 20718
+   "forks": 20717
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62839,
-   "forks": 13073
+   "stars": 62841,
+   "forks": 13075
   },
   {
    "full": "pydantic/pydantic-settings",
