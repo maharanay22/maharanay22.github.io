@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-07T02:49:39Z",
+ "generated_at": "2026-11-07T07:20:49Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3571,
+   "stars": 3572,
    "forks": 694
   },
   {
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28706,
-   "forks": 6592
+   "stars": 28709,
+   "forks": 6593
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50502,
+   "stars": 50506,
    "forks": 20727
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62848,
-   "forks": 13076
+   "stars": 62853,
+   "forks": 13081
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,10 +157,42 @@
     "CLI"
    ],
    "stars": 1496,
-   "forks": 252
+   "forks": 253
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "pandas-dev/pandas",
+   "status": "open",
+   "title": "to_sql writes timedelta64 columns in their own unit instead of nanoseconds (1000x too small with the default \"us\")",
+   "date": "2026-11-07",
+   "created_at": "2026-11-07T06:59:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 71941,
+    "url": "https://github.com/pandas-dev/pandas/issues/71941"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-07T07:00:08Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 68
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -316,7 +348,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-05T02:13:38Z",
-    "updated_at": "2026-11-05T03:40:33Z",
+    "updated_at": "2026-11-07T06:52:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11278,7 +11310,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-06T19:01:56Z",
-    "updated_at": "2026-11-06T19:30:18Z",
+    "updated_at": "2026-11-07T06:52:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
