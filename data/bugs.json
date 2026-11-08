@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-07T20:54:41Z",
+ "generated_at": "2026-11-08T00:38:17Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3354,
-   "forks": 701
+   "forks": 703
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28717,
-   "forks": 6593
+   "stars": 28718,
+   "forks": 6592
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50521,
+   "stars": 50524,
    "forks": 20727
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62880,
-   "forks": 13096
+   "stars": 62882,
+   "forks": 13099
   },
   {
    "full": "pydantic/pydantic-settings",
