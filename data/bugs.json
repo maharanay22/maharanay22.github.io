@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T01:47:00Z",
+ "generated_at": "2026-11-08T07:23:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3354,
-   "forks": 703
+   "stars": 3355,
+   "forks": 704
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -37,7 +37,7 @@
     "Windows"
    ],
    "stars": 3572,
-   "forks": 695
+   "forks": 696
   },
   {
    "full": "mlflow/mlflow",
@@ -51,8 +51,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28719,
-   "forks": 6592
+   "stars": 28720,
+   "forks": 6593
   },
   {
    "full": "mindsdb/engine",
@@ -82,7 +82,7 @@
     "String regex"
    ],
    "stars": 50525,
-   "forks": 20727
+   "forks": 20728
   },
   {
    "full": "delta-io/delta",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9069,
+   "stars": 9070,
    "forks": 2210
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62883,
-   "forks": 13100
+   "stars": 62890,
+   "forks": 13102
   },
   {
    "full": "pydantic/pydantic-settings",
