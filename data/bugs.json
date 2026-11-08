@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T08:05:27Z",
+ "generated_at": "2026-11-08T15:09:15Z",
  "stages": [
   "reported",
   "fix sent",
@@ -51,7 +51,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28721,
+   "stars": 28725,
    "forks": 6593
   },
   {
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50526,
-   "forks": 20728
+   "stars": 50533,
+   "forks": 20729
   },
   {
    "full": "delta-io/delta",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62892,
-   "forks": 13104
+   "stars": 62906,
+   "forks": 13111
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -157,7 +157,7 @@
     "CLI"
    ],
    "stars": 1495,
-   "forks": 256
+   "forks": 257
   }
  ],
  "items": [
@@ -1993,13 +1993,24 @@
    "proof": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "jaceklaskowski",
+      "at": "2026-11-08T14:58:05Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/issues/2026#issuecomment-6723027676",
+      "maintainer": false,
+      "path": null,
+      "text": "I just hit an issue after bumping my sbt-openapi-generator to **7.27.0** (the [latest available](https://github.com/OpenAPITools/sbt-openapi-generator/releases) at the time of this writing) and ran into a build issue. Its generated Java didn't compile (`getAction()` returned `ActionEnum` where the parent expects `Stri…",
+      "answered": false
+     }
+    ],
     "stage": 1,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-10-20T02:46:09Z",
+    "updated_at": "2026-11-08T14:58:05Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
