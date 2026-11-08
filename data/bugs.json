@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T18:00:26Z",
+ "generated_at": "2026-11-08T19:42:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -36,7 +36,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3572,
+   "stars": 3573,
    "forks": 696
   },
   {
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28725,
-   "forks": 6594
+   "forks": 6595
   },
   {
    "full": "mindsdb/engine",
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9071,
+   "stars": 9072,
    "forks": 2210
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62912,
-   "forks": 13117
+   "stars": 62914,
+   "forks": 13121
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -515,11 +515,11 @@
     "approved_by": [],
     "last_push": "2026-11-04T23:48:36Z",
     "updated_at": "2026-11-04T23:51:02Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 66
   },
