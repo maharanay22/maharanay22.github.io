@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T19:42:56Z",
+ "generated_at": "2026-11-08T23:12:20Z",
  "stages": [
   "reported",
   "fix sent",
@@ -81,8 +81,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50536,
-   "forks": 20729
+   "stars": 50545,
+   "forks": 20732
   },
   {
    "full": "delta-io/delta",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62914,
+   "stars": 62917,
    "forks": 13121
   },
   {
@@ -515,11 +515,11 @@
     "approved_by": [],
     "last_push": "2026-11-04T23:48:36Z",
     "updated_at": "2026-11-04T23:51:02Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 66
   },
