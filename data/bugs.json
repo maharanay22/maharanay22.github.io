@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T15:09:15Z",
+ "generated_at": "2026-11-08T18:00:26Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3355,
+   "stars": 3356,
    "forks": 704
   },
   {
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28725,
-   "forks": 6593
+   "forks": 6594
   },
   {
    "full": "mindsdb/engine",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50533,
+   "stars": 50536,
    "forks": 20729
   },
   {
@@ -96,7 +96,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9070,
+   "stars": 9071,
    "forks": 2210
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62906,
-   "forks": 13111
+   "stars": 62912,
+   "forks": 13117
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -196,11 +196,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Merge with merge_schema ignores assignments to the new column and fills unchanged rows from the source",
    "date": "2026-11-05",
    "created_at": "2026-11-05T02:15:40Z",
-   "merged_at": null,
+   "merged_at": "2026-11-08",
    "reported": true,
    "pr": {
     "number": 5027,
@@ -343,17 +343,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-05T02:13:38Z",
-    "updated_at": "2026-11-07T06:52:33Z",
+    "review": "approved",
+    "approved_by": [
+     "rtyler"
+    ],
+    "last_push": "2026-11-08T15:52:39Z",
+    "updated_at": "2026-11-08T16:28:08Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 67
   },
@@ -1043,8 +1045,8 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-04T23:18:56Z",
-    "updated_at": "2026-11-04T23:22:15Z",
+    "last_push": "2026-11-08T15:56:54Z",
+    "updated_at": "2026-11-08T16:29:04Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -2002,7 +2004,7 @@
       "maintainer": false,
       "path": null,
       "text": "I just hit an issue after bumping my sbt-openapi-generator to **7.27.0** (the [latest available](https://github.com/OpenAPITools/sbt-openapi-generator/releases) at the time of this writing) and ran into a build issue. Its generated Java didn't compile (`getAction()` returned `ActionEnum` where the parent expects `Stri…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 1,
@@ -2010,7 +2012,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-08T14:58:05Z",
+    "updated_at": "2026-11-08T17:57:23Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
