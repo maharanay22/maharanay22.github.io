@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-08T23:12:20Z",
+ "generated_at": "2026-11-08T23:44:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -141,7 +141,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62917,
+   "stars": 62918,
    "forks": 13121
   },
   {
@@ -515,11 +515,11 @@
     "approved_by": [],
     "last_push": "2026-11-04T23:48:36Z",
     "updated_at": "2026-11-04T23:51:02Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 66
   },
@@ -11155,8 +11155,8 @@
     "checks": "not started",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-09T13:57:57Z",
-    "updated_at": "2026-10-09T13:57:59Z",
+    "last_push": "2026-11-08T23:39:00Z",
+    "updated_at": "2026-11-08T23:41:58Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11514,31 +11514,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,11 +1,22 @@"
-      ],
-      [
-       "c",
-       "import json"
-      ],
-      [
-       "a",
-       "import re"
-      ],
-      [
-       "c",
-       "from dataclasses import dataclass"
-      ],
-      [
-       "c",
-       "from typing import Any, ClassVar, Optional"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from dbt.adapters.spark.column import SparkColumn"
+       "@@ -8,6 +8,16 @@"
       ],
       [
        "c",
@@ -11606,7 +11582,7 @@
       ],
       [
        "h",
-       "@@ -82,7 +93,7 @@"
+       "@@ -84,7 +94,7 @@"
       ],
       [
        "c",
@@ -11631,10 +11607,18 @@
       [
        "c",
        "                field_type = cls._parse_type_from_json(field.get(\"type\"))"
+      ],
+      [
+       "c",
+       "                field_strs.append(f\"{field_name}:{field_type}\")"
+      ],
+      [
+       "c",
+       "            return f\"struct<{','.join(field_strs)}>\""
       ]
      ],
-     "truncated": true,
-     "additions": 12,
+     "truncated": false,
+     "additions": 11,
      "deletions": 1
     }
    ],
@@ -11644,8 +11628,8 @@
     "checks": "not started",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-08T22:35:23Z",
-    "updated_at": "2026-10-08T22:35:25Z",
+    "last_push": "2026-11-08T23:38:59Z",
+    "updated_at": "2026-11-08T23:41:55Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11957,8 +11941,8 @@
     "checks": "not started",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-03T05:43:09Z",
-    "updated_at": "2026-11-03T19:54:39Z",
+    "last_push": "2026-11-08T23:39:21Z",
+    "updated_at": "2026-11-08T23:41:53Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
