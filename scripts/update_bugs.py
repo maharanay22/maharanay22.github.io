@@ -119,7 +119,33 @@ def repo_info(r):
         "about": o.get("about") or (r["description"] or "")[:180],
         "icon": o.get("icon", "📦"), "category": o.get("category") or (r["primaryLanguage"] or {}).get("name", "open source"),
         "tags": o.get("tags", topics[:3]), "stars": r["stargazerCount"], "forks": r["forkCount"],
+        "package": o.get("package"), "impact": o.get("impact"),
     }
+
+
+def add_downloads(repos):
+    """Monthly PyPI downloads per package, refreshed at most once a day (pypistats asks for light use)."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        previous = {r["full"]: r for r in json.loads(OUT.read_text(encoding="utf-8"))["repos"]}
+    except (OSError, ValueError, KeyError):
+        previous = {}
+    for repo in repos.values():
+        old = previous.get(repo["full"], {})
+        repo["downloads_month"] = old.get("downloads_month")
+        repo["downloads_checked"] = old.get("downloads_checked")
+        if not repo["package"] or repo["downloads_checked"] == today:
+            continue
+        try:
+            req = urllib.request.Request(
+                f"https://pypistats.org/api/packages/{repo['package']}/recent",
+                headers={"User-Agent": f"{LOGIN}.github.io bug page"},
+            )
+            with urllib.request.urlopen(req, timeout=30) as resp:
+                repo["downloads_month"] = json.loads(resp.read())["data"]["last_month"]
+            repo["downloads_checked"] = today
+        except Exception as e:  # keep the last known value if pypistats is unavailable
+            print(f"downloads for {repo['package']} unavailable: {e}", file=sys.stderr)
 
 
 MAINTAINER = {"OWNER", "MEMBER", "COLLABORATOR"}
@@ -324,6 +350,7 @@ def main():
             "track": track_report(issue, status),
         })
 
+    add_downloads(repos)
     items.sort(key=lambda x: x["created_at"], reverse=True)
     for i, item in enumerate(reversed(items), 1):
         item["id"] = i
