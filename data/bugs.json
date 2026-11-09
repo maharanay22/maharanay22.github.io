@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-09T22:07:39Z",
+ "generated_at": "2026-11-09T22:54:49Z",
  "stages": [
   "reported",
   "fix sent",
@@ -81,7 +81,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50554,
+   "stars": 50557,
    "forks": 20735
   },
   {
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62988,
-   "forks": 13137
+   "stars": 62989,
+   "forks": 13138
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -490,11 +490,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Merge with only not-matched-by-source clauses duplicates target rows when source keys repeat",
    "date": "2026-11-04",
    "created_at": "2026-11-04T23:49:10Z",
-   "merged_at": null,
+   "merged_at": "2026-11-09",
    "reported": true,
    "pr": {
     "number": 5025,
@@ -559,11 +559,11 @@
       ],
       [
        "h",
-       "@@ -5271,6 +5274,55 @@"
+       "@@ -5344,6 +5347,55 @@"
       ],
       [
        "c",
-       "        assert_batches_sorted_eq!(&expected_cdf, &batches);"
+       "        assert_batches_sorted_eq!(&expected, &actual);"
       ],
       [
        "c",
@@ -645,26 +645,26 @@
       "maintainer": true,
       "path": null,
       "text": "Thanks for the fix @maharanay22, can you please address the merge conflict?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "adamreeve"
     ],
-    "last_push": "2026-11-04T23:48:36Z",
-    "updated_at": "2026-11-09T09:23:32Z",
+    "last_push": "2026-11-09T22:08:29Z",
+    "updated_at": "2026-11-09T22:42:21Z",
     "conflicts": false,
     "last_comment": {
      "who": "adamreeve",
      "at": "2026-11-09T09:23:32Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "adamreeve commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 66
   },
@@ -10647,11 +10647,11 @@
     "approved_by": [],
     "last_push": "2026-11-06T19:01:57Z",
     "updated_at": "2026-11-06T19:30:20Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -11482,11 +11482,11 @@
     "approved_by": [],
     "last_push": "2026-11-06T19:01:56Z",
     "updated_at": "2026-11-07T06:52:54Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -11643,11 +11643,11 @@
     "approved_by": [],
     "last_push": "2026-11-06T19:01:55Z",
     "updated_at": "2026-11-06T19:30:16Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
