@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-09T02:44:13Z",
+ "generated_at": "2026-11-09T05:39:00Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Data Loss"
    ],
    "stars": 3356,
-   "forks": 705
+   "forks": 706
   },
   {
    "full": "unitycatalog/unitycatalog",
@@ -52,7 +52,7 @@
     "GenAI Eval"
    ],
    "stars": 28726,
-   "forks": 6595
+   "forks": 6596
   },
   {
    "full": "mindsdb/engine",
@@ -96,8 +96,8 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9072,
-   "forks": 2211
+   "stars": 9071,
+   "forks": 2212
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -141,8 +141,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62928,
-   "forks": 13126
+   "stars": 62935,
+   "forks": 13127
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -161,6 +161,134 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "CREATE SCHEMA ... COMMENT ... LOCATION stores both as properties instead of the schema comment and storage root",
+   "date": "2026-11-09",
+   "created_at": "2026-11-09T05:38:08Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2156,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2156"
+   },
+   "issue": {
+    "number": 2155,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2155"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -1298,6 +1298,7 @@"
+      ],
+      [
+       "c",
+       "    metadata(SchemaInfo.JSON_PROPERTY_CREATED_AT) = if (schema.getCreatedAt != null) {schema.getCreatedAt.toString} else {\"null\"}"
+      ],
+      [
+       "c",
+       "    metadata(SchemaInfo.JSON_PROPERTY_UPDATED_AT) = if (schema.getUpdatedAt != null) {schema.getUpdatedAt.toString} else {\"null\"}"
+      ],
+      [
+       "c",
+       "    metadata(SchemaInfo.JSON_PROPERTY_SCHEMA_ID) = schema.getSchemaId"
+      ],
+      [
+       "a",
+       "    Option(schema.getStorageRoot).foreach(metadata(SupportsNamespaces.PROP_LOCATION) = _)"
+      ],
+      [
+       "c",
+       "    metadata.asJava"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -1306,7 +1307,11 @@"
+      ],
+      [
+       "c",
+       "    val createSchema = new CreateSchema()"
+      ],
+      [
+       "c",
+       "    createSchema.setCatalogName(this.name)"
+      ],
+      [
+       "c",
+       "    createSchema.setName(namespace.head)"
+      ],
+      [
+       "d",
+       "    createSchema.setProperties(metadata)"
+      ],
+      [
+       "a",
+       "    // COMMENT and LOCATION are schema fields in UC, not properties"
+      ],
+      [
+       "a",
+       "    val properties = new util.HashMap[String, String](metadata)"
+      ],
+      [
+       "a",
+       "    Option(properties.remove(SupportsNamespaces.PROP_COMMENT)).foreach(createSchema.setComment)"
+      ],
+      [
+       "a",
+       "    Option(properties.remove(SupportsNamespaces.PROP_LOCATION)).foreach(createSchema.setStorageRoot)"
+      ],
+      [
+       "a",
+       "    createSchema.setProperties(properties)"
+      ],
+      [
+       "c",
+       "    // Spark 4.2 removed the namespaceExists() pre-check from CreateNamespaceExec. It relies on the"
+      ],
+      [
+       "c",
+       "    // catalog throwing NamespaceAlreadyExistsException for IF NOT EXISTS handling. On Spark 4.0/4.1"
+      ],
+      [
+       "c",
+       "    // the pre-check prevents this path."
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-09T05:00:04Z",
+    "updated_at": "2026-11-09T05:38:09Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 69
+  },
   {
    "kind": "report",
    "repo": "pandas-dev/pandas",
@@ -184,7 +312,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-07T17:08:01Z",
+    "updated_at": "2026-11-09T04:18:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -9022,7 +9150,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T02:50:40Z",
-    "updated_at": "2026-10-22T17:33:14Z",
+    "updated_at": "2026-11-09T04:44:46Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
