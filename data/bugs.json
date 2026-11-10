@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T23:43:05Z",
+ "generated_at": "2026-11-10T23:55:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -173,7 +173,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63065,
+   "stars": 63066,
    "forks": 13177,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -569,7 +569,7 @@
     "waiting_on": "nobody",
     "next": "Tests are running"
    },
-   "id": 73
+   "id": 74
   },
   {
    "kind": "fix",
@@ -743,7 +743,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 72
+   "id": 73
   },
   {
    "kind": "fix",
@@ -953,6 +953,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-10T23:48:11Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#pullrequestreview-5851321759",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] One question on the metadata copy in toStructField.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T23:48:11Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4532030048",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] With every stored key now coming back, does CTAS or CREATE TABLE LIKE from a managed Delta table on this path copy `delta.columnMapping.id` and `delta.columnMapping.physicalName` into the new table? If so, should those keys be skipped here?",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T23:46:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6782496807",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-10T23:04:17Z",
@@ -981,36 +1011,6 @@
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
       "text": "[AI Assisted] The change applies to managed Delta loads through `loadV1Table` too, but the new tests only cover external Parquet. CI passing does not show the new metadata is harmless on a Delta load. Could we add a cheap managed Delta load check?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-10T21:02:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491366",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCColumnConversions.java",
-      "text": "[AI Assisted] The Javadoc now describes the fallback, which is good. Could we add `@param` and `@return` tags for `columnName` and `typeJson`, following the file's usual form?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-10T21:02:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491372",
-      "maintainer": true,
-      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCColumnConversionsSuite.java",
-      "text": "[AI Assisted] The empty, null and non-object metadata cases could be one parameterized test over input and expected pairs.",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-10T21:02:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#pullrequestreview-5849339721",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the fallback, the malformed and unrepresentable cases are now covered by tests. Two items have no diff line, so they are here. 1. The description should call out that `__CHAR_VARCHAR_TYPE_STRING` now comes back on load. Spark's `CharVarcharUtils` reads it to restore char(n)/varchar(n) semantic…",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -1018,18 +1018,18 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T23:35:20Z",
-    "updated_at": "2026-11-10T23:38:03Z",
+    "updated_at": "2026-11-10T23:48:11Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-10T23:04:17Z",
+     "at": "2026-11-10T23:46:30Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
-   "id": 71
+   "id": 72
   },
   {
    "kind": "fix",
@@ -1047,6 +1047,122 @@
    "issue": null,
    "proof": null,
    "files": [
+    {
+     "path": "api/all.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1315,7 +1315,7 @@"
+      ],
+      [
+       "c",
+       "      parameters:"
+      ],
+      [
+       "c",
+       "        - name: force"
+      ],
+      [
+       "c",
+       "          in: query"
+      ],
+      [
+       "d",
+       "          description: Force deletion even if there are dependent external locations."
+      ],
+      [
+       "a",
+       "          description: Force deletion even if there are dependent external locations. The dependent external locations are kept, and they have no credential until they are updated with a new credential_name."
+      ],
+      [
+       "c",
+       "          required: false"
+      ],
+      [
+       "c",
+       "          schema:"
+      ],
+      [
+       "c",
+       "            type: boolean"
+      ],
+      [
+       "h",
+       "@@ -2979,7 +2979,7 @@"
+      ],
+      [
+       "c",
+       "          description: Path URL of the external location."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "c",
+       "        credential_name:"
+      ],
+      [
+       "d",
+       "          description: Name of the storage credential used with this location."
+      ],
+      [
+       "a",
+       "          description: Name of the storage credential used with this location. Omitted when the credential no longer exists, for example after it was force-deleted. Updating the external location with a new credential_name repairs it."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "c",
+       "        comment:"
+      ],
+      [
+       "c",
+       "          description: User-provided free-form text description."
+      ],
+      [
+       "h",
+       "@@ -3030,7 +3030,7 @@"
+      ],
+      [
+       "c",
+       "          description: Path URL of the external location."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "c",
+       "        credential_name:"
+      ],
+      [
+       "d",
+       "          description: Name of the storage credential used with this location."
+      ],
+      [
+       "a",
+       "          description: Name of the storage credential used with this location. Setting it on an external location whose credential was force-deleted repairs the location."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "c",
+       "        comment:"
+      ],
+      [
+       "c",
+       "          description: User-provided free-form text description."
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 3
+    },
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/CredentialRepository.java",
      "lines": [
@@ -1189,29 +1305,9 @@
       [
        "a",
        "              \"The storage credential for '%s' no longer exists. Update the external location \""
-      ],
-      [
-       "a",
-       "                  + \"that covers this path with a new credential.\","
-      ],
-      [
-       "a",
-       "              url));"
-      ],
-      [
-       "c",
-       "    }"
-      ],
-      [
-       "c",
-       "    return Optional.of(credentialDAO);"
-      ],
-      [
-       "c",
-       "  }"
       ]
      ],
-     "truncated": false,
+     "truncated": true,
      "additions": 6,
      "deletions": 3
     }
@@ -1280,22 +1376,22 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T23:22:05Z",
-    "updated_at": "2026-11-10T23:23:28Z",
+    "last_push": "2026-11-10T23:53:41Z",
+    "updated_at": "2026-11-10T23:53:50Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-10T22:05:46Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
-   "id": 70
+   "id": 71
   },
   {
    "kind": "fix",
@@ -1490,7 +1586,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 69
+   "id": 70
   },
   {
    "kind": "report",
@@ -1515,14 +1611,14 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-09T04:18:21Z",
+    "updated_at": "2026-11-10T23:47:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
     "next": "Reported with a reproduction. Waiting for maintainers"
    },
-   "id": 68
+   "id": 69
   },
   {
    "kind": "fix",
@@ -1688,7 +1784,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 67
+   "id": 68
   },
   {
    "kind": "fix",
@@ -1869,7 +1965,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 66
+   "id": 67
   },
   {
    "kind": "fix",
@@ -2090,7 +2186,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 65
+   "id": 66
   },
   {
    "kind": "fix",
@@ -2405,7 +2501,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 64
+   "id": 65
   },
   {
    "kind": "fix",
@@ -2520,7 +2616,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 63
+   "id": 64
   },
   {
    "kind": "fix",
@@ -2825,7 +2921,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 62
+   "id": 63
   },
   {
    "kind": "fix",
@@ -3117,7 +3213,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 61
+   "id": 62
   },
   {
    "kind": "fix",
@@ -3324,7 +3420,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 60
+   "id": 61
   },
   {
    "kind": "report",
@@ -3367,7 +3463,7 @@
     "waiting_on": "maintainers",
     "next": "Reported with a reproduction. Waiting for maintainers"
    },
-   "id": 59
+   "id": 60
   },
   {
    "kind": "report",
@@ -3402,7 +3498,7 @@
     "waiting_on": "nobody",
     "next": "Another contributor's fix was merged"
    },
-   "id": 58
+   "id": 59
   },
   {
    "kind": "fix",
@@ -3769,7 +3865,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 57
+   "id": 58
   },
   {
    "kind": "fix",
@@ -3894,7 +3990,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 56
+   "id": 57
   },
   {
    "kind": "fix",
@@ -4075,7 +4171,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 55
+   "id": 56
   },
   {
    "kind": "fix",
@@ -4375,7 +4471,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 54
+   "id": 55
   },
   {
    "kind": "fix",
@@ -4714,7 +4810,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 53
+   "id": 54
   },
   {
    "kind": "fix",
@@ -4875,7 +4971,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 52
+   "id": 53
   },
   {
    "kind": "fix",
@@ -5036,7 +5132,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 51
+   "id": 52
   },
   {
    "kind": "fix",
@@ -5197,7 +5293,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 50
+   "id": 51
   },
   {
    "kind": "fix",
@@ -5358,7 +5454,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 49
+   "id": 50
   },
   {
    "kind": "fix",
@@ -5479,7 +5575,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 48
+   "id": 49
   },
   {
    "kind": "fix",
@@ -5794,7 +5890,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 47
+   "id": 48
   },
   {
    "kind": "fix",
@@ -6097,7 +6193,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 46
+   "id": 47
   },
   {
    "kind": "fix",
@@ -6394,7 +6490,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 45
+   "id": 46
   },
   {
    "kind": "fix",
@@ -6621,7 +6717,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 44
+   "id": 45
   },
   {
    "kind": "fix",
@@ -6915,7 +7011,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 43
+   "id": 44
   },
   {
    "kind": "fix",
@@ -6947,7 +7043,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 42
+   "id": 43
   },
   {
    "kind": "fix",
@@ -7196,7 +7292,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 41
+   "id": 42
   },
   {
    "kind": "fix",
@@ -7471,7 +7567,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 40
+   "id": 41
   },
   {
    "kind": "fix",
@@ -7802,7 +7898,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 39
+   "id": 40
   },
   {
    "kind": "fix",
@@ -8102,7 +8198,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 38
+   "id": 39
   },
   {
    "kind": "fix",
@@ -8268,7 +8364,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 37
+   "id": 38
   },
   {
    "kind": "fix",
@@ -8475,7 +8571,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 36
+   "id": 37
   },
   {
    "kind": "fix",
@@ -8769,7 +8865,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 35
+   "id": 36
   },
   {
    "kind": "fix",
@@ -9000,7 +9096,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 34
+   "id": 35
   },
   {
    "kind": "fix",
@@ -9086,7 +9182,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 33
+   "id": 34
   },
   {
    "kind": "fix",
@@ -9162,7 +9258,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 32
+   "id": 33
   },
   {
    "kind": "fix",
@@ -9326,7 +9422,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 31
+   "id": 32
   },
   {
    "kind": "fix",
@@ -9490,7 +9586,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 30
+   "id": 31
   },
   {
    "kind": "fix",
@@ -9795,7 +9891,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 29
+   "id": 30
   },
   {
    "kind": "fix",
@@ -9932,7 +10028,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 28
+   "id": 29
   },
   {
    "kind": "fix",
@@ -10226,7 +10322,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 27
+   "id": 28
   },
   {
    "kind": "fix",
@@ -10390,7 +10486,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 26
+   "id": 27
   },
   {
    "kind": "fix",
@@ -10758,7 +10854,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 25
+   "id": 26
   },
   {
    "kind": "fix",
@@ -10972,7 +11068,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 24
+   "id": 25
   },
   {
    "kind": "fix",
@@ -11098,7 +11194,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
-   "id": 23
+   "id": 24
   },
   {
    "kind": "fix",
@@ -11262,7 +11358,7 @@
     "waiting_on": "nobody",
     "next": "Closed without merging"
    },
-   "id": 22
+   "id": 23
   },
   {
    "kind": "fix",
@@ -11564,7 +11660,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 21
+   "id": 22
   },
   {
    "kind": "fix",
@@ -11856,7 +11952,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 20
+   "id": 21
   },
   {
    "kind": "fix",
@@ -12180,7 +12276,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 19
+   "id": 20
   },
   {
    "kind": "fix",
@@ -12360,7 +12456,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 18
+   "id": 19
   },
   {
    "kind": "fix",
@@ -12524,7 +12620,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 17
+   "id": 18
   },
   {
    "kind": "fix",
@@ -12691,7 +12787,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 16
+   "id": 17
   },
   {
    "kind": "fix",
@@ -12852,7 +12948,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 15
+   "id": 16
   },
   {
    "kind": "fix",
@@ -12997,7 +13093,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 14
+   "id": 15
   },
   {
    "kind": "fix",
@@ -13310,7 +13406,7 @@
     "waiting_on": "maintainers",
     "next": "Waiting for a maintainer to start the tests and review"
    },
-   "id": 13
+   "id": 14
   },
   {
    "kind": "fix",
@@ -13668,6 +13764,318 @@
     "last_comment": {
      "who": "yili-db",
      "at": "2026-10-19T23:22:21Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
+   },
+   "id": 13
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "merged",
+   "title": "Accept previous tool call rounds as history in Anthropic and LiteLLM generate_tool_call_messages",
+   "date": "2026-10-08",
+   "created_at": "2026-10-08T21:11:16Z",
+   "merged_at": "2026-10-19",
+   "reported": true,
+   "pr": {
+    "number": 1966,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/1966"
+   },
+   "issue": null,
+   "proof": "Two-round regression tests fail on main with \"Invalid conversation history format\" and pass with the fix, on Anthropic SDK 0.84.0 and 0.34.2",
+   "files": [
+    {
+     "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -3,7 +3,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, Field, ValidationError"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from anthropic.types import ContentBlock, Message, MessageParam, ToolUseBlock"
+      ],
+      [
+       "a",
+       "from anthropic.types import ContentBlock, Message, ToolUseBlock"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.base import BaseFunctionClient"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.function_processing_utils import construct_original_function_name"
+      ],
+      [
+       "h",
+       "@@ -16,7 +16,8 @@"
+      ],
+      [
+       "c",
+       "    role: str = Field("
+      ],
+      [
+       "c",
+       "        ..., description=\"The role of the message sender, e.g., 'user' or 'assistant'.\""
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "d",
+       "    content: Union[str, List[MessageParam], List[ContentBlock]] = Field("
+      ],
+      [
+       "a",
+       "    # Dict blocks (e.g. `tool_result` blocks from a previous tool call round) pass through unchanged"
+      ],
+      [
+       "a",
+       "    content: Union[str, List[Union[Dict[str, Any], ContentBlock]]] = Field("
+      ],
+      [
+       "c",
+       "        ...,"
+      ],
+      [
+       "c",
+       "        description=\"The content of the message, whether from an original user question or an assistant response.\","
+      ],
+      [
+       "c",
+       "    )"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    },
+    {
+     "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,7 +1,7 @@"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "c",
+       "from typing import Any, Optional, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from pydantic import BaseModel, Field, ValidationError"
+      ],
+      [
+       "a",
+       "from pydantic import BaseModel, ConfigDict, Field, ValidationError"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from litellm.types.utils import ChatCompletionMessageToolCall, Choices, Message"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.client import BaseFunctionClient"
+      ],
+      [
+       "h",
+       "@@ -12,19 +12,20 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "class ConversationMessage(BaseModel):"
+      ],
+      [
+       "a",
+       "    # Keep fields such as `tool_calls`, `tool_call_id` and `name` so the history can be sent back as-is"
+      ],
+      [
+       "a",
+       "    model_config = ConfigDict(extra=\"allow\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    role: str = Field("
+      ],
+      [
+       "c",
+       "        ..., description=\"The role of the message sender, e.g., 'user' or 'assistant'.\""
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "d",
+       "    content: str = Field("
+      ],
+      [
+       "a",
+       "    content: Optional[Union[str, list[Any]]] = Field("
+      ],
+      [
+       "c",
+       "        ...,"
+      ],
+      [
+       "d",
+       "        description=\"The content of the message, e.g. original user question or an assistant response.\","
+      ],
+      [
+       "a",
+       "        description=\"The content of the message, e.g. original user question or an assistant response. \""
+      ],
+      [
+       "a",
+       "        \"It is None for an assistant message that only requests tool calls.\","
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def to_dict(self) -> dict[str, Any]:"
+      ],
+      [
+       "d",
+       "        return {"
+      ],
+      [
+       "d",
+       "            \"role\": self.role,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 8,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-19T18:51:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6274764498",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529445",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+      "text": "With `extra=\"allow\"` and `content` defaulting to `None`, only `role` is required now. So `{\"role\": \"user\", \"contnet\": \"hi\"}` validates: the typo becomes an extra field, `content` is `None`, and the UC functions run before the provider rejects the request. Can we keep the field required but nullable (`Field(..., ...)`)…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529448",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/tests/test_litellm_utils.py",
+      "text": "Neither test file (here or Anthropic) has a case asserting `ValueError(\"Invalid conversation history format\")`. This PR loosens validation in both integrations (`Dict[str, Any]` blocks, `extra=\"allow\"`), so nothing would fail if it ended up accepting everything. Can you add a negative test per integration? For example…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529449",
+      "maintainer": true,
+      "path": "ai/integrations/anthropic/tests/test_anthropic_utils.py",
+      "text": "The history here is all dicts, so the `ContentBlock` side of the union isn't tested. That's the path where an object gets converted to a dict. Can you add a `TextBlock(...)` object to the history and check it comes back as a dict?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:35:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#discussion_r4306529450",
+      "maintainer": true,
+      "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+      "text": "nit: The new comment says history \"can be sent back as-is\", but `to_dict()` still returns only `role` and `content`, so it drops the fields this PR keeps. Nothing in `ai/` calls it. Can it just `return self.model_dump()` so the two can't disagree?",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-10-18T07:53:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6247342827",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     }
+    ],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
+    "last_push": "2026-10-18T14:42:52Z",
+    "updated_at": "2026-10-19T19:51:47Z",
+    "conflicts": false,
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-10-19T18:51:09Z",
      "maintainer": true
     },
     "state": "done",
