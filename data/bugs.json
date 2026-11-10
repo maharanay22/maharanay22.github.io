@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T18:53:33Z",
+ "generated_at": "2026-11-10T23:24:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,8 +59,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28750,
-   "forks": 6605,
+   "stars": 28749,
+   "forks": 6606,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50571,
+   "stars": 50574,
    "forks": 20743,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -116,8 +116,8 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9075,
-   "forks": 2214,
+   "stars": 9074,
+   "forks": 2216,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63054,
-   "forks": 13167,
+   "stars": 63065,
+   "forks": 13177,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -192,7 +192,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1497,
+   "stars": 1498,
    "forks": 256,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -346,6 +346,118 @@
      "deletions": 1
     },
     {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelWriteUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -186,8 +186,10 @@"
+      ],
+      [
+       "c",
+       "      } else if (dataType == ShortType.SHORT) {"
+      ],
+      [
+       "c",
+       "        values = generateRandomValues(dataType, count, false, offset);"
+      ],
+      [
+       "c",
+       "        vectors[i] = shortVector((List<Short>) values);"
+      ],
+      [
+       "a",
+       "      } else {"
+      ],
+      [
+       "a",
+       "        throw new UnsupportedOperationException("
+      ],
+      [
+       "a",
+       "            \"table write does not support column \" + field.getName() + \" of type \" + dataType);"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "d",
+       "      // Add more types as needed"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    return vectors;"
+      ],
+      [
+       "c",
+       "  }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
+     "lines": [
+      [
+       "h",
+       "@@ -38,8 +38,9 @@"
+      ],
+      [
+       "c",
+       "      \"columns\","
+      ],
+      [
+       "c",
+       "      \"The columns of the table. Each column spec should be in the sql-like format  \\\"column_name\""
+      ],
+      [
+       "c",
+       "          + \" column_data_type\\\".Supported data types are BOOLEAN, BYTE, SHORT, INT, LONG, FLOAT,\""
+      ],
+      [
+       "d",
+       "          + \" DOUBLE, DATE, TIMESTAMP, TIMESTAMP_NTZ, STRING, BINARY, DECIMAL. Multiple columns\""
+      ],
+      [
+       "d",
+       "          + \" should be separated by a comma. For example: \\\"id INT, name STRING\\\".\","
+      ],
+      [
+       "a",
+       "          + \" DOUBLE, DATE, TIMESTAMP, TIMESTAMP_NTZ, STRING, BINARY, DECIMAL(p,s). A bare DECIMAL\""
+      ],
+      [
+       "a",
+       "          + \" means DECIMAL(10,0). Multiple columns should be separated by a comma. For example:\""
+      ],
+      [
+       "a",
+       "          + \" \\\"id INT, price DECIMAL(10,2)\\\".\","
+      ],
+      [
+       "c",
+       "      \"columns\"),"
+      ],
+      [
+       "c",
+       "  VOLUME_TYPE("
+      ],
+      [
+       "c",
+       "      \"volume_type\","
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    },
+    {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
      "lines": [
       [
@@ -371,148 +483,102 @@
       [
        "d",
        "      String[] paramArray = params.split(\",\");"
-      ],
-      [
-       "d",
-       "      if (typeText.equals(\"DECIMAL\") && paramArray.length == 2) {"
-      ],
-      [
-       "d",
-       "        columnInfo.setTypePrecision(Integer.valueOf(paramArray[0].trim()));"
-      ],
-      [
-       "d",
-       "        columnInfo.setTypeScale(Integer.valueOf(paramArray[1].trim()));"
-      ],
-      [
-       "d",
-       "        return \"(\" + paramArray[0].trim() + \",\" + paramArray[1].trim() + \")\";"
-      ],
-      [
-       "a",
-       "    if (typeText.equals(\"DECIMAL\")) {"
-      ],
-      [
-       "a",
-       "      String[] paramArray = params == null ? new String[0] : params.split(\",\", -1);"
-      ],
-      [
-       "a",
-       "      if (paramArray.length > 2) {"
-      ],
-      [
-       "a",
-       "        throw new IllegalArgumentException(\"DECIMAL takes at most 2 parameters: (\" + params + \")\");"
-      ],
-      [
-       "c",
-       "      }"
-      ],
-      [
-       "d",
-       "    } else {"
-      ],
-      [
-       "a",
-       "      int precision = paramArray.length > 0 ? parseDecimalParam(paramArray[0], params) : 10;"
-      ],
-      [
-       "a",
-       "      int scale = paramArray.length > 1 ? parseDecimalParam(paramArray[1], params) : 0;"
-      ],
-      [
-       "a",
-       "      if (precision < 1 || precision > 38) {"
-      ],
-      [
-       "a",
-       "        throw new IllegalArgumentException("
-      ],
-      [
-       "a",
-       "            \"DECIMAL precision must be between 1 and 38: \" + precision);"
-      ],
-      [
-       "a",
-       "      }"
-      ],
-      [
-       "a",
-       "      if (scale > precision) {"
-      ],
-      [
-       "a",
-       "        throw new IllegalArgumentException("
-      ],
-      [
-       "a",
-       "            \"DECIMAL scale must be between 0 and precision \" + precision + \": \" + scale);"
-      ],
-      [
-       "a",
-       "      }"
-      ],
-      [
-       "a",
-       "      columnInfo.setTypePrecision(precision);"
-      ],
-      [
-       "a",
-       "      columnInfo.setTypeScale(scale);"
-      ],
-      [
-       "a",
-       "      return \"(\" + precision + \",\" + scale + \")\";"
-      ],
-      [
-       "a",
-       "    }"
       ]
      ],
      "truncated": true,
-     "additions": 41,
-     "deletions": 11
+     "additions": 33,
+     "deletions": 10
     }
    ],
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:40:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4531469868",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+      "text": "[AI Assisted] Nit: this pattern change applies to every type. `id INT (5)` and `id INT()` now get non-null params, so `typePrecision` is null where it was 0 before. That is a non-DECIMAL outcome. Could we say in the PR description that the whitespace and empty-parentheses tolerance is global, or pin it in a test?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:40:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4531469876",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+      "text": "[AI Assisted] Nit: the message says `between 0 and precision`, but the check only tests `scale > precision`. The lower bound holds only because `\\d{1,9}` rejects a minus sign. Could we add `scale < 0 ||` to the check, or reword the message to say the scale must not exceed the precision?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:40:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4531469880",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
+      "text": "[AI Assisted] Nit: this asserts only the wrapper prefix `Invalid column definition`, so the test cannot tell the at-most-2-parameters, non-numeric, precision-range and scale-range branches apart. Could we assert the root cause message for each input, for example with a parameterized test that pairs each input with its…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-10T22:40:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#pullrequestreview-5850626879",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Review at 6c060c51. Two items that fall outside the inline anchors. Docs: `docs/usage/tables/deltalake.md:118` and `docs/usage/tables/formats.md:142` still list a bare `DECIMAL` and the old `\"id INT, name STRING\"` example, while `docs/usage/cli.md` and the CLI help now say `DECIMAL(p,s)`. Could we use th…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:40:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4531469862",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+      "text": "[AI Assisted] A typo in the DECIMAL parameter list gives a silently wrong column. `price DECIMAL(12,3` (missing `)`) and `price DECIMAL[10,2]` (brackets) do not match the optional parameter group, so `params` is null and the bare-DECIMAL default applies. Both create `decimal(10,0)` with no error, and the precision and…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
-      "at": "2026-11-10T17:42:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6774676470",
+      "at": "2026-11-10T22:08:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6780595034",
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": true
+      "answered": false
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T18:44:49Z",
-    "updated_at": "2026-11-10T18:45:36Z",
+    "last_push": "2026-11-10T21:36:42Z",
+    "updated_at": "2026-11-10T22:40:28Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-10T17:42:37Z",
+     "at": "2026-11-10T22:08:15Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 73
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep column type_text case on table create",
    "date": "2026-11-10",
    "created_at": "2026-11-10T16:12:44Z",
-   "merged_at": null,
+   "merged_at": "2026-11-10",
    "reported": true,
    "pr": {
     "number": 2165,
@@ -659,21 +725,23 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-10T18:48:39Z",
-    "updated_at": "2026-11-10T18:48:53Z",
+    "updated_at": "2026-11-10T20:59:54Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-10T17:42:36Z",
      "maintainer": true
     },
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 72
   },
@@ -798,7 +866,7 @@
       ],
       [
        "h",
-       "@@ -120,6 +126,33 @@"
+       "@@ -120,6 +126,37 @@"
       ],
       [
        "c",
@@ -818,7 +886,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 33,
+     "additions": 37,
      "deletions": 0
     },
     {
@@ -887,29 +955,79 @@
      {
       "kind": "comment",
       "who": "yili-db",
-      "at": "2026-11-10T17:42:35Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6774675655",
+      "at": "2026-11-10T23:04:17Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6781726513",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:08:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6780595711",
       "maintainer": true,
       "path": null,
       "text": "/review",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491356",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] The change applies to managed Delta loads through `loadV1Table` too, but the new tests only cover external Parquet. CI passing does not show the new metadata is harmless on a Delta load. Could we add a cheap managed Delta load check?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491366",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCColumnConversions.java",
+      "text": "[AI Assisted] The Javadoc now describes the fallback, which is good. Could we add `@param` and `@return` tags for `columnName` and `typeJson`, following the file's usual form?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491372",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCColumnConversionsSuite.java",
+      "text": "[AI Assisted] The empty, null and non-object metadata cases could be one parameterized test over input and expected pairs.",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-10T21:02:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#pullrequestreview-5849339721",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the fallback, the malformed and unrepresentable cases are now covered by tests. Two items have no diff line, so they are here. 1. The description should call out that `__CHAR_VARCHAR_TYPE_STRING` now comes back on load. Spark's `CharVarcharUtils` reads it to restore char(n)/varchar(n) semantic…",
+      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T18:48:08Z",
-    "updated_at": "2026-11-10T18:48:26Z",
+    "last_push": "2026-11-10T22:11:31Z",
+    "updated_at": "2026-11-10T23:04:17Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-10T17:42:35Z",
+     "at": "2026-11-10T23:04:17Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 71
   },
@@ -917,7 +1035,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Delete dependent external locations on credential force delete",
+   "title": "Handle external locations whose credential was force-deleted",
    "date": "2026-11-10",
    "created_at": "2026-11-10T13:04:23Z",
    "merged_at": null,
@@ -934,11 +1052,11 @@
      "lines": [
       [
        "h",
-       "@@ -151,7 +151,13 @@"
+       "@@ -74,12 +74,10 @@"
       ],
       [
        "c",
-       "        /* readOnly= */ false);"
+       "        /* readOnly= */ true);"
       ],
       [
        "c",
@@ -949,156 +1067,36 @@
        ""
       ],
       [
-       "d",
-       "  public UUID deleteCredential(String name, boolean force) {"
-      ],
-      [
        "a",
-       "  /**"
-      ],
-      [
-       "a",
-       "   * Deletes a credential. With {@code force}, the external locations using it are deleted in the"
-      ],
-      [
-       "a",
-       "   * same transaction so none are left pointing at a missing credential."
-      ],
-      [
-       "a",
-       "   *"
-      ],
-      [
-       "a",
-       "   * @return the IDs of the deleted credential and of any deleted external locations"
-      ],
-      [
-       "a",
-       "   */"
-      ],
-      [
-       "a",
-       "  public List<UUID> deleteCredential(String name, boolean force) {"
+       "  /** Returns null if the credential no longer exists, e.g. after a force delete. */"
       ],
       [
        "c",
-       "    LOGGER.debug(\"Deleting storage credential {}\", name);"
+       "  protected String getCredentialName(Session session, UUID id) {"
       ],
       [
        "c",
-       "    return TransactionManager.executeWithTransaction("
-      ],
-      [
-       "c",
-       "        sessionFactory,"
-      ],
-      [
-       "h",
-       "@@ -160,34 +166,40 @@"
-      ],
-      [
-       "c",
-       "          if (existingCredential == null) {"
-      ],
-      [
-       "c",
-       "            throw new BaseException(ErrorCode.NOT_FOUND, \"Credential not found: \" + name);"
-      ],
-      [
-       "c",
-       "          }"
+       "    CredentialDAO credentialDAO = session.get(CredentialDAO.class, id);"
       ],
       [
        "d",
-       "          if (!force) {"
+       "    if (credentialDAO == null) {"
       ],
       [
        "d",
-       "            // Check if it's still used by any external location."
+       "      throw new BaseException(ErrorCode.INTERNAL, \"Credential not found: \" + id);"
       ],
       [
        "d",
-       "            ExternalLocationDAO externalLocationDAO ="
-      ],
-      [
-       "d",
-       "                getExternalLocationDAOUsingCredential(session, existingCredential.getId());"
-      ],
-      [
-       "d",
-       "            if (externalLocationDAO != null) {"
-      ],
-      [
-       "d",
-       "              throw new BaseException("
-      ],
-      [
-       "d",
-       "                  ErrorCode.INVALID_ARGUMENT,"
-      ],
-      [
-       "d",
-       "                  \"Credential still used by external location '\""
-      ],
-      [
-       "d",
-       "                      + externalLocationDAO.getName()"
-      ],
-      [
-       "d",
-       "                      + \"'\");"
-      ],
-      [
-       "d",
-       "            }"
-      ]
-     ],
-     "truncated": true,
-     "additions": 28,
-     "deletions": 16
-    },
-    {
-     "path": "server/src/main/java/io/unitycatalog/server/service/CredentialService.java",
-     "lines": [
-      [
-       "h",
-       "@@ -112,8 +112,9 @@"
-      ],
-      [
-       "c",
-       "  public HttpResponse deleteCredential("
-      ],
-      [
-       "c",
-       "      @Param(\"name\") @AuthorizeResourceKey(CREDENTIAL) String name,"
-      ],
-      [
-       "c",
-       "      @Param(\"force\") Optional<Boolean> force) {"
-      ],
-      [
-       "d",
-       "    UUID deletedCredentialId = credentialRepository.deleteCredential(name, force.orElse(false));"
-      ],
-      [
-       "d",
-       "    removeAuthorizations(deletedCredentialId.toString());"
-      ],
-      [
-       "a",
-       "    for (UUID deletedId : credentialRepository.deleteCredential(name, force.orElse(false))) {"
-      ],
-      [
-       "a",
-       "      removeAuthorizations(deletedId.toString());"
-      ],
-      [
-       "a",
        "    }"
       ],
       [
-       "c",
-       "    return HttpResponse.of(HttpStatus.OK);"
+       "d",
+       "    return credentialDAO.getName();"
+      ],
+      [
+       "a",
+       "    return credentialDAO == null ? null : credentialDAO.getName();"
       ],
       [
        "c",
@@ -1106,16 +1104,160 @@
       ],
       [
        "c",
-       "}"
+       ""
+      ],
+      [
+       "c",
+       "  protected CredentialDAO getCredentialDAO(Session session, String name) {"
       ]
      ],
      "truncated": false,
-     "additions": 3,
-     "deletions": 2
+     "additions": 2,
+     "deletions": 4
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -289,8 +289,8 @@"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @param url the storage path to find credentials for (e.g., s3://bucket/path/to/data)"
+      ],
+      [
+       "c",
+       "   * @return the storage credential if an external location covers this path, empty otherwise"
+      ],
+      [
+       "d",
+       "   * @throws BaseException with FAILED_PRECONDITION if multiple external locations cover the path"
+      ],
+      [
+       "d",
+       "   *     (invalid state) or if the credential referenced by the external location does not exist"
+      ],
+      [
+       "a",
+       "   * @throws BaseException with INTERNAL if multiple external locations cover the path (invalid"
+      ],
+      [
+       "a",
+       "   *     state), or if the credential referenced by the external location was deleted"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public Optional<CredentialDAO> getExternalLocationCredentialDaoForPath(NormalizedURL url) {"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "h",
+       "@@ -334,7 +334,10 @@"
+      ],
+      [
+       "c",
+       "    if (credentialDAO == null) {"
+      ],
+      [
+       "c",
+       "      throw new BaseException("
+      ],
+      [
+       "c",
+       "          ErrorCode.INTERNAL,"
+      ],
+      [
+       "d",
+       "          String.format(\"Credential %s for '%s' not found.\", credentialId, url));"
+      ],
+      [
+       "a",
+       "          String.format("
+      ],
+      [
+       "a",
+       "              \"The storage credential for '%s' no longer exists. Update the external location \""
+      ],
+      [
+       "a",
+       "                  + \"that covers this path with a new credential.\","
+      ],
+      [
+       "a",
+       "              url));"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    return Optional.of(credentialDAO);"
+      ],
+      [
+       "c",
+       "  }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 3
     }
    ],
    "track": {
     "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:35:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#discussion_r4531421626",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+      "text": "I suggested `NOT_FOUND` earlier, but `INTERNAL` is better here: a 404 on path credentials makes the Spark connector fall back to ambient credentials, and `INTERNAL` is what this path already returned on main. Could we keep `INTERNAL` and make the message say that the storage credential for this path no longer exists a…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-10T22:30:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#pullrequestreview-5850514790",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The remaining item from the earlier comment is the `force` description in `api/all.yaml` and the regenerated `api/Apis/CredentialsApi.md`. It should say that dependent external locations are kept. The `credential_name` field description should say it is omitted while the credential is missing, and that a…",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T22:05:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6780540693",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T21:18:05Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6779511589",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
      {
       "kind": "comment",
       "who": "yili-db",
@@ -1124,7 +1266,7 @@
       "maintainer": true,
       "path": null,
       "text": "I think force-deleting a credential should keep its dependent external locations instead of deleting them and their grants. - Keeping the locations is less destructive. Their URLs, owners, comments and grants survive, and no new authorization is needed on the locations. - A location can be repaired later by updating i…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -1134,24 +1276,24 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T12:44:21Z",
-    "updated_at": "2026-11-10T18:33:29Z",
+    "last_push": "2026-11-10T23:22:05Z",
+    "updated_at": "2026-11-10T23:22:07Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-10T18:32:53Z",
+     "at": "2026-11-10T22:05:46Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 70
   },
@@ -10853,7 +10995,7 @@
      "lines": [
       [
        "h",
-       "@@ -404,15 +404,15 @@"
+       "@@ -411,7 +411,7 @@"
       ],
       [
        "c",
@@ -10885,15 +11027,15 @@
       ],
       [
        "c",
-       "                loaded=get_instance_fn("
+       "                loaded=_LOADED_CALLBACK.validate_python("
+      ],
+      [
+       "h",
+       "@@ -421,7 +421,7 @@"
       ],
       [
        "c",
-       "                    value=value,"
-      ],
-      [
-       "c",
-       "                    config_file_path=config_file_path,"
+       "                    )"
       ],
       [
        "c",
@@ -10948,8 +11090,8 @@
     "approved_by": [
      "VANDRANKI"
     ],
-    "last_push": "2026-10-09T14:28:27Z",
-    "updated_at": "2026-11-02T02:03:18Z",
+    "last_push": "2026-11-10T21:58:18Z",
+    "updated_at": "2026-11-10T22:22:58Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -14903,7 +15045,7 @@
      "lines": [
       [
        "h",
-       "@@ -17202,7 +17202,11 @@"
+       "@@ -17230,7 +17230,11 @@"
       ],
       [
        "c",
@@ -14963,7 +15105,7 @@
      "lines": [
       [
        "h",
-       "@@ -11846,13 +11846,16 @@"
+       "@@ -11865,13 +11865,16 @@"
       ],
       [
        "c",
@@ -15126,8 +15268,8 @@
     "checks": "passing",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-10-28T22:54:04Z",
-    "updated_at": "2026-11-02T01:55:47Z",
+    "last_push": "2026-11-10T21:56:29Z",
+    "updated_at": "2026-11-10T22:06:35Z",
     "conflicts": false,
     "last_comment": {
      "who": "jbrockmendel",
