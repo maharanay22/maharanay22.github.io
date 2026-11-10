@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T03:28:25Z",
+ "generated_at": "2026-11-10T09:52:46Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,8 +59,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28738,
-   "forks": 6601,
+   "stars": 28745,
+   "forks": 6603,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -97,8 +97,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50560,
-   "forks": 20736,
+   "stars": 50564,
+   "forks": 20738,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -117,7 +117,7 @@
     "Lakehouse"
    ],
    "stars": 9073,
-   "forks": 2213,
+   "forks": 2214,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63002,
-   "forks": 13140,
+   "stars": 63025,
+   "forks": 13148,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -204,11 +204,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "CREATE SCHEMA ... COMMENT ... LOCATION stores both as properties instead of the schema comment and storage root",
    "date": "2026-11-09",
    "created_at": "2026-11-09T05:38:08Z",
-   "merged_at": null,
+   "merged_at": "2026-11-10",
    "reported": true,
    "pr": {
     "number": 2156,
@@ -316,6 +316,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T05:04:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#issuecomment-6759490579",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-10T01:38:16Z",
@@ -364,33 +374,25 @@
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] Non-blocking followup, not for this PR: Spark's `owner` key is still passed through here as a plain property. It could be handled separately.",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-09T23:02:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#issuecomment-6753815412",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-10T02:28:14Z",
-    "updated_at": "2026-11-10T02:40:20Z",
+    "updated_at": "2026-11-10T07:34:10Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-09T23:02:39Z",
+     "at": "2026-11-10T05:04:18Z",
      "maintainer": true
     },
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 69
   },
@@ -10750,13 +10752,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-06T19:01:57Z",
-    "updated_at": "2026-11-06T19:30:20Z",
-    "conflicts": true,
+    "last_push": "2026-11-10T03:10:01Z",
+    "updated_at": "2026-11-10T03:27:59Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -11585,13 +11587,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-06T19:01:56Z",
-    "updated_at": "2026-11-07T06:52:54Z",
-    "conflicts": true,
+    "last_push": "2026-11-10T03:10:00Z",
+    "updated_at": "2026-11-10T03:27:57Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -11746,13 +11748,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-06T19:01:55Z",
-    "updated_at": "2026-11-06T19:30:16Z",
-    "conflicts": true,
+    "last_push": "2026-11-10T03:09:59Z",
+    "updated_at": "2026-11-10T03:27:56Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },

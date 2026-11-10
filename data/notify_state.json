@@ -22,29 +22,29 @@
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/databricks/databricks-sql-python/pull/979": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/databricks/databricks-sql-python/pull/982": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/databricks/dbt-databricks/pull/1709": {
   "approved_by": [],
@@ -666,12 +666,14 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2156": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
-  "last_comment": "yili-db@2026-11-09T23:02:39Z",
+  "last_comment": "yili-db@2026-11-10T05:04:18Z",
   "last_comment_who": "yili-db",
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  }
 }
