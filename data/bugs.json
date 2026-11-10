@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T12:00:49Z",
+ "generated_at": "2026-11-10T16:47:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -40,7 +40,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3574,
+   "stars": 3575,
    "forks": 697,
    "package": "unitycatalog-ai",
    "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
@@ -59,8 +59,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28745,
-   "forks": 6603,
+   "stars": 28749,
+   "forks": 6604,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -78,7 +78,7 @@
     "Databricks",
     "Connectors"
    ],
-   "stars": 25,
+   "stars": 26,
    "forks": 11,
    "package": null,
    "impact": "In review: PostgreSQL, SQL Server and Databricks connector fixes for exact integers with NULLs, connection-string escaping and native queries.",
@@ -97,8 +97,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50565,
-   "forks": 20738,
+   "stars": 50569,
+   "forks": 20740,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -116,7 +116,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9073,
+   "stars": 9074,
    "forks": 2214,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63033,
-   "forks": 13152,
+   "stars": 63049,
+   "forks": 13165,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -201,6 +201,842 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Support DECIMAL(p,s) columns in table create",
+   "date": "2026-11-10",
+   "created_at": "2026-11-10T16:12:51Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2166,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2166"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -12,6 +12,7 @@"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.internal.SnapshotImpl;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.BasePrimitiveType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.DataType;"
+      ],
+      [
+       "a",
+       "import io.delta.kernel.types.DecimalType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.IntegerType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.StructType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.VariantType;"
+      ],
+      [
+       "h",
+       "@@ -23,6 +24,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.auth.TokenProvider;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.AwsCredentials;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.ColumnInfo;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.client.model.ColumnTypeName;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.TemporaryCredentials;"
+      ],
+      [
+       "c",
+       "import java.net.URI;"
+      ],
+      [
+       "c",
+       "import java.util.HashMap;"
+      ],
+      [
+       "h",
+       "@@ -223,6 +225,9 @@"
+      ],
+      [
+       "c",
+       "    if (column.getTypeName() == null) {"
+      ],
+      [
+       "c",
+       "      throw new IllegalArgumentException(\"Column type is missing: \" + column.getName());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       "    if (column.getTypeName() == ColumnTypeName.DECIMAL) {"
+      ],
+      [
+       "a",
+       "      return new DecimalType(column.getTypePrecision(), column.getTypeScale());"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    return findBasicTypeFromString(column.getTypeName().toString());"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -243,7 +248,6 @@"
+      ],
+      [
+       "c",
+       "      case \"TIMESTAMP\":"
+      ],
+      [
+       "c",
+       "      case \"TIMESTAMP_NTZ\":"
+      ],
+      [
+       "c",
+       "      case \"BINARY\":"
+      ]
+     ],
+     "truncated": true,
+     "additions": 5,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -737,14 +737,15 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private static String setPrecisionAndScale("
+      ],
+      [
+       "c",
+       "      ColumnInfo columnInfo, String typeText, String params) {"
+      ],
+      [
+       "d",
+       "    if (params != null) {"
+      ],
+      [
+       "d",
+       "      String[] paramArray = params.split(\",\");"
+      ],
+      [
+       "d",
+       "      if (typeText.equals(\"DECIMAL\") && paramArray.length == 2) {"
+      ],
+      [
+       "d",
+       "        columnInfo.setTypePrecision(Integer.valueOf(paramArray[0].trim()));"
+      ],
+      [
+       "d",
+       "        columnInfo.setTypeScale(Integer.valueOf(paramArray[1].trim()));"
+      ],
+      [
+       "d",
+       "        return \"(\" + paramArray[0].trim() + \",\" + paramArray[1].trim() + \")\";"
+      ],
+      [
+       "d",
+       "      }"
+      ],
+      [
+       "d",
+       "    } else {"
+      ],
+      [
+       "a",
+       "    if (typeText.equals(\"DECIMAL\")) {"
+      ],
+      [
+       "a",
+       "      String[] paramArray = params == null ? new String[0] : params.split(\",\");"
+      ],
+      [
+       "a",
+       "      int precision = paramArray.length > 0 ? Integer.parseInt(paramArray[0].trim()) : 10;"
+      ],
+      [
+       "a",
+       "      int scale = paramArray.length > 1 ? Integer.parseInt(paramArray[1].trim()) : 0;"
+      ],
+      [
+       "a",
+       "      columnInfo.setTypePrecision(precision);"
+      ],
+      [
+       "a",
+       "      columnInfo.setTypeScale(scale);"
+      ],
+      [
+       "a",
+       "      return \"(\" + precision + \",\" + scale + \")\";"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "    if (params == null) {"
+      ],
+      [
+       "c",
+       "      columnInfo.setTypePrecision(0);"
+      ],
+      [
+       "c",
+       "      columnInfo.setTypeScale(0);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "h",
+       "@@ -773,15 +774,18 @@"
+      ],
+      [
+       "c",
+       "        String typeName = matcher.group(2).toUpperCase(); // e.g., DECIMAL, VARCHAR, INT"
+      ],
+      [
+       "c",
+       "        String params = matcher.group(4); // e.g., 10,2 or 255"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        String precisionAndScale = setPrecisionAndScale(columnInfo, typeName, params);"
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 14,
+     "deletions": 10
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-10T15:07:21Z",
+    "updated_at": "2026-11-10T16:12:52Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 73
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep column type_text case on table create",
+   "date": "2026-11-10",
+   "created_at": "2026-11-10T16:12:44Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2165,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2165"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/TableRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -46,7 +46,6 @@"
+      ],
+      [
+       "c",
+       "import java.util.Comparator;"
+      ],
+      [
+       "c",
+       "import java.util.Date;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "d",
+       "import java.util.Locale;"
+      ],
+      [
+       "c",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Objects;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "h",
+       "@@ -829,7 +828,7 @@"
+      ],
+      [
+       "c",
+       "            .map("
+      ],
+      [
+       "c",
+       "                c -> {"
+      ],
+      [
+       "c",
+       "                  ColumnUtils.validateTypeJson(c, format);"
+      ],
+      [
+       "d",
+       "                  return c.typeText(c.getTypeText().toLowerCase(Locale.ROOT));"
+      ],
+      [
+       "a",
+       "                  return c;"
+      ],
+      [
+       "c",
+       "                })"
+      ],
+      [
+       "c",
+       "            .toList();"
+      ],
+      [
+       "c",
+       "    Long createTime = System.currentTimeMillis();"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-10T15:13:48Z",
+    "updated_at": "2026-11-10T16:12:46Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 72
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep column metadata such as DEFAULT values when loading a table",
+   "date": "2026-11-10",
+   "created_at": "2026-11-10T16:12:39Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2164,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2164"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCColumnConversions.java",
+     "lines": [
+      [
+       "h",
+       "@@ -12,6 +12,7 @@"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.connector.expressions.NamedReference;"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.connector.expressions.Transform;"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.types.DataType;"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.types.Metadata;"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.types.StructField;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/**"
+      ],
+      [
+       "h",
+       "@@ -120,6 +121,23 @@"
+      ],
+      [
+       "c",
+       "    return Column.create(name, dataType, nullable, comment, metadataInJSON);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Wire -&gt; Spark field metadata: read the {@code metadata} object of a column's {@code"
+      ],
+      [
+       "a",
+       "   * type_json}. It carries what {@code type_text} cannot, such as the {@code CURRENT_DEFAULT} and"
+      ],
+      [
+       "a",
+       "   * {@code EXISTS_DEFAULT} keys of a column {@code DEFAULT}. Returns empty metadata when {@code"
+      ],
+      [
+       "a",
+       "   * type_json} or its {@code metadata} object is absent."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public static Metadata metadataOf(String typeJson) {"
+      ],
+      [
+       "a",
+       "    if (typeJson == null || typeJson.isEmpty()) {"
+      ],
+      [
+       "a",
+       "      return Metadata.empty();"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "    JsonNode metadataNode = readTree(typeJson).get(FIELD_METADATA);"
+      ],
+      [
+       "a",
+       "    if (metadataNode == null || !metadataNode.isObject()) {"
+      ],
+      [
+       "a",
+       "      return Metadata.empty();"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "    return Metadata.fromJson(writeValueAsString(metadataNode));"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ]
+     ],
+     "truncated": true,
+     "additions": 18,
+     "deletions": 0
+    },
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -1088,7 +1088,11 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private[spark] def toStructField(col: ColumnInfo): StructField ="
+      ],
+      [
+       "d",
+       "    StructField(col.getName, DataType.fromDDL(col.getTypeText), col.getNullable)"
+      ],
+      [
+       "a",
+       "    StructField("
+      ],
+      [
+       "a",
+       "      col.getName,"
+      ],
+      [
+       "a",
+       "      DataType.fromDDL(col.getTypeText),"
+      ],
+      [
+       "a",
+       "      col.getNullable,"
+      ],
+      [
+       "a",
+       "      UCColumnConversions.metadataOf(col.getTypeJson))"
+      ],
+      [
+       "c",
+       "      .withComment(col.getComment)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private[spark] def asV1Table(catalogTable: CatalogTable): Table = {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-10T15:19:19Z",
+    "updated_at": "2026-11-10T16:12:41Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 71
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Delete dependent external locations on credential force delete",
+   "date": "2026-11-10",
+   "created_at": "2026-11-10T13:04:23Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2163,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2163"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/CredentialRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -151,7 +151,13 @@"
+      ],
+      [
+       "c",
+       "        /* readOnly= */ false);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  public UUID deleteCredential(String name, boolean force) {"
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Deletes a credential. With {@code force}, the external locations using it are deleted in the"
+      ],
+      [
+       "a",
+       "   * same transaction so none are left pointing at a missing credential."
+      ],
+      [
+       "a",
+       "   *"
+      ],
+      [
+       "a",
+       "   * @return the IDs of the deleted credential and of any deleted external locations"
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public List<UUID> deleteCredential(String name, boolean force) {"
+      ],
+      [
+       "c",
+       "    LOGGER.debug(\"Deleting storage credential {}\", name);"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "c",
+       "        sessionFactory,"
+      ],
+      [
+       "h",
+       "@@ -160,34 +166,40 @@"
+      ],
+      [
+       "c",
+       "          if (existingCredential == null) {"
+      ],
+      [
+       "c",
+       "            throw new BaseException(ErrorCode.NOT_FOUND, \"Credential not found: \" + name);"
+      ],
+      [
+       "c",
+       "          }"
+      ],
+      [
+       "d",
+       "          if (!force) {"
+      ],
+      [
+       "d",
+       "            // Check if it's still used by any external location."
+      ],
+      [
+       "d",
+       "            ExternalLocationDAO externalLocationDAO ="
+      ],
+      [
+       "d",
+       "                getExternalLocationDAOUsingCredential(session, existingCredential.getId());"
+      ],
+      [
+       "d",
+       "            if (externalLocationDAO != null) {"
+      ],
+      [
+       "d",
+       "              throw new BaseException("
+      ],
+      [
+       "d",
+       "                  ErrorCode.INVALID_ARGUMENT,"
+      ],
+      [
+       "d",
+       "                  \"Credential still used by external location '\""
+      ],
+      [
+       "d",
+       "                      + externalLocationDAO.getName()"
+      ],
+      [
+       "d",
+       "                      + \"'\");"
+      ],
+      [
+       "d",
+       "            }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 28,
+     "deletions": 16
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/CredentialService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -112,8 +112,9 @@"
+      ],
+      [
+       "c",
+       "  public HttpResponse deleteCredential("
+      ],
+      [
+       "c",
+       "      @Param(\"name\") @AuthorizeResourceKey(CREDENTIAL) String name,"
+      ],
+      [
+       "c",
+       "      @Param(\"force\") Optional<Boolean> force) {"
+      ],
+      [
+       "d",
+       "    UUID deletedCredentialId = credentialRepository.deleteCredential(name, force.orElse(false));"
+      ],
+      [
+       "d",
+       "    removeAuthorizations(deletedCredentialId.toString());"
+      ],
+      [
+       "a",
+       "    for (UUID deletedId : credentialRepository.deleteCredential(name, force.orElse(false))) {"
+      ],
+      [
+       "a",
+       "      removeAuthorizations(deletedId.toString());"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    return HttpResponse.of(HttpStatus.OK);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-10T12:44:21Z",
+    "updated_at": "2026-11-10T13:04:25Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 70
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -9996,11 +10832,11 @@
     ],
     "last_push": "2026-10-09T14:28:27Z",
     "updated_at": "2026-11-02T02:03:18Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
