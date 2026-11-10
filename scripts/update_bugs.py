@@ -77,9 +77,13 @@ def request(url, payload=None, accept="application/vnd.github+json"):
 def search(q):
     nodes, after = [], None
     while True:
-        res = request("https://api.github.com/graphql", {"query": QUERY, "variables": {"q": q, "after": after}})
-        if res.get("errors"):
-            sys.exit(f"GraphQL error: {res['errors']}")
+        for attempt in range(4):
+            res = request("https://api.github.com/graphql", {"query": QUERY, "variables": {"q": q, "after": after}})
+            if not res.get("errors"):
+                break
+            if attempt == 3:
+                sys.exit(f"GraphQL error: {res['errors']}")
+            time.sleep(10 * (attempt + 1))
         page = res["data"]["search"]
         nodes += page["nodes"]
         if not page["pageInfo"]["hasNextPage"]:
