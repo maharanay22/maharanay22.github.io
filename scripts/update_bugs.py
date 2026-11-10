@@ -4,6 +4,8 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -62,8 +64,14 @@ def request(url, payload=None, accept="application/vnd.github+json"):
         "Authorization": f"Bearer {TOKEN}", "Accept": accept, "User-Agent": f"{LOGIN}-bug-page",
         "X-GitHub-Api-Version": "2022-11-28",
     })
-    with urllib.request.urlopen(req, timeout=60) as resp:
-        return json.loads(resp.read().decode())
+    for attempt in range(4):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as resp:
+                return json.loads(resp.read().decode())
+        except urllib.error.HTTPError as e:
+            if e.code < 500 or attempt == 3:
+                raise
+            time.sleep(5 * (attempt + 1))
 
 
 def search(q):
@@ -98,7 +106,11 @@ def parse_patch(patch):
 
 
 def fix_diffs(repo, number):
-    files = request(f"https://api.github.com/repos/{repo}/pulls/{number}/files?per_page=100")
+    try:
+        files = request(f"https://api.github.com/repos/{repo}/pulls/{number}/files?per_page=100")
+    except urllib.error.HTTPError as e:
+        print(f"skipping diff for {repo}#{number}: HTTP {e.code}", file=sys.stderr)
+        return []
     out, budget = [], MAX_LINES_PER_FIX
     for f in files:
         if budget <= 0 or SKIP_PATH.search(f["filename"]) or not f.get("patch"):
