@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T16:47:54Z",
+ "generated_at": "2026-11-10T17:52:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,8 +59,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28749,
-   "forks": 6604,
+   "stars": 28750,
+   "forks": 6605,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -97,8 +97,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50569,
-   "forks": 20740,
+   "stars": 50570,
+   "forks": 20741,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63049,
-   "forks": 13165,
+   "stars": 63053,
+   "forks": 13166,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -475,18 +475,33 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T17:42:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6774676470",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T15:07:21Z",
-    "updated_at": "2026-11-10T16:12:52Z",
+    "updated_at": "2026-11-10T17:42:37Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-10T17:42:37Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 73
   },
@@ -584,18 +599,33 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T17:42:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2165#issuecomment-6774676048",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T15:13:48Z",
-    "updated_at": "2026-11-10T16:12:46Z",
+    "updated_at": "2026-11-10T17:42:36Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-10T17:42:36Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 72
   },
@@ -805,18 +835,33 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T17:42:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6774675655",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T15:19:19Z",
-    "updated_at": "2026-11-10T16:12:41Z",
+    "updated_at": "2026-11-10T17:42:35Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-10T17:42:35Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 71
   },
@@ -1022,18 +1067,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-10T17:42:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6774675265",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T12:44:21Z",
-    "updated_at": "2026-11-10T13:04:25Z",
+    "updated_at": "2026-11-10T17:42:34Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-10T17:42:34Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 70
   },
