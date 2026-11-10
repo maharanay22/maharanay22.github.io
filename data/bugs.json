@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T01:33:05Z",
+ "generated_at": "2026-11-10T03:28:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -40,7 +40,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3573,
+   "stars": 3574,
    "forks": 697,
    "package": "unitycatalog-ai",
    "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28736,
+   "stars": 28738,
    "forks": 6601,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 62995,
-   "forks": 13142,
+   "stars": 63002,
+   "forks": 13140,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -316,6 +316,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-10T01:38:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#pullrequestreview-5835440700",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the fix. Mapping `COMMENT` and `LOCATION` onto the `CreateSchema` fields is the right shape, and the test is in the connector module. Nothing blocking. One note on the PR description: `CREATE SCHEMA ... LOCATION` now goes through the server storage-root checks (a covering external location, pl…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T01:38:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#discussion_r4520138930",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/SchemaOperationsTest.java",
+      "text": "[AI Assisted] Optional: a case where `LOCATION` points at a path no external location covers, asserting that the server error reaches Spark, would lock in the new behavior described above.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T01:38:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#discussion_r4520138936",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/SchemaOperationsTest.java",
+      "text": "[AI Assisted] The user-facing symptom in #2155 is managed tables landing at the catalog root, and this test does not check that. A cheap option is to fetch the schema through `SchemasApi` and assert that `storageLocation` starts with the requested location, since that is the managed location the server derives in `Sch…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T01:38:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#discussion_r4520138944",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/SchemaOperationsTest.java",
+      "text": "[AI Assisted] If an assertion above fails, this `DROP SCHEMA` is skipped and `commented_schema` is left behind, which can make later runs fail on `CREATE SCHEMA`. Could you wrap the assertions in try and finally and drop the schema in finally? `testCreateExistingSchemaThrows` already uses this pattern.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T01:38:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#discussion_r4520138949",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] Non-blocking followup, not for this PR: Spark's `owner` key is still passed through here as a plain property. It could be handled separately.",
+      "answered": true
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-09T23:02:39Z",
@@ -326,12 +376,12 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-09T05:00:04Z",
-    "updated_at": "2026-11-10T01:25:44Z",
+    "last_push": "2026-11-10T02:28:14Z",
+    "updated_at": "2026-11-10T02:40:20Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -339,8 +389,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 69
   },
