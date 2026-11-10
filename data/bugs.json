@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-10T23:24:30Z",
+ "generated_at": "2026-11-10T23:43:05Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28749,
+   "stars": 28750,
    "forks": 6606,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -500,7 +500,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] Nit: this pattern change applies to every type. `id INT (5)` and `id INT()` now get non-null params, so `typePrecision` is null where it was 0 before. That is a non-DECIMAL outcome. Could we say in the PR description that the whitespace and empty-parentheses tolerance is global, or pin it in a test?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -510,7 +510,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] Nit: the message says `between 0 and precision`, but the check only tests `scale > precision`. The lower bound holds only because `\\d{1,9}` rejects a minus sign. Could we add `scale < 0 ||` to the check, or reword the message to say the scale must not exceed the precision?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -520,7 +520,7 @@
       "maintainer": true,
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
       "text": "[AI Assisted] Nit: this asserts only the wrapper prefix `Invalid column definition`, so the test cannot tell the at-most-2-parameters, non-numeric, precision-range and scale-range branches apart. Could we assert the root cause message for each input, for example with a parameterized test that pairs each input with its…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -530,7 +530,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Review at 6c060c51. Two items that fall outside the inline anchors. Docs: `docs/usage/tables/deltalake.md:118` and `docs/usage/tables/formats.md:142` still list a bare `DECIMAL` and the old `\"id INT, name STRING\"` example, while `docs/usage/cli.md` and the CLI help now say `DECIMAL(p,s)`. Could we use th…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -540,7 +540,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] A typo in the DECIMAL parameter list gives a silently wrong column. `price DECIMAL(12,3` (missing `)`) and `price DECIMAL[10,2]` (brackets) do not match the optional parameter group, so `params` is null and the bare-DECIMAL default applies. Both create `decimal(10,0)` with no error, and the precision and…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -550,24 +550,24 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T21:36:42Z",
-    "updated_at": "2026-11-10T22:40:28Z",
+    "last_push": "2026-11-10T23:27:47Z",
+    "updated_at": "2026-11-10T23:29:38Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-10T22:08:15Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 73
   },
@@ -866,7 +866,7 @@
       ],
       [
        "h",
-       "@@ -120,6 +126,37 @@"
+       "@@ -120,6 +126,39 @@"
       ],
       [
        "c",
@@ -886,7 +886,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 37,
+     "additions": 39,
      "deletions": 0
     },
     {
@@ -960,7 +960,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -1013,21 +1013,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T22:11:31Z",
-    "updated_at": "2026-11-10T23:04:17Z",
+    "last_push": "2026-11-10T23:35:20Z",
+    "updated_at": "2026-11-10T23:38:03Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-10T23:04:17Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 71
   },
@@ -1280,20 +1280,20 @@
      }
     ],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T23:22:05Z",
-    "updated_at": "2026-11-10T23:22:07Z",
+    "updated_at": "2026-11-10T23:23:28Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-10T22:05:46Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 70
   },
