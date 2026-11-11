@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T15:14:54Z",
+ "generated_at": "2026-11-11T17:03:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3360,
+   "stars": 3361,
    "forks": 705,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28762,
+   "stars": 28763,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -97,8 +97,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50497,
-   "forks": 20736,
+   "stars": 50478,
+   "forks": 20734,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63106,
-   "forks": 13197,
+   "stars": 63111,
+   "forks": 13198,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -392,7 +392,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-10T23:47:36Z",
-    "updated_at": "2026-11-11T01:09:15Z",
+    "updated_at": "2026-11-11T15:16:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -700,7 +700,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Review at 271e69fa. One inline item on the `table write` supported-types list. The list was requested in my previous review, so this one is on me as much as the author.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -710,7 +710,7 @@
       "maintainer": true,
       "path": "docs/usage/cli.md",
       "text": "[AI Assisted] This list says `BYTE`, `SHORT`, `LONG` and `FLOAT` can be written, but they fail on write. `ColumnVectorUtils.createVector` overrides only `getInt`, `getDouble` and `getString`, and the `byteVector`, `shortVector`, `longVector` and `floatVector` helpers in `DeltaKernelWriteUtils` all go through it. The o…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -720,7 +720,7 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -754,20 +754,20 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T04:28:56Z",
-    "updated_at": "2026-11-11T08:04:21Z",
+    "last_push": "2026-11-11T17:01:56Z",
+    "updated_at": "2026-11-11T17:01:59Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-11T07:50:55Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 72
   },
