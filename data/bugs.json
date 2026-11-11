@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T19:04:54Z",
+ "generated_at": "2026-11-11T19:33:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -9,25 +9,6 @@
   "merged"
  ],
  "repos": [
-  {
-   "full": "delta-io/delta-rs",
-   "name": "delta-rs",
-   "url": "https://github.com/delta-io/delta-rs",
-   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
-   "icon": "🦀",
-   "category": "lakehouse storage",
-   "tags": [
-    "Rust",
-    "Python",
-    "Data Loss"
-   ],
-   "stars": 3362,
-   "forks": 705,
-   "package": "deltalake",
-   "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 9159509,
-   "downloads_checked": "2026-11-11"
-  },
   {
    "full": "unitycatalog/unitycatalog",
    "name": "Unity Catalog",
@@ -45,6 +26,25 @@
    "package": "unitycatalog-ai",
    "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
    "downloads_month": 672672,
+   "downloads_checked": "2026-11-11"
+  },
+  {
+   "full": "delta-io/delta-rs",
+   "name": "delta-rs",
+   "url": "https://github.com/delta-io/delta-rs",
+   "about": "Native Rust implementation of Delta Lake with the deltalake Python package, used to read and write Delta tables from pandas, Polars, DuckDB and Arrow without Spark",
+   "icon": "🦀",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "Data Loss"
+   ],
+   "stars": 3362,
+   "forks": 705,
+   "package": "deltalake",
+   "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
+   "downloads_month": 9159509,
    "downloads_checked": "2026-11-11"
   },
   {
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50479,
+   "stars": 50480,
    "forks": 20734,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63118,
-   "forks": 13201,
+   "stars": 63120,
+   "forks": 13202,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -201,6 +201,199 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Fix TIMESTAMP values and TIMESTAMP_NTZ in table read",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T19:32:11Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2183,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2183"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelReadUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -24,13 +24,16 @@"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.ShortType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.StringType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.StructType;"
+      ],
+      [
+       "a",
+       "import io.delta.kernel.types.TimestampNTZType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.TimestampType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.utils.CloseableIterator;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.utils.FileStatus;"
+      ],
+      [
+       "c",
+       "import java.io.IOException;"
+      ],
+      [
+       "a",
+       "import java.time.Instant;"
+      ],
+      [
+       "c",
+       "import java.time.LocalDate;"
+      ],
+      [
+       "c",
+       "import java.time.LocalDateTime;"
+      ],
+      [
+       "c",
+       "import java.time.ZoneOffset;"
+      ],
+      [
+       "a",
+       "import java.time.temporal.ChronoUnit;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "h",
+       "@@ -78,15 +81,10 @@"
+      ],
+      [
+       "c",
+       "      return LocalDate.ofEpochDay(daysSinceEpochUTC).toString();"
+      ],
+      [
+       "c",
+       "    } else if (dataType instanceof LongType) {"
+      ],
+      [
+       "c",
+       "      return Long.toString(row.getLong(columnOrdinal));"
+      ],
+      [
+       "d",
+       "    } else if (dataType instanceof TimestampType) {"
+      ],
+      [
+       "d",
+       "      // TimestampType data is stored internally as the number of microseconds since epoch"
+      ],
+      [
+       "d",
+       "      long microSecsSinceEpochUTC = row.getLong(columnOrdinal);"
+      ],
+      [
+       "d",
+       "      LocalDateTime dateTime ="
+      ],
+      [
+       "d",
+       "          LocalDateTime.ofEpochSecond("
+      ],
+      [
+       "d",
+       "              microSecsSinceEpochUTC / 1_000_000 /* epochSecond */,"
+      ],
+      [
+       "d",
+       "              (int) (1000 * microSecsSinceEpochUTC % 1_000_000) /* nanoOfSecond */,"
+      ],
+      [
+       "d",
+       "              ZoneOffset.UTC);"
+      ],
+      [
+       "d",
+       "      return dateTime.toString();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 7,
+     "deletions": 9
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T19:30:02Z",
+    "updated_at": "2026-11-11T19:32:13Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 77
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Add tests for loaded column metadata scenarios",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T19:18:45Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2178,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2178"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T19:18:24Z",
+    "updated_at": "2026-11-11T19:18:46Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 76
+  },
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
