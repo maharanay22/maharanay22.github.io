@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T22:00:05Z",
+ "generated_at": "2026-11-11T23:21:55Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28768,
+   "stars": 28769,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50487,
+   "stars": 50490,
    "forks": 20733,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63124,
-   "forks": 13205,
+   "stars": 63126,
+   "forks": 13207,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -193,7 +193,7 @@
     "CLI"
    ],
    "stars": 1498,
-   "forks": 257,
+   "forks": 258,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
@@ -510,30 +510,70 @@
     "feedback": [
      {
       "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T21:58:55Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6808038198",
+      "who": "shba24",
+      "at": "2026-11-11T23:13:55Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6809429780",
       "maintainer": true,
       "path": null,
-      "text": "/review",
+      "text": "Thanks a lot for this! The fix makes sense, and following the V2 pattern from #2013 made it easy to review. One thought on ordering, if you're open to it. I have a stack of PRs that adds guardrails for schema steps, starting with #2113 (which checks the steps on every pull request) through #2118. Schema steps are stil…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-11T23:05:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#pullrequestreview-5866508902",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Two items for the whole PR. Followup, V3 numbering: #2180 and #2181 also add a V3 step on all three databases. Whichever of the three merges second has to be renumbered above the first, because dev/check-migration-steps.sh refuses a new step that is not above the highest merged step. Could we agree the m…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:05:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199550",
+      "maintainer": true,
+      "path": "server/src/main/resources/db/migration/h2/V3__widen_function_types_and_comments.sql",
+      "text": "[AI Assisted] This step sends six statements on each database. The step rules in the stack (#2113 through #2118) hold each step to one statement (MigrationStepRulesTest, eachStepIsOneAllowedStatement), and the per-step recovery in #2114 only works when a step is a single statement: a MySQL step that stopped partway ma…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:05:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199569",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
+      "text": "[AI Assisted] nit: comment and parameterDefault both use LONG_COMMENT, so swapping the two columns would still pass. Two distinct 300-character values would catch that.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:05:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199578",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
+      "text": "[AI Assisted] nit: the test has no return param. Return rows share type_text, so adding one would cover the return path.",
       "answered": false
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T21:03:18Z",
-    "updated_at": "2026-11-11T21:58:55Z",
+    "updated_at": "2026-11-11T23:13:55Z",
     "conflicts": false,
     "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T21:58:55Z",
+     "who": "shba24",
+     "at": "2026-11-11T23:13:55Z",
      "maintainer": true
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 80
   },
@@ -683,33 +723,18 @@
     }
    ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T21:58:54Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#issuecomment-6808037904",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": false
-     }
-    ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-11T20:58:11Z",
     "updated_at": "2026-11-11T21:58:54Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T21:58:54Z",
-     "maintainer": true
-    },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 79
   },
@@ -987,33 +1012,18 @@
     }
    ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T21:58:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#issuecomment-6808037603",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": false
-     }
-    ],
+    "feedback": [],
     "stage": 3,
-    "checks": "failing",
-    "review": "commented",
+    "checks": "running",
+    "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-11T21:00:15Z",
-    "updated_at": "2026-11-11T21:58:53Z",
+    "updated_at": "2026-11-11T22:35:26Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T21:58:53Z",
-     "maintainer": true
-    },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 78
   },
@@ -1173,16 +1183,6 @@
       "path": null,
       "text": "[AI Assisted] Thanks. The timestamp conversion is right for sub-second and pre-1970 values, and output for other types is unchanged. Non-blocking, optional: wrap the two assertions in `testTimestampValues` in `assertAll` so both failures show. Also consider `Long.MIN_VALUE` and `Long.MAX_VALUE` cases.",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T21:02:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2183#issuecomment-6806956863",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 5,
@@ -1194,11 +1194,7 @@
     "last_push": "2026-11-11T19:30:02Z",
     "updated_at": "2026-11-11T21:47:25Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T21:02:14Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -1231,7 +1227,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/DeltaManagedTableReadWriteTest.java",
       "text": "[AI Assisted] The source here is loaded through Delta's catalog path, so its schema comes from the Delta log and the metadataOf strip from #2164 is not on this path. The assertions check Delta's own physical-name assignment. Either fold this case into testLoadManagedDeltaTableWithStoredColumnMetadata so the source com…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1241,7 +1237,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
       "text": "[AI Assisted] This adds a server, a Spark session and a table for a case that testInsertWithoutDefaultedColumnWritesDefaultValue (line 90) already covers with the same column definition. Could the pre-existing file read go into that method before the insert, so the two share one server, session and table?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1251,7 +1247,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
       "text": "[AI Assisted] Could the VARCHAR(3) COMMENT column go into testLoadTableKeepsColumnDefaultValue (line 74) instead? It is the same setup with one more column. Also compare the loaded fields one by one (data type, comment, metadata keys) rather than the whole StructType, so the test does not depend on how a null comment…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1261,34 +1257,20 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Each new method adds its own server and Spark session, so these folds save three of each per job. The UCProxySuite test is fine as is.",
-      "answered": false
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T21:02:13Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#issuecomment-6806956413",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 3,
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T21:02:05Z",
-    "updated_at": "2026-11-11T21:51:30Z",
+    "last_push": "2026-11-11T22:36:00Z",
+    "updated_at": "2026-11-11T23:10:49Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T21:02:13Z",
-     "maintainer": true
-    },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 76
   },
@@ -1383,13 +1365,16 @@
   {
    "kind": "report",
    "repo": "mlflow/mlflow",
-   "status": "open",
+   "status": "scout",
    "title": "Proxied artifact paths with # are silently truncated and overwrite each other",
    "date": "2026-11-11",
    "created_at": "2026-11-11T02:32:27Z",
    "merged_at": null,
    "reported": true,
-   "pr": null,
+   "pr": {
+    "number": 27667,
+    "url": "https://github.com/mlflow/mlflow/pull/27667"
+   },
    "issue": {
     "number": 27666,
     "url": "https://github.com/mlflow/mlflow/issues/27666"
@@ -1398,17 +1383,17 @@
    "files": [],
    "track": {
     "feedback": [],
-    "stage": 1,
+    "stage": 5,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-11T02:42:52Z",
+    "updated_at": "2026-11-11T23:09:26Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Another contributor's fix was merged"
    },
    "id": 74
   },
@@ -1486,9 +1471,9 @@
     "updated_at": "2026-11-11T15:16:17Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Maintainers labeled it Needs Discussion and are deciding between writing nanoseconds (this PR) and changing the warning. The one CI failure is a macOS runner that lost connection. Nothing to do until they decide"
    },
    "id": 73
   },
@@ -1784,16 +1769,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T17:52:54Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6803218915",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-11T08:04:21Z",
@@ -1811,16 +1786,6 @@
       "maintainer": true,
       "path": "docs/usage/cli.md",
       "text": "[AI Assisted] This list says `BYTE`, `SHORT`, `LONG` and `FLOAT` can be written, but they fail on write. `ColumnVectorUtils.createVector` overrides only `getInt`, `getDouble` and `getString`, and the `byteVector`, `shortVector`, `longVector` and `floatVector` helpers in `DeltaKernelWriteUtils` all go through it. The o…",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T07:50:55Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6790317507",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
       "answered": true
      },
      {
@@ -1842,6 +1807,26 @@
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
       "text": "[AI Assisted] Blocker: the parser tests in this class (`testParseDecimalColumns`, `testParseInvalidDecimalColumns`, `testParseDecimalBoundaries`, `testParseNonDecimalColumnsStaysLenient`) only call `CliUtils.parseColumns` and `DeltaKernelUtils.getSchema`. The class extends `BaseServerTest`, so each of them starts a se…",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T01:50:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4532966430",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
+      "text": "[AI Assisted] Nit: every DECIMAL input in this test is uppercase, so the case-insensitive lookbehind in the pattern is not exercised. Could we add a lowercase case such as `tax decimal (10,2)`?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T01:50:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4532966432",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
+      "text": "[AI Assisted] Nit: this covers only the both-null case. Could we parameterize it over `(10, null)` and `(null, 2)`? Otherwise a change from `||` to `&&` in the null check in `getDataType` would still pass.",
+      "answered": true
      }
     ],
     "stage": 5,
@@ -1853,11 +1838,7 @@
     "last_push": "2026-11-11T17:01:56Z",
     "updated_at": "2026-11-11T18:12:55Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T17:52:54Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -2006,18 +1987,7 @@
     }
    ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-10T17:42:36Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2165#issuecomment-6774676048",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     }
-    ],
+    "feedback": [],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -2027,11 +1997,7 @@
     "last_push": "2026-11-10T18:48:39Z",
     "updated_at": "2026-11-10T20:59:54Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-10T17:42:36Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -2256,16 +2222,6 @@
       "answered": true
      },
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T01:37:59Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6784428686",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-10T23:48:11Z",
@@ -2286,23 +2242,33 @@
       "answered": true
      },
      {
-      "kind": "comment",
+      "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-10T23:46:30Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6782496807",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491356",
       "maintainer": true,
-      "path": null,
-      "text": "/review",
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] The change applies to managed Delta loads through `loadV1Table` too, but the new tests only cover external Parquet. CI passing does not show the new metadata is harmless on a Delta load. Could we add a cheap managed Delta load check?",
       "answered": true
      },
      {
-      "kind": "comment",
+      "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-10T23:04:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#issuecomment-6781726513",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491366",
       "maintainer": true,
-      "path": null,
-      "text": "/review",
+      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCColumnConversions.java",
+      "text": "[AI Assisted] The Javadoc now describes the fallback, which is good. Could we add `@param` and `@return` tags for `columnName` and `typeJson`, following the file's usual form?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-10T21:02:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2164#discussion_r4530491372",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCColumnConversionsSuite.java",
+      "text": "[AI Assisted] The empty, null and non-object metadata cases could be one parameterized test over input and expected pairs.",
       "answered": true
      }
     ],
@@ -2315,11 +2281,7 @@
     "last_push": "2026-11-11T01:02:00Z",
     "updated_at": "2026-11-11T07:34:54Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-11T01:37:59Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -2630,16 +2592,6 @@
       "answered": true
      },
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-10T23:55:45Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6782652650",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-10T22:35:09Z",
@@ -2662,11 +2614,11 @@
      {
       "kind": "comment",
       "who": "yili-db",
-      "at": "2026-11-10T22:05:46Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6780540693",
+      "at": "2026-11-10T18:32:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2163#issuecomment-6775845484",
       "maintainer": true,
       "path": null,
-      "text": "/review",
+      "text": "I think force-deleting a credential should keep its dependent external locations instead of deleting them and their grants. - Keeping the locations is less destructive. Their URLs, owners, comments and grants survive, and no new authorization is needed on the locations. - A location can be repaired later by updating i…",
       "answered": true
      }
     ],
@@ -2806,16 +2758,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-10T05:04:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2156#issuecomment-6759490579",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-10T01:38:16Z",
@@ -2875,11 +2817,7 @@
     "last_push": "2026-11-10T02:28:14Z",
     "updated_at": "2026-11-10T07:34:10Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-10T05:04:18Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -5053,16 +4991,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-22T01:48:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#issuecomment-6330719285",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-20T20:16:31Z",
@@ -5111,6 +5039,16 @@
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
       "text": "[AI Assisted] Have you tried registering a function with a nested collection against a real server? `FunctionParameterInfoDAO.typeJson` is `@Column(name = \"type_json\")` with no length, so it is `varchar(255)`, and this value now carries the whole type tree plus the name and comment. `dict[str, list[dict[str, list[floa…",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T23:00:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2013#discussion_r4319730298",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils_oss.py",
+      "text": "[AI Assisted] One more behavior change worth calling out in the description: collections used to be a bare `\"array\"` / `\"map\"`, both in `JSON_SCHEMA_TYPE`, so they counted as strict. Now the leaf is checked, so `list[datetime.date]` or `dict[str, Decimal]` flips the OpenAI tool to `strict=false`. Probably more correct…",
+      "answered": true
      }
     ],
     "stage": 5,
@@ -5122,11 +5060,7 @@
     "last_push": "2026-10-20T20:53:42Z",
     "updated_at": "2026-10-22T17:15:43Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-22T01:48:39Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -5226,18 +5160,7 @@
     }
    ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:51:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2012#issuecomment-6274774966",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     }
-    ],
+    "feedback": [],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -5247,11 +5170,7 @@
     "last_push": "2026-10-17T01:01:07Z",
     "updated_at": "2026-10-19T19:57:17Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T18:51:42Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -5407,18 +5326,7 @@
     }
    ],
    "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:51:35Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2011#issuecomment-6274772774",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     }
-    ],
+    "feedback": [],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
@@ -5428,11 +5336,7 @@
     "last_push": "2026-10-17T00:35:23Z",
     "updated_at": "2026-10-19T19:56:28Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T18:51:35Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -8755,16 +8659,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:22:08Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1988#issuecomment-6279535224",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T05:44:43Z",
@@ -8824,11 +8718,7 @@
     "last_push": "2026-10-19T18:18:42Z",
     "updated_at": "2026-10-20T18:06:44Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T23:22:08Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -9096,16 +8986,6 @@
       "answered": true
      },
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:22:28Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#issuecomment-6279538412",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T06:07:35Z",
@@ -9143,6 +9023,16 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `Decimal(str(value))` accepts `\"NaN\"`, `\"Infinity\"`, `\"sNaN\"`, and JSON can produce `float(\"inf\")`/`nan`. SQL DECIMAL can't represent any of these, and `sNaN` only fails on the first arithmetic inside the user's function, far from the bad input. Should we reject `not result.is_finite()`? Please add these…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-19T06:07:35Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1987#discussion_r4310798127",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] TIMESTAMP_NTZ with a `Z`/offset becomes a tz-aware datetime here, which contradicts NTZ. Should NTZ reject offsets instead? Either way, can the docstring state the behavior?",
       "answered": true
      }
     ],
@@ -12051,16 +11941,6 @@
       "answered": true
      },
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-20T18:59:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6298802675",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-10-19T19:54:54Z",
@@ -12081,16 +11961,6 @@
       "answered": true
      },
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:51:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#issuecomment-6274767377",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-18T09:26:40Z",
@@ -12098,6 +11968,26 @@
       "maintainer": true,
       "path": "clients/python/build/templates/asyncio/rest.mustache",
       "text": "A plain bump to 7.11.0+ won't be enough to retire this. From 7.11.0 on (still true in 7.26.0), the Java `native` client decodes sync responses with `new String(readAllBytes())`, i.e. the JVM default charset, which is the regression you hit. Can we say that here so whoever upgrades knows what else has to move? A tracki…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:26:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505901",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "Someone bumping the plugin has no pointer to this override. Can we add one here, and a matching note next to the version in `project/plugins.sbt`? [code] (ai assisted)",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T09:26:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1975#discussion_r4306505902",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "The retry client is lazy too (created on the first GET, closed in `close()`), but neither test sets `retries`, so if it went back to eager creation nothing would fail. Can we add a small case with `retries` set: `api_client.rest_client.pool_manager` and `retry_client` are `None` before the first call, both are set aft…",
       "answered": true
      }
     ],
@@ -12304,16 +12194,6 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] nit: nothing checks that a repeated call reuses the cached callable, so a change that re-`exec`s on every call would still pass these tests. Could you assert `func_cache[full_name]` is the same object after a second call?",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T05:52:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1971#issuecomment-6260648118",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 5,
@@ -12325,11 +12205,7 @@
     "last_push": "2026-10-10T20:44:03Z",
     "updated_at": "2026-10-19T08:43:06Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T05:52:01Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -13644,16 +13520,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-03T19:00:07Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6612844827",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-10-19T23:08:50Z",
@@ -13661,16 +13527,6 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks, the test changes look good, and your reason for keeping the async `None` case makes sense. Since the sandbox executor maps `None` itself, nothing else reaches that check. One last thing, on the description: - Testing still lists only `False`, `0`, `0.0` and `\"\"` \"plus a `None` case\". Can you add…",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:52:06Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#issuecomment-6274782568",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
       "answered": true
      },
      {
@@ -13702,6 +13558,16 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "nit: the description says `[]` and `{}` were also affected, but these cases don't cover them. Can you add an `ARRAY` case and a `MAP` case, or narrow the description?",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-10-18T22:06:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1969#discussion_r4308965250",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "nit: the `uc_client` fixture also does `await uc_api_client.close()`. Can you mirror that here?",
+      "answered": true
      }
     ],
     "stage": 5,
@@ -13713,11 +13579,7 @@
     "last_push": "2026-10-18T23:03:47Z",
     "updated_at": "2026-11-03T21:21:28Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-03T19:00:07Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -14958,16 +14820,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T23:22:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#issuecomment-6279536777",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-19T06:06:35Z",
@@ -15016,6 +14868,16 @@
       "path": "ai/core/tests/core/test_local_executor.py",
       "text": "nit: this explicit `undo()` is load-bearing (it must run before the reload so the real `resource` is imported again). A short comment would keep someone from removing it as redundant with monkeypatch's auto-teardown.",
       "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-10-19T06:06:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/1967#pullrequestreview-5567524669",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the fix, this is small and in the right place. The fork check failing closed with a clear message (instead of crashing, or silently running unrestricted) is the right call. A few comments inline, none blocking.",
+      "answered": true
      }
     ],
     "stage": 5,
@@ -15027,11 +14889,7 @@
     "last_push": "2026-10-19T18:14:15Z",
     "updated_at": "2026-10-20T18:28:10Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T23:22:21Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
@@ -15270,16 +15128,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-19T18:51:09Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6274764498",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-10-18T09:35:30Z",
@@ -15318,16 +15166,6 @@
       "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
       "text": "nit: The new comment says history \"can be sent back as-is\", but `to_dict()` still returns only `role` and `content`, so it drops the fields this PR keeps. Nothing in `ai/` calls it. Can it just `return self.model_dump()` so the two can't disagree?",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-10-18T07:53:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/1966#issuecomment-6247342827",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 5,
@@ -15339,11 +15177,7 @@
     "last_push": "2026-10-18T14:42:52Z",
     "updated_at": "2026-10-19T19:51:47Z",
     "conflicts": false,
-    "last_comment": {
-     "who": "yili-db",
-     "at": "2026-10-19T18:51:09Z",
-     "maintainer": true
-    },
+    "last_comment": null,
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
