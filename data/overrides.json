@@ -49,7 +49,7 @@
         "Windows"
       ],
       "package": "unitycatalog-ai",
-      "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop."
+      "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client."
     },
     "databricks/dbt-databricks": {
       "name": "dbt-databricks",

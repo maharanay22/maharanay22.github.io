@@ -22,7 +22,11 @@
   .lib h3 a { color: var(--text); text-decoration: none; }
   .lib h3 a:hover { color: var(--accent); text-decoration: underline; }
   .counts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .counts div { display: flex; flex-direction: column; background: var(--surface-2); border-radius: var(--radius-sm); padding: 8px 12px; min-width: 0; }
+  .counts button { display: flex; flex-direction: column; align-items: flex-start; text-align: left; background: var(--surface-2); border: 1px solid transparent; border-radius: var(--radius-sm); padding: 8px 12px; min-width: 0; font: inherit; color: inherit; cursor: pointer; }
+  .counts button:hover, .counts button:focus-visible { border-color: var(--accent); }
+  button.stat { font: inherit; color: inherit; text-align: left; cursor: pointer; }
+  button.stat:hover, button.stat:focus-visible { border-color: var(--accent); }
+  .back { margin-left: auto; }
   .counts b { font-size: 1.35rem; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
   .counts span { font-size: 0.78rem; color: var(--muted); }
   .counts .is-merged b { color: var(--good); }
@@ -71,7 +75,7 @@
 <header class="topbar"><div class="container"><a class="brand" href="index.html"><strong>Maha Rana Yadavalli</strong><span>Data &amp; AI Architect</span></a><nav class="nav" aria-label="Main"><a href="index.html">Home</a><a href="bugs.html" aria-current="page">Open-source fixes</a><a href="status.html">Fix tracker</a><button class="theme-toggle" type="button" id="themeToggle">Theme</button></nav></div></header>
 
 <main>
-  <section class="hero">
+  <section class="hero" id="top-stats">
     <div class="container">
       <p class="eyebrow">Open source</p>
       <h1>Open-source contributions</h1>
@@ -107,7 +111,7 @@
         <select class="select" id="repoSel" aria-label="Project"><option value="all">All projects</option></select>
         <select class="select" id="statusSel" aria-label="Status"><option value="all">All statuses</option></select>
       </div>
-      <div class="result-line"><span id="count"></span><button class="linkbtn" id="clear" type="button" hidden>Clear filters</button></div>
+      <div class="result-line"><span id="count"></span><button class="linkbtn" id="clear" type="button" hidden>Clear filters</button><button class="linkbtn back" id="back" type="button" hidden>Back to libraries</button></div>
       <ul class="fix-list" id="fixList"><li class="fix">Loading fixes...</li></ul>
     </div>
   </section>
@@ -165,9 +169,10 @@
     var s = STATUS[status] || { label: status, badge: 'badge-closed' };
     return el('span', 'badge ' + s.badge, s.label);
   }
-  function stat(value, label, cls) {
-    var s = el('div', 'stat' + (cls ? ' ' + cls : ''));
+  function stat(value, label, cls, onClick) {
+    var s = el(onClick ? 'button' : 'div', 'stat' + (cls ? ' ' + cls : ''));
     s.append(el('b', null, whole.format(value)), el('span', null, label));
+    if (onClick) { s.type = 'button'; s.title = 'Show these fixes'; s.addEventListener('click', onClick); }
     return s;
   }
   function count(list, status) { return list.filter(function (i) { return i.status === status; }).length; }
@@ -180,14 +185,14 @@
     $('count').textContent = '';
   }
 
-  function renderHero(fixes, projects) {
+  function renderHero(fixes, projects, onFilter) {
     var merged = count(fixes, 'merged');
     var mergedProjects = new Set(fixes.filter(function (i) { return i.status === 'merged'; }).map(function (i) { return i.repo; })).size;
     $('lead').textContent = merged + ' merged fixes across ' + mergedProjects + ' projects, including pandas, MLflow, Delta Lake and Unity Catalog.';
     $('stats').replaceChildren(
-      stat(merged, 'Merged fixes', 'is-good'),
-      stat(count(fixes, 'review'), 'In review', 'is-accent'),
-      stat(fixes.length, 'Pull requests opened'),
+      stat(merged, 'Merged fixes', 'is-good', function () { onFilter('all', 'merged'); }),
+      stat(count(fixes, 'review'), 'In review', 'is-accent', function () { onFilter('all', 'review'); }),
+      stat(fixes.length, 'Pull requests opened', '', function () { onFilter('all', 'all'); }),
       stat(projects.length, 'Projects')
     );
   }
@@ -195,6 +200,7 @@
   function libraryCard(p, login, onFilter) {
     var r = p.repo, mine = p.fixes, merged = count(mine, 'merged'), review = count(mine, 'review');
     var card = el('article', 'card lib');
+    card.id = 'lib-' + r.full.replace(/[^a-z0-9]+/gi, '-');
 
     var head = el('div', 'lib-head');
     var h = el('h3'); h.append(link(r.name, r.url));
@@ -202,8 +208,12 @@
     if (r.about) head.append(el('p', null, r.about));
 
     var counts = el('div', 'counts');
-    [['is-merged', merged, 'Merged'], ['is-review', review, 'In review'], ['', mine.length, 'Total PRs']].forEach(function (c) {
-      var d = el('div', c[0]); d.append(el('b', null, c[1]), el('span', null, c[2])); counts.append(d);
+    [['is-merged', merged, 'Merged', 'merged'], ['is-review', review, 'In review', 'review'], ['', mine.length, 'Total PRs', 'all']].forEach(function (c) {
+      var d = el('button', c[0]); d.type = 'button';
+      d.setAttribute('aria-label', 'Show ' + c[2].toLowerCase() + ' fixes in ' + r.name);
+      d.append(el('b', null, c[1]), el('span', null, c[2]));
+      d.addEventListener('click', function () { onFilter(r.full, c[3], card); });
+      counts.append(d);
     });
     var pct = Math.round(merged / mine.length * 100);
     var bar = el('div', 'bar'); bar.setAttribute('role', 'img'); bar.setAttribute('aria-label', pct + '% of pull requests merged');
@@ -224,7 +234,7 @@
 
     var links = el('div', 'lib-links');
     var view = el('button', 'linkbtn', 'View fixes'); view.type = 'button';
-    view.addEventListener('click', function () { onFilter(r.full); });
+    view.addEventListener('click', function () { onFilter(r.full, 'all', card); });
     links.append(view, link('Pull requests on GitHub', r.url + '/pulls?q=is%3Apr+author%3A' + encodeURIComponent(login)));
     card.append(links);
     return card;
@@ -277,9 +287,8 @@
       return count(b.fixes, 'merged') - count(a.fixes, 'merged') || b.fixes.length - a.fixes.length;
     });
 
-    renderHero(fixes, projects);
-
-    var q = $('q'), repoSel = $('repoSel'), statusSel = $('statusSel'), clear = $('clear');
+    var q = $('q'), repoSel = $('repoSel'), statusSel = $('statusSel'), clear = $('clear'), back = $('back');
+    var returnTo = null;
     projects.forEach(function (p) { var o = el('option', null, p.repo.name); o.value = p.repo.full; repoSel.append(o); });
     Object.keys(STATUS).filter(function (s) { return count(fixes, s); }).forEach(function (s) {
       var o = el('option', null, STATUS[s].label); o.value = s; statusSel.append(o);
@@ -305,12 +314,23 @@
     repoSel.addEventListener('change', apply);
     statusSel.addEventListener('change', apply);
     clear.addEventListener('click', function () { q.value = ''; repoSel.value = 'all'; statusSel.value = 'all'; apply(); });
+    back.addEventListener('click', function () {
+      var target = returnTo || $('libraries');
+      back.hidden = true; returnTo = null;
+      target.scrollIntoView({ block: 'start' });
+    });
     apply();
 
-    var onFilter = function (full) {
-      q.value = ''; statusSel.value = 'all'; repoSel.value = full; apply();
+    var onFilter = function (full, status, from) {
+      q.value = ''; repoSel.value = full;
+      statusSel.value = Array.prototype.some.call(statusSel.options, function (o) { return o.value === status; }) ? status : 'all';
+      apply();
+      returnTo = from || $('top-stats') || null;
+      back.hidden = false;
+      back.textContent = from ? 'Back to libraries' : 'Back to top';
       $('fixes').scrollIntoView({ block: 'start' });
     };
+    renderHero(fixes, projects, onFilter);
     var login = data.login || 'maharanay22';
     $('libGrid').replaceChildren.apply($('libGrid'), projects.map(function (p) { return libraryCard(p, login, onFilter); }));
 
