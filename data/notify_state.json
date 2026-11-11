@@ -703,8 +703,8 @@
   "conflicts": false,
   "last_comment": "tdas@2026-11-11T06:04:30Z",
   "last_comment_who": "tdas",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2164": {
   "approved_by": [
@@ -714,8 +714,8 @@
   "conflicts": false,
   "last_comment": "yili-db@2026-11-11T01:37:59Z",
   "last_comment_who": "yili-db",
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2165": {
   "approved_by": [
@@ -732,9 +732,9 @@
   "approved_by": [],
   "checks": "failing",
   "conflicts": false,
-  "last_comment": "yili-db@2026-11-11T01:07:42Z",
+  "last_comment": "yili-db@2026-11-11T07:50:55Z",
   "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  }
 }
