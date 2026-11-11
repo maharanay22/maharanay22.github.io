@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T02:33:39Z",
+ "generated_at": "2026-11-11T02:46:19Z",
  "stages": [
   "reported",
   "fix sent",
@@ -60,7 +60,7 @@
     "GenAI Eval"
    ],
    "stars": 28751,
-   "forks": 6607,
+   "forks": 6608,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50576,
+   "stars": 50577,
    "forks": 20745,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -173,7 +173,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63070,
+   "stars": 63072,
    "forks": 13181,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -202,6 +202,94 @@
  ],
  "items": [
   {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "triage",
+   "title": "@mlflow.trace stores NumPy arrays and scalars as truncated strings",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T02:45:11Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 27668,
+    "url": "https://github.com/mlflow/mlflow/pull/27668"
+   },
+   "issue": {
+    "number": 27665,
+    "url": "https://github.com/mlflow/mlflow/issues/27665"
+   },
+   "proof": null,
+   "files": [
+    {
+     "path": "mlflow/tracing/utils/__init__.py",
+     "lines": [
+      [
+       "h",
+       "@@ -92,6 +92,10 @@"
+      ],
+      [
+       "c",
+       "            except Exception:"
+      ],
+      [
+       "c",
+       "                pass"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        # Detect NumPy arrays and scalars without importing numpy, which mlflow-skinny lacks."
+      ],
+      [
+       "a",
+       "        if type(obj).__module__ == \"numpy\" and hasattr(obj, \"tolist\"):"
+      ],
+      [
+       "a",
+       "            return obj.tolist()"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "        # Some object has dangerous side effect in __str__ method, so we use class name instead."
+      ],
+      [
+       "c",
+       "        if not self._is_safe_to_encode_str(obj):"
+      ],
+      [
+       "c",
+       "            return type(obj)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 2,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T02:33:35Z",
+    "updated_at": "2026-11-11T02:45:29Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+   },
+   "id": 75
+  },
+  {
    "kind": "report",
    "repo": "mlflow/mlflow",
    "status": "open",
@@ -224,39 +312,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-11T02:33:02Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
-   },
-   "id": 75
-  },
-  {
-   "kind": "report",
-   "repo": "mlflow/mlflow",
-   "status": "open",
-   "title": "@mlflow.trace stores NumPy arrays and scalars as truncated strings",
-   "date": "2026-11-11",
-   "created_at": "2026-11-11T02:32:26Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 27665,
-    "url": "https://github.com/mlflow/mlflow/issues/27665"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-11-11T02:32:58Z",
+    "updated_at": "2026-11-11T02:42:52Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
