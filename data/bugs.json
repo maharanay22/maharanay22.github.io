@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T17:03:38Z",
+ "generated_at": "2026-11-11T19:04:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3361,
+   "stars": 3362,
    "forks": 705,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28763,
+   "stars": 28766,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50478,
+   "stars": 50479,
    "forks": 20734,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63111,
-   "forks": 13198,
+   "stars": 63118,
+   "forks": 13201,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -404,11 +404,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Support DECIMAL(p,s) columns in table create",
    "date": "2026-11-10",
    "created_at": "2026-11-10T16:12:51Z",
-   "merged_at": null,
+   "merged_at": "2026-11-11",
    "reported": true,
    "pr": {
     "number": 2166,
@@ -693,6 +693,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T17:52:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6803218915",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-11T08:04:21Z",
@@ -741,33 +751,25 @@
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
       "text": "[AI Assisted] Blocker: the parser tests in this class (`testParseDecimalColumns`, `testParseInvalidDecimalColumns`, `testParseDecimalBoundaries`, `testParseNonDecimalColumnsStaysLenient`) only call `CliUtils.parseColumns` and `DeltaKernelUtils.getSchema`. The class extends `BaseServerTest`, so each of them starts a se…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-11T01:50:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4532966430",
-      "maintainer": true,
-      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
-      "text": "[AI Assisted] Nit: every DECIMAL input in this test is uppercase, so the case-insensitive lookbehind in the pattern is not exercised. Could we add a lowercase case such as `tax decimal (10,2)`?",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-11T17:01:56Z",
-    "updated_at": "2026-11-11T17:01:59Z",
+    "updated_at": "2026-11-11T18:12:55Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-11T07:50:55Z",
+     "at": "2026-11-11T17:52:54Z",
      "maintainer": true
     },
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 72
   },
