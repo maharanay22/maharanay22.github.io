@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T06:23:57Z",
+ "generated_at": "2026-11-11T12:59:32Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3359,
+   "stars": 3360,
    "forks": 705,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -40,7 +40,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3575,
+   "stars": 3576,
    "forks": 697,
    "package": "unitycatalog-ai",
    "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
@@ -59,8 +59,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28754,
-   "forks": 6608,
+   "stars": 28761,
+   "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50579,
+   "stars": 50574,
    "forks": 20745,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -117,7 +117,7 @@
     "Lakehouse"
    ],
    "stars": 9074,
-   "forks": 2216,
+   "forks": 2217,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63079,
-   "forks": 13182,
+   "stars": 63099,
+   "forks": 13192,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -193,7 +193,7 @@
     "CLI"
    ],
    "stars": 1498,
-   "forks": 256,
+   "forks": 257,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
@@ -695,6 +695,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-11T08:04:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#pullrequestreview-5855629394",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Review at 271e69fa. One inline item on the `table write` supported-types list. The list was requested in my previous review, so this one is on me as much as the author.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T08:04:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4535407253",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] This list says `BYTE`, `SHORT`, `LONG` and `FLOAT` can be written, but they fail on write. `ColumnVectorUtils.createVector` overrides only `getInt`, `getDouble` and `getString`, and the `byteVector`, `shortVector`, `longVector` and `floatVector` helpers in `DeltaKernelWriteUtils` all go through it. The o…",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T07:50:55Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6790317507",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-11T01:50:47Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#pullrequestreview-5852568539",
       "maintainer": true,
@@ -721,36 +751,6 @@
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
       "text": "[AI Assisted] Nit: every DECIMAL input in this test is uppercase, so the case-insensitive lookbehind in the pattern is not exercised. Could we add a lowercase case such as `tax decimal (10,2)`?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-11T01:50:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#discussion_r4532966432",
-      "maintainer": true,
-      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableCreationTest.java",
-      "text": "[AI Assisted] Nit: this covers only the both-null case. Could we parameterize it over `(10, null)` and `(null, 2)`? Otherwise a change from `||` to `&&` in the null check in `getDataType` would still pass.",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-11T01:07:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6783904183",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-10T23:55:46Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2166#issuecomment-6782652900",
-      "maintainer": true,
-      "path": null,
-      "text": "/review",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -758,16 +758,16 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T04:28:56Z",
-    "updated_at": "2026-11-11T04:32:48Z",
+    "updated_at": "2026-11-11T08:04:21Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
-     "at": "2026-11-11T01:07:42Z",
+     "at": "2026-11-11T07:50:55Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 72
   },
@@ -948,11 +948,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep column metadata such as DEFAULT values when loading a table",
    "date": "2026-11-10",
    "created_at": "2026-11-10T16:12:39Z",
-   "merged_at": null,
+   "merged_at": "2026-11-11",
    "reported": true,
    "pr": {
     "number": 2164,
@@ -1213,34 +1213,34 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-11T01:02:00Z",
-    "updated_at": "2026-11-11T02:30:18Z",
+    "updated_at": "2026-11-11T07:34:54Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-11T01:37:59Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 70
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Handle external locations whose credential was force-deleted",
    "date": "2026-11-10",
    "created_at": "2026-11-10T13:04:23Z",
-   "merged_at": null,
+   "merged_at": "2026-11-11",
    "reported": true,
    "pr": {
     "number": 2163,
@@ -1524,7 +1524,7 @@
       "maintainer": false,
       "path": null,
       "text": "LGTM on the yaml change.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -1577,7 +1577,7 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
@@ -1585,16 +1585,16 @@
      "tdas"
     ],
     "last_push": "2026-11-10T23:53:41Z",
-    "updated_at": "2026-11-11T06:04:30Z",
+    "updated_at": "2026-11-11T07:34:31Z",
     "conflicts": false,
     "last_comment": {
      "who": "tdas",
      "at": "2026-11-11T06:04:30Z",
      "maintainer": false
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "tdas commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 69
   },
