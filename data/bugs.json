@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T21:15:44Z",
+ "generated_at": "2026-11-11T21:25:58Z",
  "stages": [
   "reported",
   "fix sent",
@@ -24,7 +24,7 @@
    "stars": 3577,
    "forks": 697,
    "package": "unitycatalog-ai",
-   "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
+   "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 672672,
    "downloads_checked": "2026-11-11"
   },
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50484,
+   "stars": 50485,
    "forks": 20733,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
