@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T20:09:15Z",
+ "generated_at": "2026-11-11T21:06:45Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3576,
+   "stars": 3577,
    "forks": 697,
    "package": "unitycatalog-ai",
    "impact": "Makes Unity Catalog functions work correctly as tools for AI agents: arguments and results are converted correctly for Anthropic, LiteLLM and the OSS client, falsy and typed results are kept, the function cache is keyed correctly, and the client runs on Windows and outside an event loop.",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28766,
+   "stars": 28767,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -97,8 +97,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50483,
-   "forks": 20734,
+   "stars": 50484,
+   "forks": 20733,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -173,8 +173,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63120,
-   "forks": 13203,
+   "stars": 63121,
+   "forks": 13205,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -201,6 +201,777 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Widen function parameter and return type columns",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T21:05:41Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2187,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2187"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/FunctionInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -54,7 +54,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"data_type\")"
+      ],
+      [
+       "c",
+       "  private ColumnTypeName dataType;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"full_data_type\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"full_data_type\", length = 16777215)"
+      ],
+      [
+       "c",
+       "  private String fullDataType;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"external_language\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/FunctionParameterInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -43,7 +43,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"input_or_return\", nullable = false)"
+      ],
+      [
+       "c",
+       "  private InputOrReturnEnum inputOrReturn;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"type_text\", nullable = false)"
+      ],
+      [
+       "a",
+       "  @Column(name = \"type_text\", nullable = false, length = 16777215)"
+      ],
+      [
+       "c",
+       "  private String typeText;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"type_json\", length = 16777215)"
+      ],
+      [
+       "h",
+       "@@ -70,10 +70,10 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"parameter_type\")"
+      ],
+      [
+       "c",
+       "  private FunctionParameterType parameterType;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"parameter_default\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"parameter_default\", length = 65535)"
+      ],
+      [
+       "c",
+       "  private String parameterDefault;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"comment\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"comment\", length = 65535)"
+      ],
+      [
+       "c",
+       "  private String comment;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static FunctionParameterInfoDAO from("
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 3
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -27,7 +27,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"catalog_id\")"
+      ],
+      [
+       "c",
+       "  private UUID catalogId;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"comment\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"comment\", length = 65535)"
+      ],
+      [
+       "c",
+       "  private String comment;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"owner\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/VolumeInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -28,7 +28,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"schema_id\")"
+      ],
+      [
+       "c",
+       "  private UUID schemaId;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"comment\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"comment\", length = 65535)"
+      ],
+      [
+       "c",
+       "  private String comment;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"storage_location\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V3__widen_function_types_and_comments.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,6 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params ALTER COLUMN type_text CLOB NOT NULL;"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params ALTER COLUMN comment VARCHAR(65535);"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params ALTER COLUMN parameter_default VARCHAR(65535);"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_functions ALTER COLUMN full_data_type CLOB;"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_schemas ALTER COLUMN comment VARCHAR(65535);"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_volumes ALTER COLUMN comment VARCHAR(65535);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V3__widen_function_types_and_comments.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,6 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params MODIFY COLUMN type_text mediumtext NOT NULL;"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params MODIFY COLUMN comment text NULL;"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_function_params MODIFY COLUMN parameter_default text NULL;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 6,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T21:03:18Z",
+    "updated_at": "2026-11-11T21:05:42Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 80
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Don't close the shared delegate FileSystem when a scoped wrapper is closed",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T21:05:38Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2186,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2186"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
+     "lines": [
+      [
+       "h",
+       "@@ -7,9 +7,11 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.id.FileSystemCredId;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.util.CloseableUtils;"
+      ],
+      [
+       "c",
+       "import java.io.IOException;"
+      ],
+      [
+       "a",
+       "import java.lang.ref.Cleaner;"
+      ],
+      [
+       "c",
+       "import java.net.URI;"
+      ],
+      [
+       "c",
+       "import java.util.Collections;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "a",
+       "import java.util.function.Supplier;"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.conf.Configuration;"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.fs.FileSystem;"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.fs.FilterFileSystem;"
+      ],
+      [
+       "h",
+       "@@ -52,30 +54,39 @@"
+      ],
+      [
+       "c",
+       " * <p>All public {@link FileSystem} operations are delegated to the credential-scoped instance via"
+      ],
+      [
+       "c",
+       " * {@link FilterFileSystem}, so callers see a fully functional filesystem regardless of which"
+      ],
+      [
+       "c",
+       " * underlying implementation backs it."
+      ],
+      [
+       "a",
+       " *"
+      ],
+      [
+       "a",
+       " * <p>The cache owns each delegate, and every wrapper of the same scope shares it. Closing a wrapper"
+      ],
+      [
+       "a",
+       " * therefore only releases that wrapper's reference and never closes the delegate. A delegate is"
+      ],
+      [
+       "a",
+       " * closed once it has been evicted from the cache and no open wrapper still references it. A wrapper"
+      ],
+      [
+       "a",
+       " * that is never closed releases its reference when it is garbage collected."
+      ],
+      [
+       "c",
+       " */"
+      ],
+      [
+       "c",
+       "public class CredScopedFileSystem extends FilterFileSystem {"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private static final String CRED_SCOPED_FS_CACHE_MAX_SIZE ="
+      ],
+      [
+       "c",
+       "      \"unitycatalog.credScopedFs.cache.maxSize\";"
+      ],
+      [
+       "c",
+       "  private static final int CRED_SCOPED_FS_CACHE_MAX_SIZE_DEFAULT = 100;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  private static final Cleaner CLEANER = Cleaner.create();"
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 79,
+     "deletions": 9
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T20:58:11Z",
+    "updated_at": "2026-11-11T21:05:39Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 79
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Reject removing or changing reserved properties of managed tables in Delta REST updateTable",
+   "date": "2026-11-11",
+   "created_at": "2026-11-11T21:05:34Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2185,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2185"
+   },
+   "issue": null,
+   "proof": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
+     "lines": [
+      [
+       "h",
+       "@@ -174,6 +174,30 @@"
+      ],
+      [
+       "c",
+       "    return features;"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Inverse of {@link #deriveFromProtocol}, for validating the stored state when a request changes"
+      ],
+      [
+       "a",
+       "   * protocol properties without {@code set-protocol}. Properties do not record which features are"
+      ],
+      [
+       "a",
+       "   * reader features, so every stored feature is listed as both a reader and a writer feature. A"
+      ],
+      [
+       "a",
+       "   * missing or non-numeric version comes back as null."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public static DeltaProtocol synthesizeProtocolFromProperties(Map<String, String> props) {"
+      ],
+      [
+       "a",
+       "    List<String> features = List.copyOf(extractFeaturesFromProperties(props));"
+      ],
+      [
+       "a",
+       "    return new DeltaProtocol()"
+      ],
+      [
+       "a",
+       "        .minReaderVersion(parseVersion(props.get(TableProperties.MIN_READER_VERSION)))"
+      ],
+      [
+       "a",
+       "        .minWriterVersion(parseVersion(props.get(TableProperties.MIN_WRITER_VERSION)))"
+      ],
+      [
+       "a",
+       "        .readerFeatures(features)"
+      ],
+      [
+       "a",
+       "        .writerFeatures(features);"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  private static Integer parseVersion(String value) {"
+      ],
+      [
+       "a",
+       "    if (value == null) return null;"
+      ],
+      [
+       "a",
+       "    try {"
+      ],
+      [
+       "a",
+       "      return Integer.valueOf(value);"
+      ],
+      [
+       "a",
+       "    } catch (NumberFormatException e) {"
+      ],
+      [
+       "a",
+       "      return null;"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  private static void addFeatureProperties(Map<String, String> props, List<String> features) {"
+      ],
+      [
+       "c",
+       "    if (features == null) return;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
+     "lines": [
+      [
+       "h",
+       "@@ -422,18 +422,29 @@"
+      ],
+      [
+       "c",
+       "    c.removeDomainMetadata.ifPresent(u -> applyRemoveDomainMetadata(properties, u.getDomains()));"
+      ],
+      [
+       "c",
+       "    c.setTableComment.ifPresent(u -> applySetTableComment(dao, u));"
+      ],
+      [
+       "c",
+       "    c.updateSnapshotVersion.ifPresent(u -> applyUpdateSnapshotVersion(dao, properties, u));"
+      ],
+      [
+       "d",
+       "    // Re-validate the MANAGED contract against the final post-apply state. set-protocol runs"
+      ],
+      [
+       "d",
+       "    // full validation; set-domain-metadata alone only needs the DM-vs-writer-features check."
+      ],
+      [
+       "a",
+       "    // Re-validate the MANAGED contract against the final post-apply state. set-protocol, or a"
+      ],
+      [
+       "a",
+       "    // set-/remove-properties that touches a reserved key, runs full validation; set-domain-metadata"
+      ],
+      [
+       "a",
+       "    // alone only needs the DM-vs-writer-features check."
+      ],
+      [
+       "c",
+       "    if (TableType.MANAGED.toString().equals(dao.getType())) {"
+      ],
+      [
+       "a",
+       "      boolean touchesReservedProperty = touchesReservedProperty(c);"
+      ],
+      [
+       "c",
+       "      DeltaDomainMetadataUpdates effectiveDm ="
+      ],
+      [
+       "c",
+       "          DeltaPropertyMapper.synthesizeDomainMetadataFromProperties(properties.asMap());"
+      ],
+      [
+       "c",
+       "      if (c.setProtocol.isPresent()) {"
+      ],
+      [
+       "c",
+       "        UcManagedDeltaContract.validate("
+      ],
+      [
+       "c",
+       "            c.setProtocol.get().getProtocol(), effectiveDm, properties.asMap(), serverProperties);"
+      ],
+      [
+       "a",
+       "      } else if (touchesReservedProperty) {"
+      ],
+      [
+       "a",
+       "        UcManagedDeltaContract.validate("
+      ],
+      [
+       "a",
+       "            DeltaPropertyMapper.synthesizeProtocolFromProperties(properties.asMap()),"
+      ],
+      [
+       "a",
+       "            effectiveDm,"
+      ],
+      [
+       "a",
+       "            properties.asMap(),"
+      ],
+      [
+       "a",
+       "            serverProperties);"
+      ],
+      [
+       "c",
+       "      } else if (c.setDomainMetadata.isPresent()) {"
+      ],
+      [
+       "c",
+       "        UcManagedDeltaContract.validateDomainMetadataAgainstWriterFeatures("
+      ],
+      [
+       "c",
+       "            DeltaPropertyMapper.extractFeaturesFromProperties(properties.asMap()), effectiveDm);"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "a",
+       "      if (touchesReservedProperty) {"
+      ],
+      [
+       "a",
+       "        UcManagedDeltaContract.validateTableIdProperty(properties.asMap(), dao.getId().toString());"
+      ],
+      [
+       "a",
+       "      }"
+      ],
+      [
+       "c",
+       "    }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 22,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-11T21:00:15Z",
+    "updated_at": "2026-11-11T21:05:35Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 78
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -347,18 +1118,33 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:02:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2183#issuecomment-6806956863",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T19:30:02Z",
-    "updated_at": "2026-11-11T19:32:13Z",
+    "updated_at": "2026-11-11T21:02:15Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-11T21:02:14Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 77
   },
@@ -379,18 +1165,33 @@
    "proof": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:02:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#issuecomment-6806956413",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
+    "checks": "running",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T19:18:24Z",
-    "updated_at": "2026-11-11T19:18:46Z",
+    "last_push": "2026-11-11T21:02:05Z",
+    "updated_at": "2026-11-11T21:02:13Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-11T21:02:13Z",
+     "maintainer": true
+    },
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 76
   },
@@ -2858,7 +3659,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-08T15:56:54Z",
-    "updated_at": "2026-11-09T23:44:40Z",
+    "updated_at": "2026-11-11T20:20:03Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -4832,7 +5633,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-17T01:36:37Z",
-    "updated_at": "2026-10-17T01:38:37Z",
+    "updated_at": "2026-11-11T20:19:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6554,7 +7355,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-04T23:12:19Z",
-    "updated_at": "2026-11-04T23:32:17Z",
+    "updated_at": "2026-11-11T20:19:34Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -8559,7 +9360,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-31T21:24:55Z",
-    "updated_at": "2026-10-31T21:53:55Z",
+    "updated_at": "2026-11-11T20:18:22Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
