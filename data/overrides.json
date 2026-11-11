@@ -219,6 +219,11 @@
       "state": "waiting",
       "waiting_on": "maintainers",
       "next": "One test job failed because the CI worker crashed (unrelated S3 test). Waiting for a maintainer to re-run it"
+    },
+    "https://github.com/pandas-dev/pandas/pull/72006": {
+      "state": "waiting",
+      "waiting_on": "maintainers",
+      "next": "Maintainers labeled it Needs Discussion and are deciding between writing nanoseconds (this PR) and changing the warning. The one CI failure is a macOS runner that lost connection. Nothing to do until they decide"
     }
   }
 }

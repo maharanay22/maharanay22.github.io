@@ -184,6 +184,11 @@ def plan(state, waiting_on, next_step):
     return {"state": state, "waiting_on": waiting_on, "next": next_step}
 
 
+def is_command(body):
+    """A comment that only triggers a bot, like `/review` or `/take`, needs no reply."""
+    return bool(re.fullmatch(r"\s*/[\w-]+(\s+\S+)?\s*", body or ""))
+
+
 def excerpt(body, limit=320):
     text = re.sub(r"<!--.*?-->", "", body or "", flags=re.S)
     text = re.sub(r"```.*?```", " [code] ", text, flags=re.S)
@@ -205,7 +210,7 @@ def feedback(node, last_mine):
             entries.append(("inline comment", first, t["isResolved"]))
     out = []
     for kind, c, resolved in entries:
-        if is_bot(c["author"]) or c["author"]["login"] == LOGIN:
+        if is_bot(c["author"]) or c["author"]["login"] == LOGIN or is_command(c["body"]):
             continue
         at = c.get("createdAt") or c.get("submittedAt")
         out.append({
@@ -244,7 +249,7 @@ def track_pr(pr, status):
     last_push = commit.get("committedDate") or pr["createdAt"]
     reviews = [r for r in pr["latestReviews"]["nodes"] if not is_bot(r["author"])]
     bot_ok = any(is_bot(r["author"]) and r["state"] == "APPROVED" for r in pr["latestReviews"]["nodes"])
-    human = [c for c in pr["comments"]["nodes"] if not is_bot(c["author"])]
+    human = [c for c in pr["comments"]["nodes"] if not is_bot(c["author"]) and not is_command(c["body"])]
     mine = [c for c in human if c["author"]["login"] == LOGIN]
     others = [c for c in human if c["author"]["login"] != LOGIN]
     my_last = max([c["createdAt"] for c in mine] + [last_push])
