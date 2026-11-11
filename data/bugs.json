@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T21:25:58Z",
+ "generated_at": "2026-11-11T22:00:05Z",
  "stages": [
   "reported",
   "fix sent",
@@ -59,7 +59,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28767,
+   "stars": 28768,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50485,
+   "stars": 50487,
    "forks": 20733,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -173,7 +173,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63122,
+   "stars": 63124,
    "forks": 13205,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -507,18 +507,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:58:55Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6808038198",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 3,
     "checks": "running",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T21:03:18Z",
-    "updated_at": "2026-11-11T21:05:42Z",
+    "updated_at": "2026-11-11T21:58:55Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-11T21:58:55Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 80
   },
@@ -668,18 +683,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:58:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#issuecomment-6808037904",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 3,
     "checks": "running",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T20:58:11Z",
-    "updated_at": "2026-11-11T21:05:39Z",
+    "updated_at": "2026-11-11T21:58:54Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-11T21:58:54Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 79
   },
@@ -957,29 +987,44 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:58:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#issuecomment-6808037603",
+      "maintainer": true,
+      "path": null,
+      "text": "/review",
+      "answered": false
+     }
+    ],
     "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "checks": "failing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T21:00:15Z",
-    "updated_at": "2026-11-11T21:05:35Z",
+    "updated_at": "2026-11-11T21:58:53Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-11T21:58:53Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 78
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Fix TIMESTAMP values and TIMESTAMP_NTZ in table read",
    "date": "2026-11-11",
    "created_at": "2026-11-11T19:32:11Z",
-   "merged_at": null,
+   "merged_at": "2026-11-11",
    "reported": true,
    "pr": {
     "number": 2183,
@@ -1120,6 +1165,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-11T21:46:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2183#pullrequestreview-5865711869",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. The timestamp conversion is right for sub-second and pre-1970 values, and output for other types is unchanged. Non-blocking, optional: wrap the two assertions in `testTimestampValues` in `assertAll` so both failures show. Also consider `Long.MIN_VALUE` and `Long.MAX_VALUE` cases.",
+      "answered": true
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-11T21:02:14Z",
@@ -1127,24 +1182,26 @@
       "maintainer": true,
       "path": null,
       "text": "/review",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-11T19:30:02Z",
-    "updated_at": "2026-11-11T21:02:15Z",
+    "updated_at": "2026-11-11T21:47:25Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-11T21:02:14Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 77
   },
@@ -1167,6 +1224,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:51:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#discussion_r4543588768",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/DeltaManagedTableReadWriteTest.java",
+      "text": "[AI Assisted] The source here is loaded through Delta's catalog path, so its schema comes from the Delta log and the metadataOf strip from #2164 is not on this path. The assertions check Delta's own physical-name assignment. Either fold this case into testLoadManagedDeltaTableWithStoredColumnMetadata so the source com…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:51:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#discussion_r4543588776",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] This adds a server, a Spark session and a table for a case that testInsertWithoutDefaultedColumnWritesDefaultValue (line 90) already covers with the same column definition. Could the pre-existing file read go into that method before the insert, so the two share one server, session and table?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T21:51:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#discussion_r4543588783",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] Could the VARCHAR(3) COMMENT column go into testLoadTableKeepsColumnDefaultValue (line 74) instead? It is the same setup with one more column. Also compare the loaded fields one by one (data type, comment, metadata keys) rather than the whole StructType, so the test does not depend on how a null comment…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-11T21:51:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#pullrequestreview-5865761153",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Each new method adds its own server and Spark session, so these folds save three of each per job. The UCProxySuite test is fine as is.",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-11T21:02:13Z",
@@ -1182,7 +1279,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T21:02:05Z",
-    "updated_at": "2026-11-11T21:02:13Z",
+    "updated_at": "2026-11-11T21:51:30Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -1191,7 +1288,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 76
   },
