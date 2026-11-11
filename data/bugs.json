@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T19:33:29Z",
+ "generated_at": "2026-11-11T20:09:15Z",
  "stages": [
   "reported",
   "fix sent",
@@ -97,7 +97,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50480,
+   "stars": 50483,
    "forks": 20734,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -174,7 +174,7 @@
     "Tool Calls"
    ],
    "stars": 63120,
-   "forks": 13202,
+   "forks": 13203,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
