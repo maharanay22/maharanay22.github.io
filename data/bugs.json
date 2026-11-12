@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T17:44:40Z",
+ "generated_at": "2026-11-12T18:58:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28786,
+   "stars": 28785,
    "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50499,
+   "stars": 50498,
    "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63175,
-   "forks": 13228,
+   "stars": 63180,
+   "forks": 13230,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,

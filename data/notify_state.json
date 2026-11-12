@@ -223,13 +223,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4947": {
-  "approved_by": [],
+  "approved_by": [
+   "ion-elgreco"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": "ion-elgreco@2026-11-12T10:25:33Z",
   "last_comment_who": "ion-elgreco",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4949": {
   "approved_by": [
@@ -788,7 +790,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2187": {
   "approved_by": [],
@@ -812,7 +814,7 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2194": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "failing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -821,20 +823,29 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2211": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "failing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2213": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2218": {
   "approved_by": [],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  }
 }
