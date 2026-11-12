@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T14:44:48Z",
+ "generated_at": "2026-11-12T15:33:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50497,
-   "forks": 20735,
+   "forks": 20734,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63167,
+   "stars": 63170,
    "forks": 13222,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -2886,7 +2886,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-12T06:44:36Z",
+    "updated_at": "2026-11-12T14:49:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6070,11 +6070,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "load_cdf returns the deleted rows instead of the live rows when a file with a deletion vector is removed or restored",
    "date": "2026-10-24",
    "created_at": "2026-10-24T00:47:36Z",
-   "merged_at": null,
+   "merged_at": "2026-11-12",
    "reported": true,
    "pr": {
     "number": 4947,
@@ -6350,6 +6350,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "ion-elgreco",
+      "at": "2026-11-12T14:53:57Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4947#pullrequestreview-5876546436",
+      "maintainer": true,
+      "path": null,
+      "text": "Thanks for the fix @maharanay22!",
+      "answered": true
+     },
+     {
       "kind": "comment",
       "who": "ion-elgreco",
       "at": "2026-11-12T10:25:33Z",
@@ -6360,21 +6370,23 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-11-12T14:21:37Z",
-    "updated_at": "2026-11-12T14:22:01Z",
+    "review": "approved",
+    "approved_by": [
+     "ion-elgreco"
+    ],
+    "last_push": "2026-11-12T15:05:20Z",
+    "updated_at": "2026-11-12T15:29:35Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
      "at": "2026-11-12T10:25:33Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 61
   },
