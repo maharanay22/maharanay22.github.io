@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T03:01:03Z",
+ "generated_at": "2026-11-12T05:37:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3363,
-   "forks": 705,
+   "forks": 706,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 9159509,
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28771,
-   "forks": 6610,
+   "stars": 28772,
+   "forks": 6611,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50492,
-   "forks": 20735,
+   "stars": 50493,
+   "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -162,7 +162,7 @@
     "Lakehouse"
    ],
    "stars": 9074,
-   "forks": 2217,
+   "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63131,
-   "forks": 13210,
+   "stars": 63136,
+   "forks": 13211,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -291,6 +291,461 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "create_python_function silently stores an empty body for async def functions",
+   "date": "2026-11-12",
+   "created_at": "2026-11-12T05:36:42Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2213,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2213"
+   },
+   "issue": {
+    "number": 2212,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2212"
+   },
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -155,6 +155,29 @@"
+      ],
+      [
+       "c",
+       "    is_default: bool = False"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _reject_async_function(func: Callable[..., Any]) -> None:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Raises a ValueError if the function, or the function it wraps, is defined with `async def`."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Unity Catalog runs a stored function body as the body of a regular `def`, so a coroutine"
+      ],
+      [
+       "a",
+       "    or async generator function cannot be stored."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    Args:"
+      ],
+      [
+       "a",
+       "        func: The function to check."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    original = inspect.unwrap(func)"
+      ],
+      [
+       "a",
+       "    if not (inspect.iscoroutinefunction(original) or inspect.isasyncgenfunction(original)):"
+      ],
+      [
+       "a",
+       "        return"
+      ],
+      [
+       "a",
+       "    if original is func:"
+      ],
+      [
+       "a",
+       "        problem, target = \"is an async function\", \"it\""
+      ],
+      [
+       "a",
+       "    else:"
+      ],
+      [
+       "a",
+       "        problem, target = \"wraps an async function\", \"the wrapped function\""
+      ],
+      [
+       "a",
+       "    raise ValueError("
+      ],
+      [
+       "a",
+       "        f\"Function '{func.__name__}' {problem}. Async functions are not supported in Unity \""
+      ],
+      [
+       "a",
+       "        f\"Catalog. Define {target} with a regular 'def' instead of 'async def'.\""
+      ],
+      [
+       "a",
+       "    )"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def extract_function_body(func: Callable[..., Any]) -> tuple[str, int]:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    Extracts the body of a function as a string without the signature or docstring,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 25,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-12T05:34:53Z",
+    "updated_at": "2026-11-12T05:36:44Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 87
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep multi-line string literals intact in function bodies",
+   "date": "2026-11-12",
+   "created_at": "2026-11-12T05:12:50Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2211,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2211"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
+     "lines": [
+      [
+       "h",
+       "@@ -6,7 +6,6 @@"
+      ],
+      [
+       "c",
+       "import subprocess"
+      ],
+      [
+       "c",
+       "import sys"
+      ],
+      [
+       "c",
+       "import tempfile"
+      ],
+      [
+       "d",
+       "import textwrap"
+      ],
+      [
+       "c",
+       "from typing import Any"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import cloudpickle"
+      ],
+      [
+       "h",
+       "@@ -21,6 +20,7 @@"
+      ],
+      [
+       "c",
+       "    NO_OUTPUT_MESSAGE,"
+      ],
+      [
+       "c",
+       "    TIMEOUT_ERROR_MESSAGE,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "a",
+       "from unitycatalog.ai.core.utils.code_layout import dedent_code"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "_logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -31,7 +31,7 @@"
+      ],
+      [
+       "c",
+       "    using the ast module."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    try:"
+      ],
+      [
+       "d",
+       "        module_ast = ast.parse(textwrap.dedent(function_source))"
+      ],
+      [
+       "a",
+       "        module_ast = ast.parse(dedent_code(function_source))"
+      ],
+      [
+       "c",
+       "    except SyntaxError as e:"
+      ],
+      [
+       "c",
+       "        raise ValueError(\"Invalid Python source code\") from e"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -47,7 +47,7 @@"
+      ],
+      [
+       "c",
+       "    directly into the script that will be executed in a subprocess."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    function_name = _extract_function_name(function_source)"
+      ],
+      [
+       "d",
+       "    function_source = textwrap.dedent(function_source)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 4,
+     "deletions": 4
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -5,7 +5,7 @@"
+      ],
+      [
+       "c",
+       "import re"
+      ],
+      [
+       "c",
+       "import warnings"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "d",
+       "from textwrap import dedent, fill, indent"
+      ],
+      [
+       "a",
+       "from textwrap import fill"
+      ],
+      [
+       "c",
+       "from types import UnionType"
+      ],
+      [
+       "c",
+       "from typing import ("
+      ],
+      [
+       "c",
+       "    Any,"
+      ],
+      [
+       "h",
+       "@@ -20,14 +20,20 @@"
+      ],
+      [
+       "c",
+       "    get_type_hints,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "from unitycatalog.ai.core.utils.code_layout import ("
+      ],
+      [
+       "a",
+       "    PRIMARY_INDENT,"
+      ],
+      [
+       "a",
+       "    classify_lines,"
+      ],
+      [
+       "a",
+       "    dedent_code,"
+      ],
+      [
+       "a",
+       "    shift_stored_body,"
+      ],
+      [
+       "a",
+       "    to_databricks_body,"
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.docstring_utils import DocstringInfo, parse_docstring"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.type_utils import ("
+      ],
+      [
+       "c",
+       "    SQL_TYPE_TO_PYTHON_TYPE_MAPPING,"
+      ],
+      [
+       "c",
+       "    python_type_to_sql_type,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "FORBIDDEN_PARAMS = [\"self\", \"cls\"]"
+      ],
+      [
+       "d",
+       "PRIMARY_INDENT = \" \" * 4"
+      ],
+      [
+       "c",
+       "WRAPPED_INDENT = \" \" * 6"
+      ],
+      [
+       "c",
+       "# Mirrors the server-side minimum environment version that ships the `databricks.secrets`"
+      ]
+     ],
+     "truncated": true,
+     "additions": 45,
+     "deletions": 30
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-12T05:10:35Z",
+    "updated_at": "2026-11-12T05:12:51Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 86
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -753,17 +1208,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-12T02:44:37Z",
-    "updated_at": "2026-11-12T02:44:39Z",
+    "updated_at": "2026-11-12T03:57:31Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 83
   },
@@ -822,7 +1277,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-12T01:28:25Z",
+    "updated_at": "2026-11-12T03:58:18Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1274,58 +1729,6 @@
    },
    "files": [
     {
-     "path": "clients/java/src/main/java/io/unitycatalog/client/internal/BoundedKeyedCache.java",
-     "lines": [
-      [
-       "h",
-       "@@ -120,6 +120,10 @@"
-      ],
-      [
-       "c",
-       "    evicted.forEach(evictionListener);"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "  public int maxSize() {"
-      ],
-      [
-       "a",
-       "    return maxSize;"
-      ],
-      [
-       "a",
-       "  }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "  public int size() {"
-      ],
-      [
-       "c",
-       "    synchronized (cacheLock) {"
-      ],
-      [
-       "c",
-       "      return cache.size();"
-      ]
-     ],
-     "truncated": false,
-     "additions": 4,
-     "deletions": 0
-    },
-    {
      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
      "lines": [
       [
@@ -1422,7 +1825,7 @@
       ],
       [
        "h",
-       "@@ -52,37 +54,49 @@"
+       "@@ -52,37 +54,66 @@"
       ],
       [
        "c",
@@ -1450,8 +1853,8 @@
       ]
      ],
      "truncated": true,
-     "additions": 99,
-     "deletions": 20
+     "additions": 121,
+     "deletions": 19
     }
    ],
    "track": {
@@ -1517,17 +1920,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T01:34:14Z",
-    "updated_at": "2026-11-12T01:41:06Z",
+    "last_push": "2026-11-12T04:49:36Z",
+    "updated_at": "2026-11-12T04:49:45Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 79
   },
@@ -1871,12 +2274,12 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "changes requested",
     "approved_by": [],
     "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-12T02:31:11Z",
+    "updated_at": "2026-11-12T03:56:43Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -5344,7 +5747,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-24T18:34:22Z",
-    "updated_at": "2026-11-02T02:02:23Z",
+    "updated_at": "2026-11-12T03:50:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10365,7 +10768,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-31T21:24:55Z",
-    "updated_at": "2026-11-11T20:18:22Z",
+    "updated_at": "2026-11-12T03:49:37Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11449,7 +11852,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T03:10:14Z",
-    "updated_at": "2026-10-10T04:02:55Z",
+    "updated_at": "2026-11-12T03:46:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11617,7 +12020,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T03:42:58Z",
-    "updated_at": "2026-10-10T04:02:51Z",
+    "updated_at": "2026-11-12T03:45:56Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11785,7 +12188,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T03:38:53Z",
-    "updated_at": "2026-10-10T04:02:49Z",
+    "updated_at": "2026-11-12T03:45:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -12701,7 +13104,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-10T02:50:40Z",
-    "updated_at": "2026-11-09T04:44:46Z",
+    "updated_at": "2026-11-12T03:44:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -14177,7 +14580,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
-    "updated_at": "2026-11-10T03:27:59Z",
+    "updated_at": "2026-11-12T03:48:16Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -14843,7 +15246,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-08T23:39:00Z",
-    "updated_at": "2026-11-08T23:55:45Z",
+    "updated_at": "2026-11-12T03:47:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -15014,7 +15417,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
-    "updated_at": "2026-11-10T03:27:57Z",
+    "updated_at": "2026-11-12T03:49:00Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -15179,7 +15582,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
-    "updated_at": "2026-11-10T03:27:56Z",
+    "updated_at": "2026-11-12T03:48:38Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -15328,7 +15731,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-08T23:38:59Z",
-    "updated_at": "2026-11-08T23:41:55Z",
+    "updated_at": "2026-11-12T03:47:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -15645,7 +16048,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-08T23:39:21Z",
-    "updated_at": "2026-11-08T23:41:53Z",
+    "updated_at": "2026-11-12T03:47:57Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
