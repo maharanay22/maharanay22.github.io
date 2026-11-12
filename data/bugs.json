@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T11:14:21Z",
+ "generated_at": "2026-11-12T14:44:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28780,
+   "stars": 28784,
    "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,7 +161,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9075,
+   "stars": 9076,
    "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -218,7 +218,7 @@
     "SQL DDL"
    ],
    "stars": 391,
-   "forks": 231,
+   "forks": 232,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 3741376,
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63152,
-   "forks": 13218,
+   "stars": 63167,
+   "forks": 13222,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -274,7 +274,7 @@
     "CLI"
    ],
    "stars": 1498,
-   "forks": 259,
+   "forks": 261,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
@@ -291,6 +291,291 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Sandbox executor loses function results when the parent process uses more memory than EXECUTOR_MAX_MEMORY_LIMIT",
+   "date": "2026-11-12",
+   "created_at": "2026-11-12T14:43:20Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2218,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2218"
+   },
+   "issue": {
+    "number": 2217,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2217"
+   },
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/envs/executor_env_vars.py",
+     "lines": [
+      [
+       "h",
+       "@@ -12,7 +12,9 @@"
+      ],
+      [
+       "c",
+       "    \"EXECUTOR_MAX_MEMORY_LIMIT\","
+      ],
+      [
+       "c",
+       "    int,"
+      ],
+      [
+       "c",
+       "    100,"
+      ],
+      [
+       "d",
+       "    \"Maximum memory limit for the executor measured in MB.\","
+      ],
+      [
+       "a",
+       "    \"Maximum memory limit for the executor measured in MB. In sandbox mode, this is the virtual memory \""
+      ],
+      [
+       "a",
+       "    \"the function can allocate on top of the address space the forked process inherits. In the \""
+      ],
+      [
+       "a",
+       "    \"Databricks client's local mode, it caps the whole subprocess.\","
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "EXECUTOR_TIMEOUT = _EnvironmentVariable("
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
+     "lines": [
+      [
+       "h",
+       "@@ -52,6 +52,14 @@"
+      ],
+      [
+       "c",
+       "    \"and has no functional use in Mac OSX or Windows.\\n\""
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "EXITED_WITHOUT_RESULT_MESSAGE_TEMPLATE = ("
+      ],
+      [
+       "a",
+       "    \"The function execution process exited with code {exit_code} before it could report a result. \""
+      ],
+      [
+       "a",
+       "    \"This can happen when the function exits the process itself, or when the process runs out of \""
+      ],
+      [
+       "a",
+       "    \"memory while reporting its result or error. If the function needs more memory, increase the \""
+      ],
+      [
+       "a",
+       "    \"EXECUTOR_MAX_MEMORY_LIMIT environment variable. Any error raised in the process was written to \""
+      ],
+      [
+       "a",
+       "    \"its standard error output.\\n\""
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "IMPORT_DISALLOWED_MESSAGE_TEMPLATE = ("
+      ],
+      [
+       "c",
+       "    \"The import of module '{module_name}' is restricted. {import_disallowed_message}\""
+      ],
+      [
+       "c",
+       ")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 0
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+     "lines": [
+      [
+       "h",
+       "@@ -2,8 +2,9 @@"
+      ],
+      [
+       "c",
+       "import builtins"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "import multiprocessing"
+      ],
+      [
+       "a",
+       "import multiprocessing.connection"
+      ],
+      [
+       "c",
+       "import traceback"
+      ],
+      [
+       "d",
+       "from typing import Any, Callable"
+      ],
+      [
+       "a",
+       "from typing import Any, Callable, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "try:"
+      ],
+      [
+       "c",
+       "    import resource"
+      ],
+      [
+       "h",
+       "@@ -17,6 +18,7 @@"
+      ],
+      [
+       "c",
+       "    EXECUTOR_TIMEOUT,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.executor.common import ("
+      ],
+      [
+       "a",
+       "    EXITED_WITHOUT_RESULT_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    IMPORT_DISALLOWED_MESSAGE,"
+      ],
+      [
+       "c",
+       "    IMPORT_DISALLOWED_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    MB_CONVERSION,"
+      ],
+      [
+       "h",
+       "@@ -29,6 +31,8 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "_logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "_STATM_PATH = \"/proc/self/statm\""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _limit_resources(cpu_time_limit: int, memory_limit: int):"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "h",
+       "@@ -38,7 +42,12 @@"
+      ],
+      [
+       "c",
+       "        This CPU restriction will only work on Unix-based systems. When"
+      ]
+     ],
+     "truncated": true,
+     "additions": 80,
+     "deletions": 20
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-12T14:09:12Z",
+    "updated_at": "2026-11-12T14:43:21Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 88
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -312,15 +597,11 @@
    "impact": null,
    "files": [
     {
-     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "path": "ai/core/src/unitycatalog/ai/core/base.py",
      "lines": [
       [
        "h",
-       "@@ -155,6 +155,29 @@"
-      ],
-      [
-       "c",
-       "    is_default: bool = False"
+       "@@ -61,6 +61,10 @@"
       ],
       [
        "c",
@@ -328,19 +609,11 @@
       ],
       [
        "c",
-       ""
+       "        Returns:"
       ],
       [
-       "a",
-       "def _reject_async_function(func: Callable[..., Any]) -> None:"
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    Raises a ValueError if the function, or the function it wraps, is defined with `async def`."
+       "c",
+       "            The UC function information metadata for the configured UC implementation."
       ],
       [
        "a",
@@ -348,95 +621,243 @@
       ],
       [
        "a",
-       "    Unity Catalog runs a stored function body as the body of a regular `def`, so a coroutine"
+       "        Raises:"
       ],
       [
        "a",
-       "    or async generator function cannot be stored."
+       "            ValueError: If `func` is not a valid function to register, for example if it is defined"
       ],
       [
        "a",
-       ""
+       "                with `async def`."
       ],
       [
-       "a",
-       "    Args:"
+       "c",
+       "        \"\"\""
       ],
       [
-       "a",
-       "        func: The function to check."
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    original = inspect.unwrap(func)"
-      ],
-      [
-       "a",
-       "    if not (inspect.iscoroutinefunction(original) or inspect.isasyncgenfunction(original)):"
-      ],
-      [
-       "a",
-       "        return"
-      ],
-      [
-       "a",
-       "    if original is func:"
-      ],
-      [
-       "a",
-       "        problem, target = \"is an async function\", \"it\""
-      ],
-      [
-       "a",
-       "    else:"
-      ],
-      [
-       "a",
-       "        problem, target = \"wraps an async function\", \"the wrapped function\""
-      ],
-      [
-       "a",
-       "    raise ValueError("
-      ],
-      [
-       "a",
-       "        f\"Function '{func.__name__}' {problem}. Async functions are not supported in Unity \""
-      ],
-      [
-       "a",
-       "        f\"Catalog. Define {target} with a regular 'def' instead of 'async def'.\""
-      ],
-      [
-       "a",
-       "    )"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
+       "c",
        ""
       ],
       [
        "c",
-       "def extract_function_body(func: Callable[..., Any]) -> tuple[str, int]:"
+       "    @abstractmethod"
+      ],
+      [
+       "h",
+       "@@ -85,6 +89,10 @@"
       ],
       [
        "c",
-       "    \"\"\""
+       ""
       ],
       [
        "c",
-       "    Extracts the body of a function as a string without the signature or docstring,"
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            The UC function information metadata for the configured UC implementation."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Raises:"
+      ],
+      [
+       "a",
+       "            ValueError: If `primary_func` or `functions` are not valid to register, for example if"
+      ],
+      [
+       "a",
+       "                `primary_func` is defined with `async def`."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    @abstractmethod"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 0
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -582,6 +582,10 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            The created FunctionInfo object."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Raises:"
+      ],
+      [
+       "a",
+       "            ValueError: If `func` is not a valid function to register, for example if it is defined"
+      ],
+      [
+       "a",
+       "                with `async def`."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        if not callable(func):"
+      ],
+      [
+       "h",
+       "@@ -630,6 +634,10 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            The created FunctionInfo object."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Raises:"
+      ],
+      [
+       "a",
+       "            ValueError: If `func` is not a valid function to register, for example if it is defined"
+      ],
+      [
+       "a",
+       "                with `async def`."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        pass"
+      ],
+      [
+       "h",
+       "@@ -664,6 +672,10 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            The created FunctionInfo object."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Raises:"
+      ],
+      [
+       "a",
+       "            ValueError: If `primary_func` or `functions` are not valid to register, for example if"
+      ],
+      [
+       "a",
+       "                `primary_func` is defined with `async def`."
       ]
      ],
      "truncated": true,
-     "additions": 25,
+     "additions": 16,
+     "deletions": 0
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/databricks.py",
+     "lines": [
+      [
+       "h",
+       "@@ -389,6 +389,10 @@"
+      ],
+      [
+       "c",
+       "            - Functions that declare credentials or secrets cannot be run in 'local' execution mode, which has no"
+      ],
+      [
+       "c",
+       "            access to the Unity Catalog credential and secret services. Use 'serverless' execution mode instead."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        5. **Regular Functions Only**:"
+      ],
+      [
+       "a",
+       "            - The Python function must be a regular `def`. A coroutine function or async generator function"
+      ],
+      [
+       "a",
+       "            defined with `async def`, or a `functools.wraps` wrapper around one, raises a `ValueError`."
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 12,
      "deletions": 0
     }
    ],
@@ -450,7 +871,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Review of 8144621c. No blockers. The fix is correct and minimal: the check runs before body extraction on all four create paths (both clients, primary and helper), and the tests cover the sync-wrapper and async-generator cases. Inline comments cover items 1, 3, 4, 5 and 6. Item 2 is here because the file…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -460,7 +881,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] 1. normal: the async fixtures (`async_concat`, `async_suffix`, `concat_with_suffix`) and `ASYNC_FUNCTION_ERROR` are identical in this file and in `ai/core/tests/core/databricks/test_databricks_unit_tests.py` (lines 500-530). The same message is also pinned in `test_callable_utils.py:2588` and `test_wrapp…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -470,7 +891,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "[AI Assisted] 3. nit: `func.__name__` raises `AttributeError` for a `functools.partial` of an `async def`, because partials have no `__name__`. Verified on Python 3.10+: `inspect.iscoroutinefunction` sees through partials, so this check fires first. Not a regression: the primary path already fails on partials (`callab…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -480,7 +901,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "[AI Assisted] 4. nit: for a helper `staticmethod(async_fn)`, `inspect.unwrap` goes through the staticmethod object (Python 3.10+), so the message says \"wraps an async function\". The primary path calls `unwrap_function` first and says \"is an async function\". Calling `func = unwrap_function(func)` before `_reject_async_…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -490,7 +911,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_wrapped_utils.py",
       "text": "[AI Assisted] 5. nit: the \"wraps an async function\" branch is only tested on the primary function. Adding a helper that is a `functools.wraps` wrapper, such as `run_sync(async_int_helper)`, would cover it. Avoid copying `run_sync` (see 1).",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -500,20 +921,20 @@
       "maintainer": true,
       "path": "docs/ai/client.md",
       "text": "[AI Assisted] 6. nit: \"or a function that wraps one\" can read as the `create_wrapped_function` feature on the same page. Suggest \"or a `functools.wraps` wrapper around an `async def`\".",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T05:34:53Z",
-    "updated_at": "2026-11-12T07:11:26Z",
+    "last_push": "2026-11-12T13:48:26Z",
+    "updated_at": "2026-11-12T13:54:09Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 87
   },
@@ -534,6 +955,98 @@
    "proof": null,
    "impact": null,
    "files": [
+    {
+     "path": ".github/workflows/ucai-core-tests.yml",
+     "lines": [
+      [
+       "h",
+       "@@ -45,7 +45,11 @@"
+      ],
+      [
+       "c",
+       "    runs-on: ubuntu-latest"
+      ],
+      [
+       "c",
+       "    strategy:"
+      ],
+      [
+       "c",
+       "      matrix:"
+      ],
+      [
+       "a",
+       "        python-version: ['3.10']"
+      ],
+      [
+       "c",
+       "        pydantic-version: [1, 2]"
+      ],
+      [
+       "a",
+       "        include:"
+      ],
+      [
+       "a",
+       "          - python-version: '3.12'"
+      ],
+      [
+       "a",
+       "            pydantic-version: 2"
+      ],
+      [
+       "c",
+       "    timeout-minutes: 40"
+      ],
+      [
+       "c",
+       "    defaults:"
+      ],
+      [
+       "c",
+       "      run:"
+      ],
+      [
+       "h",
+       "@@ -61,7 +65,7 @@"
+      ],
+      [
+       "c",
+       "      - name: Set up Python"
+      ],
+      [
+       "c",
+       "        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0"
+      ],
+      [
+       "c",
+       "        with:"
+      ],
+      [
+       "d",
+       "          python-version: '3.10'"
+      ],
+      [
+       "a",
+       "          python-version: ${{ matrix.python-version }}"
+      ],
+      [
+       "c",
+       "      - name: Install uv"
+      ],
+      [
+       "c",
+       "        run: bash \"$GITHUB_WORKSPACE/.github/scripts/install-uv.sh\""
+      ],
+      [
+       "c",
+       "      - name: Install dependencies"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 1
+    },
     {
      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
      "lines": [
@@ -700,95 +1213,11 @@
       [
        "c",
        "    Any,"
-      ],
-      [
-       "h",
-       "@@ -20,14 +20,20 @@"
-      ],
-      [
-       "c",
-       "    get_type_hints,"
-      ],
-      [
-       "c",
-       ")"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "from unitycatalog.ai.core.utils.code_layout import ("
-      ],
-      [
-       "a",
-       "    PRIMARY_INDENT,"
-      ],
-      [
-       "a",
-       "    classify_lines,"
-      ],
-      [
-       "a",
-       "    dedent_code,"
-      ],
-      [
-       "a",
-       "    shift_stored_body,"
-      ],
-      [
-       "a",
-       "    to_databricks_body,"
-      ],
-      [
-       "a",
-       ")"
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.utils.docstring_utils import DocstringInfo, parse_docstring"
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.utils.type_utils import ("
-      ],
-      [
-       "c",
-       "    SQL_TYPE_TO_PYTHON_TYPE_MAPPING,"
-      ],
-      [
-       "c",
-       "    python_type_to_sql_type,"
-      ],
-      [
-       "c",
-       ")"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "FORBIDDEN_PARAMS = [\"self\", \"cls\"]"
-      ],
-      [
-       "d",
-       "PRIMARY_INDENT = \" \" * 4"
-      ],
-      [
-       "c",
-       "WRAPPED_INDENT = \" \" * 6"
-      ],
-      [
-       "c",
-       "# Mirrors the server-side minimum environment version that ships the `databricks.secrets`"
       ]
      ],
      "truncated": true,
-     "additions": 45,
-     "deletions": 30
+     "additions": 49,
+     "deletions": 32
     }
    ],
    "track": {
@@ -801,7 +1230,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the docstring change. Two regressions against main are still open: the indent factor for bodies with a deeper string line or a comment at 4 spaces (`callable_utils.py`, `_parse_routine_definition`), and a whitespace-only string line on create then execute (`to_stored_body`). Both have small fi…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -811,7 +1240,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "[AI Assisted] Blocker: `indent_standard` now ignores string lines and comment lines, so a body whose only nested step is 8 spaces fails in `get_function_as_callable`. Two triggers: a string line indented deeper than the statements, and a comment line at 4 spaces (`if flag:` / ` # comment` / ` return \"yes\"`). On main t…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -821,7 +1250,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] Blocker: `to_stored_body` slices each string line by `shift`, so a whitespace-only line whose width equals `shift` becomes empty, and `shift_stored_body` leaves empty lines alone. For source `return \"\"\"a` / four-space line / ` b\"\"\"`, create then execute returns `'a\\n\\n b'` here, and `'a\\n \\n b'` on main.…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -831,7 +1260,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] Normal: the negative shift clamps each string line separately, so lines of one literal can move by different amounts. For a body stored as ` q = \"\"\"` / `SELECT *` / ` FROM t` / `\"\"\"` / ` return q`, this reads `'\\nSELECT *\\nFROM t\\n'`, not the source value. Main also misreads it, so this is not a regressi…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -841,7 +1270,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] Normal: the tokenizer error is swallowed with no log, and the fallback makes every nonblank line a statement line, which can move string lines. Please log it at debug or warning level, and add a test for the fallback.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -851,20 +1280,20 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] Normal: a bare multi-line f-string statement is laid out with the code on 3.10 and with the string lines on 3.12, so a body stored on one version reads back differently on the other. Please treat `FSTRING_START` the same as a plain string statement, or document the difference.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T06:45:49Z",
-    "updated_at": "2026-11-12T08:55:26Z",
+    "last_push": "2026-11-12T14:01:35Z",
+    "updated_at": "2026-11-12T14:41:46Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 86
   },
@@ -1056,7 +1485,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks, the source comparison covers cross-client replacement and case-mismatched names, which eviction on delete would not. Two test points and one behavior point below.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1066,7 +1495,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Removing `clear_function_cache()` here also changes `replace=True` for an identical definition. The cached callable and its module globals are now reused, where before the replace started from a fresh callable. The source check only needs to handle a changed source. Could we drop only the replaced entry…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1076,7 +1505,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] The `deleted_by_this_client` parameter does not change the code path. The mocked delete never touches `func_cache`, and the cache check reads only the fetched `FunctionInfo`. Could we drop it? Also the second case's body `return x * 10` ignores `y`, so it only fails on main through the unexpected-keyword…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1086,20 +1515,20 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Nothing checks reuse after a rebuild. A change that rebuilt the callable on every call would pass, because the changed-definition test runs only once. Could we run the changed definition through the counter body three times and assert `[1, 2, 3]`?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T01:49:57Z",
-    "updated_at": "2026-11-12T07:08:51Z",
+    "last_push": "2026-11-12T13:21:46Z",
+    "updated_at": "2026-11-12T13:22:03Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 84
   },
@@ -2001,7 +2430,7 @@
       ],
       [
        "h",
-       "@@ -52,37 +54,66 @@"
+       "@@ -52,37 +54,86 @@"
       ],
       [
        "c",
@@ -2021,16 +2450,16 @@
       ],
       [
        "a",
-       " * <p>The cache owns each delegate, and every wrapper of the same scope shares it. Each wrapper"
+       " * <h2>Delegate lifetime</h2>"
       ],
       [
        "a",
-       " * therefore wraps its own {@code Lease} on the delegate rather than the delegate itself, so closing"
+       " *"
       ]
      ],
      "truncated": true,
-     "additions": 121,
-     "deletions": 19
+     "additions": 149,
+     "deletions": 20
     }
    ],
    "track": {
@@ -2043,7 +2472,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks. The narrowed lifetime wording (`f469a40b`) and the pre-counted lease in `acquire` (`e3a1805e`) address the earlier items. I checked the eviction-after-publish path, and the entry stays open until its lease is released. Non-blocking nits: - The javadoc at line 70 says \"This is no worse than closin…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2053,7 +2482,7 @@
       "maintainer": true,
       "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
       "text": "[AI Assisted] The lease is released only if the wrapper's `close()` reaches `fs.close()`. `FilterFileSystem.close()` calls `super.close()` first, which runs `processDeleteOnExit()` and can throw a `RuntimeException`. In that case this lease is never released, so a `newInstance` wrapper that Hadoop's cache holds keeps…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2063,7 +2492,7 @@
       "maintainer": true,
       "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
       "text": "[AI Assisted] If an eviction listener throws a `RuntimeException` during `getOrLoad`'s `put`, the new entry is already in the cache with its pre-counted lease, but this wrapper never receives it. Nothing releases that count, so the entry is never closed after eviction. `CloseableUtils.closeQuietly` swallows only `IOEx…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2100,13 +2529,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T04:49:36Z",
-    "updated_at": "2026-11-12T06:30:31Z",
+    "last_push": "2026-11-12T13:07:09Z",
+    "updated_at": "2026-11-12T13:07:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 79
   },
@@ -5666,7 +6095,7 @@
      "lines": [
       [
        "h",
-       "@@ -166,6 +166,7 @@"
+       "@@ -168,6 +168,7 @@"
       ],
       [
        "c",
@@ -5698,7 +6127,7 @@
       ],
       [
        "h",
-       "@@ -407,6 +408,7 @@"
+       "@@ -426,6 +427,7 @@"
       ],
       [
        "c",
@@ -5730,7 +6159,7 @@
       ],
       [
        "h",
-       "@@ -417,12 +419,14 @@"
+       "@@ -436,12 +438,14 @@"
       ],
       [
        "c",
@@ -5794,7 +6223,7 @@
      "lines": [
       [
        "h",
-       "@@ -1808,6 +1808,136 @@"
+       "@@ -1842,6 +1842,128 @@"
       ],
       [
        "c",
@@ -5810,99 +6239,15 @@
       ],
       [
        "a",
-       "    /// Version 1 of this fixture writes rows 0 to 9 to one file and version 2 deletes rows 2"
+       "    /// Version 1 deletes ids 2 and 3 of the only file with a deletion vector. Version 2 removes"
       ],
       [
        "a",
-       "    /// and 3 with a deletion vector. Every later commit removes or re-adds that file without"
+       "    /// that file and version 3 re-adds it, both without change data files, as Spark does for a"
       ],
       [
        "a",
-       "    /// change data files, so its change rows are the eight rows that were live in the file."
-      ],
-      [
-       "a",
-       "    /// The expected rows match Spark's `table_changes` for the same versions."
-      ],
-      [
-       "a",
-       "    async fn read_unpaired_dv_action_changes("
-      ],
-      [
-       "a",
-       "        starting_version: Version,"
-      ],
-      [
-       "a",
-       "        ending_version: Version,"
-      ],
-      [
-       "a",
-       "    ) -> Result<Vec<RecordBatch>, Box<dyn std::error::Error>> {"
-      ],
-      [
-       "a",
-       "        let ctx = SessionContext::new();"
-      ],
-      [
-       "a",
-       "        let table_path = Path::new(\"../test/tests/data/cdf-table-dv-unpaired-actions\");"
-      ],
-      [
-       "a",
-       "        let table_uri = Url::from_directory_path(std::fs::canonicalize(table_path)?).unwrap();"
-      ],
-      [
-       "a",
-       "        let builder = DeltaTable::try_from_url(table_uri)"
-      ],
-      [
-       "a",
-       "            .await?"
-      ],
-      [
-       "a",
-       "            .scan_cdf()"
-      ],
-      [
-       "a",
-       "            .with_starting_version(starting_version)"
-      ],
-      [
-       "a",
-       "            .with_ending_version(ending_version);"
-      ],
-      [
-       "a",
-       "        ctx.register_table(\"cdf\", Arc::new(DeltaCdfTableProvider::try_new(builder)?))?;"
-      ],
-      [
-       "a",
-       "        Ok(ctx"
-      ],
-      [
-       "a",
-       "            .sql(\"SELECT id, _change_type, _commit_version FROM cdf\")"
-      ],
-      [
-       "a",
-       "            .await?"
-      ],
-      [
-       "a",
-       "            .collect()"
-      ],
-      [
-       "a",
-       "            .await?)"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "a",
-       ""
+       "    /// partition DELETE and a RESTORE, so their change rows are the eight live ids."
       ],
       [
        "a",
@@ -5910,11 +6255,95 @@
       ],
       [
        "a",
-       "    async fn test_cdf_partition_delete_after_dv_delete() -> TestResult {"
+       "    async fn test_cdf_unpaired_actions_with_deletion_vector() -> TestResult {"
+      ],
+      [
+       "a",
+       "        use delta_kernel::actions::deletion_vector_writer::{"
+      ],
+      [
+       "a",
+       "            KernelDeletionVector, StreamingDeletionVectorWriter,"
+      ],
+      [
+       "a",
+       "        };"
+      ],
+      [
+       "a",
+       "        use parquet::arrow::ArrowWriter;"
+      ],
+      [
+       "a",
+       "        use serde_json::json;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        let dir = tempfile::tempdir()?;"
+      ],
+      [
+       "a",
+       "        std::fs::create_dir(dir.path().join(\"_delta_log\"))?;"
+      ],
+      [
+       "a",
+       "        let schema = Arc::new(Schema::new(vec![Field::new("
+      ],
+      [
+       "a",
+       "            \"id\","
+      ],
+      [
+       "a",
+       "            arrow_schema::DataType::Int32,"
+      ],
+      [
+       "a",
+       "            false,"
+      ],
+      [
+       "a",
+       "        )]));"
+      ],
+      [
+       "a",
+       "        let data_file = std::fs::File::create(dir.path().join(\"part-0.parquet\"))?;"
+      ],
+      [
+       "a",
+       "        let mut writer = ArrowWriter::try_new(data_file, Arc::clone(&schema), None)?;"
+      ],
+      [
+       "a",
+       "        writer.write(&RecordBatch::try_new("
+      ],
+      [
+       "a",
+       "            schema,"
+      ],
+      [
+       "a",
+       "            vec![Arc::new(Int32Array::from_iter_values(0..10))],"
+      ],
+      [
+       "a",
+       "        )?)?;"
+      ],
+      [
+       "a",
+       "        writer.close()?;"
+      ],
+      [
+       "a",
+       ""
       ]
      ],
      "truncated": true,
-     "additions": 130,
+     "additions": 122,
      "deletions": 0
     }
    ],
@@ -5928,24 +6357,24 @@
       "maintainer": true,
       "path": null,
       "text": "@maharanay22 instead of checking the data in, can you please make a spark fixture that runs it on the fly, also perhaps a dat-0.0.8 table covers it already?",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-10-24T18:34:22Z",
-    "updated_at": "2026-11-12T10:25:33Z",
+    "last_push": "2026-11-12T14:21:37Z",
+    "updated_at": "2026-11-12T14:22:01Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
      "at": "2026-11-12T10:25:33Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "ion-elgreco commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 61
   },
