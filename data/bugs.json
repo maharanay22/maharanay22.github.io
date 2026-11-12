@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T18:58:42Z",
+ "generated_at": "2026-11-12T22:55:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28785,
+   "stars": 28786,
    "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50498,
+   "stars": 50504,
    "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63180,
-   "forks": 13230,
+   "stars": 63190,
+   "forks": 13238,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -273,7 +273,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1498,
+   "stars": 1500,
    "forks": 262,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -294,11 +294,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Sandbox executor loses function results when the parent process uses more memory than EXECUTOR_MAX_MEMORY_LIMIT",
    "date": "2026-11-12",
    "created_at": "2026-11-12T14:43:20Z",
-   "merged_at": null,
+   "merged_at": "2026-11-12",
    "reported": true,
    "pr": {
     "number": 2218,
@@ -561,18 +561,83 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-12T21:01:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#issuecomment-6835830586",
+      "maintainer": true,
+      "path": null,
+      "text": "Hi @maharanay22. Thanks for fixing it. I am going to merge this as-is to fix main branch. Please address the issues in follow up PR.",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-12T20:58:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#pullrequestreview-5881907037",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Inline versions of the follow-ups listed in the approval above. Not anchorable in the diff: the `TERMINATED_MESSAGE_TEMPLATE` wording in `ai/core/src/unitycatalog/ai/core/executor/common.py` (around line 50, outside the changed hunk) still describes `EXECUTOR_MAX_MEMORY_LIMIT` as the memory limit for the…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T20:58:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#discussion_r4556253459",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+      "text": "[AI Assisted] `receiver.recv()` can raise more than `EOFError`. If the child dies partway through a frame, `Connection._recv` raises `OSError(\"got end of file during message\")`, and a result that fails to unpickle in the parent raises as well. Both escape `run_in_sandbox`, and `process.join()` is skipped, so the child…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T20:58:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#discussion_r4556253469",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+      "text": "[AI Assisted] Followup, known limitation: after `wait_for` times out, `_receive_result` keeps running until the sentinel fires. Two joins on the same pid are safe, because the second `waitpid` gets ECHILD and `Popen.poll` returns None. The thread only stays blocked when the child died mid-frame and another forked chil…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T20:58:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#discussion_r4556253478",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
+      "text": "[AI Assisted] Followup: errors raised by the function are returned as a failure result, not written to standard error. Only a process that could not send its result can leave a traceback on standard error. Could we say that instead, for example: \"If the process could not send a result, its traceback may appear in its…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T20:58:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2218#discussion_r4556253484",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_executor.py",
+      "text": "[AI Assisted] Followup: removing the `None` check in `_limit_resources` would still pass this test, because the TypeError is caught below and no limit is set. Could we assert the info log with `caplog`, like the test around line 252, so the early return is covered?",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
+    "review": "approved",
     "approved_by": [],
     "last_push": "2026-11-12T14:09:12Z",
-    "updated_at": "2026-11-12T15:36:38Z",
+    "updated_at": "2026-11-12T21:01:31Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-12T21:01:24Z",
+     "maintainer": true
+    },
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 88
   },
@@ -866,6 +931,46 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-12T19:59:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#pullrequestreview-5881169821",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at a241fa19. The removal of the helper check is correct: a regular primary that runs an `async def` helper with `asyncio.run` works on main, and the first revision broke it. Nothing blocks merge. The three inline comments are optional cleanups.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T19:59:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4555643355",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_callable_utils.py",
+      "text": "[AI Assisted] nit: the classmethod primary has no case in this matrix, and the wrapped-function test only passes a plain `async def` primary (`test_wrapped_utils.py:231`). Could we add `(classmethod(async_int_func), ASYNC_FUNCTION_ERROR.format(\"async_int_func\"))`?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T19:59:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4555643367",
+      "maintainer": true,
+      "path": "docs/ai/client.md",
+      "text": "[AI Assisted] nit: the rule now appears twice in this file. Item 4 at line 142 and this bullet say the same thing. Could we drop the bullet, or point it at item 4? The same applies to `ai/core/README.md:99`, which repeats the bullet at line 51.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T19:59:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4555643377",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "[AI Assisted] nit: for a `functools.partial` around a sync `functools.wraps` wrapper of an `async def`, `inspect.unwrap` stops at the partial, so nothing is rejected. `extract_function_metadata` then fails on `func.__name__` with `AttributeError`, as it already did on main. Nothing is stored, so this is harmless. Opti…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-12T07:11:25Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#pullrequestreview-5870546434",
       "maintainer": true,
@@ -882,59 +987,19 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] 1. normal: the async fixtures (`async_concat`, `async_suffix`, `concat_with_suffix`) and `ASYNC_FUNCTION_ERROR` are identical in this file and in `ai/core/tests/core/databricks/test_databricks_unit_tests.py` (lines 500-530). The same message is also pinned in `test_callable_utils.py:2588` and `test_wrapp…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:11:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4547418071",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
-      "text": "[AI Assisted] 3. nit: `func.__name__` raises `AttributeError` for a `functools.partial` of an `async def`, because partials have no `__name__`. Verified on Python 3.10+: `inspect.iscoroutinefunction` sees through partials, so this check fires first. Not a regression: the primary path already fails on partials (`callab…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:11:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4547418076",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
-      "text": "[AI Assisted] 4. nit: for a helper `staticmethod(async_fn)`, `inspect.unwrap` goes through the staticmethod object (Python 3.10+), so the message says \"wraps an async function\". The primary path calls `unwrap_function` first and says \"is an async function\". Calling `func = unwrap_function(func)` before `_reject_async_…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:11:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4547418084",
-      "maintainer": true,
-      "path": "ai/core/tests/core/test_wrapped_utils.py",
-      "text": "[AI Assisted] 5. nit: the \"wraps an async function\" branch is only tested on the primary function. Adding a helper that is a `functools.wraps` wrapper, such as `run_sync(async_int_helper)`, would cover it. Avoid copying `run_sync` (see 1).",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:11:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#discussion_r4547418092",
-      "maintainer": true,
-      "path": "docs/ai/client.md",
-      "text": "[AI Assisted] 6. nit: \"or a function that wraps one\" can read as the `create_wrapped_function` feature on the same page. Suggest \"or a `functools.wraps` wrapper around an `async def`\".",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T13:48:26Z",
-    "updated_at": "2026-11-12T13:54:09Z",
+    "last_push": "2026-11-12T21:10:21Z",
+    "updated_at": "2026-11-12T21:21:34Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 87
   },
@@ -1283,17 +1348,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T14:01:35Z",
-    "updated_at": "2026-11-12T14:41:46Z",
+    "last_push": "2026-11-12T21:10:20Z",
+    "updated_at": "2026-11-12T21:21:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 86
   },
@@ -1351,7 +1416,39 @@
      "lines": [
       [
        "h",
-       "@@ -508,11 +508,6 @@"
+       "@@ -387,6 +387,7 @@"
+      ],
+      [
+       "c",
+       "            # Function calls still fail with SANDBOX_UNSUPPORTED_MESSAGE as their error, which in"
+      ],
+      [
+       "c",
+       "            # toolkit setups only reaches the LLM, so also tell the developer at construction."
+      ],
+      [
+       "c",
+       "            _logger.warning(SANDBOX_UNSUPPORTED_MESSAGE)"
+      ],
+      [
+       "a",
+       "        # Each cached callable records the source it was built from in `_uc_source`."
+      ],
+      [
+       "c",
+       "        self.func_cache = {}"
+      ],
+      [
+       "c",
+       "        super().__init__()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -508,11 +509,8 @@"
       ],
       [
        "c",
@@ -1378,12 +1475,16 @@
        "        # refresh the cache with the new function definition"
       ],
       [
-       "d",
+       "c",
        "        if replace:"
       ],
       [
        "d",
        "            self.clear_function_cache()"
+      ],
+      [
+       "a",
+       "            self.func_cache.pop(function_metadata.full_name, None)"
       ],
       [
        "c",
@@ -1399,7 +1500,7 @@
       ],
       [
        "h",
-       "@@ -883,15 +878,21 @@"
+       "@@ -883,15 +881,21 @@"
       ],
       [
        "c",
@@ -1432,51 +1533,35 @@
       [
        "a",
        ""
-      ],
-      [
-       "a",
-       "        The cached function is reused only while the given FunctionInfo produces the same"
-      ],
-      [
-       "a",
-       "        source, so a function that was deleted and recreated, or replaced by another client,"
-      ],
-      [
-       "a",
-       "        is rebuilt instead of running its old body."
-      ],
-      [
-       "c",
-       "        \"\"\""
-      ],
-      [
-       "d",
-       "        if function_info.full_name in self.func_cache:"
-      ],
-      [
-       "d",
-       "            return self.func_cache[function_info.full_name]"
-      ],
-      [
-       "c",
-       "        python_function = get_callable_definition(function_info)"
-      ],
-      [
-       "a",
-       "        cached_func = self.func_cache.get(function_info.full_name)"
-      ],
-      [
-       "a",
-       "        if getattr(cached_func, \"_uc_source\", None) == python_function:"
       ]
      ],
      "truncated": true,
-     "additions": 10,
-     "deletions": 9
+     "additions": 12,
+     "deletions": 8
     }
    ],
    "track": {
     "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-12T19:58:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#pullrequestreview-5881147750",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] nit: the description still says the cost is one string comparison per execution. `get_callable_definition` now builds the source on every call, which a cache hit used to skip. Small, but the wording should match.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T19:58:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4555624824",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] If the single-entry pop lands, a test should pin the stated benefit: after `replace=True` on `a`, the `func_cache` entry for `b` is still the same object. Today nothing would fail if the blanket clear came back.",
+      "answered": true
+     },
      {
       "kind": "review commented",
       "who": "yili-db",
@@ -1518,17 +1603,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T13:21:46Z",
-    "updated_at": "2026-11-12T13:22:03Z",
+    "last_push": "2026-11-12T21:10:19Z",
+    "updated_at": "2026-11-12T21:21:31Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 84
   },
@@ -2316,11 +2401,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Don't close the shared delegate FileSystem when a scoped wrapper is closed",
    "date": "2026-11-11",
    "created_at": "2026-11-11T21:05:38Z",
-   "merged_at": null,
+   "merged_at": "2026-11-12",
    "reported": true,
    "pr": {
     "number": 2186,
@@ -2465,6 +2550,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-12T19:58:50Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#pullrequestreview-5881158095",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 001308048114fd05e0af936048e2794fab17cbf7. The round-5 items are addressed: the wrapper close releases the lease in a finally, and an eviction listener that throws releases the pre-counted lease before rethrowing. Both have tests that fail on the previous head. The remaining points are non-bl…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-12T06:30:31Z",
@@ -2513,29 +2608,21 @@
       "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
       "text": "[AI Assisted] Returned streams and iterators reference the delegate, not the `Lease`, so a stream can outlive the lease. Once the last wrapper is collected and the scope is evicted, the delegate closes under an open stream. Main closed the delegate on eviction regardless, so this is strictly better than main. Could we…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T01:21:45Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#discussion_r4545100564",
-      "maintainer": true,
-      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
-      "text": "[AI Assisted] This delegate close runs while holding the `SharedFileSystem` monitor, and on the eviction path it runs under the load lock of an unrelated key, since `BoundedKeyedCache.put` calls the listener inside `getOrLoad`. A slow delegate close can block other releases and loads. The description says a separate i…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-12T13:07:09Z",
-    "updated_at": "2026-11-12T13:07:14Z",
+    "updated_at": "2026-11-12T19:59:55Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 79
   },
