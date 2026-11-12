@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-11T23:21:55Z",
+ "generated_at": "2026-11-12T00:24:19Z",
  "stages": [
   "reported",
   "fix sent",
@@ -26,7 +26,7 @@
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 672672,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "delta-io/delta-rs",
@@ -45,7 +45,7 @@
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 9159509,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "mlflow/mlflow",
@@ -64,7 +64,7 @@
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "mindsdb/engine",
@@ -97,12 +97,12 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50490,
+   "stars": 50492,
    "forks": 20733,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "delta-io/delta",
@@ -117,11 +117,11 @@
     "Lakehouse"
    ],
    "stars": 9074,
-   "forks": 2216,
+   "forks": 2217,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -140,7 +140,7 @@
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37686630,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -159,7 +159,7 @@
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 3741376,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "BerriAI/litellm",
@@ -173,12 +173,12 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63126,
-   "forks": 13207,
+   "stars": 63125,
+   "forks": 13209,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -197,7 +197,7 @@
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
-   "downloads_checked": "2026-11-11"
+   "downloads_checked": "2026-11-12"
   }
  ],
  "items": [
@@ -446,63 +446,95 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V3__widen_function_types_and_comments.sql",
+     "path": "server/src/main/resources/db/migration/h2/V3__widen_function_param_type_text.sql",
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,6 @@"
+       "@@ -0,0 +1 @@"
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params ALTER COLUMN type_text CLOB NOT NULL;"
-      ],
+       "ALTER TABLE uc_function_params ALTER COLUMN type_text CLOB;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V4__widen_function_full_data_type.sql",
+     "lines": [
       [
-       "a",
-       "ALTER TABLE uc_function_params ALTER COLUMN comment VARCHAR(65535);"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_function_params ALTER COLUMN parameter_default VARCHAR(65535);"
+       "h",
+       "@@ -0,0 +1 @@"
       ],
       [
        "a",
        "ALTER TABLE uc_functions ALTER COLUMN full_data_type CLOB;"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN comment VARCHAR(65535);"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_volumes ALTER COLUMN comment VARCHAR(65535);"
       ]
      ],
      "truncated": false,
-     "additions": 6,
+     "additions": 1,
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V3__widen_function_types_and_comments.sql",
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_function_param_comment.sql",
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,6 @@"
+       "@@ -0,0 +1 @@"
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params MODIFY COLUMN type_text mediumtext NOT NULL;"
+       "ALTER TABLE uc_function_params ALTER COLUMN \"COMMENT\" VARCHAR(65535);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_function_param_default.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params MODIFY COLUMN comment text NULL;"
+       "ALTER TABLE uc_function_params ALTER COLUMN parameter_default VARCHAR(65535);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_comment.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params MODIFY COLUMN parameter_default text NULL;"
+       "ALTER TABLE uc_schemas ALTER COLUMN \"COMMENT\" VARCHAR(65535);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
       ]
      ],
      "truncated": true,
-     "additions": 6,
+     "additions": 1,
      "deletions": 0
     }
    ],
@@ -511,12 +543,22 @@
      {
       "kind": "comment",
       "who": "shba24",
+      "at": "2026-11-11T23:59:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6810199677",
+      "maintainer": true,
+      "path": null,
+      "text": "A quick follow-up with something more concrete, so you know what to expect. I cherry-picked this PR onto the top of the stack (#2118) and ran its checks on H2, PostgreSQL and MySQL: - The merged-steps check and the \"type changes only widen\" rule both pass, so the widths and the NOT NULL on `type_text` look good. - `Mi…",
+      "answered": true
+     },
+     {
+      "kind": "comment",
+      "who": "shba24",
       "at": "2026-11-11T23:13:55Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6809429780",
       "maintainer": true,
       "path": null,
       "text": "Thanks a lot for this! The fix makes sense, and following the V2 pattern from #2013 made it easy to review. One thought on ordering, if you're open to it. I have a stack of PRs that adds guardrails for schema steps, starting with #2113 (which checks the steps on every pull request) through #2118. Schema steps are stil…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -526,7 +568,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Two items for the whole PR. Followup, V3 numbering: #2180 and #2181 also add a V3 step on all three databases. Whichever of the three merges second has to be renumbered above the first, because dev/check-migration-steps.sh refuses a new step that is not above the highest merged step. Could we agree the m…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -536,7 +578,7 @@
       "maintainer": true,
       "path": "server/src/main/resources/db/migration/h2/V3__widen_function_types_and_comments.sql",
       "text": "[AI Assisted] This step sends six statements on each database. The step rules in the stack (#2113 through #2118) hold each step to one statement (MigrationStepRulesTest, eachStepIsOneAllowedStatement), and the per-step recovery in #2114 only works when a step is a single statement: a MySQL step that stopped partway ma…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -546,7 +588,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
       "text": "[AI Assisted] nit: comment and parameterDefault both use LONG_COMMENT, so swapping the two columns would still pass. Two distinct 300-character values would catch that.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -556,24 +598,24 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
       "text": "[AI Assisted] nit: the test has no return param. Return rows share type_text, so adding one would cover the return path.",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T21:03:18Z",
-    "updated_at": "2026-11-11T23:13:55Z",
+    "last_push": "2026-11-11T23:27:06Z",
+    "updated_at": "2026-11-12T00:09:57Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
-     "at": "2026-11-11T23:13:55Z",
+     "at": "2026-11-11T23:59:31Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 80
   },
@@ -723,13 +765,64 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-11T23:47:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#pullrequestreview-5866866682",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The core change looks right: the refcount, the `evicted` retry loop and the Cleaner release all hold up against `BoundedKeyedCache`. One item to settle before approval is the `newInstance` cache-map retention (inline comment on `close()`). Please also consider a Cleaner-path test (inline comment), and a…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:47:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#discussion_r4544500303",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
+      "text": "[AI Assisted] Closing a wrapper skips the `FileSystem.close()` bookkeeping. Hadoop's `FileSystem.close()` calls `Cache.remove(key, this)`, and `FileSystem.newInstance(uri, conf)` registers the instance in that static cache under a unique key. This applies when callers use `FileSystem.newInstance`, since `FileSystem.ge…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:47:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#discussion_r4544500308",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
+      "text": "[AI Assisted] Suggestion: a test for the Cleaner path. The Cleaner releases wrappers that are never closed, and no test covers it, even though the description calls it the common case. A test that evicts the delegate, drops the only wrapper reference, and polls `System.gc()` until `delegate.closed` is true would fail…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:47:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#discussion_r4544500312",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
+      "text": "[AI Assisted] The CACHE javadoc still says the cache is bounded to prevent unbounded growth, but an evicted delegate with open wrappers stays open, so open delegates are no longer capped by `maxSize`. Closing the last wrapper of a live scope also keeps its pools open until LRU eviction. If this is intended, can the ja…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:47:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2186#discussion_r4544500321",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/test/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystemCacheTest.java",
+      "text": "[AI Assisted] Nit: the literal 100 here is tied to the default of `unitycatalog.credScopedFs.cache.maxSize`. A named constant or a comment referencing the default would keep the test honest if the default changes.",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-11T20:58:11Z",
-    "updated_at": "2026-11-11T21:58:54Z",
+    "updated_at": "2026-11-12T00:16:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -755,11 +848,203 @@
    "proof": null,
    "files": [
     {
+     "path": "api/delta.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1004,7 +1004,13 @@"
+      ],
+      [
+       "c",
+       "          const: \"set-properties\""
+      ],
+      [
+       "c",
+       "        updates:"
+      ],
+      [
+       "c",
+       "          type: object"
+      ],
+      [
+       "d",
+       "          description: Properties to set"
+      ],
+      [
+       "a",
+       "          description: |"
+      ],
+      [
+       "a",
+       "            Properties to set. On a MANAGED table, a server-derived key (delta.minReaderVersion,"
+      ],
+      [
+       "a",
+       "            delta.minWriterVersion, delta.feature.*, clusteringColumns,"
+      ],
+      [
+       "a",
+       "            delta.rowTracking.rowIdHighWaterMark, delta.lastUpdateVersion, delta.lastCommitTimestamp)"
+      ],
+      [
+       "a",
+       "            is rejected with a 400 InvalidParameterValueException, and a change to a required"
+      ],
+      [
+       "a",
+       "            catalog-managed property or io.unitycatalog.tableId that breaks the contract is rejected"
+      ],
+      [
+       "a",
+       "            with the same error. Resending a required property with its stored value is accepted."
+      ],
+      [
+       "c",
+       "          additionalProperties:"
+      ],
+      [
+       "c",
+       "            type: string"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -1018,7 +1024,10 @@"
+      ],
+      [
+       "c",
+       "          const: \"remove-properties\""
+      ],
+      [
+       "c",
+       "        removals:"
+      ],
+      [
+       "c",
+       "          type: array"
+      ],
+      [
+       "d",
+       "          description: Property keys to remove"
+      ],
+      [
+       "a",
+       "          description: |"
+      ],
+      [
+       "a",
+       "            Property keys to remove. On a MANAGED table, removing a server-derived key (see"
+      ],
+      [
+       "a",
+       "            set-properties) or a required catalog-managed property or io.unitycatalog.tableId is"
+      ],
+      [
+       "a",
+       "            rejected with a 400 InvalidParameterValueException."
+      ],
+      [
+       "c",
+       "          items:"
+      ],
+      [
+       "c",
+       "            type: string"
+      ],
+      [
+       "c",
+       "      required:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 11,
+     "deletions": 2
+    },
+    {
      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
      "lines": [
       [
        "h",
-       "@@ -174,6 +174,30 @@"
+       "@@ -161,19 +161,48 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "d",
+       "   * Reads the {@code delta.feature.*} keys back out as a feature set. Safe to treat as"
+      ],
+      [
+       "a",
+       "   * Reads the {@code delta.feature.*} keys whose value is {@code supported} back out as a feature"
+      ],
+      [
+       "a",
+       "   * set, matching how the connector decides a table is catalog-managed. Safe to treat as"
+      ],
+      [
+       "c",
+       "   * writer-features since the Delta spec makes every reader-feature also a writer-feature."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public static Set<String> extractFeaturesFromProperties(Map<String, String> props) {"
+      ],
+      [
+       "c",
+       "    Set<String> features = new HashSet<>();"
+      ],
+      [
+       "d",
+       "    for (String key : props.keySet()) {"
+      ],
+      [
+       "d",
+       "      if (key.startsWith(TableProperties.FEATURE_PREFIX)) {"
+      ],
+      [
+       "d",
+       "        features.add(key.substring(TableProperties.FEATURE_PREFIX.length()));"
+      ],
+      [
+       "a",
+       "    for (Map.Entry<String, String> entry : props.entrySet()) {"
+      ],
+      [
+       "a",
+       "      if (entry.getKey().startsWith(TableProperties.FEATURE_PREFIX)"
+      ],
+      [
+       "a",
+       "          && FEATURE_SUPPORTED.equals(entry.getValue())) {"
+      ],
+      [
+       "a",
+       "        features.add(entry.getKey().substring(TableProperties.FEATURE_PREFIX.length()));"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "    }"
       ],
       [
        "c",
@@ -779,19 +1064,19 @@
       ],
       [
        "a",
-       "   * Inverse of {@link #deriveFromProtocol}, for validating the stored state when a request changes"
+       "   * Rebuilds a protocol from the stored properties for contract validation only. It is lossy:"
       ],
       [
        "a",
-       "   * protocol properties without {@code set-protocol}. Properties do not record which features are"
+       "   * properties do not record which features are reader features, so every stored feature is listed"
       ],
       [
        "a",
-       "   * reader features, so every stored feature is listed as both a reader and a writer feature. A"
+       "   * as both a reader and a writer feature. A missing version comes back as null, and a non-numeric"
       ],
       [
        "a",
-       "   * missing or non-numeric version comes back as null."
+       "   * one is rejected with the stored value in the message."
       ],
       [
        "a",
@@ -800,225 +1085,102 @@
       [
        "a",
        "  public static DeltaProtocol synthesizeProtocolFromProperties(Map<String, String> props) {"
-      ],
-      [
-       "a",
-       "    List<String> features = List.copyOf(extractFeaturesFromProperties(props));"
-      ],
-      [
-       "a",
-       "    return new DeltaProtocol()"
-      ],
-      [
-       "a",
-       "        .minReaderVersion(parseVersion(props.get(TableProperties.MIN_READER_VERSION)))"
-      ],
-      [
-       "a",
-       "        .minWriterVersion(parseVersion(props.get(TableProperties.MIN_WRITER_VERSION)))"
-      ],
-      [
-       "a",
-       "        .readerFeatures(features)"
-      ],
-      [
-       "a",
-       "        .writerFeatures(features);"
-      ],
-      [
-       "a",
-       "  }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "  private static Integer parseVersion(String value) {"
-      ],
-      [
-       "a",
-       "    if (value == null) return null;"
-      ],
-      [
-       "a",
-       "    try {"
-      ],
-      [
-       "a",
-       "      return Integer.valueOf(value);"
-      ],
-      [
-       "a",
-       "    } catch (NumberFormatException e) {"
-      ],
-      [
-       "a",
-       "      return null;"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "a",
-       "  }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "  private static void addFeatureProperties(Map<String, String> props, List<String> features) {"
-      ],
-      [
-       "c",
-       "    if (features == null) return;"
       ]
      ],
      "truncated": true,
-     "additions": 24,
-     "deletions": 0
+     "additions": 33,
+     "deletions": 4
     },
     {
      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
      "lines": [
       [
        "h",
-       "@@ -422,18 +422,29 @@"
+       "@@ -52,6 +52,7 @@"
       ],
       [
        "c",
-       "    c.removeDomainMetadata.ifPresent(u -> applyRemoveDomainMetadata(properties, u.getDomains()));"
+       "import java.util.UUID;"
       ],
       [
        "c",
-       "    c.setTableComment.ifPresent(u -> applySetTableComment(dao, u));"
-      ],
-      [
-       "c",
-       "    c.updateSnapshotVersion.ifPresent(u -> applyUpdateSnapshotVersion(dao, properties, u));"
-      ],
-      [
-       "d",
-       "    // Re-validate the MANAGED contract against the final post-apply state. set-protocol runs"
-      ],
-      [
-       "d",
-       "    // full validation; set-domain-metadata alone only needs the DM-vs-writer-features check."
-      ],
-      [
-       "a",
-       "    // Re-validate the MANAGED contract against the final post-apply state. set-protocol, or a"
-      ],
-      [
-       "a",
-       "    // set-/remove-properties that touches a reserved key, runs full validation; set-domain-metadata"
-      ],
-      [
-       "a",
-       "    // alone only needs the DM-vs-writer-features check."
-      ],
-      [
-       "c",
-       "    if (TableType.MANAGED.toString().equals(dao.getType())) {"
-      ],
-      [
-       "a",
-       "      boolean touchesReservedProperty = touchesReservedProperty(c);"
-      ],
-      [
-       "c",
-       "      DeltaDomainMetadataUpdates effectiveDm ="
-      ],
-      [
-       "c",
-       "          DeltaPropertyMapper.synthesizeDomainMetadataFromProperties(properties.asMap());"
-      ],
-      [
-       "c",
-       "      if (c.setProtocol.isPresent()) {"
-      ],
-      [
-       "c",
-       "        UcManagedDeltaContract.validate("
-      ],
-      [
-       "c",
-       "            c.setProtocol.get().getProtocol(), effectiveDm, properties.asMap(), serverProperties);"
-      ],
-      [
-       "a",
-       "      } else if (touchesReservedProperty) {"
-      ],
-      [
-       "a",
-       "        UcManagedDeltaContract.validate("
-      ],
-      [
-       "a",
-       "            DeltaPropertyMapper.synthesizeProtocolFromProperties(properties.asMap()),"
-      ],
-      [
-       "a",
-       "            effectiveDm,"
-      ],
-      [
-       "a",
-       "            properties.asMap(),"
-      ],
-      [
-       "a",
-       "            serverProperties);"
-      ],
-      [
-       "c",
-       "      } else if (c.setDomainMetadata.isPresent()) {"
-      ],
-      [
-       "c",
-       "        UcManagedDeltaContract.validateDomainMetadataAgainstWriterFeatures("
-      ],
-      [
-       "c",
-       "            DeltaPropertyMapper.extractFeaturesFromProperties(properties.asMap()), effectiveDm);"
-      ],
-      [
-       "c",
-       "      }"
-      ],
-      [
-       "a",
-       "      if (touchesReservedProperty) {"
-      ],
-      [
-       "a",
-       "        UcManagedDeltaContract.validateTableIdProperty(properties.asMap(), dao.getId().toString());"
-      ],
-      [
-       "a",
-       "      }"
-      ],
-      [
-       "c",
-       "    }"
+       "import java.util.function.Function;"
       ]
      ],
      "truncated": true,
-     "additions": 22,
-     "deletions": 2
+     "additions": 44,
+     "deletions": 3
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5866765595",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Review of #2185 at 790e99e0. Two blockers: 1. A `set-properties` of a required feature key to a value other than `supported` passes the contract check and is stored, so the connector stops treating the table as catalog-managed. 2. A `set-protocol` request combined with `remove-properties` or a version `s…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544415172",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
+      "text": "[AI Assisted] `extractFeaturesFromProperties` (line 167) counts a feature by its key alone, and this method builds the synthesized protocol from it. A `set-properties` of `delta.feature.catalogManaged` to `false`, an empty string or `disabled` therefore passes the contract check and is stored. The connector treats a t…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544415177",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
+      "text": "[AI Assisted] When `set-protocol` is present (lines 432-434), the contract is validated from the request protocol only. `applySetProtocol` (line 418) derives the feature and version properties first, and then `remove-properties` (line 420) can strip `delta.feature.catalogManaged`, or `set-properties` (line 419) can ch…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544415184",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/delta/UcManagedDeltaContract.java",
+      "text": "[AI Assisted] This set covers only the contract keys. The spec lists the server-derived keys that clients must not send in `set-properties` or `remove-properties` (`spec/protocols/ManagedDeltaTablesSpec.md`, Synthetic property keys): `delta.minReaderVersion`, `delta.minWriterVersion`, `delta.feature.<name>`, `delta.cl…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544415191",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapperTest.java",
+      "text": "[AI Assisted] The parameterized source covers five of the 13 reserved keys. Could it be driven from `UcManagedDeltaContract.RESERVED_PROPERTY_KEYS` so it cannot drift, with the feature-value and `set-protocol` cases added?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-11T23:34:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544415200",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
+      "text": "[AI Assisted] `parseVersion` returns null for a non-numeric value, and `validateRequiredVersions` then reports 'got null' (`UcManagedDeltaContract.java:201-212`). Could the message include the stored value instead?",
+      "answered": true
+     }
+    ],
     "stage": 3,
     "checks": "running",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T21:00:15Z",
-    "updated_at": "2026-11-11T22:35:26Z",
+    "last_push": "2026-11-12T00:20:58Z",
+    "updated_at": "2026-11-12T00:21:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1204,11 +1366,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Add tests for loaded column metadata scenarios",
    "date": "2026-11-11",
    "created_at": "2026-11-11T19:18:45Z",
-   "merged_at": null,
+   "merged_at": "2026-11-12",
    "reported": true,
    "pr": {
     "number": 2178,
@@ -1219,6 +1381,16 @@
    "files": [],
    "track": {
     "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-12T00:12:51Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2178#pullrequestreview-5867069229",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for folding the tests. The folded cases still go through the V1 load and toStructField, and the change saves four servers and Spark sessions per job. Optional, not blocking: assert that the rejected row is absent after the failed VARCHAR insert, and consider renaming testLoadTableKeepsColumnDefaul…",
+      "answered": true
+     },
      {
       "kind": "inline comment",
       "who": "yili-db",
@@ -1260,24 +1432,26 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-11T22:36:00Z",
-    "updated_at": "2026-11-11T23:10:49Z",
+    "updated_at": "2026-11-12T00:23:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 76
   },
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
-   "status": "triage",
+   "status": "closed",
    "title": "@mlflow.trace stores NumPy arrays and scalars as truncated strings",
    "date": "2026-11-11",
    "created_at": "2026-11-11T02:45:11Z",
@@ -1356,9 +1530,9 @@
     "updated_at": "2026-11-11T02:45:29Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A bot closed the PR until maintainers label the issue `ready`. It gets reopened once they do"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 75
   },
