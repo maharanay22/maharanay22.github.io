@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T09:34:26Z",
+ "generated_at": "2026-11-12T11:14:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28779,
-   "forks": 6611,
+   "stars": 28780,
+   "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50495,
+   "stars": 50497,
    "forks": 20735,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63151,
-   "forks": 13217,
+   "stars": 63152,
+   "forks": 13218,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -5919,18 +5919,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "ion-elgreco",
+      "at": "2026-11-12T10:25:33Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4947#issuecomment-6821058441",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 instead of checking the data in, can you please make a spark fixture that runs it on the fly, also perhaps a dat-0.0.8 table covers it already?",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-10-24T18:34:22Z",
-    "updated_at": "2026-11-12T03:50:17Z",
+    "updated_at": "2026-11-12T10:25:33Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "last_comment": {
+     "who": "ion-elgreco",
+     "at": "2026-11-12T10:25:33Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "ion-elgreco commented. Reply or update the PR"
    },
    "id": 61
   },
@@ -14759,11 +14774,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -15596,11 +15611,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -15761,11 +15776,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
