@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T01:55:11Z",
+ "generated_at": "2026-11-12T03:01:03Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28770,
-   "forks": 6609,
+   "stars": 28771,
+   "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50492,
-   "forks": 20734,
+   "forks": 20735,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63130,
-   "forks": 13209,
+   "stars": 63131,
+   "forks": 13210,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -291,6 +291,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Delta REST create stores client-sent synthetic properties before deriving them from the protocol",
+   "date": "2026-11-12",
+   "created_at": "2026-11-12T02:09:38Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2195,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2195"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-12T02:09:38Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 85
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -439,8 +471,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-12T01:49:57Z",
@@ -448,8 +480,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 84
   },
@@ -475,7 +507,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,18 +1,21 @@"
+       "@@ -1,21 +1,32 @@"
       ],
       [
        "c",
@@ -578,24 +610,24 @@
        "public class ColumnVectorUtils {"
       ],
       [
-       "h",
-       "@@ -60,55 +63,38 @@"
+       "a",
+       "  /**"
       ],
       [
-       "c",
-       "        }"
+       "a",
+       "   * Creates a ColumnVector over the given values."
       ],
       [
-       "c",
-       "        return ColumnVector.super.getInt(rowId);"
+       "a",
+       "   *"
       ],
       [
-       "c",
-       "      }"
+       "a",
+       "   * @param data the values, which give the vector size and which rows are null"
       ]
      ],
      "truncated": true,
-     "additions": 24,
+     "additions": 32,
      "deletions": 38
     },
     {
@@ -639,7 +671,7 @@
       ],
       [
        "h",
-       "@@ -213,7 +213,7 @@"
+       "@@ -213,7 +213,8 @@"
       ],
       [
        "c",
@@ -659,7 +691,11 @@
       ],
       [
        "a",
-       "          values.add((T) (Byte) (byte) random.nextInt(Byte.MAX_VALUE + 1)); // Random byte values"
+       "          // A bound above Byte.MAX_VALUE + 1 would wrap into negative values"
+      ],
+      [
+       "a",
+       "          values.add((T) (Byte) (byte) random.nextInt(Byte.MAX_VALUE + 1));"
       ],
       [
        "c",
@@ -675,7 +711,7 @@
       ],
       [
        "h",
-       "@@ -263,8 +263,4 @@"
+       "@@ -263,8 +264,4 @@"
       ],
       [
        "c",
@@ -711,7 +747,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
+     "additions": 3,
      "deletions": 6
     }
    ],
@@ -721,8 +757,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-12T01:46:43Z",
-    "updated_at": "2026-11-12T01:48:51Z",
+    "last_push": "2026-11-12T02:44:37Z",
+    "updated_at": "2026-11-12T02:44:39Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1481,8 +1517,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-12T01:34:14Z",
@@ -1490,8 +1526,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 79
   },
@@ -1556,7 +1592,7 @@
       ],
       [
        "h",
-       "@@ -1004,7 +1004,13 @@"
+       "@@ -1004,7 +1004,14 @@"
       ],
       [
        "c",
@@ -1592,15 +1628,19 @@
       ],
       [
        "a",
-       "            is rejected with a 400 InvalidParameterValueException, and a change to a required"
+       "            is rejected with a 400 InvalidParameterValueException. Changing the stored value of a"
       ],
       [
        "a",
-       "            catalog-managed property or io.unitycatalog.tableId that breaks the contract is rejected"
+       "            required catalog-managed property, io.unitycatalog.tableId or"
       ],
       [
        "a",
-       "            with the same error. Resending a required property with its stored value is accepted."
+       "            delta.enableIcebergCompatV2 is rejected with the same error when the result breaks the"
+      ],
+      [
+       "a",
+       "            contract. Resending the stored value of a contract property is a no-op."
       ],
       [
        "c",
@@ -1616,7 +1656,7 @@
       ],
       [
        "h",
-       "@@ -1018,7 +1024,10 @@"
+       "@@ -1018,7 +1025,12 @@"
       ],
       [
        "c",
@@ -1633,110 +1673,82 @@
       [
        "d",
        "          description: Property keys to remove"
-      ],
-      [
-       "a",
-       "          description: |"
       ]
      ],
      "truncated": true,
-     "additions": 12,
+     "additions": 15,
      "deletions": 3
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/DeltaCommitRepository.java",
      "lines": [
       [
        "h",
-       "@@ -33,9 +33,9 @@"
+       "@@ -471,16 +471,23 @@"
       ],
       [
        "c",
-       " *"
+       "          RepositoryUtils.lockTableForCommit("
       ],
       [
        "c",
-       " * <ul>"
+       "              session, tableInfoDAO, tableId, Optional.empty(), ErrorCode.COMMIT_STATE_UNKNOWN);"
       ],
       [
        "c",
-       " *   <li>The {@code delta.clustering} domain-metadata entry's {@code clusteringColumns} field"
+       "          validateTableForCommit(session, commit, tableInfoDAO, uniformFields);"
       ],
       [
        "d",
-       " *       projects to the {@code delta.clusteringColumns} table property as a JSON-encoded list of"
-      ],
-      [
-       "d",
-       " *       column paths. Paths are arrays of segment names so nested columns survive as arrays rather"
-      ],
-      [
-       "d",
-       " *       than collapsing into dotted strings."
+       "          postCommitCore(session, tableId, tableInfoDAO, commit, uniformFields, filesChecked);"
       ],
       [
        "a",
-       " *       projects to the {@code clusteringColumns} table property as a JSON-encoded list of column"
+       "          postCommitCore("
       ],
       [
        "a",
-       " *       paths. Paths are arrays of segment names so nested columns survive as arrays rather than"
+       "              session,"
       ],
       [
        "a",
-       " *       collapsing into dotted strings."
-      ],
-      [
-       "c",
-       " *   <li>The {@code delta.rowTracking} domain-metadata entry's {@code rowIdHighWaterMark} field"
-      ],
-      [
-       "c",
-       " *       projects to the {@code delta.rowTracking.rowIdHighWaterMark} table property."
-      ],
-      [
-       "c",
-       " * </ul>"
-      ],
-      [
-       "h",
-       "@@ -56,7 +56,7 @@"
-      ],
-      [
-       "c",
-       "   * Builds the stored UC property map by layering client-supplied entries first, then overlaying"
-      ],
-      [
-       "c",
-       "   * protocol- and domain-metadata-derived entries on top. The structured {@code protocol} and"
-      ],
-      [
-       "c",
-       "   * {@code domain-metadata} blocks are the canonical source for the keys this method derives"
-      ],
-      [
-       "d",
-       "   * ({@code delta.feature.*}, {@code delta.clusteringColumns}, {@code"
+       "              tableId,"
       ],
       [
        "a",
-       "   * ({@code delta.feature.*}, {@code clusteringColumns}, {@code"
+       "              tableInfoDAO,"
+      ],
+      [
+       "a",
+       "              commit,"
+      ],
+      [
+       "a",
+       "              uniformFields,"
+      ],
+      [
+       "a",
+       "              getNewestCommits(session, tableId),"
+      ],
+      [
+       "a",
+       "              filesChecked);"
       ],
       [
        "c",
-       "   * delta.rowTracking.rowIdHighWaterMark}); a stray client property under those names cannot"
+       "          return null;"
       ],
       [
        "c",
-       "   * silently override the projection. Client-only properties (e.g. {@code"
+       "        },"
       ],
       [
        "c",
-       "   * delta.rowTracking.materializedRowIdColumnName}) flow through untouched."
+       "        \"Error committing to table: \" + commit.getTableId(),"
       ],
       [
-       "h",
-       "@@ -161,19 +161,48 @@"
+       "c",
+       "        /* readOnly= */ false);"
       ],
       [
        "c",
@@ -1752,24 +1764,48 @@
       ],
       [
        "d",
-       "   * Reads the {@code delta.feature.*} keys back out as a feature set. Safe to treat as"
+       "   * Shared core of {@link #postCommit} and {@link #applyCommitAndBackfillInSession}: read the"
+      ],
+      [
+       "d",
+       "   * newest commits and route to {@link #handleOnboardingCommit} (no prior commits + commit info"
       ],
       [
        "a",
-       "   * Reads the {@code delta.feature.*} keys whose value is {@code supported} back out as a feature"
+       "   * Shared core of {@link #postCommit} and {@link #applyCommitAndBackfillInSession}: given the"
       ],
       [
        "a",
-       "   * set, matching how the connector decides a table is catalog-managed. Safe to treat as"
+       "   * newest commits, route to {@link #handleOnboardingCommit} (no prior commits + commit info"
       ],
       [
        "c",
-       "   * writer-features since the Delta spec makes every reader-feature also a writer-feature."
+       "   * present), {@link #handleBackfillOnlyCommit} (prior commits + commit info absent), or {@link"
+      ],
+      [
+       "c",
+       "   * #handleNormalCommit} (prior commits + commit info present). A backfill-only request against an"
+      ],
+      [
+       "c",
+       "   * empty commit log is rejected here directly with a caller-aware message."
+      ],
+      [
+       "h",
+       "@@ -494,8 +501,8 @@"
+      ],
+      [
+       "c",
+       "      TableInfoDAO tableInfoDAO,"
+      ],
+      [
+       "c",
+       "      DeltaCommit commit,"
       ]
      ],
      "truncated": true,
-     "additions": 37,
-     "deletions": 8
+     "additions": 30,
+     "deletions": 9
     }
    ],
    "track": {
@@ -1782,7 +1818,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at be06a340. Thanks for the fixes: the no-op resend case, the `enableIcebergCompatV2` trigger, the literal test list and the spec synthetic-keys paragraph are addressed. Two blockers remain: 1. The removal branch of `changesStoredValue` checks `CONTRACT_INPUT_KEYS` instead of the `keys` argumen…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1792,7 +1828,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
       "text": "[AI Assisted] This is a blocker. The removal branch checks `UcManagedDeltaContract.CONTRACT_INPUT_KEYS` instead of the `keys` argument. `changesTableId` (line 397) calls this helper with `Set.of(UC_TABLE_ID)`, so removing any stored contract input, such as `delta.enableIcebergCompatV2`, makes `validateTableIdProperty`…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1802,7 +1838,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
       "text": "[AI Assisted] This now counts only `supported`, but Delta accepts `enabled` as a feature status (`TableFeatureSupport.scala` in Delta v4.4.1, around line 519). The change also affects the `set-domain-metadata` writer-feature check, so a stored `enabled` value would now fail with a missing writer-feature error. Could t…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review changes requested",
@@ -1836,16 +1872,16 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [],
-    "last_push": "2026-11-12T00:55:50Z",
-    "updated_at": "2026-11-12T01:32:46Z",
+    "last_push": "2026-11-12T02:31:09Z",
+    "updated_at": "2026-11-12T02:31:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db asked for changes. Update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Requested changes are pushed. Waiting for yili-db to look again"
    },
    "id": 78
   },
