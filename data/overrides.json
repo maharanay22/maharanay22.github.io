@@ -225,5 +225,307 @@
       "waiting_on": "maintainers",
       "next": "Maintainers labeled it Needs Discussion and are deciding between writing nanoseconds (this PR) and changing the warning. The one CI failure is a macOS runner that lost connection. Nothing to do until they decide"
     }
+  },
+  "impact_levels": {
+    "unitycatalog/unitycatalog#2187": {
+      "level": "medium",
+      "why": "Creating functions with long parameter types or docstrings failed with a server error"
+    },
+    "unitycatalog/unitycatalog#2186": {
+      "level": "high",
+      "why": "Closing one handle broke every Spark or Hadoop job sharing the same credentials until restart"
+    },
+    "unitycatalog/unitycatalog#2185": {
+      "level": "high",
+      "why": "A client could strip a managed table's reserved settings, breaking it for Spark"
+    },
+    "unitycatalog/unitycatalog#2183": {
+      "level": "medium",
+      "why": "The CLI printed wrong timestamp values and failed on dates before 1970"
+    },
+    "unitycatalog/unitycatalog#2178": {
+      "level": "low",
+      "why": "Adds test coverage for column metadata loading"
+    },
+    "unitycatalog/unitycatalog#2166": {
+      "level": "medium",
+      "why": "The CLI could not create tables with DECIMAL columns"
+    },
+    "unitycatalog/unitycatalog#2165": {
+      "level": "medium",
+      "why": "Nested column names lost their case for clients reading type_text"
+    },
+    "unitycatalog/unitycatalog#2164": {
+      "level": "high",
+      "why": "Spark dropped column DEFAULT values, so inserts wrote NULL instead of the default"
+    },
+    "unitycatalog/unitycatalog#2163": {
+      "level": "high",
+      "why": "One credential force delete broke external location listing for the whole metastore"
+    },
+    "unitycatalog/unitycatalog#2156": {
+      "level": "medium",
+      "why": "CREATE SCHEMA lost its comment and storage location"
+    },
+    "unitycatalog/unitycatalog#2013": {
+      "level": "medium",
+      "why": "List and dict parameter types lost their element types"
+    },
+    "unitycatalog/unitycatalog#2012": {
+      "level": "medium",
+      "why": "OpenAI tool definitions got the wrong strict flag"
+    },
+    "unitycatalog/unitycatalog#2011": {
+      "level": "medium",
+      "why": "Functions with optional type hints like str | None could not be created"
+    },
+    "unitycatalog/unitycatalog#1988": {
+      "level": "medium",
+      "why": "Functions with Decimal or timedelta types could not be created"
+    },
+    "unitycatalog/unitycatalog#1987": {
+      "level": "medium",
+      "why": "Date, binary, decimal and timestamp arguments were rejected or passed wrongly"
+    },
+    "unitycatalog/unitycatalog#1975": {
+      "level": "medium",
+      "why": "The client crashed when used outside async code"
+    },
+    "unitycatalog/unitycatalog#1971": {
+      "level": "high",
+      "why": "Function results were memoized, so repeated calls returned stale results"
+    },
+    "unitycatalog/unitycatalog#1970": {
+      "level": "medium",
+      "why": "Integer arguments were rejected for FLOAT, DOUBLE and DECIMAL parameters"
+    },
+    "unitycatalog/unitycatalog#1969": {
+      "level": "high",
+      "why": "Falsy results like 0 or False were replaced with a no-output message"
+    },
+    "unitycatalog/unitycatalog#1967": {
+      "level": "medium",
+      "why": "The library could not be imported on Windows"
+    },
+    "unitycatalog/unitycatalog#1966": {
+      "level": "medium",
+      "why": "Multi-round tool call history was rejected for Anthropic and LiteLLM"
+    },
+    "mlflow/mlflow#27668": {
+      "level": "high",
+      "why": "Trace inputs and outputs with NumPy arrays were saved as truncated strings"
+    },
+    "mlflow/mlflow#26805": {
+      "level": "medium",
+      "why": "Evaluation failed for scorers that return NumPy scalars"
+    },
+    "mlflow/mlflow#26539": {
+      "level": "medium",
+      "why": "Evaluation failed for scorers that return NumPy scalars"
+    },
+    "mlflow/mlflow#26804": {
+      "level": "high",
+      "why": "Async logging applied writes for the same run out of order"
+    },
+    "mlflow/mlflow#26538": {
+      "level": "medium",
+      "why": "The AI Gateway crashed on tools without a description or parameters"
+    },
+    "mlflow/mlflow#26440": {
+      "level": "medium",
+      "why": "Streaming responses lost their token usage"
+    },
+    "mlflow/mlflow#26439": {
+      "level": "medium",
+      "why": "Streaming chunks with list content failed"
+    },
+    "pandas-dev/pandas#72006": {
+      "level": "high",
+      "why": "to_sql wrote timedelta values 1000x too small"
+    },
+    "pandas-dev/pandas#71745": {
+      "level": "high",
+      "why": "Changing the result of ffill or bfill also changed the original data"
+    },
+    "pandas-dev/pandas#71025": {
+      "level": "medium",
+      "why": "Regex \\s missed some whitespace characters on pyarrow strings"
+    },
+    "pandas-dev/pandas#70773": {
+      "level": "high",
+      "why": "Regex \\w, \\d, \\s and \\b matched only ASCII on the default string dtype"
+    },
+    "pandas-dev/pandas#70723": {
+      "level": "medium",
+      "why": "any and all with skipna=False raised TypeError on pyarrow booleans"
+    },
+    "pandas-dev/pandas#70515": {
+      "level": "medium",
+      "why": "Series.mode raised TypeError for nullable booleans"
+    },
+    "delta-io/delta-rs#5027": {
+      "level": "high",
+      "why": "Merge with schema evolution wrote wrong values for the new column"
+    },
+    "delta-io/delta-rs#5025": {
+      "level": "high",
+      "why": "Merge duplicated target rows when source keys repeated"
+    },
+    "delta-io/delta-rs#5019": {
+      "level": "high",
+      "why": "add_constraint committed while a concurrent append wrote violating rows"
+    },
+    "delta-io/delta-rs#4975": {
+      "level": "high",
+      "why": "Writes corrupted Spark-written tables with non-ASCII partition values"
+    },
+    "delta-io/delta-rs#4949": {
+      "level": "medium",
+      "why": "Reading the change data feed panicked on multi-row-group files"
+    },
+    "delta-io/delta-rs#4947": {
+      "level": "high",
+      "why": "The change data feed returned deleted rows instead of live rows"
+    },
+    "delta-io/delta-rs#4945": {
+      "level": "high",
+      "why": "Enabling a table feature on a column-mapped table dropped column mapping"
+    },
+    "delta-io/delta-rs#4899": {
+      "level": "medium",
+      "why": "Lite vacuum never deleted expired deletion vector files"
+    },
+    "delta-io/delta-rs#4897": {
+      "level": "high",
+      "why": "Time travel by timestamp could open the wrong table version"
+    },
+    "delta-io/delta-rs#4895": {
+      "level": "high",
+      "why": "Rounded decimal statistics made filters and deletes skip matching rows"
+    },
+    "delta-io/delta-rs#4893": {
+      "level": "high",
+      "why": "Predicates with fractional literals were rounded and matched the wrong rows"
+    },
+    "delta-io/delta-rs#4881": {
+      "level": "high",
+      "why": "delete() removed every row for some partition predicates"
+    },
+    "delta-io/delta-rs#4858": {
+      "level": "high",
+      "why": "Vacuum deleted files still needed by unexpired tombstones"
+    },
+    "delta-io/delta-rs#4856": {
+      "level": "medium",
+      "why": "The change data feed returned wrong dates for out-of-range INT96 timestamps"
+    },
+    "delta-io/delta-rs#4854": {
+      "level": "low",
+      "why": "A clearer error message for naive timestamps"
+    },
+    "delta-io/delta-rs#4850": {
+      "level": "high",
+      "why": "count() ignored deletion vectors and over-counted rows"
+    },
+    "delta-io/delta-rs#4847": {
+      "level": "low",
+      "why": "Removes an outdated CI dependency pin"
+    },
+    "delta-io/delta-rs#4843": {
+      "level": "medium",
+      "why": "The change data feed failed for partition values needing escaping"
+    },
+    "delta-io/delta-rs#4841": {
+      "level": "high",
+      "why": "Out-of-range INT96 timestamps read as 1816, and optimize saved the wrong values"
+    },
+    "delta-io/delta-rs#4839": {
+      "level": "high",
+      "why": "Full vacuum deleted referenced deletion vector files, making tables unreadable"
+    },
+    "delta-io/delta#7843": {
+      "level": "medium",
+      "why": "Generated columns using BETWEEN could not be created"
+    },
+    "delta-io/delta#7841": {
+      "level": "low",
+      "why": "clusterBy was case-sensitive, unlike the documentation"
+    },
+    "delta-io/delta#7840": {
+      "level": "medium",
+      "why": "Python clone methods returned a raw Java object instead of a DeltaTable"
+    },
+    "delta-io/delta#7838": {
+      "level": "medium",
+      "why": "replaceWhere with BETWEEN failed on partition columns"
+    },
+    "mindsdb/engine#14": {
+      "level": "medium",
+      "why": "Catalog queries failed for SQL Server database names that need quoting"
+    },
+    "mindsdb/engine#13": {
+      "level": "medium",
+      "why": "Connection string values with special characters broke the SQL Server connection"
+    },
+    "mindsdb/engine#12": {
+      "level": "high",
+      "why": "Databricks integer columns with NULLs lost precision"
+    },
+    "mindsdb/engine#11": {
+      "level": "high",
+      "why": "SQL Server integer columns with NULLs lost precision"
+    },
+    "mindsdb/engine#10": {
+      "level": "low",
+      "why": "A missing PostgreSQL schema now fails early with a clear error"
+    },
+    "mindsdb/engine#9": {
+      "level": "low",
+      "why": "Adds a missing Databricks dependency"
+    },
+    "mindsdb/engine#8": {
+      "level": "medium",
+      "why": "PostgreSQL native queries other than SELECT failed"
+    },
+    "BerriAI/litellm#45599": {
+      "level": "medium",
+      "why": "A single-string callbacks setting replaced the proxy's internal callbacks"
+    },
+    "BerriAI/litellm#45147": {
+      "level": "medium",
+      "why": "Anthropic streaming reported the wrong finish reason with tools"
+    },
+    "pydantic/pydantic-settings#1024": {
+      "level": "medium",
+      "why": "CliApp.run raised TypeError for BaseModel commands"
+    },
+    "pydantic/pydantic-settings#1022": {
+      "level": "high",
+      "why": "Environment variables and secrets for aliased fields were silently ignored"
+    },
+    "databricks/databricks-sql-python#982": {
+      "level": "medium",
+      "why": "Iterating a cursor was 100x or more slower than fetchall"
+    },
+    "databricks/databricks-sql-python#979": {
+      "level": "high",
+      "why": "NaN values were returned as None, the same as NULL"
+    },
+    "databricks/databricks-sql-python#977": {
+      "level": "medium",
+      "why": "CloudFetch downloads could crash with ZeroDivisionError"
+    },
+    "databricks/dbt-databricks#1711": {
+      "level": "high",
+      "why": "replace_where and microbatch inserted rows by position, risking wrong columns"
+    },
+    "databricks/dbt-databricks#1710": {
+      "level": "medium",
+      "why": "Struct field names that need quoting broke column types"
+    },
+    "databricks/dbt-databricks#1709": {
+      "level": "low",
+      "why": "Backslashes in descriptions broke comments"
+    }
   }
 }

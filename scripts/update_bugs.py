@@ -419,6 +419,7 @@ def main():
             "pr": {"number": pr["number"], "url": pr["url"]},
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
             "proof": OVERRIDES.get("proofs", {}).get(pr["url"]),
+            "impact": OVERRIDES.get("impact_levels", {}).get(f"{repo}#{pr['number']}"),
             "files": fix_diffs(repo, pr["number"]),
             "track": apply_note(pr["url"], status, replaced_by, track_pr(pr, status)),
         })

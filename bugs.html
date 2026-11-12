@@ -28,6 +28,16 @@
   button.stat:hover, button.stat:focus-visible { border-color: var(--accent); }
   .back { margin-left: auto; }
   .rank { margin: 0; font-size: 0.92rem; color: var(--muted); }
+  .impact-badge { display: inline-flex; gap: 6px; align-items: center; font-size: 0.78rem; font-weight: 600; border-radius: 999px; padding: 2px 10px; }
+  .impact-badge .stars { letter-spacing: 1px; }
+  .impact-high { color: #f0b429; background: rgba(240, 180, 41, 0.14); }
+  .impact-medium { color: var(--accent); background: var(--surface-2); }
+  .impact-low { color: var(--muted); background: var(--surface-2); }
+  .impact-why { margin: 6px 0 0; font-size: 0.9rem; color: var(--muted); }
+  .impact-why b { color: var(--text); font-weight: 600; }
+  .impact-legend { margin: 0 0 16px; font-size: 0.88rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .impact-legend span { display: inline-flex; gap: 6px; align-items: center; }
+  .lib-impact { margin: 0; font-size: 0.9rem; color: var(--muted); }
   .rank a { color: var(--good); font-weight: 600; text-decoration: none; }
   .rank a:hover, .rank a:focus-visible { text-decoration: underline; }
   .counts b { font-size: 1.35rem; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
@@ -109,10 +119,12 @@
         <h2 class="section-title">All fixes</h2>
         <p class="section-sub">Each fix links to its pull request and the issue it resolves. Expand a row to see the code change.</p>
       </div>
+      <p class="impact-legend" aria-label="Impact levels"><span><b class="impact-badge impact-high"><span class="stars">&#9733;&#9733;&#9733;</span>High</b> silent wrong data or data loss, wrong query results, or a broken core workflow</span><span><b class="impact-badge impact-medium"><span class="stars">&#9733;&#9733;</span>Medium</b> a crash or error in a supported workflow, or wrong metadata</span><span><b class="impact-badge impact-low"><span class="stars">&#9733;</span>Low</b> error messages, docs, tests or CI</span></p>
       <div class="controls">
         <input class="input" id="q" type="search" placeholder="Search fixes" aria-label="Search fixes">
         <select class="select" id="repoSel" aria-label="Project"><option value="all">All projects</option></select>
         <select class="select" id="statusSel" aria-label="Status"><option value="all">All statuses</option></select>
+        <select class="select" id="impactSel" aria-label="Impact"><option value="all">All impact levels</option><option value="high">High impact</option><option value="medium">Medium impact</option><option value="low">Low impact</option></select>
       </div>
       <div class="result-line"><span id="count"></span><button class="linkbtn" id="clear" type="button" hidden>Clear filters</button><button class="linkbtn back" id="back" type="button" hidden>Back to libraries</button></div>
       <ul class="fix-list" id="fixList"><li class="fix">Loading fixes...</li></ul>
@@ -237,6 +249,14 @@
     var bar = el('div', 'bar'); bar.setAttribute('role', 'img'); bar.setAttribute('aria-label', pct + '% of pull requests merged');
     var fill = el('span'); fill.style.width = pct + '%'; bar.append(fill);
     var share = el('div'); share.append(counts, el('p', 'bar-label', merged ? merged + ' of ' + mine.length + ' pull requests merged (' + pct + '%)' : 'No merges yet, ' + review + ' in review'), bar);
+    var levels = ['high', 'medium', 'low'].map(function (lv) {
+      return [lv, mine.filter(function (f) { return f.impact && f.impact.level === lv; }).length];
+    }).filter(function (x) { return x[1]; });
+    if (levels.length) {
+      var li2 = el('p', 'lib-impact'); li2.append('Impact of these fixes: ');
+      levels.forEach(function (x, i) { if (i) li2.append(' \u00b7 '); li2.append(el('b', null, '\u2605'.repeat(IMPACT[x[0]].stars) + ' ' + x[1] + ' ' + IMPACT[x[0]].label.toLowerCase())); });
+      share.append(li2);
+    }
     card.append(head, share);
 
     if (r.impact) {
@@ -284,19 +304,34 @@
     return d;
   }
 
+  var IMPACT = { high: { stars: 3, label: 'High' }, medium: { stars: 2, label: 'Medium' }, low: { stars: 1, label: 'Low' } };
+  function impactBadge(level) {
+    var i = IMPACT[level];
+    var b = el('span', 'impact-badge impact-' + level);
+    b.title = i.label + ' impact';
+    b.append(el('span', 'stars', '\u2605'.repeat(i.stars)), i.label + ' impact');
+    return b;
+  }
+
   function fixRow(q, repoName) {
     var li = el('li', 'fix');
     li.append(withCode('h3', null, q.title));
     var meta = el('div', 'meta');
-    meta.append(el('span', 'project', repoName[q.repo] || q.repo), badge(q.status), el('span', null, 'Opened ' + fmtDate(q.date)));
+    meta.append(el('span', 'project', repoName[q.repo] || q.repo), badge(q.status));
+    if (q.impact && IMPACT[q.impact.level]) meta.append(impactBadge(q.impact.level));
+    meta.append(el('span', null, 'Opened ' + fmtDate(q.date)));
     if (q.merged_at) meta.append(el('span', null, 'Merged ' + fmtDate(q.merged_at)));
     if (q.pr) meta.append(link('PR #' + q.pr.number, q.pr.url));
     if (q.issue) meta.append(link('Issue #' + q.issue.number, q.issue.url));
     li.append(meta);
+    if (q.impact && q.impact.why) {
+      var why = el('p', 'impact-why'); why.append(el('b', null, 'Impact: '), q.impact.why); li.append(why);
+    }
     if (q.proof) li.append(withCode('p', 'proof', q.proof));
     if (q.files && q.files.length) li.append(diffBlock(q.files));
     li.dataset.repo = q.repo;
     li.dataset.status = q.status;
+    li.dataset.impact = q.impact ? q.impact.level : 'none';
     li.dataset.text = [q.title, q.proof || '', repoName[q.repo] || '', q.pr ? '#' + q.pr.number : ''].join(' ').toLowerCase();
     return li;
   }
@@ -321,7 +356,7 @@
         $('creditList').append(li);
       });
 
-    var q = $('q'), repoSel = $('repoSel'), statusSel = $('statusSel'), clear = $('clear'), back = $('back');
+    var q = $('q'), repoSel = $('repoSel'), statusSel = $('statusSel'), impactSel = $('impactSel'), clear = $('clear'), back = $('back');
     var returnTo = null;
     projects.forEach(function (p) { var o = el('option', null, p.repo.name); o.value = p.repo.full; repoSel.append(o); });
     Object.keys(STATUS).filter(function (s) { return count(fixes, s); }).forEach(function (s) {
@@ -334,20 +369,21 @@
     $('fixList').replaceChildren.apply($('fixList'), rows.concat([empty]));
 
     function apply() {
-      var term = q.value.trim().toLowerCase(), repo = repoSel.value, status = statusSel.value;
+      var term = q.value.trim().toLowerCase(), repo = repoSel.value, status = statusSel.value, impact = impactSel.value;
       var shown = rows.filter(function (r) {
-        var visible = (repo === 'all' || r.dataset.repo === repo) && (status === 'all' || r.dataset.status === status) && (!term || r.dataset.text.indexOf(term) >= 0);
+        var visible = (repo === 'all' || r.dataset.repo === repo) && (status === 'all' || r.dataset.status === status) && (impact === 'all' || r.dataset.impact === impact) && (!term || r.dataset.text.indexOf(term) >= 0);
         r.hidden = !visible;
         return visible;
       }).length;
       empty.hidden = shown > 0;
-      clear.hidden = !term && repo === 'all' && status === 'all';
+      clear.hidden = !term && repo === 'all' && status === 'all' && impact === 'all';
       $('count').textContent = 'Showing ' + shown + ' of ' + rows.length + ' fixes';
     }
     q.addEventListener('input', apply);
     repoSel.addEventListener('change', apply);
     statusSel.addEventListener('change', apply);
-    clear.addEventListener('click', function () { q.value = ''; repoSel.value = 'all'; statusSel.value = 'all'; apply(); });
+    impactSel.addEventListener('change', apply);
+    clear.addEventListener('click', function () { q.value = ''; repoSel.value = 'all'; statusSel.value = 'all'; impactSel.value = 'all'; apply(); });
     back.addEventListener('click', function () {
       var target = returnTo || $('libraries');
       back.hidden = true; returnTo = null;
@@ -356,7 +392,7 @@
     apply();
 
     var onFilter = function (full, status, from) {
-      q.value = ''; repoSel.value = full;
+      q.value = ''; repoSel.value = full; impactSel.value = 'all';
       statusSel.value = Array.prototype.some.call(statusSel.options, function (o) { return o.value === status; }) ? status : 'all';
       apply();
       returnTo = from || $('top-stats') || null;
