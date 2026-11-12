@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T15:33:23Z",
+ "generated_at": "2026-11-12T17:44:40Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28784,
+   "stars": 28786,
    "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50497,
-   "forks": 20734,
+   "stars": 50499,
+   "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63170,
-   "forks": 13222,
+   "stars": 63175,
+   "forks": 13228,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -274,7 +274,7 @@
     "CLI"
    ],
    "stars": 1498,
-   "forks": 261,
+   "forks": 262,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
@@ -562,17 +562,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-12T14:09:12Z",
-    "updated_at": "2026-11-12T14:43:21Z",
+    "updated_at": "2026-11-12T15:36:38Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 88
   },
@@ -6377,7 +6377,7 @@
      "ion-elgreco"
     ],
     "last_push": "2026-11-12T15:05:20Z",
-    "updated_at": "2026-11-12T15:29:35Z",
+    "updated_at": "2026-11-12T15:53:29Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
