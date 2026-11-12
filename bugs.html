@@ -27,6 +27,9 @@
   button.stat { font: inherit; color: inherit; text-align: left; cursor: pointer; }
   button.stat:hover, button.stat:focus-visible { border-color: var(--accent); }
   .back { margin-left: auto; }
+  .rank { margin: 0; font-size: 0.92rem; color: var(--muted); }
+  .rank a { color: var(--good); font-weight: 600; text-decoration: none; }
+  .rank a:hover, .rank a:focus-visible { text-decoration: underline; }
   .counts b { font-size: 1.35rem; font-weight: 600; line-height: 1.2; font-variant-numeric: tabular-nums; }
   .counts span { font-size: 0.78rem; color: var(--muted); }
   .counts .is-merged b { color: var(--good); }
@@ -120,10 +123,10 @@
     <div class="container">
       <div class="section-head">
         <p class="eyebrow">Recognition</p>
-        <h2 class="section-title">Release credits</h2>
-        <p class="section-sub">Official release notes that name these contributions.</p>
+        <h2 class="section-title">Credits and contributor lists</h2>
+        <p class="section-sub">Official release notes and project contributor lists that name these contributions.</p>
       </div>
-      <ul class="credits card">
+      <ul class="credits card" id="creditList">
         <li><a href="https://pandas.pydata.org/docs/whatsnew/v3.1.0.html">pandas 3.1.0</a><span>Named in the release contributor list</span></li>
         <li><a href="https://pandas.pydata.org/docs/whatsnew/v3.1.1.html">pandas 3.1.1</a><span>Named in the release contributor list</span></li>
         <li><a href="https://github.com/mlflow/mlflow/releases/tag/v3.18.0">MLflow v3.18.0</a><span>Release notes credit 4 pull requests to @maharanay22</span></li>
@@ -197,6 +200,21 @@
     );
   }
 
+  function rankInfo(r) {
+    if (!r.period_rank && !r.contributor_rank) return null;
+    var href = r.url + '/graphs/contributors', parts = [];
+    if (r.period_rank && r.period_since) {
+      var d = r.period_since.split('-');
+      href += '?from=' + Number(d[1]) + '%2F' + Number(d[2]) + '%2F' + d[0];
+      parts.push('#' + r.period_rank + ' of ' + r.period_total + ' contributors since ' + fmtDate(r.period_since) +
+        ' (' + r.period_commits + (r.period_commits === 1 ? ' commit)' : ' commits)'));
+    }
+    if (r.contributor_rank) {
+      parts.push('#' + r.contributor_rank + ' of ' + (r.contributor_total >= 300 ? '300+' : String(r.contributor_total)) + ' all time');
+    }
+    return { href: href, text: parts.join(' · ') };
+  }
+
   function libraryCard(p, login, onFilter) {
     var r = p.repo, mine = p.fixes, merged = count(mine, 'merged'), review = count(mine, 'review');
     var card = el('article', 'card lib');
@@ -232,10 +250,18 @@
     if (r.downloads_checked) reach.append(', as of ' + fmtDate(r.downloads_checked));
     card.append(reach);
 
+    var rank = rankInfo(r);
+    if (rank) {
+      var rk = el('p', 'rank');
+      rk.append('Contributor rank: ', link(rank.text, rank.href));
+      card.append(rk);
+    }
+
     var links = el('div', 'lib-links');
     var view = el('button', 'linkbtn', 'View fixes'); view.type = 'button';
     view.addEventListener('click', function () { onFilter(r.full, 'all', card); });
     links.append(view, link('Pull requests on GitHub', r.url + '/pulls?q=is%3Apr+author%3A' + encodeURIComponent(login)));
+    if (rank) links.append(link('Contributors list', rank.href));
     card.append(links);
     return card;
   }
@@ -286,6 +312,14 @@
     }).filter(function (p) { return p.fixes.length; }).sort(function (a, b) {
       return count(b.fixes, 'merged') - count(a.fixes, 'merged') || b.fixes.length - a.fixes.length;
     });
+
+    repos.filter(function (r) { return rankInfo(r); })
+      .sort(function (a, b) { return (a.period_rank || 999) - (b.period_rank || 999) || (a.contributor_rank || 999) - (b.contributor_rank || 999); })
+      .forEach(function (r) {
+        var info = rankInfo(r), li = el('li');
+        li.append(link(r.name + ' contributors', info.href), el('span', null, info.text));
+        $('creditList').append(li);
+      });
 
     var q = $('q'), repoSel = $('repoSel'), statusSel = $('statusSel'), clear = $('clear'), back = $('back');
     var returnTo = null;

@@ -72,6 +72,10 @@ def request(url, payload=None, accept="application/vnd.github+json"):
             if e.code < 500 or attempt == 3:
                 raise
             time.sleep(5 * (attempt + 1))
+        except (urllib.error.URLError, ConnectionError, TimeoutError):
+            if attempt == 3:
+                raise
+            time.sleep(5 * (attempt + 1))
 
 
 def search(q):
@@ -162,6 +166,68 @@ def add_downloads(repos):
             repo["downloads_checked"] = today
         except Exception as e:  # keep the last known value if pypistats is unavailable
             print(f"downloads for {repo['package']} unavailable: {e}", file=sys.stderr)
+
+
+def add_contributor_ranks(repos, pages=3):
+    """Position on each repo's GitHub contributor list (by commits), refreshed at most once a day."""
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    try:
+        previous = {r["full"]: r for r in json.loads(OUT.read_text(encoding="utf-8"))["repos"]}
+    except (OSError, ValueError, KeyError):
+        previous = {}
+    keys = ("contributor_rank", "contributor_commits", "contributor_total", "contributors_checked")
+    for repo in repos.values():
+        old = previous.get(repo["full"], {})
+        for k in keys:
+            repo[k] = old.get(k)
+        add_period_rank(repo, old, today)
+        if repo["contributors_checked"] == today:
+            continue
+        try:
+            logins = []
+            for page in range(1, pages + 1):
+                batch = request(f"https://api.github.com/repos/{repo['full']}/contributors?per_page=100&page={page}")
+                logins += [(c.get("login"), c.get("contributions")) for c in batch]
+                if len(batch) < 100:
+                    break
+            rank = next((i for i, (login, _) in enumerate(logins, 1) if login == LOGIN), None)
+            repo["contributor_rank"] = rank
+            repo["contributor_commits"] = logins[rank - 1][1] if rank else None
+            repo["contributor_total"] = len(logins)
+            repo["contributors_checked"] = today
+        except Exception as e:  # keep the last known value if the API is unavailable
+            print(f"contributors for {repo['full']} unavailable: {e}", file=sys.stderr)
+
+
+def add_period_rank(repo, old, today):
+    """Rank by commits since RANK_SINCE, as GitHub's contributors graph shows with ?from=<date>."""
+    since = OVERRIDES.get("rank_since", "2026-07-18")
+    keys = ("period_rank", "period_commits", "period_total")
+    for k in keys:
+        repo[k] = old.get(k)
+    repo["period_since"] = since
+    if old.get("period_checked") == today and old.get("period_since") == since:
+        repo["period_checked"] = today
+        return
+    repo["period_checked"] = old.get("period_checked")
+    start = datetime.strptime(since, "%Y-%m-%d").replace(tzinfo=timezone.utc).timestamp() - 6 * 86400
+    try:
+        stats = request(f"https://api.github.com/repos/{repo['full']}/stats/contributors")
+    except Exception as e:
+        print(f"contributor stats for {repo['full']} unavailable: {e}", file=sys.stderr)
+        return
+    if not isinstance(stats, list) or not stats:  # GitHub returns 202 with no body while it computes stats
+        return
+    rows = sorted(
+        ((sum(w["c"] for w in c["weeks"] if w["w"] >= start), (c.get("author") or {}).get("login")) for c in stats),
+        key=lambda x: -x[0],
+    )
+    rows = [r for r in rows if r[0] > 0]
+    rank = next((i for i, (_, login) in enumerate(rows, 1) if login == LOGIN), None)
+    repo["period_rank"] = rank
+    repo["period_commits"] = rows[rank - 1][0] if rank else None
+    repo["period_total"] = len(rows)
+    repo["period_checked"] = today
 
 
 MAINTAINER = {"OWNER", "MEMBER", "COLLABORATOR"}
@@ -372,6 +438,7 @@ def main():
         })
 
     add_downloads(repos)
+    add_contributor_ranks(repos)
     items.sort(key=lambda x: x["created_at"], reverse=True)
     for i, item in enumerate(reversed(items), 1):
         item["id"] = i
