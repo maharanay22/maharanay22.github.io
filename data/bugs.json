@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T17:39:11Z",
+ "generated_at": "2026-11-13T18:13:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28792,
-   "forks": 6610,
+   "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50510,
-   "forks": 20740,
+   "forks": 20739,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63224,
+   "stars": 63215,
    "forks": 13266,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -291,6 +291,299 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "delta-io/delta-rs",
+   "status": "review",
+   "title": "Full overwrite does not conflict with a concurrent append, so appended data survives the overwrite",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T18:12:01Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 5065,
+    "url": "https://github.com/delta-io/delta-rs/pull/5065"
+   },
+   "issue": {
+    "number": 5064,
+    "url": "https://github.com/delta-io/delta-rs/issues/5064"
+   },
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "crates/core/src/kernel/schema/partitions.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -296,6 +296,20 @@"
+      ],
+      [
+       "c",
+       "    })"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "/// Render a conjunction (AND) of filter literals as a SQL predicate in the dialect"
+      ],
+      [
+       "a",
+       "/// operation predicates such as `replaceWhere` are recorded and conflict-checked in."
+      ],
+      [
+       "a",
+       "#[cfg(feature = \"datafusion\")]"
+      ],
+      [
+       "a",
+       "pub fn conjunction_to_sql_predicate("
+      ],
+      [
+       "a",
+       "    literals: &[FilterLiteral<'_>],"
+      ],
+      [
+       "a",
+       "    table_schema: &StructType,"
+      ],
+      [
+       "a",
+       ") -> DeltaResult<String> {"
+      ],
+      [
+       "a",
+       "    use crate::delta_datafusion::engine::to_datafusion_predicate_expr;"
+      ],
+      [
+       "a",
+       "    use crate::delta_datafusion::expr::fmt_expr_to_sql;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    let predicate = conjunction_to_kernel_predicate(literals, table_schema)?;"
+      ],
+      [
+       "a",
+       "    fmt_expr_to_sql(&to_datafusion_predicate_expr(&predicate, table_schema)?)"
+      ],
+      [
+       "a",
+       "}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "/// Translate filters in disjunctive normal form -- an OR across conjunctions"
+      ],
+      [
+       "c",
+       "/// (AND groups) of `(column, op, value)` literals -- into a kernel [`Predicate`]."
+      ],
+      [
+       "c",
+       "pub fn dnf_to_kernel_predicate("
+      ],
+      [
+       "h",
+       "@@ -753,4 +767,80 @@"
+      ],
+      [
+       "c",
+       "        let literal = (\"number\", FilterOp::Eq, FilterValue::Scalar(\"not_a_number\"));"
+      ],
+      [
+       "c",
+       "        assert!(literal_to_kernel_predicate(&literal, &schema).is_err());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    #[cfg(feature = \"datafusion\")]"
+      ],
+      [
+       "a",
+       "    #[test]"
+      ],
+      [
+       "a",
+       "    fn test_conjunction_to_sql_predicate() {"
+      ],
+      [
+       "a",
+       "        use crate::delta_datafusion::expr::parse_predicate_expression;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 90,
+     "deletions": 0
+    },
+    {
+     "path": "crates/core/src/operations/create.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -685,6 +685,7 @@"
+      ],
+      [
+       "c",
+       "    mod datafusion_tests {"
+      ],
+      [
+       "c",
+       "        use super::*;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        use crate::kernel::transaction::{CommitConflictError, TransactionError};"
+      ],
+      [
+       "c",
+       "        use crate::writer::test_utils::get_record_batch;"
+      ],
+      [
+       "c",
+       "        #[tokio::test]"
+      ],
+      [
+       "c",
+       "        async fn test_create_table_save_mode() {"
+      ],
+      [
+       "h",
+       "@@ -781,6 +782,46 @@"
+      ],
+      [
+       "c",
+       "            assert_eq!(state.log_data().num_files(), 0);"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        #[tokio::test]"
+      ],
+      [
+       "a",
+       "        async fn test_create_or_replace_conflicts_with_concurrent_append() -> DeltaResult<()> {"
+      ],
+      [
+       "a",
+       "            let batch = get_record_batch(None, false);"
+      ],
+      [
+       "a",
+       "            let table = DeltaTable::new_in_memory()"
+      ],
+      [
+       "a",
+       "                .write(vec![batch.clone()])"
+      ],
+      [
+       "a",
+       "                .await?;"
+      ],
+      [
+       "a",
+       "            let stale_snapshot = table.snapshot()?.clone();"
+      ],
+      [
+       "a",
+       "            let (_, actions, operation) = table"
+      ],
+      [
+       "a",
+       "                .create()"
+      ],
+      [
+       "a",
+       "                .with_columns(get_delta_schema().fields().cloned())"
+      ],
+      [
+       "a",
+       "                .with_save_mode(SaveMode::Overwrite)"
+      ],
+      [
+       "a",
+       "                .into_table_and_actions()"
+      ],
+      [
+       "a",
+       "                .await?;"
+      ],
+      [
+       "a",
+       "            let mut table = table"
+      ],
+      [
+       "a",
+       "                .write(vec![batch])"
+      ],
+      [
+       "a",
+       "                .with_save_mode(SaveMode::Append)"
+      ],
+      [
+       "a",
+       "                .await?;"
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 41,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T18:11:22Z",
+    "updated_at": "2026-11-13T18:12:03Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 91
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -444,7 +737,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T17:20:06Z",
-    "updated_at": "2026-11-13T17:37:56Z",
+    "updated_at": "2026-11-13T18:06:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
