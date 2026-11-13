@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T16:43:55Z",
+ "generated_at": "2026-11-13T17:39:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50510,
-   "forks": 20739,
+   "forks": 20740,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63234,
+   "stars": 63224,
    "forks": 13266,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -291,6 +291,168 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep comment and table properties on non-Delta tables",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T17:37:55Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2228,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2228"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -1068,7 +1068,16 @@"
+      ],
+      [
+       "c",
+       "      enableServerSidePlanningConfig(identifier)"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    val storageProperties = (t.getProperties.asScala.toMap ++ extraSerdeProps).asJava"
+      ],
+      [
+       "a",
+       "    val isDelta = t.getDataSourceFormat == DataSourceFormat.DELTA"
+      ],
+      [
+       "a",
+       "    // Delta tables keep all UC properties as storage properties, unchanged (Delta reads"
+      ],
+      [
+       "a",
+       "    // UC_TABLE_ID_KEY there). Other formats split them like Spark's session catalog: OPTIONS become"
+      ],
+      [
+       "a",
+       "    // reader and writer options, everything else is a table property."
+      ],
+      [
+       "a",
+       "    val (tableProperties, dataSourceOptions) = if (isDelta) {"
+      ],
+      [
+       "a",
+       "      (Map.empty[String, String], t.getProperties.asScala.toMap)"
+      ],
+      [
+       "a",
+       "    } else {"
+      ],
+      [
+       "a",
+       "      splitOptionsFromTableProperties(t.getProperties.asScala.toMap)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "    val storageProperties = (dataSourceOptions ++ extraSerdeProps).asJava"
+      ],
+      [
+       "c",
+       "    val sparkTable = CatalogTable("
+      ],
+      [
+       "c",
+       "      identifier,"
+      ],
+      [
+       "c",
+       "      tableType = if (t.getTableType == TableType.MANAGED) {"
+      ],
+      [
+       "h",
+       "@@ -1080,6 +1089,8 @@"
+      ],
+      [
+       "c",
+       "        locationUri, storageProperties),"
+      ],
+      [
+       "c",
+       "      schema = StructType(fields),"
+      ],
+      [
+       "c",
+       "      provider = Some(t.getDataSourceFormat.getValue.toLowerCase()),"
+      ],
+      [
+       "a",
+       "      properties = tableProperties,"
+      ],
+      [
+       "a",
+       "      comment = if (isDelta) None else Option(t.getComment),"
+      ],
+      [
+       "c",
+       "      createTime = t.getCreatedAt,"
+      ],
+      [
+       "c",
+       "      tracksPartitionsInCatalog = false,"
+      ],
+      [
+       "c",
+       "      partitionColumnNames = partitionCols.sortBy(_._2).map(_._1).toSeq"
+      ],
+      [
+       "h",
+       "@@ -1090,6 +1101,17 @@"
+      ],
+      [
+       "c",
+       "    asV1Table(sparkTable)"
+      ],
+      [
+       "c",
+       "  }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 23,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T17:20:06Z",
+    "updated_at": "2026-11-13T17:37:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 90
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
