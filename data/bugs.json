@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T03:17:03Z",
+ "generated_at": "2026-11-13T08:00:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3362,
-   "forks": 706,
+   "forks": 707,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 9159509,
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28787,
+   "stars": 28789,
    "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50505,
-   "forks": 20736,
+   "stars": 50506,
+   "forks": 20738,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -161,7 +161,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9076,
+   "stars": 9077,
    "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63200,
-   "forks": 13243,
+   "stars": 63205,
+   "forks": 13246,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -273,7 +273,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1500,
+   "stars": 1501,
    "forks": 262,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -533,7 +533,39 @@
      "lines": [
       [
        "h",
-       "@@ -27,6 +27,7 @@"
+       "@@ -3,6 +3,7 @@"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "import multiprocessing"
+      ],
+      [
+       "c",
+       "import multiprocessing.connection"
+      ],
+      [
+       "a",
+       "import pickle"
+      ],
+      [
+       "c",
+       "import traceback"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -27,6 +28,7 @@"
       ],
       [
        "c",
@@ -542,58 +574,79 @@
       [
        "c",
        "    TERMINATED_MESSAGE_TEMPLATE,"
-      ],
-      [
-       "c",
-       "    TIMEOUT_ERROR_MESSAGE,"
-      ],
-      [
-       "a",
-       "    UNREADABLE_RESULT_MESSAGE_TEMPLATE,"
-      ],
-      [
-       "c",
-       ")"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "_logger = logging.getLogger(__name__)"
-      ],
-      [
-       "h",
-       "@@ -158,20 +159,30 @@"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "    The result is read before joining the process, so a result larger than the pipe"
       ]
      ],
      "truncated": true,
-     "additions": 25,
+     "additions": 33,
      "deletions": 9
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-13T07:36:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2223#pullrequestreview-5887666891",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving. The fix for N2 is correct: `recv_bytes()` followed by `pickle.loads` in its own try, with the EOFError case covered by a parametrized test. Follow-ups, inline above: the early-return test does not catch removal of only the `return`, and the partial-frame test does not prove `join()` runs. Also…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T07:36:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2223#discussion_r4560827487",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_executor.py",
+      "text": "[AI Assisted] Follow-up: this check does not catch removal of only the early `return` in `_limit_resources`. Without the `return`, `resource.getrlimit(RLIMIT_AS)` is still read in the `existing_limits` list, then `None + ...` raises TypeError, which is swallowed, so `setrlimit` is never called and this assertion still…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T07:36:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2223#discussion_r4560827494",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_executor.py",
+      "text": "[AI Assisted] Follow-up: `process.exitcode` polls the child, and by this point the sentinel has fired, so the child is already exited and this line reaps it even when `_receive_result` never calls `join()`. The test therefore cannot tell whether the `finally` join runs. Could we spy on `process.join` and assert it was…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T04:57:11Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2223#pullrequestreview-5886373992",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review on eb779068: the signal ordering, the docstring, the framing comment and the notebook wording are addressed. One normal item is open as an inline comment. The tracking issue for the receive-thread limitation and the test isolation nit are followups.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T04:57:11Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2223#discussion_r4559816146",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+      "text": "[AI Assisted] `receiver.recv()` also unpickles, so an `EOFError` raised while rebuilding a complete payload lands in this branch and is reported as \"exited with code 0 before it could report a result\". This is still open after eb779068. I reproduced it on CPython 3.10 with a `__reduce__` that raises `EOFError`. Could…",
+      "answered": true
+     }
+    ],
     "stage": 3,
-    "checks": "running",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-13T02:45:43Z",
-    "updated_at": "2026-11-13T02:46:02Z",
+    "checks": "failing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
+    "last_push": "2026-11-13T05:53:45Z",
+    "updated_at": "2026-11-13T07:36:48Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 89
   },
@@ -1509,7 +1562,7 @@
       ],
       [
        "a",
-       "        module_ast = ast.parse(dedent_code(function_source))"
+       "        module_ast = ast.parse(function_source)"
       ],
       [
        "c",
@@ -1525,7 +1578,11 @@
       ],
       [
        "h",
-       "@@ -47,7 +47,7 @@"
+       "@@ -46,8 +46,8 @@"
+      ],
+      [
+       "c",
+       "    Generates a Python runner script that sets resource limits and embeds the function's source code"
       ],
       [
        "c",
@@ -1536,12 +1593,8 @@
        "    \"\"\""
       ],
       [
-       "c",
-       "    function_name = _extract_function_name(function_source)"
-      ],
-      [
-       "d",
-       "    function_source = textwrap.dedent(function_source)"
+       "a",
+       "    function_source = dedent_code(function_source)"
       ]
      ],
      "truncated": true,
@@ -1553,7 +1606,7 @@
      "lines": [
       [
        "h",
-       "@@ -5,7 +5,7 @@"
+       "@@ -6,7 +6,7 @@"
       ],
       [
        "c",
@@ -1589,12 +1642,62 @@
       ]
      ],
      "truncated": true,
-     "additions": 49,
-     "deletions": 32
+     "additions": 59,
+     "deletions": 38
     }
    ],
    "track": {
     "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T05:26:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4559982170",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
+      "text": "[AI Assisted] This says `restores string values for OSS and Databricks bodies alike`, but it holds only for bodies written by the writers here or by main. Please narrow the claim.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T05:26:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4559982179",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "[AI Assisted] The first NB bullet still says `smallest nonzero indent found in the block`. The value is now taken from statement lines past the 4-space margin, and an indent unit of 4 or more gives a factor of 1.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T05:26:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4559982183",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
+      "text": "[AI Assisted] `dedent_code` runs twice on the same source (here and in `_extract_function_name`). Dedent once and pass the result on.",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T05:26:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#pullrequestreview-5886600946",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the all-strings rule, which fixes the intermediate-docstring case and the stored-body disclosure. Before approval, the leading-backslash statement needs a fix (inline), and the branch needs a rebase onto main, which is currently conflicting. The rest are nits, inline.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T05:26:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4559982159",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
+      "text": "[AI Assisted] A logical line that starts with a backslash continuation takes its indentation from the first physical line, but `statement_lines` records the row of the first token. For `\\` / ` if True:` / ` return 1` as a stored body, main executes it to 1, and this head raises IndentationError in both `get_callable_d…",
+      "answered": true
+     },
      {
       "kind": "review commented",
       "who": "yili-db",
@@ -1604,69 +1707,19 @@
       "path": null,
       "text": "[AI Assisted] Summary: the verdict is comment. One normal item is left, nested-function docstring values (inline). The rest are nits. Both earlier regressions (indent factor, whitespace-only lines) read back correctly on this head.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T23:08:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510616",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] A bare string statement is now laid out with the code, which also covers the docstring of a nested `def` or `class`, and `__doc__` can observe that. For `def f_nest():` / ` def helper():` / ` \"\"\"Summary.` / `content` at column 0 / ` indented` / ` \"\"\"`, the rebuilt `helper.__doc__` has ` content`, where t…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T23:08:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510635",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
-      "text": "[AI Assisted] This still says `int(4 / indent_standard)`. The code is `max(1, 4 // indent_standard)`.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T23:08:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510644",
-      "maintainer": true,
-      "path": "ai/core/tests/core/test_callable_utils.py",
-      "text": "[AI Assisted] This comment says `stored by main`, which will go stale. Please describe the layout instead.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T23:08:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510656",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] A tab margin in a hand-written body is counted as one column, so `\\tx = '''a` / `\\tb'''` reads `'a\\n \\tb'`. Either skip moving string lines when the margin is not all spaces, or narrow the module docstring claim to space-indented bodies.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4548281514",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
-      "text": "[AI Assisted] Blocker: `indent_standard` now ignores string lines and comment lines, so a body whose only nested step is 8 spaces fails in `get_function_as_callable`. Two triggers: a string line indented deeper than the statements, and a comment line at 4 spaces (`if flag:` / ` # comment` / ` return \"yes\"`). On main t…",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T02:39:38Z",
-    "updated_at": "2026-11-13T02:52:00Z",
-    "conflicts": true,
+    "last_push": "2026-11-13T07:19:12Z",
+    "updated_at": "2026-11-13T07:36:58Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 86
   },
@@ -1705,11 +1758,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Don't execute a stale cached function after it is deleted or replaced",
    "date": "2026-11-12",
    "created_at": "2026-11-12T01:50:14Z",
-   "merged_at": null,
+   "merged_at": "2026-11-13",
    "reported": true,
    "pr": {
     "number": 2194,
@@ -1851,6 +1904,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-13T04:49:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#pullrequestreview-5886294855",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 54808238. The round-3 items are addressed: the signature-only case, the server-name check in the replace test, the README wording, and the removed comment. The remaining optional nit on the pop comment is not blocking.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-12T23:43:44Z",
@@ -1899,29 +1962,21 @@
       "path": null,
       "text": "[AI Assisted] nit: the description still says the cost is one string comparison per execution. `get_callable_definition` now builds the source on every call, which a cache hit used to skip. Small, but the wording should match.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T19:58:06Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4555624824",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] If the single-entry pop lands, a test should pin the stated benefit: after `replace=True` on `a`, the `func_cache` entry for `b` is still the same object. Today nothing would fail if the blanket clear came back.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-13T00:33:27Z",
-    "updated_at": "2026-11-13T01:42:26Z",
+    "updated_at": "2026-11-13T04:53:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 84
   },
@@ -2692,8 +2747,8 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-11T23:27:06Z",
-    "updated_at": "2026-11-12T00:09:57Z",
+    "last_push": "2026-11-13T03:30:04Z",
+    "updated_at": "2026-11-13T03:30:17Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
@@ -15610,11 +15665,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -16447,11 +16502,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -16612,11 +16667,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },

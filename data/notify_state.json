@@ -815,22 +815,24 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2194": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2211": {
   "approved_by": [],
-  "checks": "passing",
-  "conflicts": true,
+  "checks": "running",
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2213": {
   "approved_by": [
@@ -851,5 +853,16 @@
   "last_comment_who": "yili-db",
   "status": "merged",
   "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2223": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
  }
 }
