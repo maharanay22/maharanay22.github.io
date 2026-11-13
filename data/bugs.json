@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T20:39:21Z",
+ "generated_at": "2026-11-13T22:39:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50511,
+   "stars": 50512,
    "forks": 20739,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -246,7 +246,7 @@
     "Tool Calls"
    ],
    "stars": 63220,
-   "forks": 13266,
+   "forks": 13267,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -647,8 +647,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T20:12:31Z",
@@ -656,8 +656,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 97
   },
@@ -937,8 +937,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:28:27Z",
@@ -946,8 +946,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 96
   },
@@ -1389,8 +1389,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:29:05Z",
@@ -1398,8 +1398,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 94
   },
@@ -2287,11 +2287,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep comment and table properties on non-Delta tables",
    "date": "2026-11-13",
    "created_at": "2026-11-13T17:37:55Z",
-   "merged_at": null,
+   "merged_at": "2026-11-13",
    "reported": true,
    "pr": {
     "number": 2228,
@@ -2557,6 +2557,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-13T21:45:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#pullrequestreview-5898483914",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving, with two inline follow-ups (writer check, cli.md wording) that are not blocking.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T21:45:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4569003011",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ParquetExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] This insert does not check the writer side. The table has only a table property, so no writer option is asserted, and the reply that says writer options are covered is not accurate. Could we either assert a writer option here (for example a Parquet write option that changes the output files), or correct…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T21:45:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4569003033",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] Nit: this says other keys, such as a bare header, are table properties. A bare key that duplicates an option with the same value is dropped, not kept as a table property, so this is not always true. Could we say a bare header with no matching option. header, or add unless option.header has the same value?",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-13T18:43:23Z",
@@ -2585,49 +2615,21 @@
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] This decodes the option. prefix a second time, and UCTableProperties.withoutOptionPrefix already does it. Could the split move next to that helper so the convention lives in one place?",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-13T18:43:22Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#pullrequestreview-5896270848",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] The approach matches Spark's own convention, and the Delta path is unchanged. Please fix the bare-key collision (inline, UCSingleCatalog.scala) and document a migration path for existing REST or CLI tables that use bare reader keys. The test restructuring is the main ask. The remaining items are nits.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T18:43:22Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231382",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
-      "text": "[AI Assisted] The bare copy is dropped by name, whatever its value. Spark writes the same value for both copies, but a table created through the REST API or CLI can set header and option.header to different values. Then the bare header table property is lost without a warning. Could we drop a bare key only when its va…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T18:43:22Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231390",
-      "maintainer": true,
-      "path": "docs/usage/cli.md",
-      "text": "[AI Assisted] This stops passing bare keys to the reader for existing non-Delta tables created through the REST API or CLI, so a table registered with a bare header no longer reads with a header row. The change is disclosed here, but existing tables have no migration path in the doc. Could the doc say how an existing…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-13T19:18:38Z",
-    "updated_at": "2026-11-13T19:30:08Z",
+    "updated_at": "2026-11-13T21:58:36Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 90
   },
@@ -5611,6 +5613,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review changes requested",
+      "who": "yili-db",
+      "at": "2026-11-13T22:32:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5898977154",
+      "maintainer": true,
+      "path": null,
+      "text": "Requested changes",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "tdas",
       "at": "2026-11-13T19:49:25Z",
@@ -5659,32 +5671,21 @@
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
       "text": "[AI Assisted] This now counts only `supported`, but Delta accepts `enabled` as a feature status (`TableFeatureSupport.scala` in Delta v4.4.1, around line 519). The change also affects the `set-domain-metadata` writer-feature check, so a stored `enabled` value would now fail with a missing writer-feature error. Could t…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T00:46:11Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544881184",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
-      "text": "[AI Assisted] This is a blocker. A no-op resend is rejected on a MANAGED table whose stored properties do not carry the full contract, for example a table created through the UC REST path, which stores only `io.unitycatalog.tableId`. Here `touchesContractProperty` is true, so the full `UcManagedDeltaContract.validate`…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "approved",
+    "review": "changes requested",
     "approved_by": [
-     "yili-db",
      "tdas"
     ],
     "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-13T20:00:54Z",
+    "updated_at": "2026-11-13T22:32:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "tdas left review comments. Reply or update the PR"
+    "next": "yili-db asked for changes. Update the PR"
    },
    "id": 78
   },
