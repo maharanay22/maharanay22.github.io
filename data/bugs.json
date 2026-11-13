@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T18:37:06Z",
+ "generated_at": "2026-11-13T19:45:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Windows"
    ],
    "stars": 3578,
-   "forks": 697,
+   "forks": 698,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 672672,
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50510,
+   "stars": 50511,
    "forks": 20739,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -162,7 +162,7 @@
     "Lakehouse"
    ],
    "stars": 9077,
-   "forks": 2218,
+   "forks": 2219,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63217,
+   "stars": 63220,
    "forks": 13266,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -291,6 +291,1046 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "List partition columns last in the schema of non-Delta tables",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T19:43:49Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2232,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2232"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -1027,13 +1027,16 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private[spark] def loadV1Table(t: UCTableInfo): Table = {"
+      ],
+      [
+       "c",
+       "    val identifier = TableIdentifier(t.getName, Some(t.getSchemaName), Some(t.getCatalogName))"
+      ],
+      [
+       "d",
+       "    val partitionCols = scala.collection.mutable.ArrayBuffer.empty[(String, Int)]"
+      ],
+      [
+       "d",
+       "    val fields = t.getColumns.asScala.map { col =>"
+      ],
+      [
+       "d",
+       "      Option(col.getPartitionIndex).foreach { index =>"
+      ],
+      [
+       "d",
+       "        partitionCols += col.getName -> index"
+      ],
+      [
+       "d",
+       "      }"
+      ],
+      [
+       "d",
+       "      toStructField(col)"
+      ],
+      [
+       "d",
+       "    }.toArray"
+      ],
+      [
+       "a",
+       "    val columns = t.getColumns.asScala.toSeq"
+      ],
+      [
+       "a",
+       "    val (partitionCols, dataCols) = columns.partition(_.getPartitionIndex != null)"
+      ],
+      [
+       "a",
+       "    val sortedPartitionCols = partitionCols.sortBy(_.getPartitionIndex.intValue)"
+      ],
+      [
+       "a",
+       "    // Spark's file sources read and write a table as its data columns followed by its partition"
+      ],
+      [
+       "a",
+       "    // columns, the order Spark's own catalog stores. Delta takes its schema from the Delta log."
+      ],
+      [
+       "a",
+       "    val fields = (if (t.getDataSourceFormat == DataSourceFormat.DELTA) {"
+      ],
+      [
+       "a",
+       "      columns"
+      ],
+      [
+       "a",
+       "    } else {"
+      ],
+      [
+       "a",
+       "      dataCols ++ sortedPartitionCols"
+      ],
+      [
+       "a",
+       "    }).map(toStructField).toArray"
+      ],
+      [
+       "c",
+       "    val locationUri = CatalogUtils.stringToURI(t.getStorageLocation)"
+      ],
+      [
+       "c",
+       "    val tableId = t.getTableId"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -1082,7 +1085,7 @@"
+      ],
+      [
+       "c",
+       "      provider = Some(t.getDataSourceFormat.getValue.toLowerCase()),"
+      ],
+      [
+       "c",
+       "      createTime = t.getCreatedAt,"
+      ],
+      [
+       "c",
+       "      tracksPartitionsInCatalog = false,"
+      ],
+      [
+       "d",
+       "      partitionColumnNames = partitionCols.sortBy(_._2).map(_._1).toSeq"
+      ],
+      [
+       "a",
+       "      partitionColumnNames = sortedPartitionCols.map(_.getName)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 11,
+     "deletions": 8
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T19:20:49Z",
+    "updated_at": "2026-11-13T19:43:50Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 95
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Run function bodies with real newlines in function call and fail on errors",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T19:43:46Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2231,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2231"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "etc/data/function/python_engine.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,10 +1,28 @@"
+      ],
+      [
+       "a",
+       "import ast"
+      ],
+      [
+       "c",
+       "import sys"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "a",
+       "import textwrap"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "# Configure logging"
+      ],
+      [
+       "c",
+       "logging.basicConfig(filename='python_engine.log', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def parse_body(routine_body):"
+      ],
+      [
+       "a",
+       "    # A body without a real newline separates its lines with the two characters backslash and n,"
+      ],
+      [
+       "a",
+       "    # as in the CLI examples (--def \"c=a*b\\nreturn c\")."
+      ],
+      [
+       "a",
+       "    if '\\n' not in routine_body:"
+      ],
+      [
+       "a",
+       "        routine_body = routine_body.replace('\\\\n', '\\n')"
+      ],
+      [
+       "a",
+       "    try:"
+      ],
+      [
+       "a",
+       "        return ast.parse(routine_body).body"
+      ],
+      [
+       "a",
+       "    except IndentationError:"
+      ],
+      [
+       "a",
+       "        # A body indented as a whole, such as the inside of a triple-quoted string."
+      ],
+      [
+       "a",
+       "        return ast.parse(textwrap.dedent(routine_body)).body"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def define_function(func_name, routine_body, param_names):"
+      ],
+      [
+       "a",
+       "    func_def = ast.parse(f\"def {func_name}({', '.join(param_names)}):\\n    pass\")"
+      ],
+      [
+       "a",
+       "    func_def.body[0].body = parse_body(routine_body)"
+      ],
+      [
+       "a",
+       "    exec(compile(func_def, '<routine_definition>', 'exec'), globals())"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def execute_function(func_name, routine_body, params_str, args_str):"
+      ],
+      [
+       "c",
+       "    try:"
+      ],
+      [
+       "c",
+       "        # Split the parameter names and argument values"
+      ],
+      [
+       "h",
+       "@@ -14,12 +32,7 @@"
+      ]
+     ],
+     "truncated": true,
+     "additions": 25,
+     "deletions": 9
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+     "lines": [
+      [
+       "h",
+       "@@ -5,9 +5,14 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.FunctionInfo;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.FunctionParameterInfo;"
+      ],
+      [
+       "c",
+       "import java.io.BufferedReader;"
+      ],
+      [
+       "a",
+       "import java.io.IOException;"
+      ],
+      [
+       "a",
+       "import java.io.InputStream;"
+      ],
+      [
+       "c",
+       "import java.io.InputStreamReader;"
+      ],
+      [
+       "a",
+       "import java.io.UncheckedIOException;"
+      ],
+      [
+       "a",
+       "import java.nio.charset.StandardCharsets;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "a",
+       "import java.util.concurrent.CompletableFuture;"
+      ],
+      [
+       "c",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "c",
+       "import org.json.JSONArray;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -68,6 +73,10 @@"
+      ],
+      [
+       "c",
+       "      // Invoke the Python script"
+      ],
+      [
+       "c",
+       "      ProcessBuilder pb = new ProcessBuilder(argsList);"
+      ],
+      [
+       "c",
+       "      Process p = pb.start();"
+      ],
+      [
+       "a",
+       "      // Read stderr on another thread, so that a full stderr pipe cannot block the script while"
+      ],
+      [
+       "a",
+       "      // stdout is read below."
+      ],
+      [
+       "a",
+       "      CompletableFuture<String> error ="
+      ],
+      [
+       "a",
+       "          CompletableFuture.supplyAsync(() -> readFully(p.getErrorStream()));"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "      // Get the output from the Python script"
+      ],
+      [
+       "c",
+       "      BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));"
+      ],
+      [
+       "h",
+       "@@ -77,10 +86,25 @@"
+      ],
+      [
+       "c",
+       "        result.append(resultLine).append(\"\\n\");"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "      in.close();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T19:29:05Z",
+    "updated_at": "2026-11-13T19:43:47Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 94
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "List every page in list commands",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T19:43:42Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2230,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2230"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/CatalogCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -7,11 +7,13 @@"
+      ],
+      [
+       "c",
+       "import com.fasterxml.jackson.databind.ObjectWriter;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.cli.utils.CliParams;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.cli.utils.CliUtils;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.cli.utils.Pagination;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.ApiClient;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.ApiException;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.api.CatalogsApi;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.CatalogInfo;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.CreateCatalog;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.client.model.ListCatalogsResponse;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.UpdateCatalog;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLine;"
+      ],
+      [
+       "c",
+       "import org.json.JSONObject;"
+      ],
+      [
+       "h",
+       "@@ -65,16 +67,13 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private static String listCatalogs(CatalogsApi catalogsApi, JSONObject json)"
+      ],
+      [
+       "c",
+       "      throws JsonProcessingException, ApiException {"
+      ],
+      [
+       "d",
+       "    int maxResults = 100;"
+      ],
+      [
+       "d",
+       "    if (json.has(CliParams.MAX_RESULTS.getServerParam())) {"
+      ],
+      [
+       "d",
+       "      maxResults = json.getInt(CliParams.MAX_RESULTS.getServerParam());"
+      ],
+      [
+       "d",
+       "    }"
+      ],
+      [
+       "d",
+       "    String pageToken = null;"
+      ],
+      [
+       "d",
+       "    if (json.has(CliParams.PAGE_TOKEN.getServerParam())) {"
+      ],
+      [
+       "d",
+       "      pageToken = json.getString(CliParams.PAGE_TOKEN.getServerParam());"
+      ],
+      [
+       "d",
+       "    }"
+      ],
+      [
+       "c",
+       "    return objectWriter.writeValueAsString("
+      ],
+      [
+       "d",
+       "        catalogsApi.listCatalogs(pageToken, maxResults, /* includeBrowse= */ false).getCatalogs());"
+      ],
+      [
+       "a",
+       "        Pagination.listAllPages("
+      ],
+      [
+       "a",
+       "            json,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 8,
+     "deletions": 9
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/CredentialCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -6,6 +6,7 @@"
+      ],
+      [
+       "c",
+       "import com.fasterxml.jackson.databind.ObjectWriter;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.cli.utils.CliParams;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.cli.utils.CliUtils;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.cli.utils.Pagination;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.ApiClient;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.ApiException;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.api.CredentialsApi;"
+      ],
+      [
+       "h",
+       "@@ -15,7 +16,6 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.CredentialPurpose;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.ListCredentialsResponse;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.UpdateCredentialRequest;"
+      ],
+      [
+       "d",
+       "import java.util.List;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLine;"
+      ],
+      [
+       "c",
+       "import org.json.JSONObject;"
+      ],
+      [
+       "h",
+       "@@ -77,12 +77,12 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private static String listCredentials(CredentialsApi credentialsApi, JSONObject json)"
+      ],
+      [
+       "c",
+       "      throws JsonProcessingException, ApiException {"
+      ],
+      [
+       "d",
+       "    int maxResults = json.optInt(CliParams.MAX_RESULTS.getServerParam(), 100);"
+      ],
+      [
+       "d",
+       "    String pageToken = json.optString(CliParams.PAGE_TOKEN.getServerParam(), null);"
+      ],
+      [
+       "d",
+       "    ListCredentialsResponse listCredentialsResponse ="
+      ],
+      [
+       "d",
+       "        credentialsApi.listCredentials(maxResults, pageToken, null);"
+      ],
+      [
+       "d",
+       "    List<CredentialInfo> credentials = listCredentialsResponse.getCredentials();"
+      ],
+      [
+       "d",
+       "    return objectWriter.writeValueAsString(credentials);"
+      ],
+      [
+       "a",
+       "    return objectWriter.writeValueAsString("
+      ],
+      [
+       "a",
+       "        Pagination.listAllPages("
+      ],
+      [
+       "a",
+       "            json,"
+      ],
+      [
+       "a",
+       "            (maxResults, pageToken) -> credentialsApi.listCredentials(maxResults, pageToken, null),"
+      ]
+     ],
+     "truncated": true,
+     "additions": 7,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T19:36:31Z",
+    "updated_at": "2026-11-13T19:43:44Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 93
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Make the generated unitycatalog.delta package importable",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T19:30:22Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2229,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2229"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "build.sbt",
+     "lines": [
+      [
+       "h",
+       "@@ -340,7 +340,17 @@"
+      ],
+      [
+       "c",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"delta.yaml\").getAbsolutePath,"
+      ],
+      [
+       "c",
+       "              packageName = s\"$artifactNamePrefix.delta\","
+      ],
+      [
+       "c",
+       "              additionalProperties = commonProps,"
+      ],
+      [
+       "d",
+       "              globalProperties = Map(\"apis\" -> \"\", \"models\" -> \"\")"
+      ],
+      [
+       "a",
+       "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath,"
+      ],
+      [
+       "a",
+       "              // Only the package's own runtime modules: the project-level supporting files"
+      ],
+      [
+       "a",
+       "              // (README.md, setup.cfg, requirements.txt, ...) come from the all.yaml run above."
+      ],
+      [
+       "a",
+       "              globalProperties = Map("
+      ],
+      [
+       "a",
+       "                \"apis\" -> \"\","
+      ],
+      [
+       "a",
+       "                \"models\" -> \"\","
+      ],
+      [
+       "a",
+       "                \"supportingFiles\" -> Seq("
+      ],
+      [
+       "a",
+       "                  \"__init__.py\", \"api_client.py\", \"api_response.py\", \"configuration.py\","
+      ],
+      [
+       "a",
+       "                  \"exceptions.py\", \"rest.py\", \"py.typed\""
+      ],
+      [
+       "a",
+       "                ).mkString(\",\")"
+      ],
+      [
+       "a",
+       "              )"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "c",
+       "          )"
+      ],
+      [
+       "c",
+       "        )"
+      ]
+     ],
+     "truncated": false,
+     "additions": 11,
+     "deletions": 1
+    },
+    {
+     "path": "clients/python/src/unitycatalog/delta/internal/serde/delta_data_type_module.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,7 +1,7 @@"
+      ],
+      [
+       "c",
+       "\"\"\""
+      ],
+      [
+       "c",
+       "Python counterpart of the server/client Java ``DeltaDataTypeModule``: patches"
+      ],
+      [
+       "d",
+       "``DeltaDataType.from_dict``/``to_dict`` and ``DeltaStructField.from_dict``/"
+      ],
+      [
+       "d",
+       "``to_dict`` to handle Delta's string-or-object wire form (e.g. ``\"long\"`` /"
+      ],
+      [
+       "a",
+       "``from_dict``/``to_dict`` on ``DeltaDataType``, its subtypes, and"
+      ],
+      [
+       "a",
+       "``DeltaStructField`` to handle Delta's string-or-object wire form (e.g. ``\"long\"`` /"
+      ],
+      [
+       "c",
+       "``\"decimal(10,2)\"`` as bare JSON strings for primitives, vs. JSON objects"
+      ],
+      [
+       "c",
+       "for ``array`` / ``map`` / ``struct``)."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -99,6 +99,8 @@"
+      ],
+      [
+       "c",
+       "# Patch class methods"
+      ],
+      [
+       "c",
+       "@classmethod"
+      ],
+      [
+       "c",
+       "def _patched_dt_from_dict(cls, obj):"
+      ],
+      [
+       "a",
+       "    if obj is None:"
+      ],
+      [
+       "a",
+       "        return None"
+      ],
+      [
+       "c",
+       "    return _parse_type(obj)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -108,6 +110,11 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "DeltaDataType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "a",
+       "DeltaPrimitiveType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "a",
+       "DeltaDecimalType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "a",
+       "DeltaArrayType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "a",
+       "DeltaMapType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "a",
+       "DeltaStructType.from_dict = _patched_dt_from_dict"
+      ],
+      [
+       "c",
+       "DeltaStructField.from_dict = _patched_sf_from_dict"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 9,
+     "deletions": 2
+    },
+    {
+     "path": "project/PythonClientPostBuild.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -126,12 +126,10 @@"
+      ],
+      [
+       "c",
+       "    val targetModule = targetSerdeDir.resolve(\"delta_data_type_module.py\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    if (!Files.exists(srcModule)) {"
+      ],
+      [
+       "d",
+       "      log.warn(s\"delta_data_type_module.py not found at $srcModule, skipping patch\")"
+      ],
+      [
+       "d",
+       "      return"
+      ],
+      [
+       "a",
+       "      sys.error(s\"delta_data_type_module.py not found at $srcModule\")"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    if (!Files.exists(targetDir)) {"
+      ],
+      [
+       "d",
+       "      log.warn(s\"Delta package not found at $targetDir, skipping patch\")"
+      ],
+      [
+       "d",
+       "      return"
+      ]
+     ],
+     "truncated": true,
+     "additions": 3,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T19:30:19Z",
+    "updated_at": "2026-11-13T19:30:24Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 92
+  },
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
@@ -602,11 +1642,139 @@
    "impact": null,
    "files": [
     {
+     "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCTableProperties.java",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,8 @@"
+      ],
+      [
+       "c",
+       "package io.unitycatalog.spark;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Set;"
+      ],
+      [
+       "a",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.connector.catalog.TableCatalog;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "public class UCTableProperties {"
+      ],
+      [
+       "h",
+       "@@ -59,6 +61,28 @@"
+      ],
+      [
+       "c",
+       "    return key;"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Reader and writer options of a non-Delta table: the {@code option.}-prefixed properties, with"
+      ],
+      [
+       "a",
+       "   * the prefix removed."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public static Map<String, String> dataSourceOptions(Map<String, String> properties) {"
+      ],
+      [
+       "a",
+       "    return properties.entrySet().stream()"
+      ],
+      [
+       "a",
+       "        .filter(e -> e.getKey().startsWith(TableCatalog.OPTION_PREFIX))"
+      ],
+      [
+       "a",
+       "        .collect(Collectors.toMap(e -> withoutOptionPrefix(e.getKey()), Map.Entry::getValue));"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Table properties of a non-Delta table: the properties without the {@code option.} prefix, minus"
+      ],
+      [
+       "a",
+       "   * each bare copy Spark writes next to an option. A bare key is dropped only when {@code"
+      ],
+      [
+       "a",
+       "   * option.<key>} (same case) holds the same value; otherwise it stays a table property."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public static Map<String, String> tablePropertiesWithoutOptions(Map<String, String> properties) {"
+      ],
+      [
+       "a",
+       "    return properties.entrySet().stream()"
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 0
+    },
+    {
      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
      "lines": [
       [
        "h",
-       "@@ -1068,7 +1068,16 @@"
+       "@@ -1068,7 +1068,18 @@"
       ],
       [
        "c",
@@ -634,11 +1802,15 @@
       ],
       [
        "a",
-       "    // UC_TABLE_ID_KEY there). Other formats split them like Spark's session catalog: OPTIONS become"
+       "    // UC_TABLE_ID_KEY there), and take their comment and table properties from the Delta log."
       ],
       [
        "a",
-       "    // reader and writer options, everything else is a table property."
+       "    // Other formats split them like Spark's session catalog: OPTIONS become reader and writer"
+      ],
+      [
+       "a",
+       "    // options, and the rest, minus Spark's bare duplicate of each option, are table properties."
       ],
       [
        "a",
@@ -654,7 +1826,11 @@
       ],
       [
        "a",
-       "      splitOptionsFromTableProperties(t.getProperties.asScala.toMap)"
+       "      (UCTableProperties.tablePropertiesWithoutOptions(t.getProperties).asScala.toMap,"
+      ],
+      [
+       "a",
+       "        UCTableProperties.dataSourceOptions(t.getProperties).asScala.toMap)"
       ],
       [
        "a",
@@ -678,7 +1854,7 @@
       ],
       [
        "h",
-       "@@ -1080,6 +1089,8 @@"
+       "@@ -1080,6 +1091,8 @@"
       ],
       [
        "c",
@@ -711,38 +1887,87 @@
       [
        "c",
        "      partitionColumnNames = partitionCols.sortBy(_._2).map(_._1).toSeq"
-      ],
-      [
-       "h",
-       "@@ -1090,6 +1101,17 @@"
-      ],
-      [
-       "c",
-       "    asV1Table(sparkTable)"
-      ],
-      [
-       "c",
-       "  }"
       ]
      ],
-     "truncated": true,
-     "additions": 23,
+     "truncated": false,
+     "additions": 14,
      "deletions": 1
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231415",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] A short note here would stop someone from setting the Delta comment from UC later: Delta takes its comment and table properties from the Delta log. The scaladoc could also say that a bare key equal to an option key is dropped.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231428",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] Spark stores both header and option.header for OPTIONS, and the connector ignores the bare copy, so 'matches what Spark stores' is not quite right. Could the sentence say only that option.-prefixed keys become reader and writer options?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231436",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] This decodes the option. prefix a second time, and UCTableProperties.withoutOptionPrefix already does it. Could the split move next to that helper so the convention lives in one place?",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#pullrequestreview-5896270848",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The approach matches Spark's own convention, and the Delta path is unchanged. Please fix the bare-key collision (inline, UCSingleCatalog.scala) and document a migration path for existing REST or CLI tables that use bare reader keys. The test restructuring is the main ask. The remaining items are nits.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231382",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] The bare copy is dropped by name, whatever its value. Spark writes the same value for both copies, but a table created through the REST API or CLI can set header and option.header to different values. Then the bare header table property is lost without a warning. Could we drop a bare key only when its va…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T18:43:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2228#discussion_r4567231390",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] This stops passing bare keys to the reader for existing non-Delta tables created through the REST API or CLI, so a table registered with a bare header no longer reads with a header row. The change is disclosed here, but existing tables have no migration path in the doc. Could the doc say how an existing…",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "running",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T17:20:06Z",
-    "updated_at": "2026-11-13T18:06:26Z",
+    "last_push": "2026-11-13T19:18:38Z",
+    "updated_at": "2026-11-13T19:30:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 90
   },
@@ -3726,6 +4951,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "tdas",
+      "at": "2026-11-13T19:41:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4567821570",
+      "maintainer": false,
+      "path": "spec/protocols/ManagedDeltaTablesSpec.md",
+      "text": "lets switch to calling this derived instead of synthetic.",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-12T06:44:36Z",
@@ -3733,16 +4968,6 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Approving at 214def49. The round-2 and round-3 blockers are addressed: the no-op resend of unchanged contract keys, the removal branch using the keys argument, and the early taken-version check ordering for retries. The remaining notes are non-blocking.",
-      "answered": true
-     },
-     {
-      "kind": "review changes requested",
-      "who": "yili-db",
-      "at": "2026-11-12T01:32:46Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5867665515",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at be06a340. Thanks for the fixes: the no-op resend case, the `enableIcebergCompatV2` trigger, the literal test list and the spec synthetic-keys paragraph are addressed. Two blockers remain: 1. The removal branch of `changesStoredValue` checks `CONTRACT_INPUT_KEYS` instead of the `keys` argumen…",
       "answered": true
      },
      {
@@ -3766,16 +4991,6 @@
       "answered": true
      },
      {
-      "kind": "review changes requested",
-      "who": "yili-db",
-      "at": "2026-11-12T00:46:11Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5867318345",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the fix. Earlier findings 1, 2, 3, 6 and 7, and the rejection text in `api/delta.yaml`, are addressed. Still open: - Blocker: a no-op resend of an unchanged contract key fails on tables that do not store the full contract (inline at `DeltaUpdateTableMapper.java:440`). Please validate only the…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-12T00:46:11Z",
@@ -3783,6 +4998,16 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
       "text": "[AI Assisted] This is a blocker. A no-op resend is rejected on a MANAGED table whose stored properties do not carry the full contract, for example a table created through the UC REST path, which stores only `io.unitycatalog.tableId`. Here `touchesContractProperty` is true, so the full `UcManagedDeltaContract.validate`…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T00:46:11Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544881192",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/delta/UcManagedDeltaContract.java",
+      "text": "[AI Assisted] `delta.enableIcebergCompatV2` is not in this set, but `shouldSkipDeletionVectorRequirement` reads it through `validate`. With `allow-missing-dv` on, removing it or setting it to `false` leaves a stored state that the contract rejects, and nothing re-validates it. Could it go in a separate validation-trig…",
       "answered": true
      }
     ],
@@ -3793,12 +5018,12 @@
      "yili-db"
     ],
     "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-12T14:49:12Z",
+    "updated_at": "2026-11-13T19:42:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "tdas left review comments. Reply or update the PR"
    },
    "id": 78
   },
@@ -16122,11 +17347,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -16959,11 +18184,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -17124,11 +18349,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
