@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T19:45:11Z",
+ "generated_at": "2026-11-13T20:06:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -295,6 +295,296 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
+   "title": "Keep function properties after create",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T20:04:58Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2233,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2233"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -1,22 +1,31 @@"
+      ],
+      [
+       "c",
+       "package io.unitycatalog.server.persist;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.core.JsonProcessingException;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.core.StreamReadFeature;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.databind.DeserializationFeature;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.databind.JsonNode;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.databind.ObjectReader;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.exception.BaseException;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.exception.ErrorCode;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CreateFunction;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CreateFunctionRequest;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.FunctionInfo;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.ListFunctionsResponse;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.FunctionInfoDAO;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.persist.dao.PropertyDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.SchemaInfoDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
+      ],
+      [
+       "d",
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.TransactionManager;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.IdentityUtils;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.utils.JsonUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "a",
+       "import java.util.HashMap;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "a",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "a",
+       "import java.util.TreeMap;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 85,
+     "deletions": 6
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/utils/RepositoryUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -12,11 +12,9 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.PropertyDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.SchemaInfoDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.TableInfoDAO;"
+      ],
+      [
+       "d",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "c",
+       "import java.lang.reflect.InvocationTargetException;"
+      ],
+      [
+       "c",
+       "import java.lang.reflect.Method;"
+      ],
+      [
+       "d",
+       "import java.util.HashMap;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "c",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "h",
+       "@@ -27,8 +25,6 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "public class RepositoryUtils {"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  private static final Map<String, Class<?>> PROPERTY_TYPE_MAP = new HashMap<>();"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * Acquires the table row lock shared by the Delta and Iceberg commit paths and by table deletion,"
+      ],
+      [
+       "c",
+       "   * so concurrent commits on the same table serialize, and a deletion waits for them. A lock-wait"
+      ],
+      [
+       "h",
+       "@@ -110,10 +106,6 @@"
+      ],
+      [
+       "c",
+       "        || failure instanceof org.hibernate.exception.LockAcquisitionException;"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  static {"
+      ],
+      [
+       "d",
+       "    PROPERTY_TYPE_MAP.put(Constants.FUNCTION, String.class);"
+      ],
+      [
+       "d",
+       "  }"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "c",
+       "  public static <T> T attachProperties("
+      ]
+     ],
+     "truncated": true,
+     "additions": 2,
+     "deletions": 20
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T19:28:27Z",
+    "updated_at": "2026-11-13T20:04:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 96
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
    "title": "List partition columns last in the schema of non-Delta tables",
    "date": "2026-11-13",
    "created_at": "2026-11-13T19:43:49Z",
@@ -440,16 +730,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:20:49Z",
     "updated_at": "2026-11-13T19:43:50Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 95
   },
@@ -4951,6 +5241,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "tdas",
+      "at": "2026-11-13T19:49:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5897087828",
+      "maintainer": false,
+      "path": null,
+      "text": "LGTM. thanks for all the improvements @maharanay22",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "tdas",
       "at": "2026-11-13T19:41:49Z",
@@ -4999,26 +5299,17 @@
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
       "text": "[AI Assisted] This is a blocker. A no-op resend is rejected on a MANAGED table whose stored properties do not carry the full contract, for example a table created through the UC REST path, which stores only `io.unitycatalog.tableId`. Here `touchesContractProperty` is true, so the full `UcManagedDeltaContract.validate`…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T00:46:11Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#discussion_r4544881192",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/delta/UcManagedDeltaContract.java",
-      "text": "[AI Assisted] `delta.enableIcebergCompatV2` is not in this set, but `shouldSkipDeletionVectorRequirement` reads it through `validate`. With `allow-missing-dv` on, removing it or setting it to `false` leaves a stored state that the contract rejects, and nothing re-validates it. Could it go in a separate validation-trig…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "yili-db"
+     "yili-db",
+     "tdas"
     ],
     "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-13T19:42:49Z",
+    "updated_at": "2026-11-13T20:00:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
