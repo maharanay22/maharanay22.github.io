@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-12T22:55:04Z",
+ "generated_at": "2026-11-13T00:27:40Z",
  "stages": [
   "reported",
   "fix sent",
@@ -26,11 +26,11 @@
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 672672,
-   "downloads_checked": "2026-11-12",
-   "contributor_rank": 12,
-   "contributor_commits": 18,
+   "downloads_checked": "2026-11-13",
+   "contributor_rank": 11,
+   "contributor_commits": 22,
    "contributor_total": 138,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": 7,
    "period_commits": 18,
    "period_total": 33,
@@ -54,16 +54,16 @@
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 9159509,
-   "downloads_checked": "2026-11-12",
-   "contributor_rank": 26,
-   "contributor_commits": 20,
+   "downloads_checked": "2026-11-13",
+   "contributor_rank": 24,
+   "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": 7,
-   "period_commits": 20,
+   "period_commits": 21,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "mlflow/mlflow",
@@ -77,21 +77,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28786,
-   "forks": 6610,
+   "stars": 28787,
+   "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": 39,
    "period_commits": 4,
    "period_total": 111,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "mindsdb/engine",
@@ -114,12 +114,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,21 +133,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50504,
+   "stars": 50505,
    "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 26,
+   "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "delta-io/delta",
@@ -166,11 +166,11 @@
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 27744060,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
    "period_total": 52,
@@ -194,11 +194,11 @@
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37686630,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
@@ -222,16 +222,16 @@
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 3741376,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "BerriAI/litellm",
@@ -245,21 +245,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63190,
+   "stars": 63193,
    "forks": 13238,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
    "period_total": 134,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -278,16 +278,16 @@
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 361918214,
-   "downloads_checked": "2026-11-12",
+   "downloads_checked": "2026-11-13",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-12",
+   "contributors_checked": "2026-11-13",
    "period_rank": 35,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   }
  ],
  "items": [
@@ -644,11 +644,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "create_python_function silently stores an empty body for async def functions",
    "date": "2026-11-12",
    "created_at": "2026-11-12T05:36:42Z",
-   "merged_at": null,
+   "merged_at": "2026-11-12",
    "reported": true,
    "pr": {
     "number": 2213,
@@ -929,6 +929,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-12T23:58:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#pullrequestreview-5883977647",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 86a3a76f. Commit 586143d4 resolves the three nits from the previous round (N1 to N3). The merge of main does not touch the PR's lines. No open findings from my side.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-12T19:59:43Z",
@@ -969,16 +979,6 @@
       "answered": true
      },
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-12T07:11:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2213#pullrequestreview-5870546434",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Review of 8144621c. No blockers. The fix is correct and minimal: the check runs before body extraction on all four create paths (both clients, primary and helper), and the tests cover the sync-wrapper and async-generator cases. Inline comments cover items 1, 3, 4, 5 and 6. Item 2 is here because the file…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-12T07:11:25Z",
@@ -989,17 +989,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-12T21:10:21Z",
-    "updated_at": "2026-11-12T21:21:34Z",
+    "updated_at": "2026-11-12T23:59:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 87
   },
@@ -1290,12 +1292,52 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#pullrequestreview-5871670504",
+      "at": "2026-11-12T23:08:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#pullrequestreview-5883404139",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Thanks for the docstring change. Two regressions against main are still open: the indent factor for bodies with a deeper string line or a comment at 4 spaces (`callable_utils.py`, `_parse_routine_definition`), and a whitespace-only string line on create then execute (`to_stored_body`). Both have small fi…",
-      "answered": true
+      "text": "[AI Assisted] Summary: the verdict is comment. One normal item is left, nested-function docstring values (inline). The rest are nits. Both earlier regressions (indent factor, whitespace-only lines) read back correctly on this head.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:08:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510616",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
+      "text": "[AI Assisted] A bare string statement is now laid out with the code, which also covers the docstring of a nested `def` or `class`, and `__doc__` can observe that. For `def f_nest():` / ` def helper():` / ` \"\"\"Summary.` / `content` at column 0 / ` indented` / ` \"\"\"`, the rebuilt `helper.__doc__` has ` content`, where t…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:08:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510635",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "[AI Assisted] This still says `int(4 / indent_standard)`. The code is `max(1, 4 // indent_standard)`.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:08:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510644",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_callable_utils.py",
+      "text": "[AI Assisted] This comment says `stored by main`, which will go stale. Please describe the layout instead.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:08:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4557510656",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
+      "text": "[AI Assisted] A tab margin in a hand-written body is counted as one column, so `\\tx = '''a` / `\\tb'''` reads `'a\\n \\tb'`. Either skip moving string lines when the margin is not all spaces, or narrow the module docstring claim to space-indented bodies.",
+      "answered": false
      },
      {
       "kind": "inline comment",
@@ -1306,46 +1348,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "[AI Assisted] Blocker: `indent_standard` now ignores string lines and comment lines, so a body whose only nested step is 8 spaces fails in `get_function_as_callable`. Two triggers: a string line indented deeper than the statements, and a comment line at 4 spaces (`if flag:` / ` # comment` / ` return \"yes\"`). On main t…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4548281522",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] Blocker: `to_stored_body` slices each string line by `shift`, so a whitespace-only line whose width equals `shift` becomes empty, and `shift_stored_body` leaves empty lines alone. For source `return \"\"\"a` / four-space line / ` b\"\"\"`, create then execute returns `'a\\n\\n b'` here, and `'a\\n \\n b'` on main.…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4548281529",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] Normal: the negative shift clamps each string line separately, so lines of one literal can move by different amounts. For a body stored as ` q = \"\"\"` / `SELECT *` / ` FROM t` / `\"\"\"` / ` return q`, this reads `'\\nSELECT *\\nFROM t\\n'`, not the source value. Main also misreads it, so this is not a regressi…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4548281533",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] Normal: the tokenizer error is swallowed with no log, and the fallback makes every nonblank line a statement line, which can move string lines. Please log it at debug or warning level, and add a test for the fallback.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T08:55:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2211#discussion_r4548281540",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
-      "text": "[AI Assisted] Normal: a bare multi-line f-string statement is laid out with the code on 3.10 and with the string lines on 3.12, so a body stored on one version reads back differently on the other. Please treat `FSTRING_START` the same as a plain string statement, or document the difference.",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1353,12 +1355,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-12T21:10:20Z",
-    "updated_at": "2026-11-12T21:21:32Z",
-    "conflicts": false,
+    "updated_at": "2026-11-12T23:08:56Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 86
   },
@@ -1545,6 +1547,46 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-12T23:43:44Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#pullrequestreview-5883816174",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The pop and the split tests look right, and the replace=True reset is back. One item is outside the diff: `ai/core/README.md:30` still says the client uses caching to reduce redundant executions, the same claim this PR corrects in `docs/ai/client.md`. Could we align that line too?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:43:44Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4557830043",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] Both cases now change the body as well as the parameters, so no test covers a signature-only change (same body, new parameter). A comparison of the body alone would pass everything here. Could we add `(\"return x * 10\", [\"x\", \"y\"], {\"x\": 10, \"y\": 3}, 100)`? On main it fails with the unexpected-keyword err…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:43:44Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4557830051",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] The mock echoes the caller's name here, so this test would also pass if the pop used `function_name` rather than the server's `full_name`. Could the caller pass a differently cased name while the mocked return value carries the server's `full_name`? That would pin the claim in the description.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-12T23:43:44Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4557830060",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] nit: this comment repeats the `_get_callable` docstring. Could we drop it?",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-12T19:58:06Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#pullrequestreview-5881147750",
       "maintainer": true,
@@ -1561,46 +1603,6 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] If the single-entry pop lands, a test should pin the stated benefit: after `replace=True` on `a`, the `func_cache` entry for `b` is still the same object. Today nothing would fail if the blanket clear came back.",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-12T07:08:51Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#pullrequestreview-5870521381",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks, the source comparison covers cross-client replacement and case-mismatched names, which eviction on delete would not. Two test points and one behavior point below.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:08:51Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4547398380",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Removing `clear_function_cache()` here also changes `replace=True` for an identical definition. The cached callable and its module globals are now reused, where before the replace started from a fresh callable. The source check only needs to handle a changed source. Could we drop only the replaced entry…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:08:51Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4547398382",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] The `deleted_by_this_client` parameter does not change the code path. The mocked delete never touches `func_cache`, and the cache check reads only the fetched `FunctionInfo`. Could we drop it? Also the second case's body `return x * 10` ignores `y`, so it only fails on main through the unexpected-keyword…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-12T07:08:51Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2194#discussion_r4547398389",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] Nothing checks reuse after a rebuild. A change that rebuilt the callable on every call would pass, because the changed-definition test runs only once. Could we run the changed definition through the counter body three times and assert `[1, 2, 3]`?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1608,12 +1610,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-12T21:10:19Z",
-    "updated_at": "2026-11-12T21:21:31Z",
+    "updated_at": "2026-11-12T23:43:45Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 84
   },
@@ -15302,11 +15304,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -16139,11 +16141,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -16304,11 +16306,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
