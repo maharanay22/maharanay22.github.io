@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T00:48:42Z",
+ "generated_at": "2026-11-13T03:17:03Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28787,
-   "forks": 6609,
+   "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 19887934,
@@ -245,8 +245,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63194,
-   "forks": 13238,
+   "stars": 63200,
+   "forks": 13243,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 92239101,
@@ -308,6 +308,50 @@
    "proof": null,
    "impact": null,
    "files": [
+    {
+     "path": "ai/core/UnityCatalog_AI_DevLoop.ipynb",
+     "lines": [
+      [
+       "h",
+       "@@ -2118,7 +2118,7 @@"
+      ],
+      [
+       "c",
+       "    \"\\n\","
+      ],
+      [
+       "c",
+       "    \"- `EXECUTOR_TIMEOUT`: Maximum wall clock time (in seconds) before termination\\n\","
+      ],
+      [
+       "c",
+       "    \"- `EXECUTOR_MAX_CPU_TIME_LIMIT`: Maximum CPU time (in seconds)\\n\","
+      ],
+      [
+       "d",
+       "    \"- `EXECUTOR_MAX_MEMORY_LIMIT`: Maximum memory usage (in MB)\\n\","
+      ],
+      [
+       "a",
+       "    \"- `EXECUTOR_MAX_MEMORY_LIMIT`: Virtual memory (in MB) the function can allocate on top of the address space the sandbox process inherits\\n\","
+      ],
+      [
+       "c",
+       "    \"- `EXECUTOR_DISALLOWED_MODULES`: Comma-separated list of modules to block\\n\","
+      ],
+      [
+       "c",
+       "    \"\\n\","
+      ],
+      [
+       "c",
+       "    \"As demonstrated in our example, you can adjust these settings to match your specific requirements and risk tolerance.\\n\","
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
     {
      "path": "ai/core/src/unitycatalog/ai/core/envs/executor_env_vars.py",
      "lines": [
@@ -521,7 +565,7 @@
       ],
       [
        "h",
-       "@@ -158,18 +159,28 @@"
+       "@@ -158,20 +159,30 @@"
       ],
       [
        "c",
@@ -530,47 +574,11 @@
       [
        "c",
        "    The result is read before joining the process, so a result larger than the pipe"
-      ],
-      [
-       "c",
-       "    buffer cannot block the process from exiting. When the process exits without"
-      ],
-      [
-       "d",
-       "    sending anything, the returned error describes how it exited."
-      ],
-      [
-       "a",
-       "    sending anything, or sends something that cannot be read, the returned error"
-      ],
-      [
-       "a",
-       "    describes how it exited."
-      ],
-      [
-       "c",
-       "    \"\"\""
-      ],
-      [
-       "d",
-       "    with receiver:"
-      ],
-      [
-       "d",
-       "        multiprocessing.connection.wait([receiver, process.sentinel])"
-      ],
-      [
-       "d",
-       "        try:"
-      ],
-      [
-       "a",
-       "    read_error = None"
       ]
      ],
      "truncated": true,
-     "additions": 24,
-     "deletions": 8
+     "additions": 25,
+     "deletions": 9
     }
    ],
    "track": {
@@ -579,8 +587,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-13T00:47:39Z",
-    "updated_at": "2026-11-13T00:47:40Z",
+    "last_push": "2026-11-13T02:45:43Z",
+    "updated_at": "2026-11-13T02:46:02Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1595,7 +1603,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Summary: the verdict is comment. One normal item is left, nested-function docstring values (inline). The rest are nits. Both earlier regressions (indent factor, whitespace-only lines) read back correctly on this head.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1605,7 +1613,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] A bare string statement is now laid out with the code, which also covers the docstring of a nested `def` or `class`, and `__doc__` can observe that. For `def f_nest():` / ` def helper():` / ` \"\"\"Summary.` / `content` at column 0 / ` indented` / ` \"\"\"`, the rebuilt `helper.__doc__` has ` content`, where t…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1615,7 +1623,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
       "text": "[AI Assisted] This still says `int(4 / indent_standard)`. The code is `max(1, 4 // indent_standard)`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1625,7 +1633,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_callable_utils.py",
       "text": "[AI Assisted] This comment says `stored by main`, which will go stale. Please describe the layout instead.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1635,7 +1643,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/code_layout.py",
       "text": "[AI Assisted] A tab margin in a hand-written body is counted as one column, so `\\tx = '''a` / `\\tb'''` reads `'a\\n \\tb'`. Either skip moving string lines when the margin is not all spaces, or narrow the module docstring claim to space-indented bodies.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1652,13 +1660,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T21:10:20Z",
-    "updated_at": "2026-11-12T23:08:56Z",
+    "last_push": "2026-11-13T02:39:38Z",
+    "updated_at": "2026-11-13T02:52:00Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 86
   },
@@ -1903,17 +1911,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-13T00:33:27Z",
-    "updated_at": "2026-11-13T00:33:31Z",
+    "updated_at": "2026-11-13T01:42:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 84
   },
