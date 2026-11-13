@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T00:27:40Z",
+ "generated_at": "2026-11-13T00:46:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -31,11 +31,11 @@
    "contributor_commits": 22,
    "contributor_total": 138,
    "contributors_checked": "2026-11-13",
-   "period_rank": 7,
-   "period_commits": 18,
+   "period_rank": 5,
+   "period_commits": 22,
    "period_total": 33,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "delta-io/delta-rs",
@@ -173,9 +173,9 @@
    "contributors_checked": "2026-11-13",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 52,
+   "period_total": 51,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -203,7 +203,7 @@
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-12"
+   "period_checked": "2026-11-13"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63193,
+   "stars": 63194,
    "forks": 13238,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1418,39 +1418,7 @@
      "lines": [
       [
        "h",
-       "@@ -387,6 +387,7 @@"
-      ],
-      [
-       "c",
-       "            # Function calls still fail with SANDBOX_UNSUPPORTED_MESSAGE as their error, which in"
-      ],
-      [
-       "c",
-       "            # toolkit setups only reaches the LLM, so also tell the developer at construction."
-      ],
-      [
-       "c",
-       "            _logger.warning(SANDBOX_UNSUPPORTED_MESSAGE)"
-      ],
-      [
-       "a",
-       "        # Each cached callable records the source it was built from in `_uc_source`."
-      ],
-      [
-       "c",
-       "        self.func_cache = {}"
-      ],
-      [
-       "c",
-       "        super().__init__()"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -508,11 +509,8 @@"
+       "@@ -508,11 +508,8 @@"
       ],
       [
        "c",
@@ -1502,7 +1470,7 @@
       ],
       [
        "h",
-       "@@ -883,15 +881,21 @@"
+       "@@ -883,15 +880,21 @@"
       ],
       [
        "c",
@@ -1535,10 +1503,42 @@
       [
        "a",
        ""
+      ],
+      [
+       "a",
+       "        The cached function is reused only while the given FunctionInfo produces the same"
+      ],
+      [
+       "a",
+       "        source, so a function that was deleted and recreated, or replaced by another client,"
+      ],
+      [
+       "a",
+       "        is rebuilt instead of running its old body."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "d",
+       "        if function_info.full_name in self.func_cache:"
+      ],
+      [
+       "d",
+       "            return self.func_cache[function_info.full_name]"
+      ],
+      [
+       "c",
+       "        python_function = get_callable_definition(function_info)"
+      ],
+      [
+       "a",
+       "        cached_func = self.func_cache.get(function_info.full_name)"
       ]
      ],
      "truncated": true,
-     "additions": 12,
+     "additions": 11,
      "deletions": 8
     }
    ],
@@ -1552,7 +1552,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The pop and the split tests look right, and the replace=True reset is back. One item is outside the diff: `ai/core/README.md:30` still says the client uses caching to reduce redundant executions, the same claim this PR corrects in `docs/ai/client.md`. Could we align that line too?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1562,7 +1562,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Both cases now change the body as well as the parameters, so no test covers a signature-only change (same body, new parameter). A comparison of the body alone would pass everything here. Could we add `(\"return x * 10\", [\"x\", \"y\"], {\"x\": 10, \"y\": 3}, 100)`? On main it fails with the unexpected-keyword err…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1572,7 +1572,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] The mock echoes the caller's name here, so this test would also pass if the pop used `function_name` rather than the server's `full_name`. Could the caller pass a differently cased name while the mocked return value carries the server's `full_name`? That would pin the claim in the description.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1582,7 +1582,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: this comment repeats the `_get_callable` docstring. Could we drop it?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1605,17 +1605,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-12T21:10:19Z",
-    "updated_at": "2026-11-12T23:43:45Z",
+    "last_push": "2026-11-13T00:33:27Z",
+    "updated_at": "2026-11-13T00:33:31Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 84
   },
@@ -15304,11 +15304,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -16141,11 +16141,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -16306,11 +16306,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
