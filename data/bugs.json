@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T18:13:23Z",
+ "generated_at": "2026-11-13T18:37:06Z",
  "stages": [
   "reported",
   "fix sent",
@@ -245,7 +245,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63215,
+   "stars": 63217,
    "forks": 13266,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -570,17 +570,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T18:11:22Z",
-    "updated_at": "2026-11-13T18:12:03Z",
+    "updated_at": "2026-11-13T18:12:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 91
   },
@@ -732,8 +732,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T17:20:06Z",
@@ -741,8 +741,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 90
   },
@@ -16122,11 +16122,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -16959,11 +16959,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -17124,11 +17124,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
