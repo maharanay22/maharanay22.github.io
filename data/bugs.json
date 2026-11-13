@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T22:39:30Z",
+ "generated_at": "2026-11-13T23:54:00Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28792,
+   "stars": 28793,
    "forks": 6609,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50512,
-   "forks": 20739,
+   "forks": 20738,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 546920076,
@@ -652,7 +652,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T20:12:31Z",
-    "updated_at": "2026-11-13T20:38:07Z",
+    "updated_at": "2026-11-13T22:44:49Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -942,7 +942,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:28:27Z",
-    "updated_at": "2026-11-13T20:04:59Z",
+    "updated_at": "2026-11-13T22:44:48Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1098,18 +1098,59 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T23:16:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#pullrequestreview-5899387861",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The reorder matches Spark's own catalog, so the approach is right. Two inline asks: limit the reorder to file-source formats, and fold the new test class into ParquetExternalTableReadWriteTest. The docs wording is a nit.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:16:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4569739017",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] This reorders every format except Delta, but the description and docs only cover file sources. ICEBERG is in the DataSourceFormat enum, and loadTable sends any non-view table here, so an ICEBERG-format table would also get its DESCRIBE order changed. Could the reorder be limited to file-source formats (P…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:16:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4569739023",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ExternalTablePartitionColumnOrderTest.java",
+      "text": "[AI Assisted] This adds a new class with about 17 server and session starts per job, and the reorder does not depend on the format. Could the Parquet layouts fold into ParquetExternalTableReadWriteTest.testLoadTableKeepsColumnDefaultValue (line 72)? Keep the partition-in-middle case, which covers DESCRIBE and SELECT o…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:16:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4569739029",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] Nit: this paragraph lists Avro and text, but no test loads those formats. Since the reorder does not depend on the format, either say every non-Delta table, or leave the list as is and keep the claim tied to the code path.",
+      "answered": false
+     }
+    ],
     "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
+    "checks": "running",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-13T19:20:49Z",
-    "updated_at": "2026-11-13T19:43:50Z",
+    "updated_at": "2026-11-13T23:16:45Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 95
   },
@@ -1388,18 +1429,79 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#pullrequestreview-5899414228",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the change. The exit-code contract and the error reporting look right. Two bodies that main runs now fail, so this needs changes before merge. Details are inline.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759942",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] The dedent fallback breaks a body that main accepted. For ` b = a + 1\\n# explanation\\n return b` (literal backslash-n, as in the CLI examples), main runs it and returns 6, but this engine fails with `IndentationError: unexpected indent`. The cause is that `textwrap.dedent` sees a common margin of zero be…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759952",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] A body written with literal `\\n` separators and one trailing line break now fails: `b = a + 1\\nreturn b` followed by a real newline gives `SyntaxError: unexpected character after line continuation character`, while main returns 6. The check for a real newline should ignore trailing line breaks, for examp…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759960",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] For a whole-indented body with a multi-line string, ` s = \"\"\"x\\n y\"\"\"\\n return s` returns `\"x\\ny\"`, so the indent inside the string is removed. The description says string content is not changed. The wrapper fallback from the first comment returns `\"x\\n y\"`, which keeps the string as written. Could the d…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759965",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Could we add two cases here: the legacy whole-indent body with a column-zero comment (`\" b = a + 1\\n# explanation\\n return b\"`, expected 6), and a body with backslash-n separators plus a trailing real newline (`\"b = a + 1\\nreturn b\\n\"`, expected 6)? Both are forms main runs today, so they belong with the…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:19:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759970",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] Nit: could both `ast.parse` calls pass `filename='<routine_definition>'`? That matches the compile call below and makes the message name the routine.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-13T19:29:05Z",
-    "updated_at": "2026-11-13T19:43:47Z",
+    "updated_at": "2026-11-13T23:19:31Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 94
   },
@@ -1678,18 +1780,79 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684193",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
+      "text": "[AI Assisted] The loop only ends when the server returns no token or the limit is reached. If a server keeps returning the same token, the CLI refetches the same page forever and results grows without bound. The in-repo server cannot do this, but a cheap guard would turn the hang into an error: keep a `Set<String>` of…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684203",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
+      "text": "[AI Assisted] Could we add a plain `PaginationTest` (no server) with a fake PageFetcher that records the (maxResults, pageToken) pairs and the number of fetches? It would cover stopping exactly at the limit with no extra fetch, a negative maxResults passed through, an empty next token in the middle of a listing, and a…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684206",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
+      "text": "[AI Assisted] Nit: could the javadoc use `@param` tags for json, fetchPage, getItems and getNextPageToken, plus an `@return` and `@throws` tag, instead of prose?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684212",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
+      "text": "[AI Assisted] Nit: could we assign `pageMaxResults = maxResults` and then reassign it inside `if (isLimited)`? Or add a one-line comment saying the `Integer.valueOf` boxing prevents unboxing a null `maxResults`?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684218",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] Nit: could the note say that the default changed (without `--max_results`, a list command now returns all results, where it used to return at most 100), and that this applies to every list command except `user list`, which uses `--start_index` and `--count`? That tells existing scripts which output they…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-13T23:08:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#pullrequestreview-5899321120",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the change. Pagination and limit handling are correct for the server in this repo. Two normal items and three nits are inline. The one item outside the diff is the PR description: the BaseTableCRUDTest sentence describes a test this PR does not change, so it needs rewording.",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "running",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T19:36:31Z",
-    "updated_at": "2026-11-13T19:43:44Z",
+    "last_push": "2026-11-13T23:22:09Z",
+    "updated_at": "2026-11-13T23:30:52Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 93
   },
@@ -1982,7 +2145,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:30:19Z",
-    "updated_at": "2026-11-13T19:30:24Z",
+    "updated_at": "2026-11-13T22:44:44Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
