@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T20:06:09Z",
+ "generated_at": "2026-11-13T20:39:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -291,6 +291,376 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Widen catalog, schema, volume and model version path columns",
+   "date": "2026-11-13",
+   "created_at": "2026-11-13T20:38:05Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2234,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2234"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -42,10 +42,10 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"updated_by\")"
+      ],
+      [
+       "c",
+       "  private String updatedBy;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_root\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_root\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String storageRoot;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_location\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_location\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String storageLocation;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static CatalogInfoDAO from(CatalogInfo catalogInfo) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/ModelVersionInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -39,7 +39,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"version\")"
+      ],
+      [
+       "c",
+       "  private Long version;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"source\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"source\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String source;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"run_id\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -45,10 +45,10 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"updated_by\")"
+      ],
+      [
+       "c",
+       "  private String updatedBy;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_root\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_root\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String storageRoot;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_location\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_location\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String storageLocation;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static SchemaInfoDAO from(SchemaInfo schemaInfo) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/VolumeInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -31,7 +31,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"comment\")"
+      ],
+      [
+       "c",
+       "  private String comment;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_location\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_location\", length = 2048)"
+      ],
+      [
+       "c",
+       "  private String storageLocation;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"owner\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V3__widen_catalog_storage_root.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs ALTER COLUMN storage_root VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V4__widen_catalog_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_schema_storage_root.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_schemas ALTER COLUMN storage_root VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_schema_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_schemas ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_volume_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_volumes ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_model_version_source.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_model_versions ALTER COLUMN source VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V3__widen_catalog_storage_root.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_root varchar(2048) NULL;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V4__widen_catalog_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_location varchar(2048) NULL;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-13T20:12:31Z",
+    "updated_at": "2026-11-13T20:38:07Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 97
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -1309,8 +1679,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:36:31Z",
@@ -1318,8 +1688,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 93
   },
@@ -1607,8 +1977,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-13T19:30:19Z",
@@ -1616,8 +1986,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 92
   },
@@ -2247,8 +2617,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-13T19:18:38Z",
@@ -2256,8 +2626,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 90
   },
