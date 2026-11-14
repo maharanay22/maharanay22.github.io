@@ -526,6 +526,62 @@
     "databricks/dbt-databricks#1709": {
       "level": "low",
       "why": "Backslashes in descriptions broke comments"
+    },
+    "unitycatalog/unitycatalog#2234": {
+      "level": "medium",
+      "why": "Catalogs, schemas, volumes and model versions with storage paths over 255 characters failed with a server error"
+    },
+    "unitycatalog/unitycatalog#2233": {
+      "level": "high",
+      "why": "Function properties were accepted on create but never saved, so they were silently lost"
+    },
+    "unitycatalog/unitycatalog#2232": {
+      "level": "medium",
+      "why": "Spark listed the columns of partitioned Parquet, CSV and other file tables in a different order than its own catalog"
+    },
+    "unitycatalog/unitycatalog#2231": {
+      "level": "high",
+      "why": "function call printed the Python error as the result and exited 0 for functions created through the API"
+    },
+    "unitycatalog/unitycatalog#2230": {
+      "level": "high",
+      "why": "Every CLI list command silently dropped all results after the first page of 100"
+    },
+    "unitycatalog/unitycatalog#2229": {
+      "level": "medium",
+      "why": "The Python client's Delta API package could not be imported"
+    },
+    "delta-io/delta-rs#5065": {
+      "level": "high",
+      "why": "A full overwrite racing with an append committed both, so appended rows survived in a table that was replaced"
+    },
+    "unitycatalog/unitycatalog#2228": {
+      "level": "medium",
+      "why": "COMMENT and TBLPROPERTIES on Parquet, CSV and other non-Delta tables were lost or mixed into the data source options"
+    },
+    "unitycatalog/unitycatalog#2223": {
+      "level": "medium",
+      "why": "Sandbox results that could not be read were not reported as failures"
+    },
+    "unitycatalog/unitycatalog#2218": {
+      "level": "high",
+      "why": "The sandbox executor lost function results when the parent process used a lot of memory"
+    },
+    "unitycatalog/unitycatalog#2213": {
+      "level": "high",
+      "why": "Creating a Python function from an async def silently stored an empty body"
+    },
+    "unitycatalog/unitycatalog#2211": {
+      "level": "high",
+      "why": "Multi-line string literals in Python function bodies were silently changed when stored"
+    },
+    "unitycatalog/unitycatalog#2194": {
+      "level": "high",
+      "why": "A deleted or replaced function could still run its old cached code"
+    },
+    "unitycatalog/unitycatalog#2193": {
+      "level": "medium",
+      "why": "The CLI could not write BYTE, SHORT, LONG or FLOAT columns"
     }
   }
 }

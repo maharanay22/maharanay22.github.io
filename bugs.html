@@ -249,14 +249,20 @@
     var bar = el('div', 'bar'); bar.setAttribute('role', 'img'); bar.setAttribute('aria-label', pct + '% of pull requests merged');
     var fill = el('span'); fill.style.width = pct + '%'; bar.append(fill);
     var share = el('div'); share.append(counts, el('p', 'bar-label', merged ? merged + ' of ' + mine.length + ' pull requests merged (' + pct + '%)' : 'No merges yet, ' + review + ' in review'), bar);
-    var levels = ['high', 'medium', 'low'].map(function (lv) {
-      return [lv, mine.filter(function (f) { return f.impact && f.impact.level === lv; }).length];
-    }).filter(function (x) { return x[1]; });
-    if (levels.length) {
-      var li2 = el('p', 'lib-impact'); li2.append('Impact of these fixes: ');
-      levels.forEach(function (x, i) { if (i) li2.append(' \u00b7 '); li2.append(el('b', null, '\u2605'.repeat(IMPACT[x[0]].stars) + ' ' + x[1] + ' ' + IMPACT[x[0]].label.toLowerCase())); });
-      share.append(li2);
+    function impactLine(label, fixes) {
+      if (!fixes.length) return;
+      var parts = ['high', 'medium', 'low'].map(function (lv) {
+        var n = fixes.filter(function (f) { return f.impact && f.impact.level === lv; }).length;
+        return n ? '\u2605'.repeat(IMPACT[lv].stars) + ' ' + n + ' ' + IMPACT[lv].label.toLowerCase() : null;
+      });
+      var unrated = fixes.filter(function (f) { return !(f.impact && IMPACT[f.impact.level]); }).length;
+      if (unrated) parts.push(unrated + ' not rated yet');
+      var line = el('p', 'lib-impact'); line.append(label + ' (' + fixes.length + '): ');
+      parts.filter(Boolean).forEach(function (t, i) { if (i) line.append(' \u00b7 '); line.append(el('b', null, t)); });
+      share.append(line);
     }
+    impactLine('Impact of merged fixes', mine.filter(function (f) { return f.status === 'merged'; }));
+    impactLine('Impact of fixes in review', mine.filter(function (f) { return f.status === 'review'; }));
     card.append(head, share);
 
     if (r.impact) {
