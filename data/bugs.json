@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T04:55:10Z",
+ "generated_at": "2026-11-14T05:16:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -255,7 +255,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63226,
+   "stars": 63227,
    "forks": 13272,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
