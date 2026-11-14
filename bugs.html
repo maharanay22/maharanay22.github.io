@@ -263,6 +263,11 @@
     }
     impactLine('Impact of merged fixes', mine.filter(function (f) { return f.status === 'merged'; }));
     impactLine('Impact of fixes in review', mine.filter(function (f) { return f.status === 'review'; }));
+    if (r.release_notes && r.release_notes.length) {
+      var rn = el('p', 'lib-impact'); rn.append('Credited as a contributor in the release notes: ');
+      r.release_notes.forEach(function (n, i) { if (i) rn.append(' · '); rn.append(link(r.name + ' ' + n.version, n.url)); });
+      share.append(rn);
+    }
     card.append(head, share);
 
     if (r.impact) {

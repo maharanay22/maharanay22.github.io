@@ -113,12 +113,58 @@ def parse_patch(patch):
     return rows
 
 
-def fix_diffs(repo, number):
+def pr_files(repo, number):
     try:
-        files = request(f"https://api.github.com/repos/{repo}/pulls/{number}/files?per_page=100")
+        return request(f"https://api.github.com/repos/{repo}/pulls/{number}/files?per_page=100")
     except urllib.error.HTTPError as e:
-        print(f"skipping diff for {repo}#{number}: HTTP {e.code}", file=sys.stderr)
+        print(f"skipping files for {repo}#{number}: HTTP {e.code}", file=sys.stderr)
         return []
+
+
+def release_version(repo, files):
+    """The release whose notes a PR adds to, from the repo's release_notes.file pattern in overrides."""
+    pattern = OVERRIDES.get("repos", {}).get(repo, {}).get("release_notes", {}).get("file")
+    if not pattern:
+        return None
+    return next((m.group(1) for f in files if (m := re.search(pattern, f["filename"]))), None)
+
+
+def version_key(v):
+    return tuple(int(p) if p.isdigit() else 0 for p in v.split("."))
+
+
+def add_release_notes(repos, items):
+    """Links to published release notes that credit this user, for releases that include a merged fix."""
+    try:
+        previous = {r["full"]: r for r in json.loads(OUT.read_text(encoding="utf-8"))["repos"]}
+    except (OSError, ValueError, KeyError):
+        previous = {}
+    for repo in repos.values():
+        cfg = OVERRIDES.get("repos", {}).get(repo["full"], {}).get("release_notes")
+        if not cfg:
+            continue
+        versions = sorted({x["release"] for x in items
+                           if x["repo"] == repo["full"] and x["status"] == "merged" and x.get("release")}, key=version_key)
+        known = {n["version"]: n for n in previous.get(repo["full"], {}).get("release_notes") or []}
+        notes = []
+        for v in versions:
+            if v in known:
+                notes.append(known[v])
+                continue
+            url = cfg["url"].format(version=v)
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": f"{LOGIN}.github.io bug page"})
+                with urllib.request.urlopen(req, timeout=30) as resp:
+                    page = resp.read().decode("utf-8", "replace")
+            except Exception as e:  # not published yet, or the docs site is unavailable
+                print(f"release notes {url} unavailable: {e}", file=sys.stderr)
+                continue
+            if cfg["credit_name"] in page:
+                notes.append({"version": v, "url": url + cfg.get("anchor", "")})
+        repo["release_notes"] = notes
+
+
+def fix_diffs(files):
     out, budget = [], MAX_LINES_PER_FIX
     for f in files:
         if budget <= 0 or SKIP_PATH.search(f["filename"]) or not f.get("patch"):
@@ -412,6 +458,7 @@ def main():
         if replaced_by:
             status = "closed"
         title_src = (issue or ref or {}).get("title") or pr["title"]
+        files = pr_files(repo, pr["number"])
         items.append({
             "kind": "fix", "repo": repo, "status": status, "title": clean_title(title_src),
             "date": pr["createdAt"][:10], "created_at": pr["createdAt"], "merged_at": (pr["mergedAt"] or "")[:10] or None,
@@ -420,7 +467,8 @@ def main():
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
             "proof": OVERRIDES.get("proofs", {}).get(pr["url"]),
             "impact": OVERRIDES.get("impact_levels", {}).get(f"{repo}#{pr['number']}"),
-            "files": fix_diffs(repo, pr["number"]),
+            "release": release_version(repo, files),
+            "files": fix_diffs(files),
             "track": apply_note(pr["url"], status, replaced_by, track_pr(pr, status)),
         })
 
@@ -440,6 +488,7 @@ def main():
 
     add_downloads(repos)
     add_contributor_ranks(repos)
+    add_release_notes(repos, items)
     items.sort(key=lambda x: x["created_at"], reverse=True)
     for i, item in enumerate(reversed(items), 1):
         item["id"] = i
