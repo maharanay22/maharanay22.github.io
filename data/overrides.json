@@ -600,6 +600,11 @@
     "unitycatalog/unitycatalog#2193": {
       "level": "medium",
       "why": "The CLI could not write BYTE, SHORT, LONG or FLOAT columns"
-    }
+    },
+    "lance-format/lance#11079": "high",
+    "lance-format/lance#11080": "high",
+    "lance-format/lance#11081": "medium",
+    "lance-format/lance#11082": "medium",
+    "lance-format/lance#11083": "medium"
   }
 }
