@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T03:18:55Z",
+ "generated_at": "2026-11-14T03:40:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28797,
+   "stars": 28798,
    "forks": 6607,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -147,7 +147,17 @@
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-14",
+   "release_notes": [
+    {
+     "version": "3.1.0",
+     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.0.html#contributors"
+    },
+    {
+     "version": "3.1.1",
+     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.1.html#contributors"
+    }
+   ]
   },
   {
    "full": "delta-io/delta",
@@ -173,9 +183,9 @@
    "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 51,
+   "period_total": 53,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -203,7 +213,7 @@
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -245,8 +255,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63224,
-   "forks": 13271,
+   "stars": 63225,
+   "forks": 13272,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 97401315,
@@ -310,6 +320,7 @@
     "level": "medium",
     "why": "Catalogs, schemas, volumes and model versions with storage paths over 255 characters failed with a server error"
    },
+   "release": null,
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
@@ -683,6 +694,7 @@
     "level": "high",
     "why": "Function properties were accepted on create but never saved, so they were silently lost"
    },
+   "release": null,
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
@@ -1035,6 +1047,7 @@
     "level": "medium",
     "why": "Spark listed the columns of partitioned Parquet, CSV and other file tables in a different order than its own catalog"
    },
+   "release": null,
    "files": [
     {
      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
@@ -1228,8 +1241,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
@@ -1263,6 +1276,7 @@
     "level": "high",
     "why": "function call printed the Python error as the result and exited 0 for functions created through the API"
    },
+   "release": null,
    "files": [
     {
      "path": "etc/data/function/python_engine.py",
@@ -1617,6 +1631,7 @@
     "level": "high",
     "why": "Every CLI list command silently dropped all results after the first page of 100"
    },
+   "release": null,
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/CatalogCli.java",
@@ -1938,8 +1953,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T02:28:42Z",
@@ -1947,8 +1962,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 93
   },
@@ -1971,6 +1986,7 @@
     "level": "medium",
     "why": "The Python client's Delta API package could not be imported"
    },
+   "release": null,
    "files": [
     {
      "path": "build.sbt",
@@ -2328,6 +2344,7 @@
     "level": "high",
     "why": "A full overwrite racing with an append committed both, so appended rows survived in a table that was replaced"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/schema/partitions.rs",
@@ -2621,6 +2638,7 @@
     "level": "medium",
     "why": "COMMENT and TBLPROPERTIES on Parquet, CSV and other non-Delta tables were lost or mixed into the data source options"
    },
+   "release": null,
    "files": [
     {
      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCTableProperties.java",
@@ -2973,6 +2991,7 @@
     "level": "medium",
     "why": "Sandbox results that could not be read were not reported as failures"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/UnityCatalog_AI_DevLoop.ipynb",
@@ -3338,6 +3357,7 @@
     "level": "high",
     "why": "The sandbox executor lost function results when the parent process used a lot of memory"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/envs/executor_env_vars.py",
@@ -3691,6 +3711,7 @@
     "level": "high",
     "why": "Creating a Python function from an async def silently stored an empty body"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/base.py",
@@ -4055,6 +4076,7 @@
     "level": "high",
     "why": "Multi-line string literals in Python function bodies were silently changed when stored"
    },
+   "release": null,
    "files": [
     {
      "path": ".github/workflows/ucai-core-tests.yml",
@@ -4451,6 +4473,7 @@
     "level": "high",
     "why": "A deleted or replaced function could still run its old cached code"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -4679,6 +4702,7 @@
     "level": "medium",
     "why": "The CLI could not write BYTE, SHORT, LONG or FLOAT columns"
    },
+   "release": null,
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/ColumnVectorUtils.java",
@@ -5041,6 +5065,7 @@
     "level": "medium",
     "why": "Creating functions with long parameter types or docstrings failed with a server error"
    },
+   "release": null,
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/FunctionInfoDAO.java",
@@ -5463,6 +5488,7 @@
     "level": "high",
     "why": "Closing one handle broke every Spark or Hadoop job sharing the same credentials until restart"
    },
+   "release": null,
    "files": [
     {
      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/fs/CredScopedFileSystem.java",
@@ -5691,6 +5717,7 @@
     "level": "high",
     "why": "A client could strip a managed table's reserved settings, breaking it for Spark"
    },
+   "release": null,
    "files": [
     {
      "path": "api/delta.yaml",
@@ -6047,6 +6074,7 @@
     "level": "medium",
     "why": "The CLI printed wrong timestamp values and failed on dates before 1970"
    },
+   "release": null,
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelReadUtils.java",
@@ -6225,6 +6253,7 @@
     "level": "low",
     "why": "Adds test coverage for column metadata loading"
    },
+   "release": null,
    "files": [],
    "track": {
     "feedback": [
@@ -6317,6 +6346,7 @@
     "level": "high",
     "why": "Trace inputs and outputs with NumPy arrays were saved as truncated strings"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/tracing/utils/__init__.py",
@@ -6444,6 +6474,7 @@
     "level": "high",
     "why": "to_sql wrote timedelta values 1000x too small"
    },
+   "release": "3.1.2",
    "files": [
     {
      "path": "pandas/io/sql/base.py",
@@ -6525,6 +6556,7 @@
     "level": "medium",
     "why": "The CLI could not create tables with DECIMAL columns"
    },
+   "release": null,
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelUtils.java",
@@ -6897,6 +6929,7 @@
     "level": "medium",
     "why": "Nested column names lost their case for clients reading type_text"
    },
+   "release": null,
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/TableRepository.java",
@@ -7060,6 +7093,7 @@
     "level": "high",
     "why": "Spark dropped column DEFAULT values, so inserts wrote NULL instead of the default"
    },
+   "release": null,
    "files": [
     {
      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCColumnConversions.java",
@@ -7348,6 +7382,7 @@
     "level": "high",
     "why": "One credential force delete broke external location listing for the whole metastore"
    },
+   "release": null,
    "files": [
     {
      "path": "api/all.yaml",
@@ -7710,6 +7745,7 @@
     "level": "medium",
     "why": "CREATE SCHEMA lost its comment and storage location"
    },
+   "release": null,
    "files": [
     {
      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
@@ -7895,6 +7931,7 @@
     "level": "high",
     "why": "Merge with schema evolution wrote wrong values for the new column"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/merge/mod.rs",
@@ -8065,6 +8102,7 @@
     "level": "high",
     "why": "Merge duplicated target rows when source keys repeated"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/merge/mod.rs",
@@ -8250,6 +8288,7 @@
     "level": "high",
     "why": "add_constraint committed while a concurrent append wrote violating rows"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/constraints.rs",
@@ -8475,6 +8514,7 @@
     "level": "high",
     "why": "Writes corrupted Spark-written tables with non-ASCII partition values"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/models/actions.rs",
@@ -8794,6 +8834,7 @@
     "level": "high",
     "why": "Changing the result of ffill or bfill also changed the original data"
    },
+   "release": "3.1.1",
    "files": [
     {
      "path": "pandas/core/arrays/arrow/array.py",
@@ -8913,6 +8954,7 @@
     "level": "medium",
     "why": "Reading the change data feed panicked on multi-row-group files"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
@@ -9222,6 +9264,7 @@
     "level": "high",
     "why": "The change data feed returned deleted rows instead of live rows"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
@@ -9545,6 +9588,7 @@
     "level": "high",
     "why": "Enabling a table feature on a column-mapped table dropped column mapping"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/models/actions.rs",
@@ -9834,6 +9878,7 @@
     "level": "medium",
     "why": "List and dict parameter types lost their element types"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
@@ -10201,6 +10246,7 @@
     "level": "medium",
     "why": "OpenAI tool definitions got the wrong strict flag"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
@@ -10315,6 +10361,7 @@
     "level": "medium",
     "why": "Functions with optional type hints like str | None could not be created"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
@@ -10485,6 +10532,7 @@
     "level": "medium",
     "why": "Lite vacuum never deleted expired deletion vector files"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/snapshot/iterators.rs",
@@ -10789,6 +10837,7 @@
     "level": "high",
     "why": "Time travel by timestamp could open the wrong table version"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/snapshot/mod.rs",
@@ -11129,6 +11178,7 @@
     "level": "medium",
     "why": "Catalog queries failed for SQL Server database names that need quoting"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
@@ -11294,6 +11344,7 @@
     "level": "medium",
     "why": "Connection string values with special characters broke the SQL Server connection"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
@@ -11459,6 +11510,7 @@
     "level": "high",
     "why": "Databricks integer columns with NULLs lost precision"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/integrations/handlers/databricks_handler/databricks_handler.py",
@@ -11624,6 +11676,7 @@
     "level": "high",
     "why": "SQL Server integer columns with NULLs lost precision"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/integrations/handlers/mssql_handler/mssql_handler.py",
@@ -11789,6 +11842,7 @@
     "level": "low",
     "why": "A missing PostgreSQL schema now fails early with a clear error"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/integrations/handlers/postgres_handler/postgres_handler.py",
@@ -11917,6 +11971,7 @@
     "level": "high",
     "why": "Rounded decimal statistics made filters and deletes skip matching rows"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/delete.rs",
@@ -12236,6 +12291,7 @@
     "level": "high",
     "why": "Predicates with fractional literals were rounded and matched the wrong rows"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/utils.rs",
@@ -12543,6 +12599,7 @@
     "level": "medium",
     "why": "Evaluation failed for scorers that return NumPy scalars"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/genai/evaluation/utils.py",
@@ -12844,6 +12901,7 @@
     "level": "high",
     "why": "Async logging applied writes for the same run out of order"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/utils/async_logging/async_logging_queue.py",
@@ -13075,6 +13133,7 @@
     "level": "high",
     "why": "delete() removed every row for some partition predicates"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/engine/expressions/to_kernel.rs",
@@ -13370,6 +13429,7 @@
     "level": "low",
     "why": "Adds a missing Databricks dependency"
    },
+   "release": null,
    "files": [],
    "track": {
     "feedback": [],
@@ -13406,6 +13466,7 @@
     "level": "medium",
     "why": "PostgreSQL native queries other than SELECT failed"
    },
+   "release": null,
    "files": [
     {
      "path": "mindsdb/api/executor/sql_query/steps/fetch_dataframe.py",
@@ -13662,6 +13723,7 @@
     "level": "medium",
     "why": "Functions with Decimal or timedelta types could not be created"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -13927,6 +13989,7 @@
     "level": "medium",
     "why": "Date, binary, decimal and timestamp arguments were rejected or passed wrongly"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/base.py",
@@ -14262,6 +14325,7 @@
     "level": "high",
     "why": "Vacuum deleted files still needed by unexpired tombstones"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/kernel/snapshot/iterators.rs",
@@ -14566,6 +14630,7 @@
     "level": "medium",
     "why": "The change data feed returned wrong dates for out-of-range INT96 timestamps"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/load_cdf.rs",
@@ -14736,6 +14801,7 @@
     "level": "low",
     "why": "A clearer error message for naive timestamps"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/operations/write/mod.rs",
@@ -14947,6 +15013,7 @@
     "level": "high",
     "why": "count() ignored deletion vectors and over-counted rows"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/table/state.rs",
@@ -15245,6 +15312,7 @@
     "level": "medium",
     "why": "Regex \\s missed some whitespace characters on pyarrow strings"
    },
+   "release": "3.1.1",
    "files": [
     {
      "path": "pandas/core/arrays/_arrow_string_mixins.py",
@@ -15477,6 +15545,7 @@
     "level": "low",
     "why": "Removes an outdated CI dependency pin"
    },
+   "release": null,
    "files": [
     {
      "path": "python/pyproject.toml",
@@ -15570,6 +15639,7 @@
     "level": "medium",
     "why": "Generated columns using BETWEEN could not be created"
    },
+   "release": null,
    "files": [
     {
      "path": "spark/src/main/scala/org/apache/spark/sql/delta/AllowedUserProvidedExpressions.scala",
@@ -15650,6 +15720,7 @@
     "level": "low",
     "why": "clusterBy was case-sensitive, unlike the documentation"
    },
+   "release": null,
    "files": [
     {
      "path": "spark/src/main/scala/org/apache/spark/sql/delta/DeltaAnalysis.scala",
@@ -15818,6 +15889,7 @@
     "level": "medium",
     "why": "Python clone methods returned a raw Java object instead of a DeltaTable"
    },
+   "release": null,
    "files": [
     {
      "path": "python/delta/tables.py",
@@ -15986,6 +16058,7 @@
     "level": "medium",
     "why": "The change data feed failed for partition values needing escaping"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
@@ -16295,6 +16368,7 @@
     "level": "high",
     "why": "Out-of-range INT96 timestamps read as 1816, and optimize saved the wrong values"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/datafile/properties.rs",
@@ -16436,6 +16510,7 @@
     "level": "high",
     "why": "Full vacuum deleted referenced deletion vector files, making tables unreadable"
    },
+   "release": null,
    "files": [
     {
      "path": "crates/core/src/delta_datafusion/cdf/scan_utils.rs",
@@ -16734,6 +16809,7 @@
     "level": "medium",
     "why": "replaceWhere with BETWEEN failed on partition columns"
    },
+   "release": null,
    "files": [
     {
      "path": "spark/src/main/scala/org/apache/spark/sql/delta/DeltaLog.scala",
@@ -16902,6 +16978,7 @@
     "level": "medium",
     "why": "The client crashed when used outside async code"
    },
+   "release": null,
    "files": [
     {
      "path": "build.sbt",
@@ -17271,6 +17348,7 @@
     "level": "high",
     "why": "Function results were memoized, so repeated calls returned stale results"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -17475,6 +17553,7 @@
     "level": "medium",
     "why": "A single-string callbacks setting replaced the proxy's internal callbacks"
    },
+   "release": null,
    "files": [
     {
      "path": "litellm/proxy/common_utils/callback_utils.py",
@@ -17608,6 +17687,7 @@
     "level": "medium",
     "why": "CliApp.run raised TypeError for BaseModel commands"
    },
+   "release": null,
    "files": [
     {
      "path": "pydantic_settings/main.py",
@@ -17776,6 +17856,7 @@
     "level": "high",
     "why": "Environment variables and secrets for aliased fields were silently ignored"
    },
+   "release": null,
    "files": [
     {
      "path": "pydantic_settings/main.py",
@@ -18082,6 +18163,7 @@
     "level": "medium",
     "why": "Iterating a cursor was 100x or more slower than fetchall"
    },
+   "release": null,
    "files": [
     {
      "path": "src/databricks/sql/backend/kernel/result_set.py",
@@ -18348,11 +18430,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -18375,6 +18457,7 @@
     "level": "medium",
     "why": "Integer arguments were rejected for FLOAT, DOUBLE and DECIMAL parameters"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -18703,6 +18786,7 @@
     "level": "high",
     "why": "Falsy results like 0 or False were replaced with a no-output message"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -18876,6 +18960,7 @@
     "level": "high",
     "why": "replace_where and microbatch inserted rows by position, risking wrong columns"
    },
+   "release": null,
    "files": [
     {
      "path": "dbt/include/databricks/macros/materializations/incremental/strategies.sql",
@@ -19044,6 +19129,7 @@
     "level": "high",
     "why": "NaN values were returned as None, the same as NULL"
    },
+   "release": null,
    "files": [
     {
      "path": "src/databricks/sql/result_set.py",
@@ -19185,11 +19271,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -19212,6 +19298,7 @@
     "level": "medium",
     "why": "CloudFetch downloads could crash with ZeroDivisionError"
    },
+   "release": null,
    "files": [
     {
      "path": "src/databricks/sql/cloudfetch/downloader.py",
@@ -19350,11 +19437,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
@@ -19377,6 +19464,7 @@
     "level": "medium",
     "why": "Struct field names that need quoting broke column types"
    },
+   "release": null,
    "files": [
     {
      "path": "dbt/adapters/databricks/column.py",
@@ -19526,6 +19614,7 @@
     "level": "low",
     "why": "Backslashes in descriptions broke comments"
    },
+   "release": null,
    "files": [
     {
      "path": "dbt/adapters/databricks/column.py",
@@ -19843,6 +19932,7 @@
     "level": "medium",
     "why": "The library could not be imported on Windows"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
@@ -20207,6 +20297,7 @@
     "level": "medium",
     "why": "Multi-round tool call history was rejected for Anthropic and LiteLLM"
    },
+   "release": null,
    "files": [
     {
      "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
@@ -20502,6 +20593,7 @@
     "level": "medium",
     "why": "Evaluation failed for scorers that return NumPy scalars"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/genai/evaluation/utils.py",
@@ -20782,6 +20874,7 @@
     "level": "medium",
     "why": "The AI Gateway crashed on tools without a description or parameters"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/gateway/providers/anthropic.py",
@@ -21015,6 +21108,7 @@
     "level": "medium",
     "why": "Anthropic streaming reported the wrong finish reason with tools"
    },
+   "release": null,
    "files": [
     {
      "path": "litellm/llms/anthropic/chat/handler.py",
@@ -21190,6 +21284,7 @@
     "level": "high",
     "why": "Regex \\w, \\d, \\s and \\b matched only ASCII on the default string dtype"
    },
+   "release": "3.1.0",
    "files": [
     {
      "path": "pandas/core/arrays/_arrow_string_mixins.py",
@@ -21551,6 +21646,7 @@
     "level": "medium",
     "why": "any and all with skipna=False raised TypeError on pyarrow booleans"
    },
+   "release": "3.2.0",
    "files": [
     {
      "path": "pandas/core/frame.py",
@@ -21886,6 +21982,7 @@
     "level": "medium",
     "why": "Series.mode raised TypeError for nullable booleans"
    },
+   "release": "3.2.0",
    "files": [
     {
      "path": "pandas/core/algorithms.py",
@@ -21997,6 +22094,7 @@
     "level": "medium",
     "why": "Streaming responses lost their token usage"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/gateway/providers/mistral.py",
@@ -22168,6 +22266,7 @@
     "level": "medium",
     "why": "Streaming chunks with list content failed"
    },
+   "release": null,
    "files": [
     {
      "path": "mlflow/gateway/providers/databricks.py",
