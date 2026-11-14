@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T12:19:59Z",
+ "generated_at": "2026-11-14T14:21:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3363,
-   "forks": 708,
+   "forks": 707,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10395350,
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28805,
+   "stars": 28806,
    "forks": 6608,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50512,
+   "stars": 50514,
    "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -160,6 +160,34 @@
    ]
   },
   {
+   "full": "lance-format/lance",
+   "name": "Lance",
+   "url": "https://github.com/lance-format/lance",
+   "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
+   "icon": "🏹",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "AI data"
+   ],
+   "stars": 7295,
+   "forks": 937,
+   "package": "pylance",
+   "impact": null,
+   "downloads_month": 4333515,
+   "downloads_checked": "2026-11-14",
+   "contributor_rank": null,
+   "contributor_commits": null,
+   "contributor_total": 300,
+   "contributors_checked": "2026-11-14",
+   "period_rank": null,
+   "period_commits": null,
+   "period_total": null,
+   "period_since": "2026-07-18",
+   "period_checked": null
+  },
+  {
    "full": "delta-io/delta",
    "name": "Delta Lake",
    "url": "https://github.com/delta-io/delta",
@@ -172,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9077,
-   "forks": 2219,
+   "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24825217,
@@ -255,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63244,
-   "forks": 13276,
+   "stars": 63251,
+   "forks": 13277,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 97401315,
@@ -284,7 +312,7 @@
     "CLI"
    ],
    "stars": 1502,
-   "forks": 264,
+   "forks": 263,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 487993966,
@@ -301,6 +329,885 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Write Enum fields of Pydantic models",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T14:20:07Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11083,
+    "url": "https://github.com/lance-format/lance/pull/11083"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "python/python/lance/dependencies.py",
+     "lines": [
+      [
+       "h",
+       "@@ -14,6 +14,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import re"
+      ],
+      [
+       "c",
+       "import sys"
+      ],
+      [
+       "a",
+       "from enum import Enum"
+      ],
+      [
+       "c",
+       "from functools import lru_cache"
+      ],
+      [
+       "c",
+       "from importlib import import_module"
+      ],
+      [
+       "c",
+       "from importlib.util import find_spec"
+      ],
+      [
+       "h",
+       "@@ -236,7 +237,20 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def model_to_dict(obj: Any) -> dict[str, Any]:"
+      ],
+      [
+       "d",
+       "    return obj.model_dump() if hasattr(obj, \"model_dump\") else obj.dict()"
+      ],
+      [
+       "a",
+       "    data = obj.model_dump() if hasattr(obj, \"model_dump\") else obj.dict()"
+      ],
+      [
+       "a",
+       "    return _enum_values(data)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _enum_values(value: Any) -> Any:"
+      ],
+      [
+       "a",
+       "    # Arrow cannot convert Enum members unless they also subclass str or int, and"
+      ],
+      [
+       "a",
+       "    # the schema stores an Enum field as the type of its values."
+      ],
+      [
+       "a",
+       "    if isinstance(value, Enum):"
+      ],
+      [
+       "a",
+       "        return value.value"
+      ],
+      [
+       "a",
+       "    if isinstance(value, dict):"
+      ],
+      [
+       "a",
+       "        return {key: _enum_values(item) for key, item in value.items()}"
+      ],
+      [
+       "a",
+       "    if isinstance(value, (list, tuple)):"
+      ],
+      [
+       "a",
+       "        return [_enum_values(item) for item in value]"
+      ],
+      [
+       "a",
+       "    return value"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _validate_pydantic_list(data: Any, model_class: type) -> None:"
+      ]
+     ],
+     "truncated": false,
+     "additions": 15,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:41:55Z",
+    "updated_at": "2026-11-14T14:20:17Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 105
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Accept timezone-aware asof timestamps",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T14:20:00Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11082,
+    "url": "https://github.com/lance-format/lance/pull/11082"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "python/python/lance/util.py",
+     "lines": [
+      [
+       "h",
+       "@@ -58,8 +58,12 @@"
+      ],
+      [
+       "c",
+       "        if ts is pd.NaT:"
+      ],
+      [
+       "c",
+       "            raise ValueError(\"NaT is not a valid version timestamp\")"
+      ],
+      [
+       "c",
+       "        if isinstance(ts, pd.Timestamp):"
+      ],
+      [
+       "d",
+       "            return ts.to_pydatetime()"
+      ],
+      [
+       "a",
+       "            ts = ts.to_pydatetime()"
+      ],
+      [
+       "c",
+       "    if isinstance(ts, datetime):"
+      ],
+      [
+       "a",
+       "        # Version timestamps are naive local times, so an aware cutoff is"
+      ],
+      [
+       "a",
+       "        # converted to local time before they are compared."
+      ],
+      [
+       "a",
+       "        if ts.tzinfo is not None:"
+      ],
+      [
+       "a",
+       "            return ts.astimezone().replace(tzinfo=None)"
+      ],
+      [
+       "c",
+       "        return ts"
+      ],
+      [
+       "c",
+       "    raise TypeError(f\"Unrecognized version timestamp {ts} of type {type(ts)}\")"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:18:30Z",
+    "updated_at": "2026-11-14T14:20:12Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 104
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Do not reserve a full delete batch up front",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T14:19:50Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11081,
+    "url": "https://github.com/lance-format/lance/pull/11081"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance/src/dataset/cleanup.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1921,9 +1921,22 @@"
+      ],
+      [
+       "c",
+       "            let store = self.dataset.object_store.as_ref();"
+      ],
+      [
+       "c",
+       "            let concurrency = execution.concurrency.max(1);"
+      ],
+      [
+       "c",
+       "            let batch_size = concurrency.saturating_mul(BULK_DELETE_BATCH_FILES);"
+      ],
+      [
+       "d",
+       "            let mut chunks = all_files_to_remove.try_chunks(batch_size);"
+      ],
+      [
+       "d",
+       "            while let Some(chunk) = chunks.next().await {"
+      ],
+      [
+       "d",
+       "                let chunk = chunk.map_err(|error| error.1)?;"
+      ],
+      [
+       "a",
+       "            // Not `try_chunks`: it reserves `batch_size` slots up front, which overflows"
+      ],
+      [
+       "a",
+       "            // or aborts on allocation for a large but valid `delete_concurrency`."
+      ],
+      [
+       "a",
+       "            let mut files = std::pin::pin!(all_files_to_remove);"
+      ],
+      [
+       "a",
+       "            let mut is_exhausted = false;"
+      ],
+      [
+       "a",
+       "            while !is_exhausted {"
+      ],
+      [
+       "a",
+       "                let mut chunk = Vec::new();"
+      ],
+      [
+       "a",
+       "                while chunk.len() < batch_size {"
+      ],
+      [
+       "a",
+       "                    let Some(file) = files.try_next().await? else {"
+      ],
+      [
+       "a",
+       "                        is_exhausted = true;"
+      ],
+      [
+       "a",
+       "                        break;"
+      ],
+      [
+       "a",
+       "                    };"
+      ],
+      [
+       "a",
+       "                    chunk.push(file);"
+      ],
+      [
+       "a",
+       "                }"
+      ],
+      [
+       "a",
+       "                if chunk.is_empty() {"
+      ],
+      [
+       "a",
+       "                    break;"
+      ],
+      [
+       "a",
+       "                }"
+      ],
+      [
+       "c",
+       "                Self::delete_chunk("
+      ],
+      [
+       "c",
+       "                    chunk,"
+      ],
+      [
+       "c",
+       "                    store,"
+      ],
+      [
+       "h",
+       "@@ -3558,8 +3571,8 @@"
+      ],
+      [
+       "c",
+       "    use crate::{"
+      ],
+      [
+       "c",
+       "        dataset::transaction::{Operation, Transaction},"
+      ],
+      [
+       "c",
+       "        dataset::{"
+      ]
+     ],
+     "truncated": true,
+     "additions": 55,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T06:36:15Z",
+    "updated_at": "2026-11-14T14:20:01Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 103
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Keep the UTC offset of timestamp literals",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T14:19:46Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11080,
+    "url": "https://github.com/lance-format/lance/pull/11080"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance-datafusion/src/planner.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -16,6 +16,7 @@"
+      ],
+      [
+       "c",
+       "use arrow_array::ListArray;"
+      ],
+      [
+       "c",
+       "use arrow_buffer::{OffsetBuffer, i256};"
+      ],
+      [
+       "c",
+       "use arrow_cast::cast_with_options;"
+      ],
+      [
+       "a",
+       "use arrow_cast::parse::string_to_datetime;"
+      ],
+      [
+       "c",
+       "use arrow_schema::{"
+      ],
+      [
+       "c",
+       "    DECIMAL128_MAX_PRECISION, DECIMAL256_MAX_PRECISION, DataType as ArrowDataType, Field,"
+      ],
+      [
+       "c",
+       "    SchemaRef, TimeUnit,"
+      ],
+      [
+       "h",
+       "@@ -55,7 +56,7 @@"
+      ],
+      [
+       "c",
+       "use lance_core::datatypes::{Schema, parse_field_path};"
+      ],
+      [
+       "c",
+       "use lance_core::error::LanceOptionExt;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "use chrono::Utc;"
+      ],
+      [
+       "a",
+       "use chrono::{FixedOffset, Utc};"
+      ],
+      [
+       "c",
+       "use lance_core::{Error, Result};"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/// Encode a JSON string into a JSONB `LargeBinary` literal expression."
+      ],
+      [
+       "h",
+       "@@ -945,9 +946,13 @@"
+      ],
+      [
+       "c",
+       "                data_type, value, .."
+      ],
+      [
+       "c",
+       "            }) => {"
+      ],
+      [
+       "c",
+       "                let value = value.clone().into_string().expect_ok()?;"
+      ],
+      [
+       "a",
+       "                let data_type = self.parse_type(data_type)?;"
+      ],
+      [
+       "a",
+       "                if let Some(instant) = timestamp_with_offset(&value, &data_type) {"
+      ],
+      [
+       "a",
+       "                    return Ok(Expr::Literal(instant, None));"
+      ],
+      [
+       "a",
+       "                }"
+      ],
+      [
+       "c",
+       "                Ok(Expr::Cast(datafusion::logical_expr::Cast::new("
+      ],
+      [
+       "c",
+       "                    Box::new(Expr::Literal(ScalarValue::Utf8(Some(value)), None)),"
+      ],
+      [
+       "d",
+       "                    self.parse_type(data_type)?,"
+      ],
+      [
+       "a",
+       "                    data_type,"
+      ],
+      [
+       "c",
+       "                )))"
+      ]
+     ],
+     "truncated": true,
+     "additions": 124,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:39:07Z",
+    "updated_at": "2026-11-14T14:19:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 102
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Reject schema-dependent commits across cleaned-up history",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T14:19:42Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11079,
+    "url": "https://github.com/lance-format/lance/pull/11079"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance/src/io/commit.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1910,7 +1910,12 @@"
+      ],
+      [
+       "c",
+       "            let missing = (checked_since + 1..=dataset.manifest.version)"
+      ],
+      [
+       "c",
+       "                .filter(|version| !seen.contains(version))"
+      ],
+      [
+       "c",
+       "                .collect::<Vec<_>>();"
+      ],
+      [
+       "d",
+       "            rebase.check_missing_versions(&missing, dataset.manifest.version)?;"
+      ],
+      [
+       "a",
+       "            rebase.check_missing_versions("
+      ],
+      [
+       "a",
+       "                &missing,"
+      ],
+      [
+       "a",
+       "                dataset.manifest.version,"
+      ],
+      [
+       "a",
+       "                read_version_dataset.schema(),"
+      ],
+      [
+       "a",
+       "                dataset.schema(),"
+      ],
+      [
+       "a",
+       "            )?;"
+      ],
+      [
+       "c",
+       "            // A cleaned-up version may have replaced a key field; an identity"
+      ],
+      [
+       "c",
+       "            // window with a hole cannot be judged, so it is refused."
+      ],
+      [
+       "c",
+       "            if identity_fence.is_some() && !missing.is_empty() {"
+      ],
+      [
+       "h",
+       "@@ -2808,6 +2813,111 @@"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[rstest::rstest]"
+      ],
+      [
+       "a",
+       "    #[case::drop_columns_after_add_columns(\"add_columns\")]"
+      ],
+      [
+       "a",
+       "    #[case::append_after_cast(\"cast\")]"
+      ],
+      [
+       "a",
+       "    #[case::append_null_after_set_not_null(\"set_not_null\")]"
+      ],
+      [
+       "a",
+       "    #[case::append_after_overwrite_reusing_field_ids(\"overwrite\")]"
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn test_schema_dependent_commit_rejects_cleaned_history(#[case] concurrent: &str) {"
+      ],
+      [
+       "a",
+       "        let initial = arrow_array::record_batch!("
+      ],
+      [
+       "a",
+       "            (\"id\", Int32, [0, 1, 2, 3]),"
+      ],
+      [
+       "a",
+       "            (\"x\", Int32, [Some(0), Some(1), Some(2), Some(3)])"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "a",
+       "        .unwrap();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 111,
+     "deletions": 1
+    },
+    {
+     "path": "rust/lance/src/io/commit/conflict_resolver/init.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,8 @@"
+      ],
+      [
+       "c",
+       "// SPDX-License-Identifier: Apache-2.0"
+      ],
+      [
+       "c",
+       "// SPDX-FileCopyrightText: Copyright The Lance Authors"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "use lance_core::datatypes::Schema;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "use super::*;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "impl<'a> TransactionRebase<'a> {"
+      ],
+      [
+       "h",
+       "@@ -329,10 +331,26 @@"
+      ],
+      [
+       "c",
+       "        &mut self,"
+      ],
+      [
+       "c",
+       "        missing: &[u64],"
+      ],
+      [
+       "c",
+       "        latest_version: u64,"
+      ],
+      [
+       "a",
+       "        read_schema: &Schema,"
+      ],
+      [
+       "a",
+       "        latest_schema: &Schema,"
+      ],
+      [
+       "c",
+       "    ) -> Result<()> {"
+      ],
+      [
+       "c",
+       "        if missing.is_empty() {"
+      ],
+      [
+       "c",
+       "            return Ok(());"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "a",
+       "        if conflicts_with_unseen_schema_change("
+      ],
+      [
+       "a",
+       "            &self.transaction.operation,"
+      ],
+      [
+       "a",
+       "            read_schema,"
+      ],
+      [
+       "a",
+       "            latest_schema,"
+      ],
+      [
+       "a",
+       "        ) {"
+      ],
+      [
+       "a",
+       "            return Err(Error::retryable_commit_conflict_source("
+      ],
+      [
+       "a",
+       "                latest_version,"
+      ],
+      [
+       "a",
+       "                format!("
+      ],
+      [
+       "a",
+       "                    \"versions {missing:?} between transaction read version {} and latest                      version {latest_version} were cleaned up, so {} cannot safely check                      conflicts with schema changes; retry the operation on the latest version\","
+      ],
+      [
+       "a",
+       "                    self.transaction.read_version, self.transaction.operation"
+      ],
+      [
+       "a",
+       "                )"
+      ]
+     ],
+     "truncated": true,
+     "additions": 63,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T05:38:21Z",
+    "updated_at": "2026-11-14T14:19:54Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 101
+  },
   {
    "kind": "fix",
    "repo": "mlflow/mlflow",
