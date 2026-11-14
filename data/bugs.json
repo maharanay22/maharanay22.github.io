@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T18:23:02Z",
+ "generated_at": "2026-11-14T20:55:16Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28812,
-   "forks": 6609,
+   "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21601230,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50515,
-   "forks": 20741,
+   "stars": 50518,
+   "forks": 20742,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 698520592,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7300,
+   "stars": 7302,
    "forks": 938,
    "package": "pylance",
    "impact": null,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63253,
-   "forks": 13276,
+   "stars": 63257,
+   "forks": 13278,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 97401315,
@@ -540,8 +540,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T18:12:17Z",
@@ -549,8 +549,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 106
   },
@@ -1221,7 +1221,7 @@
       ],
       [
        "h",
-       "@@ -2808,6 +2813,126 @@"
+       "@@ -2808,6 +2813,194 @@"
       ],
       [
        "c",
@@ -1261,6 +1261,18 @@
       ],
       [
        "a",
+       "    #[case::append_after_overwrite_swapping_same_type_structs(\"overwrite_nested_swap\")]"
+      ],
+      [
+       "a",
+       "    #[case::append_after_overwrite_struct_to_list(\"overwrite_struct_to_list\")]"
+      ],
+      [
+       "a",
+       "    #[case::append_after_overwrite_list_to_struct(\"overwrite_list_to_struct\")]"
+      ],
+      [
+       "a",
        "    #[tokio::test]"
       ],
       [
@@ -1269,23 +1281,11 @@
       ],
       [
        "a",
-       "        let initial = arrow_array::record_batch!("
-      ],
-      [
-       "a",
-       "            (\"id\", Int32, [0, 1, 2, 3]),"
-      ],
-      [
-       "a",
-       "            (\"x\", Int32, [Some(0), Some(1), Some(2), Some(3)])"
-      ],
-      [
-       "a",
-       "        )"
+       "        let (initial, staged) = match concurrent {"
       ]
      ],
      "truncated": true,
-     "additions": 126,
+     "additions": 194,
      "deletions": 1
     },
     {
@@ -1413,7 +1413,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 65,
+     "additions": 73,
      "deletions": 0
     }
    ],
@@ -1423,8 +1423,8 @@
     "checks": "failing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T17:38:40Z",
-    "updated_at": "2026-11-14T17:54:07Z",
+    "last_push": "2026-11-14T20:25:10Z",
+    "updated_at": "2026-11-14T20:44:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -20142,13 +20142,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-10T03:10:01Z",
-    "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": true,
+    "last_push": "2026-11-14T20:53:22Z",
+    "updated_at": "2026-11-14T20:54:05Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -20983,13 +20983,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-10T03:10:00Z",
-    "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": true,
+    "last_push": "2026-11-14T20:47:36Z",
+    "updated_at": "2026-11-14T20:49:05Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -21149,13 +21149,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-10T03:09:59Z",
-    "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": true,
+    "last_push": "2026-11-14T20:47:28Z",
+    "updated_at": "2026-11-14T20:49:08Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
