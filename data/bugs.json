@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T03:40:11Z",
+ "generated_at": "2026-11-14T04:55:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50513,
-   "forks": 20738,
+   "stars": 50512,
+   "forks": 20737,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 698520592,
@@ -255,7 +255,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63225,
+   "stars": 63226,
    "forks": 13272,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -301,6 +301,455 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Accept `BaseException` such as `asyncio.CancelledError` in `LiveSpan.record_exception`",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T04:52:58Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 27773,
+    "url": "https://github.com/mlflow/mlflow/pull/27773"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "mlflow/entities/span.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1172,18 +1172,19 @@"
+      ],
+      [
+       "c",
+       "        if hasattr(self._span, \"add_link\"):"
+      ],
+      [
+       "c",
+       "            self._span.add_link(otel_context, link.attributes)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    def record_exception(self, exception: str | Exception):"
+      ],
+      [
+       "a",
+       "    def record_exception(self, exception: str | BaseException):"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        Record an exception on the span, adding an exception event and setting span status to ERROR."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Args:"
+      ],
+      [
+       "d",
+       "            exception: The exception to record. Can be an Exception instance or a string"
+      ],
+      [
+       "a",
+       "            exception: The exception to record. Can be an exception instance (including"
+      ],
+      [
+       "a",
+       "                ``asyncio.CancelledError`` and other ``BaseException`` subclasses) or a string"
+      ],
+      [
+       "c",
+       "                describing the exception."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        if isinstance(exception, str):"
+      ],
+      [
+       "c",
+       "            exception = Exception(exception)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        if isinstance(exception, Exception):"
+      ],
+      [
+       "a",
+       "        if isinstance(exception, BaseException):"
+      ],
+      [
+       "c",
+       "            self.add_event(SpanEvent.from_exception(exception))"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "c",
+       "            raise MlflowException("
+      ],
+      [
+       "h",
+       "@@ -1611,7 +1612,7 @@"
+      ],
+      [
+       "c",
+       "    def add_link(self, link: Link) -> None:"
+      ],
+      [
+       "c",
+       "        pass"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    def record_exception(self, exception: str | Exception):"
+      ],
+      [
+       "a",
+       "    def record_exception(self, exception: str | BaseException):"
+      ],
+      [
+       "c",
+       "        pass"
+      ]
+     ],
+     "truncated": true,
+     "additions": 5,
+     "deletions": 4
+    },
+    {
+     "path": "mlflow/entities/span_event.py",
+     "lines": [
+      [
+       "h",
+       "@@ -35,7 +35,7 @@"
+      ],
+      [
+       "c",
+       "    attributes: dict[str, AttributeValue] = field(default_factory=dict)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    @classmethod"
+      ],
+      [
+       "d",
+       "    def from_exception(cls, exception: Exception) -> \"SpanEvent\":"
+      ],
+      [
+       "a",
+       "    def from_exception(cls, exception: BaseException) -> \"SpanEvent\":"
+      ],
+      [
+       "c",
+       "        \"Create a span event from an exception.\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        stack_trace = cls._get_stacktrace(exception)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:44:08Z",
+    "updated_at": "2026-11-14T04:53:28Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
+   },
+   "id": 100
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Keep `None` elements in `Array(string)` and `Array(boolean)` schema enforcement",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T04:52:44Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 27772,
+    "url": "https://github.com/mlflow/mlflow/pull/27772"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "mlflow/models/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1372,6 +1372,15 @@"
+      ],
+      [
+       "c",
+       "    return pd_series[0]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _enforce_array_of_datatype(data, dtype: DataType) -> np.ndarray:"
+      ],
+      [
+       "a",
+       "    enforced = _enforce_mlflow_datatype(\"\", pd.Series(data), dtype)"
+      ],
+      [
+       "a",
+       "    # NumPy string and bool dtypes cannot hold missing values, so casting to them would turn None"
+      ],
+      [
+       "a",
+       "    # into \"None\" or False (and truncate every string to one character on pandas 3)."
+      ],
+      [
+       "a",
+       "    if dtype in (DataType.string, DataType.boolean) and enforced.isna().any():"
+      ],
+      [
+       "a",
+       "        return enforced.to_numpy(dtype=object, na_value=None)"
+      ],
+      [
+       "a",
+       "    return enforced.to_numpy(dtype=dtype.to_numpy())"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def _enforce_array(data: Any, arr: Array, required: bool = True):"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    Enforce data against an Array type."
+      ],
+      [
+       "h",
+       "@@ -1388,13 +1397,7 @@"
+      ],
+      [
+       "c",
+       "    if isinstance(arr.dtype, DataType):"
+      ],
+      [
+       "c",
+       "        # TODO: this is still significantly slower than direct np.asarray dtype conversion"
+      ],
+      [
+       "c",
+       "        # pd.Series conversion can be removed once we support direct validation on the numpy array"
+      ],
+      [
+       "d",
+       "        data_enforced = ("
+      ],
+      [
+       "d",
+       "            _enforce_mlflow_datatype(\"\", pd.Series(data), arr.dtype).to_numpy("
+      ],
+      [
+       "d",
+       "                dtype=arr.dtype.to_numpy()"
+      ],
+      [
+       "d",
+       "            )"
+      ],
+      [
+       "d",
+       "            if len(data) > 0"
+      ],
+      [
+       "d",
+       "            else data"
+      ],
+      [
+       "d",
+       "        )"
+      ],
+      [
+       "a",
+       "        data_enforced = _enforce_array_of_datatype(data, arr.dtype) if len(data) > 0 else data"
+      ],
+      [
+       "c",
+       "    else:"
+      ],
+      [
+       "c",
+       "        data_enforced = [_enforce_type(x, arr.dtype, required=required) for x in data]"
+      ]
+     ],
+     "truncated": true,
+     "additions": 10,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:44:07Z",
+    "updated_at": "2026-11-14T04:52:58Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
+   },
+   "id": 99
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Handle numbers, booleans, and empty lists in `parse_outputs_to_str`",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T04:52:32Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 27771,
+    "url": "https://github.com/mlflow/mlflow/pull/27771"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "mlflow/genai/utils/trace_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -720,6 +720,8 @@"
+      ],
+      [
+       "c",
+       "        return parse_outputs_to_str(value[0])"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    value = _to_dict(value)"
+      ],
+      [
+       "a",
+       "    if not isinstance(value, dict):"
+      ],
+      [
+       "a",
+       "        return json.dumps(value, cls=TraceJSONEncoder)"
+      ],
+      [
+       "c",
+       "    if _is_chat_choices(value.get(_CHOICES_KEY)):"
+      ],
+      [
+       "c",
+       "        content = value[_CHOICES_KEY][0][_MESSAGE_KEY][_CONTENT_KEY]"
+      ],
+      [
+       "c",
+       "    elif _is_chat_messages(value.get(_MESSAGES_KEY)):"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T04:44:07Z",
+    "updated_at": "2026-11-14T04:53:02Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
+   },
+   "id": 98
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -661,8 +1110,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T03:02:21Z",
@@ -670,8 +1119,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 97
   },
@@ -6039,8 +6488,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "changes requested",
     "approved_by": [
      "tdas"
