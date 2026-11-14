@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-13T23:54:00Z",
+ "generated_at": "2026-11-14T03:18:55Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,17 +25,17 @@
    "forks": 698,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 672672,
-   "downloads_checked": "2026-11-13",
-   "contributor_rank": 11,
-   "contributor_commits": 22,
+   "downloads_month": 630131,
+   "downloads_checked": "2026-11-14",
+   "contributor_rank": 9,
+   "contributor_commits": 26,
    "contributor_total": 138,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": 5,
-   "period_commits": 22,
+   "period_commits": 26,
    "period_total": 33,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "delta-io/delta-rs",
@@ -53,17 +53,17 @@
    "forks": 708,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 9159509,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 10395350,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": 7,
    "period_commits": 21,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "mlflow/mlflow",
@@ -77,21 +77,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28793,
-   "forks": 6609,
+   "stars": 28797,
+   "forks": 6607,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 19887934,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 21601230,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": 39,
    "period_commits": 4,
    "period_total": 111,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "mindsdb/engine",
@@ -114,12 +114,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,21 +133,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50512,
+   "stars": 50513,
    "forks": 20738,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 546920076,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 698520592,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "delta-io/delta",
@@ -165,12 +165,12 @@
    "forks": 2219,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 27744060,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 24825217,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 51,
@@ -193,12 +193,12 @@
    "forks": 162,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 37686630,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 37811442,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
@@ -221,17 +221,17 @@
    "forks": 232,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 3741376,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 4290318,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "BerriAI/litellm",
@@ -245,21 +245,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63220,
-   "forks": 13267,
+   "stars": 63224,
+   "forks": 13271,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 92239101,
-   "downloads_checked": "2026-11-13",
+   "downloads_month": 97401315,
+   "downloads_checked": "2026-11-14",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-13",
+   "contributors_checked": "2026-11-14",
    "period_rank": null,
    "period_commits": null,
    "period_total": 134,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -274,20 +274,20 @@
     "CLI"
    ],
    "stars": 1502,
-   "forks": 262,
+   "forks": 263,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 361918214,
-   "downloads_checked": "2026-11-13",
-   "contributor_rank": 113,
+   "downloads_month": 487993966,
+   "downloads_checked": "2026-11-14",
+   "contributor_rank": 114,
    "contributor_commits": 1,
-   "contributor_total": 133,
-   "contributors_checked": "2026-11-13",
-   "period_rank": 35,
+   "contributor_total": 134,
+   "contributors_checked": "2026-11-14",
+   "period_rank": 29,
    "period_commits": 1,
-   "period_total": 56,
+   "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-13"
+   "period_checked": "2026-11-14"
   }
  ],
  "items": [
@@ -306,7 +306,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "Catalogs, schemas, volumes and model versions with storage paths over 255 characters failed with a server error"
+   },
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
@@ -647,17 +650,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-13T20:12:31Z",
-    "updated_at": "2026-11-13T22:44:49Z",
+    "last_push": "2026-11-14T03:02:21Z",
+    "updated_at": "2026-11-14T03:14:55Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 97
   },
@@ -676,7 +679,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "Function properties were accepted on create but never saved, so they were silently lost"
+   },
    "files": [
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
@@ -803,8 +809,88 @@
       ]
      ],
      "truncated": true,
-     "additions": 85,
+     "additions": 92,
      "deletions": 6
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/PropertyDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -35,6 +35,8 @@"
+      ],
+      [
+       "c",
+       "@ToString"
+      ],
+      [
+       "c",
+       "@Builder"
+      ],
+      [
+       "c",
+       "public class PropertyDAO {"
+      ],
+      [
+       "a",
+       "  public static final int MAX_KEY_LENGTH = 255;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  @Id"
+      ],
+      [
+       "c",
+       "  @UuidGenerator"
+      ],
+      [
+       "c",
+       "  @Column(name = \"id\", updatable = false, nullable = false)"
+      ],
+      [
+       "h",
+       "@@ -46,7 +48,7 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"entity_type\", nullable = false)"
+      ],
+      [
+       "c",
+       "  private String entityType;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"property_key\", nullable = false)"
+      ],
+      [
+       "a",
+       "  @Column(name = \"property_key\", nullable = false, length = MAX_KEY_LENGTH)"
+      ],
+      [
+       "c",
+       "  private String key;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"property_value\", nullable = false, length = 16777215)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
     },
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/RepositoryUtils.java",
@@ -856,78 +942,6 @@
       [
        "c",
        "import java.util.Optional;"
-      ],
-      [
-       "h",
-       "@@ -27,8 +25,6 @@"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "public class RepositoryUtils {"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  private static final Map<String, Class<?>> PROPERTY_TYPE_MAP = new HashMap<>();"
-      ],
-      [
-       "d",
-       ""
-      ],
-      [
-       "c",
-       "  /**"
-      ],
-      [
-       "c",
-       "   * Acquires the table row lock shared by the Delta and Iceberg commit paths and by table deletion,"
-      ],
-      [
-       "c",
-       "   * so concurrent commits on the same table serialize, and a deletion waits for them. A lock-wait"
-      ],
-      [
-       "h",
-       "@@ -110,10 +106,6 @@"
-      ],
-      [
-       "c",
-       "        || failure instanceof org.hibernate.exception.LockAcquisitionException;"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  static {"
-      ],
-      [
-       "d",
-       "    PROPERTY_TYPE_MAP.put(Constants.FUNCTION, String.class);"
-      ],
-      [
-       "d",
-       "  }"
-      ],
-      [
-       "d",
-       ""
-      ],
-      [
-       "c",
-       "  public static <T> T attachProperties("
       ]
      ],
      "truncated": true,
@@ -936,13 +950,64 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:15:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131765",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] Main accepts all of these creates and returns 200, and this PR turns several of them into 400s. Some of them can keep succeeding without losing anything: - An empty string or whitespace-only value should be treated as no properties, like `null`. It carries no data, so it should return 200 and create the…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:15:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131771",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] After the change above, this message covers duplicate keys, trailing text, text that is not JSON, and a top-level value that is not an object. \"Values are all strings\" is not the reason for any of them. Could it name the rule, for example \"must be a single JSON object with unique keys\" (with \"string valu…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:15:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131781",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] The bulk load for the function list is intentional. `attachProperties` takes a single entity ID, so it cannot load a page in one query, and the table list already uses the same pattern (`TableRepository.java:1175-1197`). Could the repeated `toPropertiesJson(PropertyDAO.toMap(...))` in `getFunction` and `…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-14T00:15:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5899888094",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The fix stores function properties as `uc_properties` rows in the create transaction, returns them on get and list, and removes them on delete. The tests check the stored rows, which is the right test. Two changes are needed before merge: a key over 255 characters should return `INVALID_ARGUMENT` instead…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:15:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131756",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] A property key longer than 255 characters fails the insert into `uc_properties.property_key` and returns a 500, and no function is created. On main the same request returned 200, so this turns a success into a server error. Could `parseProperties` reject keys over 255 characters with `INVALID_ARGUMENT`,…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T19:28:27Z",
-    "updated_at": "2026-11-13T22:44:48Z",
+    "last_push": "2026-11-14T01:05:49Z",
+    "updated_at": "2026-11-14T01:29:27Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -966,14 +1031,77 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "Spark listed the columns of partitioned Parquet, CSV and other file tables in a different order than its own catalog"
+   },
    "files": [
     {
      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
      "lines": [
       [
        "h",
-       "@@ -1027,13 +1027,16 @@"
+       "@@ -749,6 +749,14 @@"
+      ],
+      [
+       "c",
+       "  // before it reaches the vend site in `UCProxy.loadV1Table`."
+      ],
+      [
+       "c",
+       "  private[spark] val WRITE_INTENT = ThreadLocal.withInitial[Boolean](() => false)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  private[spark] val FILE_SOURCE_FORMATS: Set[DataSourceFormat] = Set("
+      ],
+      [
+       "a",
+       "    DataSourceFormat.PARQUET,"
+      ],
+      [
+       "a",
+       "    DataSourceFormat.ORC,"
+      ],
+      [
+       "a",
+       "    DataSourceFormat.JSON,"
+      ],
+      [
+       "a",
+       "    DataSourceFormat.CSV,"
+      ],
+      [
+       "a",
+       "    DataSourceFormat.AVRO,"
+      ],
+      [
+       "a",
+       "    DataSourceFormat.TEXT)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * UC external locations and the temporary path-credentials API use canonical lowercase"
+      ],
+      [
+       "c",
+       "   * `s3://` URLs on the server. Hadoop clients may reference the same storage as `s3a://`"
+      ],
+      [
+       "h",
+       "@@ -1027,13 +1035,16 @@"
       ],
       [
        "c",
@@ -1030,75 +1158,35 @@
       [
        "a",
        "    // Spark's file sources read and write a table as its data columns followed by its partition"
-      ],
-      [
-       "a",
-       "    // columns, the order Spark's own catalog stores. Delta takes its schema from the Delta log."
-      ],
-      [
-       "a",
-       "    val fields = (if (t.getDataSourceFormat == DataSourceFormat.DELTA) {"
-      ],
-      [
-       "a",
-       "      columns"
-      ],
-      [
-       "a",
-       "    } else {"
-      ],
-      [
-       "a",
-       "      dataCols ++ sortedPartitionCols"
-      ],
-      [
-       "a",
-       "    }).map(toStructField).toArray"
-      ],
-      [
-       "c",
-       "    val locationUri = CatalogUtils.stringToURI(t.getStorageLocation)"
-      ],
-      [
-       "c",
-       "    val tableId = t.getTableId"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -1082,7 +1085,7 @@"
-      ],
-      [
-       "c",
-       "      provider = Some(t.getDataSourceFormat.getValue.toLowerCase()),"
-      ],
-      [
-       "c",
-       "      createTime = t.getCreatedAt,"
-      ],
-      [
-       "c",
-       "      tracksPartitionsInCatalog = false,"
-      ],
-      [
-       "d",
-       "      partitionColumnNames = partitionCols.sortBy(_._2).map(_._1).toSeq"
-      ],
-      [
-       "a",
-       "      partitionColumnNames = sortedPartitionCols.map(_.getName)"
       ]
      ],
      "truncated": true,
-     "additions": 11,
+     "additions": 19,
      "deletions": 8
     }
    ],
    "track": {
     "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-14T02:11:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#pullrequestreview-5900754399",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving, with one non-blocking docs note inline.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T02:11:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4570834517",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] nit: Could the docs also say that UC keeps the declared column order (what the REST API and other engines see), while Spark lists partition columns last for file-source tables, matching Spark's own catalog? A table created as `(a, p, b)` then shows `a, p, b` through REST and `a, b, p` in Spark.",
+      "answered": true
+     },
      {
       "kind": "review commented",
       "who": "yili-db",
@@ -1107,7 +1195,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The reorder matches Spark's own catalog, so the approach is right. Two inline asks: limit the reorder to file-source formats, and fold the new test class into ParquetExternalTableReadWriteTest. The docs wording is a nit.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1117,7 +1205,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] This reorders every format except Delta, but the description and docs only cover file sources. ICEBERG is in the DataSourceFormat enum, and loadTable sends any non-view table here, so an ICEBERG-format table would also get its DESCRIBE order changed. Could the reorder be limited to file-source formats (P…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1127,7 +1215,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ExternalTablePartitionColumnOrderTest.java",
       "text": "[AI Assisted] This adds a new class with about 17 server and session starts per job, and the reorder does not depend on the format. Could the Parquet layouts fold into ParquetExternalTableReadWriteTest.testLoadTableKeepsColumnDefaultValue (line 72)? Keep the partition-in-middle case, which covers DESCRIBE and SELECT o…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1137,20 +1225,22 @@
       "maintainer": true,
       "path": "docs/integrations/unity-catalog-spark.md",
       "text": "[AI Assisted] Nit: this paragraph lists Avro and text, but no test loads those formats. Since the reorder does not depend on the format, either say every non-Delta table, or leave the list as is and keep the claim tied to the code path.",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 3,
     "checks": "running",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-11-13T19:20:49Z",
-    "updated_at": "2026-11-13T23:16:45Z",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
+    "last_push": "2026-11-14T02:24:40Z",
+    "updated_at": "2026-11-14T02:45:44Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 95
   },
@@ -1169,14 +1259,17 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "function call printed the Python error as the result and exited 0 for functions created through the API"
+   },
    "files": [
     {
      "path": "etc/data/function/python_engine.py",
      "lines": [
       [
        "h",
-       "@@ -1,10 +1,28 @@"
+       "@@ -1,10 +1,35 @@"
       ],
       [
        "a",
@@ -1193,10 +1286,6 @@
       [
        "c",
        "import logging"
-      ],
-      [
-       "a",
-       "import textwrap"
       ],
       [
        "c",
@@ -1228,7 +1317,7 @@
       ],
       [
        "a",
-       "    if '\\n' not in routine_body:"
+       "    if '\\n' not in routine_body.rstrip('\\r\\n'):"
       ],
       [
        "a",
@@ -1240,19 +1329,51 @@
       ],
       [
        "a",
-       "        return ast.parse(routine_body).body"
+       "        return ast.parse(routine_body, filename='<routine_definition>').body"
       ],
       [
        "a",
-       "    except IndentationError:"
+       "    except IndentationError as original:"
       ],
       [
        "a",
-       "        # A body indented as a whole, such as the inside of a triple-quoted string."
+       "        # A body indented as a whole parses inside an indented block, with its strings and"
       ],
       [
        "a",
-       "        return ast.parse(textwrap.dedent(routine_body)).body"
+       "        # comments kept as written. Any statement outside that block means the body is malformed."
+      ],
+      [
+       "a",
+       "        try:"
+      ],
+      [
+       "a",
+       "            wrapped = ast.parse(\"if 1:\\n\" + routine_body, filename='<routine_definition>')"
+      ],
+      [
+       "a",
+       "        except SyntaxError:"
+      ],
+      [
+       "a",
+       "            raise original from None"
+      ],
+      [
+       "a",
+       "        block = wrapped.body[0] if len(wrapped.body) == 1 else None"
+      ],
+      [
+       "a",
+       "        if not isinstance(block, ast.If) or block.orelse:"
+      ],
+      [
+       "a",
+       "            raise original from None"
+      ],
+      [
+       "a",
+       "        return block.body"
       ],
       [
        "a",
@@ -1265,38 +1386,10 @@
       [
        "a",
        "    func_def = ast.parse(f\"def {func_name}({', '.join(param_names)}):\\n    pass\")"
-      ],
-      [
-       "a",
-       "    func_def.body[0].body = parse_body(routine_body)"
-      ],
-      [
-       "a",
-       "    exec(compile(func_def, '<routine_definition>', 'exec'), globals())"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "def execute_function(func_name, routine_body, params_str, args_str):"
-      ],
-      [
-       "c",
-       "    try:"
-      ],
-      [
-       "c",
-       "        # Split the parameter names and argument values"
-      ],
-      [
-       "h",
-       "@@ -14,12 +32,7 @@"
       ]
      ],
      "truncated": true,
-     "additions": 25,
+     "additions": 32,
      "deletions": 9
     },
     {
@@ -1364,7 +1457,7 @@
       ],
       [
        "h",
-       "@@ -68,6 +73,10 @@"
+       "@@ -68,19 +73,48 @@"
       ],
       [
        "c",
@@ -1380,52 +1473,52 @@
       ],
       [
        "a",
-       "      // Read stderr on another thread, so that a full stderr pipe cannot block the script while"
+       "      try {"
       ],
       [
        "a",
-       "      // stdout is read below."
+       "        // Read stderr on another thread, so that a full stderr pipe cannot block the script while"
       ],
       [
        "a",
-       "      CompletableFuture<String> error ="
+       "        // stdout is read below."
       ],
       [
        "a",
-       "          CompletableFuture.supplyAsync(() -> readFully(p.getErrorStream()));"
+       "        CompletableFuture<String> error ="
+      ],
+      [
+       "a",
+       "            CompletableFuture.supplyAsync(() -> readFully(p.getErrorStream()));"
       ],
       [
        "c",
        ""
       ],
       [
-       "c",
+       "d",
        "      // Get the output from the Python script"
       ],
       [
-       "c",
+       "d",
        "      BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));"
       ],
       [
-       "h",
-       "@@ -77,10 +86,25 @@"
+       "d",
+       "      String resultLine;"
       ],
       [
-       "c",
-       "        result.append(resultLine).append(\"\\n\");"
+       "d",
+       "      StringBuilder result = new StringBuilder();"
       ],
       [
-       "c",
-       "      }"
-      ],
-      [
-       "c",
-       "      in.close();"
+       "d",
+       "      while ((resultLine = in.readLine()) != null) {"
       ]
      ],
      "truncated": true,
-     "additions": 24,
-     "deletions": 0
+     "additions": 42,
+     "deletions": 8
     }
    ],
    "track": {
@@ -1433,75 +1526,75 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#pullrequestreview-5899414228",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#pullrequestreview-5900825951",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Thanks for the change. The exit-code contract and the error reporting look right. Two bodies that main runs now fail, so this needs changes before merge. Details are inline.",
-      "answered": false
+      "text": "[AI Assisted] Thanks for the follow-up. The column-0 comment, trailing newline, indented string and error-path changes all check out in scratch runs. One blocker remains: a malformed body can now return a wrong result. The four nits are inline. CI: the POSTGRES_18 \"All tests\" job failed on one server test, `SdkBrowseA…",
+      "answered": true
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759942",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892337",
       "maintainer": true,
       "path": "etc/data/function/python_engine.py",
-      "text": "[AI Assisted] The dedent fallback breaks a body that main accepted. For ` b = a + 1\\n# explanation\\n return b` (literal backslash-n, as in the CLI examples), main runs it and returns 6, but this engine fails with `IndentationError: unexpected indent`. The cause is that `textwrap.dedent` sees a common margin of zero be…",
-      "answered": false
+      "text": "[AI Assisted] The `if 1:` fallback accepts a malformed body and drops statements. For ` b = a + 1` followed by a column-0 `return b`, the wrapper parses as an `if` plus a module-level `return`, and only the `if` body is kept. The engine then returns `null` with exit 0, where main raised a SyntaxError. A trailing colum…",
+      "answered": true
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759952",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892342",
       "maintainer": true,
-      "path": "etc/data/function/python_engine.py",
-      "text": "[AI Assisted] A body written with literal `\\n` separators and one trailing line break now fails: `b = a + 1\\nreturn b` followed by a real newline gives `SyntaxError: unexpected character after line continuation character`, while main returns 6. The check for a real newline should ignore trailing line breaks, for examp…",
-      "answered": false
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Nit: `p.waitFor()` can throw InterruptedException. It now falls into the broad `catch (Exception e)`, which prints a stack trace, wraps it, and drops the interrupt flag. Could we add `catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new ApiException(\"Interrupted while invoking P…",
+      "answered": true
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759960",
-      "maintainer": true,
-      "path": "etc/data/function/python_engine.py",
-      "text": "[AI Assisted] For a whole-indented body with a multi-line string, ` s = \"\"\"x\\n y\"\"\"\\n return s` returns `\"x\\ny\"`, so the indent inside the string is removed. The description says string content is not changed. The wrapper fallback from the first comment returns `\"x\\n y\"`, which keeps the string as written. Could the d…",
-      "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759965",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892348",
       "maintainer": true,
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
-      "text": "[AI Assisted] Could we add two cases here: the legacy whole-indent body with a column-zero comment (`\" b = a + 1\\n# explanation\\n return b\"`, expected 6), and a body with backslash-n separators plus a trailing real newline (`\"b = a + 1\\nreturn b\\n\"`, expected 6)? Both are forms main runs today, so they belong with the…",
-      "answered": false
+      "text": "[AI Assisted] Nit: the new error paths have no test yet: a result that cannot be written as JSON (`return {a}`, expecting `TypeError`), a body with a `SyntaxError`, and a call with too few arguments, which would pin down that the existing `ApiException` is no longer wrapped. Could we add these as cases with `hasMessag…",
+      "answered": true
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-13T23:19:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4569759970",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892351",
       "maintainer": true,
-      "path": "etc/data/function/python_engine.py",
-      "text": "[AI Assisted] Nit: could both `ast.parse` calls pass `filename='<routine_definition>'`? That matches the compile call below and makes the message name the routine.",
-      "answered": false
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Nit: when the script exits non-zero with empty stderr, the message ends with a dangling `: `. Could the suffix be left out when stderr is blank?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892355",
+      "maintainer": true,
+      "path": "docs/usage/functions.md",
+      "text": "[AI Assisted] Nit: the engine ignores line breaks at the end of the body, so \"is split only at those line breaks\" is not exact. Could it say \"a real line break other than at its end\"? Also, \"reports the Python error\" reads as if the message is the output. The CLI prefixes it with `Python function failed with exit code…",
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T19:29:05Z",
-    "updated_at": "2026-11-13T23:19:31Z",
+    "last_push": "2026-11-14T02:26:46Z",
+    "updated_at": "2026-11-14T02:53:29Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 94
   },
@@ -1520,7 +1613,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "Every CLI list command silently dropped all results after the first page of 100"
+   },
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/CatalogCli.java",
@@ -1782,6 +1878,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-14T02:14:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#pullrequestreview-5900776195",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the follow-ups. The repeated-token guard, the PaginationTest, and the javadoc and boxing changes look right. Still open: one test gap for the unscoped registered_model list (inline), an optional comment on the 100 in CliTableOperations (inline), and a help text update for --max_results. The he…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T02:14:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4570852498",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/CliListPaginationTest.java",
+      "text": "[AI Assisted] Could we also cover the unscoped `registered_model list` (no `--catalog` or `--schema`)? That path pages by UUID id instead of name, and the CLI loop is the same, so it should be exercised across a page boundary. The order is by id, so assert with `containsExactlyInAnyOrder(\"mdl_a\", \"mdl_b\", \"mdl_c\")` (o…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T02:14:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4570852501",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/table/CliTableOperations.java",
+      "text": "[AI Assisted] Optional: could a short comment say why 100 is passed here, for example that `SdkTableOperations` lists one page of 100 and the CLI now follows every page?",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-13T23:08:14Z",
@@ -1810,44 +1936,14 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
       "text": "[AI Assisted] Nit: could the javadoc use `@param` tags for json, fetchPage, getItems and getNextPageToken, plus an `@return` and `@throws` tag, instead of prose?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:08:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684212",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
-      "text": "[AI Assisted] Nit: could we assign `pageMaxResults = maxResults` and then reassign it inside `if (isLimited)`? Or add a one-line comment saying the `Integer.valueOf` boxing prevents unboxing a null `maxResults`?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:08:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684218",
-      "maintainer": true,
-      "path": "docs/usage/cli.md",
-      "text": "[AI Assisted] Nit: could the note say that the default changed (without `--max_results`, a list command now returns all results, where it used to return at most 100), and that this applies to every list command except `user list`, which uses `--start_index` and `--count`? That tells existing scripts which output they…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-13T23:08:13Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#pullrequestreview-5899321120",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the change. Pagination and limit handling are correct for the server in this repo. Two normal items and three nits are inline. The one item outside the diff is the PR description: the BaseTableCRUDTest sentence describes a test this PR does not change, so it needs rewording.",
-      "answered": true
      }
     ],
     "stage": 3,
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T23:22:09Z",
-    "updated_at": "2026-11-13T23:30:52Z",
+    "last_push": "2026-11-14T02:28:42Z",
+    "updated_at": "2026-11-14T02:48:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1871,22 +1967,109 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "The Python client's Delta API package could not be imported"
+   },
    "files": [
     {
      "path": "build.sbt",
      "lines": [
       [
        "h",
-       "@@ -340,7 +340,17 @@"
+       "@@ -328,19 +328,24 @@"
       ],
       [
        "c",
+       "          outputDir = outputDir,"
+      ],
+      [
+       "c",
+       "          generatorName = \"python\","
+      ],
+      [
+       "c",
+       "          specs = Seq("
+      ],
+      [
+       "a",
+       "            // The delta.yaml run goes first because its \"__init__.py\" filter matches by file name: besides the"
+      ],
+      [
+       "a",
+       "            // delta api/ and models/ inits (patchDeltaDataTypeModule needs the models one), it also writes"
+      ],
+      [
+       "a",
+       "            // unitycatalog/client/__init__.py, which the all.yaml run below must overwrite."
+      ],
+      [
+       "c",
+       "            OpenApiSpec("
+      ],
+      [
+       "d",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"all.yaml\").getAbsolutePath,"
+      ],
+      [
+       "a",
        "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"delta.yaml\").getAbsolutePath,"
       ],
       [
        "c",
+       "              packageName = s\"$artifactNamePrefix.client\","
+      ],
+      [
+       "a",
+       "              apiPackage = \"delta.api\","
+      ],
+      [
+       "a",
+       "              modelPackage = \"delta.models\","
+      ],
+      [
+       "c",
+       "              additionalProperties = commonProps,"
+      ],
+      [
+       "d",
+       "              // Overrides python/asyncio/rest.mustache with the v7.11.0 version. See the header of"
+      ],
+      [
+       "d",
+       "              // build/templates/asyncio/rest.mustache for when to remove it."
+      ],
+      [
+       "d",
+       "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath"
+      ],
+      [
+       "a",
+       "              globalProperties = Map(\"apis\" -> \"\", \"models\" -> \"\", \"supportingFiles\" -> \"__init__.py\")"
+      ],
+      [
+       "c",
+       "            ),"
+      ],
+      [
+       "c",
+       "            OpenApiSpec("
+      ],
+      [
+       "d",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"delta.yaml\").getAbsolutePath,"
+      ],
+      [
+       "d",
        "              packageName = s\"$artifactNamePrefix.delta\","
+      ],
+      [
+       "a",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"all.yaml\").getAbsolutePath,"
+      ],
+      [
+       "a",
+       "              packageName = s\"$artifactNamePrefix.client\","
       ],
       [
        "c",
@@ -1898,254 +2081,223 @@
       ],
       [
        "a",
-       "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath,"
+       "              // Overrides python/asyncio/rest.mustache with the v7.11.0 version (see its header for when to"
       ],
       [
        "a",
-       "              // Only the package's own runtime modules: the project-level supporting files"
+       "              // remove it) and python/api_client.mustache so the shared ApiClient also resolves Delta models."
       ],
       [
        "a",
-       "              // (README.md, setup.cfg, requirements.txt, ...) come from the all.yaml run above."
-      ],
-      [
-       "a",
-       "              globalProperties = Map("
-      ],
-      [
-       "a",
-       "                \"apis\" -> \"\","
-      ],
-      [
-       "a",
-       "                \"models\" -> \"\","
-      ],
-      [
-       "a",
-       "                \"supportingFiles\" -> Seq("
-      ],
-      [
-       "a",
-       "                  \"__init__.py\", \"api_client.py\", \"api_response.py\", \"configuration.py\","
-      ],
-      [
-       "a",
-       "                  \"exceptions.py\", \"rest.py\", \"py.typed\""
-      ],
-      [
-       "a",
-       "                ).mkString(\",\")"
-      ],
-      [
-       "a",
-       "              )"
+       "              templateDir = (baseDirectory.value / \"build\" / \"templates\").getAbsolutePath"
       ],
       [
        "c",
        "            )"
-      ],
-      [
-       "c",
-       "          )"
-      ],
-      [
-       "c",
-       "        )"
-      ]
-     ],
-     "truncated": false,
-     "additions": 11,
-     "deletions": 1
-    },
-    {
-     "path": "clients/python/src/unitycatalog/delta/internal/serde/delta_data_type_module.py",
-     "lines": [
-      [
-       "h",
-       "@@ -1,7 +1,7 @@"
-      ],
-      [
-       "c",
-       "\"\"\""
-      ],
-      [
-       "c",
-       "Python counterpart of the server/client Java ``DeltaDataTypeModule``: patches"
-      ],
-      [
-       "d",
-       "``DeltaDataType.from_dict``/``to_dict`` and ``DeltaStructField.from_dict``/"
-      ],
-      [
-       "d",
-       "``to_dict`` to handle Delta's string-or-object wire form (e.g. ``\"long\"`` /"
-      ],
-      [
-       "a",
-       "``from_dict``/``to_dict`` on ``DeltaDataType``, its subtypes, and"
-      ],
-      [
-       "a",
-       "``DeltaStructField`` to handle Delta's string-or-object wire form (e.g. ``\"long\"`` /"
-      ],
-      [
-       "c",
-       "``\"decimal(10,2)\"`` as bare JSON strings for primitives, vs. JSON objects"
-      ],
-      [
-       "c",
-       "for ``array`` / ``map`` / ``struct``)."
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -99,6 +99,8 @@"
-      ],
-      [
-       "c",
-       "# Patch class methods"
-      ],
-      [
-       "c",
-       "@classmethod"
-      ],
-      [
-       "c",
-       "def _patched_dt_from_dict(cls, obj):"
-      ],
-      [
-       "a",
-       "    if obj is None:"
-      ],
-      [
-       "a",
-       "        return None"
-      ],
-      [
-       "c",
-       "    return _parse_type(obj)"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -108,6 +110,11 @@"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "DeltaDataType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "a",
-       "DeltaPrimitiveType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "a",
-       "DeltaDecimalType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "a",
-       "DeltaArrayType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "a",
-       "DeltaMapType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "a",
-       "DeltaStructType.from_dict = _patched_dt_from_dict"
-      ],
-      [
-       "c",
-       "DeltaStructField.from_dict = _patched_sf_from_dict"
-      ],
-      [
-       "c",
-       ""
       ]
      ],
      "truncated": true,
-     "additions": 9,
-     "deletions": 2
+     "additions": 12,
+     "deletions": 7
     },
     {
-     "path": "project/PythonClientPostBuild.scala",
+     "path": "clients/python/build/templates/api_client.mustache",
      "lines": [
       [
        "h",
-       "@@ -126,12 +126,10 @@"
-      ],
-      [
-       "c",
-       "    val targetModule = targetSerdeDir.resolve(\"delta_data_type_module.py\")"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "    if (!Files.exists(srcModule)) {"
-      ],
-      [
-       "d",
-       "      log.warn(s\"delta_data_type_module.py not found at $srcModule, skipping patch\")"
-      ],
-      [
-       "d",
-       "      return"
+       "@@ -0,0 +1,827 @@"
       ],
       [
        "a",
-       "      sys.error(s\"delta_data_type_module.py not found at $srcModule\")"
+       "{{! Copied from OpenAPI Generator v7.9.0 (python/api_client.mustache), with _lookup_model added so the"
       ],
       [
-       "c",
-       "    }"
+       "a",
+       "    shared ApiClient also resolves response types from the Delta models in the client's delta.models package."
       ],
       [
-       "c",
-       "    if (!Files.exists(targetDir)) {"
+       "a",
+       "    Re-sync this copy from the new version whenever sbt-openapi-generator in project/plugins.sbt is"
       ],
       [
-       "d",
-       "      log.warn(s\"Delta package not found at $targetDir, skipping patch\")"
+       "a",
+       "    upgraded. }}"
       ],
       [
-       "d",
-       "      return"
+       "a",
+       "# coding: utf-8"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{>partial_header}}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "import datetime"
+      ],
+      [
+       "a",
+       "from dateutil.parser import parse"
+      ],
+      [
+       "a",
+       "from enum import Enum"
+      ],
+      [
+       "a",
+       "import decimal"
+      ],
+      [
+       "a",
+       "import importlib"
+      ],
+      [
+       "a",
+       "import json"
+      ],
+      [
+       "a",
+       "import mimetypes"
+      ],
+      [
+       "a",
+       "import os"
+      ],
+      [
+       "a",
+       "import re"
+      ],
+      [
+       "a",
+       "import tempfile"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "from urllib.parse import quote"
+      ],
+      [
+       "a",
+       "from typing import Tuple, Optional, List, Dict, Union"
+      ],
+      [
+       "a",
+       "from pydantic import SecretStr"
+      ],
+      [
+       "a",
+       "{{#tornado}}"
+      ],
+      [
+       "a",
+       "import tornado.gen"
+      ],
+      [
+       "a",
+       "{{/tornado}}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "from {{packageName}}.configuration import Configuration"
+      ],
+      [
+       "a",
+       "from {{packageName}}.api_response import ApiResponse, T as ApiResponseT"
+      ],
+      [
+       "a",
+       "import {{modelPackage}}"
       ]
      ],
      "truncated": true,
-     "additions": 3,
-     "deletions": 5
+     "additions": 827,
+     "deletions": 0
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5900181963",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Finding 2 changes the package layout, so please rework that first. The Delta run should generate only `api` and `models` under `unitycatalog.client.delta`, sharing the UC `ApiClient`, with one template override for the model lookup. Once that is in, the subtype `from_dict` blocker, the README example and…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372700",
+      "maintainer": true,
+      "path": "clients/python/src/unitycatalog/delta/internal/serde/delta_data_type_module.py",
+      "text": "[AI Assisted] blocker: The subtype patches ignore `cls` and always return `_parse_type(obj)`, so `DeltaMapType.from_dict({\"type\": \"struct\", \"fields\": []})` returns a `DeltaStructType`, and `DeltaStructType.from_dict(\"long\")` returns a `DeltaPrimitiveType` instead of failing. Only `DeltaStructType` is reached from gene…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372705",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] blocker: This adds a second `ApiClient` and `Configuration` for Python. Java has one client: `build.sbt` generates `delta.yaml` into the same `invokerPackage` as `all.yaml`, and the Delta APIs use the shared client (`ApiClientBuilder.java:181` registers the Delta serde on it, and `DeltaBaseTableCRUDTestE…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372713",
+      "maintainer": true,
+      "path": "clients/python/build/README.md",
+      "text": "[AI Assisted] The Delta section should show one client. Suggested replacement: [code] Use the same `ApiClient` for UC and Delta calls, so no second configuration is needed. The example should say where the token comes from, the same way the UC quickstart does.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372719",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] nit: `supportingFiles` matches the destination file name, so `\"__init__.py\"` also emits the `api/` and `models/` inits of the Delta package. The models one is what `patchDeltaDataTypeModule` needs. This run also writes `unitycatalog/client/__init__.py`, so the run order matters: the `all.yaml` run has to…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T00:53:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372723",
+      "maintainer": true,
+      "path": "clients/python/tests/conftest.py",
+      "text": "[AI Assisted] nit: With one client, this fixture can wrap the existing `api_client` fixture (`DeltaTablesApi(api_client)`) instead of building a second client. The `rest.mustache` override exists so the client can be built outside a running loop (per its header), and nothing here checks that. A plain test that only co…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T19:30:19Z",
-    "updated_at": "2026-11-13T22:44:44Z",
+    "last_push": "2026-11-14T01:46:48Z",
+    "updated_at": "2026-11-14T02:23:46Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2172,7 +2324,10 @@
     "url": "https://github.com/delta-io/delta-rs/issues/5064"
    },
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "A full overwrite racing with an append committed both, so appended rows survived in a table that was replaced"
+   },
    "files": [
     {
      "path": "crates/core/src/kernel/schema/partitions.rs",
@@ -2462,7 +2617,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "COMMENT and TBLPROPERTIES on Parquet, CSV and other non-Delta tables were lost or mixed into the data source options"
+   },
    "files": [
     {
      "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCTableProperties.java",
@@ -2811,7 +2969,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "Sandbox results that could not be read were not reported as failures"
+   },
    "files": [
     {
      "path": "ai/core/UnityCatalog_AI_DevLoop.ipynb",
@@ -3173,7 +3334,10 @@
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2217"
    },
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "The sandbox executor lost function results when the parent process used a lot of memory"
+   },
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/envs/executor_env_vars.py",
@@ -3523,7 +3687,10 @@
     "url": "https://github.com/unitycatalog/unitycatalog/issues/2212"
    },
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "Creating a Python function from an async def silently stored an empty body"
+   },
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/base.py",
@@ -3884,7 +4051,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "Multi-line string literals in Python function bodies were silently changed when stored"
+   },
    "files": [
     {
      "path": ".github/workflows/ucai-core-tests.yml",
@@ -4277,7 +4447,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "high",
+    "why": "A deleted or replaced function could still run its old cached code"
+   },
    "files": [
     {
      "path": "ai/core/src/unitycatalog/ai/core/client.py",
@@ -4502,7 +4675,10 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": {
+    "level": "medium",
+    "why": "The CLI could not write BYTE, SHORT, LONG or FLOAT columns"
+   },
    "files": [
     {
      "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/ColumnVectorUtils.java",
@@ -5521,18 +5697,26 @@
      "lines": [
       [
        "h",
-       "@@ -865,7 +865,7 @@"
+       "@@ -863,11 +863,10 @@"
+      ],
+      [
+       "c",
+       "        properties:"
+      ],
+      [
+       "c",
+       "          type: object"
       ],
       [
        "c",
        "          description: |"
       ],
       [
-       "c",
+       "d",
        "            Table properties. Besides the table's metaData.configuration entries, the map carries"
       ],
       [
-       "c",
+       "d",
        "            server-derived keys (delta.minReaderVersion, delta.minWriterVersion, delta.feature.*,"
       ],
       [
@@ -5540,24 +5724,44 @@
        "            delta.clusteringColumns, delta.rowTracking.rowIdHighWaterMark, delta.lastUpdateVersion,"
       ],
       [
-       "a",
-       "            clusteringColumns, delta.rowTracking.rowIdHighWaterMark, delta.lastUpdateVersion,"
-      ],
-      [
-       "c",
+       "d",
        "            delta.lastCommitTimestamp) that clients must not write back to the Delta log or send in"
       ],
       [
-       "c",
+       "d",
        "            set-properties / remove-properties."
+      ],
+      [
+       "a",
+       "            Table properties. Besides the table's metaData.configuration entries, the map can carry"
+      ],
+      [
+       "a",
+       "            server-derived keys that clients must not write back to the Delta log or send in"
+      ],
+      [
+       "a",
+       "            set-properties / remove-properties. Examples, not a complete list: delta.minReaderVersion,"
+      ],
+      [
+       "a",
+       "            delta.feature.* and delta.lastCommitTimestamp."
       ],
       [
        "c",
        "          additionalProperties:"
       ],
       [
+       "c",
+       "            type: string"
+      ],
+      [
+       "c",
+       "        last-commit-version:"
+      ],
+      [
        "h",
-       "@@ -1004,7 +1004,14 @@"
+       "@@ -1004,7 +1003,10 @@"
       ],
       [
        "c",
@@ -5581,31 +5785,15 @@
       ],
       [
        "a",
-       "            Properties to set. On a MANAGED table, a server-derived key (delta.minReaderVersion,"
+       "            Properties to set. On a MANAGED table, the server rejects some properties with a 400"
       ],
       [
        "a",
-       "            delta.minWriterVersion, delta.feature.*, clusteringColumns,"
+       "            InvalidParameterValueException. Examples, not a complete list: a server-derived key such"
       ],
       [
        "a",
-       "            delta.rowTracking.rowIdHighWaterMark, delta.lastUpdateVersion, delta.lastCommitTimestamp)"
-      ],
-      [
-       "a",
-       "            is rejected with a 400 InvalidParameterValueException. Changing the stored value of a"
-      ],
-      [
-       "a",
-       "            required catalog-managed property, io.unitycatalog.tableId or"
-      ],
-      [
-       "a",
-       "            delta.enableIcebergCompatV2 is rejected with the same error when the result breaks the"
-      ],
-      [
-       "a",
-       "            contract. Resending the stored value of a contract property is a no-op."
+       "            as delta.minReaderVersion, or a change to io.unitycatalog.tableId."
       ],
       [
        "c",
@@ -5621,28 +5809,16 @@
       ],
       [
        "h",
-       "@@ -1018,7 +1025,12 @@"
+       "@@ -1018,7 +1020,10 @@"
       ],
       [
        "c",
        "          const: \"remove-properties\""
-      ],
-      [
-       "c",
-       "        removals:"
-      ],
-      [
-       "c",
-       "          type: array"
-      ],
-      [
-       "d",
-       "          description: Property keys to remove"
       ]
      ],
      "truncated": true,
-     "additions": 15,
-     "deletions": 3
+     "additions": 12,
+     "deletions": 7
     },
     {
      "path": "server/src/main/java/io/unitycatalog/server/persist/DeltaCommitRepository.java",
@@ -5783,7 +5959,7 @@
       "maintainer": true,
       "path": null,
       "text": "Requested changes",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -5803,7 +5979,7 @@
       "maintainer": false,
       "path": "spec/protocols/ManagedDeltaTablesSpec.md",
       "text": "lets switch to calling this derived instead of synthetic.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -5836,19 +6012,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "changes requested",
     "approved_by": [
      "tdas"
     ],
-    "last_push": "2026-11-12T02:31:09Z",
-    "updated_at": "2026-11-13T22:32:14Z",
+    "last_push": "2026-11-14T02:59:17Z",
+    "updated_at": "2026-11-14T03:14:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db asked for changes. Update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Requested changes are pushed. Waiting for yili-db to look again"
    },
    "id": 78
   },
@@ -18172,11 +18348,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:01Z",
     "updated_at": "2026-11-12T03:48:16Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -19009,11 +19185,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:10:00Z",
     "updated_at": "2026-11-12T03:49:00Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -19174,11 +19350,11 @@
     "approved_by": [],
     "last_push": "2026-11-10T03:09:59Z",
     "updated_at": "2026-11-12T03:48:38Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
