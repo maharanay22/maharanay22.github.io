@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T18:04:34Z",
+ "generated_at": "2026-11-14T18:23:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7299,
+   "stars": 7300,
    "forks": 938,
    "package": "pylance",
    "impact": null,
@@ -349,8 +349,8 @@
    "files": [],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T17:15:53Z",
@@ -358,8 +358,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 107
   },
@@ -442,11 +442,63 @@
      "lines": [
       [
        "h",
-       "@@ -127,7 +127,8 @@"
+       "@@ -25,6 +25,7 @@"
       ],
       [
        "c",
+       "import io.unitycatalog.client.model.CreateFunctionRequest;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.FunctionParameterInfos;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.ListFunctionsResponse;"
+      ],
+      [
+       "a",
+       "import java.nio.file.Paths;"
+      ],
+      [
+       "c",
+       "import java.util.Arrays;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLine;"
+      ],
+      [
+       "c",
+       "import org.json.JSONObject;"
+      ],
+      [
+       "h",
+       "@@ -124,10 +125,12 @@"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "c",
+       "      return PythonInvoker.invokePython("
+      ],
+      [
+       "c",
+       "          functionsApi.getFunction(functionFullName, /* includeBrowse= */ false),"
+      ],
+      [
+       "d",
        "          \"etc/data/function/python_engine.py\","
+      ],
+      [
+       "a",
+       "          Paths.get(System.getProperty(\"user.dir\"), \"etc\", \"data\", \"function\", \"python_engine.py\")"
+      ],
+      [
+       "a",
+       "              .toString(),"
       ],
       [
        "c",
@@ -482,23 +534,23 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
-     "deletions": 1
+     "additions": 5,
+     "deletions": 2
     }
    ],
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T17:14:44Z",
-    "updated_at": "2026-11-14T17:15:02Z",
+    "last_push": "2026-11-14T18:12:17Z",
+    "updated_at": "2026-11-14T18:12:20Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 106
   },
@@ -2892,7 +2944,7 @@
     "review": "approved",
     "approved_by": [],
     "last_push": "2026-11-14T02:24:40Z",
-    "updated_at": "2026-11-14T11:12:33Z",
+    "updated_at": "2026-11-14T18:06:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -3212,16 +3264,6 @@
       "answered": true
      },
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-14T02:21:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#pullrequestreview-5900825951",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the follow-up. The column-0 comment, trailing newline, indented string and error-path changes all check out in scratch runs. One blocker remains: a malformed body can now return a wrong result. The four nits are inline. CI: the POSTGRES_18 \"All tests\" job failed on one server test, `SdkBrowseA…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-14T02:21:24Z",
@@ -3240,6 +3282,16 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
       "text": "[AI Assisted] Nit: `p.waitFor()` can throw InterruptedException. It now falls into the broad `catch (Exception e)`, which prints a stack trace, wraps it, and drops the interrupt flag. Could we add `catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new ApiException(\"Interrupted while invoking P…",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T02:21:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892348",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Nit: the new error paths have no test yet: a result that cannot be written as JSON (`return {a}`, expecting `TypeError`), a body with a `SyntaxError`, and a call with too few arguments, which would pin down that the existing `ApiException` is no longer wrapped. Could we add these as cases with `hasMessag…",
+      "answered": true
      }
     ],
     "stage": 5,
@@ -3249,7 +3301,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-14T02:26:46Z",
-    "updated_at": "2026-11-14T17:07:10Z",
+    "updated_at": "2026-11-14T18:08:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
