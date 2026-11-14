@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T05:16:35Z",
+ "generated_at": "2026-11-14T11:29:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28798,
-   "forks": 6607,
+   "stars": 28805,
+   "forks": 6608,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21601230,
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50512,
-   "forks": 20737,
+   "forks": 20736,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 698520592,
@@ -255,8 +255,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63227,
-   "forks": 13272,
+   "stars": 63242,
+   "forks": 13274,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 97401315,
@@ -284,7 +284,7 @@
     "CLI"
    ],
    "stars": 1502,
-   "forks": 263,
+   "forks": 264,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 487993966,
@@ -493,18 +493,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "its-amann",
+      "at": "2026-11-14T07:17:40Z",
+      "url": "https://github.com/mlflow/mlflow/pull/27773#issuecomment-6873687660",
+      "maintainer": false,
+      "path": null,
+      "text": "same gap is in the `@trace` stream wrappers in `mlflow/tracing/fluent.py`: both the sync and async loops only catch `Exception`, so cancelling a traced async generator (or ctrl+c mid stream) skips `_end_stream_span` and the span never gets ended [code] fixed this plus a test in this commit, you can just cherry pick it…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T04:44:08Z",
-    "updated_at": "2026-11-14T04:53:28Z",
+    "updated_at": "2026-11-14T07:17:40Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "last_comment": {
+     "who": "its-amann",
+     "at": "2026-11-14T07:17:40Z",
+     "maintainer": false
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "its-amann commented. Reply or update the PR"
    },
    "id": 100
   },
@@ -1413,6 +1428,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-14T10:55:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5903950708",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks, the points on keys, blank and non-string values, the message and the helper are addressed in bad3bab1. One blocker remains (NUL characters, inline). Please also correct the description for numbers (inline) and confirm the MySQL collation (inline). Follow-up: keys over 255 characters on the catalo…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:55:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199738",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] A key or value containing a NUL character passes parsing, and the insert then fails on PostgreSQL because text columns cannot store NUL. The error is not mapped, so the request returns a 500 and no function is created. On main the same request returned 200. Could `parseProperties` reject NUL characters i…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:55:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199740",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] Numbers are not stored as their exact JSON text. The reader parses floats as doubles, so `{\"amount\":0.1234567890123456789}` is stored as `\"0.12345678901234568\"`, and `{\"big\":1e400}` is stored as `\"Infinity\"`, which is not JSON. The description says non-string values are stored as their JSON text. Could t…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:55:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199741",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] The duplicate-key check compares Java strings, but the unique constraint on `uc_properties` uses the database collation. The MySQL baseline sets no collation, so the server default applies, which is case-insensitive in MySQL 8. `{\"Tier\":\"a\",\"tier\":\"b\"}` would pass this check and then fail at flush with a…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:55:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199744",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] nit: `String.length()` counts UTF-16 units, so a key of 128 emoji (256 units) is rejected, although `varchar(255)` counts characters and the key fits. `codePointCount` would match the column.",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-14T00:15:02Z",
@@ -1421,46 +1486,6 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] Main accepts all of these creates and returns 200, and this PR turns several of them into 400s. Some of them can keep succeeding without losing anything: - An empty string or whitespace-only value should be treated as no properties, like `null`. It carries no data, so it should return 200 and create the…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:15:02Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131771",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] After the change above, this message covers duplicate keys, trailing text, text that is not JSON, and a top-level value that is not an object. \"Values are all strings\" is not the reason for any of them. Could it name the rule, for example \"must be a single JSON object with unique keys\" (with \"string valu…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:15:02Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131781",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] The bulk load for the function list is intentional. `attachProperties` takes a single entity ID, so it cannot load a page in one query, and the table list already uses the same pattern (`TableRepository.java:1175-1197`). Could the repeated `toPropertiesJson(PropertyDAO.toMap(...))` in `getFunction` and `…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-14T00:15:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5899888094",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] The fix stores function properties as `uc_properties` rows in the create transaction, returns them on get and list, and removes them on delete. The tests check the stored rows, which is the right test. Two changes are needed before merge: a key over 255 characters should return `INVALID_ARGUMENT` instead…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:15:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131756",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] A property key longer than 255 characters fails the insert into `uc_properties.property_key` and returns a 500, and no function is created. On main the same request returned 200, so this turns a success into a server error. Could `parseProperties` reject keys over 255 characters with `INVALID_ARGUMENT`,…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1468,23 +1493,23 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T01:05:49Z",
-    "updated_at": "2026-11-14T01:29:27Z",
+    "updated_at": "2026-11-14T10:55:17Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 96
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "List partition columns last in the schema of non-Delta tables",
    "date": "2026-11-13",
    "created_at": "2026-11-13T19:43:49Z",
-   "merged_at": null,
+   "merged_at": "2026-11-14",
    "reported": true,
    "pr": {
     "number": 2232,
@@ -1630,6 +1655,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-14T10:54:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#pullrequestreview-5903948228",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Follow-up only: the approval above stands.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:54:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4573197622",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] This paragraph sits inside the HTML comment that starts at line 781 and ends at line 971, so the published page will not show it. Could we move it outside that block, for example near the partitioned CREATE TABLE material above line 772?",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-14T02:11:16Z",
@@ -1668,52 +1713,30 @@
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] This reorders every format except Delta, but the description and docs only cover file sources. ICEBERG is in the DataSourceFormat enum, and loadTable sends any non-view table here, so an ICEBERG-format table would also get its DESCRIBE order changed. Could the reorder be limited to file-source formats (P…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:16:45Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4569739023",
-      "maintainer": true,
-      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/ExternalTablePartitionColumnOrderTest.java",
-      "text": "[AI Assisted] This adds a new class with about 17 server and session starts per job, and the reorder does not depend on the format. Could the Parquet layouts fold into ParquetExternalTableReadWriteTest.testLoadTableKeepsColumnDefaultValue (line 72)? Keep the partition-in-middle case, which covers DESCRIBE and SELECT o…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:16:45Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2232#discussion_r4569739029",
-      "maintainer": true,
-      "path": "docs/integrations/unity-catalog-spark.md",
-      "text": "[AI Assisted] Nit: this paragraph lists Avro and text, but no test loads those formats. Since the reorder does not depend on the format, either say every non-Delta table, or leave the list as is and keep the claim tied to the code path.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
-    "approved_by": [
-     "yili-db"
-    ],
+    "approved_by": [],
     "last_push": "2026-11-14T02:24:40Z",
-    "updated_at": "2026-11-14T02:45:44Z",
+    "updated_at": "2026-11-14T11:12:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 95
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Run function bodies with real newlines in function call and fail on errors",
    "date": "2026-11-13",
    "created_at": "2026-11-13T19:43:46Z",
-   "merged_at": null,
+   "merged_at": "2026-11-14",
    "reported": true,
    "pr": {
     "number": 2231,
@@ -1987,6 +2010,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-14T11:02:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#pullrequestreview-5903974998",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the fix. The malformed-body case is verified, and the remaining items are non-blocking follow-ups, two of them inline. Before merge, please rerun the cancelled \"All tests (Spark 4.0.0, Delta 4.4.1)\" job. It looks like the six-hour job limit, not a test failure, but the run has not completed cl…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T11:02:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4573222110",
+      "maintainer": true,
+      "path": "docs/usage/functions.md",
+      "text": "[AI Assisted] Nit: this says the message ends with the Python error, but the top-level message is `Failed to execute function <name>`, with the Python error in the cause chain. Could the docs say that, or could the CLI put the cause message in its message?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T11:02:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4573222115",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] Nit: an empty or comment-only body fails with `ValueError: empty body on FunctionDef`, which names an internal detail. Could we raise a clear error when the parsed body is empty, and add a row to `failingRoutineDefinitions`?",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-14T02:21:24Z",
@@ -2015,60 +2068,32 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
       "text": "[AI Assisted] Nit: `p.waitFor()` can throw InterruptedException. It now falls into the broad `catch (Exception e)`, which prints a stack trace, wraps it, and drops the interrupt flag. Could we add `catch (InterruptedException e) { Thread.currentThread().interrupt(); throw new ApiException(\"Interrupted while invoking P…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T02:21:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892348",
-      "maintainer": true,
-      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
-      "text": "[AI Assisted] Nit: the new error paths have no test yet: a result that cannot be written as JSON (`return {a}`, expecting `TypeError`), a body with a `SyntaxError`, and a call with too few arguments, which would pin down that the existing `ApiException` is no longer wrapped. Could we add these as cases with `hasMessag…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T02:21:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892351",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
-      "text": "[AI Assisted] Nit: when the script exits non-zero with empty stderr, the message ends with a dangling `: `. Could the suffix be left out when stderr is blank?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T02:21:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2231#discussion_r4570892355",
-      "maintainer": true,
-      "path": "docs/usage/functions.md",
-      "text": "[AI Assisted] Nit: the engine ignores line breaks at the end of the body, so \"is split only at those line breaks\" is not exact. Could it say \"a real line break other than at its end\"? Also, \"reports the Python error\" reads as if the message is the output. The CLI prefixes it with `Python function failed with exit code…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-14T02:26:46Z",
-    "updated_at": "2026-11-14T02:53:29Z",
+    "updated_at": "2026-11-14T11:02:56Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 94
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "List every page in list commands",
    "date": "2026-11-13",
    "created_at": "2026-11-13T19:43:42Z",
-   "merged_at": null,
+   "merged_at": "2026-11-14",
    "reported": true,
    "pr": {
     "number": 2230,
@@ -2342,6 +2367,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-14T10:56:38Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#pullrequestreview-5903954365",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the follow-ups. The unscoped registered_model test, the --max_results help text and the comment on the 100 all look right, and the repeated-token guard and PaginationTest from earlier are in place. Non-blocking, optional: a short comment in Pagination.java on the requestedTokens seeding with a…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-14T02:14:23Z",
@@ -2390,29 +2425,21 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
       "text": "[AI Assisted] Could we add a plain `PaginationTest` (no server) with a fake PageFetcher that records the (maxResults, pageToken) pairs and the number of fetches? It would cover stopping exactly at the limit with no extra fetch, a negative maxResults passed through, an empty next token in the middle of a listing, and a…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-13T23:08:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2230#discussion_r4569684206",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/Pagination.java",
-      "text": "[AI Assisted] Nit: could the javadoc use `@param` tags for json, fetchPage, getItems and getNextPageToken, plus an `@return` and `@throws` tag, instead of prose?",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-14T02:28:42Z",
-    "updated_at": "2026-11-14T02:48:30Z",
+    "updated_at": "2026-11-14T10:57:48Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 93
   },
@@ -2699,62 +2726,62 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5900181963",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5903964628",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Finding 2 changes the package layout, so please rework that first. The Delta run should generate only `api` and `models` under `unitycatalog.client.delta`, sharing the UC `ApiClient`, with one template override for the model lookup. Once that is in, the subtype `from_dict` blocker, the README example and…",
-      "answered": true
+      "text": "[AI Assisted] Option D landed and the earlier findings are addressed. One blocker remains: the README `access_token` example does not send a token, because the specs declare no security scheme. Use an explicit `Authorization` header in the example and note. The DeltaCommit precedence test, the import-rewrite residual…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372700",
-      "maintainer": true,
-      "path": "clients/python/src/unitycatalog/delta/internal/serde/delta_data_type_module.py",
-      "text": "[AI Assisted] blocker: The subtype patches ignore `cls` and always return `_parse_type(obj)`, so `DeltaMapType.from_dict({\"type\": \"struct\", \"fields\": []})` returns a `DeltaStructType`, and `DeltaStructType.from_dict(\"long\")` returns a `DeltaPrimitiveType` instead of failing. Only `DeltaStructType` is reached from gene…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372705",
-      "maintainer": true,
-      "path": "build.sbt",
-      "text": "[AI Assisted] blocker: This adds a second `ApiClient` and `Configuration` for Python. Java has one client: `build.sbt` generates `delta.yaml` into the same `invokerPackage` as `all.yaml`, and the Delta APIs use the shared client (`ApiClientBuilder.java:181` registers the Delta serde on it, and `DeltaBaseTableCRUDTestE…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372713",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211981",
       "maintainer": true,
       "path": "clients/python/build/README.md",
-      "text": "[AI Assisted] The Delta section should show one client. Suggested replacement: [code] Use the same `ApiClient` for UC and Delta calls, so no second configuration is needed. The example should say where the token comes from, the same way the UC quickstart does.",
-      "answered": true
+      "text": "[AI Assisted] blocker: `access_token` has no effect here, and the example and note came from our earlier suggestion, so this one is on us. Neither `api/all.yaml` nor `api/delta.yaml` declares `securitySchemes` or a `security` block, so the generated operations pass an empty `auth_settings`, and `update_params_for_auth…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372719",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211986",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] normal: The rewrite is needed, since the generator hardcodes `{{packageName}}.models` in `model_generic.mustache` (lines 21 and 257). But a replace that matches nothing passes silently. Could the step fail if any file under `unitycatalog/client/delta` still contains `unitycatalog.client.models.` or `from…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211988",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "[AI Assisted] normal: The DeltaCommit split is guarded only for nested fields. Could we add a test that every response type the Delta APIs return resolves to a Delta model, not a UC one, so a future top-level Delta response named `DeltaCommit` fails in CI? The precedence comment in `_lookup_model` would then match wha…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211992",
       "maintainer": true,
       "path": "build.sbt",
-      "text": "[AI Assisted] nit: `supportingFiles` matches the destination file name, so `\"__init__.py\"` also emits the `api/` and `models/` inits of the Delta package. The models one is what `patchDeltaDataTypeModule` needs. This run also writes `unitycatalog/client/__init__.py`, so the run order matters: the `all.yaml` run has to…",
-      "answered": true
+      "text": "[AI Assisted] nit: The generator writes the package `__init__.py` only to the client package (`PythonClientCodegen` lines 289-291 and 308), so `unitycatalog/client/delta/__init__.py` is not generated and `delta` is an implicit namespace package. It imports fine, but an empty file from the post-build step would make it…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T00:53:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4570372723",
+      "at": "2026-11-14T10:59:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211997",
       "maintainer": true,
-      "path": "clients/python/tests/conftest.py",
-      "text": "[AI Assisted] nit: With one client, this fixture can wrap the existing `api_client` fixture (`DeltaTablesApi(api_client)`) instead of building a second client. The `rest.mustache` override exists so the client can be built outside a running loop (per its header), and nothing here checks that. A plain test that only co…",
-      "answered": true
+      "path": "clients/python/build/templates/api_client.mustache",
+      "text": "[AI Assisted] nit: Name both packages in this message, for example \"no model named '{}' in unitycatalog.client.models or unitycatalog.client.delta.models\". The `relocateDeltaImports` scaladoc should also say that the step fails the build when `client/delta` is missing, and that it runs before the serde module is copie…",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -2762,12 +2789,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T01:46:48Z",
-    "updated_at": "2026-11-14T02:23:46Z",
+    "updated_at": "2026-11-14T10:59:25Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 92
   },
@@ -3053,18 +3080,31 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "Shahzeb-DataEngineer",
+      "at": "2026-11-14T07:22:53Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/5065#pullrequestreview-5902629166",
+      "maintainer": false,
+      "path": null,
+      "text": "The fix matches the bug in #5064. A predicate-less overwrite recorded no read predicate, so `read_whole_table()` returned false and the conflict checker never looked at the concurrent append. `crates/core/src/protocol/mod.rs` now returns true for the two full-replace cases: [code] That lines up with Delta Spark record…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "community approved",
+    "approved_by": [
+     "Shahzeb-DataEngineer"
+    ],
     "last_push": "2026-11-13T18:11:22Z",
-    "updated_at": "2026-11-13T18:12:17Z",
+    "updated_at": "2026-11-14T07:22:53Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
    },
    "id": 91
   },
@@ -6150,11 +6190,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Reject removing or changing reserved properties of managed tables in Delta REST updateTable",
    "date": "2026-11-11",
    "created_at": "2026-11-11T21:05:34Z",
-   "merged_at": null,
+   "merged_at": "2026-11-14",
    "reported": true,
    "pr": {
     "number": 2185,
@@ -6428,6 +6468,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-14T10:42:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5903893615",
+      "maintainer": true,
+      "path": null,
+      "text": "Approving at 6bc90c92. The description-only change addresses TD's comment 1: the yaml, the regenerated delta-docs and the spec rows agree, and the examples are marked as examples.",
+      "answered": true
+     },
+     {
       "kind": "review changes requested",
       "who": "yili-db",
       "at": "2026-11-13T22:32:14Z",
@@ -6458,16 +6508,6 @@
       "answered": true
      },
      {
-      "kind": "review approved",
-      "who": "yili-db",
-      "at": "2026-11-12T06:44:36Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2185#pullrequestreview-5870274912",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Approving at 214def49. The round-2 and round-3 blockers are addressed: the no-op resend of unchanged contract keys, the removal branch using the keys argument, and the early taken-version check ordering for retries. The remaining notes are non-blocking.",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-12T01:32:46Z",
@@ -6488,19 +6528,20 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "changes requested",
+    "review": "approved",
     "approved_by": [
+     "yili-db",
      "tdas"
     ],
     "last_push": "2026-11-14T02:59:17Z",
-    "updated_at": "2026-11-14T03:14:07Z",
+    "updated_at": "2026-11-14T10:53:00Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Requested changes are pushed. Waiting for yili-db to look again"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 78
   },

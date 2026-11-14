@@ -287,7 +287,9 @@
   "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/5065": {
-  "approved_by": [],
+  "approved_by": [
+   "Shahzeb-DataEngineer"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
@@ -491,6 +493,33 @@
   "last_comment_who": null,
   "status": "closed",
   "waiting_on": "nobody"
+ },
+ "https://github.com/mlflow/mlflow/pull/27771": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mlflow/mlflow/pull/27772": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mlflow/mlflow/pull/27773": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": "its-amann@2026-11-14T07:17:40Z",
+  "last_comment_who": "its-amann",
+  "status": "review",
+  "waiting_on": "you"
  },
  "https://github.com/pandas-dev/pandas/pull/70515": {
   "approved_by": [
@@ -783,14 +812,15 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2185": {
   "approved_by": [
-   "tdas"
+   "tdas",
+   "yili-db"
   ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2186": {
   "approved_by": [
@@ -894,34 +924,38 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2230": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2231": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2232": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2233": {
   "approved_by": [],
@@ -930,7 +964,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [],
