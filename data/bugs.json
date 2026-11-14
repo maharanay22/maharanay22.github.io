@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T14:21:35Z",
+ "generated_at": "2026-11-14T17:16:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3578,
+   "stars": 3579,
    "forks": 698,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28806,
+   "stars": 28810,
    "forks": 6608,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50514,
-   "forks": 20736,
+   "stars": 50515,
+   "forks": 20738,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 698520592,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7295,
+   "stars": 7299,
    "forks": 937,
    "package": "pylance",
    "impact": null,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9077,
+   "stars": 9078,
    "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63251,
-   "forks": 13277,
+   "stars": 63253,
+   "forks": 13276,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 97401315,
@@ -331,6 +331,145 @@
  "items": [
   {
    "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Show the Python error in function call failures and reject empty function bodies",
+   "date": "2026-11-14",
+   "created_at": "2026-11-14T17:15:01Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2237,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2237"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "low",
+   "release": null,
+   "files": [
+    {
+     "path": "etc/data/function/python_engine.py",
+     "lines": [
+      [
+       "h",
+       "@@ -27,7 +27,10 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def define_function(func_name, routine_body, param_names):"
+      ],
+      [
+       "c",
+       "    func_def = ast.parse(f\"def {func_name}({', '.join(param_names)}):\\n    pass\")"
+      ],
+      [
+       "d",
+       "    func_def.body[0].body = parse_body(routine_body)"
+      ],
+      [
+       "a",
+       "    body = parse_body(routine_body)"
+      ],
+      [
+       "a",
+       "    if not body:"
+      ],
+      [
+       "a",
+       "        raise SyntaxError(\"the routine definition has no statements\")"
+      ],
+      [
+       "a",
+       "    func_def.body[0].body = body"
+      ],
+      [
+       "c",
+       "    exec(compile(func_def, '<routine_definition>', 'exec'), globals())"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def execute_function(func_name, routine_body, params_str, args_str):"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/FunctionCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -127,7 +127,8 @@"
+      ],
+      [
+       "c",
+       "          \"etc/data/function/python_engine.py\","
+      ],
+      [
+       "c",
+       "          Arrays.stream(args.split(\",\")).map(String::trim).toArray(String[]::new));"
+      ],
+      [
+       "c",
+       "    } catch (Exception e) {"
+      ],
+      [
+       "d",
+       "      throw new CliException(\"Failed to execute function \" + functionFullName, e);"
+      ],
+      [
+       "a",
+       "      throw new CliException("
+      ],
+      [
+       "a",
+       "          \"Failed to execute function \" + functionFullName + \": \" + e.getMessage(), e);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-14T17:14:44Z",
+    "updated_at": "2026-11-14T17:15:02Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 106
+  },
+  {
+   "kind": "fix",
    "repo": "lance-format/lance",
    "status": "review",
    "title": "Write Enum fields of Pydantic models",
@@ -344,7 +483,7 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": "medium",
    "release": null,
    "files": [
     {
@@ -478,17 +617,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T04:41:55Z",
-    "updated_at": "2026-11-14T14:20:17Z",
+    "updated_at": "2026-11-14T14:45:36Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 105
   },
@@ -507,7 +646,7 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": "medium",
    "release": null,
    "files": [
     {
@@ -578,16 +717,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T04:18:30Z",
-    "updated_at": "2026-11-14T14:20:12Z",
+    "updated_at": "2026-11-14T14:44:34Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 104
   },
@@ -606,7 +745,7 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": "medium",
    "release": null,
    "files": [
     {
@@ -740,17 +879,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T06:36:15Z",
-    "updated_at": "2026-11-14T14:20:01Z",
+    "updated_at": "2026-11-14T14:34:22Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 103
   },
@@ -769,7 +908,7 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": "high",
    "release": null,
    "files": [
     {
@@ -904,16 +1043,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T04:39:07Z",
-    "updated_at": "2026-11-14T14:19:56Z",
+    "updated_at": "2026-11-14T14:26:35Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 102
   },
@@ -932,7 +1071,7 @@
    },
    "issue": null,
    "proof": null,
-   "impact": null,
+   "impact": "high",
    "release": null,
    "files": [
     {
@@ -1195,16 +1334,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T05:38:21Z",
-    "updated_at": "2026-11-14T14:19:54Z",
+    "updated_at": "2026-11-14T14:39:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 101
   },
@@ -1397,6 +1536,98 @@
      "truncated": false,
      "additions": 1,
      "deletions": 1
+    },
+    {
+     "path": "mlflow/tracing/fluent.py",
+     "lines": [
+      [
+       "h",
+       "@@ -447,7 +447,7 @@"
+      ],
+      [
+       "c",
+       "        inputs: dict[str, Any] | None = None,"
+      ],
+      [
+       "c",
+       "        outputs: list[Any] | None = None,"
+      ],
+      [
+       "c",
+       "        output_reducer: Callable[[list[Any]], Any] | None = None,"
+      ],
+      [
+       "d",
+       "        error: Exception | None = None,"
+      ],
+      [
+       "a",
+       "        error: BaseException | None = None,"
+      ],
+      [
+       "c",
+       "    ):"
+      ],
+      [
+       "c",
+       "        if error:"
+      ],
+      [
+       "c",
+       "            span.add_event(SpanEvent.from_exception(error))"
+      ],
+      [
+       "h",
+       "@@ -490,7 +490,7 @@"
+      ],
+      [
+       "c",
+       "                        value = next(generator)"
+      ],
+      [
+       "c",
+       "                except StopIteration:"
+      ],
+      [
+       "c",
+       "                    break"
+      ],
+      [
+       "d",
+       "                except Exception as e:"
+      ],
+      [
+       "a",
+       "                except BaseException as e:"
+      ],
+      [
+       "c",
+       "                    _end_stream_span(span, error=e)"
+      ],
+      [
+       "c",
+       "                    raise e"
+      ],
+      [
+       "c",
+       "                else:"
+      ],
+      [
+       "h",
+       "@@ -516,7 +516,7 @@"
+      ],
+      [
+       "c",
+       "                        value = await generator.__anext__()"
+      ],
+      [
+       "c",
+       "                except StopAsyncIteration:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 3,
+     "deletions": 3
     }
    ],
    "track": {
@@ -1409,24 +1640,24 @@
       "maintainer": false,
       "path": null,
       "text": "same gap is in the `@trace` stream wrappers in `mlflow/tracing/fluent.py`: both the sync and async loops only catch `Exception`, so cancelling a traced async generator (or ctrl+c mid stream) skips `_end_stream_span` and the span never gets ended [code] fixed this plus a test in this commit, you can just cherry pick it…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T04:44:08Z",
-    "updated_at": "2026-11-14T07:17:40Z",
+    "last_push": "2026-11-14T14:26:12Z",
+    "updated_at": "2026-11-14T14:29:42Z",
     "conflicts": false,
     "last_comment": {
      "who": "its-amann",
      "at": "2026-11-14T07:17:40Z",
      "maintainer": false
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "its-amann commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 100
   },
@@ -2072,7 +2303,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,22 +1,31 @@"
+       "@@ -1,25 +1,37 @@"
       ],
       [
        "c",
@@ -2101,6 +2332,10 @@
       [
        "a",
        "import com.fasterxml.jackson.databind.ObjectReader;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.databind.cfg.JsonNodeFeature;"
       ],
       [
        "c",
@@ -2185,14 +2420,10 @@
       [
        "c",
        "import java.util.Optional;"
-      ],
-      [
-       "a",
-       "import java.util.TreeMap;"
       ]
      ],
      "truncated": true,
-     "additions": 92,
+     "additions": 141,
      "deletions": 6
     },
     {
@@ -2342,7 +2573,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks, the points on keys, blank and non-string values, the message and the helper are addressed in bad3bab1. One blocker remains (NUL characters, inline). Please also correct the description for numbers (inline) and confirm the MySQL collation (inline). Follow-up: keys over 255 characters on the catalo…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2352,7 +2583,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] A key or value containing a NUL character passes parsing, and the insert then fails on PostgreSQL because text columns cannot store NUL. The error is not mapped, so the request returns a 500 and no function is created. On main the same request returned 200. Could `parseProperties` reject NUL characters i…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2362,7 +2593,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] Numbers are not stored as their exact JSON text. The reader parses floats as doubles, so `{\"amount\":0.1234567890123456789}` is stored as `\"0.12345678901234568\"`, and `{\"big\":1e400}` is stored as `\"Infinity\"`, which is not JSON. The description says non-string values are stored as their JSON text. Could t…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2372,7 +2603,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] The duplicate-key check compares Java strings, but the unique constraint on `uc_properties` uses the database collation. The MySQL baseline sets no collation, so the server default applies, which is case-insensitive in MySQL 8. `{\"Tier\":\"a\",\"tier\":\"b\"}` would pass this check and then fail at flush with a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2382,7 +2613,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] nit: `String.length()` counts UTF-16 units, so a key of 128 emoji (256 units) is rejected, although `varchar(255)` counts characters and the key fits. `codePointCount` would match the column.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2395,17 +2626,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T01:05:49Z",
-    "updated_at": "2026-11-14T10:55:17Z",
+    "last_push": "2026-11-14T14:40:48Z",
+    "updated_at": "2026-11-14T16:40:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
@@ -2984,7 +3215,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-14T02:26:46Z",
-    "updated_at": "2026-11-14T11:02:56Z",
+    "updated_at": "2026-11-14T17:07:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -3504,7 +3735,7 @@
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,827 @@"
+       "@@ -0,0 +1,830 @@"
       ],
       [
        "a",
@@ -3624,7 +3855,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 827,
+     "additions": 830,
      "deletions": 0
     }
    ],
@@ -3638,7 +3869,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Option D landed and the earlier findings are addressed. One blocker remains: the README `access_token` example does not send a token, because the specs declare no security scheme. Use an explicit `Authorization` header in the example and note. The DeltaCommit precedence test, the import-rewrite residual…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3648,7 +3879,7 @@
       "maintainer": true,
       "path": "clients/python/build/README.md",
       "text": "[AI Assisted] blocker: `access_token` has no effect here, and the example and note came from our earlier suggestion, so this one is on us. Neither `api/all.yaml` nor `api/delta.yaml` declares `securitySchemes` or a `security` block, so the generated operations pass an empty `auth_settings`, and `update_params_for_auth…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3658,7 +3889,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] normal: The rewrite is needed, since the generator hardcodes `{{packageName}}.models` in `model_generic.mustache` (lines 21 and 257). But a replace that matches nothing passes silently. Could the step fail if any file under `unitycatalog/client/delta` still contains `unitycatalog.client.models.` or `from…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3668,7 +3899,7 @@
       "maintainer": true,
       "path": "clients/python/tests/test_api_client.py",
       "text": "[AI Assisted] normal: The DeltaCommit split is guarded only for nested fields. Could we add a test that every response type the Delta APIs return resolves to a Delta model, not a UC one, so a future top-level Delta response named `DeltaCommit` fails in CI? The precedence comment in `_lookup_model` would then match wha…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3678,7 +3909,7 @@
       "maintainer": true,
       "path": "build.sbt",
       "text": "[AI Assisted] nit: The generator writes the package `__init__.py` only to the client package (`PythonClientCodegen` lines 289-291 and 308), so `unitycatalog/client/delta/__init__.py` is not generated and `delta` is an implicit namespace package. It imports fine, but an empty file from the post-build step would make it…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3688,20 +3919,20 @@
       "maintainer": true,
       "path": "clients/python/build/templates/api_client.mustache",
       "text": "[AI Assisted] nit: Name both packages in this message, for example \"no model named '{}' in unitycatalog.client.models or unitycatalog.client.delta.models\". The `relocateDeltaImports` scaladoc should also say that the step fails the build when `client/delta` is missing, and that it runs before the serde module is copie…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T01:46:48Z",
-    "updated_at": "2026-11-14T10:59:25Z",
+    "last_push": "2026-11-14T16:54:47Z",
+    "updated_at": "2026-11-14T17:13:59Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 92
   },
