@@ -605,6 +605,7 @@
     "lance-format/lance#11080": "high",
     "lance-format/lance#11081": "medium",
     "lance-format/lance#11082": "medium",
-    "lance-format/lance#11083": "medium"
+    "lance-format/lance#11083": "medium",
+    "unitycatalog/unitycatalog#2237": "low"
   }
 }
