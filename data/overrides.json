@@ -133,6 +133,18 @@
         "Connectors"
       ],
       "impact": "In review: PostgreSQL, SQL Server and Databricks connector fixes for exact integers with NULLs, connection-string escaping and native queries."
+    },
+    "lance-format/lance": {
+      "name": "Lance",
+      "icon": "🏹",
+      "category": "lakehouse storage",
+      "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
+      "tags": [
+        "Rust",
+        "Python",
+        "AI data"
+      ],
+      "package": "pylance"
     }
   },
   "proofs": {
