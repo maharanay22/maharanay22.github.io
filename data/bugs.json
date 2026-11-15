@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T21:16:21Z",
+ "generated_at": "2026-11-15T22:02:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50533,
-   "forks": 20744,
+   "stars": 50534,
+   "forks": 20743,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 693710064,
@@ -172,7 +172,7 @@
     "AI data"
    ],
    "stars": 7316,
-   "forks": 942,
+   "forks": 943,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4280266,
@@ -329,6 +329,269 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Check struct fields before parsing, guard the generator run order, and test Delta request serialization",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T22:00:26Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2248,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2248"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "build.sbt",
+     "lines": [
+      [
+       "h",
+       "@@ -330,7 +330,7 @@"
+      ],
+      [
+       "c",
+       "          specs = Seq("
+      ],
+      [
+       "c",
+       "            // The delta.yaml run goes first because its \"__init__.py\" filter matches by file name: besides the"
+      ],
+      [
+       "c",
+       "            // delta api/ and models/ inits (patchDeltaDataTypeModule needs the models one), it also writes"
+      ],
+      [
+       "d",
+       "            // unitycatalog/client/__init__.py, which the all.yaml run below must overwrite."
+      ],
+      [
+       "a",
+       "            // unitycatalog/client/__init__.py, which the all.yaml run below must overwrite (checked after the build)."
+      ],
+      [
+       "c",
+       "            OpenApiSpec("
+      ],
+      [
+       "c",
+       "              inputSpec = (baseDirectory.value.getParentFile.getParentFile / \"api\" / \"delta.yaml\").getAbsolutePath,"
+      ],
+      [
+       "c",
+       "              packageName = s\"$artifactNamePrefix.client\","
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
+     "lines": [
+      [
+       "h",
+       "@@ -108,8 +108,10 @@"
+      ],
+      [
+       "c",
+       "def _patched_struct_from_dict(cls, obj):"
+      ],
+      [
+       "c",
+       "    if obj is None:"
+      ],
+      [
+       "c",
+       "        return None"
+      ],
+      [
+       "a",
+       "    if not isinstance(obj, dict) or not isinstance(obj.get(\"fields\"), list):"
+      ],
+      [
+       "a",
+       "        raise ValueError(\"Expected a struct type with 'fields', got: {}\".format(obj))"
+      ],
+      [
+       "c",
+       "    parsed = _parse_type(obj)"
+      ],
+      [
+       "d",
+       "    if not isinstance(obj, dict) or \"fields\" not in obj or not isinstance(parsed, DeltaStructType):"
+      ],
+      [
+       "a",
+       "    if not isinstance(parsed, DeltaStructType):"
+      ],
+      [
+       "c",
+       "        raise ValueError(\"Expected a struct type with 'fields', got: {}\".format(obj))"
+      ],
+      [
+       "c",
+       "    return parsed"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    },
+    {
+     "path": "project/PythonClientPostBuild.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -106,13 +106,35 @@"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    moveGeneratedUnityCatalog(log, openApiOutputDir)"
+      ],
+      [
+       "a",
+       "    checkClientPackageInit(openApiOutputDir)"
+      ],
+      [
+       "c",
+       "    relocateDeltaImports(log, openApiOutputDir)"
+      ],
+      [
+       "c",
+       "    patchDeltaDataTypeModule(log, baseDir, openApiOutputDir)"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Fails the build unless unitycatalog/client/__init__.py is the one from the all.yaml run. The delta.yaml"
+      ],
+      [
+       "a",
+       "   * run writes this file too, with imports from the bare delta package, so it has to run first. Both versions"
+      ],
+      [
+       "a",
+       "   * export ApiClient, so the check looks for the UC API imports and for no bare delta import instead."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  private def checkClientPackageInit(openApiOutputDir: String): Unit = {"
+      ],
+      [
+       "a",
+       "    val clientInit = Paths.get(openApiOutputDir, \"src\", \"unitycatalog\", \"client\", \"__init__.py\")"
+      ],
+      [
+       "a",
+       "    val content ="
+      ],
+      [
+       "a",
+       "      if (Files.exists(clientInit)) new String(Files.readAllBytes(clientInit), StandardCharsets.UTF_8) else \"\""
+      ],
+      [
+       "a",
+       "    val fromAllYaml = content.contains(\"from unitycatalog.client.api.\") &&"
+      ],
+      [
+       "a",
+       "      content.contains(\"from unitycatalog.client.api_client import ApiClient\") &&"
+      ],
+      [
+       "a",
+       "      bareDeltaImport.findFirstIn(content).isEmpty"
+      ],
+      [
+       "a",
+       "    if (!fromAllYaml) {"
+      ],
+      [
+       "a",
+       "      sys.error("
+      ],
+      [
+       "a",
+       "        s\"$clientInit is not the one from the all.yaml run. The all.yaml run in pythonClient/generate must \" +"
+      ],
+      [
+       "a",
+       "          \"run last, after the delta.yaml run.\")"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  private val bareDeltaImport = \"\"\"(?m)^\\s*(from|import)\\s+delta\\.\"\"\".r"
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 23,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T22:00:07Z",
+    "updated_at": "2026-11-15T22:00:27Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 117
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -5903,11 +6166,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Make the generated unitycatalog.delta package importable",
    "date": "2026-11-13",
    "created_at": "2026-11-13T19:30:22Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2229,
@@ -6181,6 +6444,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T21:27:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5913011947",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Metadata fix and tests look right. The round-trip coverage at three nesting levels was what I wanted, and I generated the client and ran its tests at this head (53 passed). Remaining items are follow-ups: - Release note: say that `unitycatalog.delta.models` is removed with no alias, not only moved. - A r…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T21:27:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4580310642",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] nit: The run order is enforced only by this comment. A post-build assertion that `unitycatalog/client/__init__.py` exports `ApiClient` would fail the build if the specs are reordered, instead of relying on the import tests.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T21:27:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4580310647",
+      "maintainer": true,
+      "path": "clients/python/build/templates/api_client.mustache",
+      "text": "[AI Assisted] followup: This copy must be re-synced from the 7.9.0 template whenever the generator is upgraded. Could the #2026 upgrade checklist name this file as well as `rest.mustache`?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T21:27:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4580310638",
+      "maintainer": true,
+      "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
+      "text": "[AI Assisted] nit: `_parse_type(obj)` runs before the `fields` check, so `{\"type\": \"struct\", \"fields\": null}` raises `TypeError` from `_parse_type` rather than this `ValueError`. Could we validate `fields` as a list before parsing, and add that input to `test_table_columns_rejects_non_struct`?",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-15T04:28:47Z",
@@ -6199,59 +6502,21 @@
       "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
       "text": "[AI Assisted] blocker: The defect is in `_parse_field` at line 66, which this function calls; line 66 is outside this PR diff, so the comment sits here. `_parse_field` passes the raw metadata dict to the `DeltaStructField` constructor, so pydantic validates it as a `DeltaStructFieldMetadata` and drops every key that i…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T04:28:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016135",
-      "maintainer": true,
-      "path": "project/PythonClientPostBuild.scala",
-      "text": "[AI Assisted] nit: Anchor both patterns to import lines, for example `(?m)^\\s*(from|import)\\s+unitycatalog\\.client\\.models\\b`, so a docstring that mentions the UC models does not fail the build with a misleading message.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T04:28:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016136",
-      "maintainer": true,
-      "path": "clients/python/build/templates/api_client.mustache",
-      "text": "[AI Assisted] nit: `import {{modelPackage}}` is no longer used, since the lookup uses `importlib`. Drop it, and link or drop the upstream TODO on line 62 of this template.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T04:28:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016138",
-      "maintainer": true,
-      "path": "clients/python/build/templates/api_client.mustache",
-      "text": "[AI Assisted] nit: This comment names `test_api_client.py`. A template comment should not name another file; say what the test guarantees instead.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T04:28:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016141",
-      "maintainer": true,
-      "path": "clients/python/tests/test_api_client.py",
-      "text": "[AI Assisted] nit: Add a test that an unknown name raises `AttributeError` from `_lookup_model`.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T04:36:14Z",
-    "updated_at": "2026-11-15T08:42:28Z",
+    "updated_at": "2026-11-15T22:00:40Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 92
   },
@@ -13759,7 +14024,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-08T23:56:39Z",
+    "updated_at": "2026-11-15T22:00:42Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
