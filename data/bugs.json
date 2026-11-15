@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T16:34:15Z",
+ "generated_at": "2026-11-15T16:38:08Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,169 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Clean up function call stderr files best effort and cover the else fallback and multi-byte cuts",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T16:36:35Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2247,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2247"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+     "lines": [
+      [
+       "h",
+       "@@ -79,7 +79,7 @@"
+      ],
+      [
+       "c",
+       "      try {"
+      ],
+      [
+       "c",
+       "        return runScript(argsList, errorOutput);"
+      ],
+      [
+       "c",
+       "      } finally {"
+      ],
+      [
+       "d",
+       "        Files.deleteIfExists(errorOutput);"
+      ],
+      [
+       "a",
+       "        deleteQuietly(errorOutput);"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "    } catch (ApiException e) {"
+      ],
+      [
+       "c",
+       "      throw e;"
+      ],
+      [
+       "h",
+       "@@ -121,8 +121,9 @@"
+      ],
+      [
+       "c",
+       "  /** Reads the last MAX_ERROR_OUTPUT_BYTES of the file, with \"...\" in front if it is longer. */"
+      ],
+      [
+       "c",
+       "  private static String readEnd(Path file) throws IOException {"
+      ],
+      [
+       "c",
+       "    try (RandomAccessFile in = new RandomAccessFile(file.toFile(), \"r\")) {"
+      ],
+      [
+       "d",
+       "      long start = Math.max(0, in.length() - MAX_ERROR_OUTPUT_BYTES);"
+      ],
+      [
+       "d",
+       "      byte[] bytes = new byte[(int) (in.length() - start)];"
+      ],
+      [
+       "a",
+       "      long length = in.length();"
+      ],
+      [
+       "a",
+       "      long start = Math.max(0, length - MAX_ERROR_OUTPUT_BYTES);"
+      ],
+      [
+       "a",
+       "      byte[] bytes = new byte[(int) (length - start)];"
+      ],
+      [
+       "c",
+       "      in.seek(start);"
+      ],
+      [
+       "c",
+       "      in.readFully(bytes);"
+      ],
+      [
+       "c",
+       "      int from = 0;"
+      ],
+      [
+       "h",
+       "@@ -134,4 +135,13 @@"
+      ],
+      [
+       "c",
+       "      return start > 0 ? \"...\" + end : end;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /** Deletes the file, or schedules it for deletion at exit, so cleanup never hides the result. */"
+      ],
+      [
+       "a",
+       "  private static void deleteQuietly(Path file) {"
+      ],
+      [
+       "a",
+       "    try {"
+      ],
+      [
+       "a",
+       "      Files.deleteIfExists(file);"
+      ]
+     ],
+     "truncated": true,
+     "additions": 13,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T16:36:31Z",
+    "updated_at": "2026-11-15T16:36:36Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 116
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
