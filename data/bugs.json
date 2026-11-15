@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T06:45:11Z",
+ "generated_at": "2026-11-15T09:30:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28816,
-   "forks": 6610,
+   "stars": 28817,
+   "forks": 6612,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50523,
-   "forks": 20741,
+   "stars": 50524,
+   "forks": 20742,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 693710064,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7308,
+   "stars": 7311,
    "forks": 939,
    "package": "pylance",
    "impact": null,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9080,
+   "stars": 9081,
    "forks": 2218,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63271,
-   "forks": 13285,
+   "stars": 63280,
+   "forks": 13289,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -311,7 +311,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1502,
+   "stars": 1503,
    "forks": 263,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -478,17 +478,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T06:38:50Z",
-    "updated_at": "2026-11-15T06:44:00Z",
+    "updated_at": "2026-11-15T08:42:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 115
   },
@@ -601,17 +601,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T06:06:54Z",
-    "updated_at": "2026-11-15T06:06:56Z",
+    "updated_at": "2026-11-15T08:42:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 114
   },
@@ -913,7 +913,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T06:06:52Z",
-    "updated_at": "2026-11-15T06:06:55Z",
+    "updated_at": "2026-11-15T08:42:31Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -1215,17 +1215,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T05:47:12Z",
-    "updated_at": "2026-11-15T05:48:44Z",
+    "updated_at": "2026-11-15T08:42:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 112
   },
@@ -1383,7 +1383,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T05:44:04Z",
-    "updated_at": "2026-11-15T06:06:07Z",
+    "updated_at": "2026-11-15T08:42:29Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1395,11 +1395,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep the end of long stderr in function call failures and stop reading it on the common pool",
    "date": "2026-11-15",
    "created_at": "2026-11-15T03:43:33Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2241,
@@ -1580,18 +1580,61 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T07:49:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2241#pullrequestreview-5909699528",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the follow-ups. The stderr truncation, the removal of the common-pool reader, and the happy-path function call test all look right, and the three inline items are non-blocking. Follow-ups, non-blocking: add a fallback test for the column-0 `else` case, which was requested in #2231 and is still…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T07:49:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2241#discussion_r4577543222",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Non-blocking: could the cleanup be best effort so it cannot replace the real result? For example, catch `IOException` around `deleteIfExists` and call `deleteOnExit` on the file instead.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T07:49:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2241#discussion_r4577543228",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Non-blocking: could we read the length once into a local and derive the start and the array size from it? A child process that is still writing could otherwise change the length between the two reads.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T07:49:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2241#discussion_r4577543230",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Non-blocking: could a test check that no `uc-function-*.stderr` file is left in `java.io.tmpdir` after a successful call and after a failing call? Parameterized rows for a 3-byte and a 4-byte character would also cover more of the continuation-byte loop.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T03:43:01Z",
-    "updated_at": "2026-11-15T04:34:17Z",
+    "updated_at": "2026-11-15T07:49:40Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 110
   },
@@ -1887,29 +1930,90 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5909808075",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the work. The core behavior reads correctly. The inline comments cover two test gaps (the same-URL case and the success after the catalog and schema are dropped), plus nits on docs, CLI wording, logging and the refusal message. Points for the description and title: - The description should sta…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631386",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
+      "text": "[AI Assisted] Could we add a same-URL case: updating the URL to its current value without force, while a volume is under it, should succeed. The equality branch in isSameOrUnder has no test. Removing it would still pass the suite and would break clients that resend the current URL.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631387",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
+      "text": "[AI Assisted] Could we also cover the success side of the new counting? After the catalog and schema are dropped, a non-force delete and a URL change of the location should succeed. Right now only the refusal side is pinned.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631390",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] The @throws list further down names only INVALID_ARGUMENT, but a pending cleanup throws PERMISSION_DENIED (ExternalLocationUtils.java:637). Please add it. A short Javadoc on updateExternalLocation for the refusal, force and covering-URL exemption would help too.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631397",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+      "text": "[AI Assisted] With --force alone, the update passes the empty-update check and sends a no-op update that succeeds. Could we leave force out of the emptiness check and the 'please provide one of' list, and say in the docs that at least one other parameter is required?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T08:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631400",
+      "maintainer": true,
+      "path": "api/all.yaml",
+      "text": "[AI Assisted] Suggested wording: 'Unless force is true, changing the url fails if the location is in use (as described for deleting it), unless the new url is the same as, or a parent of, the old one.' Then regenerate api/Apis/ExternalLocationsApi.md.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T03:16:22Z",
-    "updated_at": "2026-11-15T04:34:16Z",
-    "conflicts": false,
+    "updated_at": "2026-11-15T08:20:38Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 109
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Run CLI tests from the repository root",
    "date": "2026-11-15",
    "created_at": "2026-11-15T01:59:17Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2239,
@@ -2046,18 +2150,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T07:28:52Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2239#pullrequestreview-5909641763",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks, the forked test working directory and the reverted engine path look right.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T01:59:06Z",
-    "updated_at": "2026-11-15T04:34:15Z",
+    "updated_at": "2026-11-15T07:47:34Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 108
   },
@@ -4314,11 +4431,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep function properties after create",
    "date": "2026-11-13",
    "created_at": "2026-11-13T20:04:58Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2233,
@@ -4600,6 +4717,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T07:25:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5909634030",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving. The breaking-change list, the stream-limit message, the flush comment, and the test coverage for paging and duplicate creates are addressed, and the database mapping stays local as explained in the Javadoc. Follow-ups: - The NUL message in the breaking list reads `(\\^@)`, but the code says `(\\…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T07:25:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4577485016",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] nit: a key longer than Jackson's 50,000-character name limit also raises `StreamConstraintsException`, and this message does not describe that limit. Could the message say a key name is too long for that case, or could the name limit be added to the list?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T07:25:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4577485020",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] nit: when there are no properties, both flushes and the empty persist still run. Guarding them with `if (!properties.isEmpty())` would keep the common path unchanged.",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-15T04:11:20Z",
@@ -4628,49 +4775,21 @@
       "path": null,
       "text": "[AI Assisted] The breaking-change section still says four kinds of value. Several more inputs that main accepted now return 400 and are not listed: a key or value containing NUL, a key longer than 255 code points, an exponent out of range, a number longer than 1000 digits or nesting deeper than 1000 (Jackson's default…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T04:11:19Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4576975393",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] A number longer than 1000 digits, or nesting deeper than 1000, raises a `StreamConstraintsException`, which is a `JsonProcessingException`. So a valid object with such a value gets the \"single JSON object with unique keys\" message, which is wrong. Could this catch `StreamConstraintsException` separately,…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-14T10:55:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5903950708",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks, the points on keys, blank and non-string values, the message and the helper are addressed in bad3bab1. One blocker remains (NUL characters, inline). Please also correct the description for numbers (inline) and confirm the MySQL collation (inline). Follow-up: keys over 255 characters on the catalo…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:55:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199738",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] A key or value containing a NUL character passes parsing, and the insert then fails on PostgreSQL because text columns cannot store NUL. The error is not mapped, so the request returns a 500 and no function is created. On main the same request returned 200. Could `parseProperties` reject NUL characters i…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T04:20:13Z",
-    "updated_at": "2026-11-15T04:34:15Z",
+    "updated_at": "2026-11-15T07:26:52Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 96
   },
@@ -5961,7 +6080,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T04:36:14Z",
-    "updated_at": "2026-11-15T04:40:10Z",
+    "updated_at": "2026-11-15T08:42:28Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -9118,15 +9237,15 @@
     "approved_by": [],
     "last_push": "2026-11-13T03:30:04Z",
     "updated_at": "2026-11-13T03:30:17Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-11T23:59:31Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 80
   },
