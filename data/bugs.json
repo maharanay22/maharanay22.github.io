@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T10:56:32Z",
+ "generated_at": "2026-11-15T16:28:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28818,
+   "stars": 28820,
    "forks": 6612,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50524,
-   "forks": 20742,
+   "stars": 50523,
+   "forks": 20744,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 693710064,
@@ -171,8 +171,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7312,
-   "forks": 939,
+   "stars": 7313,
+   "forks": 941,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4280266,
@@ -199,8 +199,8 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9081,
-   "forks": 2218,
+   "stars": 9083,
+   "forks": 2220,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24656979,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63284,
-   "forks": 13289,
+   "stars": 63299,
+   "forks": 13296,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -3960,18 +3960,29 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "its-amann",
+      "at": "2026-11-15T14:34:53Z",
+      "url": "https://github.com/mlflow/mlflow/pull/27772#discussion_r4578819327",
+      "maintainer": false,
+      "path": "mlflow/models/utils.py",
+      "text": "same thing happens for `Array(DataType.binary)`, `[b\"mlflow\", None]` still comes out as `[b\"mlflow\", b\"None\"]` since binary passes through as object and then gets cast to the numpy bytes dtype [code] fixed this plus a test in this commit, you can just cherry pick it instead of redoing it: https://github.com/its-amann/…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T04:44:07Z",
-    "updated_at": "2026-11-14T04:52:58Z",
+    "updated_at": "2026-11-15T14:34:53Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "its-amann left review comments. Reply or update the PR"
    },
    "id": 99
   },
@@ -10310,7 +10321,7 @@
     "approved_by": [],
     "last_push": "2026-11-10T23:47:36Z",
     "updated_at": "2026-11-11T15:16:17Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
