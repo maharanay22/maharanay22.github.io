@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T02:41:28Z",
+ "generated_at": "2026-11-15T03:18:12Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3364,
-   "forks": 707,
+   "forks": 708,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10271169,
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28815,
+   "stars": 28816,
    "forks": 6611,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7305,
+   "stars": 7306,
    "forks": 939,
    "package": "pylance",
    "impact": null,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63264,
+   "stars": 63265,
    "forks": 13283,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,313 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Refuse URL changes and deletes of external locations that are still in use",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T03:16:52Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2240,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2240"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "high",
+   "release": null,
+   "files": [
+    {
+     "path": "api/all.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1419,11 +1419,14 @@"
+      ],
+      [
+       "c",
+       "        Deletes the specified external location from the metastore."
+      ],
+      [
+       "c",
+       "        The caller must be a metastore admin, the external location owner,"
+      ],
+      [
+       "c",
+       "        or have MANAGE on the external location."
+      ],
+      [
+       "a",
+       "        Unless force is true, the deletion fails while the location is in use: a table, volume"
+      ],
+      [
+       "a",
+       "        or registered model is stored under it, a catalog or schema keeps its managed storage"
+      ],
+      [
+       "a",
+       "        under it, or a storage cleanup is pending there."
+      ],
+      [
+       "c",
+       "      operationId: deleteExternalLocation"
+      ],
+      [
+       "c",
+       "      parameters:"
+      ],
+      [
+       "c",
+       "        - name: force"
+      ],
+      [
+       "c",
+       "          in: query"
+      ],
+      [
+       "d",
+       "          description: Force deletion even if there are dependent external tables or mounts."
+      ],
+      [
+       "a",
+       "          description: Force deletion even if the external location is in use."
+      ],
+      [
+       "c",
+       "          required: false"
+      ],
+      [
+       "c",
+       "          schema:"
+      ],
+      [
+       "c",
+       "            type: boolean"
+      ],
+      [
+       "h",
+       "@@ -1438,6 +1441,8 @@"
+      ],
+      [
+       "c",
+       "        Updates an external location in the metastore."
+      ],
+      [
+       "c",
+       "        The caller must be a metastore admin, the external location owner,"
+      ],
+      [
+       "c",
+       "        or have MANAGE on the external location."
+      ],
+      [
+       "a",
+       "        Unless force is true, changing the url fails while the location is in use, as described"
+      ],
+      [
+       "a",
+       "        for deleting it, and the new url does not cover the old one."
+      ],
+      [
+       "c",
+       "      operationId: updateExternalLocation"
+      ],
+      [
+       "c",
+       "      requestBody:"
+      ],
+      [
+       "c",
+       "        required: true"
+      ],
+      [
+       "h",
+       "@@ -3052,6 +3057,9 @@"
+      ],
+      [
+       "c",
+       "        new_name:"
+      ],
+      [
+       "c",
+       "          description: New name for the external location."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "a",
+       "        force:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 9,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
+     "lines": [
+      [
+       "h",
+       "@@ -65,7 +65,7 @@"
+      ],
+      [
+       "c",
+       "      \"To indicate CLI output format preference. Supported values are json and jsonPretty.\","
+      ],
+      [
+       "c",
+       "      \"output\"),"
+      ],
+      [
+       "c",
+       "  VERSION(\"version\", \"Version number of a registered model entity.\", \"version\"),"
+      ],
+      [
+       "d",
+       "  FORCE(\"force\", \"To force delete the entity\", \"force\"),"
+      ],
+      [
+       "a",
+       "  FORCE(\"force\", \"To force the operation even if the entity is in use\", \"force\"),"
+      ],
+      [
+       "c",
+       "  SECURABLE_TYPE(\"securable_type\", \"The type of the securable\", \"securable_type\"),"
+      ],
+      [
+       "c",
+       "  PRINCIPAL(\"principal\", \"The target principal of the permission change\", \"principal\"),"
+      ],
+      [
+       "c",
+       "  PRIVILEGE(\"privilege\", \"The privilege to grant or revoke\", \"privilege\"),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -393,7 +393,8 @@"
+      ],
+      [
+       "c",
+       "                              CliParams.NEW_NAME,"
+      ],
+      [
+       "c",
+       "                              CliParams.URL,"
+      ],
+      [
+       "c",
+       "                              CliParams.CREDENTIAL_NAME,"
+      ],
+      [
+       "d",
+       "                              CliParams.COMMENT)));"
+      ],
+      [
+       "a",
+       "                              CliParams.COMMENT,"
+      ],
+      [
+       "a",
+       "                              CliParams.FORCE)));"
+      ],
+      [
+       "c",
+       "                  put(DELETE, new CliOptions(List.of(CliParams.NAME), List.of(CliParams.FORCE)));"
+      ],
+      [
+       "c",
+       "                }"
+      ],
+      [
+       "c",
+       "              });"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -178,6 +178,11 @@"
+      ],
+      [
+       "c",
+       "            ExternalLocationUtils.validateNotSameOrUnderManagedStoragePrefix(url);"
+      ],
+      [
+       "c",
+       "            validateUrlNotUsedByAnyExternalLocation("
+      ],
+      [
+       "c",
+       "                session, url, Optional.of(existingLocation.getId()));"
+      ],
+      [
+       "a",
+       "            NormalizedURL currentUrl = NormalizedURL.from(existingLocation.getUrl());"
+      ],
+      [
+       "a",
+       "            if (!Boolean.TRUE.equals(updateExternalLocation.getForce())"
+      ],
+      [
+       "a",
+       "                && !ExternalLocationUtils.isSameOrUnder(currentUrl, url)) {"
+      ],
+      [
+       "a",
+       "              ExternalLocationUtils.validateExternalLocationNotInUse(session, currentUrl);"
+      ],
+      [
+       "a",
+       "            }"
+      ],
+      [
+       "c",
+       "            existingLocation.setUrl(url.toString());"
+      ],
+      [
+       "c",
+       "          }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 10,
+     "deletions": 26
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T03:16:22Z",
+    "updated_at": "2026-11-15T03:16:54Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 109
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -474,8 +781,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T01:59:06Z",
@@ -483,8 +790,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 108
   },
