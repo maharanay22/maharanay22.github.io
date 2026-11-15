@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T03:44:56Z",
+ "generated_at": "2026-11-15T04:28:20Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63266,
-   "forks": 13283,
+   "stars": 63267,
+   "forks": 13284,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -825,8 +825,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T03:16:22Z",
@@ -834,8 +834,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 109
   },
@@ -1017,18 +1017,31 @@
    "release": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T04:15:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2238#pullrequestreview-5908985085",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving: the paragraph now renders, and nothing else in the file changed.",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-14T17:15:53Z",
-    "updated_at": "2026-11-15T01:35:47Z",
+    "updated_at": "2026-11-15T04:15:31Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 107
   },
@@ -3261,7 +3274,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,25 +1,37 @@"
+       "@@ -1,25 +1,39 @@"
       ],
       [
        "c",
@@ -3277,7 +3290,15 @@
       ],
       [
        "a",
+       "import com.fasterxml.jackson.core.StreamReadConstraints;"
+      ],
+      [
+       "a",
        "import com.fasterxml.jackson.core.StreamReadFeature;"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.core.exc.StreamConstraintsException;"
       ],
       [
        "a",
@@ -3370,18 +3391,10 @@
       [
        "c",
        "import java.util.List;"
-      ],
-      [
-       "a",
-       "import java.util.Map;"
-      ],
-      [
-       "c",
-       "import java.util.Optional;"
       ]
      ],
      "truncated": true,
-     "additions": 141,
+     "additions": 160,
      "deletions": 6
     },
     {
@@ -3469,11 +3482,7 @@
      "lines": [
       [
        "h",
-       "@@ -12,11 +12,9 @@"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.persist.dao.PropertyDAO;"
+       "@@ -13,11 +13,9 @@"
       ],
       [
        "c",
@@ -3482,6 +3491,10 @@
       [
        "c",
        "import io.unitycatalog.server.persist.dao.TableInfoDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.UuidEntity;"
       ],
       [
        "d",
@@ -3524,6 +3537,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:11:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4576975397",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] The cause walk here repeats the mapping that `DatabaseErrors` already does by SQLSTATE. Could the constraint and data cases go into `DatabaseErrors`, or could this Javadoc say why they must stay local?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:11:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4576975400",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] nit: a one-line comment here would help. It keeps function and parameter failures out of `flushProperties`, so only property rows reach its mapping. A later cleanup could otherwise report a function-row failure as a property error.",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-15T04:11:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#pullrequestreview-5908973749",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The breaking-change section still says four kinds of value. Several more inputs that main accepted now return 400 and are not listed: a key or value containing NUL, a key longer than 255 code points, an exponent out of range, a number longer than 1000 digits or nesting deeper than 1000 (Jackson's default…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:11:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4576975393",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "[AI Assisted] A number longer than 1000 digits, or nesting deeper than 1000, raises a `StreamConstraintsException`, which is a `JsonProcessingException`. So a valid object with such a value gets the \"single JSON object with unique keys\" message, which is wrong. Could this catch `StreamConstraintsException` separately,…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-14T10:55:16Z",
@@ -3542,59 +3595,19 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
       "text": "[AI Assisted] A key or value containing a NUL character passes parsing, and the insert then fails on PostgreSQL because text columns cannot store NUL. The error is not mapped, so the request returns a 500 and no function is created. On main the same request returned 200. Could `parseProperties` reject NUL characters i…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:55:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199740",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] Numbers are not stored as their exact JSON text. The reader parses floats as doubles, so `{\"amount\":0.1234567890123456789}` is stored as `\"0.12345678901234568\"`, and `{\"big\":1e400}` is stored as `\"Infinity\"`, which is not JSON. The description says non-string values are stored as their JSON text. Could t…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:55:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199741",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] The duplicate-key check compares Java strings, but the unique constraint on `uc_properties` uses the database collation. The MySQL baseline sets no collation, so the server default applies, which is case-insensitive in MySQL 8. `{\"Tier\":\"a\",\"tier\":\"b\"}` would pass this check and then fail at flush with a…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:55:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4573199744",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] nit: `String.length()` counts UTF-16 units, so a key of 128 emoji (256 units) is rejected, although `varchar(255)` counts characters and the key fits. `codePointCount` would match the column.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T00:15:02Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2233#discussion_r4570131765",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
-      "text": "[AI Assisted] Main accepts all of these creates and returns 200, and this PR turns several of them into 400s. Some of them can keep succeeding without losing anything: - An empty string or whitespace-only value should be treated as no properties, like `null`. It carries no data, so it should return 200 and create the…",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T14:40:48Z",
-    "updated_at": "2026-11-15T01:35:45Z",
-    "conflicts": true,
+    "last_push": "2026-11-15T04:20:13Z",
+    "updated_at": "2026-11-15T04:25:44Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
