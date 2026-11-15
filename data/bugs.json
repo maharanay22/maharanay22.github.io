@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T05:50:04Z",
+ "generated_at": "2026-11-15T06:08:06Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3364,
-   "forks": 708,
+   "forks": 707,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10271169,
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28816,
-   "forks": 6611,
+   "forks": 6610,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -329,6 +329,436 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Build Gemini and DSPy tools for functions without parameters",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T06:06:40Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2245,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2245"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "medium",
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -97,7 +97,7 @@"
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "c",
+       "            Dict[str, Any]: A dictionary containing the DSPy-compatible function schema with args_dict, args_desc, and args_type."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "d",
+       "        param_infos = function_info.input_params.parameters"
+      ],
+      [
+       "a",
+       "        param_infos = function_info.input_params.parameters if function_info.input_params else []"
+      ],
+      [
+       "c",
+       "        if param_infos is None:"
+      ],
+      [
+       "c",
+       "            raise ValueError(\"Function input parameters are None.\")"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -103,7 +103,7 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        fields_dict = {}"
+      ],
+      [
+       "d",
+       "        param_infos = function_info.input_params.parameters"
+      ],
+      [
+       "a",
+       "        param_infos = function_info.input_params.parameters if function_info.input_params else []"
+      ],
+      [
+       "c",
+       "        if param_infos is None:"
+      ],
+      [
+       "c",
+       "            raise ValueError(\"Function input parameters are None.\")"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T06:06:54Z",
+    "updated_at": "2026-11-15T06:06:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 114
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Send STRUCT and BINARY tool arguments as JSON values in every integration",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T06:06:36Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2244,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2244"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "high",
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -52,7 +52,7 @@"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        Actually call the UC function with the provided parameters."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "d",
+       "        param_dict = args.model_dump()"
+      ],
+      [
+       "a",
+       "        param_dict = args.model_dump(mode=\"json\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        result = self._client.execute_function("
+      ],
+      [
+       "c",
+       "            function_name=self._function_full_name,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "ai/integrations/crewai/src/unitycatalog/ai/crewai/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,9 +1,9 @@"
+      ],
+      [
+       "c",
+       "import importlib"
+      ],
+      [
+       "d",
+       "import json"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable, Dict, List, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, ConfigDict, Field, model_validator"
+      ],
+      [
+       "a",
+       "from pydantic_core import to_jsonable_python"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.base import BaseFunctionClient"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
+      ],
+      [
+       "h",
+       "@@ -163,10 +163,9 @@"
+      ],
+      [
+       "c",
+       "            raise e"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        def func(**kwargs: Any) -> str:"
+      ],
+      [
+       "d",
+       "            args_json = json.loads(json.dumps(kwargs, default=str))"
+      ],
+      [
+       "c",
+       "            result = client.execute_function("
+      ],
+      [
+       "c",
+       "                function_name=function_name,"
+      ],
+      [
+       "d",
+       "                parameters=args_json,"
+      ],
+      [
+       "a",
+       "                parameters=to_jsonable_python(kwargs, fallback=str),"
+      ],
+      [
+       "c",
+       "                enable_retriever_tracing=mlflow_tracing_enabled(\"crewai\"),"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 3
+    },
+    {
+     "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,8 +1,8 @@"
+      ],
+      [
+       "d",
+       "import json"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "from typing import Any, Dict, List, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator"
+      ],
+      [
+       "a",
+       "from pydantic_core import to_jsonable_python"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import dspy"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.base import BaseFunctionClient"
+      ],
+      [
+       "h",
+       "@@ -166,10 +166,9 @@"
+      ],
+      [
+       "c",
+       "        schema_data = UCFunctionToolkit.convert_to_dspy_schema(function_info, strict=True)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        def func(**kwargs: Any) -> str:"
+      ],
+      [
+       "d",
+       "            args_json = json.loads(json.dumps(kwargs, default=str))"
+      ],
+      [
+       "c",
+       "            result = client.execute_function("
+      ],
+      [
+       "c",
+       "                function_name=function_name,"
+      ],
+      [
+       "d",
+       "                parameters=args_json,"
+      ],
+      [
+       "a",
+       "                parameters=to_jsonable_python(kwargs, fallback=str),"
+      ],
+      [
+       "c",
+       "                enable_retriever_tracing=mlflow_tracing_enabled(\"dspy\"),"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "c",
+       "            return result.to_json()"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 3
+    },
+    {
+     "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,9 +1,10 @@"
+      ],
+      [
+       "d",
+       "import json"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "a",
+       "from collections.abc import Mapping, Sequence"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable, Dict, List, Optional"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 18,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T06:06:52Z",
+    "updated_at": "2026-11-15T06:06:55Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 113
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -790,7 +1220,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T05:44:04Z",
-    "updated_at": "2026-11-15T05:44:06Z",
+    "updated_at": "2026-11-15T06:06:07Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
