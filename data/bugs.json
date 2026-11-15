@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T04:49:38Z",
+ "generated_at": "2026-11-15T05:45:24Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50522,
-   "forks": 20742,
+   "stars": 50523,
+   "forks": 20741,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 693710064,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7306,
+   "stars": 7307,
    "forks": 939,
    "package": "pylance",
    "impact": null,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63269,
+   "stars": 63270,
    "forks": 13285,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,169 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Run OSS function client calls on one event loop so they work from any thread",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T05:43:54Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2242,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2242"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "high",
+   "release": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -4,6 +4,7 @@"
+      ],
+      [
+       "c",
+       "import datetime"
+      ],
+      [
+       "c",
+       "import decimal"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "a",
+       "import threading"
+      ],
+      [
+       "c",
+       "from enum import Enum"
+      ],
+      [
+       "c",
+       "from functools import partial, wraps"
+      ],
+      [
+       "c",
+       "from typing import Any, Callable, Dict, List, Optional, Union"
+      ],
+      [
+       "h",
+       "@@ -54,6 +55,7 @@"
+      ],
+      [
+       "c",
+       "    SchemasApi,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.client.exceptions import NotFoundException, ServiceException"
+      ],
+      [
+       "a",
+       "from unitycatalog.client.rest import RESTClientObject"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "nest_asyncio.apply()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -129,8 +131,61 @@"
+      ],
+      [
+       "c",
+       "    return wrapper"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "class _SingleLoopRESTClient:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Takes the place of an ApiClient's REST client and sends every request from one event loop,"
+      ],
+      [
+       "a",
+       "    which it runs on a daemon thread, so the ApiClient works from any thread or event loop."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    An aiohttp session only works on the event loop it is created on, so sharing the ApiClient's"
+      ],
+      [
+       "a",
+       "    own session fails with \"Timeout context manager should be used inside a task\" anywhere else."
+      ],
+      [
+       "a",
+       "    Response bodies are read on the owned loop before the response is returned."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 61,
+     "deletions": 24
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T05:44:04Z",
+    "updated_at": "2026-11-15T05:44:06Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 111
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -3597,8 +3760,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T04:20:13Z",
@@ -3606,8 +3769,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 96
   },
@@ -4893,8 +5056,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T04:36:14Z",
@@ -4902,8 +5065,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 92
   },
