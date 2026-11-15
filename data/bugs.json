@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T04:28:20Z",
+ "generated_at": "2026-11-15T04:30:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -1001,11 +1001,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Show the Spark partition column order note outside the hidden section",
    "date": "2026-11-14",
    "created_at": "2026-11-14T17:15:55Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2238,
@@ -1029,19 +1029,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-14T17:15:53Z",
-    "updated_at": "2026-11-15T04:15:31Z",
+    "updated_at": "2026-11-15T04:27:32Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 107
   },
@@ -4835,62 +4835,62 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5903964628",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5909038458",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Option D landed and the earlier findings are addressed. One blocker remains: the README `access_token` example does not send a token, because the specs declare no security scheme. Use an explicit `Authorization` header in the example and note. The DeltaCommit precedence test, the import-rewrite residual…",
-      "answered": true
+      "text": "[AI Assisted] Option D and the earlier fixes landed. One blocker remains: the column metadata parse drops keys (serde line 66), so column comments and column-mapping ids are lost on load. Use `DeltaStructFieldMetadata.from_dict`, and add a round-trip test with non-empty metadata. The nits can follow. The forked `api_c…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211981",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016133",
       "maintainer": true,
-      "path": "clients/python/build/README.md",
-      "text": "[AI Assisted] blocker: `access_token` has no effect here, and the example and note came from our earlier suggestion, so this one is on us. Neither `api/all.yaml` nor `api/delta.yaml` declares `securitySchemes` or a `security` block, so the generated operations pass an empty `auth_settings`, and `update_params_for_auth…",
-      "answered": true
+      "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
+      "text": "[AI Assisted] blocker: The defect is in `_parse_field` at line 66, which this function calls; line 66 is outside this PR diff, so the comment sits here. `_parse_field` passes the raw metadata dict to the `DeltaStructField` constructor, so pydantic validates it as a `DeltaStructFieldMetadata` and drops every key that i…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211986",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016135",
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
-      "text": "[AI Assisted] normal: The rewrite is needed, since the generator hardcodes `{{packageName}}.models` in `model_generic.mustache` (lines 21 and 257). But a replace that matches nothing passes silently. Could the step fail if any file under `unitycatalog/client/delta` still contains `unitycatalog.client.models.` or `from…",
-      "answered": true
+      "text": "[AI Assisted] nit: Anchor both patterns to import lines, for example `(?m)^\\s*(from|import)\\s+unitycatalog\\.client\\.models\\b`, so a docstring that mentions the UC models does not fail the build with a misleading message.",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211988",
-      "maintainer": true,
-      "path": "clients/python/tests/test_api_client.py",
-      "text": "[AI Assisted] normal: The DeltaCommit split is guarded only for nested fields. Could we add a test that every response type the Delta APIs return resolves to a Delta model, not a UC one, so a future top-level Delta response named `DeltaCommit` fails in CI? The precedence comment in `_lookup_model` would then match wha…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211992",
-      "maintainer": true,
-      "path": "build.sbt",
-      "text": "[AI Assisted] nit: The generator writes the package `__init__.py` only to the client package (`PythonClientCodegen` lines 289-291 and 308), so `unitycatalog/client/delta/__init__.py` is not generated and `delta` is an implicit namespace package. It imports fine, but an empty file from the post-build step would make it…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-14T10:59:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4573211997",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016136",
       "maintainer": true,
       "path": "clients/python/build/templates/api_client.mustache",
-      "text": "[AI Assisted] nit: Name both packages in this message, for example \"no model named '{}' in unitycatalog.client.models or unitycatalog.client.delta.models\". The `relocateDeltaImports` scaladoc should also say that the step fails the build when `client/delta` is missing, and that it runs before the serde module is copie…",
-      "answered": true
+      "text": "[AI Assisted] nit: `import {{modelPackage}}` is no longer used, since the lookup uses `importlib`. Drop it, and link or drop the upstream TODO on line 62 of this template.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016138",
+      "maintainer": true,
+      "path": "clients/python/build/templates/api_client.mustache",
+      "text": "[AI Assisted] nit: This comment names `test_api_client.py`. A template comment should not name another file; say what the test guarantees instead.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016141",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "[AI Assisted] nit: Add a test that an unknown name raises `AttributeError` from `_lookup_model`.",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -4898,12 +4898,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T16:54:47Z",
-    "updated_at": "2026-11-15T01:35:44Z",
+    "updated_at": "2026-11-15T04:28:47Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 92
   },
