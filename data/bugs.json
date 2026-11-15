@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T16:38:08Z",
+ "generated_at": "2026-11-15T16:55:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63299,
+   "stars": 63298,
    "forks": 13296,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1792,7 +1792,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-15T03:43:01Z",
-    "updated_at": "2026-11-15T07:49:40Z",
+    "updated_at": "2026-11-15T16:40:34Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -1805,7 +1805,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Refuse URL changes and deletes of external locations that are still in use",
+   "title": "Also check URL changes and count catalog and schema storage when deleting external locations",
    "date": "2026-11-15",
    "created_at": "2026-11-15T03:16:52Z",
    "merged_at": null,
@@ -1824,7 +1824,7 @@
      "lines": [
       [
        "h",
-       "@@ -1419,11 +1419,14 @@"
+       "@@ -1464,11 +1464,14 @@"
       ],
       [
        "c",
@@ -1888,7 +1888,7 @@
       ],
       [
        "h",
-       "@@ -1438,6 +1441,8 @@"
+       "@@ -1483,6 +1486,8 @@"
       ],
       [
        "c",
@@ -1904,27 +1904,27 @@
       ],
       [
        "a",
-       "        Unless force is true, changing the url fails while the location is in use, as described"
+       "        Unless force is true, changing the url fails if the location is in use (as described for"
       ],
       [
        "a",
-       "        for deleting it, and the new url does not cover the old one."
+       "        deleting it), unless the new url is the same as, or a parent of, the old one."
+      ],
+      [
+       "c",
+       "        EXPERIMENTAL: a location whose credential is `s3_compatible` must have an `s3://` URL;"
+      ],
+      [
+       "c",
+       "        otherwise the request fails with `INVALID_ARGUMENT`."
       ],
       [
        "c",
        "      operationId: updateExternalLocation"
       ],
       [
-       "c",
-       "      requestBody:"
-      ],
-      [
-       "c",
-       "        required: true"
-      ],
-      [
        "h",
-       "@@ -3052,6 +3057,9 @@"
+       "@@ -3216,6 +3221,9 @@"
       ],
       [
        "c",
@@ -1972,7 +1972,7 @@
       ],
       [
        "a",
-       "  FORCE(\"force\", \"To force the operation even if the entity is in use\", \"force\"),"
+       "  FORCE(\"force\", \"To force the operation even if it would otherwise be refused\", \"force\"),"
       ],
       [
        "c",
@@ -2033,63 +2033,55 @@
       [
        "c",
        "              });"
-      ]
-     ],
-     "truncated": false,
-     "additions": 2,
-     "deletions": 1
-    },
-    {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-     "lines": [
+      ],
       [
        "h",
-       "@@ -178,6 +178,11 @@"
+       "@@ -872,12 +873,15 @@"
       ],
       [
        "c",
-       "            ExternalLocationUtils.validateNotSameOrUnderManagedStoragePrefix(url);"
+       "  }"
       ],
       [
        "c",
-       "            validateUrlNotUsedByAnyExternalLocation("
+       ""
       ],
       [
        "c",
-       "                session, url, Optional.of(existingLocation.getId()));"
+       "  public static void validateUpdateParameters(JSONObject json, String command, String subCommand) {"
+      ],
+      [
+       "d",
+       "    if (json.isEmpty()) {"
       ],
       [
        "a",
-       "            NormalizedURL currentUrl = NormalizedURL.from(existingLocation.getUrl());"
+       "    // --force only changes how an update is checked, so it is not an update by itself."
       ],
       [
        "a",
-       "            if (!Boolean.TRUE.equals(updateExternalLocation.getForce())"
-      ],
-      [
-       "a",
-       "                && !ExternalLocationUtils.isSameOrUnder(currentUrl, url)) {"
-      ],
-      [
-       "a",
-       "              ExternalLocationUtils.validateExternalLocationNotInUse(session, currentUrl);"
-      ],
-      [
-       "a",
-       "            }"
+       "    if (json.keySet().stream().allMatch(CliParams.FORCE.getServerParam()::equals)) {"
       ],
       [
        "c",
-       "            existingLocation.setUrl(url.toString());"
+       "      List<CliParams> optionalParams ="
       ],
       [
        "c",
-       "          }"
+       "          CliUtils.cliOptions.get(command).get(subCommand).getOptionalParams();"
+      ],
+      [
+       "c",
+       "      String errorMessage = \"No parameters to update, please provide one of:\";"
+      ],
+      [
+       "c",
+       "      for (CliParams param : optionalParams) {"
       ]
      ],
      "truncated": true,
-     "additions": 10,
-     "deletions": 26
+     "additions": 7,
+     "deletions": 3
     }
    ],
    "track": {
@@ -2102,7 +2094,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the work. The core behavior reads correctly. The inline comments cover two test gaps (the same-URL case and the success after the catalog and schema are dropped), plus nits on docs, CLI wording, logging and the refusal message. Points for the description and title: - The description should sta…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2112,7 +2104,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
       "text": "[AI Assisted] Could we add a same-URL case: updating the URL to its current value without force, while a volume is under it, should succeed. The equality branch in isSameOrUnder has no test. Removing it would still pass the suite and would break clients that resend the current URL.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2122,7 +2114,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
       "text": "[AI Assisted] Could we also cover the success side of the new counting? After the catalog and schema are dropped, a non-force delete and a URL change of the location should succeed. Right now only the refusal side is pinned.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2132,7 +2124,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] The @throws list further down names only INVALID_ARGUMENT, but a pending cleanup throws PERMISSION_DENIED (ExternalLocationUtils.java:637). Please add it. A short Javadoc on updateExternalLocation for the refusal, force and covering-URL exemption would help too.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2142,7 +2134,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] With --force alone, the update passes the empty-update check and sends a no-op update that succeeds. Could we leave force out of the emptiness check and the 'please provide one of' list, and say in the docs that at least one other parameter is required?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2152,20 +2144,20 @@
       "maintainer": true,
       "path": "api/all.yaml",
       "text": "[AI Assisted] Suggested wording: 'Unless force is true, changing the url fails if the location is in use (as described for deleting it), unless the new url is the same as, or a parent of, the old one.' Then regenerate api/Apis/ExternalLocationsApi.md.",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T03:16:22Z",
-    "updated_at": "2026-11-15T08:20:38Z",
-    "conflicts": true,
+    "last_push": "2026-11-15T16:46:12Z",
+    "updated_at": "2026-11-15T16:54:03Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 109
   },
