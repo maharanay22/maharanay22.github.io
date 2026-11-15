@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-14T22:40:17Z",
+ "generated_at": "2026-11-15T02:01:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -27,10 +27,10 @@
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 630131,
    "downloads_checked": "2026-11-14",
-   "contributor_rank": 9,
-   "contributor_commits": 26,
-   "contributor_total": 138,
-   "contributors_checked": "2026-11-14",
+   "contributor_rank": 8,
+   "contributor_commits": 31,
+   "contributor_total": 139,
+   "contributors_checked": "2026-11-15",
    "period_rank": 5,
    "period_commits": 26,
    "period_total": 33,
@@ -53,17 +53,17 @@
    "forks": 707,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10395350,
-   "downloads_checked": "2026-11-14",
+   "downloads_month": 10271169,
+   "downloads_checked": "2026-11-15",
    "contributor_rank": 24,
    "contributor_commits": 21,
-   "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributor_total": 299,
+   "contributors_checked": "2026-11-15",
    "period_rank": 7,
    "period_commits": 21,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "mlflow/mlflow",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28812,
-   "forks": 6610,
+   "stars": 28815,
+   "forks": 6611,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21601230,
@@ -86,12 +86,12 @@
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": 39,
    "period_commits": 4,
    "period_total": 111,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "mindsdb/engine",
@@ -114,12 +114,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50519,
+   "stars": 50521,
    "forks": 20742,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14",
+   "period_checked": "2026-11-15",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -171,21 +171,21 @@
     "Python",
     "AI data"
    ],
-   "stars": 7303,
+   "stars": 7304,
    "forks": 939,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 4333515,
-   "downloads_checked": "2026-11-14",
+   "downloads_month": 4280266,
+   "downloads_checked": "2026-11-15",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 67,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "delta-io/delta",
@@ -208,7 +208,7 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 53,
@@ -236,12 +236,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -264,12 +264,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63258,
-   "forks": 13280,
+   "stars": 63263,
+   "forks": 13283,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 97401315,
-   "downloads_checked": "2026-11-14",
+   "downloads_month": 96183274,
+   "downloads_checked": "2026-11-15",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-14",
+   "contributors_checked": "2026-11-15",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 134,
+   "period_total": 135,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -315,20 +315,179 @@
    "forks": 263,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 487993966,
-   "downloads_checked": "2026-11-14",
-   "contributor_rank": 114,
+   "downloads_month": 482016531,
+   "downloads_checked": "2026-11-15",
+   "contributor_rank": 113,
    "contributor_commits": 1,
-   "contributor_total": 134,
-   "contributors_checked": "2026-11-14",
+   "contributor_total": 133,
+   "contributors_checked": "2026-11-15",
    "period_rank": 29,
    "period_commits": 1,
    "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-14"
+   "period_checked": "2026-11-15"
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Run CLI tests from the repository root",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T01:59:17Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2239,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2239"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "low",
+   "release": null,
+   "files": [
+    {
+     "path": "build.sbt",
+     "lines": [
+      [
+       "h",
+       "@@ -683,7 +683,7 @@"
+      ],
+      [
+       "c",
+       "      \"org.junit.platform\" % \"junit-platform-launcher\" % junitPlatformVersion % Test,"
+      ],
+      [
+       "c",
+       "      \"net.aichler\" % \"jupiter-interface\" % JupiterKeys.jupiterVersion.value % Test,"
+      ],
+      [
+       "c",
+       "    ),"
+      ],
+      [
+       "d",
+       "    Test / javaOptions += s\"-Duser.dir=${(ThisBuild / baseDirectory).value.getAbsolutePath}\","
+      ],
+      [
+       "a",
+       "    Test / forkOptions := (Test / forkOptions).value.withWorkingDirectory((ThisBuild / baseDirectory).value),"
+      ],
+      [
+       "c",
+       "  )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "// What the test-database harness needs to run on PostgreSQL: server, and spark and hadoop, which take"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/FunctionCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -25,7 +25,6 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.CreateFunctionRequest;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.FunctionParameterInfos;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.ListFunctionsResponse;"
+      ],
+      [
+       "d",
+       "import java.nio.file.Paths;"
+      ],
+      [
+       "c",
+       "import java.util.Arrays;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLine;"
+      ],
+      [
+       "c",
+       "import org.json.JSONObject;"
+      ],
+      [
+       "h",
+       "@@ -125,8 +124,7 @@"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "c",
+       "      return PythonInvoker.invokePython("
+      ],
+      [
+       "c",
+       "          functionsApi.getFunction(functionFullName, /* includeBrowse= */ false),"
+      ],
+      [
+       "d",
+       "          Paths.get(System.getProperty(\"user.dir\"), \"etc\", \"data\", \"function\", \"python_engine.py\")"
+      ],
+      [
+       "d",
+       "              .toString(),"
+      ],
+      [
+       "a",
+       "          \"etc/data/function/python_engine.py\","
+      ],
+      [
+       "c",
+       "          Arrays.stream(args.split(\",\")).map(String::trim).toArray(String[]::new));"
+      ],
+      [
+       "c",
+       "    } catch (Exception e) {"
+      ],
+      [
+       "c",
+       "      throw new CliException("
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T01:59:06Z",
+    "updated_at": "2026-11-15T01:59:18Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 108
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -354,7 +513,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-14T17:15:53Z",
-    "updated_at": "2026-11-14T17:15:56Z",
+    "updated_at": "2026-11-15T01:35:47Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -366,11 +525,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Show the Python error in function call failures and reject empty function bodies",
    "date": "2026-11-14",
    "created_at": "2026-11-14T17:15:01Z",
-   "merged_at": null,
+   "merged_at": "2026-11-15",
    "reported": true,
    "pr": {
     "number": 2237,
@@ -539,18 +698,61 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-15T01:45:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2237#pullrequestreview-5908481435",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. The #2231 follow-ups are addressed: the docs wording and the empty-body error. The three inline items are non-blocking. Still open from #2231, also non-blocking: the stderr size in the failure message and the stderr reader on the common pool. Those could be a follow-up issue.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T01:45:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2237#discussion_r4576613703",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/FunctionCli.java",
+      "text": "[AI Assisted] Non-blocking question: the engine path now comes from `user.dir`. In a normal run that is the same directory as before, so behavior does not change, but the reason is the CLI test working directory. Could the test set the process directory instead, or could a short comment here say why this is needed?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T01:45:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2237#discussion_r4576613701",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/function/CliFunctionCRUDTest.java",
+      "text": "[AI Assisted] Non-blocking: could we add a happy-path `function call` test next to this one, for example a function with `--def \"return a + 1\"` called with `5` that expects `6`? The failure test already exercises the path, so this is for coverage of normal output.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T01:45:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2237#discussion_r4576613702",
+      "maintainer": true,
+      "path": "etc/data/function/python_engine.py",
+      "text": "[AI Assisted] Non-blocking: a one-line comment saying why this check exists would help, for example \"An empty or comment-only body parses to no statements.\"",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-14T18:12:17Z",
-    "updated_at": "2026-11-14T18:12:20Z",
+    "updated_at": "2026-11-15T01:46:55Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 106
   },
@@ -2877,12 +3079,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T14:40:48Z",
-    "updated_at": "2026-11-14T16:40:57Z",
-    "conflicts": false,
+    "updated_at": "2026-11-15T01:35:45Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 96
   },
@@ -4173,7 +4375,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-14T16:54:47Z",
-    "updated_at": "2026-11-14T17:13:59Z",
+    "updated_at": "2026-11-15T01:35:44Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
