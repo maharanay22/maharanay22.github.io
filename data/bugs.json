@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T04:30:11Z",
+ "generated_at": "2026-11-15T04:49:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63267,
-   "forks": 13284,
+   "stars": 63269,
+   "forks": 13285,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -518,17 +518,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T03:43:01Z",
-    "updated_at": "2026-11-15T03:43:35Z",
+    "updated_at": "2026-11-15T04:34:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },
@@ -830,7 +830,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T03:16:22Z",
-    "updated_at": "2026-11-15T03:16:54Z",
+    "updated_at": "2026-11-15T04:34:16Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -989,7 +989,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T01:59:06Z",
-    "updated_at": "2026-11-15T01:59:18Z",
+    "updated_at": "2026-11-15T04:34:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3602,7 +3602,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T04:20:13Z",
-    "updated_at": "2026-11-15T04:25:44Z",
+    "updated_at": "2026-11-15T04:34:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4706,7 +4706,7 @@
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,830 @@"
+       "@@ -0,0 +1,831 @@"
       ],
       [
        "a",
@@ -4715,6 +4715,14 @@
       [
        "a",
        "    shared ApiClient also resolves response types from the Delta models in the client's delta.models package."
+      ],
+      [
+       "a",
+       "    _lookup_model imports the model packages itself, so the module-level model package import is dropped, and"
+      ],
+      [
+       "a",
+       "    so is the generator's TODO on the 'long' type mapping."
       ],
       [
        "a",
@@ -4815,18 +4823,10 @@
       [
        "a",
        "from {{packageName}}.configuration import Configuration"
-      ],
-      [
-       "a",
-       "from {{packageName}}.api_response import ApiResponse, T as ApiResponseT"
-      ],
-      [
-       "a",
-       "import {{modelPackage}}"
       ]
      ],
      "truncated": true,
-     "additions": 830,
+     "additions": 831,
      "deletions": 0
     }
    ],
@@ -4840,7 +4840,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Option D and the earlier fixes landed. One blocker remains: the column metadata parse drops keys (serde line 66), so column comments and column-mapping ids are lost on load. Use `DeltaStructFieldMetadata.from_dict`, and add a round-trip test with non-empty metadata. The nits can follow. The forked `api_c…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4850,7 +4850,7 @@
       "maintainer": true,
       "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
       "text": "[AI Assisted] blocker: The defect is in `_parse_field` at line 66, which this function calls; line 66 is outside this PR diff, so the comment sits here. `_parse_field` passes the raw metadata dict to the `DeltaStructField` constructor, so pydantic validates it as a `DeltaStructFieldMetadata` and drops every key that i…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4860,7 +4860,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] nit: Anchor both patterns to import lines, for example `(?m)^\\s*(from|import)\\s+unitycatalog\\.client\\.models\\b`, so a docstring that mentions the UC models does not fail the build with a misleading message.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4870,7 +4870,7 @@
       "maintainer": true,
       "path": "clients/python/build/templates/api_client.mustache",
       "text": "[AI Assisted] nit: `import {{modelPackage}}` is no longer used, since the lookup uses `importlib`. Drop it, and link or drop the upstream TODO on line 62 of this template.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4880,7 +4880,7 @@
       "maintainer": true,
       "path": "clients/python/build/templates/api_client.mustache",
       "text": "[AI Assisted] nit: This comment names `test_api_client.py`. A template comment should not name another file; say what the test guarantees instead.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4890,20 +4890,20 @@
       "maintainer": true,
       "path": "clients/python/tests/test_api_client.py",
       "text": "[AI Assisted] nit: Add a test that an unknown name raises `AttributeError` from `_lookup_model`.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T16:54:47Z",
-    "updated_at": "2026-11-15T04:28:47Z",
+    "last_push": "2026-11-15T04:36:14Z",
+    "updated_at": "2026-11-15T04:40:10Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 92
   },
