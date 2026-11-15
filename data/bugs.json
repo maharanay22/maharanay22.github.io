@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T03:18:12Z",
+ "generated_at": "2026-11-15T03:44:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50521,
+   "stars": 50522,
    "forks": 20742,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63265,
+   "stars": 63266,
    "forks": 13283,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,209 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep the end of long stderr in function call failures and stop reading it on the common pool",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T03:43:33Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2241,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2241"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "low",
+   "release": null,
+   "files": [
+    {
+     "path": "etc/data/function/python_engine.py",
+     "lines": [
+      [
+       "h",
+       "@@ -28,6 +28,7 @@"
+      ],
+      [
+       "c",
+       "def define_function(func_name, routine_body, param_names):"
+      ],
+      [
+       "c",
+       "    func_def = ast.parse(f\"def {func_name}({', '.join(param_names)}):\\n    pass\")"
+      ],
+      [
+       "c",
+       "    body = parse_body(routine_body)"
+      ],
+      [
+       "a",
+       "    # An empty or comment-only body parses to no statements."
+      ],
+      [
+       "c",
+       "    if not body:"
+      ],
+      [
+       "c",
+       "        raise SyntaxError(\"the routine definition has no statements\")"
+      ],
+      [
+       "c",
+       "    func_def.body[0].body = body"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+     "lines": [
+      [
+       "h",
+       "@@ -6,18 +6,21 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.FunctionParameterInfo;"
+      ],
+      [
+       "c",
+       "import java.io.BufferedReader;"
+      ],
+      [
+       "c",
+       "import java.io.IOException;"
+      ],
+      [
+       "d",
+       "import java.io.InputStream;"
+      ],
+      [
+       "c",
+       "import java.io.InputStreamReader;"
+      ],
+      [
+       "d",
+       "import java.io.UncheckedIOException;"
+      ],
+      [
+       "a",
+       "import java.io.RandomAccessFile;"
+      ],
+      [
+       "c",
+       "import java.nio.charset.StandardCharsets;"
+      ],
+      [
+       "a",
+       "import java.nio.file.Files;"
+      ],
+      [
+       "a",
+       "import java.nio.file.Path;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "d",
+       "import java.util.concurrent.CompletableFuture;"
+      ],
+      [
+       "c",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "c",
+       "import org.json.JSONArray;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "public class PythonInvoker {"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /** How much of the end of stderr a failure message keeps. The Python error is printed last. */"
+      ],
+      [
+       "a",
+       "  private static final int MAX_ERROR_OUTPUT_BYTES = 4096;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  public static String invokePython(FunctionInfo function, String scriptPath, String... args)"
+      ],
+      [
+       "c",
+       "      throws ApiException {"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "h",
+       "@@ -70,34 +73,13 @@"
+      ],
+      [
+       "c",
+       "      argsList.add(String.join(\", \", paramNames));"
+      ],
+      [
+       "c",
+       "      argsList.add(new JSONArray(argValues).toString());"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "      // Invoke the Python script"
+      ]
+     ],
+     "truncated": true,
+     "additions": 51,
+     "deletions": 34
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T03:43:01Z",
+    "updated_at": "2026-11-15T03:43:35Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 110
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
