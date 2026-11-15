@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T05:45:24Z",
+ "generated_at": "2026-11-15T05:50:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,313 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Clear the Iceberg metadata of a managed Delta table when UniForm is turned off",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T05:48:42Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2243,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2243"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "high",
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/DeltaCommitRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -1315,7 +1315,8 @@"
+      ],
+      [
+       "c",
+       "   * metadata provided in a commit. This method handles:"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * <ul>"
+      ],
+      [
+       "d",
+       "   *   <li>Properties: Replaces all existing properties with new ones"
+      ],
+      [
+       "a",
+       "   *   <li>Properties: Replaces all existing properties with new ones, and clears the UniForm"
+      ],
+      [
+       "a",
+       "   *       metadata when the new properties no longer enable UniForm-Iceberg"
+      ],
+      [
+       "c",
+       "   *   <li>Schema: Replaces all existing columns with new ones"
+      ],
+      [
+       "c",
+       "   *   <li>Description: Updates the table comment"
+      ],
+      [
+       "c",
+       "   * </ul>"
+      ],
+      [
+       "h",
+       "@@ -1335,6 +1336,8 @@"
+      ],
+      [
+       "c",
+       "      session.flush();"
+      ],
+      [
+       "c",
+       "      PropertyDAO.from(metadata.getProperties().getProperties(), tableId, Constants.TABLE)"
+      ],
+      [
+       "c",
+       "          .forEach(session::persist);"
+      ],
+      [
+       "a",
+       "      DeltaUniformUtils.clearUnlessIcebergEnabled("
+      ],
+      [
+       "a",
+       "          tableInfoDAO, metadata.getProperties().getProperties());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    if (metadata.getSchema() != null) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/TableInfoDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -171,4 +171,11 @@"
+      ],
+      [
+       "c",
+       "    setUniformIcebergConvertedDeltaVersion(convertedDeltaVersion);"
+      ],
+      [
+       "c",
+       "    setUniformIcebergConvertedDeltaTimestamp(new Date(convertedDeltaTimestampMs));"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /** Clear the UniForm Iceberg metadata fields as an atomic triple. */"
+      ],
+      [
+       "a",
+       "  public void clearUniformIcebergMetadata() {"
+      ],
+      [
+       "a",
+       "    setIcebergMetadataLocation(null);"
+      ],
+      [
+       "a",
+       "    setUniformIcebergConvertedDeltaVersion(null);"
+      ],
+      [
+       "a",
+       "    setUniformIcebergConvertedDeltaTimestamp(null);"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 7,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUniformUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -35,6 +35,7 @@"
+      ],
+      [
+       "c",
+       " *       (metadata-location, version, timestamp-ms, optional base-version) so no field is normalized"
+      ],
+      [
+       "c",
+       " *       or parsed twice."
+      ],
+      [
+       "c",
+       " *   <li>{@link #applyToDao} -- writes the triple to the DAO; no-op when absent."
+      ],
+      [
+       "a",
+       " *   <li>{@link #clearUnlessIcebergEnabled} -- clears the triple once UniForm-Iceberg is off."
+      ],
+      [
+       "c",
+       " * </ul>"
+      ],
+      [
+       "c",
+       " */"
+      ],
+      [
+       "c",
+       "public final class DeltaUniformUtils {"
+      ],
+      [
+       "h",
+       "@@ -318,4 +319,18 @@"
+      ],
+      [
+       "c",
+       "            dao.updateUniformIcebergMetadata("
+      ],
+      [
+       "c",
+       "                f.metadataLocation(), f.convertedDeltaVersion(), f.convertedDeltaTimestampMs()));"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Clear the UniForm Iceberg fields on a Delta table's {@link TableInfoDAO} unless {@code"
+      ],
+      [
+       "a",
+       "   * properties}, the table's properties after the request, enable UniForm-Iceberg. Otherwise a"
+      ],
+      [
+       "a",
+       "   * table that turned UniForm off keeps being served at its last converted version through the"
+      ],
+      [
+       "a",
+       "   * Iceberg REST catalog and in the {@code uniform} block of the Delta {@code loadTable}. Callers"
+      ],
+      [
+       "a",
+       "   * must only pass Delta tables: a native Iceberg table keeps its metadata pointer in the same"
+      ],
+      [
+       "a",
+       "   * column."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public static void clearUnlessIcebergEnabled(TableInfoDAO dao, Map<String, String> properties) {"
+      ],
+      [
+       "a",
+       "    if (!isIcebergEnabled(properties)) {"
+      ],
+      [
+       "a",
+       "      dao.clearUniformIcebergMetadata();"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 15,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
+     "lines": [
+      [
+       "h",
+       "@@ -374,8 +374,8 @@"
+      ],
+      [
+       "c",
+       "   * <p>Actions run in canonical order (not request order): schema + partition columns first (one"
+      ]
+     ],
+     "truncated": true,
+     "additions": 3,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T05:47:12Z",
+    "updated_at": "2026-11-15T05:48:44Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 112
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
