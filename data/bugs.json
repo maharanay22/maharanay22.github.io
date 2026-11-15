@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T06:08:06Z",
+ "generated_at": "2026-11-15T06:45:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7307,
+   "stars": 7308,
    "forks": 939,
    "package": "pylance",
    "impact": null,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63270,
+   "stars": 63271,
    "forks": 13285,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,169 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep LOCATION in CREATE OR REPLACE TABLE for a table that does not exist yet",
+   "date": "2026-11-15",
+   "created_at": "2026-11-15T06:43:59Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2246,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2246"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": "high",
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -392,11 +392,6 @@"
+      ],
+      [
+       "c",
+       "    // a REPLACE against a non-managed-Delta table still surfaces the precise error rather than"
+      ],
+      [
+       "c",
+       "    // tripping the more generic \"only supported for catalog-managed UC Delta tables\" gate."
+      ],
+      [
+       "c",
+       "    rejectSystemManagedProperties(properties)"
+      ],
+      [
+       "d",
+       "    if (properties.containsKey(TableCatalog.PROP_LOCATION)) {"
+      ],
+      [
+       "d",
+       "      throw new ApiException("
+      ],
+      [
+       "d",
+       "        s\"$operation cannot specify property '${TableCatalog.PROP_LOCATION}' \" +"
+      ],
+      [
+       "d",
+       "          s\"on an existing UC-managed Delta table.\")"
+      ],
+      [
+       "d",
+       "    }"
+      ],
+      [
+       "c",
+       "    // Second, make sure UC says this is an existing catalog-managed Delta table and that the"
+      ],
+      [
+       "c",
+       "    // metadata we need to reuse it for replace (storage location and table ID) is present."
+      ],
+      [
+       "c",
+       "    if (!isCatalogManagedDeltaTable(tableInfo)) {"
+      ],
+      [
+       "h",
+       "@@ -615,6 +610,13 @@"
+      ],
+      [
+       "c",
+       "      partitions: Array[Transform],"
+      ],
+      [
+       "c",
+       "      properties: util.Map[String, String]): StagedTable = {"
+      ],
+      [
+       "c",
+       "    val stagingCatalog = requireStagingCatalog(\"REPLACE TABLE\")"
+      ],
+      [
+       "a",
+       "    if (UCSingleCatalog.isPathTable(ident)) {"
+      ],
+      [
+       "a",
+       "      return stagingCatalog.stageReplace(ident, schema, partitions, properties)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       "    if (!UCSingleCatalog.isManagedTable(properties, ident)) {"
+      ],
+      [
+       "a",
+       "      resolveExistingTableForReplace(ident, allowMissingTable = false)"
+      ],
+      [
+       "a",
+       "      throw locationOnExistingTableError(\"REPLACE TABLE\", ident)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    if (shouldDelegateReplaceToDeltaApi(properties)) {"
+      ],
+      [
+       "c",
+       "      // Defer load + augment to the Delta-side `buildReplaceProps`. UCSingleCatalog no longer"
+      ],
+      [
+       "c",
+       "      // loads the existing table and prepare the properties for replace as this will be done by"
+      ],
+      [
+       "h",
+       "@@ -651,6 +653,15 @@"
+      ],
+      [
+       "c",
+       "      partitions: Array[Transform],"
+      ],
+      [
+       "c",
+       "      properties: util.Map[String, String]): StagedTable = {"
+      ],
+      [
+       "c",
+       "    val stagingCatalog = requireStagingCatalog(\"CREATE OR REPLACE TABLE\")"
+      ]
+     ],
+     "truncated": true,
+     "additions": 27,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-15T06:38:50Z",
+    "updated_at": "2026-11-15T06:44:00Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 115
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -746,16 +909,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T06:06:52Z",
     "updated_at": "2026-11-15T06:06:55Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 113
   },
@@ -1215,8 +1378,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T05:44:04Z",
@@ -1224,8 +1387,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 111
   },
