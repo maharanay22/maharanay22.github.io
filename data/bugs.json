@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T04:58:08Z",
+ "generated_at": "2026-11-16T08:01:51Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28824,
-   "forks": 6615,
+   "forks": 6616,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50534,
-   "forks": 20743,
+   "stars": 50536,
+   "forks": 20744,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 688477256,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7322,
+   "stars": 7323,
    "forks": 943,
    "package": "pylance",
    "impact": null,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9083,
+   "stars": 9082,
    "forks": 2221,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63322,
-   "forks": 13308,
+   "stars": 63326,
+   "forks": 13311,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -1205,18 +1205,69 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-16T06:17:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#pullrequestreview-5915782246",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Requesting changes to the create-on-missing behavior. The inline comments cover it, plus a docs note and two nits.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:17:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#discussion_r4582557157",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] This branch creates an external table when the table is missing. `CREATE OR REPLACE TABLE` with `LOCATION` or `EXTERNAL` should fail for a missing table too, for every provider and both `deltaRestApi.enabled` settings. Why: - Creating on a missing table makes the statement work once and fail on every rer…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:17:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#discussion_r4582557176",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] The new paragraph says CREATE OR REPLACE TABLE with LOCATION creates an external table when the table does not exist. That would be rejected under this change, so the paragraph needs rewriting. It also sits inside the HTML comment block that starts at line 789 and ends at line 976, so the published page…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:17:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#discussion_r4582557185",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] Nit: isPathTable matches any single-part namespace with an absolute name, so parquet.`/path` would also be routed to the delegate. Delta only treats the delta namespace (isPathIdentifier, with runSQLonFile) and the iceberg namespace (isIcebergPathIdentifier) as path identifiers. The connector already has…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:17:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#discussion_r4582557196",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/DeltaExternalTableReadWriteTest.java",
+      "text": "[AI Assisted] Optional nit: could one delta.`s3://...` path-identifier case be added next to testReplaceDeltaPathTable? All path cases use local paths, and the cloud form is not tested.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T06:38:50Z",
-    "updated_at": "2026-11-15T08:42:33Z",
+    "updated_at": "2026-11-16T06:17:58Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 114
   },
@@ -1635,18 +1686,79 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695889",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/test_utils/function_utils_oss.py",
+      "text": "[AI Assisted] Nit: this import pulls in `function_utils`, which imports `databricks.sdk` at module level. The OSS test helpers would then depend on the Databricks SDK, which is not a core dependency. Could `param_type_name` move to a small module without SDK imports, or be inlined?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695896",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
+      "text": "[AI Assisted] Nit: `PLACE_TYPE_JSON` and `GEMINI_JSON_ARGUMENT_PARAMS` differ from the shared fixtures: string-only struct fields, and no date, timestamp or decimal parameter. A short comment on why would help. Does the protobuf `Struct` return numbers as floats? If so, a note on that would help reviewers too.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:52Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5915961394",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the fix. The STRUCT and BINARY conversion looks right for the reported cases. Summary of the inline comments: - Blocker: UTC `datetime` arguments on Python 3.10 with `DatabricksFunctionClient`. - Normal: the AutoGen `mode=\"json\"` change affects `timedelta`, native `bytes` and defaults. - Norma…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:52Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695832",
+      "maintainer": true,
+      "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
+      "text": "[AI Assisted] Blocker: a UTC `datetime` argument now reaches the client as a text value ending in `Z`. `DatabricksFunctionClient` validates timestamps with `datetime.fromisoformat`, and that call rejects a trailing `Z` on Python 3.10. `requires-python` still allows `>=3.10`. The old `str()` form (`+00:00`) was accepte…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:52Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695841",
+      "maintainer": true,
+      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
+      "text": "[AI Assisted] Normal: `timedelta` arguments. `model_dump(mode=\"json\")` turns a `timedelta` into an ISO 8601 duration such as `P1DT2H`. `DatabricksFunctionClient` rejects that string for an INTERVAL argument, and `UnitycatalogFunctionClient` passes it through as text. The old Python-mode dump sent the native `timedelta…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T06:39:52Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695848",
+      "maintainer": true,
+      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
+      "text": "[AI Assisted] Normal: native `bytes` passed to `run()`. `convert_json_argument` passes non-string values through unchanged, so native `bytes` reach the function as bytes today. After this change they are base64 decoded. The model cannot tell a validated value (which holds the UTF-8 bytes of the base64 text) from nativ…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T17:03:42Z",
-    "updated_at": "2026-11-15T17:03:46Z",
+    "updated_at": "2026-11-16T06:39:53Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 112
   },
@@ -2004,17 +2116,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T04:56:29Z",
-    "updated_at": "2026-11-16T04:56:47Z",
+    "updated_at": "2026-11-16T05:01:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 111
   },
