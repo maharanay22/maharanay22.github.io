@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T17:25:22Z",
+ "generated_at": "2026-11-16T17:36:46Z",
  "stages": [
   "reported",
   "fix sent",
@@ -2403,8 +2403,8 @@
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T17:23:34Z",
-    "updated_at": "2026-11-16T17:23:38Z",
+    "last_push": "2026-11-16T17:34:52Z",
+    "updated_at": "2026-11-16T17:35:18Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4503,11 +4503,11 @@
     "approved_by": [],
     "last_push": "2026-11-14T20:25:10Z",
     "updated_at": "2026-11-14T20:44:12Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 100
   },
