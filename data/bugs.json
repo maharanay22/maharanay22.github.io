@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T01:10:29Z",
+ "generated_at": "2026-11-16T02:45:36Z",
  "stages": [
   "reported",
   "fix sent",
@@ -32,10 +32,10 @@
    "contributor_total": 139,
    "contributors_checked": "2026-11-16",
    "period_rank": 5,
-   "period_commits": 31,
+   "period_commits": 36,
    "period_total": 34,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "delta-io/delta-rs",
@@ -53,8 +53,8 @@
    "forks": 707,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10271169,
-   "downloads_checked": "2026-11-15",
+   "downloads_month": 10145425,
+   "downloads_checked": "2026-11-16",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 298,
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28823,
-   "forks": 6615,
+   "stars": 28824,
+   "forks": 6616,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -133,12 +133,12 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50535,
-   "forks": 20743,
+   "stars": 50534,
+   "forks": 20742,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 693710064,
-   "downloads_checked": "2026-11-15",
+   "downloads_month": 688477256,
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7317,
+   "stars": 7319,
    "forks": 943,
    "package": "pylance",
    "impact": null,
@@ -183,9 +183,9 @@
    "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 67,
+   "period_total": 66,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "delta-io/delta",
@@ -203,17 +203,17 @@
    "forks": 2221,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24656979,
-   "downloads_checked": "2026-11-15",
+   "downloads_month": 24476764,
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
    "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 53,
+   "period_total": 51,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63312,
-   "forks": 13305,
+   "stars": 63316,
+   "forks": 13306,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -6545,16 +6545,6 @@
       "answered": true
      },
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-15T04:28:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#pullrequestreview-5909038458",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Option D and the earlier fixes landed. One blocker remains: the column metadata parse drops keys (serde line 66), so column comments and column-mapping ids are lost on load. Use `DeltaStructFieldMetadata.from_dict`, and add a round-trip test with non-empty metadata. The nits can follow. The forked `api_c…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-15T04:28:47Z",
@@ -6562,6 +6552,16 @@
       "maintainer": true,
       "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
       "text": "[AI Assisted] blocker: The defect is in `_parse_field` at line 66, which this function calls; line 66 is outside this PR diff, so the comment sits here. `_parse_field` passes the raw metadata dict to the `DeltaStructField` constructor, so pydantic validates it as a `DeltaStructFieldMetadata` and drops every key that i…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-15T04:28:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2229#discussion_r4577016135",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] nit: Anchor both patterns to import lines, for example `(?m)^\\s*(from|import)\\s+unitycatalog\\.client\\.models\\b`, so a docstring that mentions the UC models does not fail the build with a misleading message.",
       "answered": true
      }
     ],
@@ -6572,7 +6572,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-15T04:36:14Z",
-    "updated_at": "2026-11-15T22:00:40Z",
+    "updated_at": "2026-11-16T01:43:38Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
