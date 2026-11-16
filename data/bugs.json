@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T20:02:22Z",
+ "generated_at": "2026-11-16T20:06:20Z",
  "stages": [
   "reported",
   "fix sent",
@@ -4395,19 +4395,19 @@
       ],
       [
        "c",
-       "            // A cleaned-up version may have replaced a key field; an identity"
+       "            // A retry's window starts after its previous attempt, so it would"
       ],
       [
        "c",
-       "            // window with a hole cannot be judged, so it is refused."
+       "            // miss the moves recorded there; not tracking only costs coverage."
       ],
       [
        "c",
-       "            if identity_fence.is_some() && !missing.is_empty() {"
+       "            if checked_since == read_version && missing.is_empty() {"
       ],
       [
        "h",
-       "@@ -2808,6 +2813,194 @@"
+       "@@ -2813,6 +2818,194 @@"
       ],
       [
        "c",
@@ -4515,7 +4515,7 @@
       ],
       [
        "h",
-       "@@ -329,10 +331,26 @@"
+       "@@ -347,10 +349,26 @@"
       ],
       [
        "c",
@@ -4606,16 +4606,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T20:25:10Z",
-    "updated_at": "2026-11-14T20:44:12Z",
-    "conflicts": true,
+    "last_push": "2026-11-16T20:04:33Z",
+    "updated_at": "2026-11-16T20:04:47Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 100
   },
