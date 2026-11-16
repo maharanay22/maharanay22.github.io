@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-15T22:50:11Z",
+ "generated_at": "2026-11-16T01:10:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -26,11 +26,11 @@
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 618284,
-   "downloads_checked": "2026-11-15",
-   "contributor_rank": 8,
-   "contributor_commits": 31,
+   "downloads_checked": "2026-11-16",
+   "contributor_rank": 7,
+   "contributor_commits": 36,
    "contributor_total": 139,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": 5,
    "period_commits": 31,
    "period_total": 34,
@@ -57,13 +57,13 @@
    "downloads_checked": "2026-11-15",
    "contributor_rank": 24,
    "contributor_commits": 21,
-   "contributor_total": 299,
-   "contributors_checked": "2026-11-15",
+   "contributor_total": 298,
+   "contributors_checked": "2026-11-16",
    "period_rank": 7,
    "period_commits": 21,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "mlflow/mlflow",
@@ -77,21 +77,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28822,
+   "stars": 28823,
    "forks": 6615,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": 39,
    "period_commits": 4,
    "period_total": 111,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "mindsdb/engine",
@@ -114,12 +114,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50536,
+   "stars": 50535,
    "forks": 20743,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15",
+   "period_checked": "2026-11-16",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -171,16 +171,16 @@
     "Python",
     "AI data"
    ],
-   "stars": 7316,
+   "stars": 7317,
    "forks": 943,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4280266,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 67,
@@ -208,7 +208,7 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 53,
@@ -232,16 +232,16 @@
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37302413,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -260,16 +260,16 @@
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4226977,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63307,
-   "forks": 13304,
+   "stars": 63312,
+   "forks": 13305,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": null,
    "period_commits": null,
    "period_total": 135,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -316,16 +316,16 @@
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 482016531,
-   "downloads_checked": "2026-11-15",
+   "downloads_checked": "2026-11-16",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-15",
+   "contributors_checked": "2026-11-16",
    "period_rank": 29,
    "period_commits": 1,
    "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-15"
+   "period_checked": "2026-11-16"
   }
  ],
  "items": [
@@ -578,8 +578,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T22:00:07Z",
@@ -587,8 +587,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 117
   },
