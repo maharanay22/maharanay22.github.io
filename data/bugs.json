@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T17:08:44Z",
+ "generated_at": "2026-11-16T17:25:22Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63347,
-   "forks": 13325,
+   "stars": 63350,
+   "forks": 13326,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -1291,8 +1291,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T16:14:32Z",
@@ -1300,8 +1300,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 114
   },
@@ -1452,7 +1452,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-15T06:06:54Z",
-    "updated_at": "2026-11-16T09:34:11Z",
+    "updated_at": "2026-11-16T17:08:41Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -2276,7 +2276,7 @@
       ],
       [
        "h",
-       "@@ -129,8 +131,61 @@"
+       "@@ -129,8 +131,97 @@"
       ],
       [
        "c",
@@ -2320,20 +2320,20 @@
       ],
       [
        "a",
-       "    Response bodies are read on the owned loop before the response is returned."
+       "    Response bodies are read on the owned loop before the response is returned. The thread starts"
+      ],
+      [
+       "a",
+       "    with the first request, so a client that never sends one costs no thread."
       ],
       [
        "a",
        "    \"\"\""
-      ],
-      [
-       "a",
-       ""
       ]
      ],
      "truncated": true,
-     "additions": 61,
-     "deletions": 24
+     "additions": 109,
+     "deletions": 28
     }
    ],
    "track": {
@@ -2346,7 +2346,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Review of head `498fd535`: no blockers. The core change (one owned loop per client) is sound. The close path needs work before merge: races and hangs during close, teardown after a failed close, and blocking in `close_async()`. Also a thread per client, a docs caveat that now contradicts the new behavior…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2356,7 +2356,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `request()` checks `_closed` and submits to the loop without any synchronization against `shutdown()`. `shutdown()` then stops the loop without cancelling the tasks still pending on it. Two cases can hang or misbehave: - A request sleeping in retry backoff when `close()` runs (only when `retries` is set…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2366,7 +2366,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `_close()` awaits the replaced client's `close()` with no `try/finally`. `shutdown()` only stops the loop and joins the thread after `.result()` returns (see `shutdown()` at line 162). If the replaced close raises, the owned session is not closed, the executor is not shut down, and the loop thread keeps…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2376,7 +2376,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `close()` is `async` but calls the blocking `shutdown()`. So `await client.close_async()`, and `await api_client.close()` on the `ApiClient` passed in, block the caller's event loop until the owned thread joins. The call also cannot be cancelled. Suggested fix: `await asyncio.to_thread(self.shutdown)`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2386,7 +2386,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Each `UnitycatalogClient` now starts a daemon thread and event loop in `__init__`. `atexit.register(self.close)` (line 197) keeps the client alive until exit. So a client created per request and never closed keeps its thread, its event loop and the selector file descriptors. Before this change it held on…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2396,20 +2396,20 @@
       "maintainer": true,
       "path": "docs/ai/client.md",
       "text": "[AI Assisted] This paragraph still says to avoid creating additional event loops for async method calls, and the new sentence says calls work from any thread or loop. Readers will take these as contradictory. The same caveat is in `ai/core/README.md` at line 39. Suggested fix: reword the old caveat to say which part s…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T05:44:04Z",
-    "updated_at": "2026-11-16T09:37:36Z",
-    "conflicts": true,
+    "last_push": "2026-11-16T17:23:34Z",
+    "updated_at": "2026-11-16T17:23:38Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
