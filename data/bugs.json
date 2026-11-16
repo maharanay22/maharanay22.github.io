@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T16:17:03Z",
+ "generated_at": "2026-11-16T16:40:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63347,
+   "stars": 63346,
    "forks": 13326,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1262,7 +1262,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T16:14:32Z",
-    "updated_at": "2026-11-16T16:15:01Z",
+    "updated_at": "2026-11-16T16:19:24Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1446,11 +1446,207 @@
    "release": null,
    "files": [
     {
+     "path": "ai/core/src/unitycatalog/ai/core/client.py",
+     "lines": [
+      [
+       "h",
+       "@@ -36,6 +36,7 @@"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.validation_utils import ("
+      ],
+      [
+       "c",
+       "    FullFunctionName,"
+      ],
+      [
+       "a",
+       "    parse_iso_datetime,"
+      ],
+      [
+       "c",
+       "    validate_function_name_length,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.client import ("
+      ],
+      [
+       "h",
+       "@@ -1157,10 +1158,7 @@"
+      ],
+      [
+       "c",
+       "    if column_type == \"DATE\":"
+      ],
+      [
+       "c",
+       "        return datetime.date.fromisoformat(value)"
+      ],
+      [
+       "c",
+       "    if column_type in (\"TIMESTAMP\", \"TIMESTAMP_NTZ\"):"
+      ],
+      [
+       "d",
+       "        # NB: datetime.fromisoformat accepts a trailing \"Z\" only from Python 3.11"
+      ],
+      [
+       "d",
+       "        result = datetime.datetime.fromisoformat("
+      ],
+      [
+       "d",
+       "            value[:-1] + \"+00:00\" if value.endswith(\"Z\") else value"
+      ],
+      [
+       "d",
+       "        )"
+      ],
+      [
+       "a",
+       "        result = parse_iso_datetime(value)"
+      ],
+      [
+       "c",
+       "        if column_type == \"TIMESTAMP_NTZ\" and result.tzinfo is not None:"
+      ],
+      [
+       "c",
+       "            raise ValueError(\"TIMESTAMP_NTZ values must not have a time zone offset\")"
+      ],
+      [
+       "c",
+       "        return result"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 4
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/validation_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -49,6 +49,14 @@"
+      ],
+      [
+       "c",
+       "        return False"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def parse_iso_datetime(value: str) -> datetime.datetime:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Parse an ISO 8601 datetime string. A trailing \"Z\" means UTC, which"
+      ],
+      [
+       "a",
+       "    `datetime.fromisoformat` accepts only from Python 3.11."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    return datetime.datetime.fromisoformat(value[:-1] + \"+00:00\" if value.endswith(\"Z\") else value)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def validate_param(param: Any, column_type: str, param_type_text: str) -> None:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    Validate the parameter against the parameter info."
+      ],
+      [
+       "h",
+       "@@ -60,7 +68,7 @@"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    if is_time_type(column_type) and isinstance(param, str):"
+      ],
+      [
+       "c",
+       "        try:"
+      ],
+      [
+       "d",
+       "            datetime.datetime.fromisoformat(param)"
+      ],
+      [
+       "a",
+       "            parse_iso_datetime(param)"
+      ],
+      [
+       "c",
+       "        except ValueError as e:"
+      ],
+      [
+       "c",
+       "            raise ValueError(f\"Invalid datetime string: {param}, expecting ISO format.\") from e"
+      ],
+      [
+       "c",
+       "    elif column_type == \"INTERVAL\":"
+      ]
+     ],
+     "truncated": false,
+     "additions": 9,
+     "deletions": 1
+    },
+    {
      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
      "lines": [
       [
        "h",
-       "@@ -52,7 +52,7 @@"
+       "@@ -51,8 +51,17 @@"
+      ],
+      [
+       "c",
+       "    async def run(self, args: BaseModel, cancellation_token: CancellationToken) -> str:"
       ],
       [
        "c",
@@ -1459,6 +1655,22 @@
       [
        "c",
        "        Actually call the UC function with the provided parameters."
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        Arguments keep their python values. A BINARY argument is validated from the base64 text"
+      ],
+      [
+       "a",
+       "        the model sends into the bytes of that text, so the bytes of an argument that was set are"
+      ],
+      [
+       "a",
+       "        sent back as that text. A default that was not set keeps its value."
       ],
       [
        "c",
@@ -1470,252 +1682,32 @@
       ],
       [
        "a",
-       "        param_dict = args.model_dump(mode=\"json\")"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        result = self._client.execute_function("
-      ],
-      [
-       "c",
-       "            function_name=self._function_full_name,"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 1
-    },
-    {
-     "path": "ai/integrations/crewai/src/unitycatalog/ai/crewai/toolkit.py",
-     "lines": [
-      [
-       "h",
-       "@@ -1,9 +1,9 @@"
-      ],
-      [
-       "c",
-       "import importlib"
-      ],
-      [
-       "d",
-       "import json"
-      ],
-      [
-       "c",
-       "import logging"
-      ],
-      [
-       "c",
-       "from typing import Any, Callable, Dict, List, Optional"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from pydantic import BaseModel, ConfigDict, Field, model_validator"
+       "        param_dict = {"
       ],
       [
        "a",
-       "from pydantic_core import to_jsonable_python"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.base import BaseFunctionClient"
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
-      ],
-      [
-       "h",
-       "@@ -163,10 +163,9 @@"
-      ],
-      [
-       "c",
-       "            raise e"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        def func(**kwargs: Any) -> str:"
-      ],
-      [
-       "d",
-       "            args_json = json.loads(json.dumps(kwargs, default=str))"
-      ],
-      [
-       "c",
-       "            result = client.execute_function("
-      ],
-      [
-       "c",
-       "                function_name=function_name,"
-      ],
-      [
-       "d",
-       "                parameters=args_json,"
+       "            name: value.decode()"
       ],
       [
        "a",
-       "                parameters=to_jsonable_python(kwargs, fallback=str),"
-      ],
-      [
-       "c",
-       "                enable_retriever_tracing=mlflow_tracing_enabled(\"crewai\"),"
-      ],
-      [
-       "c",
-       "            )"
-      ],
-      [
-       "c",
-       ""
-      ]
-     ],
-     "truncated": false,
-     "additions": 2,
-     "deletions": 3
-    },
-    {
-     "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
-     "lines": [
-      [
-       "h",
-       "@@ -1,8 +1,8 @@"
-      ],
-      [
-       "d",
-       "import json"
-      ],
-      [
-       "c",
-       "import logging"
-      ],
-      [
-       "c",
-       "from typing import Any, Dict, List, Optional"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, model_validator"
+       "            if isinstance(value, bytes) and name in args.model_fields_set"
       ],
       [
        "a",
-       "from pydantic_core import to_jsonable_python"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "import dspy"
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.base import BaseFunctionClient"
-      ],
-      [
-       "h",
-       "@@ -166,10 +166,9 @@"
-      ],
-      [
-       "c",
-       "        schema_data = UCFunctionToolkit.convert_to_dspy_schema(function_info, strict=True)"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "        def func(**kwargs: Any) -> str:"
-      ],
-      [
-       "d",
-       "            args_json = json.loads(json.dumps(kwargs, default=str))"
-      ],
-      [
-       "c",
-       "            result = client.execute_function("
-      ],
-      [
-       "c",
-       "                function_name=function_name,"
-      ],
-      [
-       "d",
-       "                parameters=args_json,"
+       "            else value"
       ],
       [
        "a",
-       "                parameters=to_jsonable_python(kwargs, fallback=str),"
-      ],
-      [
-       "c",
-       "                enable_retriever_tracing=mlflow_tracing_enabled(\"dspy\"),"
-      ],
-      [
-       "c",
-       "            )"
-      ],
-      [
-       "c",
-       "            return result.to_json()"
-      ]
-     ],
-     "truncated": false,
-     "additions": 2,
-     "deletions": 3
-    },
-    {
-     "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-     "lines": [
-      [
-       "h",
-       "@@ -1,9 +1,10 @@"
-      ],
-      [
-       "d",
-       "import json"
-      ],
-      [
-       "c",
-       "import logging"
+       "            for name, value in args.model_dump().items()"
       ],
       [
        "a",
-       "from collections.abc import Mapping, Sequence"
-      ],
-      [
-       "c",
-       "from typing import Any, Callable, Dict, List, Optional"
-      ],
-      [
-       "c",
-       ""
+       "        }"
       ]
      ],
      "truncated": true,
-     "additions": 18,
-     "deletions": 3
+     "additions": 10,
+     "deletions": 1
     }
    ],
    "track": {
@@ -1728,7 +1720,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/test_utils/function_utils_oss.py",
       "text": "[AI Assisted] Nit: this import pulls in `function_utils`, which imports `databricks.sdk` at module level. The OSS test helpers would then depend on the Databricks SDK, which is not a core dependency. Could `param_type_name` move to a small module without SDK imports, or be inlined?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1738,7 +1730,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
       "text": "[AI Assisted] Nit: `PLACE_TYPE_JSON` and `GEMINI_JSON_ARGUMENT_PARAMS` differ from the shared fixtures: string-only struct fields, and no date, timestamp or decimal parameter. A short comment on why would help. Does the protobuf `Struct` return numbers as floats? If so, a note on that would help reviewers too.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1748,7 +1740,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the fix. The STRUCT and BINARY conversion looks right for the reported cases. Summary of the inline comments: - Blocker: UTC `datetime` arguments on Python 3.10 with `DatabricksFunctionClient`. - Normal: the AutoGen `mode=\"json\"` change affects `timedelta`, native `bytes` and defaults. - Norma…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1758,7 +1750,7 @@
       "maintainer": true,
       "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
       "text": "[AI Assisted] Blocker: a UTC `datetime` argument now reaches the client as a text value ending in `Z`. `DatabricksFunctionClient` validates timestamps with `datetime.fromisoformat`, and that call rejects a trailing `Z` on Python 3.10. `requires-python` still allows `>=3.10`. The old `str()` form (`+00:00`) was accepte…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1768,7 +1760,7 @@
       "maintainer": true,
       "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
       "text": "[AI Assisted] Normal: `timedelta` arguments. `model_dump(mode=\"json\")` turns a `timedelta` into an ISO 8601 duration such as `P1DT2H`. `DatabricksFunctionClient` rejects that string for an INTERVAL argument, and `UnitycatalogFunctionClient` passes it through as text. The old Python-mode dump sent the native `timedelta…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1778,20 +1770,20 @@
       "maintainer": true,
       "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
       "text": "[AI Assisted] Normal: native `bytes` passed to `run()`. `convert_json_argument` passes non-string values through unchanged, so native `bytes` reach the function as bytes today. After this change they are base64 decoded. The model cannot tell a validated value (which holds the UTF-8 bytes of the base64 text) from nativ…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T17:03:42Z",
-    "updated_at": "2026-11-16T06:39:53Z",
-    "conflicts": true,
+    "last_push": "2026-11-16T16:38:33Z",
+    "updated_at": "2026-11-16T16:39:04Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 112
   },
