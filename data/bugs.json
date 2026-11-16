@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T20:38:31Z",
+ "generated_at": "2026-11-16T20:46:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,169 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Log failed stderr file cleanup and test it in a private temp directory",
+   "date": "2026-11-16",
+   "created_at": "2026-11-16T20:44:29Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2253,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2253"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+     "lines": [
+      [
+       "h",
+       "@@ -11,18 +11,29 @@"
+      ],
+      [
+       "c",
+       "import java.nio.charset.StandardCharsets;"
+      ],
+      [
+       "c",
+       "import java.nio.file.Files;"
+      ],
+      [
+       "c",
+       "import java.nio.file.Path;"
+      ],
+      [
+       "a",
+       "import java.nio.file.Paths;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "c",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "c",
+       "import org.json.JSONArray;"
+      ],
+      [
+       "a",
+       "import org.slf4j.Logger;"
+      ],
+      [
+       "a",
+       "import org.slf4j.LoggerFactory;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "public class PythonInvoker {"
+      ],
+      [
+       "a",
+       "  private static final Logger LOGGER = LoggerFactory.getLogger(PythonInvoker.class);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /** How much of the end of stderr a failure message keeps. The Python error is printed last. */"
+      ],
+      [
+       "c",
+       "  private static final int MAX_ERROR_OUTPUT_BYTES = 4096;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static String invokePython(FunctionInfo function, String scriptPath, String... args)"
+      ],
+      [
+       "c",
+       "      throws ApiException {"
+      ],
+      [
+       "a",
+       "    return invokePython("
+      ],
+      [
+       "a",
+       "        function, scriptPath, Paths.get(System.getProperty(\"java.io.tmpdir\")), args);"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /** Same as above, with the stderr file of the call created in {@code tempDir}. */"
+      ],
+      [
+       "a",
+       "  static String invokePython(FunctionInfo function, String scriptPath, Path tempDir, String... args)"
+      ],
+      [
+       "a",
+       "      throws ApiException {"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "c",
+       "      // Prepare the arguments for the Python script"
+      ],
+      [
+       "c",
+       "      List<String> argsList = new ArrayList<>();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 14,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-16T20:44:26Z",
+    "updated_at": "2026-11-16T20:44:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 120
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -1123,7 +1286,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T20:36:45Z",
-    "updated_at": "2026-11-16T20:37:00Z",
+    "updated_at": "2026-11-16T20:39:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
