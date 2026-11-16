@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T02:53:35Z",
+ "generated_at": "2026-11-16T04:58:08Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28824,
-   "forks": 6616,
+   "forks": 6615,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50534,
-   "forks": 20742,
+   "forks": 20743,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 688477256,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7319,
+   "stars": 7322,
    "forks": 943,
    "package": "pylance",
    "impact": null,
@@ -256,7 +256,7 @@
     "SQL DDL"
    ],
    "stars": 391,
-   "forks": 232,
+   "forks": 233,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4226977,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63317,
-   "forks": 13306,
+   "stars": 63322,
+   "forks": 13308,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -618,16 +618,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-16T02:51:40Z",
     "updated_at": "2026-11-16T02:52:21Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 117
   },
@@ -1753,11 +1753,103 @@
      "deletions": 1
     },
     {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/TableRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -365,6 +365,7 @@"
+      ],
+      [
+       "c",
+       "          DeltaUpdateTableMapper.checkTableUuidRequirement(dao, collected);"
+      ],
+      [
+       "c",
+       "          String preApplyEtag = DeltaUpdateTableMapper.computeEtag(dao);"
+      ],
+      [
+       "c",
+       "          MutablePropertyMap properties = MutablePropertyMap.load(session, dao.getId());"
+      ],
+      [
+       "a",
+       "          boolean hadUniformMetadata = dao.getIcebergMetadataLocation() != null;"
+      ],
+      [
+       "c",
+       "          // The request is validated against the table's current state, which would wrongly"
+      ],
+      [
+       "c",
+       "          // reject a replay of an add-commit whose changes a later commit superseded. Settle a"
+      ],
+      [
+       "c",
+       "          // taken add-commit version first, so the replay or conflict is reported as the commit"
+      ],
+      [
+       "h",
+       "@@ -401,8 +402,10 @@"
+      ],
+      [
+       "c",
+       "          properties.flush(session, dao.getId());"
+      ],
+      [
+       "c",
+       "          // updatedAt/updatedBy track the last change to the table's catalog-visible metadata."
+      ],
+      [
+       "c",
+       "          // Data-only add-commit and backfill-only requests change no metadata, so they must"
+      ],
+      [
+       "d",
+       "          // not advance these fields."
+      ],
+      [
+       "d",
+       "          if (collected.updates().changesTableMetadata()) {"
+      ],
+      [
+       "a",
+       "          // not advance these fields unless they cleared stale UniForm metadata."
+      ],
+      [
+       "a",
+       "          boolean clearedUniformMetadata ="
+      ],
+      [
+       "a",
+       "              hadUniformMetadata && dao.getIcebergMetadataLocation() == null;"
+      ],
+      [
+       "a",
+       "          if (collected.updates().changesTableMetadata() || clearedUniformMetadata) {"
+      ],
+      [
+       "c",
+       "            dao.setUpdatedAt(new Date());"
+      ],
+      [
+       "c",
+       "            dao.setUpdatedBy(callerId);"
+      ],
+      [
+       "c",
+       "          }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 2
+    },
+    {
      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/TableInfoDAO.java",
      "lines": [
       [
        "h",
-       "@@ -171,4 +171,11 @@"
+       "@@ -171,4 +171,14 @@"
       ],
       [
        "c",
@@ -1777,7 +1869,19 @@
       ],
       [
        "a",
-       "  /** Clear the UniForm Iceberg metadata fields as an atomic triple. */"
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Clear all three UniForm Iceberg fields together. Delta tables only; see {@link"
+      ],
+      [
+       "a",
+       "   * io.unitycatalog.server.service.delta.DeltaUniformUtils#clearUnlessIcebergEnabled}."
+      ],
+      [
+       "a",
+       "   */"
       ],
       [
        "a",
@@ -1805,7 +1909,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 7,
+     "additions": 10,
      "deletions": 0
     },
     {
@@ -1830,115 +1934,11 @@
       [
        "a",
        " *   <li>{@link #clearUnlessIcebergEnabled} -- clears the triple once UniForm-Iceberg is off."
-      ],
-      [
-       "c",
-       " * </ul>"
-      ],
-      [
-       "c",
-       " */"
-      ],
-      [
-       "c",
-       "public final class DeltaUniformUtils {"
-      ],
-      [
-       "h",
-       "@@ -318,4 +319,18 @@"
-      ],
-      [
-       "c",
-       "            dao.updateUniformIcebergMetadata("
-      ],
-      [
-       "c",
-       "                f.metadataLocation(), f.convertedDeltaVersion(), f.convertedDeltaTimestampMs()));"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "  /**"
-      ],
-      [
-       "a",
-       "   * Clear the UniForm Iceberg fields on a Delta table's {@link TableInfoDAO} unless {@code"
-      ],
-      [
-       "a",
-       "   * properties}, the table's properties after the request, enable UniForm-Iceberg. Otherwise a"
-      ],
-      [
-       "a",
-       "   * table that turned UniForm off keeps being served at its last converted version through the"
-      ],
-      [
-       "a",
-       "   * Iceberg REST catalog and in the {@code uniform} block of the Delta {@code loadTable}. Callers"
-      ],
-      [
-       "a",
-       "   * must only pass Delta tables: a native Iceberg table keeps its metadata pointer in the same"
-      ],
-      [
-       "a",
-       "   * column."
-      ],
-      [
-       "a",
-       "   */"
-      ],
-      [
-       "a",
-       "  public static void clearUnlessIcebergEnabled(TableInfoDAO dao, Map<String, String> properties) {"
-      ],
-      [
-       "a",
-       "    if (!isIcebergEnabled(properties)) {"
-      ],
-      [
-       "a",
-       "      dao.clearUniformIcebergMetadata();"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "a",
-       "  }"
-      ],
-      [
-       "c",
-       "}"
-      ]
-     ],
-     "truncated": false,
-     "additions": 15,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
-     "lines": [
-      [
-       "h",
-       "@@ -374,8 +374,8 @@"
-      ],
-      [
-       "c",
-       "   * <p>Actions run in canonical order (not request order): schema + partition columns first (one"
       ]
      ],
      "truncated": true,
-     "additions": 3,
-     "deletions": 2
+     "additions": 15,
+     "deletions": 0
     }
    ],
    "track": {
@@ -1951,7 +1951,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The clear is correct on the Delta updateTable and UC REST commit paths, and the replay ordering holds. Thanks for the work on this. Inline, non-blocking: the `updated_at` and etag bump when the clear removes stored metadata, the Javadoc and spec wording, a test for an external UniForm table with no commi…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1961,7 +1961,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
       "text": "[AI Assisted] When the clear removes stored UniForm metadata but the request changes no table metadata, `updated_at` and the etag stay the same, while `loadTable` drops the `uniform` block. Clients that cache the etag would keep serving the old block. Could the clear bump `updated_at` only when it removes something, a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1971,7 +1971,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/dao/TableInfoDAO.java",
       "text": "[AI Assisted] The Javadoc calls the clear an atomic triple. The three setters are atomic only through the surrounding transaction. Suggested wording: \"Clear all three UniForm Iceberg fields together. Delta tables only; see `DeltaUniformUtils.clearUnlessIcebergEnabled`.\"",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1981,7 +1981,7 @@
       "maintainer": true,
       "path": "spec/protocols/ManagedDeltaTablesSpec.md",
       "text": "[AI Assisted] \"When a request leaves UniForm disabled\" can read as \"already off and stays off\". The clear also runs when a request turns UniForm off. Suggested wording: \"When the table's properties after a request no longer enable UniForm, the server drops the table's stored UniForm metadata, so `loadTable` no longer…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1991,7 +1991,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/delta/SdkUpdateTableTest.java",
       "text": "[AI Assisted] Could we add a case for an external UniForm Delta table where the property is removed without a commit? It should check the `uniform` block in `loadTable` and that the Iceberg REST `tableExists` is false.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2001,20 +2001,20 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/delta/SdkUpdateTableTest.java",
       "text": "[AI Assisted] `ENABLED_FORMATS` duplicates `TableProperties.UNIVERSAL_FORMAT_ENABLED_FORMATS`, which this file already imports. Could it use the constant?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T05:47:12Z",
-    "updated_at": "2026-11-15T22:44:12Z",
+    "last_push": "2026-11-16T04:56:29Z",
+    "updated_at": "2026-11-16T04:56:47Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 111
   },
