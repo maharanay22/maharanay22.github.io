@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T08:01:51Z",
+ "generated_at": "2026-11-16T11:22:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28824,
+   "stars": 28831,
    "forks": 6616,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50536,
-   "forks": 20744,
+   "stars": 50535,
+   "forks": 20745,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 688477256,
@@ -171,8 +171,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7323,
-   "forks": 943,
+   "stars": 7328,
+   "forks": 944,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4280266,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63326,
-   "forks": 13311,
+   "stars": 63338,
+   "forks": 13316,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -622,7 +622,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-16T02:51:40Z",
-    "updated_at": "2026-11-16T02:52:21Z",
+    "updated_at": "2026-11-16T09:44:13Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -885,7 +885,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T22:00:07Z",
-    "updated_at": "2026-11-15T22:00:27Z",
+    "updated_at": "2026-11-16T09:44:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1048,7 +1048,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-15T16:36:31Z",
-    "updated_at": "2026-11-15T16:36:36Z",
+    "updated_at": "2026-11-16T09:44:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1274,11 +1274,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Build Gemini and DSPy tools for functions without parameters",
    "date": "2026-11-15",
    "created_at": "2026-11-15T06:06:40Z",
-   "merged_at": null,
+   "merged_at": "2026-11-16",
    "reported": true,
    "pr": {
     "number": 2245,
@@ -1379,18 +1379,51 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-16T09:29:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2245#pullrequestreview-5917715873",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Verdict: approve. The `input_params` None guard is the right minimal fix and matches the zero-parameter guards already used in core. Two optional nits on the Gemini tests are inline.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:29:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2245#discussion_r4583986410",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
+      "text": "[AI Assisted] nit: this compares the response with an exact JSON string, which depends on key order and spacing. Parsing it with `json.loads` and comparing to `{\"format\": \"SCALAR\", \"value\": \"sunny\"}`, as the DSPy test does, would be less brittle.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:29:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2245#discussion_r4583986420",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
+      "text": "[AI Assisted] nit: could we add a Gemini case for `FunctionParameterInfos(parameters=None)` expecting `ValueError`, like `test_toolkit_convert_to_dspy_schema_none_parameters` in the DSPy OSS tests? The PR keeps that branch on purpose, so a test would pin it down.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T06:06:54Z",
-    "updated_at": "2026-11-15T08:42:32Z",
+    "updated_at": "2026-11-16T09:34:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 113
   },
@@ -1754,7 +1787,7 @@
     "approved_by": [],
     "last_push": "2026-11-15T17:03:42Z",
     "updated_at": "2026-11-16T06:39:53Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
@@ -2121,7 +2154,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T04:56:29Z",
-    "updated_at": "2026-11-16T05:01:08Z",
+    "updated_at": "2026-11-16T09:44:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2278,18 +2311,79 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5917810384",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Review of head `498fd535`: no blockers. The core change (one owned loop per client) is sound. The close path needs work before merge: races and hangs during close, teardown after a failed close, and blocking in `close_async()`. Also a thread per client, a docs caveat that now contradicts the new behavior…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4584055719",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] `request()` checks `_closed` and submits to the loop without any synchronization against `shutdown()`. `shutdown()` then stops the loop without cancelling the tasks still pending on it. Two cases can hang or misbehave: - A request sleeping in retry backoff when `close()` runs (only when `retries` is set…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4584055729",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] `_close()` awaits the replaced client's `close()` with no `try/finally`. `shutdown()` only stops the loop and joins the thread after `.result()` returns (see `shutdown()` at line 162). If the replaced close raises, the owned session is not closed, the executor is not shut down, and the loop thread keeps…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4584055739",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] `close()` is `async` but calls the blocking `shutdown()`. So `await client.close_async()`, and `await api_client.close()` on the `ApiClient` passed in, block the caller's event loop until the owned thread joins. The call also cannot be cancelled. Suggested fix: `await asyncio.to_thread(self.shutdown)`.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4584055746",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Each `UnitycatalogClient` now starts a daemon thread and event loop in `__init__`. `atexit.register(self.close)` (line 197) keeps the client alive until exit. So a client created per request and never closed keeps its thread, its event loop and the selector file descriptors. Before this change it held on…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T09:37:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4584055753",
+      "maintainer": true,
+      "path": "docs/ai/client.md",
+      "text": "[AI Assisted] This paragraph still says to avoid creating additional event loops for async method calls, and the new sentence says calls work from any thread or loop. Readers will take these as contradictory. The same caveat is in `ai/core/README.md` at line 39. Suggested fix: reword the old caveat to say which part s…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T05:44:04Z",
-    "updated_at": "2026-11-15T08:42:29Z",
-    "conflicts": false,
+    "updated_at": "2026-11-16T09:37:36Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -2890,7 +2984,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T16:46:12Z",
-    "updated_at": "2026-11-15T17:00:19Z",
+    "updated_at": "2026-11-16T09:44:09Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
