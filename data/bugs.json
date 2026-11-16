@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T02:45:36Z",
+ "generated_at": "2026-11-16T02:53:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63316,
+   "stars": 63317,
    "forks": 13306,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,308 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Upgrade sbt-openapi-generator and drop the Python asyncio rest.mustache override",
+   "date": "2026-11-16",
+   "created_at": "2026-11-16T02:52:20Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2250,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2250"
+   },
+   "issue": {
+    "number": 2026,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2026"
+   },
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "api/delta.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1369,9 +1369,9 @@"
+      ],
+      [
+       "c",
+       "          description: |"
+      ],
+      [
+       "c",
+       "            Schema-only marker; never sent on the wire. Declared so the OpenAPI generator emits a"
+      ],
+      [
+       "c",
+       "            wrapper class for this schema instead of inlining `metadata` on the parent DeltaStructField"
+      ],
+      [
+       "d",
+       "            `new HashMap<>()` -- that would erase the \"metadata absent\" signal. Use the Map"
+      ],
+      [
+       "d",
+       "            accessors (e.g., `metadata.put(\"comment\", ...)` and `metadata.get(\"comment\")`) for "
+      ],
+      [
+       "d",
+       "            actual metadata keys."
+      ],
+      [
+       "a",
+       "            `new HashMap<>()` -- that would erase the \"metadata absent\" signal. Actual metadata keys"
+      ],
+      [
+       "a",
+       "            are additional properties (in the Java client, e.g., `metadata.putAdditionalProperty(\"comment\", ...)`"
+      ],
+      [
+       "a",
+       "            and `metadata.getAdditionalProperty(\"comment\")`)."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    DeltaDataType:"
+      ],
+      [
+       "c",
+       "      description: |"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 3
+    },
+    {
+     "path": "build.sbt",
+     "lines": [
+      [
+       "h",
+       "@@ -178,6 +178,10 @@"
+      ],
+      [
+       "c",
+       "  (Compile / compile) := ((Compile / compile) dependsOn (Compile / javafmtAll)).value"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "// Overrides Java/libraries/native/api.mustache so the native Java clients decode responses as UTF-8 (see its"
+      ],
+      [
+       "a",
+       "// header for when to remove it)."
+      ],
+      [
+       "a",
+       "lazy val javaClientTemplateDir = (file(\"clients\") / \"java\" / \"templates\").getAbsolutePath"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "lazy val controlApi = (project in file(\"target/control/java\"))"
+      ],
+      [
+       "c",
+       "  .enablePlugins(OpenApiGeneratorPlugin)"
+      ],
+      [
+       "c",
+       "  .disablePlugins(JavaFormatterPlugin, CheckstylePlugin)"
+      ],
+      [
+       "h",
+       "@@ -206,6 +210,7 @@"
+      ],
+      [
+       "c",
+       "      \"useJakartaEe\" -> \"true\","
+      ],
+      [
+       "c",
+       "      \"hideGenerationTimestamp\" -> \"true\","
+      ],
+      [
+       "c",
+       "      \"openApiNullable\" -> \"false\"),"
+      ],
+      [
+       "a",
+       "    openApiTemplateDir := javaClientTemplateDir,"
+      ],
+      [
+       "c",
+       "    openApiGenerateApiTests := SettingDisabled,"
+      ],
+      [
+       "c",
+       "    openApiGenerateModelTests := SettingDisabled,"
+      ],
+      [
+       "c",
+       "    openApiGenerateApiDocumentation := SettingDisabled,"
+      ],
+      [
+       "h",
+       "@@ -274,14 +279,16 @@"
+      ],
+      [
+       "c",
+       "            invokerPackage = s\"$orgName.client\","
+      ],
+      [
+       "c",
+       "            apiPackage = s\"$orgName.client.api\","
+      ],
+      [
+       "c",
+       "            modelPackage = s\"$orgName.client.model\","
+      ],
+      [
+       "d",
+       "            additionalProperties = commonProps"
+      ],
+      [
+       "a",
+       "            additionalProperties = commonProps,"
+      ],
+      [
+       "a",
+       "            templateDir = javaClientTemplateDir"
+      ],
+      [
+       "c",
+       "          ),"
+      ],
+      [
+       "c",
+       "          OpenApiSpec("
+      ],
+      [
+       "c",
+       "            inputSpec = (file(\".\") / \"api\" / \"delta.yaml\").toString,"
+      ],
+      [
+       "c",
+       "            invokerPackage = s\"$orgName.client\","
+      ]
+     ],
+     "truncated": true,
+     "additions": 10,
+     "deletions": 4
+    },
+    {
+     "path": "clients/java/templates/libraries/native/api.mustache",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,963 @@"
+      ],
+      [
+       "a",
+       "{{! Copied from OpenAPI Generator v7.27.0 (Java/libraries/native/api.mustache), with every response body"
+      ],
+      [
+       "a",
+       "    decoded as UTF-8 instead of the JVM default charset. Re-sync this copy from the new version, or delete it"
+      ],
+      [
+       "a",
+       "    once the generator decodes them as UTF-8 itself, whenever sbt-openapi-generator in project/plugins.sbt is"
+      ],
+      [
+       "a",
+       "    upgraded. }}"
+      ],
+      [
+       "a",
+       "{{>licenseInfo}}"
+      ],
+      [
+       "a",
+       "package {{package}};"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "import {{invokerPackage}}.ApiClient;"
+      ],
+      [
+       "a",
+       "import {{invokerPackage}}.ApiException;"
+      ],
+      [
+       "a",
+       "import {{invokerPackage}}.ApiResponse;"
+      ],
+      [
+       "a",
+       "import {{invokerPackage}}.Configuration;"
+      ],
+      [
+       "a",
+       "import {{invokerPackage}}.Pair;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{#imports}}"
+      ],
+      [
+       "a",
+       "import {{import}};"
+      ],
+      [
+       "a",
+       "{{/imports}}"
+      ]
+     ],
+     "truncated": true,
+     "additions": 963,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-16T02:51:40Z",
+    "updated_at": "2026-11-16T02:52:21Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 117
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -590,7 +892,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 117
+   "id": 116
   },
   {
    "kind": "fix",
@@ -753,7 +1055,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 116
+   "id": 115
   },
   {
    "kind": "fix",
@@ -916,7 +1218,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 115
+   "id": 114
   },
   {
    "kind": "fix",
@@ -1039,7 +1341,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 114
+   "id": 113
   },
   {
    "kind": "fix",
@@ -1346,7 +1648,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 113
+   "id": 112
   },
   {
    "kind": "fix",
@@ -1714,7 +2016,7 @@
     "waiting_on": "you",
     "next": "yili-db left review comments. Reply or update the PR"
    },
-   "id": 112
+   "id": 111
   },
   {
    "kind": "fix",
@@ -1877,7 +2179,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 111
+   "id": 110
   },
   {
    "kind": "fix",
@@ -2123,7 +2425,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 110
+   "id": 109
   },
   {
    "kind": "fix",
@@ -2483,7 +2785,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 109
+   "id": 108
   },
   {
    "kind": "fix",
@@ -2655,7 +2957,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 108
+   "id": 107
   },
   {
    "kind": "fix",
@@ -2702,7 +3004,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 107
+   "id": 106
   },
   {
    "kind": "fix",
@@ -2936,7 +3238,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 106
+   "id": 105
   },
   {
    "kind": "fix",
@@ -3099,7 +3401,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 105
+   "id": 104
   },
   {
    "kind": "fix",
@@ -3358,7 +3660,7 @@
     "waiting_on": "you",
     "next": "Some tests failed. Check the logs"
    },
-   "id": 104
+   "id": 103
   },
   {
    "kind": "fix",
@@ -3521,7 +3823,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 103
+   "id": 102
   },
   {
    "kind": "fix",
@@ -3684,7 +3986,7 @@
     "waiting_on": "you",
     "next": "Some tests failed. Check the logs"
    },
-   "id": 102
+   "id": 101
   },
   {
    "kind": "fix",
@@ -3975,7 +4277,7 @@
     "waiting_on": "you",
     "next": "Some tests failed. Check the logs"
    },
-   "id": 101
+   "id": 100
   },
   {
    "kind": "fix",
@@ -4289,7 +4591,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
-   "id": 100
+   "id": 99
   },
   {
    "kind": "fix",
@@ -4463,7 +4765,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
-   "id": 99
+   "id": 98
   },
   {
    "kind": "fix",
@@ -4542,7 +4844,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
-   "id": 98
+   "id": 97
   },
   {
    "kind": "fix",
@@ -4916,7 +5218,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 97
+   "id": 96
   },
   {
    "kind": "fix",
@@ -5281,7 +5583,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 96
+   "id": 95
   },
   {
    "kind": "fix",
@@ -5508,7 +5810,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 95
+   "id": 94
   },
   {
    "kind": "fix",
@@ -5865,7 +6167,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 94
+   "id": 93
   },
   {
    "kind": "fix",
@@ -6222,7 +6524,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 93
+   "id": 92
   },
   {
    "kind": "fix",
@@ -6579,7 +6881,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 92
+   "id": 91
   },
   {
    "kind": "fix",
@@ -6889,7 +7191,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
    },
-   "id": 91
+   "id": 90
   },
   {
    "kind": "fix",
@@ -7242,7 +7544,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 90
+   "id": 89
   },
   {
    "kind": "fix",
@@ -7605,7 +7907,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 89
+   "id": 88
   },
   {
    "kind": "fix",
@@ -7959,7 +8261,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 88
+   "id": 87
   },
   {
    "kind": "fix",
@@ -8327,7 +8629,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 87
+   "id": 86
   },
   {
    "kind": "fix",
@@ -8692,7 +8994,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 86
+   "id": 85
   },
   {
    "kind": "report",
@@ -8724,7 +9026,7 @@
     "waiting_on": "maintainers",
     "next": "Reported with a reproduction. Waiting for maintainers"
    },
-   "id": 85
+   "id": 84
   },
   {
    "kind": "fix",
@@ -8953,7 +9255,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 84
+   "id": 83
   },
   {
    "kind": "fix",
@@ -9252,7 +9554,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 83
+   "id": 82
   },
   {
    "kind": "report",
@@ -9284,7 +9586,7 @@
     "waiting_on": "maintainers",
     "next": "Reported with a reproduction. Waiting for maintainers"
    },
-   "id": 82
+   "id": 81
   },
   {
    "kind": "report",
@@ -9316,7 +9618,7 @@
     "waiting_on": "maintainers",
     "next": "Reported with a reproduction. Waiting for maintainers"
    },
-   "id": 81
+   "id": 80
   },
   {
    "kind": "fix",
@@ -9739,7 +10041,7 @@
     "waiting_on": "you",
     "next": "The branch conflicts with main. Rebase it"
    },
-   "id": 80
+   "id": 79
   },
   {
    "kind": "fix",
@@ -9968,7 +10270,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 79
+   "id": 78
   },
   {
    "kind": "fix",
@@ -10326,7 +10628,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 78
+   "id": 77
   },
   {
    "kind": "fix",
@@ -10505,7 +10807,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 77
+   "id": 76
   },
   {
    "kind": "fix",
@@ -10595,7 +10897,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 76
+   "id": 75
   },
   {
    "kind": "fix",
@@ -10688,7 +10990,7 @@
     "waiting_on": "nobody",
     "next": "Closed without merging"
    },
-   "id": 75
+   "id": 74
   },
   {
    "kind": "report",
@@ -10723,7 +11025,7 @@
     "waiting_on": "nobody",
     "next": "Another contributor's fix was merged"
    },
-   "id": 74
+   "id": 73
   },
   {
    "kind": "fix",
@@ -10808,7 +11110,7 @@
     "waiting_on": "maintainers",
     "next": "Maintainers labeled it Needs Discussion and are deciding between writing nanoseconds (this PR) and changing the warning. The one CI failure is a macOS runner that lost connection. Nothing to do until they decide"
    },
-   "id": 73
+   "id": 72
   },
   {
    "kind": "fix",
@@ -11181,7 +11483,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 72
+   "id": 71
   },
   {
    "kind": "fix",
@@ -11345,7 +11647,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 71
+   "id": 70
   },
   {
    "kind": "fix",
@@ -11634,7 +11936,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 70
+   "id": 69
   },
   {
    "kind": "fix",
@@ -11994,7 +12296,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 69
+   "id": 68
   },
   {
    "kind": "fix",
@@ -12180,7 +12482,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 68
+   "id": 67
   },
   {
    "kind": "fix",
@@ -12351,7 +12653,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 67
+   "id": 66
   },
   {
    "kind": "fix",
@@ -12537,7 +12839,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 66
+   "id": 65
   },
   {
    "kind": "fix",
@@ -12763,7 +13065,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 65
+   "id": 64
   },
   {
    "kind": "fix",
@@ -13083,7 +13385,7 @@
     "waiting_on": "maintainers",
     "next": "Tests pass. Waiting for a maintainer to review"
    },
-   "id": 64
+   "id": 63
   },
   {
    "kind": "fix",
@@ -13203,7 +13505,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 63
+   "id": 62
   },
   {
    "kind": "fix",
@@ -13513,7 +13815,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 62
+   "id": 61
   },
   {
    "kind": "fix",
@@ -13837,7 +14139,7 @@
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
    },
-   "id": 61
+   "id": 60
   },
   {
    "kind": "fix",
@@ -14048,49 +14350,6 @@
     "state": "done",
     "waiting_on": "nobody",
     "next": "Merged. It ships in the project's next release"
-   },
-   "id": 60
-  },
-  {
-   "kind": "report",
-   "repo": "unitycatalog/unitycatalog",
-   "status": "open",
-   "title": "Upgrade sbt-openapi-generator and drop the Python asyncio rest.mustache override",
-   "date": "2026-10-20",
-   "created_at": "2026-10-20T02:46:09Z",
-   "merged_at": null,
-   "reported": true,
-   "pr": null,
-   "issue": {
-    "number": 2026,
-    "url": "https://github.com/unitycatalog/unitycatalog/issues/2026"
-   },
-   "proof": null,
-   "files": [],
-   "track": {
-    "feedback": [
-     {
-      "kind": "comment",
-      "who": "jaceklaskowski",
-      "at": "2026-11-08T14:58:05Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/issues/2026#issuecomment-6723027676",
-      "maintainer": false,
-      "path": null,
-      "text": "I just hit an issue after bumping my sbt-openapi-generator to **7.27.0** (the [latest available](https://github.com/OpenAPITools/sbt-openapi-generator/releases) at the time of this writing) and ran into a build issue. Its generated Java didn't compile (`getAction()` returned `ActionEnum` where the parent expects `Stri…",
-      "answered": true
-     }
-    ],
-    "stage": 1,
-    "checks": null,
-    "review": null,
-    "approved_by": [],
-    "last_push": null,
-    "updated_at": "2026-11-15T22:00:42Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Reported with a reproduction. Waiting for maintainers"
    },
    "id": 59
   },
