@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T20:22:29Z",
+ "generated_at": "2026-11-16T20:32:31Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28838,
-   "forks": 6618,
+   "forks": 6619,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -329,6 +329,121 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Refuse deleting an external location with pending cleanup as FAILED_PRECONDITION, not 403",
+   "date": "2026-11-16",
+   "created_at": "2026-11-16T20:31:05Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2252,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2252"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -221,6 +221,8 @@"
+      ],
+      [
+       "c",
+       "   * @throws BaseException with NOT_FOUND if the external location doesn't exist"
+      ],
+      [
+       "c",
+       "   * @throws BaseException with INVALID_ARGUMENT if the external location is in use and force is"
+      ],
+      [
+       "c",
+       "   *     false"
+      ],
+      [
+       "a",
+       "   * @throws BaseException with FAILED_PRECONDITION if a storage cleanup is pending under the"
+      ],
+      [
+       "a",
+       "   *     external location and force is false"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public ExternalLocationDAO deleteExternalLocation(String name, boolean force) {"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "h",
+       "@@ -235,7 +237,7 @@"
+      ],
+      [
+       "c",
+       "            if (ExternalLocationUtils.hasPendingCleanupOverlap("
+      ],
+      [
+       "c",
+       "                session, NormalizedURL.from(existingLocation.getUrl()))) {"
+      ],
+      [
+       "c",
+       "              throw new BaseException("
+      ],
+      [
+       "d",
+       "                  ErrorCode.PERMISSION_DENIED, \"Input path overlaps pending storage cleanup.\");"
+      ],
+      [
+       "a",
+       "                  ErrorCode.FAILED_PRECONDITION, \"Input path overlaps pending storage cleanup.\");"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "c",
+       "            ExternalLocationUtils.getAllEntityDAOsWithURLOverlap("
+      ],
+      [
+       "c",
+       "                    session,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-16T20:31:03Z",
+    "updated_at": "2026-11-16T20:31:06Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 119
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -3118,7 +3233,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T20:20:32Z",
-    "updated_at": "2026-11-16T20:20:48Z",
+    "updated_at": "2026-11-16T20:24:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
