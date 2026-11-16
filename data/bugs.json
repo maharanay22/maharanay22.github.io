@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T18:24:13Z",
+ "generated_at": "2026-11-16T20:02:22Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50538,
+   "stars": 50539,
    "forks": 20746,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7335,
+   "stars": 7336,
    "forks": 944,
    "package": "pylance",
    "impact": null,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63350,
-   "forks": 13326,
+   "stars": 63354,
+   "forks": 13328,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -384,66 +384,6 @@
    "impact": null,
    "release": null,
    "files": [
-    {
-     "path": "api/delta.yaml",
-     "lines": [
-      [
-       "h",
-       "@@ -1369,9 +1369,9 @@"
-      ],
-      [
-       "c",
-       "          description: |"
-      ],
-      [
-       "c",
-       "            Schema-only marker; never sent on the wire. Declared so the OpenAPI generator emits a"
-      ],
-      [
-       "c",
-       "            wrapper class for this schema instead of inlining `metadata` on the parent DeltaStructField"
-      ],
-      [
-       "d",
-       "            `new HashMap<>()` -- that would erase the \"metadata absent\" signal. Use the Map"
-      ],
-      [
-       "d",
-       "            accessors (e.g., `metadata.put(\"comment\", ...)` and `metadata.get(\"comment\")`) for "
-      ],
-      [
-       "d",
-       "            actual metadata keys."
-      ],
-      [
-       "a",
-       "            `new HashMap<>()` -- that would erase the \"metadata absent\" signal. Actual metadata keys"
-      ],
-      [
-       "a",
-       "            are additional properties (in the Java client, e.g., `metadata.putAdditionalProperty(\"comment\", ...)`"
-      ],
-      [
-       "a",
-       "            and `metadata.getAdditionalProperty(\"comment\")`)."
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "    DeltaDataType:"
-      ],
-      [
-       "c",
-       "      description: |"
-      ]
-     ],
-     "truncated": false,
-     "additions": 3,
-     "deletions": 3
-    },
     {
      "path": "build.sbt",
      "lines": [
@@ -642,6 +582,58 @@
       [
        "a",
        "{{/imports}}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{#useJackson3}}"
+      ],
+      [
+       "a",
+       "import tools.jackson.core.JacksonException;"
+      ],
+      [
+       "a",
+       "{{/useJackson3}}"
+      ],
+      [
+       "a",
+       "import {{jacksonPackage}}.core.type.TypeReference;"
+      ],
+      [
+       "a",
+       "import {{jacksonPackage}}.databind.ObjectMapper;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{#useBeanValidation}}"
+      ],
+      [
+       "a",
+       "import {{javaxPackage}}.validation.constraints.*;"
+      ],
+      [
+       "a",
+       "import {{javaxPackage}}.validation.Valid;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "{{/useBeanValidation}}"
+      ],
+      [
+       "a",
+       "{{#hasFormParamsInSpec}}"
       ]
      ],
      "truncated": true,
@@ -651,17 +643,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-16T17:56:46Z",
-    "updated_at": "2026-11-16T17:57:03Z",
+    "last_push": "2026-11-16T18:51:44Z",
+    "updated_at": "2026-11-16T20:01:00Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 117
   },
@@ -913,29 +905,90 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5926054780",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Covers the #2229 follow-ups: the `fields` pre-check, the run-order guard and the request-side test. Remaining: - A failure-path test for the run-order guard (inline). - The nits (inline). The release-note wording is outside this PR.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380622",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] normal: The new guard has no test for its failure path. The swap was checked by hand, so a change that turns the guard into a no-op would still pass CI. Could we move the check into a small function, and test it against a delta-style init, an all.yaml-style init and a missing file? A missing file should…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380640",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] nit: The check runs in `processGeneratedFiles` through `checkClientPackageInit`, not after the build. Naming the function here would make it easier to find.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380651",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] nit: Move `bareDeltaImport` above `checkClientPackageInit`, with a one-line comment on what it matches. It is used before its definition, which works but reads oddly.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380668",
+      "maintainer": true,
+      "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
+      "text": "[AI Assisted] nit: The two checks have the same message. A one-line comment on each would say why there are two: the first rejects malformed input before parsing, and the second rejects input that parses to a non-struct, such as an array with `fields`.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:22:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380681",
+      "maintainer": true,
+      "path": "clients/python/tests/test_api_client.py",
+      "text": "[AI Assisted] nit: The JSON round trip on the last line adds nothing to `body == request`, because `body` is already a dict of JSON types. Either drop it, or say what it guards.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T22:00:07Z",
-    "updated_at": "2026-11-16T09:44:12Z",
+    "updated_at": "2026-11-16T19:22:27Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 116
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Clean up function call stderr files best effort and cover the else fallback and multi-byte cuts",
    "date": "2026-11-15",
    "created_at": "2026-11-15T16:36:35Z",
-   "merged_at": null,
+   "merged_at": "2026-11-16",
    "reported": true,
    "pr": {
     "number": 2247,
@@ -1076,18 +1129,71 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-16T19:24:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2247#pullrequestreview-5926090680",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. This addresses the #2241 follow-ups: the best-effort cleanup, the single length read, the temp-file test and the multi-byte rows, the column-0 else test, and the docs note on the 4096-byte cut. The four inline items are non-blocking.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:24:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2247#discussion_r4590405526",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Non-blocking: could `deleteQuietly` be package-private, with a test that calls it on a non-empty directory and checks that nothing is thrown? That would cover the `deleteOnExit` fallback branch.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:24:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2247#discussion_r4590405538",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Non-blocking: the check compares snapshots of the shared `java.io.tmpdir`, so a matching file from another process could make it flaky. If the prefix ever changed, both snapshots would be empty and the test would pass without checking anything. Could the calls use a temp directory that only this test use…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:24:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2247#discussion_r4590405546",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+      "text": "[AI Assisted] Non-blocking, but it matters for diagnosis: the `IOException` from the delete is dropped with no trace, and CODE_REVIEW asks that errors are not swallowed without logging. Could we log the path at debug level before `deleteOnExit`, so a leaked file can be traced? Log only the path, not its contents. This…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:24:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2247#discussion_r4590405555",
+      "maintainer": true,
+      "path": "docs/usage/functions.md",
+      "text": "[AI Assisted] Non-blocking: could this say \"keeps at most the last 4096 bytes\"? A cut inside a multi-byte character drops the partial character, so the message can have fewer bytes.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-15T16:36:31Z",
-    "updated_at": "2026-11-16T09:44:11Z",
+    "updated_at": "2026-11-16T19:26:25Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 115
   },
@@ -1807,8 +1913,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T17:59:18Z",
@@ -1816,8 +1922,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 112
   },
@@ -2115,6 +2221,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-16T19:08:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2243#pullrequestreview-5925837435",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at `5a00d8ea`. Our earlier review had the replay order backwards. The replay check runs before `applyUpdates` (`TableRepository.java:383` and `:386`), not after, so the item asking for a description fix was wrong. That mistake led to the wrong sentence in the description. We corrected the descr…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-15T22:44:12Z",
@@ -2163,29 +2279,21 @@
       "path": "server/src/test/java/io/unitycatalog/server/sdk/delta/SdkUpdateTableTest.java",
       "text": "[AI Assisted] Could we add a case for an external UniForm Delta table where the property is removed without a commit? It should check the `uniform` block in `loadTable` and that the Iceberg REST `tableExists` is false.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T22:44:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2243#discussion_r4580576249",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/sdk/delta/SdkUpdateTableTest.java",
-      "text": "[AI Assisted] `ENABLED_FORMATS` duplicates `TableProperties.UNIVERSAL_FORMAT_ENABLED_FORMATS`, which this file already imports. Could it use the constant?",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-16T04:56:29Z",
-    "updated_at": "2026-11-16T09:44:10Z",
+    "updated_at": "2026-11-16T19:08:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 111
   },
@@ -2399,8 +2507,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T17:34:52Z",
@@ -2408,8 +2516,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },
@@ -2947,62 +3055,62 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5909808075",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5925961402",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Thanks for the work. The core behavior reads correctly. The inline comments cover two test gaps (the same-URL case and the success after the catalog and schema are dropped), plus nits on docs, CLI wording, logging and the refusal message. Points for the description and title: - The description should sta…",
-      "answered": true
+      "text": "[AI Assisted] Thanks for the fixes at 5df7a88b. The earlier comments are addressed. The inline comments cover the Javadoc placement and the duplicated in-use probe in `ExternalLocationRepository`, a delete-message assertion, the `CliUtils` special case, the `FORCE_HINT` spacing, and a rename-rollback test. The pending…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631386",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
-      "text": "[AI Assisted] Could we add a same-URL case: updating the URL to its current value without force, while a volume is under it, should succeed. The equality branch in isSameOrUnder has no test. Removing it would still pass the suite and would break clients that resend the current URL.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631387",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
-      "text": "[AI Assisted] Could we also cover the success side of the new counting? After the catalog and schema are dropped, a non-force delete and a URL change of the location should succeed. Right now only the refusal side is pinned.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631390",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4590314637",
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "[AI Assisted] The @throws list further down names only INVALID_ARGUMENT, but a pending cleanup throws PERMISSION_DENIED (ExternalLocationUtils.java:637). Please add it. A short Javadoc on updateExternalLocation for the refusal, force and covering-URL exemption would help too.",
-      "answered": true
+      "text": "[AI Assisted] The Javadoc of `validateUrlNotUsedByAnyExternalLocation` now sits above `warnIfInUse`, and `validateUrlNotUsedByAnyExternalLocation` has no Javadoc. Could we move `warnIfInUse` above that Javadoc block or below the method, and give it a one-line Javadoc?",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631397",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4590314647",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] `warnIfInUse` repeats the pending-cleanup and storage-user probe that `validateExternalLocationNotInUse` already runs. Could we move that probe into one non-throwing helper in `ExternalLocationUtils` that returns the pending flag and the first user? The validator would throw from it and the repository wo…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4590314658",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
+      "text": "[AI Assisted] This assertion checks only the message prefix, so the new hint on the delete path is not verified. Could we assert the full message for delete as well?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4590314669",
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
-      "text": "[AI Assisted] With --force alone, the update passes the empty-update check and sends a no-op update that succeeds. Could we leave force out of the emptiness check and the 'please provide one of' list, and say in the docs that at least one other parameter is required?",
-      "answered": true
+      "text": "[AI Assisted] `validateUpdateParameters` special-cases `FORCE` in two places. Could we move that into a modifier-only set on `CliOptions`, so a later modifier-only flag does not need another special case?",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-15T08:20:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4577631400",
+      "at": "2026-11-16T19:16:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4590314674",
       "maintainer": true,
-      "path": "api/all.yaml",
-      "text": "[AI Assisted] Suggested wording: 'Unless force is true, changing the url fails if the location is in use (as described for deleting it), unless the new url is the same as, or a parent of, the old one.' Then regenerate api/Apis/ExternalLocationsApi.md.",
-      "answered": true
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+      "text": "[AI Assisted] `FORCE_HINT` starts with a space, and callers concatenate it directly. Could we drop the leading space and make the separator explicit at each call site?",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -3010,12 +3118,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-15T16:46:12Z",
-    "updated_at": "2026-11-16T09:44:09Z",
+    "updated_at": "2026-11-16T19:16:43Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 108
   },
@@ -7416,7 +7524,7 @@
      "Shahzeb-DataEngineer"
     ],
     "last_push": "2026-11-13T18:11:22Z",
-    "updated_at": "2026-11-14T07:22:53Z",
+    "updated_at": "2026-11-16T19:55:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10257,13 +10365,13 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-13T03:30:04Z",
-    "updated_at": "2026-11-13T03:30:17Z",
-    "conflicts": true,
+    "last_push": "2026-11-16T19:00:46Z",
+    "updated_at": "2026-11-16T19:00:49Z",
+    "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-11T23:59:31Z",
@@ -10271,7 +10379,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 79
   },
@@ -11331,12 +11439,12 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-10T23:47:36Z",
-    "updated_at": "2026-11-11T15:16:17Z",
-    "conflicts": true,
+    "last_push": "2026-11-16T18:53:22Z",
+    "updated_at": "2026-11-16T20:00:41Z",
+    "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
