@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T20:06:20Z",
+ "generated_at": "2026-11-16T20:22:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28838,
-   "forks": 6619,
+   "forks": 6618,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21440280,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63354,
-   "forks": 13328,
+   "stars": 63356,
+   "forks": 13329,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96183274,
@@ -2962,92 +2962,92 @@
      "lines": [
       [
        "h",
-       "@@ -393,7 +393,8 @@"
+       "@@ -26,6 +26,7 @@"
       ],
       [
        "c",
-       "                              CliParams.NEW_NAME,"
+       "import java.util.Locale;"
       ],
       [
        "c",
-       "                              CliParams.URL,"
+       "import java.util.Map;"
       ],
       [
        "c",
-       "                              CliParams.CREDENTIAL_NAME,"
-      ],
-      [
-       "d",
-       "                              CliParams.COMMENT)));"
+       "import java.util.Properties;"
       ],
       [
        "a",
-       "                              CliParams.COMMENT,"
-      ],
-      [
-       "a",
-       "                              CliParams.FORCE)));"
+       "import java.util.Set;"
       ],
       [
        "c",
-       "                  put(DELETE, new CliOptions(List.of(CliParams.NAME), List.of(CliParams.FORCE)));"
+       "import java.util.regex.Matcher;"
       ],
       [
        "c",
-       "                }"
+       "import java.util.regex.Pattern;"
       ],
       [
        "c",
-       "              });"
+       "import java.util.stream.Collectors;"
       ],
       [
        "h",
-       "@@ -872,12 +873,15 @@"
+       "@@ -86,6 +87,18 @@"
       ],
       [
        "c",
-       "  }"
+       "    public List<CliParams> getOptionalParams() {"
       ],
       [
        "c",
+       "      return optionalParams;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
        ""
       ],
       [
-       "c",
-       "  public static void validateUpdateParameters(JSONObject json, String command, String subCommand) {"
-      ],
-      [
-       "d",
-       "    if (json.isEmpty()) {"
+       "a",
+       "    /** Optional params that change how an operation is checked, not what it changes. */"
       ],
       [
        "a",
-       "    // --force only changes how an update is checked, so it is not an update by itself."
+       "    private static final Set<CliParams> MODIFIER_PARAMS = Set.of(CliParams.FORCE);"
       ],
       [
        "a",
-       "    if (json.keySet().stream().allMatch(CliParams.FORCE.getServerParam()::equals)) {"
+       ""
       ],
       [
-       "c",
-       "      List<CliParams> optionalParams ="
+       "a",
+       "    /** The optional params that change something, leaving out the modifiers. */"
       ],
       [
-       "c",
-       "          CliUtils.cliOptions.get(command).get(subCommand).getOptionalParams();"
+       "a",
+       "    public List<CliParams> getChangeParams() {"
       ],
       [
-       "c",
-       "      String errorMessage = \"No parameters to update, please provide one of:\";"
+       "a",
+       "      return optionalParams.stream().filter(param -> !MODIFIER_PARAMS.contains(param)).toList();"
       ],
       [
-       "c",
-       "      for (CliParams param : optionalParams) {"
+       "a",
+       "    }"
+      ],
+      [
+       "a",
+       ""
       ]
      ],
      "truncated": true,
-     "additions": 7,
-     "deletions": 3
+     "additions": 19,
+     "deletions": 5
     }
    ],
    "track": {
@@ -3060,7 +3060,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the fixes at 5df7a88b. The earlier comments are addressed. The inline comments cover the Javadoc placement and the duplicated in-use probe in `ExternalLocationRepository`, a delete-message assertion, the `CliUtils` special case, the `FORCE_HINT` spacing, and a rename-rollback test. The pending…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3070,7 +3070,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] The Javadoc of `validateUrlNotUsedByAnyExternalLocation` now sits above `warnIfInUse`, and `validateUrlNotUsedByAnyExternalLocation` has no Javadoc. Could we move `warnIfInUse` above that Javadoc block or below the method, and give it a one-line Javadoc?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3080,7 +3080,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] `warnIfInUse` repeats the pending-cleanup and storage-user probe that `validateExternalLocationNotInUse` already runs. Could we move that probe into one non-throwing helper in `ExternalLocationUtils` that returns the pending flag and the first user? The validator would throw from it and the repository wo…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3090,7 +3090,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
       "text": "[AI Assisted] This assertion checks only the message prefix, so the new hint on the delete path is not verified. Could we assert the full message for delete as well?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3100,7 +3100,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] `validateUpdateParameters` special-cases `FORCE` in two places. Could we move that into a modifier-only set on `CliOptions`, so a later modifier-only flag does not need another special case?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3110,20 +3110,20 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
       "text": "[AI Assisted] `FORCE_HINT` starts with a space, and callers concatenate it directly. Could we drop the leading space and make the separator explicit at each call site?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T16:46:12Z",
-    "updated_at": "2026-11-16T19:16:43Z",
+    "last_push": "2026-11-16T20:20:32Z",
+    "updated_at": "2026-11-16T20:20:48Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 108
   },
@@ -4605,17 +4605,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-16T20:04:33Z",
-    "updated_at": "2026-11-16T20:04:47Z",
+    "updated_at": "2026-11-16T20:14:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 100
   },
