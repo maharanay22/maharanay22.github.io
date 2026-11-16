@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-16T20:32:31Z",
+ "generated_at": "2026-11-16T20:38:31Z",
  "stages": [
   "reported",
   "fix sent",
@@ -795,7 +795,7 @@
      "lines": [
       [
        "h",
-       "@@ -330,7 +330,7 @@"
+       "@@ -330,7 +330,8 @@"
       ],
       [
        "c",
@@ -815,7 +815,11 @@
       ],
       [
        "a",
-       "            // unitycatalog/client/__init__.py, which the all.yaml run below must overwrite (checked after the build)."
+       "            // unitycatalog/client/__init__.py, which the all.yaml run below must overwrite (checked in"
+      ],
+      [
+       "a",
+       "            // processGeneratedFiles by PythonClientPostBuild.clientPackageInitProblem)."
       ],
       [
        "c",
@@ -828,18 +832,70 @@
       [
        "c",
        "              packageName = s\"$artifactNamePrefix.client\","
+      ],
+      [
+       "h",
+       "@@ -359,7 +360,11 @@"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "c",
+       "        log.info(\"OpenAPI Python client generation completed.\")"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "d",
+       "    ).value"
+      ],
+      [
+       "a",
+       "    ).value,"
+      ],
+      [
+       "a",
+       "    Test / test := {"
+      ],
+      [
+       "a",
+       "      val log = streams.value.log"
+      ],
+      [
+       "a",
+       "      IO.withTemporaryDirectory(dir => PythonClientPostBuildTest.run(log, dir.toPath))"
+      ],
+      [
+       "a",
+       "    },"
+      ],
+      [
+       "c",
+       "  )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "lazy val apiDocs = (project in file(\"api\"))"
       ]
      ],
      "truncated": false,
-     "additions": 1,
-     "deletions": 1
+     "additions": 7,
+     "deletions": 2
     },
     {
      "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
      "lines": [
       [
        "h",
-       "@@ -108,8 +108,10 @@"
+       "@@ -108,8 +108,12 @@"
       ],
       [
        "c",
@@ -852,6 +908,10 @@
       [
        "c",
        "        return None"
+      ],
+      [
+       "a",
+       "    # Rejects malformed input before parsing it."
       ],
       [
        "a",
@@ -871,6 +931,10 @@
       ],
       [
        "a",
+       "    # Rejects input that parses to another type, such as an array that also has \"fields\"."
+      ],
+      [
+       "a",
        "    if not isinstance(parsed, DeltaStructType):"
       ],
       [
@@ -887,7 +951,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 3,
+     "additions": 5,
      "deletions": 1
     },
     {
@@ -895,7 +959,7 @@
      "lines": [
       [
        "h",
-       "@@ -106,13 +106,35 @@"
+       "@@ -106,13 +106,39 @@"
       ],
       [
        "c",
@@ -911,7 +975,11 @@
       ],
       [
        "a",
-       "    checkClientPackageInit(openApiOutputDir)"
+       "    clientPackageInitProblem(Paths.get(openApiOutputDir, \"src\", \"unitycatalog\", \"client\", \"__init__.py\"))"
+      ],
+      [
+       "a",
+       "      .foreach(problem => sys.error(problem))"
       ],
       [
        "c",
@@ -931,79 +999,7 @@
       ],
       [
        "a",
-       "  /**"
-      ],
-      [
-       "a",
-       "   * Fails the build unless unitycatalog/client/__init__.py is the one from the all.yaml run. The delta.yaml"
-      ],
-      [
-       "a",
-       "   * run writes this file too, with imports from the bare delta package, so it has to run first. Both versions"
-      ],
-      [
-       "a",
-       "   * export ApiClient, so the check looks for the UC API imports and for no bare delta import instead."
-      ],
-      [
-       "a",
-       "   */"
-      ],
-      [
-       "a",
-       "  private def checkClientPackageInit(openApiOutputDir: String): Unit = {"
-      ],
-      [
-       "a",
-       "    val clientInit = Paths.get(openApiOutputDir, \"src\", \"unitycatalog\", \"client\", \"__init__.py\")"
-      ],
-      [
-       "a",
-       "    val content ="
-      ],
-      [
-       "a",
-       "      if (Files.exists(clientInit)) new String(Files.readAllBytes(clientInit), StandardCharsets.UTF_8) else \"\""
-      ],
-      [
-       "a",
-       "    val fromAllYaml = content.contains(\"from unitycatalog.client.api.\") &&"
-      ],
-      [
-       "a",
-       "      content.contains(\"from unitycatalog.client.api_client import ApiClient\") &&"
-      ],
-      [
-       "a",
-       "      bareDeltaImport.findFirstIn(content).isEmpty"
-      ],
-      [
-       "a",
-       "    if (!fromAllYaml) {"
-      ],
-      [
-       "a",
-       "      sys.error("
-      ],
-      [
-       "a",
-       "        s\"$clientInit is not the one from the all.yaml run. The all.yaml run in pythonClient/generate must \" +"
-      ],
-      [
-       "a",
-       "          \"run last, after the delta.yaml run.\")"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "a",
-       "  }"
-      ],
-      [
-       "a",
-       ""
+       "  /** Matches an import from the bare `delta` package, which the generator writes for the delta.yaml run. */"
       ],
       [
        "a",
@@ -1012,10 +1008,50 @@
       [
        "a",
        ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Says why the generated unitycatalog/client/__init__.py is not the one from the all.yaml run, or returns"
+      ],
+      [
+       "a",
+       "   * None if it is. The delta.yaml run writes this file too, with imports from the bare delta package, so it"
+      ],
+      [
+       "a",
+       "   * has to run first. Both versions export ApiClient, so the check looks for the UC API imports and for no"
+      ],
+      [
+       "a",
+       "   * bare delta import instead. Called by processGeneratedFiles, and tested by PythonClientPostBuildTest."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  def clientPackageInitProblem(clientInit: Path): Option[String] = {"
+      ],
+      [
+       "a",
+       "    if (!Files.exists(clientInit)) {"
+      ],
+      [
+       "a",
+       "      return Some(s\"$clientInit was not generated.\")"
+      ],
+      [
+       "a",
+       "    }"
       ]
      ],
      "truncated": true,
-     "additions": 23,
+     "additions": 27,
      "deletions": 1
     }
    ],
@@ -1029,7 +1065,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Covers the #2229 follow-ups: the `fields` pre-check, the run-order guard and the request-side test. Remaining: - A failure-path test for the run-order guard (inline). - The nits (inline). The release-note wording is outside this PR.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1039,7 +1075,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] normal: The new guard has no test for its failure path. The swap was checked by hand, so a change that turns the guard into a no-op would still pass CI. Could we move the check into a small function, and test it against a delta-style init, an all.yaml-style init and a missing file? A missing file should…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1049,7 +1085,7 @@
       "maintainer": true,
       "path": "build.sbt",
       "text": "[AI Assisted] nit: The check runs in `processGeneratedFiles` through `checkClientPackageInit`, not after the build. Naming the function here would make it easier to find.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1059,7 +1095,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] nit: Move `bareDeltaImport` above `checkClientPackageInit`, with a one-line comment on what it matches. It is used before its definition, which works but reads oddly.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1069,7 +1105,7 @@
       "maintainer": true,
       "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
       "text": "[AI Assisted] nit: The two checks have the same message. A one-line comment on each would say why there are two: the first rejects malformed input before parsing, and the second rejects input that parses to a non-struct, such as an array with `fields`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1079,20 +1115,20 @@
       "maintainer": true,
       "path": "clients/python/tests/test_api_client.py",
       "text": "[AI Assisted] nit: The JSON round trip on the last line adds nothing to `body == request`, because `body` is already a dict of JSON types. Either drop it, or say what it guards.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-15T22:00:07Z",
-    "updated_at": "2026-11-16T19:22:27Z",
+    "last_push": "2026-11-16T20:36:45Z",
+    "updated_at": "2026-11-16T20:37:00Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 116
   },
@@ -3233,7 +3269,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T20:20:32Z",
-    "updated_at": "2026-11-16T20:24:35Z",
+    "updated_at": "2026-11-16T20:32:29Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
