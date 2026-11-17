@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T18:22:07Z",
+ "generated_at": "2026-11-17T18:48:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50553,
+   "stars": 50552,
    "forks": 20746,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9084,
+   "stars": 9085,
    "forks": 2224,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63429,
-   "forks": 13362,
+   "stars": 63430,
+   "forks": 13363,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96389954,
@@ -1116,7 +1116,7 @@
       ],
       [
        "h",
-       "@@ -359,7 +360,11 @@"
+       "@@ -359,7 +360,14 @@"
       ],
       [
        "c",
@@ -1137,6 +1137,18 @@
       [
        "a",
        "    ).value,"
+      ],
+      [
+       "a",
+       "    // The build code has no test framework, so pythonClient/test runs PythonClientPostBuildTest instead of the"
+      ],
+      [
+       "a",
+       "    // default test task. testOnly and testQuick don't run it, and a test added to this project would need to be"
+      ],
+      [
+       "a",
+       "    // run from here too."
       ],
       [
        "a",
@@ -1168,7 +1180,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 7,
+     "additions": 10,
      "deletions": 2
     },
     {
@@ -1240,7 +1252,7 @@
      "lines": [
       [
        "h",
-       "@@ -106,13 +106,39 @@"
+       "@@ -106,13 +106,41 @@"
       ],
       [
        "c",
@@ -1317,22 +1329,10 @@
       [
        "a",
        "  def clientPackageInitProblem(clientInit: Path): Option[String] = {"
-      ],
-      [
-       "a",
-       "    if (!Files.exists(clientInit)) {"
-      ],
-      [
-       "a",
-       "      return Some(s\"$clientInit was not generated.\")"
-      ],
-      [
-       "a",
-       "    }"
       ]
      ],
      "truncated": true,
-     "additions": 27,
+     "additions": 29,
      "deletions": 1
     }
    ],
@@ -1346,7 +1346,7 @@
       "maintainer": true,
       "path": "build.sbt",
       "text": "[AI Assisted] nit: Explain why `Test / test` is overridden here. The override replaces the default test task, so `pythonClient/testOnly` and `testQuick` do not run these checks, and any Scala test added to this project later would be skipped. A one-line comment would make that clear.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1356,7 +1356,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuildTest.scala",
       "text": "[AI Assisted] nit: Add a case for an empty init. Writing an empty file and expecting `clientPackageInitProblem(init).isDefined` to be true would cover it. The test does not have that case yet.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1366,7 +1366,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuildTest.scala",
       "text": "[AI Assisted] nit: Add a case for the `import delta.` form. This test only covers `from delta.api`, so the `import delta.` branch of the regex has no test yet.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1376,7 +1376,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] nit: Add a comment that the trailing dot in `from unitycatalog.client.api.` keeps the check from matching the `api_client` import. The check also depends on the generator's exact import text, so a generator change to import style would fail with the order message.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1386,7 +1386,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks, the run-order guard now has tests and the comments are in. Nits, if you want them: - A comment on the `Test / test` override. - Tests for an empty init and for the `import delta.` form. - A note on the trailing-dot check. Follow-up, not needed for this PR: a nested struct with `fields: null` stil…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1399,17 +1399,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T20:36:45Z",
-    "updated_at": "2026-11-17T06:16:04Z",
+    "last_push": "2026-11-17T18:46:24Z",
+    "updated_at": "2026-11-17T18:46:34Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 116
   },
@@ -1846,7 +1846,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-17T18:20:13Z",
-    "updated_at": "2026-11-17T18:20:35Z",
+    "updated_at": "2026-11-17T18:37:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
