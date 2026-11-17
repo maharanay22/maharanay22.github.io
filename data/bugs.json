@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T19:22:37Z",
+ "generated_at": "2026-11-17T19:59:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28858,
+   "stars": 28859,
    "forks": 6624,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50552,
-   "forks": 20746,
+   "stars": 50553,
+   "forks": 20747,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 695595266,
@@ -172,7 +172,7 @@
     "AI data"
    ],
    "stars": 7350,
-   "forks": 949,
+   "forks": 950,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4234277,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63430,
+   "stars": 63429,
    "forks": 13363,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -691,84 +691,268 @@
    "release": null,
    "files": [
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+     "path": "api/all.yaml",
      "lines": [
       [
        "h",
-       "@@ -221,6 +221,8 @@"
+       "@@ -1464,11 +1464,14 @@"
       ],
       [
        "c",
-       "   * @throws BaseException with NOT_FOUND if the external location doesn't exist"
+       "        Deletes the specified external location from the metastore."
       ],
       [
        "c",
-       "   * @throws BaseException with INVALID_ARGUMENT if the external location is in use and force is"
+       "        The caller must be a metastore admin, the external location owner,"
       ],
       [
        "c",
-       "   *     false"
+       "        or have MANAGE on the external location."
       ],
       [
        "a",
-       "   * @throws BaseException with FAILED_PRECONDITION if a storage cleanup is pending under the"
+       "        Unless force is true, the deletion fails while the location is in use: a table, volume"
       ],
       [
        "a",
-       "   *     external location and force is false"
+       "        or registered model is stored under it, a catalog or schema keeps its managed storage"
+      ],
+      [
+       "a",
+       "        under it, or a storage cleanup is pending there."
       ],
       [
        "c",
-       "   */"
+       "      operationId: deleteExternalLocation"
       ],
       [
        "c",
-       "  public ExternalLocationDAO deleteExternalLocation(String name, boolean force) {"
+       "      parameters:"
       ],
       [
        "c",
-       "    return TransactionManager.executeWithTransaction("
-      ],
-      [
-       "h",
-       "@@ -235,7 +237,7 @@"
+       "        - name: force"
       ],
       [
        "c",
-       "            if (ExternalLocationUtils.hasPendingCleanupOverlap("
-      ],
-      [
-       "c",
-       "                session, NormalizedURL.from(existingLocation.getUrl()))) {"
-      ],
-      [
-       "c",
-       "              throw new BaseException("
+       "          in: query"
       ],
       [
        "d",
-       "                  ErrorCode.PERMISSION_DENIED, \"Input path overlaps pending storage cleanup.\");"
+       "          description: Force deletion even if there are dependent external tables or mounts."
       ],
       [
        "a",
-       "                  ErrorCode.FAILED_PRECONDITION, \"Input path overlaps pending storage cleanup.\");"
+       "          description: Force deletion even if the external location is in use."
       ],
       [
        "c",
-       "            }"
+       "          required: false"
       ],
       [
        "c",
-       "            ExternalLocationUtils.getAllEntityDAOsWithURLOverlap("
+       "          schema:"
       ],
       [
        "c",
-       "                    session,"
+       "            type: boolean"
+      ],
+      [
+       "h",
+       "@@ -1483,6 +1486,8 @@"
+      ],
+      [
+       "c",
+       "        Updates an external location in the metastore."
+      ],
+      [
+       "c",
+       "        The caller must be a metastore admin, the external location owner,"
+      ],
+      [
+       "c",
+       "        or have MANAGE on the external location."
+      ],
+      [
+       "a",
+       "        Unless force is true, changing the url fails if the location is in use (as described for"
+      ],
+      [
+       "a",
+       "        deleting it), unless the new url is the same as, or a parent of, the old one."
+      ],
+      [
+       "c",
+       "        EXPERIMENTAL: a location whose credential is `s3_compatible` must have an `s3://` URL;"
+      ],
+      [
+       "c",
+       "        otherwise the request fails with `INVALID_ARGUMENT`."
+      ],
+      [
+       "c",
+       "      operationId: updateExternalLocation"
+      ],
+      [
+       "h",
+       "@@ -3216,6 +3221,9 @@"
+      ],
+      [
+       "c",
+       "        new_name:"
+      ],
+      [
+       "c",
+       "          description: New name for the external location."
+      ],
+      [
+       "c",
+       "          type: string"
+      ],
+      [
+       "a",
+       "        force:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 9,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
+     "lines": [
+      [
+       "h",
+       "@@ -65,7 +65,7 @@"
+      ],
+      [
+       "c",
+       "      \"To indicate CLI output format preference. Supported values are json and jsonPretty.\","
+      ],
+      [
+       "c",
+       "      \"output\"),"
+      ],
+      [
+       "c",
+       "  VERSION(\"version\", \"Version number of a registered model entity.\", \"version\"),"
+      ],
+      [
+       "d",
+       "  FORCE(\"force\", \"To force delete the entity\", \"force\"),"
+      ],
+      [
+       "a",
+       "  FORCE(\"force\", \"To force the operation even if it would otherwise be refused\", \"force\"),"
+      ],
+      [
+       "c",
+       "  SECURABLE_TYPE(\"securable_type\", \"The type of the securable\", \"securable_type\"),"
+      ],
+      [
+       "c",
+       "  PRINCIPAL(\"principal\", \"The target principal of the permission change\", \"principal\"),"
+      ],
+      [
+       "c",
+       "  PRIVILEGE(\"privilege\", \"The privilege to grant or revoke\", \"privilege\"),"
       ]
      ],
      "truncated": false,
-     "additions": 3,
+     "additions": 1,
      "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -26,6 +26,7 @@"
+      ],
+      [
+       "c",
+       "import java.util.Locale;"
+      ],
+      [
+       "c",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Properties;"
+      ],
+      [
+       "a",
+       "import java.util.Set;"
+      ],
+      [
+       "c",
+       "import java.util.regex.Matcher;"
+      ],
+      [
+       "c",
+       "import java.util.regex.Pattern;"
+      ],
+      [
+       "c",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "h",
+       "@@ -71,6 +72,9 @@"
+      ],
+      [
+       "c",
+       "  public static final int TABLE_WIDTH = 120;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static class CliOptions {"
+      ],
+      [
+       "a",
+       "    /** Optional params that change how an operation is checked, not what it changes. */"
+      ],
+      [
+       "a",
+       "    private static final Set<CliParams> MODIFIER_PARAMS = Set.of(CliParams.FORCE);"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "    List<CliParams> necessaryParams;"
+      ],
+      [
+       "c",
+       "    List<CliParams> optionalParams;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -86,6 +90,15 @@"
+      ],
+      [
+       "c",
+       "    public List<CliParams> getOptionalParams() {"
+      ],
+      [
+       "c",
+       "      return optionalParams;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 19,
+     "deletions": 5
     }
    ],
    "track": {
@@ -781,7 +965,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The error code is right for the pending-cleanup state. Two points below. The branch conflicts with #2240 and needs a rewrite onto the shared validator (inline). Follow-up question, not for this PR: the in-use refusal stays `INVALID_ARGUMENT` in the same validator, while the catalog's force-needed refusal…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -791,7 +975,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] This PR does not apply cleanly on top of #2240. At its head, the inline check this PR changes is gone: the pending-cleanup check moved into `validateExternalLocationNotInUse`. Could we rewrite this onto that shared validator, so delete and URL change share one status? If this PR lands first, #2240 must c…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -801,7 +985,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] The Javadoc says a pending cleanup under the external location. The check also covers a cleanup at or above the URL. Could we say \"at, above, or under the external location's URL\"?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -811,20 +995,20 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
       "text": "[AI Assisted] This test pins only the delete path. URL-change coverage comes with the rebase onto #2240.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T20:31:03Z",
-    "updated_at": "2026-11-17T06:54:29Z",
+    "last_push": "2026-11-17T19:21:59Z",
+    "updated_at": "2026-11-17T19:25:46Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 119
   },
@@ -1526,8 +1710,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T18:46:24Z",
@@ -1535,8 +1719,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 116
   },
@@ -2892,7 +3076,23 @@
      "lines": [
       [
        "h",
-       "@@ -4,6 +4,7 @@"
+       "@@ -1,9 +1,11 @@"
+      ],
+      [
+       "c",
+       "import asyncio"
+      ],
+      [
+       "c",
+       "import atexit"
+      ],
+      [
+       "c",
+       "import base64"
+      ],
+      [
+       "a",
+       "import concurrent.futures"
       ],
       [
        "c",
@@ -2924,7 +3124,7 @@
       ],
       [
        "h",
-       "@@ -54,6 +55,7 @@"
+       "@@ -54,6 +56,7 @@"
       ],
       [
        "c",
@@ -2956,11 +3156,7 @@
       ],
       [
        "h",
-       "@@ -129,8 +131,97 @@"
-      ],
-      [
-       "c",
-       "    return wrapper"
+       "@@ -106,6 +109,8 @@"
       ],
       [
        "c",
@@ -2968,51 +3164,39 @@
       ],
       [
        "c",
+       "_logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
        ""
       ],
       [
        "a",
-       "class _SingleLoopRESTClient:"
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    Takes the place of an ApiClient's REST client and sends every request from one event loop,"
-      ],
-      [
-       "a",
-       "    which it runs on a daemon thread, so the ApiClient works from any thread or event loop."
+       "_SESSION_CLOSED = \"Session is closed\""
       ],
       [
        "a",
        ""
       ],
       [
-       "a",
-       "    An aiohttp session only works on the event loop it is created on, so sharing the ApiClient's"
+       "c",
+       ""
       ],
       [
-       "a",
-       "    own session fails with \"Timeout context manager should be used inside a task\" anywhere else."
+       "c",
+       "def syncify_method(sync_method):"
       ],
       [
-       "a",
-       "    Response bodies are read on the owned loop before the response is returned. The thread starts"
+       "c",
+       "    @wraps(sync_method)"
       ],
       [
-       "a",
-       "    with the first request, so a client that never sends one costs no thread."
-      ],
-      [
-       "a",
-       "    \"\"\""
+       "h",
+       "@@ -129,8 +134,119 @@"
       ]
      ],
      "truncated": true,
-     "additions": 109,
+     "additions": 134,
      "deletions": 28
     }
    ],
@@ -3026,7 +3210,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] followup: the PR description says `close()` cancels a request waiting in retry backoff, but no test sets `retries`, so that path is untested. Could we add one?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3036,7 +3220,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review of head `5d9b8eca`. F1, F2, F3, F5, F6 and F8 from the earlier review are addressed. F4 and F7 are partly addressed: the thread now starts lazily, and the new tests cover NotFound, close during a pending request and a failing replaced close, but the remaining items are in the inline comments. I…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3046,7 +3230,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] `close()` runs `shutdown` through `asyncio.to_thread`, which uses the caller's default executor. Applications often run sync tools in that same executor. If its workers are all blocked in UC calls, the shutdown queues behind them and never reaches the code that cancels those requests. `close_async()` the…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3056,7 +3240,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: `shutdown()` calls `_started_loop()` unconditionally, so closing a client that never sent a request still starts a loop thread just to stop it. The class docstring's claim that such a client costs no thread holds only until close. Could we skip starting the loop when none was started?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3066,7 +3250,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] followup: lazy start fixes clients that never send a request. A client that sends requests and is never closed still keeps its thread until exit, because `atexit` holds it. The docs now say to call `close()`, which is enough for this PR. A tracking issue would help if per-request clients are common.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3076,20 +3260,20 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] followup: `_request` builds a plain `RESTClientObject` from the configuration, so a custom or subclassed `rest_client` set on the `ApiClient` (proxy, auth or instrumentation hooks) is replaced and silently not used. Before this PR those hooks ran. Could the docs or the `UnitycatalogClient` docstring say…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T17:34:52Z",
-    "updated_at": "2026-11-17T06:57:25Z",
+    "last_push": "2026-11-17T19:58:16Z",
+    "updated_at": "2026-11-17T19:58:32Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
