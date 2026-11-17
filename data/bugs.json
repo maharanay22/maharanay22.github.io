@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T10:33:22Z",
+ "generated_at": "2026-11-17T14:27:27Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3365,
+   "stars": 3366,
    "forks": 710,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28849,
-   "forks": 6621,
+   "stars": 28853,
+   "forks": 6623,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21665042,
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50548,
+   "stars": 50550,
    "forks": 20743,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -172,7 +172,7 @@
     "AI data"
    ],
    "stars": 7348,
-   "forks": 948,
+   "forks": 949,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4234277,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63402,
-   "forks": 13345,
+   "stars": 63414,
+   "forks": 13354,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96389954,
@@ -311,7 +311,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1503,
+   "stars": 1502,
    "forks": 264,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
