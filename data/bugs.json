@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T18:48:23Z",
+ "generated_at": "2026-11-17T19:07:15Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Windows"
    ],
    "stars": 3580,
-   "forks": 702,
+   "forks": 703,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 624677,
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28858,
-   "forks": 6623,
+   "forks": 6624,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21665042,
@@ -1389,13 +1389,13 @@
       "answered": true
      },
      {
-      "kind": "review commented",
+      "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-16T19:22:27Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5926054780",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380622",
       "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Covers the #2229 follow-ups: the `fields` pre-check, the run-order guard and the request-side test. Remaining: - A failure-path test for the run-order guard (inline). - The nits (inline). The release-note wording is outside this PR.",
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] normal: The new guard has no test for its failure path. The swap was checked by hand, so a change that turns the guard into a no-op would still pass CI. Could we move the check into a small function, and test it against a delta-style init, an all.yaml-style init and a missing file? A missing file should…",
       "answered": true
      }
     ],
@@ -1404,7 +1404,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T18:46:24Z",
-    "updated_at": "2026-11-17T18:46:34Z",
+    "updated_at": "2026-11-17T18:48:41Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3439,23 +3439,19 @@
       ],
       [
        "h",
-       "@@ -86,6 +87,18 @@"
+       "@@ -71,6 +72,9 @@"
       ],
       [
        "c",
-       "    public List<CliParams> getOptionalParams() {"
+       "  public static final int TABLE_WIDTH = 120;"
       ],
       [
        "c",
-       "      return optionalParams;"
-      ],
-      [
-       "c",
-       "    }"
-      ],
-      [
-       "a",
        ""
+      ],
+      [
+       "c",
+       "  public static class CliOptions {"
       ],
       [
        "a",
@@ -3470,24 +3466,28 @@
        ""
       ],
       [
-       "a",
-       "    /** The optional params that change something, leaving out the modifiers. */"
+       "c",
+       "    List<CliParams> necessaryParams;"
       ],
       [
-       "a",
-       "    public List<CliParams> getChangeParams() {"
+       "c",
+       "    List<CliParams> optionalParams;"
       ],
       [
-       "a",
-       "      return optionalParams.stream().filter(param -> !MODIFIER_PARAMS.contains(param)).toList();"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "a",
+       "c",
        ""
+      ],
+      [
+       "h",
+       "@@ -86,6 +90,15 @@"
+      ],
+      [
+       "c",
+       "    public List<CliParams> getOptionalParams() {"
+      ],
+      [
+       "c",
+       "      return optionalParams;"
       ]
      ],
      "truncated": true,
@@ -3505,7 +3505,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the work. N1 to N6 are addressed. The 403 pending-cleanup status is deferred to #2252. Whichever of #2240 and #2252 lands second must change the shared validator and the update path's expected code together. The branch is conflicting with main, so it needs a rebase or merge before it can land.…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3515,7 +3515,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
       "text": "[AI Assisted] Question for the author: the refusal names the first blocker by ID, and catalog and schema IDs are new in this list. A principal with MANAGE on the location but no access to that catalog or schema can learn that the catalog or schema ID sits under the location. Delete already names tables, volumes and mo…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3525,7 +3525,7 @@
       "maintainer": true,
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/externallocation/CliExternalLocationOperations.java",
       "text": "[AI Assisted] This helper forwards `--force` only when the value is `true`, so the shared `.force(false)` tests never send an explicit `false` through the CLI. Could we forward any non-null value, for example with `String.valueOf(...)`?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3535,7 +3535,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
       "text": "[AI Assisted] `MODIFIER_PARAMS` sits between instance methods in `CliOptions`. Could it move to the top of the class, with the other fields?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3545,7 +3545,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
       "text": "[AI Assisted] No test pins the staging-table exclusion. A test that deletes the location with an orphaned staging row and expects success would guard the rationale in this comment.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3555,20 +3555,20 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] Narrowing the URL from `/a` to `/a/x` is refused even when everything under `/a` is also under `/a/x`. The spec text matches this behavior. A short comment at this call would make the direction clear, for example: the new URL is the same as, or a parent of, the current URL.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T20:20:32Z",
-    "updated_at": "2026-11-17T06:17:42Z",
-    "conflicts": true,
+    "last_push": "2026-11-17T19:05:23Z",
+    "updated_at": "2026-11-17T19:05:46Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 108
   },
