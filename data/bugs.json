@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T14:27:27Z",
+ "generated_at": "2026-11-17T17:45:39Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28853,
+   "stars": 28858,
    "forks": 6623,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50550,
-   "forks": 20743,
+   "stars": 50553,
+   "forks": 20746,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 695595266,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7348,
+   "stars": 7350,
    "forks": 949,
    "package": "pylance",
    "impact": null,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9083,
+   "stars": 9084,
    "forks": 2224,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63414,
-   "forks": 13354,
+   "stars": 63425,
+   "forks": 13362,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96389954,
@@ -751,7 +751,7 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "closed",
    "title": "Upgrade sbt-openapi-generator and drop the Python asyncio rest.mustache override",
    "date": "2026-11-16",
    "created_at": "2026-11-16T02:52:20Z",
@@ -1036,20 +1036,20 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the work on this. I reviewed the upgrade at `33e431be` and think the cost is larger than the benefit right now, so I'd ask you to reconsider the bump itself. What the upgrade buys: the 206-line `rest.mustache` backport can go. The 7.27.0 `rest.py` covers its session, retry, timeout, proxy and…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 2,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T18:51:44Z",
-    "updated_at": "2026-11-17T04:34:14Z",
+    "updated_at": "2026-11-17T17:35:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 117
   },
@@ -2226,72 +2226,72 @@
      "lines": [
       [
        "h",
-       "@@ -51,8 +51,17 @@"
-      ],
-      [
-       "c",
-       "    async def run(self, args: BaseModel, cancellation_token: CancellationToken) -> str:"
-      ],
-      [
-       "c",
-       "        \"\"\""
-      ],
-      [
-       "c",
-       "        Actually call the UC function with the provided parameters."
+       "@@ -1,9 +1,11 @@"
       ],
       [
        "a",
-       ""
+       "import base64"
       ],
       [
        "a",
-       "        Arguments keep their python values. A BINARY argument is validated from the base64 text"
-      ],
-      [
-       "a",
-       "        the model sends into the bytes of that text, so the bytes of an argument that was set are"
-      ],
-      [
-       "a",
-       "        sent back as that text. A default that was not set keeps its value."
+       "import json"
       ],
       [
        "c",
-       "        \"\"\""
+       "import logging"
       ],
       [
        "d",
-       "        param_dict = args.model_dump()"
+       "from typing import Dict, List, Optional"
       ],
       [
        "a",
-       "        param_dict = {"
+       "from typing import Any, Dict, List, Optional, Type"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from autogen_core import CancellationToken"
+      ],
+      [
+       "c",
+       "from autogen_core.tools import BaseTool"
+      ],
+      [
+       "d",
+       "from pydantic import BaseModel, ConfigDict, Field, model_validator"
       ],
       [
        "a",
-       "            name: value.decode()"
+       "from pydantic import BaseModel, ConfigDict, Field, create_model, field_validator, model_validator"
       ],
       [
-       "a",
-       "            if isinstance(value, bytes) and name in args.model_fields_set"
+       "c",
+       ""
       ],
       [
-       "a",
-       "            else value"
+       "c",
+       "from unitycatalog.ai.core.base import BaseFunctionClient"
       ],
       [
-       "a",
-       "            for name, value in args.model_dump().items()"
+       "c",
+       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
       ],
       [
-       "a",
-       "        }"
+       "h",
+       "@@ -50,13 +52,11 @@"
+      ],
+      [
+       "c",
+       ""
       ]
      ],
      "truncated": true,
-     "additions": 10,
-     "deletions": 1
+     "additions": 33,
+     "deletions": 7
     }
    ],
    "track": {
@@ -2304,7 +2304,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at c5a111b2. The earlier findings are addressed: the UTC timestamp on Python 3.10 (`parse_iso_datetime`), the AutoGen `timedelta` (Python-mode dump), unset defaults keeping their Python values, the native test cases, the CHANGELOG CrewAI entry, the test helper import, and the Gemini fixture com…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2314,7 +2314,7 @@
       "maintainer": true,
       "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed to `run()` are now treated as base64 text. Only fields that were set are decoded, but a value set from native bytes looks the same as a value set from model JSON. On main, native bytes went through `model_dump()` unchanged, `UnitycatalogFunctionClient` passes non-string val…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2324,7 +2324,7 @@
       "maintainer": true,
       "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
       "text": "[AI Assisted] Normal: nested BINARY values are not decoded. `ARRAY<BINARY>`, `MAP<STRING, BINARY>` and a BINARY field inside a struct stay `bytes` after the Python-mode dump, because only top-level values are converted. `UnitycatalogFunctionClient` then sends bytes, and `DatabricksFunctionClient` fails in `json.dumps`…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2361,13 +2361,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T17:59:18Z",
-    "updated_at": "2026-11-17T05:17:40Z",
+    "last_push": "2026-11-17T17:43:45Z",
+    "updated_at": "2026-11-17T17:43:47Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 112
   },
@@ -10750,6 +10750,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-17T17:08:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072686",
+      "maintainer": true,
+      "path": "server/src/main/resources/db/migration/mysql/V8__widen_volume_comment.sql",
+      "text": "**Blocker:** MySQL TEXT limit is in bytes, so multi-byte volume comments may still be rejected The MySQL step uses TEXT, which holds 65535 bytes, while the API limit is counted in characters. On a utf8mb4 database a long comment of multi-byte characters can exceed the byte limit and fail even though the API allows it,…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-17T17:08:47Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072413",
+      "maintainer": true,
+      "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
+      "text": "**Blocker:** Volume comment column is 65535 while the API allows 65536 api/all.yaml declares the volume comment with maxLength 65536, but this step and VolumeInfoDAO use 65535. A comment of exactly 65,536 ASCII characters is accepted by the API and would likely be rejected by the column. This could not be settled: the…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-17T17:08:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072198",
+      "maintainer": true,
+      "path": "server/src/main/resources/db/migration/h2/V3__widen_function_param_type_text.sql",
+      "text": "**Nit (not a blocker):** Two merge commits on the branch have no Signed-off-by trailer The contribution workflow asks for a DCO sign-off on every commit. Two merge commits on this branch, including 4fdcb25a2917332ae8ec423982fcb12925693f3b, carry no Signed-off-by trailer. CODE_REVIEW.md says a missing sign-off is not a…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "shba24",
       "at": "2026-11-11T23:59:31Z",
@@ -10778,36 +10808,6 @@
       "path": null,
       "text": "[AI Assisted] Two items for the whole PR. Followup, V3 numbering: #2180 and #2181 also add a V3 step on all three databases. Whichever of the three merges second has to be renumbered above the first, because dev/check-migration-steps.sh refuses a new step that is not above the highest merged step. Could we agree the m…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-11T23:05:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199550",
-      "maintainer": true,
-      "path": "server/src/main/resources/db/migration/h2/V3__widen_function_types_and_comments.sql",
-      "text": "[AI Assisted] This step sends six statements on each database. The step rules in the stack (#2113 through #2118) hold each step to one statement (MigrationStepRulesTest, eachStepIsOneAllowedStatement), and the per-step recovery in #2114 only works when a step is a single statement: a MySQL step that stopped partway ma…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-11T23:05:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199569",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
-      "text": "[AI Assisted] nit: comment and parameterDefault both use LONG_COMMENT, so swapping the two columns would still pass. Two distinct 300-character values would catch that.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-11T23:05:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4544199578",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/sdk/function/SdkFunctionCRUDTest.java",
-      "text": "[AI Assisted] nit: the test has no return param. Return rows share type_text, so adding one would cover the return path.",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -10815,7 +10815,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-16T19:00:46Z",
-    "updated_at": "2026-11-16T19:00:49Z",
+    "updated_at": "2026-11-17T17:08:51Z",
     "conflicts": true,
     "last_comment": {
      "who": "shba24",
@@ -10824,7 +10824,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 79
   },
