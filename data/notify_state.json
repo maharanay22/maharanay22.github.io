@@ -619,7 +619,7 @@
  },
  "https://github.com/pandas-dev/pandas/pull/72006": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -881,7 +881,7 @@
  "https://github.com/unitycatalog/unitycatalog/pull/2187": {
   "approved_by": [],
   "checks": "failing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": "shba24@2026-11-11T23:59:31Z",
   "last_comment_who": "shba24",
   "status": "review",
@@ -1018,11 +1018,11 @@
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2237": {
   "approved_by": [
@@ -1060,11 +1060,11 @@
  "https://github.com/unitycatalog/unitycatalog/pull/2240": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2241": {
   "approved_by": [
@@ -1088,6 +1088,7 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2243": {
   "approved_by": [
+   "tdas",
    "yili-db"
   ],
   "checks": "passing",
