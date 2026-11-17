@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T19:07:15Z",
+ "generated_at": "2026-11-17T19:14:36Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,133 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Log why the stderr file could not be deleted and tighten the PythonInvoker tests",
+   "date": "2026-11-17",
+   "created_at": "2026-11-17T19:13:10Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2274,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2274"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": null,
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/PythonInvoker.java",
+     "lines": [
+      [
+       "h",
+       "@@ -31,7 +31,10 @@"
+      ],
+      [
+       "c",
+       "        function, scriptPath, Paths.get(System.getProperty(\"java.io.tmpdir\")), args);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  /** Same as above, with the stderr file of the call created in {@code tempDir}. */"
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Like {@link #invokePython(FunctionInfo, String, String...)}, but creates the stderr file of the"
+      ],
+      [
+       "a",
+       "   * call in {@code tempDir}, which must exist."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "c",
+       "  static String invokePython(FunctionInfo function, String scriptPath, Path tempDir, String... args)"
+      ],
+      [
+       "c",
+       "      throws ApiException {"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "h",
+       "@@ -152,7 +155,7 @@"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "c",
+       "      Files.deleteIfExists(file);"
+      ],
+      [
+       "c",
+       "    } catch (IOException e) {"
+      ],
+      [
+       "d",
+       "      LOGGER.debug(\"Could not delete {}, deleting it at exit instead\", file);"
+      ],
+      [
+       "a",
+       "      LOGGER.debug(\"Could not delete {}, deleting it at exit instead\", file, e);"
+      ],
+      [
+       "c",
+       "      file.toFile().deleteOnExit();"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "  }"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-17T19:13:07Z",
+    "updated_at": "2026-11-17T19:13:11Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 121
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -3563,7 +3690,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T19:05:23Z",
-    "updated_at": "2026-11-17T19:05:46Z",
+    "updated_at": "2026-11-17T19:09:05Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
