@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T19:59:59Z",
+ "generated_at": "2026-11-17T22:54:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28859,
-   "forks": 6624,
+   "stars": 28861,
+   "forks": 6625,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 21665042,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50553,
-   "forks": 20747,
+   "stars": 50554,
+   "forks": 20746,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 695595266,
@@ -171,7 +171,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7350,
+   "stars": 7351,
    "forks": 950,
    "package": "pylance",
    "impact": null,
@@ -228,7 +228,7 @@
     "Arrow"
    ],
    "stars": 236,
-   "forks": 162,
+   "forks": 161,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37231813,
@@ -256,7 +256,7 @@
     "SQL DDL"
    ],
    "stars": 391,
-   "forks": 232,
+   "forks": 231,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4234079,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63429,
-   "forks": 13363,
+   "stars": 63438,
+   "forks": 13366,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 96389954,
@@ -332,11 +332,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Log why the stderr file could not be deleted and tighten the PythonInvoker tests",
    "date": "2026-11-17",
    "created_at": "2026-11-17T19:13:10Z",
-   "merged_at": null,
+   "merged_at": "2026-11-17",
    "reported": true,
    "pr": {
     "number": 2274,
@@ -441,18 +441,51 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
-    "approved_by": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-17T21:16:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2274#pullrequestreview-5946756315",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. All four #2253 nits are addressed: the exception passed to the debug log, the Python message assertion, the missing-`tempDir` check, and the overload Javadoc. The two inline items are non-blocking.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:16:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2274#discussion_r4605898307",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Non-blocking: could this also assert `.hasMessageStartingWith(\"Error invoking Python script: \")`? That shows the failure came from the wrapper, not from the path appearing somewhere else in the message.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:16:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2274#discussion_r4605898313",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/utils/PythonInvokerTest.java",
+      "text": "[AI Assisted] Non-blocking: could this assert the start of the message as well, for example `.hasMessageStartingWith(\"Python function failed with exit code 1: \")`? That matches the other tests in this class.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-17T19:13:07Z",
-    "updated_at": "2026-11-17T19:13:11Z",
+    "updated_at": "2026-11-17T21:16:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 121
   },
@@ -998,8 +1031,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T19:21:59Z",
@@ -1007,8 +1040,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 119
   },
@@ -1650,6 +1683,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-17T21:18:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5946788054",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. The posted nits are addressed, and the guard test is confirmed running in CI: the Unit Tests run logs `PythonClientPostBuildTest passed.` under `+jacoco`. Follow-up, not needed for this PR: a nested struct with `fields: null` still raises `TypeError` from `_parse_type`. Validating `fields` in the…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:18:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4605924919",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuildTest.scala",
+      "text": "[AI Assisted] nit: Add a case for an indented bare `delta` import. No case uses one, so the leading `\\s*` in the regex is untested.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:18:59Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4605924928",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] nit: Optional: a named task such as `checkBuildHelpers`, called from `python-client-tests.yml`, would make this check easier to find than an override of `Test / test`.",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-17T06:16:04Z",
@@ -1678,36 +1741,6 @@
       "path": "project/PythonClientPostBuildTest.scala",
       "text": "[AI Assisted] nit: Add a case for the `import delta.` form. This test only covers `from delta.api`, so the `import delta.` branch of the regex has no test yet.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:16:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4596045198",
-      "maintainer": true,
-      "path": "project/PythonClientPostBuild.scala",
-      "text": "[AI Assisted] nit: Add a comment that the trailing dot in `from unitycatalog.client.api.` keeps the check from matching the `api_client` import. The check also depends on the generator's exact import text, so a generator change to import style would fail with the order message.",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-17T06:16:03Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5933877594",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks, the run-order guard now has tests and the comments are in. Nits, if you want them: - A comment on the `Test / test` override. - Tests for an empty init and for the `import delta.` form. - A note on the trailing-dot check. Follow-up, not needed for this PR: a nested struct with `fields: null` stil…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-16T19:22:27Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4590380622",
-      "maintainer": true,
-      "path": "project/PythonClientPostBuild.scala",
-      "text": "[AI Assisted] normal: The new guard has no test for its failure path. The swap was checked by hand, so a change that turns the guard into a no-op would still pass CI. Could we move the check into a small function, and test it against a delta-style init, an all.yaml-style init and a missing file? A missing file should…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1715,12 +1748,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T18:46:24Z",
-    "updated_at": "2026-11-17T18:48:41Z",
+    "updated_at": "2026-11-17T21:19:00Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 116
   },
@@ -1943,11 +1976,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Reject CREATE OR REPLACE TABLE with LOCATION with one clear error",
    "date": "2026-11-15",
    "created_at": "2026-11-15T06:43:59Z",
-   "merged_at": null,
+   "merged_at": "2026-11-17",
    "reported": true,
    "pr": {
     "number": 2246,
@@ -2092,6 +2125,16 @@
      {
       "kind": "review approved",
       "who": "yili-db",
+      "at": "2026-11-17T21:09:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#pullrequestreview-5946671051",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-approving at 9900e89b. The follow-up nits from the earlier approval are addressed.",
+      "answered": true
+     },
+     {
+      "kind": "review approved",
+      "who": "yili-db",
       "at": "2026-11-17T05:38:20Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#pullrequestreview-5933517194",
       "maintainer": true,
@@ -2138,31 +2181,21 @@
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] Nit: the message always says \"with LOCATION\", including when only EXTERNAL triggered the rejection. Spark SQL cannot send that case, so this is about direct catalog-API callers only.",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-16T06:17:57Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2246#pullrequestreview-5915782246",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Requesting changes to the create-on-missing behavior. The inline comments cover it, plus a docs note and two nits.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-17T18:20:13Z",
-    "updated_at": "2026-11-17T18:37:19Z",
+    "updated_at": "2026-11-17T21:11:43Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 114
   },
@@ -2610,62 +2643,62 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-17T05:17:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5933323063",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5946184256",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Re-review at c5a111b2. The earlier findings are addressed: the UTC timestamp on Python 3.10 (`parse_iso_datetime`), the AutoGen `timedelta` (Python-mode dump), unset defaults keeping their Python values, the native test cases, the CHANGELOG CrewAI entry, the test helper import, and the Gemini fixture com…",
-      "answered": true
+      "text": "[AI Assisted] Re-review at 6e7e97ee. The AutoGen native-bytes fix is verified: base64 text from JSON is decoded at validation, native `bytes` are kept as they are, and invalid base64 is rejected. The inline comments are the open items: native `bytes` in the other four integrations (blocker), and the nested-binary foll…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-17T05:17:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4595636859",
-      "maintainer": true,
-      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
-      "text": "[AI Assisted] Blocker: native `bytes` passed to `run()` are now treated as base64 text. Only fields that were set are decoded, but a value set from native bytes looks the same as a value set from model JSON. On main, native bytes went through `model_dump()` unchanged, `UnitycatalogFunctionClient` passes non-string val…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T05:17:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4595636867",
-      "maintainer": true,
-      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
-      "text": "[AI Assisted] Normal: nested BINARY values are not decoded. `ARRAY<BINARY>`, `MAP<STRING, BINARY>` and a BINARY field inside a struct stay `bytes` after the Python-mode dump, because only top-level values are converted. `UnitycatalogFunctionClient` then sends bytes, and `DatabricksFunctionClient` fails in `json.dumps`…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-16T06:39:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695889",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/test_utils/function_utils_oss.py",
-      "text": "[AI Assisted] Nit: this import pulls in `function_utils`, which imports `databricks.sdk` at module level. The OSS test helpers would then depend on the Databricks SDK, which is not a core dependency. Could `param_type_name` move to a small module without SDK imports, or be inlined?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-16T06:39:53Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695896",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
-      "text": "[AI Assisted] Nit: `PLACE_TYPE_JSON` and `GEMINI_JSON_ARGUMENT_PARAMS` differ from the shared fixtures: string-only struct fields, and no date, timestamp or decimal parameter. A short comment on why would help. Does the protobuf `Struct` return numbers as floats? If so, a note on that would help reviewers too.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-16T06:39:52Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695832",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452158",
       "maintainer": true,
       "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
-      "text": "[AI Assisted] Blocker: a UTC `datetime` argument now reaches the client as a text value ending in `Z`. `DatabricksFunctionClient` validates timestamps with `datetime.fromisoformat`, and that call rejects a trailing `Z` on Python 3.10. `requires-python` still allows `>=3.10`. The old `str()` form (`+00:00`) was accepte…",
-      "answered": true
+      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452171",
+      "maintainer": true,
+      "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
+      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452179",
+      "maintainer": true,
+      "path": "ai/integrations/crewai/src/unitycatalog/ai/crewai/toolkit.py",
+      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452189",
+      "maintainer": true,
+      "path": "ai/integrations/llama_index/src/unitycatalog/ai/llama_index/toolkit.py",
+      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T20:36:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452207",
+      "maintainer": true,
+      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
+      "text": "[AI Assisted] Followup, thanks for disclosing this in the CHANGELOG. A binary value inside `ARRAY`, `MAP` or `STRUCT` is still sent as the bytes of its base64 text, as on main. That is accurate, and I agree it is not a regression. Could you open a tracking issue for it and reference the issue here? A test that pins th…",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -2673,12 +2706,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T17:43:45Z",
-    "updated_at": "2026-11-17T18:09:42Z",
+    "updated_at": "2026-11-17T20:36:01Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 112
   },
@@ -3203,77 +3236,77 @@
    "track": {
     "feedback": [
      {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:57:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330177",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] followup: the PR description says `close()` cancels a request waiting in retry backoff, but no test sets `retries`, so that path is untested. Could we add one?",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-17T06:57:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5934242644",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5946815935",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Re-review of head `5d9b8eca`. F1, F2, F3, F5, F6 and F8 from the earlier review are addressed. F4 and F7 are partly addressed: the thread now starts lazily, and the new tests cover NotFound, close during a pending request and a failing replaced close, but the remaining items are in the inline comments. I…",
-      "answered": true
+      "text": "[AI Assisted] Re-review of head `32240da2`. N1 (close on a saturated default executor) is fixed. I verified it with a standalone repro: `close_async()` returned immediately, and the pending call raised `Session is closed`. The retry-backoff test also covers the cancel path. N3 (`atexit` keeps used clients alive until…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-17T06:57:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330139",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947790",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] `close()` runs `shutdown` through `asyncio.to_thread`, which uses the caller's default executor. Applications often run sync tools in that same executor. If its workers are all blocked in UC calls, the shutdown queues behind them and never reaches the code that cancels those requests. `close_async()` the…",
-      "answered": true
+      "text": "[AI Assisted] After a `fork`, the child inherits `_loop` without its thread. `_started_loop` (line 209) returns that loop, so a request from the child waits forever. Could we check that `_thread` is alive, or track the pid, and create a new loop when it is not? This matters for prefork servers and for the sandbox exec…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-17T06:57:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330147",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947803",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] nit: `shutdown()` calls `_started_loop()` unconditionally, so closing a client that never sent a request still starts a loop thread just to stop it. The class docstring's claim that such a client costs no thread holds only until close. Could we skip starting the loop when none was started?",
-      "answered": true
+      "text": "[AI Assisted] nit: if the caller of `close()` was cancelled, `closed` is already cancelled, and `set_result` raises `InvalidStateError` in the close thread. Could we skip the result when `closed.cancelled()` is true?",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-17T06:57:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330156",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947811",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] followup: lazy start fixes clients that never send a request. A client that sends requests and is never closed still keeps its thread until exit, because `atexit` holds it. The docs now say to call `close()`, which is enough for this PR. A tracking issue would help if per-request clients are common.",
-      "answered": true
+      "text": "[AI Assisted] Requests now go through a new `RESTClientObject` built from the configuration, which replaces the one on the `ApiClient`. The warning covers only subclasses, not a plain client with changed attributes. Could we add a line to the CHANGELOG and `docs/ai/client.md` saying that the `ApiClient`'s `rest_client…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-17T06:57:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330160",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947816",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] nit: `client.close()` has no timeout, so if the cancellation regresses this test hangs instead of failing. Could we use `await asyncio.wait_for(client.close_async(), timeout=...)`? The final `requests == 6` check also runs before the 3.2s backoff, so it would not catch a late request.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:21:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947824",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] followup: `_request` builds a plain `RESTClientObject` from the configuration, so a custom or subclassed `rest_client` set on the `ApiClient` (proxy, auth or instrumentation hooks) is replaced and silently not used. Before this PR those hooks ran. Could the docs or the `UnitycatalogClient` docstring say…",
-      "answered": true
+      "text": "[AI Assisted] nit: 'is a' should read 'is an' for names that start with a vowel. Could we reword it as 'has type ...'?",
+      "answered": false
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T19:58:16Z",
-    "updated_at": "2026-11-17T19:58:32Z",
+    "updated_at": "2026-11-17T21:21:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -3809,6 +3842,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:14:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4605879045",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] This `try` wraps `findLocationUse`, a database query, as well as the URL parse. A `BaseException` from the query is caught, logged as \"its stored URL does not parse\", and dropped with no cause. Could we limit the `try` to `NormalizedURL.from` and `isSameOrUnder`, and pass the exception to `LOGGER.warn`?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T21:14:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4605879062",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] The rule that the new URL is the same as, or a parent of, the stored URL is written here and in the non-force update branch (line 253). Could one helper in `ExternalLocationUtils` serve both, so the two copies cannot drift?",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-17T21:14:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5946733758",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] N-A to N-E are addressed in this revision. The inline comments cover the exception handling in the forced-change logging path and a repeated rule. Optional test gaps: a forced URL change while a cleanup is pending is not asserted. Neither is the precedence between `PERMISSION_DENIED` and `INVALID_ARGUMEN…",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-17T06:17:42Z",
@@ -3837,49 +3900,19 @@
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/externallocation/CliExternalLocationOperations.java",
       "text": "[AI Assisted] This helper forwards `--force` only when the value is `true`, so the shared `.force(false)` tests never send an explicit `false` through the CLI. Could we forward any non-null value, for example with `String.valueOf(...)`?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4596056715",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
-      "text": "[AI Assisted] `MODIFIER_PARAMS` sits between instance methods in `CliOptions`. Could it move to the top of the class, with the other fields?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4596056721",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
-      "text": "[AI Assisted] No test pins the staging-table exclusion. A test that deletes the location with an orphaned staging row and expects success would guard the rationale in this comment.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4596056726",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "[AI Assisted] Narrowing the URL from `/a` to `/a/x` is refused even when everything under `/a` is also under `/a/x`. The spec text matches this behavior. A short comment at this call would make the direction clear, for example: the new URL is the same as, or a parent of, the current URL.",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T19:05:23Z",
-    "updated_at": "2026-11-17T19:09:05Z",
+    "updated_at": "2026-11-17T21:14:43Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 108
   },
