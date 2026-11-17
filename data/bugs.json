@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-17T17:45:39Z",
+ "generated_at": "2026-11-17T18:22:07Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63425,
+   "stars": 63429,
    "forks": 13362,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1772,7 +1772,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 30,
+     "additions": 43,
      "deletions": 5
     }
    ],
@@ -1796,7 +1796,7 @@
       "maintainer": true,
       "path": "docs/integrations/unity-catalog-spark.md",
       "text": "[AI Assisted] Nit: \"They fail whether or not the table exists\" is imprecise for REPLACE on a missing table, where Spark fails first. The DataFrame paths are not mentioned.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1806,7 +1806,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] Nit: the helper description should say that the namespace-only helpers differ from this one, and why the absolute-path check is needed. Without it, a real UC schema named `delta` or `iceberg` would skip the rejection.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1816,7 +1816,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] Nit: `new Path` throws IllegalArgumentException for names like `a:b`, and Delta's isPathIdentifier catches that exception. This now runs on every replace in a schema named `delta` or `iceberg`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1826,7 +1826,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] Nit: the message always says \"with LOCATION\", including when only EXTERNAL triggered the rejection. Spark SQL cannot send that case, so this is about direct catalog-API callers only.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1839,19 +1839,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
-    "last_push": "2026-11-16T16:14:32Z",
-    "updated_at": "2026-11-17T05:38:20Z",
+    "last_push": "2026-11-17T18:20:13Z",
+    "updated_at": "2026-11-17T18:20:35Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 114
   },
@@ -2347,13 +2347,13 @@
       "answered": true
      },
      {
-      "kind": "review commented",
+      "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-16T06:39:52Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5915961394",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4582695832",
       "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the fix. The STRUCT and BINARY conversion looks right for the reported cases. Summary of the inline comments: - Blocker: UTC `datetime` arguments on Python 3.10 with `DatabricksFunctionClient`. - Normal: the AutoGen `mode=\"json\"` change affects `timedelta`, native `bytes` and defaults. - Norma…",
+      "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
+      "text": "[AI Assisted] Blocker: a UTC `datetime` argument now reaches the client as a text value ending in `Z`. `DatabricksFunctionClient` validates timestamps with `datetime.fromisoformat`, and that call rejects a trailing `Z` on Python 3.10. `requires-python` still allows `>=3.10`. The old `str()` form (`+00:00`) was accepte…",
       "answered": true
      }
     ],
@@ -2362,7 +2362,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-17T17:43:45Z",
-    "updated_at": "2026-11-17T17:43:47Z",
+    "updated_at": "2026-11-17T18:09:42Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
