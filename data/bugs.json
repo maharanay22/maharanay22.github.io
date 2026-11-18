@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T04:23:47Z",
+ "generated_at": "2026-11-18T09:17:14Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28867,
-   "forks": 6626,
+   "stars": 28869,
+   "forks": 6627,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50558,
-   "forks": 20748,
+   "stars": 50564,
+   "forks": 20749,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -171,8 +171,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7354,
-   "forks": 951,
+   "stars": 7358,
+   "forks": 952,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4304986,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63452,
-   "forks": 13375,
+   "stars": 63472,
+   "forks": 13381,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -1045,7 +1045,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:33:56Z",
-    "updated_at": "2026-11-18T01:42:07Z",
+    "updated_at": "2026-11-18T05:43:56Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1703,6 +1703,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-18T08:19:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5952968634",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The `fields` pre-check and the request-side serialization test are good. The only ask is the simplification in the inline comment on the `Test / test` override: remove the override and `project/PythonClientPostBuildTest.scala`, and keep the run-order guard and its comment. This withdraws the earlier requ…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T08:19:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4610937185",
+      "maintainer": true,
+      "path": "build.sbt",
+      "text": "[AI Assisted] Suggest removing this `Test / test` override and `project/PythonClientPostBuildTest.scala`, and keeping the run-order guard and its comment. The guard already runs on every CI generate, through the Python job (`run-tests.sh`) and `+jacoco`, and it fails the build if the run order is wrong. If the guard i…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T08:19:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4610937194",
+      "maintainer": true,
+      "path": "project/PythonClientPostBuild.scala",
+      "text": "[AI Assisted] nit: This message only says the all.yaml run must run last. The guard also fails when the generator's import text changes, so the message could say that too, for example by adding \"or the generator's import style changed\".",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-17T21:18:59Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5946788054",
       "maintainer": true,
@@ -1729,49 +1759,19 @@
       "path": "build.sbt",
       "text": "[AI Assisted] nit: Optional: a named task such as `checkBuildHelpers`, called from `python-client-tests.yml`, would make this check easier to find than an override of `Test / test`.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:16:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4596045173",
-      "maintainer": true,
-      "path": "build.sbt",
-      "text": "[AI Assisted] nit: Explain why `Test / test` is overridden here. The override replaces the default test task, so `pythonClient/testOnly` and `testQuick` do not run these checks, and any Scala test added to this project later would be skipped. A one-line comment would make that clear.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:16:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4596045185",
-      "maintainer": true,
-      "path": "project/PythonClientPostBuildTest.scala",
-      "text": "[AI Assisted] nit: Add a case for an empty init. Writing an empty file and expecting `clientPackageInitProblem(init).isDefined` to be true would cover it. The test does not have that case yet.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:16:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4596045189",
-      "maintainer": true,
-      "path": "project/PythonClientPostBuildTest.scala",
-      "text": "[AI Assisted] nit: Add a case for the `import delta.` form. This test only covers `from delta.api`, so the `import delta.` branch of the regex has no test yet.",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T03:49:21Z",
-    "updated_at": "2026-11-18T03:52:56Z",
+    "updated_at": "2026-11-18T08:19:54Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 116
   },
@@ -3267,6 +3267,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-18T08:36:04Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5953157453",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review of head `0d5f090f`. R1 (fork hang), R2 (`set_result` after cancel), R3 (`rest_client` docs), R4 (retry test timeout) and R5 (grammar) are fixed. I verified R1, R2 and R4 with standalone repros. Inline: B1 (blocker, the fork reset regression). Not anchorable in the diff, so in this body: N-a (no…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T08:36:04Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4611096979",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] blocker: the fork reset drops the child's references to the parent's `rest_client` and loop. When the child finalizes them, aiohttp closes the parent's warm keep-alive transport, which unregisters its socket from the shared epoll instance. I reproduced it. After a fork, the parent's next request on the r…",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-17T21:21:10Z",
@@ -3305,39 +3325,19 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] nit: `client.close()` has no timeout, so if the cancellation regresses this test hangs instead of failing. Could we use `await asyncio.wait_for(client.close_async(), timeout=...)`? The final `requests == 6` check also runs before the 3.2s backoff, so it would not catch a late request.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947824",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] nit: 'is a' should read 'is an' for names that start with a vowel. Could we reword it as 'has type ...'?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:57:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330177",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] followup: the PR description says `close()` cancels a request waiting in retry backoff, but no test sets `retries`, so that path is untested. Could we add one?",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T03:55:28Z",
-    "updated_at": "2026-11-18T03:55:30Z",
+    "updated_at": "2026-11-18T08:36:04Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -3877,6 +3877,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-18T07:51:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5952632235",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] N-G and N-I are addressed. The inline comments cover the forced-delete test, the message for a stored URL that the current parser rejects, and the remaining exception-handling point. Verdict: comment, no blocker.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T07:51:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4610654739",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
+      "text": "[AI Assisted] The final forced delete runs after the location has moved to `anotherTestUrl()`, but the cleanup task created at the old root no longer overlaps it. So this delete no longer shows that `force` bypasses a pending cleanup. Could we create the cleanup task under the new URL before the forced delete, and ass…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T07:51:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4610654762",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] Refusing is the safe choice here. However, the message names a stored URL the caller did not send. A URL-only PATCH on a location created by v0.6.0 with a URL the current parser rejects now fails, where main allowed it. Could the PR description call that out, and could the message say that the stored URL…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T07:51:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4610654770",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "[AI Assisted] This catch also covers `findLocationUse`, which runs the database query. An `IllegalArgumentException` from the query would be logged as a URL that does not parse. Could the catch be limited to the parent-path step?",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-17T21:14:43Z",
@@ -3895,46 +3935,6 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] The rule that the new URL is the same as, or a parent of, the stored URL is written here and in the non-force update branch (line 253). Could one helper in `ExternalLocationUtils` serve both, so the two copies cannot drift?",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-17T21:14:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5946733758",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] N-A to N-E are addressed in this revision. The inline comments cover the exception handling in the forced-change logging path and a repeated rule. Optional test gaps: a forced URL change while a cleanup is pending is not asserted. Neither is the precedence between `PERMISSION_DENIED` and `INVALID_ARGUMEN…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5933892485",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Thanks for the work. N1 to N6 are addressed. The 403 pending-cleanup status is deferred to #2252. Whichever of #2240 and #2252 lands second must change the shared validator and the update path's expected code together. The branch is conflicting with main, so it needs a rebase or merge before it can land.…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4596056699",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
-      "text": "[AI Assisted] Question for the author: the refusal names the first blocker by ID, and catalog and schema IDs are new in this list. A principal with MANAGE on the location but no access to that catalog or schema can learn that the catalog or schema ID sits under the location. Delete already names tables, volumes and mo…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T06:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4596056710",
-      "maintainer": true,
-      "path": "examples/cli/src/test/java/io/unitycatalog/cli/externallocation/CliExternalLocationOperations.java",
-      "text": "[AI Assisted] This helper forwards `--force` only when the value is `true`, so the shared `.force(false)` tests never send an explicit `false` through the CLI. Could we forward any non-null value, for example with `String.valueOf(...)`?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3942,12 +3942,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:33:20Z",
-    "updated_at": "2026-11-18T01:54:01Z",
+    "updated_at": "2026-11-18T07:51:03Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 108
   },
