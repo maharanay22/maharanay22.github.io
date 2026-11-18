@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T01:44:04Z",
+ "generated_at": "2026-11-18T01:46:40Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28862,
+   "stars": 28863,
    "forks": 6625,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50555,
+   "stars": 50554,
    "forks": 20747,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -241,7 +241,7 @@
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-17"
+   "period_checked": "2026-11-18"
   },
   {
    "full": "databricks/dbt-databricks",
