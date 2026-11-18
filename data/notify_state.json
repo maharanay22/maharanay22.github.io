@@ -335,48 +335,56 @@
  },
  "https://github.com/lance-format/lance/pull/11079": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "running",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11080": {
-  "approved_by": [],
-  "checks": "failing",
+  "approved_by": [
+   "Xuanwo"
+  ],
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11081": {
-  "approved_by": [],
+  "approved_by": [
+   "Xuanwo"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11082": {
-  "approved_by": [],
-  "checks": "failing",
-  "conflicts": false,
-  "last_comment": null,
-  "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
- },
- "https://github.com/lance-format/lance/pull/11083": {
-  "approved_by": [],
+  "approved_by": [
+   "Xuanwo"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/lance-format/lance/pull/11083": {
+  "approved_by": [
+   "Xuanwo"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/mindsdb/engine/pull/10": {
   "approved_by": [],
@@ -1064,7 +1072,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2241": {
   "approved_by": [
@@ -1084,7 +1092,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2243": {
   "approved_by": [
@@ -1147,7 +1155,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2250": {
   "approved_by": [],

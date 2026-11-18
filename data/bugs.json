@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T18:14:38Z",
+ "generated_at": "2026-11-18T21:59:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3367,
+   "stars": 3368,
    "forks": 710,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28872,
+   "stars": 28873,
    "forks": 6626,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50571,
-   "forks": 20753,
+   "stars": 50569,
+   "forks": 20752,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63490,
-   "forks": 13396,
+   "stars": 63499,
+   "forks": 13398,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -1766,7 +1766,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T16:49:10Z",
-    "updated_at": "2026-11-18T16:50:58Z",
+    "updated_at": "2026-11-18T19:41:49Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3327,17 +3327,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T17:24:13Z",
-    "updated_at": "2026-11-18T17:24:16Z",
+    "updated_at": "2026-11-18T19:41:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },
@@ -3942,7 +3942,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T16:34:27Z",
-    "updated_at": "2026-11-18T16:47:20Z",
+    "updated_at": "2026-11-18T19:40:57Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -4413,11 +4413,11 @@
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Write Enum fields of Pydantic models",
    "date": "2026-11-14",
    "created_at": "2026-11-14T14:20:07Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 11083,
@@ -4561,17 +4561,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-18T16:28:21Z",
-    "updated_at": "2026-11-18T16:54:38Z",
+    "updated_at": "2026-11-18T18:16:15Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 104
   },
@@ -4849,11 +4851,11 @@
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Do not reserve a full delete batch up front",
    "date": "2026-11-14",
    "created_at": "2026-11-14T14:19:50Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 11081,
@@ -4871,7 +4873,7 @@
      "lines": [
       [
        "h",
-       "@@ -1921,9 +1921,22 @@"
+       "@@ -1811,9 +1811,22 @@"
       ],
       [
        "c",
@@ -4975,7 +4977,7 @@
       ],
       [
        "h",
-       "@@ -3558,8 +3571,8 @@"
+       "@@ -3147,8 +3160,8 @@"
       ],
       [
        "c",
@@ -4997,28 +4999,30 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-14T06:36:15Z",
-    "updated_at": "2026-11-14T14:34:22Z",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
+    "last_push": "2026-11-18T20:47:00Z",
+    "updated_at": "2026-11-18T21:39:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 102
   },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Keep the UTC offset of timestamp literals",
    "date": "2026-11-14",
    "created_at": "2026-11-14T14:19:46Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 11080,
@@ -5162,17 +5166,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-18T16:57:32Z",
-    "updated_at": "2026-11-18T17:12:16Z",
+    "updated_at": "2026-11-18T18:17:32Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 101
   },
@@ -5201,7 +5207,7 @@
      "lines": [
       [
        "h",
-       "@@ -1910,7 +1910,12 @@"
+       "@@ -1948,7 +1948,12 @@"
       ],
       [
        "c",
@@ -5257,7 +5263,7 @@
       ],
       [
        "h",
-       "@@ -2813,6 +2818,194 @@"
+       "@@ -2847,6 +2852,194 @@"
       ],
       [
        "c",
@@ -5365,7 +5371,7 @@
       ],
       [
        "h",
-       "@@ -347,10 +349,26 @@"
+       "@@ -365,10 +367,26 @@"
       ],
       [
        "c",
@@ -5455,17 +5461,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-16T20:04:33Z",
-    "updated_at": "2026-11-16T20:14:11Z",
+    "last_push": "2026-11-18T21:11:50Z",
+    "updated_at": "2026-11-18T21:41:59Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 100
   },
