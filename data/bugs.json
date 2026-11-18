@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T17:48:13Z",
+ "generated_at": "2026-11-18T18:14:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50570,
+   "stars": 50571,
    "forks": 20753,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -1761,8 +1761,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T16:49:10Z",
@@ -1770,8 +1770,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 116
   },
