@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T01:46:40Z",
+ "generated_at": "2026-11-18T02:15:15Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28863,
+   "stars": 28865,
    "forks": 6625,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -3109,7 +3109,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,9 +1,11 @@"
+       "@@ -1,9 +1,13 @@"
       ],
       [
        "c",
@@ -3141,7 +3141,15 @@
       ],
       [
        "a",
+       "import os"
+      ],
+      [
+       "a",
        "import threading"
+      ],
+      [
+       "a",
+       "import weakref"
       ],
       [
        "c",
@@ -3157,7 +3165,7 @@
       ],
       [
        "h",
-       "@@ -54,6 +56,7 @@"
+       "@@ -54,6 +58,7 @@"
       ],
       [
        "c",
@@ -3189,7 +3197,7 @@
       ],
       [
        "h",
-       "@@ -106,6 +109,8 @@"
+       "@@ -106,6 +111,19 @@"
       ],
       [
        "c",
@@ -3212,24 +3220,16 @@
        ""
       ],
       [
-       "c",
+       "a",
+       "_clients_to_reset_after_fork: \"weakref.WeakSet[_SingleLoopRESTClient]\" = weakref.WeakSet()"
+      ],
+      [
+       "a",
        ""
-      ],
-      [
-       "c",
-       "def syncify_method(sync_method):"
-      ],
-      [
-       "c",
-       "    @wraps(sync_method)"
-      ],
-      [
-       "h",
-       "@@ -129,8 +134,119 @@"
       ]
      ],
      "truncated": true,
-     "additions": 134,
+     "additions": 162,
      "deletions": 28
     }
    ],
@@ -3243,7 +3243,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review of head `32240da2`. N1 (close on a saturated default executor) is fixed. I verified it with a standalone repro: `close_async()` returned immediately, and the pending call raised `Session is closed`. The retry-backoff test also covers the cancel path. N3 (`atexit` keeps used clients alive until…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3253,7 +3253,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] After a `fork`, the child inherits `_loop` without its thread. `_started_loop` (line 209) returns that loop, so a request from the child waits forever. Could we check that `_thread` is alive, or track the pid, and create a new loop when it is not? This matters for prefork servers and for the sandbox exec…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3263,7 +3263,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: if the caller of `close()` was cancelled, `closed` is already cancelled, and `set_result` raises `InvalidStateError` in the close thread. Could we skip the result when `closed.cancelled()` is true?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3273,7 +3273,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Requests now go through a new `RESTClientObject` built from the configuration, which replaces the one on the `ApiClient`. The warning covers only subclasses, not a plain client with changed attributes. Could we add a line to the CHANGELOG and `docs/ai/client.md` saying that the `ApiClient`'s `rest_client…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3283,7 +3283,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] nit: `client.close()` has no timeout, so if the cancellation regresses this test hangs instead of failing. Could we use `await asyncio.wait_for(client.close_async(), timeout=...)`? The final `requests == 6` check also runs before the 3.2s backoff, so it would not catch a late request.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3293,20 +3293,20 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: 'is a' should read 'is an' for names that start with a vowel. Could we reword it as 'has type ...'?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-17T19:58:16Z",
-    "updated_at": "2026-11-18T01:07:20Z",
+    "last_push": "2026-11-18T01:57:22Z",
+    "updated_at": "2026-11-18T02:13:51Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
@@ -3907,7 +3907,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:33:20Z",
-    "updated_at": "2026-11-18T01:33:37Z",
+    "updated_at": "2026-11-18T01:54:01Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
