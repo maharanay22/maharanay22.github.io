@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T16:46:18Z",
+ "generated_at": "2026-11-18T16:51:34Z",
  "stages": [
   "reported",
   "fix sent",
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63486,
-   "forks": 13393,
+   "forks": 13394,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -1475,75 +1475,11 @@
       [
        "c",
        "              packageName = s\"$artifactNamePrefix.client\","
-      ],
-      [
-       "h",
-       "@@ -359,7 +360,14 @@"
-      ],
-      [
-       "c",
-       "        )"
-      ],
-      [
-       "c",
-       "        log.info(\"OpenAPI Python client generation completed.\")"
-      ],
-      [
-       "c",
-       "      }"
-      ],
-      [
-       "d",
-       "    ).value"
-      ],
-      [
-       "a",
-       "    ).value,"
-      ],
-      [
-       "a",
-       "    // The build code has no test framework, so pythonClient/test runs PythonClientPostBuildTest instead of the"
-      ],
-      [
-       "a",
-       "    // default test task. testOnly and testQuick don't run it, and a test added to this project would need to be"
-      ],
-      [
-       "a",
-       "    // run from here too."
-      ],
-      [
-       "a",
-       "    Test / test := {"
-      ],
-      [
-       "a",
-       "      val log = streams.value.log"
-      ],
-      [
-       "a",
-       "      IO.withTemporaryDirectory(dir => PythonClientPostBuildTest.run(log, dir.toPath))"
-      ],
-      [
-       "a",
-       "    },"
-      ],
-      [
-       "c",
-       "  )"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "lazy val apiDocs = (project in file(\"api\"))"
       ]
      ],
      "truncated": false,
-     "additions": 10,
-     "deletions": 2
+     "additions": 2,
+     "deletions": 1
     },
     {
      "path": "clients/python/src/unitycatalog/client/delta/internal/serde/delta_data_type_module.py",
@@ -1691,6 +1627,70 @@
       [
        "c",
        "    relocateDeltaImports(log, openApiOutputDir)"
+      ],
+      [
+       "c",
+       "    patchDeltaDataTypeModule(log, baseDir, openApiOutputDir)"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /** Matches an import from the bare `delta` package, which the generator writes for the delta.yaml run. */"
+      ],
+      [
+       "a",
+       "  private val bareDeltaImport = \"\"\"(?m)^\\s*(from|import)\\s+delta\\.\"\"\".r"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Says why the generated unitycatalog/client/__init__.py is not the one from the all.yaml run, or returns"
+      ],
+      [
+       "a",
+       "   * None if it is. The delta.yaml run writes this file too, with imports from the bare delta package, so it"
+      ],
+      [
+       "a",
+       "   * has to run first. Both versions export ApiClient, so the check looks for the UC API imports and for no"
+      ],
+      [
+       "a",
+       "   * bare delta import instead. Called by processGeneratedFiles."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  def clientPackageInitProblem(clientInit: Path): Option[String] = {"
+      ],
+      [
+       "a",
+       "    if (!Files.exists(clientInit)) {"
+      ],
+      [
+       "a",
+       "      return Some(s\"$clientInit was not generated.\")"
+      ],
+      [
+       "a",
+       "    }"
       ]
      ],
      "truncated": true,
@@ -1708,7 +1708,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The `fields` pre-check and the request-side serialization test are good. The only ask is the simplification in the inline comment on the `Test / test` override: remove the override and `project/PythonClientPostBuildTest.scala`, and keep the run-order guard and its comment. This withdraws the earlier requ…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1718,7 +1718,7 @@
       "maintainer": true,
       "path": "build.sbt",
       "text": "[AI Assisted] Suggest removing this `Test / test` override and `project/PythonClientPostBuildTest.scala`, and keeping the run-order guard and its comment. The guard already runs on every CI generate, through the Python job (`run-tests.sh`) and `+jacoco`, and it fails the build if the run order is wrong. If the guard i…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1728,7 +1728,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuild.scala",
       "text": "[AI Assisted] nit: This message only says the all.yaml run must run last. The guard also fails when the generator's import text changes, so the message could say that too, for example by adding \"or the generator's import style changed\".",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1761,17 +1761,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-18T03:49:21Z",
-    "updated_at": "2026-11-18T08:19:54Z",
+    "last_push": "2026-11-18T16:49:10Z",
+    "updated_at": "2026-11-18T16:49:43Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 116
   },
@@ -3942,7 +3942,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T16:34:27Z",
-    "updated_at": "2026-11-18T16:44:11Z",
+    "updated_at": "2026-11-18T16:47:20Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
