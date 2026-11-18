@@ -1064,7 +1064,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2241": {
   "approved_by": [
@@ -1079,12 +1079,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2242": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "nobody"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2243": {
   "approved_by": [
@@ -1142,12 +1142,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2248": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "nobody"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2250": {
   "approved_by": [],
