@@ -121,6 +121,30 @@ def pr_files(repo, number):
         return []
 
 
+IMPACT_LEVELS = ("high", "medium", "low")
+LOW_IMPACT_PATH = re.compile(
+    r"(^|/)(docs?|tests?|testing|\.github|examples?)/|(^|/)test_[^/]*$|_test\.\w+$|Tests?\.(java|scala)$"
+    r"|\.(md|rst|txt)$|(^|/)CHANGELOG", re.I)
+HIGH_IMPACT_TITLE = re.compile(
+    r"\b(wrong|incorrect|silent(ly)?|data loss|los[est]|corrupt\w*|drop(s|ped)?|overwrit\w*|leak\w*"
+    r"|bypass\w*|duplicat\w*|stale|ignor(es|ed|ing))\b", re.I)
+
+
+def impact_of(repo, number, title, files):
+    """The manual rating from overrides, else one derived from the PR, so every fix has a level."""
+    manual = OVERRIDES.get("impact_levels", {}).get(f"{repo}#{number}")
+    if isinstance(manual, dict) and manual.get("level") in IMPACT_LEVELS:
+        return manual
+    if manual in IMPACT_LEVELS:
+        return {"level": manual}
+    paths = [f["filename"] for f in files]
+    if paths and all(LOW_IMPACT_PATH.search(path) for path in paths):
+        return {"level": "low", "auto": True}
+    if HIGH_IMPACT_TITLE.search(title):
+        return {"level": "high", "auto": True}
+    return {"level": "medium", "auto": True}
+
+
 def release_version(repo, files):
     """The release whose notes a PR adds to, from the repo's release_notes.file pattern in overrides."""
     pattern = OVERRIDES.get("repos", {}).get(repo, {}).get("release_notes", {}).get("file")
@@ -466,7 +490,7 @@ def main():
             "pr": {"number": pr["number"], "url": pr["url"]},
             "issue": {"number": issue_num, "url": f"https://github.com/{repo}/issues/{issue_num}"} if issue_num else None,
             "proof": OVERRIDES.get("proofs", {}).get(pr["url"]),
-            "impact": OVERRIDES.get("impact_levels", {}).get(f"{repo}#{pr['number']}"),
+            "impact": impact_of(repo, pr["number"], pr["title"], files),
             "release": release_version(repo, files),
             "files": fix_diffs(files),
             "track": apply_note(pr["url"], status, replaced_by, track_pr(pr, status)),
