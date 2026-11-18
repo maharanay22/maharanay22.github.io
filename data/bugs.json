@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T04:10:24Z",
+ "generated_at": "2026-11-18T04:23:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Windows"
    ],
    "stars": 3581,
-   "forks": 703,
+   "forks": 704,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 642042,
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63452,
-   "forks": 13374,
+   "forks": 13375,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
