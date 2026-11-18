@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T14:01:25Z",
+ "generated_at": "2026-11-18T16:46:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28870,
-   "forks": 6627,
+   "stars": 28871,
+   "forks": 6626,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50568,
-   "forks": 20752,
+   "stars": 50569,
+   "forks": 20753,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -171,8 +171,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7360,
-   "forks": 952,
+   "stars": 7362,
+   "forks": 953,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4304986,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63479,
-   "forks": 13387,
+   "stars": 63486,
+   "forks": 13393,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -3884,7 +3884,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] N-G and N-I are addressed. The inline comments cover the forced-delete test, the message for a stored URL that the current parser rejects, and the remaining exception-handling point. Verdict: comment, no blocker.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3894,7 +3894,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/externallocation/BaseExternalLocationCRUDTest.java",
       "text": "[AI Assisted] The final forced delete runs after the location has moved to `anotherTestUrl()`, but the cleanup task created at the old root no longer overlaps it. So this delete no longer shows that `force` bypasses a pending cleanup. Could we create the cleanup task under the new URL before the forced delete, and ass…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3904,7 +3904,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] Refusing is the safe choice here. However, the message names a stored URL the caller did not send. A URL-only PATCH on a location created by v0.6.0 with a URL the current parser rejects now fails, where main allowed it. Could the PR description call that out, and could the message say that the stored URL…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3914,7 +3914,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] This catch also covers `findLocationUse`, which runs the database query. An `IllegalArgumentException` from the query would be logged as a URL that does not parse. Could the catch be limited to the parent-path step?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3937,17 +3937,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-18T01:33:20Z",
-    "updated_at": "2026-11-18T07:51:03Z",
+    "last_push": "2026-11-18T16:34:27Z",
+    "updated_at": "2026-11-18T16:44:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 108
   },
@@ -4567,22 +4567,22 @@
     "approved_by": [],
     "last_push": "2026-11-14T21:56:42Z",
     "updated_at": "2026-11-14T22:22:41Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 104
   },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Accept timezone-aware asof timestamps",
    "date": "2026-11-14",
    "created_at": "2026-11-14T14:20:00Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 11082,
@@ -4600,7 +4600,7 @@
      "lines": [
       [
        "h",
-       "@@ -336,8 +336,17 @@"
+       "@@ -336,8 +336,19 @@"
       ],
       [
        "c",
@@ -4616,7 +4616,15 @@
       ],
       [
        "a",
-       "        is_aware = ts_cutoff.tzinfo is not None"
+       "        # A tzinfo whose utcoffset() is None does not make the cutoff aware:"
+      ],
+      [
+       "a",
+       "        # Python still compares such datetimes as naive local times."
+      ],
+      [
+       "a",
+       "        is_aware = ts_cutoff.utcoffset() is not None"
       ],
       [
        "c",
@@ -4676,7 +4684,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 10,
+     "additions": 12,
      "deletions": 1
     },
     {
@@ -4822,17 +4830,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-14T21:56:39Z",
-    "updated_at": "2026-11-14T22:21:40Z",
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
+    "last_push": "2026-11-18T14:59:29Z",
+    "updated_at": "2026-11-18T15:40:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 103
   },
