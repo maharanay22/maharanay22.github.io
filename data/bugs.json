@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T02:15:15Z",
+ "generated_at": "2026-11-18T03:51:17Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28865,
-   "forks": 6625,
+   "stars": 28867,
+   "forks": 6626,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50554,
-   "forks": 20747,
+   "stars": 50557,
+   "forks": 20748,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9086,
+   "stars": 9085,
    "forks": 2224,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -213,7 +213,7 @@
    "period_commits": null,
    "period_total": 53,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-17"
+   "period_checked": "2026-11-18"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63445,
-   "forks": 13370,
+   "stars": 63452,
+   "forks": 13374,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -480,7 +480,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-17T19:13:07Z",
-    "updated_at": "2026-11-17T21:16:49Z",
+    "updated_at": "2026-11-18T03:44:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -1031,8 +1031,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:33:56Z",
@@ -1040,8 +1040,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 119
   },
@@ -1532,7 +1532,59 @@
      "lines": [
       [
        "h",
-       "@@ -108,8 +108,12 @@"
+       "@@ -48,8 +48,10 @@"
+      ],
+      [
+       "c",
+       "                value_type=_parse_type(obj.get(\"value-type\")),"
+      ],
+      [
+       "c",
+       "                value_contains_null=obj.get(\"value-contains-null\", True))"
+      ],
+      [
+       "c",
+       "        if t == \"struct\":"
+      ],
+      [
+       "d",
+       "            fields = [_parse_field(f) for f in obj.get(\"fields\", [])]"
+      ],
+      [
+       "d",
+       "            return DeltaStructType(type=t, fields=fields)"
+      ],
+      [
+       "a",
+       "            fields = obj.get(\"fields\", [])"
+      ],
+      [
+       "a",
+       "            if not isinstance(fields, list):"
+      ],
+      [
+       "a",
+       "                raise ValueError(\"Expected a list for struct 'fields', got: {}\".format(obj))"
+      ],
+      [
+       "a",
+       "            return DeltaStructType(type=t, fields=[_parse_field(f) for f in fields])"
+      ],
+      [
+       "c",
+       "        if t:"
+      ],
+      [
+       "c",
+       "            return DeltaPrimitiveType(type=t)"
+      ],
+      [
+       "c",
+       "        raise ValueError(\"dict type value missing 'type' field: {}\".format(obj))"
+      ],
+      [
+       "h",
+       "@@ -108,8 +110,12 @@"
       ],
       [
        "c",
@@ -1588,8 +1640,8 @@
       ]
      ],
      "truncated": false,
-     "additions": 5,
-     "deletions": 1
+     "additions": 9,
+     "deletions": 3
     },
     {
      "path": "project/PythonClientPostBuild.scala",
@@ -1621,58 +1673,6 @@
       [
        "c",
        "    relocateDeltaImports(log, openApiOutputDir)"
-      ],
-      [
-       "c",
-       "    patchDeltaDataTypeModule(log, baseDir, openApiOutputDir)"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "  /** Matches an import from the bare `delta` package, which the generator writes for the delta.yaml run. */"
-      ],
-      [
-       "a",
-       "  private val bareDeltaImport = \"\"\"(?m)^\\s*(from|import)\\s+delta\\.\"\"\".r"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "  /**"
-      ],
-      [
-       "a",
-       "   * Says why the generated unitycatalog/client/__init__.py is not the one from the all.yaml run, or returns"
-      ],
-      [
-       "a",
-       "   * None if it is. The delta.yaml run writes this file too, with imports from the bare delta package, so it"
-      ],
-      [
-       "a",
-       "   * has to run first. Both versions export ApiClient, so the check looks for the UC API imports and for no"
-      ],
-      [
-       "a",
-       "   * bare delta import instead. Called by processGeneratedFiles, and tested by PythonClientPostBuildTest."
-      ],
-      [
-       "a",
-       "   */"
-      ],
-      [
-       "a",
-       "  def clientPackageInitProblem(clientInit: Path): Option[String] = {"
       ]
      ],
      "truncated": true,
@@ -1690,7 +1690,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks. The posted nits are addressed, and the guard test is confirmed running in CI: the Unit Tests run logs `PythonClientPostBuildTest passed.` under `+jacoco`. Follow-up, not needed for this PR: a nested struct with `fields: null` still raises `TypeError` from `_parse_type`. Validating `fields` in the…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1700,7 +1700,7 @@
       "maintainer": true,
       "path": "project/PythonClientPostBuildTest.scala",
       "text": "[AI Assisted] nit: Add a case for an indented bare `delta` import. No case uses one, so the leading `\\s*` in the regex is untested.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1710,7 +1710,7 @@
       "maintainer": true,
       "path": "build.sbt",
       "text": "[AI Assisted] nit: Optional: a named task such as `checkBuildHelpers`, called from `python-client-tests.yml`, would make this check easier to find than an override of `Test / test`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1743,17 +1743,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-17T18:46:24Z",
-    "updated_at": "2026-11-17T21:19:00Z",
+    "last_push": "2026-11-18T03:49:21Z",
+    "updated_at": "2026-11-18T03:49:43Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 116
   },
@@ -3236,16 +3236,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5946815935",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review of head `32240da2`. N1 (close on a saturated default executor) is fixed. I verified it with a standalone repro: `close_async()` returned immediately, and the pending call raised `Session is closed`. The retry-backoff test also covers the cancel path. N3 (`atexit` keeps used clients alive until…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-17T21:21:10Z",
@@ -3294,19 +3284,29 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: 'is a' should read 'is an' for names that start with a vowel. Could we reword it as 'has type ...'?",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-17T06:57:25Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4596330177",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] followup: the PR description says `close()` cancels a request waiting in retry backoff, but no test sets `retries`, so that path is untested. Could we add one?",
+      "answered": true
      }
     ],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:57:22Z",
-    "updated_at": "2026-11-18T02:13:51Z",
+    "updated_at": "2026-11-18T03:39:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 110
   },
@@ -3902,8 +3902,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T01:33:20Z",
@@ -3911,8 +3911,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 108
   },
