@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T16:51:34Z",
+ "generated_at": "2026-11-18T17:03:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3366,
+   "stars": 3367,
    "forks": 710,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63486,
-   "forks": 13394,
+   "stars": 63489,
+   "forks": 13395,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -1766,7 +1766,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T16:49:10Z",
-    "updated_at": "2026-11-18T16:49:43Z",
+    "updated_at": "2026-11-18T16:50:58Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3228,7 +3228,7 @@
       ],
       [
        "h",
-       "@@ -106,6 +111,19 @@"
+       "@@ -106,6 +111,22 @@"
       ],
       [
        "c",
@@ -3256,11 +3256,11 @@
       ],
       [
        "a",
-       ""
+       "# A forked child shares the parent's epoll instance, so finalizing the inherited session would"
       ]
      ],
      "truncated": true,
-     "additions": 162,
+     "additions": 175,
      "deletions": 28
     }
    ],
@@ -3274,7 +3274,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review of head `0d5f090f`. R1 (fork hang), R2 (`set_result` after cancel), R3 (`rest_client` docs), R4 (retry test timeout) and R5 (grammar) are fixed. I verified R1, R2 and R4 with standalone repros. Inline: B1 (blocker, the fork reset regression). Not anchorable in the diff, so in this body: N-a (no…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3284,7 +3284,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] blocker: the fork reset drops the child's references to the parent's `rest_client` and loop. When the child finalizes them, aiohttp closes the parent's warm keep-alive transport, which unregisters its socket from the shared epoll instance. I reproduced it. After a fork, the parent's next request on the r…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3327,17 +3327,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-18T03:55:28Z",
-    "updated_at": "2026-11-18T08:36:04Z",
+    "last_push": "2026-11-18T17:01:53Z",
+    "updated_at": "2026-11-18T17:02:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
@@ -4561,17 +4561,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T21:56:42Z",
-    "updated_at": "2026-11-14T22:22:41Z",
-    "conflicts": true,
+    "last_push": "2026-11-18T16:28:21Z",
+    "updated_at": "2026-11-18T16:54:38Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 104
   },
