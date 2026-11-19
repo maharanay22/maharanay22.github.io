@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T13:11:29Z",
+ "generated_at": "2026-11-19T15:12:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3582,
+   "stars": 3583,
    "forks": 705,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28885,
-   "forks": 6628,
+   "stars": 28896,
+   "forks": 6633,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -105,7 +105,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7369,
+   "stars": 7371,
    "forks": 956,
    "package": "pylance",
    "impact": null,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50568,
-   "forks": 20754,
+   "stars": 50569,
+   "forks": 20761,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63538,
-   "forks": 13417,
+   "stars": 63542,
+   "forks": 13421,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -4113,7 +4113,7 @@
       ],
       [
        "a",
-       "    if type_json[\"type\"] == \"binary\":"
+       "    if str(type_json[\"type\"]).lower() == \"binary\":"
       ],
       [
        "a",
@@ -4203,7 +4203,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 42387ae6. The earlier native-bytes blocker is fixed: I checked the round trip with repros, and the Databricks validation and SQL path accept the sent text. Nit, tracked with #2227: an omitted `BINARY` parameter with a stored default such as `X'61626364'` uses the raw string as its default, b…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4213,7 +4213,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal: the nested-binary caveat needs four edits. 1. Name every integration that uses `to_tool_call_parameters`, not AutoGen only: LangChain, DSPy, CrewAI, LlamaIndex and Gemini. Gemini is covered by code reading only: it uses the same `to_jsonable_python` conversion, and I did not run it. 2. Drop \"as b…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -4223,7 +4223,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
       "text": "[AI Assisted] Nit: `type_json[\"type\"] == \"binary\"` is case-sensitive. The type mapping upper-cases scalar names, so a `type_json` that carried `\"BINARY\"` would get the `bytes` type without the decode validator. Spark emits lowercase, so this matters only for consistency. Could this compare case-insensitively, for exam…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -4256,17 +4256,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T03:21:12Z",
-    "updated_at": "2026-11-19T05:08:03Z",
+    "last_push": "2026-11-19T15:10:31Z",
+    "updated_at": "2026-11-19T15:10:46Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 112
   },
@@ -12768,7 +12768,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T05:06:53Z",
-    "updated_at": "2026-11-19T05:14:52Z",
+    "updated_at": "2026-11-19T15:07:16Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
