@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T03:20:30Z",
+ "generated_at": "2026-11-19T03:22:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3368,
+   "stars": 3369,
    "forks": 710,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63511,
-   "forks": 13402,
+   "forks": 13403,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -2675,17 +2675,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T03:10:21Z",
-    "updated_at": "2026-11-19T03:19:04Z",
-    "conflicts": true,
+    "last_push": "2026-11-19T03:21:12Z",
+    "updated_at": "2026-11-19T03:21:14Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 112
   },
