@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T07:54:35Z",
+ "generated_at": "2026-11-19T13:11:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3581,
+   "stars": 3582,
    "forks": 705,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3369,
-   "forks": 710,
+   "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10563244,
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28878,
-   "forks": 6627,
+   "stars": 28885,
+   "forks": 6628,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -105,7 +105,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7365,
+   "stars": 7369,
    "forks": 956,
    "package": "pylance",
    "impact": null,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50567,
-   "forks": 20755,
+   "stars": 50568,
+   "forks": 20754,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9086,
+   "stars": 9085,
    "forks": 2225,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63523,
-   "forks": 13408,
+   "stars": 63538,
+   "forks": 13417,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -4795,64 +4795,64 @@
    "track": {
     "feedback": [
      {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T03:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4623901704",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] normal: `close()` sets `_closed` before `shutdown()` has succeeded. If the shutdown fails, for example when `Thread.start` fails, a retried `close()` on the same client returns at this guard, and the transport stays open. I reproduced it with a simulated `Thread.start` failure. After the failed close, `U…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T03:17:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4623901713",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] nit: closing a client that never sent a request still starts a loop thread just to stop it. Could we skip starting the loop when none was started?",
-      "answered": true
-     },
-     {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-19T03:17:41Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5968824158",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5971469058",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Re-review of head `0e49276c`. Inline: N-e (normal, `UnitycatalogClient.close`, line 329) and N-b (nit, line 236). Followups: - N-f: the child reset quarantines the owned session but not the replaced one, and the child's `close()` still closes the replaced session. I saw no error and no effect on the pare…",
-      "answered": true
+      "text": "[AI Assisted] I'd simplify the client lifecycle to one owner and one lock. `_SingleLoopRESTClient` should hold the close state, `shutdown` should hold the lock through teardown, and a pid check can replace the fork hooks. I'd keep the custom `rest_client` class rather than replacing it with the plain one. Details are…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-18T23:23:30Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4622238691",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006477",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] normal: `shutdown` sets `_closed` before `_started_loop()` runs. If `Thread.start` fails there, `_shut_down` is never set, so later closers wait with no timeout, including the `atexit` close. This needs `Thread.start` to fail. I reproduced it with a simulated start failure: the first close logged the err…",
-      "answered": true
+      "text": "[AI Assisted] Could we remove the `_clients_to_reset_after_fork` WeakSet and the `_reset_clients_after_fork` hook? A pid check makes a registry unnecessary.",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-18T23:23:30Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4622238706",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006486",
       "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] nit: `status` is not set before the fork block, so the `finally` can read it unbound if an earlier line raises. Could we set `status = (0, 0)` before the `try`?",
-      "answered": true
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Could we drop `_inherited_before_fork`? It only keeps objects alive for the reset hook, which would go away with the pid check.",
+      "answered": false
      },
      {
-      "kind": "review commented",
+      "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-18T23:23:29Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5966816959",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006491",
       "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review of head `ec963cba`. B1 (fork keep-alive) and N-a (second close waits for the first) are fixed and verified. The fork, child request and cancelled-close repros pass. Inline: NF1 (normal, `client.py:236`) and NF3 (nit, test line 3189). In this body, because the lines are outside the diff: - NF2 (…",
-      "answered": true
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Suggest replacing the `os.register_at_fork` registration with the owning process, saved in `__init__`: [code] Check it in `request` before taking the lock, and make `shutdown` a no-op in a child: [code]",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006502",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Could we build the owned client with the same class as the replaced one, `type(self._replaced_rest_client)(self._configuration)`, on the owned loop? That keeps a subclass's `request` override in use, as main does; this PR currently calls it zero times. Instance attributes on the original object would not…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006511",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Could we drop `_shut_down` and hold `_lock` through the whole shutdown instead? A second caller would then block on the lock and return once teardown is done.",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -4860,12 +4860,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:54:17Z",
-    "updated_at": "2026-11-19T06:17:28Z",
+    "updated_at": "2026-11-19T08:48:31Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },

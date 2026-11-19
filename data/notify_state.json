@@ -290,7 +290,7 @@
   "approved_by": [
    "Shahzeb-DataEngineer"
   ],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -387,6 +387,60 @@
   "last_comment_who": null,
   "status": "merged",
   "waiting_on": "nobody"
+ },
+ "https://github.com/lance-format/lance/pull/11249": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/lance-format/lance/pull/11253": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/lance-format/lance/pull/11254": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/lance-format/lance/pull/11256": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/lance-format/lance/pull/11257": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/lance-format/lance/pull/11258": {
+  "approved_by": [],
+  "checks": "failing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
  },
  "https://github.com/mindsdb/engine/pull/10": {
   "approved_by": [],
@@ -890,12 +944,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2187": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": "shba24@2026-11-11T23:59:31Z",
   "last_comment_who": "shba24",
   "status": "review",
-  "waiting_on": "nobody"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2193": {
   "approved_by": [
@@ -1027,12 +1081,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "nobody"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2237": {
   "approved_by": [
@@ -1092,7 +1146,7 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2242": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -1108,17 +1162,17 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2244": {
   "approved_by": [],
-  "checks": "running",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "nobody"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2245": {
   "approved_by": [
@@ -1185,13 +1239,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2252": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2253": {
   "approved_by": [
@@ -1216,12 +1272,14 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2296": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  }
 }
