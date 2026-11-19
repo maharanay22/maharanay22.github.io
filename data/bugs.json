@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T15:12:28Z",
+ "generated_at": "2026-11-19T17:09:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28896,
-   "forks": 6633,
+   "stars": 28900,
+   "forks": 6637,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50569,
-   "forks": 20761,
+   "stars": 50570,
+   "forks": 20762,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63542,
-   "forks": 13421,
+   "stars": 63548,
+   "forks": 13423,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -1673,17 +1673,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T05:43:40Z",
     "updated_at": "2026-11-19T06:11:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 125
   },
@@ -4260,8 +4260,8 @@
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T15:10:31Z",
-    "updated_at": "2026-11-19T15:10:46Z",
+    "last_push": "2026-11-19T16:12:09Z",
+    "updated_at": "2026-11-19T16:12:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
