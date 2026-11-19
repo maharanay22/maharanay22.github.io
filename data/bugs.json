@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T18:27:47Z",
+ "generated_at": "2026-11-19T20:31:57Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3369,
+   "stars": 3370,
    "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28899,
-   "forks": 6637,
+   "stars": 28900,
+   "forks": 6638,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50569,
-   "forks": 20764,
+   "stars": 50572,
+   "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63552,
-   "forks": 13424,
+   "stars": 63555,
+   "forks": 13427,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -481,17 +481,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T18:25:02Z",
-    "updated_at": "2026-11-19T18:25:58Z",
+    "updated_at": "2026-11-19T20:02:02Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 132
   },
@@ -783,17 +783,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T18:13:27Z",
-    "updated_at": "2026-11-19T18:14:29Z",
+    "updated_at": "2026-11-19T20:01:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 131
   },
@@ -949,17 +949,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T17:54:44Z",
-    "updated_at": "2026-11-19T18:09:28Z",
+    "updated_at": "2026-11-19T20:01:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 130
   },
@@ -1711,28 +1711,28 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T06:09:04Z",
     "updated_at": "2026-11-19T06:25:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 127
   },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Reject list children in packed structs instead of panicking",
    "date": "2026-11-19",
    "created_at": "2026-11-19T05:47:08Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 11254,
@@ -2013,17 +2013,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-19T05:45:15Z",
-    "updated_at": "2026-11-19T05:50:39Z",
+    "updated_at": "2026-11-19T20:21:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 126
   },
@@ -4897,7 +4899,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T16:12:09Z",
-    "updated_at": "2026-11-19T16:12:15Z",
+    "updated_at": "2026-11-19T20:02:58Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
