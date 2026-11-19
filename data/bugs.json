@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T05:16:08Z",
+ "generated_at": "2026-11-19T07:54:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28876,
+   "stars": 28878,
    "forks": 6627,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -90,6 +90,34 @@
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
+   "period_since": "2026-07-18",
+   "period_checked": "2026-11-19"
+  },
+  {
+   "full": "lance-format/lance",
+   "name": "Lance",
+   "url": "https://github.com/lance-format/lance",
+   "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
+   "icon": "🏹",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "AI data"
+   ],
+   "stars": 7365,
+   "forks": 956,
+   "package": "pylance",
+   "impact": null,
+   "downloads_month": 4304986,
+   "downloads_checked": "2026-11-19",
+   "contributor_rank": 93,
+   "contributor_commits": 5,
+   "contributor_total": 300,
+   "contributors_checked": "2026-11-19",
+   "period_rank": 50,
+   "period_commits": 5,
+   "period_total": 67,
    "period_since": "2026-07-18",
    "period_checked": "2026-11-19"
   },
@@ -122,34 +150,6 @@
    "period_checked": "2026-11-19"
   },
   {
-   "full": "lance-format/lance",
-   "name": "Lance",
-   "url": "https://github.com/lance-format/lance",
-   "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
-   "icon": "🏹",
-   "category": "lakehouse storage",
-   "tags": [
-    "Rust",
-    "Python",
-    "AI data"
-   ],
-   "stars": 7363,
-   "forks": 955,
-   "package": "pylance",
-   "impact": null,
-   "downloads_month": 4304986,
-   "downloads_checked": "2026-11-19",
-   "contributor_rank": 93,
-   "contributor_commits": 5,
-   "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
-   "period_rank": 50,
-   "period_commits": 5,
-   "period_total": 67,
-   "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
-  },
-  {
    "full": "pandas-dev/pandas",
    "name": "pandas",
    "url": "https://github.com/pandas-dev/pandas",
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50569,
-   "forks": 20752,
+   "stars": 50567,
+   "forks": 20755,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63514,
-   "forks": 13403,
+   "stars": 63523,
+   "forks": 13408,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -329,6 +329,1364 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Share the prefilter across boolean and boost full-text query leaves",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T06:12:07Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11258,
+    "url": "https://github.com/lance-format/lance/pull/11258"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance/src/dataset/scanner/fts.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -1454,17 +1454,20 @@"
+      ],
+      [
+       "c",
+       "                // the documents that are not in the top-k results of the positive query,"
+      ],
+      [
+       "c",
+       "                // but in the final top-k results."
+      ],
+      [
+       "c",
+       "                let unlimited_params = params.clone().with_limit(None);"
+      ],
+      [
+       "a",
+       "                // Both children must read one shared prefilter materialization;"
+      ],
+      [
+       "a",
+       "                // see `PreFilterSource::shared_for_consumers`."
+      ],
+      [
+       "a",
+       "                let prefilter_sources = prefilter_source.shared_for_consumers(2);"
+      ],
+      [
+       "c",
+       "                let positive_exec = Box::pin(self.plan_fts("
+      ],
+      [
+       "c",
+       "                    &query.positive,"
+      ],
+      [
+       "c",
+       "                    &unlimited_params,"
+      ],
+      [
+       "c",
+       "                    filter_plan,"
+      ],
+      [
+       "d",
+       "                    prefilter_source,"
+      ],
+      [
+       "a",
+       "                    &prefilter_sources[0],"
+      ],
+      [
+       "c",
+       "                ));"
+      ],
+      [
+       "c",
+       "                let negative_exec = Box::pin(self.plan_fts("
+      ],
+      [
+       "c",
+       "                    &query.negative,"
+      ],
+      [
+       "c",
+       "                    &unlimited_params,"
+      ],
+      [
+       "c",
+       "                    filter_plan,"
+      ],
+      [
+       "d",
+       "                    prefilter_source,"
+      ],
+      [
+       "a",
+       "                    &prefilter_sources[1],"
+      ],
+      [
+       "c",
+       "                ));"
+      ],
+      [
+       "c",
+       "                let (positive_exec, negative_exec) ="
+      ],
+      [
+       "c",
+       "                    futures::future::try_join(positive_exec, negative_exec).await?;"
+      ],
+      [
+       "h",
+       "@@ -1486,7 +1489,7 @@"
+      ],
+      [
+       "c",
+       "                let can_use_bounded_compound ="
+      ],
+      [
+       "c",
+       "                    !document_granularity.is_list_element() && params.limit.is_some();"
+      ],
+      [
+       "c",
+       "                let field_prefilter_sources ="
+      ],
+      [
+       "d",
+       "                    prefilter_source.shared_for_multimatch_fields(query.match_queries.len());"
+      ],
+      [
+       "a",
+       "                    prefilter_source.shared_for_consumers(query.match_queries.len());"
+      ],
+      [
+       "c",
+       "                let children = futures::future::try_join_all("
+      ]
+     ],
+     "truncated": true,
+     "additions": 24,
+     "deletions": 9
+    },
+    {
+     "path": "rust/lance/src/io/exec/utils.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -95,7 +95,7 @@"
+      ],
+      [
+       "c",
+       "    generation: u64,"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "/// Query-plan-local materialization state for a MultiMatch base prefilter."
+      ],
+      [
+       "a",
+       "/// Query-plan-local materialization state for a prefilter shared by FTS consumers."
+      ],
+      [
+       "c",
+       "///"
+      ],
+      [
+       "c",
+       "/// Entries are keyed by task-context identity and partition. This prevents a"
+      ],
+      [
+       "c",
+       "/// reused physical plan from carrying a mask into a later query and keeps an"
+      ],
+      [
+       "h",
+       "@@ -158,7 +158,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "impl DisplayAs for SharedPreFilterExec {"
+      ],
+      [
+       "c",
+       "    fn fmt_as(&self, _t: DisplayFormatType, f: &mut std::fmt::Formatter) -> std::fmt::Result {"
+      ],
+      [
+       "d",
+       "        write!(f, \"SharedMultiMatchPrefilter\")"
+      ],
+      [
+       "a",
+       "        write!(f, \"SharedPrefilter\")"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -191,13 +191,11 @@"
+      ],
+      [
+       "c",
+       "    ) -> DataFusionResult<Arc<dyn ExecutionPlan>> {"
+      ],
+      [
+       "c",
+       "        let source = match children.len() {"
+      ],
+      [
+       "c",
+       "            1 => children.pop().ok_or_else(|| {"
+      ],
+      [
+       "d",
+       "                DataFusionError::Internal("
+      ],
+      [
+       "d",
+       "                    \"shared MultiMatch prefilter lost its source child\".to_string(),"
+      ],
+      [
+       "d",
+       "                )"
+      ],
+      [
+       "a",
+       "                DataFusionError::Internal(\"shared prefilter lost its source child\".to_string())"
+      ],
+      [
+       "c",
+       "            })?,"
+      ],
+      [
+       "c",
+       "            count => {"
+      ],
+      [
+       "c",
+       "                return Err(DataFusionError::Internal(format!("
+      ],
+      [
+       "d",
+       "                    \"shared MultiMatch prefilter expected one child, got {count}\""
+      ]
+     ],
+     "truncated": true,
+     "additions": 48,
+     "deletions": 26
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T06:10:25Z",
+    "updated_at": "2026-11-19T06:36:08Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 129
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Reject lossy alter_columns casts",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T06:11:35Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11257,
+    "url": "https://github.com/lance-format/lance/pull/11257"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "python/python/lance/dataset.py",
+     "lines": [
+      [
+       "h",
+       "@@ -2098,7 +2098,12 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Column types can be upcasted (such as int32 to int64) or downcasted"
+      ],
+      [
+       "c",
+       "        (such as int64 to int32). However, downcasting will fail if there are"
+      ],
+      [
+       "d",
+       "        any values that cannot be represented in the new type. In general,"
+      ],
+      [
+       "a",
+       "        any values that cannot be represented in the new type, such as an"
+      ],
+      [
+       "a",
+       "        integer out of range, a timestamp with more precision than the new"
+      ],
+      [
+       "a",
+       "        unit, a timestamp that is not at midnight when casting to a date, or a"
+      ],
+      [
+       "a",
+       "        decimal with more digits than the new scale. Floats can be downcasted"
+      ],
+      [
+       "a",
+       "        with a loss of precision, but a finite value that is too large for the"
+      ],
+      [
+       "a",
+       "        new type fails rather than becoming infinity. In general,"
+      ],
+      [
+       "c",
+       "        columns can be casted to same general type: integers to integers,"
+      ],
+      [
+       "c",
+       "        floats to floats, and strings to strings. However, strings, binary, and"
+      ],
+      [
+       "c",
+       "        list columns can be casted between their size variants. For example,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 1
+    },
+    {
+     "path": "rust/lance/src/dataset/schema_evolution.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -16,11 +16,9 @@"
+      ],
+      [
+       "c",
+       "use crate::dataset::mem_wal::DatasetMemWalExt;"
+      ],
+      [
+       "c",
+       "use crate::index::loading::load_all_indices;"
+      ],
+      [
+       "c",
+       "use crate::{Error, Result, io::exec::Planner};"
+      ],
+      [
+       "d",
+       "use arrow::compute::CastOptions;"
+      ],
+      [
+       "c",
+       "use arrow::compute::can_cast_types;"
+      ],
+      [
+       "c",
+       "use arrow_array::cast::AsArray;"
+      ],
+      [
+       "c",
+       "use arrow_array::{Array, RecordBatch, RecordBatchReader};"
+      ],
+      [
+       "d",
+       "use arrow_cast::cast_with_options;"
+      ],
+      [
+       "c",
+       "use arrow_ipc::writer::{DictionaryTracker, IpcDataGenerator, IpcWriteOptions};"
+      ],
+      [
+       "c",
+       "use arrow_schema::{DataType, Field as ArrowField, Schema as ArrowSchema};"
+      ],
+      [
+       "c",
+       "use datafusion::execution::SendableRecordBatchStream;"
+      ],
+      [
+       "h",
+       "@@ -38,6 +36,7 @@"
+      ],
+      [
+       "c",
+       "use lance_file::version::ConcreteFileVersion;"
+      ],
+      [
+       "c",
+       "use lance_table::format::{Fragment, overlay::TOMBSTONE_FIELD_ID};"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "mod cast;"
+      ],
+      [
+       "c",
+       "pub mod optimize;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "use optimize::{ChainedNewColumnTransformOptimizer, NewColumnTransformOptimizer};"
+      ],
+      [
+       "h",
+       "@@ -1362,17 +1361,9 @@"
+      ],
+      [
+       "c",
+       "                .iter()"
+      ],
+      [
+       "c",
+       "                .zip(output_schema.fields())"
+      ],
+      [
+       "c",
+       "                .map(|(old_column, new_field)| {"
+      ],
+      [
+       "d",
+       "                    cast_with_options("
+      ],
+      [
+       "d",
+       "                        old_column,"
+      ],
+      [
+       "d",
+       "                        new_field.data_type(),"
+      ],
+      [
+       "d",
+       "                        // Safe: false means it will error if the cast is lossy."
+      ],
+      [
+       "d",
+       "                        &CastOptions {"
+      ],
+      [
+       "d",
+       "                            safe: false,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 181,
+     "deletions": 14
+    },
+    {
+     "path": "rust/lance/src/dataset/schema_evolution/cast.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,128 @@"
+      ],
+      [
+       "a",
+       "// SPDX-License-Identifier: Apache-2.0"
+      ],
+      [
+       "a",
+       "// SPDX-FileCopyrightText: Copyright The Lance Authors"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "use arrow::compute::{CastOptions, can_cast_types};"
+      ],
+      [
+       "a",
+       "use arrow_array::cast::AsArray;"
+      ],
+      [
+       "a",
+       "use arrow_array::types::Float64Type;"
+      ],
+      [
+       "a",
+       "use arrow_array::{Array, ArrayRef};"
+      ],
+      [
+       "a",
+       "use arrow_cast::display::{ArrayFormatter, FormatOptions};"
+      ],
+      [
+       "a",
+       "use arrow_cast::{cast, cast_with_options};"
+      ],
+      [
+       "a",
+       "use arrow_schema::DataType;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "use crate::{Error, Result};"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "const STRICT: CastOptions<'static> = CastOptions {"
+      ],
+      [
+       "a",
+       "    safe: false,"
+      ]
+     ],
+     "truncated": true,
+     "additions": 128,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T06:09:47Z",
+    "updated_at": "2026-11-19T06:36:02Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 128
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Keep late-materialized batches within batch_size",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T06:10:53Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11256,
+    "url": "https://github.com/lance-format/lance/pull/11256"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance/src/io/exec/filtered_read.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -555,8 +555,9 @@"
+      ],
+      [
+       "c",
+       "    builder.build()"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "/// Merge batches up to `target` rows; batches already at the target pass"
+      ],
+      [
+       "d",
+       "/// through whole (never split). Order is preserved."
+      ],
+      [
+       "a",
+       "/// Merge consecutive batches while the merged batch stays within `target`"
+      ],
+      [
+       "a",
+       "/// rows; a batch already at or above the target passes through whole (never"
+      ],
+      [
+       "a",
+       "/// split). Order is preserved."
+      ],
+      [
+       "c",
+       "pub fn coalesce_batches("
+      ],
+      [
+       "c",
+       "    input: SendableRecordBatchStream,"
+      ],
+      [
+       "c",
+       "    target: usize,"
+      ],
+      [
+       "h",
+       "@@ -614,8 +615,12 @@"
+      ],
+      [
+       "c",
+       "                return Ok::<_, DataFusionError>(None);"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "c",
+       "            match this.input.try_next().await? {"
+      ],
+      [
+       "d",
+       "                Some(batch) if batch.num_rows() >= this.target && !this.buffered.is_empty() => {"
+      ],
+      [
+       "d",
+       "                    // Emit the partial buffer on its own; the large batch"
+      ],
+      [
+       "a",
+       "                Some(batch)"
+      ],
+      [
+       "a",
+       "                    if !this.buffered.is_empty()"
+      ],
+      [
+       "a",
+       "                        && this.buffered_rows + batch.num_rows() > this.target =>"
+      ],
+      [
+       "a",
+       "                {"
+      ],
+      [
+       "a",
+       "                    // Emit the partial buffer on its own so merging never"
+      ],
+      [
+       "a",
+       "                    // overshoots the target; a batch already at the target"
+      ],
+      [
+       "c",
+       "                    // then passes through whole on the next iteration"
+      ],
+      [
+       "c",
+       "                    let out = this.emit()?;"
+      ],
+      [
+       "c",
+       "                    this.buffer(batch);"
+      ],
+      [
+       "h",
+       "@@ -7516,6 +7521,28 @@"
+      ],
+      [
+       "c",
+       "            let mixed = vec![batch.slice(0, 2), batch.slice(2, 5)];"
+      ],
+      [
+       "c",
+       "            let plan = take_plan_sized(&fixture.dataset, rows_input(mixed), &[\"i\"], 3).unwrap();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 31,
+     "deletions": 4
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T06:09:04Z",
+    "updated_at": "2026-11-19T06:25:38Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 127
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Reject list children in packed structs instead of panicking",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T05:47:08Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11254,
+    "url": "https://github.com/lance-format/lance/pull/11254"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance-encoding/src/array_encoding/strategy.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -26,6 +26,7 @@"
+      ],
+      [
+       "c",
+       "            packed_struct::PackedStructEncoder,"
+      ],
+      [
+       "c",
+       "        },"
+      ],
+      [
+       "c",
+       "    },"
+      ],
+      [
+       "a",
+       "    compression::validate_packed_struct_children,"
+      ],
+      [
+       "c",
+       "    constants::{"
+      ],
+      [
+       "c",
+       "        COMPRESSION_LEVEL_META_KEY, COMPRESSION_META_KEY, PACKED_STRUCT_LEGACY_META_KEY,"
+      ],
+      [
+       "c",
+       "        PACKED_STRUCT_META_KEY,"
+      ],
+      [
+       "h",
+       "@@ -557,6 +558,7 @@"
+      ],
+      [
+       "c",
+       "                        .map(|v| str_is_truthy(v))"
+      ],
+      [
+       "c",
+       "                        .unwrap_or(field_metadata.contains_key(PACKED_STRUCT_META_KEY))"
+      ],
+      [
+       "c",
+       "                    {"
+      ],
+      [
+       "a",
+       "                        validate_packed_struct_children(field)?;"
+      ],
+      [
+       "c",
+       "                        Ok(Box::new(PrimitiveFieldEncoder::try_new("
+      ],
+      [
+       "c",
+       "                            options,"
+      ],
+      [
+       "c",
+       "                            self.array_encoding_strategy.clone(),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 0
+    },
+    {
+     "path": "rust/lance-encoding/src/compression.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -966,6 +966,63 @@"
+      ],
+      [
+       "c",
+       "    raw.then(|| Box::new(ValueEncoder::default()) as _)"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "/// Reject a packed struct whose children cannot be stored as one packed value."
+      ],
+      [
+       "a",
+       "///"
+      ],
+      [
+       "a",
+       "/// Packed structs are encoded as a single primitive column, so every child,"
+      ],
+      [
+       "a",
+       "/// including the children of nested structs and fixed-size lists, must be a"
+      ],
+      [
+       "a",
+       "/// value type. A list, map or similar child would otherwise panic while the"
+      ],
+      [
+       "a",
+       "/// column is converted into a data block, so this runs when the encoder is"
+      ],
+      [
+       "a",
+       "/// created, before any data is written."
+      ],
+      [
+       "a",
+       "pub fn validate_packed_struct_children(field: &Field) -> Result<()> {"
+      ],
+      [
+       "a",
+       "    fn find_unsupported<'a>("
+      ],
+      [
+       "a",
+       "        path: &mut Vec<&'a str>,"
+      ],
+      [
+       "a",
+       "        name: &'a str,"
+      ],
+      [
+       "a",
+       "        data_type: &'a DataType,"
+      ],
+      [
+       "a",
+       "    ) -> Option<&'a DataType> {"
+      ],
+      [
+       "a",
+       "        path.push(name);"
+      ],
+      [
+       "a",
+       "        let found = match data_type {"
+      ],
+      [
+       "a",
+       "            DataType::Struct(fields) => fields"
+      ],
+      [
+       "a",
+       "                .iter()"
+      ],
+      [
+       "a",
+       "                .find_map(|child| find_unsupported(path, child.name(), child.data_type())),"
+      ],
+      [
+       "a",
+       "            DataType::FixedSizeList(item, _) => {"
+      ],
+      [
+       "a",
+       "                find_unsupported(path, item.name(), item.data_type())"
+      ],
+      [
+       "a",
+       "            }"
+      ],
+      [
+       "a",
+       "            DataType::List(_)"
+      ],
+      [
+       "a",
+       "            | DataType::LargeList(_)"
+      ],
+      [
+       "a",
+       "            | DataType::ListView(_)"
+      ],
+      [
+       "a",
+       "            | DataType::LargeListView(_)"
+      ],
+      [
+       "a",
+       "            | DataType::Map(_, _)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 57,
+     "deletions": 0
+    },
+    {
+     "path": "rust/lance-encoding/src/encoder/structural.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -10,6 +10,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "pub use crate::encodings::logical::primitive::PrimitivePageEncoding;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "use crate::compression::validate_packed_struct_children;"
+      ],
+      [
+       "c",
+       "use crate::encodings::logical::{"
+      ],
+      [
+       "c",
+       "    blob::{BlobStructuralEncoder, BlobV2StructuralEncoder},"
+      ],
+      [
+       "c",
+       "    fixed_size_list::FixedSizeListStructuralEncoder,"
+      ],
+      [
+       "h",
+       "@@ -124,6 +125,9 @@"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "c",
+       "            return Ok(None);"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "a",
+       "        if field.is_packed_struct() {"
+      ],
+      [
+       "a",
+       "            validate_packed_struct_children(field)?;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 4,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T05:45:15Z",
+    "updated_at": "2026-11-19T05:50:39Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 126
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Reject out-of-range offsets in LanceFragment.take",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T05:46:06Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11253,
+    "url": "https://github.com/lance-format/lance/pull/11253"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "python/src/fragment.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -275,19 +275,32 @@"
+      ],
+      [
+       "c",
+       "    #[pyo3(signature=(row_indices, columns=None))]"
+      ],
+      [
+       "c",
+       "    fn take<'py>("
+      ],
+      [
+       "c",
+       "        self_: PyRef<'py, Self>,"
+      ],
+      [
+       "d",
+       "        row_indices: Vec<usize>,"
+      ],
+      [
+       "a",
+       "        row_indices: Vec<u64>,"
+      ],
+      [
+       "c",
+       "        columns: Option<Vec<String>>,"
+      ],
+      [
+       "c",
+       "    ) -> PyResult<Bound<'py, PyAny>> {"
+      ],
+      [
+       "a",
+       "        // Fragment offsets are u32; reject larger values instead of letting"
+      ],
+      [
+       "a",
+       "        // them wrap around to a different, valid row."
+      ],
+      [
+       "a",
+       "        let indices = row_indices"
+      ],
+      [
+       "a",
+       "            .iter()"
+      ],
+      [
+       "a",
+       "            .map(|&offset| {"
+      ],
+      [
+       "a",
+       "                u32::try_from(offset).map_err(|_| {"
+      ],
+      [
+       "a",
+       "                    PyValueError::new_err(format!("
+      ],
+      [
+       "a",
+       "                        \"Fragment offset {offset} is out of range (maximum is {})\","
+      ],
+      [
+       "a",
+       "                        u32::MAX"
+      ],
+      [
+       "a",
+       "                    ))"
+      ],
+      [
+       "a",
+       "                })"
+      ],
+      [
+       "a",
+       "            })"
+      ],
+      [
+       "a",
+       "            .collect::<PyResult<Vec<_>>>()?;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "        let dataset_schema = self_.fragment.dataset().schema();"
+      ],
+      [
+       "c",
+       "        let projection = if let Some(columns) = columns {"
+      ],
+      [
+       "c",
+       "            dataset_schema"
+      ],
+      [
+       "d",
+       "                .project(&columns)"
+      ],
+      [
+       "a",
+       "                .project_preserve_system_columns(&columns)"
+      ],
+      [
+       "c",
+       "                .map_err(|e| PyIOError::new_err(e.to_string()))?"
+      ],
+      [
+       "c",
+       "        } else {"
+      ],
+      [
+       "c",
+       "            dataset_schema.clone()"
+      ]
+     ],
+     "truncated": true,
+     "additions": 16,
+     "deletions": 3
+    },
+    {
+     "path": "rust/lance/src/dataset/fragment.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -2338,7 +2338,32 @@"
+      ],
+      [
+       "c",
+       "    ///"
+      ],
+      [
+       "c",
+       "    /// This will always return the same number of rows as the input indices."
+      ],
+      [
+       "c",
+       "    /// If indices are out-of-bounds, this will return an error."
+      ],
+      [
+       "a",
+       "    ///"
+      ],
+      [
+       "a",
+       "    /// The projection may include the `_rowid` and `_rowaddr` system columns"
+      ],
+      [
+       "a",
+       "    /// (for example from [`Schema::project_preserve_system_columns`]). They"
+      ],
+      [
+       "a",
+       "    /// are returned in the order they appear in the projection."
+      ],
+      [
+       "c",
+       "    pub async fn take(&self, indices: &[u32], projection: &Schema) -> Result<RecordBatch> {"
+      ],
+      [
+       "a",
+       "        // System columns are produced by the reader rather than read from data files."
+      ],
+      [
+       "a",
+       "        let mut with_row_id = false;"
+      ],
+      [
+       "a",
+       "        let mut with_row_address = false;"
+      ],
+      [
+       "a",
+       "        let mut data_fields = Vec::with_capacity(projection.fields.len());"
+      ],
+      [
+       "a",
+       "        for field in &projection.fields {"
+      ],
+      [
+       "a",
+       "            match field.name.as_str() {"
+      ],
+      [
+       "a",
+       "                ROW_ID => with_row_id = true,"
+      ],
+      [
+       "a",
+       "                ROW_ADDR => with_row_address = true,"
+      ],
+      [
+       "a",
+       "                name if lance_core::is_system_column(name) => {"
+      ],
+      [
+       "a",
+       "                    return Err(Error::invalid_input(format!("
+      ],
+      [
+       "a",
+       "                        \"System column {name} is not supported by fragment take\""
+      ],
+      [
+       "a",
+       "                    )));"
+      ],
+      [
+       "a",
+       "                }"
+      ],
+      [
+       "a",
+       "                _ => data_fields.push(field.clone()),"
+      ],
+      [
+       "a",
+       "            }"
+      ],
+      [
+       "a",
+       "        }"
+      ],
+      [
+       "a",
+       "        let data_projection = Schema {"
+      ],
+      [
+       "a",
+       "            fields: data_fields,"
+      ],
+      [
+       "a",
+       "            metadata: projection.metadata.clone(),"
+      ],
+      [
+       "a",
+       "        };"
+      ],
+      [
+       "a",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 120,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T05:43:40Z",
+    "updated_at": "2026-11-19T06:11:14Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 125
+  },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
@@ -486,7 +1844,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T04:43:02Z",
-    "updated_at": "2026-11-19T05:02:24Z",
+    "updated_at": "2026-11-19T05:18:47Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -962,11 +2320,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Refuse deleting an external location with pending cleanup as FAILED_PRECONDITION, not 403",
    "date": "2026-11-16",
    "created_at": "2026-11-16T20:31:05Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 2252,
@@ -1156,6 +2514,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-19T05:59:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2252#pullrequestreview-5970049838",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks. The change is small and matches the intent: the pending-cleanup refusal on delete and URL change now returns FAILED_PRECONDITION, and the path-authorization 403s are left alone. Approving at this head.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-17T06:54:29Z",
@@ -1196,17 +2564,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-19T01:38:39Z",
-    "updated_at": "2026-11-19T05:07:47Z",
+    "updated_at": "2026-11-19T06:04:25Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 119
   },
@@ -2903,11 +4273,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Clear the Iceberg metadata of a managed Delta table when UniForm is turned off",
    "date": "2026-11-15",
    "created_at": "2026-11-15T05:48:42Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 2243,
@@ -3256,7 +4626,7 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
@@ -3264,12 +4634,12 @@
      "tdas"
     ],
     "last_push": "2026-11-16T04:56:29Z",
-    "updated_at": "2026-11-19T02:30:01Z",
+    "updated_at": "2026-11-19T06:23:50Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 111
   },
@@ -3490,7 +4860,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:54:17Z",
-    "updated_at": "2026-11-19T04:13:34Z",
+    "updated_at": "2026-11-19T06:17:28Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -8545,8 +9915,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "community approved",
     "approved_by": [
      "Shahzeb-DataEngineer"
@@ -8556,8 +9926,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
    },
    "id": 90
   },
@@ -11393,8 +12763,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T05:06:53Z",
@@ -11406,8 +12776,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 79
   },
