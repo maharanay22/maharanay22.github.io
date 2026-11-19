@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T20:31:57Z",
+ "generated_at": "2026-11-19T20:58:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28900,
+   "stars": 28902,
    "forks": 6638,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63555,
-   "forks": 13427,
+   "stars": 63556,
+   "forks": 13429,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Gemini tools send integer arguments as floats",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T20:56:10Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2308,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2308"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-19T20:56:10Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 133
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -4834,6 +4866,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T20:44:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4634862444",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal, not a regression: integer fields inside Gemini `STRUCT`, `ARRAY` and `MAP` arguments arrive as floats. A protobuf `Struct` stores numbers as doubles, and I checked that a value of `150` reads back as `150.0`. The Gemini integration passes these values through `to_jsonable_python`, so an `INT` fie…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-19T20:44:00Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5983069414",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 32286209. The earlier items are addressed: the CHANGELOG nested-binary caveat now covers every integration, drops \"as before\", and references #2298 for the nested binary case. The case-sensitive binary check is fixed. The omitted-default raw-string item stays with #2227, because the fix belo…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-19T05:08:03Z",
@@ -4872,39 +4924,19 @@
       "path": null,
       "text": "[AI Assisted] Re-review at 6e7e97ee. The AutoGen native-bytes fix is verified: base64 text from JSON is decoded at validation, native `bytes` are kept as they are, and invalid base64 is rejected. The inline comments are the open items: native `bytes` in the other four integrations (blocker), and the nested-binary foll…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452158",
-      "maintainer": true,
-      "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
-      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452171",
-      "maintainer": true,
-      "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
-      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T16:12:09Z",
-    "updated_at": "2026-11-19T20:02:58Z",
+    "last_push": "2026-11-19T20:56:22Z",
+    "updated_at": "2026-11-19T20:56:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 112
   },
