@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T01:29:13Z",
+ "generated_at": "2026-11-19T01:46:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -172,7 +172,7 @@
     "AI data"
    ],
    "stars": 7363,
-   "forks": 953,
+   "forks": 954,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4304986,
@@ -770,268 +770,176 @@
    "release": null,
    "files": [
     {
-     "path": "api/all.yaml",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
      "lines": [
       [
        "h",
-       "@@ -1464,11 +1464,14 @@"
+       "@@ -208,8 +208,8 @@"
       ],
       [
        "c",
-       "        Deletes the specified external location from the metastore."
+       "   * @throws BaseException with NOT_FOUND if the external location doesn't exist"
       ],
       [
        "c",
-       "        The caller must be a metastore admin, the external location owner,"
+       "   * @throws BaseException with INVALID_ARGUMENT if the URL change is refused because the location"
       ],
       [
        "c",
-       "        or have MANAGE on the external location."
-      ],
-      [
-       "a",
-       "        Unless force is true, the deletion fails while the location is in use: a table, volume"
-      ],
-      [
-       "a",
-       "        or registered model is stored under it, a catalog or schema keeps its managed storage"
-      ],
-      [
-       "a",
-       "        under it, or a storage cleanup is pending there."
-      ],
-      [
-       "c",
-       "      operationId: deleteExternalLocation"
-      ],
-      [
-       "c",
-       "      parameters:"
-      ],
-      [
-       "c",
-       "        - name: force"
-      ],
-      [
-       "c",
-       "          in: query"
+       "   *     is in use, or the new URL is invalid or overlaps another external location"
       ],
       [
        "d",
-       "          description: Force deletion even if there are dependent external tables or mounts."
-      ],
-      [
-       "a",
-       "          description: Force deletion even if the external location is in use."
-      ],
-      [
-       "c",
-       "          required: false"
-      ],
-      [
-       "c",
-       "          schema:"
-      ],
-      [
-       "c",
-       "            type: boolean"
-      ],
-      [
-       "h",
-       "@@ -1483,6 +1486,8 @@"
-      ],
-      [
-       "c",
-       "        Updates an external location in the metastore."
-      ],
-      [
-       "c",
-       "        The caller must be a metastore admin, the external location owner,"
-      ],
-      [
-       "c",
-       "        or have MANAGE on the external location."
-      ],
-      [
-       "a",
-       "        Unless force is true, changing the url fails if the location is in use (as described for"
-      ],
-      [
-       "a",
-       "        deleting it), unless the new url is the same as, or a parent of, the old one."
-      ],
-      [
-       "c",
-       "        EXPERIMENTAL: a location whose credential is `s3_compatible` must have an `s3://` URL;"
-      ],
-      [
-       "c",
-       "        otherwise the request fails with `INVALID_ARGUMENT`."
-      ],
-      [
-       "c",
-       "      operationId: updateExternalLocation"
-      ],
-      [
-       "h",
-       "@@ -3216,6 +3221,9 @@"
-      ],
-      [
-       "c",
-       "        new_name:"
-      ],
-      [
-       "c",
-       "          description: New name for the external location."
-      ],
-      [
-       "c",
-       "          type: string"
-      ],
-      [
-       "a",
-       "        force:"
-      ]
-     ],
-     "truncated": true,
-     "additions": 9,
-     "deletions": 1
-    },
-    {
-     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
-     "lines": [
-      [
-       "h",
-       "@@ -65,7 +65,7 @@"
-      ],
-      [
-       "c",
-       "      \"To indicate CLI output format preference. Supported values are json and jsonPretty.\","
-      ],
-      [
-       "c",
-       "      \"output\"),"
-      ],
-      [
-       "c",
-       "  VERSION(\"version\", \"Version number of a registered model entity.\", \"version\"),"
+       "   * @throws BaseException with PERMISSION_DENIED if the URL change is refused because a storage"
       ],
       [
        "d",
-       "  FORCE(\"force\", \"To force delete the entity\", \"force\"),"
+       "   *     cleanup is pending under the current URL"
       ],
       [
        "a",
-       "  FORCE(\"force\", \"To force the operation even if it would otherwise be refused\", \"force\"),"
+       "   * @throws BaseException with FAILED_PRECONDITION if the URL change is refused because a storage"
+      ],
+      [
+       "a",
+       "   *     cleanup is pending at, above, or under the current URL"
       ],
       [
        "c",
-       "  SECURABLE_TYPE(\"securable_type\", \"The type of the securable\", \"securable_type\"),"
+       "   */"
       ],
       [
        "c",
-       "  PRINCIPAL(\"principal\", \"The target principal of the permission change\", \"principal\"),"
+       "  public ExternalLocationInfo updateExternalLocation("
       ],
       [
        "c",
-       "  PRIVILEGE(\"privilege\", \"The privilege to grant or revoke\", \"privilege\"),"
+       "      String name, UpdateExternalLocation updateExternalLocation) {"
+      ],
+      [
+       "h",
+       "@@ -303,8 +303,8 @@"
+      ],
+      [
+       "c",
+       "   * @throws BaseException with NOT_FOUND if the external location doesn't exist"
+      ],
+      [
+       "c",
+       "   * @throws BaseException with INVALID_ARGUMENT if the external location is in use and force is"
+      ],
+      [
+       "c",
+       "   *     false"
+      ],
+      [
+       "d",
+       "   * @throws BaseException with PERMISSION_DENIED if a storage cleanup is pending under the external"
+      ],
+      [
+       "d",
+       "   *     location and force is false"
+      ],
+      [
+       "a",
+       "   * @throws BaseException with FAILED_PRECONDITION if a storage cleanup is pending at, above, or"
+      ],
+      [
+       "a",
+       "   *     under the external location's URL and force is false"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public ExternalLocationDAO deleteExternalLocation(String name, boolean force) {"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
       ]
      ],
      "truncated": false,
-     "additions": 1,
-     "deletions": 1
+     "additions": 4,
+     "deletions": 4
     },
     {
-     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliUtils.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
      "lines": [
       [
        "h",
-       "@@ -26,6 +26,7 @@"
+       "@@ -635,13 +635,14 @@"
       ],
       [
        "c",
-       "import java.util.Locale;"
+       "   *"
       ],
       [
        "c",
-       "import java.util.Map;"
+       "   * @param session the caller's Hibernate session"
       ],
       [
        "c",
-       "import java.util.Properties;"
+       "   * @param url the URL of the external location"
+      ],
+      [
+       "d",
+       "   * @throws BaseException with PERMISSION_DENIED for a pending cleanup, INVALID_ARGUMENT otherwise"
       ],
       [
        "a",
-       "import java.util.Set;"
-      ],
-      [
-       "c",
-       "import java.util.regex.Matcher;"
-      ],
-      [
-       "c",
-       "import java.util.regex.Pattern;"
-      ],
-      [
-       "c",
-       "import java.util.stream.Collectors;"
-      ],
-      [
-       "h",
-       "@@ -71,6 +72,9 @@"
-      ],
-      [
-       "c",
-       "  public static final int TABLE_WIDTH = 120;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "  public static class CliOptions {"
+       "   * @throws BaseException with FAILED_PRECONDITION for a pending cleanup, INVALID_ARGUMENT"
       ],
       [
        "a",
-       "    /** Optional params that change how an operation is checked, not what it changes. */"
+       "   *     otherwise"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public static void validateExternalLocationNotInUse(Session session, NormalizedURL url) {"
+      ],
+      [
+       "c",
+       "    LocationUse use = findLocationUse(session, url);"
+      ],
+      [
+       "c",
+       "    if (use.pendingCleanup()) {"
+      ],
+      [
+       "c",
+       "      throw new BaseException("
+      ],
+      [
+       "d",
+       "          ErrorCode.PERMISSION_DENIED,"
       ],
       [
        "a",
-       "    private static final Set<CliParams> MODIFIER_PARAMS = Set.of(CliParams.FORCE);"
-      ],
-      [
-       "a",
-       ""
+       "          ErrorCode.FAILED_PRECONDITION,"
       ],
       [
        "c",
-       "    List<CliParams> necessaryParams;"
+       "          \"Input path overlaps pending storage cleanup. \" + FORCE_HINT);"
       ],
       [
        "c",
-       "    List<CliParams> optionalParams;"
+       "    }"
       ],
       [
        "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -86,6 +90,15 @@"
-      ],
-      [
-       "c",
-       "    public List<CliParams> getOptionalParams() {"
-      ],
-      [
-       "c",
-       "      return optionalParams;"
+       "    use.storageUser()"
       ]
      ],
-     "truncated": true,
-     "additions": 19,
-     "deletions": 5
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
     }
    ],
    "track": {
@@ -1077,17 +985,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-18T01:33:56Z",
-    "updated_at": "2026-11-18T05:43:56Z",
-    "conflicts": true,
+    "last_push": "2026-11-19T01:38:39Z",
+    "updated_at": "2026-11-19T01:45:31Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 119
   },
