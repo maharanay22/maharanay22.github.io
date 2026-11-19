@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T04:49:42Z",
+ "generated_at": "2026-11-19T05:16:08Z",
  "stages": [
   "reported",
   "fix sent",
@@ -122,6 +122,34 @@
    "period_checked": "2026-11-19"
   },
   {
+   "full": "lance-format/lance",
+   "name": "Lance",
+   "url": "https://github.com/lance-format/lance",
+   "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
+   "icon": "🏹",
+   "category": "lakehouse storage",
+   "tags": [
+    "Rust",
+    "Python",
+    "AI data"
+   ],
+   "stars": 7363,
+   "forks": 955,
+   "package": "pylance",
+   "impact": null,
+   "downloads_month": 4304986,
+   "downloads_checked": "2026-11-19",
+   "contributor_rank": 93,
+   "contributor_commits": 5,
+   "contributor_total": 300,
+   "contributors_checked": "2026-11-19",
+   "period_rank": 50,
+   "period_commits": 5,
+   "period_total": 67,
+   "period_since": "2026-07-18",
+   "period_checked": "2026-11-19"
+  },
+  {
    "full": "pandas-dev/pandas",
    "name": "pandas",
    "url": "https://github.com/pandas-dev/pandas",
@@ -158,34 +186,6 @@
      "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.1.html#contributors"
     }
    ]
-  },
-  {
-   "full": "lance-format/lance",
-   "name": "Lance",
-   "url": "https://github.com/lance-format/lance",
-   "about": "Columnar lakehouse format for AI and ML data, with versioned datasets, fast random access and built-in vector and full text search, used from Python through the pylance package",
-   "icon": "🏹",
-   "category": "lakehouse storage",
-   "tags": [
-    "Rust",
-    "Python",
-    "AI data"
-   ],
-   "stars": 7363,
-   "forks": 955,
-   "package": "pylance",
-   "impact": null,
-   "downloads_month": 4304986,
-   "downloads_checked": "2026-11-19",
-   "contributor_rank": 93,
-   "contributor_commits": 5,
-   "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
-   "period_rank": 50,
-   "period_commits": 5,
-   "period_total": 67,
-   "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
   },
   {
    "full": "delta-io/delta",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63513,
+   "stars": 63514,
    "forks": 13403,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -330,6 +330,172 @@
  ],
  "items": [
   {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Apply cosine distance_range on the exact scale when unindexed rows are re-scored",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T05:02:12Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11249,
+    "url": "https://github.com/lance-format/lance/pull/11249"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "rust/lance/src/dataset/scanner/vector.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -402,6 +402,19 @@"
+      ],
+      [
+       "c",
+       "            let stale_rows = self.overlay_stale_vector_rows(&index_segments)?;"
+      ],
+      [
+       "c",
+       "            // Build a prefilter block mask for stale rows (empty = no-op fast path)."
+      ],
+      [
+       "c",
+       "            let overlay_block = stale_rows.block_mask().await?;"
+      ],
+      [
+       "a",
+       "            let fallback_fragments = if self.fast_search {"
+      ],
+      [
+       "a",
+       "                Vec::new()"
+      ],
+      [
+       "a",
+       "            } else {"
+      ],
+      [
+       "a",
+       "                self.fragments_missing_from_index_segments(&index_name, &index_segments)"
+      ],
+      [
+       "a",
+       "                    .await?"
+      ],
+      [
+       "a",
+       "            };"
+      ],
+      [
+       "a",
+       "            // Refine, or merging unindexed and stale rows into the result,"
+      ],
+      [
+       "a",
+       "            // re-scores the index's candidates exactly and applies the range"
+      ],
+      [
+       "a",
+       "            // to those distances. Retained quantized scores are not re-scored."
+      ],
+      [
+       "a",
+       "            let rescored_exactly = q.refine_factor.is_some()"
+      ],
+      [
+       "a",
+       "                || (!self.fast_search"
+      ],
+      [
+       "a",
+       "                    && self.quantized_refine_factor.is_none()"
+      ],
+      [
+       "a",
+       "                    && (!fallback_fragments.is_empty() || !stale_rows.is_empty()));"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            let ann_query = if self.quantized_refine_factor.is_some() {"
+      ],
+      [
+       "c",
+       "                let exact_factor = q.refine_factor.unwrap_or(1) as usize;"
+      ],
+      [
+       "h",
+       "@@ -420,20 +433,20 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            let ann_node = match vector_type {"
+      ],
+      [
+       "c",
+       "                DataType::FixedSizeList(_, _) => {"
+      ],
+      [
+       "d",
+       "                    // Refine applies the distance range to exact distances, but"
+      ],
+      [
+       "d",
+       "                    // the search still has to, or a lower bound leaves it only"
+      ],
+      [
+       "d",
+       "                    // candidates refine then drops. It ranks on the index's own"
+      ],
+      [
+       "d",
+       "                    // scale, so it gets the range on that scale."
+      ],
+      [
+       "d",
+       "                    let ann_query = match q.refine_factor {"
+      ],
+      [
+       "d",
+       "                        Some(_) => {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 28,
+     "deletions": 19
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T04:43:02Z",
+    "updated_at": "2026-11-19T05:02:24Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 124
+  },
+  {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
    "status": "open",
@@ -364,11 +530,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Wait for the clock to move before each update in testModelCRUD",
    "date": "2026-11-19",
    "created_at": "2026-11-19T01:27:46Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 2296,
@@ -383,18 +549,31 @@
    "release": null,
    "files": [],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-19T04:59:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2296#pullrequestreview-5969556950",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving. The root cause is right: the back-to-back `updated_at` stamps come from `System.currentTimeMillis()` and can land in the same millisecond. The wait makes the next stamp strictly later, so the `isGreaterThan` assertions hold without weakening the check.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-19T01:16:35Z",
-    "updated_at": "2026-11-19T03:18:27Z",
+    "updated_at": "2026-11-19T05:00:40Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 122
   },
@@ -1022,7 +1201,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T01:38:39Z",
-    "updated_at": "2026-11-19T01:45:31Z",
+    "updated_at": "2026-11-19T05:07:47Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2649,6 +2828,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-19T05:08:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5969621613",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 42387ae6. The earlier native-bytes blocker is fixed: I checked the round trip with repros, and the Databricks validation and SQL path accept the sent text. Nit, tracked with #2227: an omitted `BINARY` parameter with a stored default such as `X'61626364'` uses the raw string as its default, b…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T05:08:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4624573254",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal: the nested-binary caveat needs four edits. 1. Name every integration that uses `to_tool_call_parameters`, not AutoGen only: LangChain, DSPy, CrewAI, LlamaIndex and Gemini. Gemini is covered by code reading only: it uses the same `to_jsonable_python` conversion, and I did not run it. 2. Drop \"as b…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T05:08:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4624573261",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
+      "text": "[AI Assisted] Nit: `type_json[\"type\"] == \"binary\"` is case-sensitive. The type mapping upper-cases scalar names, so a `type_json` that carried `\"BINARY\"` would get the `bytes` type without the decode validator. Spark emits lowercase, so this matters only for consistency. Could this compare case-insensitively, for exam…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-17T20:36:01Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5946184256",
       "maintainer": true,
@@ -2675,36 +2884,6 @@
       "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452179",
-      "maintainer": true,
-      "path": "ai/integrations/crewai/src/unitycatalog/ai/crewai/toolkit.py",
-      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452189",
-      "maintainer": true,
-      "path": "ai/integrations/llama_index/src/unitycatalog/ai/llama_index/toolkit.py",
-      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452207",
-      "maintainer": true,
-      "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
-      "text": "[AI Assisted] Followup, thanks for disclosing this in the CHANGELOG. A binary value inside `ARRAY`, `MAP` or `STRUCT` is still sent as the bytes of its base64 text, as on main. That is accurate, and I agree it is not a regression. Could you open a tracking issue for it and reference the issue here? A test that pins th…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -2712,12 +2891,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:21:12Z",
-    "updated_at": "2026-11-19T03:34:01Z",
+    "updated_at": "2026-11-19T05:08:03Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 112
   },
@@ -3306,8 +3485,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:54:17Z",
@@ -3315,8 +3494,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },
@@ -8367,18 +8546,18 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "community approved",
     "approved_by": [
      "Shahzeb-DataEngineer"
     ],
-    "last_push": "2026-11-13T18:11:22Z",
-    "updated_at": "2026-11-16T21:44:38Z",
+    "last_push": "2026-11-19T05:07:17Z",
+    "updated_at": "2026-11-19T05:14:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 90
   },
@@ -10935,7 +11114,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"parameter_default\", length = 65535)"
+       "  @Column(name = \"parameter_default\", length = 65536)"
       ],
       [
        "c",
@@ -10951,7 +11130,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"comment\", length = 65535)"
+       "  @Column(name = \"comment\", length = 65536)"
       ],
       [
        "c",
@@ -10995,7 +11174,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"comment\", length = 65535)"
+       "  @Column(name = \"comment\", length = 65536)"
       ],
       [
        "c",
@@ -11099,7 +11278,7 @@
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params ALTER COLUMN \"COMMENT\" VARCHAR(65535);"
+       "ALTER TABLE uc_function_params ALTER COLUMN \"COMMENT\" VARCHAR(65536);"
       ]
      ],
      "truncated": false,
@@ -11115,7 +11294,7 @@
       ],
       [
        "a",
-       "ALTER TABLE uc_function_params ALTER COLUMN parameter_default VARCHAR(65535);"
+       "ALTER TABLE uc_function_params ALTER COLUMN parameter_default VARCHAR(65536);"
       ]
      ],
      "truncated": false,
@@ -11131,7 +11310,7 @@
       ],
       [
        "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN \"COMMENT\" VARCHAR(65535);"
+       "ALTER TABLE uc_schemas ALTER COLUMN \"COMMENT\" VARCHAR(65536);"
       ]
      ],
      "truncated": false,
@@ -11161,7 +11340,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/schema/BaseSchemaCRUDTest.java",
       "text": "**Nit (not a blocker):** Schema and function parameter comment widths are not tested at their limit or with multi-byte text TestUtils.LONG_COMMENT is 300 ASCII characters, so the schema test passes with any column width of 300 or more and would not notice a byte-based limit. Only the volume test (BaseVolumeCRUDTest) c…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11171,7 +11350,7 @@
       "maintainer": true,
       "path": "server/src/main/resources/db/migration/mysql/V8__widen_schema_comment.sql",
       "text": "**Blocker:** Schema comment on MySQL is capped at 65,535 bytes, so long multi-byte comments may be rejected On MySQL this step maps uc_schemas.comment to `text`, which holds at most 65,535 bytes, while H2 and PostgreSQL get varchar(65535), which counts characters. The schema API in api/all.yaml sets no maxLength on th…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11214,21 +11393,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T03:47:19Z",
-    "updated_at": "2026-11-19T04:25:32Z",
+    "last_push": "2026-11-19T05:06:53Z",
+    "updated_at": "2026-11-19T05:14:52Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-11T23:59:31Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 79
   },
