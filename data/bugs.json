@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T17:09:35Z",
+ "generated_at": "2026-11-19T18:11:17Z",
  "stages": [
   "reported",
   "fix sent",
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50570,
-   "forks": 20762,
+   "forks": 20764,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63548,
-   "forks": 13423,
+   "stars": 63550,
+   "forks": 13424,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -329,6 +329,172 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Fix table write on S3 tables that table create initialized",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T18:09:27Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2304,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2304"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/delta/DeltaKernelWriteUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -14,6 +14,7 @@"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.data.Row;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.defaults.internal.data.DefaultColumnarBatch;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.engine.Engine;"
+      ],
+      [
+       "a",
+       "import io.delta.kernel.exceptions.TableNotFoundException;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.ByteType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.DataType;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.types.DoubleType;"
+      ],
+      [
+       "h",
+       "@@ -28,10 +29,8 @@"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.utils.CloseableIterator;"
+      ],
+      [
+       "c",
+       "import io.delta.kernel.utils.DataFileStatus;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.cli.UnityCatalogCli;"
+      ],
+      [
+       "d",
+       "import io.unitycatalog.cli.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.ColumnInfo;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.TemporaryCredentials;"
+      ],
+      [
+       "d",
+       "import java.io.File;"
+      ],
+      [
+       "c",
+       "import java.io.IOException;"
+      ],
+      [
+       "c",
+       "import java.net.URI;"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "h",
+       "@@ -61,34 +60,34 @@"
+      ],
+      [
+       "c",
+       "      StructType schema = DeltaKernelUtils.getSchema(columns);"
+      ],
+      [
+       "c",
+       "      URI tablePathUri = URI.create(tablePath);"
+      ],
+      [
+       "c",
+       "      Engine engine = DeltaKernelUtils.getEngine(tablePathUri, temporaryCredentials);"
+      ],
+      [
+       "d",
+       "      boolean createVsUpdate = true;"
+      ],
+      [
+       "d",
+       "      if (tablePathUri.getScheme().equals(Constants.URI_SCHEME_FILE)) {"
+      ],
+      [
+       "d",
+       "        createVsUpdate = !(new File(tablePathUri).isDirectory());"
+      ],
+      [
+       "d",
+       "      }"
+      ],
+      [
+       "c",
+       "      writeSampleDataToExistingDeltaTable("
+      ],
+      [
+       "d",
+       "          engine, DeltaKernelUtils.substituteSchemeForS3(tablePath), schema, createVsUpdate);"
+      ],
+      [
+       "a",
+       "          engine, DeltaKernelUtils.substituteSchemeForS3(tablePath), schema);"
+      ]
+     ],
+     "truncated": true,
+     "additions": 19,
+     "deletions": 11
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T17:54:44Z",
+    "updated_at": "2026-11-19T18:09:28Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 130
+  },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
@@ -1380,27 +1546,27 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T05:45:15Z",
     "updated_at": "2026-11-19T05:50:39Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 126
   },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Reject out-of-range offsets in LanceFragment.take",
    "date": "2026-11-19",
    "created_at": "2026-11-19T05:46:06Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 11253,
@@ -1673,17 +1839,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-19T05:43:40Z",
-    "updated_at": "2026-11-19T06:11:14Z",
+    "updated_at": "2026-11-19T17:51:37Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 125
   },
@@ -4256,8 +4424,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T16:12:09Z",
@@ -4265,8 +4433,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 112
   },
