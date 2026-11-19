@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T03:55:41Z",
+ "generated_at": "2026-11-19T04:49:42Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63511,
+   "stars": 63513,
    "forks": 13403,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -2707,8 +2707,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:21:12Z",
@@ -2716,8 +2716,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 112
   },
@@ -3311,7 +3311,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:54:17Z",
-    "updated_at": "2026-11-19T03:54:20Z",
+    "updated_at": "2026-11-19T04:13:34Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6395,8 +6395,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T03:46:23Z",
@@ -6404,8 +6404,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 96
   },
@@ -11156,6 +11156,26 @@
      {
       "kind": "inline comment",
       "who": "shba24",
+      "at": "2026-11-19T04:25:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4624308350",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/schema/BaseSchemaCRUDTest.java",
+      "text": "**Nit (not a blocker):** Schema and function parameter comment widths are not tested at their limit or with multi-byte text TestUtils.LONG_COMMENT is 300 ASCII characters, so the schema test passes with any column width of 300 or more and would not notice a byte-based limit. Only the volume test (BaseVolumeCRUDTest) c…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-19T04:25:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4624308271",
+      "maintainer": true,
+      "path": "server/src/main/resources/db/migration/mysql/V8__widen_schema_comment.sql",
+      "text": "**Blocker:** Schema comment on MySQL is capped at 65,535 bytes, so long multi-byte comments may be rejected On MySQL this step maps uc_schemas.comment to `text`, which holds at most 65,535 bytes, while H2 and PostgreSQL get varchar(65535), which counts characters. The schema API in api/all.yaml sets no maxLength on th…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
       "at": "2026-11-17T17:08:49Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072686",
       "maintainer": true,
@@ -11192,43 +11212,23 @@
       "path": null,
       "text": "A quick follow-up with something more concrete, so you know what to expect. I cherry-picked this PR onto the top of the stack (#2118) and ran its checks on H2, PostgreSQL and MySQL: - The merged-steps check and the \"type changes only widen\" rule both pass, so the widths and the NOT NULL on `type_text` look good. - `Mi…",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "shba24",
-      "at": "2026-11-11T23:13:55Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6809429780",
-      "maintainer": true,
-      "path": null,
-      "text": "Thanks a lot for this! The fix makes sense, and following the V2 pattern from #2013 made it easy to review. One thought on ordering, if you're open to it. I have a stack of PRs that adds guardrails for schema steps, starting with #2113 (which checks the steps on every pull request) through #2118. Schema steps are stil…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-11T23:05:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#pullrequestreview-5866508902",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Two items for the whole PR. Followup, V3 numbering: #2180 and #2181 also add a V3 step on all three databases. Whichever of the three merges second has to be renumbered above the first, because dev/check-migration-steps.sh refuses a new step that is not above the highest merged step. Could we agree the m…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:47:19Z",
-    "updated_at": "2026-11-19T03:54:39Z",
+    "updated_at": "2026-11-19T04:25:32Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-11T23:59:31Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 79
   },
