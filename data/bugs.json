@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T18:11:17Z",
+ "generated_at": "2026-11-19T18:16:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63550,
+   "stars": 63551,
    "forks": 13424,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,308 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Give each fixed credential its own credential-scoped file system",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T18:14:27Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2305,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2305"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/UCHadoopConfConstants.java",
+     "lines": [
+      [
+       "h",
+       "@@ -28,6 +28,10 @@"
+      ],
+      [
+       "c",
+       "  // Whether Unity Catalog vended keys for the bucket, followed by the bucket name: without them the"
+      ],
+      [
+       "c",
+       "  // engine's own S3 credentials sign, which may be per Hadoop user."
+      ],
+      [
+       "c",
+       "  public static final String UC_VENDED_S3_KEYS_PREFIX = \"fs.unitycatalog.vended.s3.keys.\";"
+      ],
+      [
+       "a",
+       "  // A hash of the fixed credential a table load vended without renewal, never the credential"
+      ],
+      [
+       "a",
+       "  // itself: the file system cache key reads it, so a later load's new credential is not served by"
+      ],
+      [
+       "a",
+       "  // a file system that holds an earlier, possibly expired, one."
+      ],
+      [
+       "a",
+       "  public static final String UC_FIXED_CREDENTIAL_ID_KEY = \"fs.unitycatalog.fixed.credential.id\";"
+      ],
+      [
+       "c",
+       "  // Expired time in milliseconds."
+      ],
+      [
+       "c",
+       "  public static final String S3A_INIT_CRED_EXPIRED_TIME = \"fs.s3a.init.credential.expired.time\";"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 0
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/id/FileSystemCredId.java",
+     "lines": [
+      [
+       "h",
+       "@@ -28,6 +28,10 @@"
+      ],
+      [
+       "c",
+       " * the table load did not route, the engine signs with its own keys, which may differ per Hadoop"
+      ],
+      [
+       "c",
+       " * user, so the calling user is part of it too."
+      ],
+      [
+       "c",
+       " *"
+      ],
+      [
+       "a",
+       " * <p>A fixed credential, vended without renewal, is part of the identity too, also as a hash: a"
+      ],
+      [
+       "a",
+       " * filesystem keeps the credential it was created with, so a later table load that vends a new"
+      ],
+      [
+       "a",
+       " * credential gets its own filesystem rather than one whose credential may have expired."
+      ],
+      [
+       "a",
+       " *"
+      ],
+      [
+       "c",
+       " * <p><b>Internal API — not for external use. May change without notice.</b>"
+      ],
+      [
+       "c",
+       " */"
+      ],
+      [
+       "c",
+       "public final class FileSystemCredId {"
+      ],
+      [
+       "h",
+       "@@ -41,13 +45,20 @@"
+      ],
+      [
+       "c",
+       "  // The calling Hadoop user for a vend without keys, compared as Hadoop's own file system cache"
+      ],
+      [
+       "c",
+       "  // does: two users of one name with different credentials stay apart. Otherwise null."
+      ],
+      [
+       "c",
+       "  private final UserGroupInformation user;"
+      ],
+      [
+       "a",
+       "  // A hash of the fixed credential the table load vended, or empty."
+      ],
+      [
+       "a",
+       "  private final String fixedCredential;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private FileSystemCredId("
+      ],
+      [
+       "d",
+       "      CredId credId, String prefix, String s3Storage, UserGroupInformation user) {"
+      ],
+      [
+       "a",
+       "      CredId credId,"
+      ],
+      [
+       "a",
+       "      String prefix,"
+      ],
+      [
+       "a",
+       "      String s3Storage,"
+      ],
+      [
+       "a",
+       "      UserGroupInformation user,"
+      ],
+      [
+       "a",
+       "      String fixedCredential) {"
+      ],
+      [
+       "c",
+       "    this.credId = credId;"
+      ],
+      [
+       "c",
+       "    this.prefix = prefix;"
+      ],
+      [
+       "c",
+       "    this.s3Storage = s3Storage;"
+      ],
+      [
+       "c",
+       "    this.user = user;"
+      ],
+      [
+       "a",
+       "    this.fixedCredential = fixedCredential;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 21,
+     "deletions": 5
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/props/AbfsCredPropsBuilder.java",
+     "lines": [
+      [
+       "h",
+       "@@ -4,6 +4,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.UCHadoopConfConstants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.auth.AzureCredential;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.auth.GenericCredential;"
+      ],
+      [
+       "a",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.conf.Configuration;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "/** Builds ABFS credential properties. */"
+      ],
+      [
+       "h",
+       "@@ -60,12 +61,12 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Override"
+      ],
+      [
+       "d",
+       "  protected void setInitFixedCredKeys(GenericCredential cred) {"
+      ],
+      [
+       "a",
+       "  protected Map<String, String> initFixedCredKeys(GenericCredential cred) {"
+      ],
+      [
+       "c",
+       "    Preconditions.checkArgument("
+      ],
+      [
+       "c",
+       "        cred instanceof AzureCredential,"
+      ],
+      [
+       "c",
+       "        \"Expected AzureCredential, but got %s\","
+      ],
+      [
+       "c",
+       "        cred.getClass().getSimpleName());"
+      ],
+      [
+       "c",
+       "    AzureCredential azure = (AzureCredential) cred;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 3,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T18:13:27Z",
+    "updated_at": "2026-11-19T18:14:29Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 131
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -1545,8 +1847,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T05:45:15Z",
@@ -1554,8 +1856,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 126
   },
