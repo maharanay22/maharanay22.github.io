@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T01:46:56Z",
+ "generated_at": "2026-11-19T03:20:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "GenAI Eval"
    ],
    "stars": 28876,
-   "forks": 6626,
+   "forks": 6627,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
@@ -172,7 +172,7 @@
     "AI data"
    ],
    "stars": 7363,
-   "forks": 954,
+   "forks": 955,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4304986,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63505,
-   "forks": 13400,
+   "stars": 63511,
+   "forks": 13402,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -352,17 +352,17 @@
    "files": [],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-19T01:16:35Z",
-    "updated_at": "2026-11-19T01:27:47Z",
+    "updated_at": "2026-11-19T03:18:27Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 122
   },
@@ -985,8 +985,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T01:38:39Z",
@@ -994,8 +994,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 119
   },
@@ -2436,6 +2436,134 @@
      "deletions": 4
     },
     {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,4 +1,5 @@"
+      ],
+      [
+       "c",
+       "import ast"
+      ],
+      [
+       "a",
+       "import base64"
+      ],
+      [
+       "c",
+       "import decimal"
+      ],
+      [
+       "c",
+       "import inspect"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "h",
+       "@@ -8,9 +9,10 @@"
+      ],
+      [
+       "c",
+       "from dataclasses import dataclass"
+      ],
+      [
+       "c",
+       "from hashlib import md5"
+      ],
+      [
+       "c",
+       "from io import StringIO"
+      ],
+      [
+       "d",
+       "from typing import Any, Callable, Dict, List, Optional, Tuple, Union"
+      ],
+      [
+       "a",
+       "from typing import Annotated, Any, Callable, Dict, List, Optional, Tuple, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "from pydantic import Field, create_model"
+      ],
+      [
+       "a",
+       "from pydantic import BeforeValidator, Field, create_model"
+      ],
+      [
+       "a",
+       "from pydantic_core import to_jsonable_python"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.callable_utils import ServiceCredential"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.config import JSON_SCHEMA_TYPE, UC_LIST_FUNCTIONS_MAX_RESULTS"
+      ],
+      [
+       "h",
+       "@@ -223,6 +225,8 @@"
+      ],
+      [
+       "c",
+       "    nullable = type_json.get(\"nullable\")"
+      ],
+      [
+       "c",
+       "    pydantic_type = uc_type_json_to_pydantic_type(type_json[\"type\"], strict=strict)"
+      ],
+      [
+       "c",
+       "    pydantic_field_type = pydantic_type.pydantic_type"
+      ],
+      [
+       "a",
+       "    if type_json[\"type\"] == \"binary\":"
+      ],
+      [
+       "a",
+       "        pydantic_field_type = Annotated[pydantic_field_type, BeforeValidator(_decode_base64_text)]"
+      ],
+      [
+       "c",
+       "    default = None"
+      ],
+      [
+       "c",
+       "    description = param_info.comment or \"\""
+      ],
+      [
+       "c",
+       "    if param_info.parameter_default:"
+      ],
+      [
+       "h",
+       "@@ -286,6 +290,28 @@"
+      ],
+      [
+       "c",
+       "    return PydanticFunctionInputParams(pydantic_model=model, strict=strict)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 28,
+     "deletions": 2
+    },
+    {
      "path": "ai/core/src/unitycatalog/ai/core/utils/validation_utils.py",
      "lines": [
       [
@@ -2477,139 +2605,11 @@
       [
        "a",
        "    return datetime.datetime.fromisoformat(value[:-1] + \"+00:00\" if value.endswith(\"Z\") else value)"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "def validate_param(param: Any, column_type: str, param_type_text: str) -> None:"
-      ],
-      [
-       "c",
-       "    \"\"\""
-      ],
-      [
-       "c",
-       "    Validate the parameter against the parameter info."
-      ],
-      [
-       "h",
-       "@@ -60,7 +68,7 @@"
-      ],
-      [
-       "c",
-       "    \"\"\""
-      ],
-      [
-       "c",
-       "    if is_time_type(column_type) and isinstance(param, str):"
-      ],
-      [
-       "c",
-       "        try:"
-      ],
-      [
-       "d",
-       "            datetime.datetime.fromisoformat(param)"
-      ],
-      [
-       "a",
-       "            parse_iso_datetime(param)"
-      ],
-      [
-       "c",
-       "        except ValueError as e:"
-      ],
-      [
-       "c",
-       "            raise ValueError(f\"Invalid datetime string: {param}, expecting ISO format.\") from e"
-      ],
-      [
-       "c",
-       "    elif column_type == \"INTERVAL\":"
-      ]
-     ],
-     "truncated": false,
-     "additions": 9,
-     "deletions": 1
-    },
-    {
-     "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
-     "lines": [
-      [
-       "h",
-       "@@ -1,9 +1,11 @@"
-      ],
-      [
-       "a",
-       "import base64"
-      ],
-      [
-       "a",
-       "import json"
-      ],
-      [
-       "c",
-       "import logging"
-      ],
-      [
-       "d",
-       "from typing import Dict, List, Optional"
-      ],
-      [
-       "a",
-       "from typing import Any, Dict, List, Optional, Type"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from autogen_core import CancellationToken"
-      ],
-      [
-       "c",
-       "from autogen_core.tools import BaseTool"
-      ],
-      [
-       "d",
-       "from pydantic import BaseModel, ConfigDict, Field, model_validator"
-      ],
-      [
-       "a",
-       "from pydantic import BaseModel, ConfigDict, Field, create_model, field_validator, model_validator"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.base import BaseFunctionClient"
-      ],
-      [
-       "c",
-       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
-      ],
-      [
-       "h",
-       "@@ -50,13 +52,11 @@"
-      ],
-      [
-       "c",
-       ""
       ]
      ],
      "truncated": true,
-     "additions": 33,
-     "deletions": 7
+     "additions": 9,
+     "deletions": 1
     }
    ],
    "track": {
@@ -2622,7 +2622,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 6e7e97ee. The AutoGen native-bytes fix is verified: base64 text from JSON is decoded at validation, native `bytes` are kept as they are, and invalid base64 is rejected. The inline comments are the open items: native `bytes` in the other four integrations (blocker), and the nested-binary foll…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2632,7 +2632,7 @@
       "maintainer": true,
       "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2642,7 +2642,7 @@
       "maintainer": true,
       "path": "ai/integrations/dspy/src/unitycatalog/ai/dspy/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2652,7 +2652,7 @@
       "maintainer": true,
       "path": "ai/integrations/crewai/src/unitycatalog/ai/crewai/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2662,7 +2662,7 @@
       "maintainer": true,
       "path": "ai/integrations/llama_index/src/unitycatalog/ai/llama_index/toolkit.py",
       "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2672,20 +2672,20 @@
       "maintainer": true,
       "path": "ai/integrations/autogen/src/unitycatalog/ai/autogen/toolkit.py",
       "text": "[AI Assisted] Followup, thanks for disclosing this in the CHANGELOG. A binary value inside `ARRAY`, `MAP` or `STRUCT` is still sent as the bytes of its base64 text, as on main. That is accurate, and I agree it is not a regression. Could you open a tracking issue for it and reference the issue here? A test that pins th…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-17T17:43:45Z",
-    "updated_at": "2026-11-17T20:36:01Z",
+    "last_push": "2026-11-19T03:10:21Z",
+    "updated_at": "2026-11-19T03:19:04Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 112
   },
@@ -3053,7 +3053,7 @@
      "tdas"
     ],
     "last_push": "2026-11-16T04:56:29Z",
-    "updated_at": "2026-11-16T23:07:23Z",
+    "updated_at": "2026-11-19T02:30:01Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3216,6 +3216,36 @@
      {
       "kind": "inline comment",
       "who": "yili-db",
+      "at": "2026-11-19T03:17:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4623901704",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] normal: `close()` sets `_closed` before `shutdown()` has succeeded. If the shutdown fails, for example when `Thread.start` fails, a retried `close()` on the same client returns at this guard, and the transport stays open. I reproduced it with a simulated `Thread.start` failure. After the failed close, `U…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T03:17:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4623901713",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] nit: closing a client that never sent a request still starts a loop thread just to stop it. Could we skip starting the loop when none was started?",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-19T03:17:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5968824158",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review of head `0e49276c`. Inline: N-e (normal, `UnitycatalogClient.close`, line 329) and N-b (nit, line 236). Followups: - N-f: the child reset quarantines the owned session but not the replaced one, and the child's `close()` still closes the replaced session. I saw no error and no effect on the pare…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
       "at": "2026-11-18T23:23:30Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4622238691",
       "maintainer": true,
@@ -3242,36 +3272,6 @@
       "path": null,
       "text": "[AI Assisted] Re-review of head `ec963cba`. B1 (fork keep-alive) and N-a (second close waits for the first) are fixed and verified. The fork, child request and cancelled-close repros pass. Inline: NF1 (normal, `client.py:236`) and NF3 (nit, test line 3189). In this body, because the lines are outside the diff: - NF2 (…",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-18T08:36:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5953157453",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review of head `0d5f090f`. R1 (fork hang), R2 (`set_result` after cancel), R3 (`rest_client` docs), R4 (retry test timeout) and R5 (grammar) are fixed. I verified R1, R2 and R4 with standalone repros. Inline: B1 (blocker, the fork reset regression). Not anchorable in the diff, so in this body: N-a (no…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-18T08:36:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4611096979",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] blocker: the fork reset drops the child's references to the parent's `rest_client` and loop. When the child finalizes them, aiohttp closes the parent's warm keep-alive transport, which unregisters its socket from the shared epoll instance. I reproduced it. After a fork, the parent's next request on the r…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947790",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] After a `fork`, the child inherits `_loop` without its thread. `_started_loop` (line 209) returns that loop, so a request from the child waits forever. Could we check that `_thread` is alive, or track the pid, and create a new loop when it is not? This matters for prefork servers and for the sandbox exec…",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -3279,12 +3279,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T00:21:38Z",
-    "updated_at": "2026-11-19T01:12:35Z",
+    "updated_at": "2026-11-19T03:17:42Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -6233,7 +6233,7 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V3__widen_catalog_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/h2/V4__widen_catalog_storage_root.sql",
      "lines": [
       [
        "h",
@@ -6249,7 +6249,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V4__widen_catalog_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_catalog_storage_location.sql",
      "lines": [
       [
        "h",
@@ -6265,7 +6265,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V5__widen_schema_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_schema_storage_root.sql",
      "lines": [
       [
        "h",
@@ -6281,7 +6281,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V6__widen_schema_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_storage_location.sql",
      "lines": [
       [
        "h",
@@ -6297,7 +6297,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V7__widen_volume_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_storage_location.sql",
      "lines": [
       [
        "h",
@@ -6313,7 +6313,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V8__widen_model_version_source.sql",
+     "path": "server/src/main/resources/db/migration/h2/V9__widen_model_version_source.sql",
      "lines": [
       [
        "h",
@@ -6329,7 +6329,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V3__widen_catalog_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/mysql/V4__widen_catalog_storage_root.sql",
      "lines": [
       [
        "h",
@@ -6345,7 +6345,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V4__widen_catalog_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/mysql/V5__widen_catalog_storage_location.sql",
      "lines": [
       [
        "h",
@@ -6363,17 +6363,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T03:02:21Z",
-    "updated_at": "2026-11-14T03:14:55Z",
-    "conflicts": true,
+    "last_push": "2026-11-19T02:32:45Z",
+    "updated_at": "2026-11-19T03:18:40Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
@@ -11007,7 +11007,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"comment\", length = 65535)"
+       "  @Column(name = \"comment\", length = 65536)"
       ],
       [
        "c",
@@ -11027,7 +11027,7 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V3__widen_function_param_type_text.sql",
+     "path": "server/src/main/resources/db/migration/h2/V4__widen_function_param_type_text.sql",
      "lines": [
       [
        "h",
@@ -11043,7 +11043,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V4__widen_function_full_data_type.sql",
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_function_full_data_type.sql",
      "lines": [
       [
        "h",
@@ -11059,7 +11059,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V5__widen_function_param_comment.sql",
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_function_param_comment.sql",
      "lines": [
       [
        "h",
@@ -11075,7 +11075,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V6__widen_function_param_default.sql",
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_function_param_default.sql",
      "lines": [
       [
        "h",
@@ -11091,7 +11091,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_comment.sql",
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_schema_comment.sql",
      "lines": [
       [
        "h",
@@ -11107,7 +11107,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
+     "path": "server/src/main/resources/db/migration/h2/V9__widen_volume_comment.sql",
      "lines": [
       [
        "h",
@@ -11129,7 +11129,7 @@
       "maintainer": true,
       "path": "server/src/main/resources/db/migration/mysql/V8__widen_volume_comment.sql",
       "text": "**Blocker:** MySQL TEXT limit is in bytes, so multi-byte volume comments may still be rejected The MySQL step uses TEXT, which holds 65535 bytes, while the API limit is counted in characters. On a utf8mb4 database a long comment of multi-byte characters can exceed the byte limit and fail even though the API allows it,…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11139,7 +11139,7 @@
       "maintainer": true,
       "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
       "text": "**Blocker:** Volume comment column is 65535 while the API allows 65536 api/all.yaml declares the volume comment with maxLength 65536, but this step and VolumeInfoDAO use 65535. A comment of exactly 65,536 ASCII characters is accepted by the API and would likely be rejected by the column. This could not be settled: the…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -11147,9 +11147,9 @@
       "at": "2026-11-17T17:08:46Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072198",
       "maintainer": true,
-      "path": "server/src/main/resources/db/migration/h2/V3__widen_function_param_type_text.sql",
+      "path": "server/src/main/resources/db/migration/h2/V4__widen_function_param_type_text.sql",
       "text": "**Nit (not a blocker):** Two merge commits on the branch have no Signed-off-by trailer The contribution workflow asks for a DCO sign-off on every commit. Two merge commits on this branch, including 4fdcb25a2917332ae8ec423982fcb12925693f3b, carry no Signed-off-by trailer. CODE_REVIEW.md says a missing sign-off is not a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -11183,20 +11183,20 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-16T19:00:46Z",
-    "updated_at": "2026-11-17T17:08:51Z",
-    "conflicts": true,
+    "last_push": "2026-11-19T02:48:31Z",
+    "updated_at": "2026-11-19T03:18:30Z",
+    "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-11T23:59:31Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 79
   },
@@ -19381,7 +19381,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-10-13T15:57:03Z",
-    "updated_at": "2026-11-02T02:02:48Z",
+    "updated_at": "2026-11-19T02:30:48Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -23345,7 +23345,7 @@
      "VANDRANKI"
     ],
     "last_push": "2026-11-10T21:58:18Z",
-    "updated_at": "2026-11-10T22:22:58Z",
+    "updated_at": "2026-11-19T02:30:25Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
