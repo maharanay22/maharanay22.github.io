@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T03:33:34Z",
+ "generated_at": "2026-11-19T03:55:41Z",
  "stages": [
   "reported",
   "fix sent",
@@ -134,7 +134,7 @@
     "String regex"
    ],
    "stars": 50569,
-   "forks": 20753,
+   "forks": 20752,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
@@ -2712,7 +2712,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:21:12Z",
-    "updated_at": "2026-11-19T03:32:07Z",
+    "updated_at": "2026-11-19T03:34:01Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3239,8 +3239,8 @@
       ]
      ],
      "truncated": true,
-     "additions": 182,
-     "deletions": 28
+     "additions": 186,
+     "deletions": 34
     }
    ],
    "track": {
@@ -3253,7 +3253,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] normal: `close()` sets `_closed` before `shutdown()` has succeeded. If the shutdown fails, for example when `Thread.start` fails, a retried `close()` on the same client returns at this guard, and the transport stays open. I reproduced it with a simulated `Thread.start` failure. After the failed close, `U…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3263,7 +3263,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] nit: closing a client that never sent a request still starts a loop thread just to stop it. Could we skip starting the loop when none was started?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3273,7 +3273,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review of head `0e49276c`. Inline: N-e (normal, `UnitycatalogClient.close`, line 329) and N-b (nit, line 236). Followups: - N-f: the child reset quarantines the owned session but not the replaced one, and the child's `close()` still closes the replaced session. I saw no error and no effect on the pare…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3307,16 +3307,16 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T00:21:38Z",
-    "updated_at": "2026-11-19T03:17:42Z",
+    "last_push": "2026-11-19T03:54:17Z",
+    "updated_at": "2026-11-19T03:54:20Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
@@ -6399,8 +6399,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-19T02:32:45Z",
-    "updated_at": "2026-11-19T03:18:40Z",
+    "last_push": "2026-11-19T03:46:23Z",
+    "updated_at": "2026-11-19T03:48:41Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -11218,8 +11218,8 @@
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T02:48:31Z",
-    "updated_at": "2026-11-19T03:18:30Z",
+    "last_push": "2026-11-19T03:47:19Z",
+    "updated_at": "2026-11-19T03:54:39Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
