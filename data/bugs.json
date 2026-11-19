@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T18:16:23Z",
+ "generated_at": "2026-11-19T18:27:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28900,
+   "stars": 28899,
    "forks": 6637,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50570,
+   "stars": 50569,
    "forks": 20764,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9085,
+   "stars": 9084,
    "forks": 2225,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63551,
+   "stars": 63552,
    "forks": 13424,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,172 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Drop Spark's cached relation when a non-Delta table is dropped, created or refreshed",
+   "date": "2026-11-19",
+   "created_at": "2026-11-19T18:25:57Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2306,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2306"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "high",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -27,7 +27,7 @@"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.fs.Path"
+      ],
+      [
+       "c",
+       "import org.apache.spark.internal.Logging"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.SparkSession"
+      ],
+      [
+       "d",
+       "import org.apache.spark.sql.catalyst.TableIdentifier"
+      ],
+      [
+       "a",
+       "import org.apache.spark.sql.catalyst.{QualifiedTableName, TableIdentifier}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.analysis.{NamespaceAlreadyExistsException, NoSuchNamespaceException, NoSuchTableException, TableAlreadyExistsException, ViewAlreadyExistsException}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.catalyst.catalog.{CatalogTable, CatalogTableType, CatalogUtils}"
+      ],
+      [
+       "c",
+       "import org.apache.spark.sql.connector.catalog._"
+      ],
+      [
+       "h",
+       "@@ -563,6 +563,8 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  override def dropTable(ident: Identifier): Boolean = delegate.dropTable(ident)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  override def invalidateTable(ident: Identifier): Unit = delegate.invalidateTable(ident)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  override def renameTable(oldIdent: Identifier, newIdent: Identifier): Unit = {"
+      ],
+      [
+       "c",
+       "    throw new UnsupportedOperationException(\"Renaming a table is not supported yet\")"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "h",
+       "@@ -1235,6 +1237,7 @@"
+      ],
+      [
+       "c",
+       "      case e: ApiException if e.getCode == 409 =>"
+      ],
+      [
+       "c",
+       "        throw new TableAlreadyExistsException(ident)"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       "    invalidateTable(ident)"
+      ],
+      [
+       "c",
+       "    loadTable(ident)"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -1324,9 +1327,24 @@"
+      ],
+      [
+       "c",
+       "    // `deleteTable` returns the (empty) response body, not an HTTP status; a real failure throws"
+      ],
+      [
+       "c",
+       "    // ApiException. Issue the delete for its side effect and report success."
+      ],
+      [
+       "c",
+       "    tablesApi.deleteTable(UCSingleCatalog.fullTableNameForApi(this.name, ident))"
+      ]
+     ],
+     "truncated": true,
+     "additions": 19,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-19T18:25:02Z",
+    "updated_at": "2026-11-19T18:25:58Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 132
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
