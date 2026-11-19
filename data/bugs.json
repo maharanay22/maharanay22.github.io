@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T21:37:50Z",
+ "generated_at": "2026-11-19T22:10:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50573,
+   "stars": 50574,
    "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63555,
-   "forks": 13428,
+   "stars": 63556,
+   "forks": 13429,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -491,7 +491,7 @@
       ],
       [
        "h",
-       "@@ -1324,9 +1327,24 @@"
+       "@@ -1324,9 +1327,31 @@"
       ],
       [
        "c",
@@ -507,7 +507,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 19,
+     "additions": 26,
      "deletions": 1
     }
    ],
@@ -521,7 +521,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCProxySuite.java",
       "text": "[AI Assisted] The PR description says mixed-case table names are cleared because the key avoids the lowercasing `TableIdentifier` overload, but nothing in this test uses a mixed-case name. `parquetTable` hard-codes `.name(\"t\")`. I switched `invalidateTable` to the `TableIdentifier` overload in a scratch build and this…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -531,7 +531,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] nit: when no session is active on the calling thread, `getActiveSession.foreach` skips the invalidation silently, and the next read returns the old files with nothing in the logs. A `logWarning` in the `None` case would make that visible. A one-line comment that this key must match the identifier `loadV1…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -541,7 +541,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCProxySuite.java",
       "text": "[AI Assisted] nit: `getOrCreate()` returns whatever session is already the default in this JVM, so the catalog confs may not apply, and the `finally` at line 615 would stop a session this test does not own. `BaseSparkIntegrationTest` also calls `getOrCreate()` without stopping its session. Clearing the active and defa…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -551,20 +551,20 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The fix is small and scoped, and the new test fails without it for both `spark_catalog` and a named catalog. No blockers. One normal item inline: the mixed-case behavior the description claims is not covered by a test. Two nits inline.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T18:25:02Z",
-    "updated_at": "2026-11-19T20:59:33Z",
+    "last_push": "2026-11-19T22:09:03Z",
+    "updated_at": "2026-11-19T22:09:08Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 132
   },
@@ -4982,17 +4982,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T20:56:22Z",
-    "updated_at": "2026-11-19T20:57:51Z",
+    "updated_at": "2026-11-19T21:53:25Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 112
   },
