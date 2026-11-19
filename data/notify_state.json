@@ -398,31 +398,37 @@
   "waiting_on": "you"
  },
  "https://github.com/lance-format/lance/pull/11253": {
-  "approved_by": [],
-  "checks": "failing",
+  "approved_by": [
+   "Xuanwo"
+  ],
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11254": {
-  "approved_by": [],
-  "checks": "failing",
+  "approved_by": [
+   "Xuanwo"
+  ],
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11256": {
-  "approved_by": [],
-  "checks": "failing",
+  "approved_by": [
+   "Xuanwo"
+  ],
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/lance-format/lance/pull/11257": {
   "approved_by": [],
@@ -1167,12 +1173,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2244": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "running",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2245": {
   "approved_by": [
@@ -1281,5 +1287,34 @@
   "last_comment_who": null,
   "status": "merged",
   "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2304": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2305": {
+  "approved_by": [
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2306": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
  }
 }

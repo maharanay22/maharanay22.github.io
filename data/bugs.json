@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T20:58:11Z",
+ "generated_at": "2026-11-19T21:37:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28902,
+   "stars": 28901,
    "forks": 6638,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50572,
+   "stars": 50573,
    "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9084,
+   "stars": 9083,
    "forks": 2225,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63556,
-   "forks": 13429,
+   "stars": 63555,
+   "forks": 13428,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
@@ -512,29 +512,70 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T20:59:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2306#discussion_r4635041897",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCProxySuite.java",
+      "text": "[AI Assisted] The PR description says mixed-case table names are cleared because the key avoids the lowercasing `TableIdentifier` overload, but nothing in this test uses a mixed-case name. `parquetTable` hard-codes `.name(\"t\")`. I switched `invalidateTable` to the `TableIdentifier` overload in a scratch build and this…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T20:59:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2306#discussion_r4635041904",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] nit: when no session is active on the calling thread, `getActiveSession.foreach` skips the invalidation silently, and the next read returns the old files with nothing in the logs. A `logWarning` in the `None` case would make that visible. A one-line comment that this key must match the identifier `loadV1…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T20:59:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2306#discussion_r4635041911",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCProxySuite.java",
+      "text": "[AI Assisted] nit: `getOrCreate()` returns whatever session is already the default in this JVM, so the catalog confs may not apply, and the `finally` at line 615 would stop a session this test does not own. `BaseSparkIntegrationTest` also calls `getOrCreate()` without stopping its session. Clearing the active and defa…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-19T20:59:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2306#pullrequestreview-5983302323",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The fix is small and scoped, and the new test fails without it for both `spark_catalog` and a named catalog. No blockers. One normal item inline: the mixed-case behavior the description claims is not covered by a test. Two nits inline.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T18:25:02Z",
-    "updated_at": "2026-11-19T20:02:02Z",
+    "updated_at": "2026-11-19T20:59:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 132
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Give each fixed credential its own credential-scoped file system",
    "date": "2026-11-19",
    "created_at": "2026-11-19T18:14:27Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 2305,
@@ -814,18 +855,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-19T20:57:08Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2305#pullrequestreview-5983269960",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The fixed-credential file system key looks right, and the reload tests fail without it on all three clouds.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-19T18:13:27Z",
-    "updated_at": "2026-11-19T20:01:40Z",
+    "updated_at": "2026-11-19T20:58:45Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 131
   },
@@ -1594,11 +1648,11 @@
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Keep late-materialized batches within batch_size",
    "date": "2026-11-19",
    "created_at": "2026-11-19T06:10:53Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 11256,
@@ -1743,17 +1797,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-19T06:09:04Z",
-    "updated_at": "2026-11-19T06:25:38Z",
+    "updated_at": "2026-11-19T21:19:16Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 127
   },
@@ -4916,13 +4972,13 @@
       "answered": true
      },
      {
-      "kind": "review commented",
+      "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-17T20:36:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#pullrequestreview-5946184256",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2244#discussion_r4605452158",
       "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at 6e7e97ee. The AutoGen native-bytes fix is verified: base64 text from JSON is decoded at validation, native `bytes` are kept as they are, and invalid base64 is rejected. The inline comments are the open items: native `bytes` in the other four integrations (blocker), and the nested-binary foll…",
+      "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
+      "text": "[AI Assisted] Blocker: native `bytes` passed directly to the tool are now sent as base64 text. `to_jsonable_python` turns bytes into text, and the function client then decodes that text as base64. For `b'abcd'`, the function now silently gets `b'i\\xb7\\x1d'`. On main, the same call sent the repr `\"b'abcd'\"`, which fail…",
       "answered": true
      }
     ],
@@ -4931,7 +4987,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T20:56:22Z",
-    "updated_at": "2026-11-19T20:56:32Z",
+    "updated_at": "2026-11-19T20:57:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
