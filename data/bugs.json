@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-18T21:59:09Z",
+ "generated_at": "2026-11-19T00:01:05Z",
  "stages": [
   "reported",
   "fix sent",
@@ -26,16 +26,16 @@
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 642042,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": 6,
-   "contributor_commits": 42,
-   "contributor_total": 139,
-   "contributors_checked": "2026-11-18",
+   "contributor_commits": 43,
+   "contributor_total": 141,
+   "contributors_checked": "2026-11-19",
    "period_rank": 4,
-   "period_commits": 42,
-   "period_total": 34,
+   "period_commits": 43,
+   "period_total": 39,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "delta-io/delta-rs",
@@ -54,11 +54,11 @@
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10563244,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": 7,
    "period_commits": 21,
    "period_total": 28,
@@ -77,21 +77,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28873,
+   "stars": 28875,
    "forks": 6626,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22182969,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
-   "period_rank": 39,
+   "contributors_checked": "2026-11-19",
+   "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "mindsdb/engine",
@@ -114,12 +114,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,21 +133,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50569,
-   "forks": 20752,
+   "stars": 50570,
+   "forks": 20753,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706035536,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18",
+   "period_checked": "2026-11-19",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -171,16 +171,16 @@
     "Python",
     "AI data"
    ],
-   "stars": 7362,
+   "stars": 7363,
    "forks": 953,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4304986,
-   "downloads_checked": "2026-11-18",
-   "contributor_rank": null,
-   "contributor_commits": null,
+   "downloads_checked": "2026-11-19",
+   "contributor_rank": 93,
+   "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 66,
@@ -204,11 +204,11 @@
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24748071,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 53,
@@ -232,11 +232,11 @@
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37842899,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
@@ -260,11 +260,11 @@
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4331404,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63499,
-   "forks": 13398,
+   "stars": 63502,
+   "forks": 13399,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 98646196,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
    "period_total": 135,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -316,16 +316,16 @@
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 498935761,
-   "downloads_checked": "2026-11-18",
+   "downloads_checked": "2026-11-19",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-18",
+   "contributors_checked": "2026-11-19",
    "period_rank": 29,
    "period_commits": 1,
    "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   }
  ],
  "items": [
@@ -1415,11 +1415,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Check struct fields before parsing, guard the generator run order, and test Delta request serialization",
    "date": "2026-11-15",
    "created_at": "2026-11-15T22:00:26Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 2248,
@@ -1701,6 +1701,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-18T23:12:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#pullrequestreview-5966692550",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the simplification. The guard stays, and the hand-rolled test and the `Test / test` override are gone, as agreed.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-18T08:19:54Z",
@@ -1749,29 +1759,21 @@
       "path": "project/PythonClientPostBuildTest.scala",
       "text": "[AI Assisted] nit: Add a case for an indented bare `delta` import. No case uses one, so the leading `\\s*` in the regex is untested.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:18:59Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2248#discussion_r4605924928",
-      "maintainer": true,
-      "path": "build.sbt",
-      "text": "[AI Assisted] nit: Optional: a named task such as `checkBuildHelpers`, called from `python-client-tests.yml`, would make this check easier to find than an override of `Test / test`.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-18T16:49:10Z",
-    "updated_at": "2026-11-18T19:41:49Z",
+    "updated_at": "2026-11-18T23:17:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 116
   },
@@ -3267,6 +3269,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T23:23:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4622238691",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] normal: `shutdown` sets `_closed` before `_started_loop()` runs. If `Thread.start` fails there, `_shut_down` is never set, so later closers wait with no timeout, including the `atexit` close. This needs `Thread.start` to fail. I reproduced it with a simulated start failure: the first close logged the err…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T23:23:30Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4622238706",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] nit: `status` is not set before the fork block, so the `finally` can read it unbound if an earlier line raises. Could we set `status = (0, 0)` before the `try`?",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-18T23:23:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5966816959",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review of head `ec963cba`. B1 (fork keep-alive) and N-a (second close waits for the first) are fixed and verified. The fork, child request and cancelled-close repros pass. Inline: NF1 (normal, `client.py:236`) and NF3 (nit, test line 3189). In this body, because the lines are outside the diff: - NF2 (…",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-18T08:36:04Z",
@@ -3295,36 +3327,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] After a `fork`, the child inherits `_loop` without its thread. `_started_loop` (line 209) returns that loop, so a request from the child waits forever. Could we check that `_thread` is alive, or track the pid, and create a new loop when it is not? This matters for prefork servers and for the sandbox exec…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947803",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] nit: if the caller of `close()` was cancelled, `closed` is already cancelled, and `set_result` raises `InvalidStateError` in the close thread. Could we skip the result when `closed.cancelled()` is true?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947811",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Requests now go through a new `RESTClientObject` built from the configuration, which replaces the one on the `ApiClient`. The warning covers only subclasses, not a plain client with changed attributes. Could we add a line to the CHANGELOG and `docs/ai/client.md` saying that the `ApiClient`'s `rest_client…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:21:10Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4605947816",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] nit: `client.close()` has no timeout, so if the cancellation regresses this test hangs instead of failing. Could we use `await asyncio.wait_for(client.close_async(), timeout=...)`? The final `requests == 6` check also runs before the 3.2s backoff, so it would not catch a late request.",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3332,12 +3334,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-18T17:24:13Z",
-    "updated_at": "2026-11-18T19:41:11Z",
+    "updated_at": "2026-11-18T23:23:30Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -3877,6 +3879,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-18T23:02:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#pullrequestreview-5966589762",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The earlier items are addressed. The PR description should say that a PATCH carrying `url` on a location with an unparseable stored URL is refused as a whole, with the \"cannot be checked\" message, and that omitting `url` or setting `force=true` works. The two inline comments are non-blocking nits. #2252…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T23:02:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4622052525",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+      "text": "[AI Assisted] Nit, not blocking: the Javadoc says \"without throwing\". The probe avoids throwing only because a location in use is reported as a value, not an error. Query and URL-processing failures still propagate. Could we reword it to \"without throwing merely because the location is in use\"?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-18T23:02:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4622052537",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+      "text": "[AI Assisted] Nit, not blocking: `stillCovers` and `isSameOrUnder` decide when the in-use check is skipped, and neither has a direct test. A unit test could cover the same URL, a parent, a narrowed URL, a prefix sibling such as `s3://b/ab` against `s3://b/a`, and a different bucket or scheme. Could `isSameOrUnder` be…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-18T07:51:03Z",
@@ -3905,49 +3937,22 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] Refusing is the safe choice here. However, the message names a stored URL the caller did not send. A URL-only PATCH on a location created by v0.6.0 with a URL the current parser rejects now fails, where main allowed it. Could the PR description call that out, and could the message say that the stored URL…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-18T07:51:03Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4610654770",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "[AI Assisted] This catch also covers `findLocationUse`, which runs the database query. An `IllegalArgumentException` from the query would be logged as a URL that does not parse. Could the catch be limited to the parent-path step?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:14:43Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4605879045",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "[AI Assisted] This `try` wraps `findLocationUse`, a database query, as well as the URL parse. A `BaseException` from the query is caught, logged as \"its stored URL does not parse\", and dropped with no cause. Could we limit the `try` to `NormalizedURL.from` and `isSameOrUnder`, and pass the exception to `LOGGER.warn`?",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-17T21:14:43Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2240#discussion_r4605879062",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "[AI Assisted] The rule that the new URL is the same as, or a parent of, the stored URL is written here and in the non-force update branch (line 253). Could one helper in `ExternalLocationUtils` serve both, so the two copies cannot drift?",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-11-18T16:34:27Z",
-    "updated_at": "2026-11-18T19:40:57Z",
+    "stage": 3,
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "yili-db",
+     "tdas"
+    ],
+    "last_push": "2026-11-18T23:58:36Z",
+    "updated_at": "2026-11-18T23:58:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 108
   },
@@ -5185,11 +5190,11 @@
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Reject schema-dependent commits across cleaned-up history",
    "date": "2026-11-14",
    "created_at": "2026-11-14T14:19:42Z",
-   "merged_at": null,
+   "merged_at": "2026-11-18",
    "reported": true,
    "pr": {
     "number": 11079,
@@ -5461,17 +5466,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-18T21:11:50Z",
-    "updated_at": "2026-11-18T21:41:59Z",
+    "updated_at": "2026-11-18T22:07:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
+    "state": "done",
     "waiting_on": "nobody",
-    "next": "Tests are running"
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 100
   },
