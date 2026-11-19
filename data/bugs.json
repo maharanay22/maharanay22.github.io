@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T00:01:05Z",
+ "generated_at": "2026-11-19T00:23:39Z",
  "stages": [
   "reported",
   "fix sent",
@@ -61,9 +61,9 @@
    "contributors_checked": "2026-11-19",
    "period_rank": 7,
    "period_commits": 21,
-   "period_total": 28,
+   "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "mlflow/mlflow",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28875,
+   "stars": 28876,
    "forks": 6626,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -211,9 +211,9 @@
    "contributors_checked": "2026-11-19",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 53,
+   "period_total": 55,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -241,7 +241,7 @@
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -269,7 +269,7 @@
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-18"
+   "period_checked": "2026-11-19"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63502,
+   "stars": 63503,
    "forks": 13399,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -3262,7 +3262,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 175,
+     "additions": 182,
      "deletions": 28
     }
    ],
@@ -3276,7 +3276,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] normal: `shutdown` sets `_closed` before `_started_loop()` runs. If `Thread.start` fails there, `_shut_down` is never set, so later closers wait with no timeout, including the `atexit` close. This needs `Thread.start` to fail. I reproduced it with a simulated start failure: the first close logged the err…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3286,7 +3286,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] nit: `status` is not set before the fork block, so the `finally` can read it unbound if an earlier line raises. Could we set `status = (0, 0)` before the `try`?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3296,7 +3296,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review of head `ec963cba`. B1 (fork keep-alive) and N-a (second close waits for the first) are fixed and verified. The fork, child request and cancelled-close repros pass. Inline: NF1 (normal, `client.py:236`) and NF3 (nit, test line 3189). In this body, because the lines are outside the diff: - NF2 (…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3329,17 +3329,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-18T17:24:13Z",
-    "updated_at": "2026-11-18T23:23:30Z",
+    "last_push": "2026-11-19T00:21:38Z",
+    "updated_at": "2026-11-19T00:21:51Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
@@ -3947,7 +3947,7 @@
      "tdas"
     ],
     "last_push": "2026-11-18T23:58:36Z",
-    "updated_at": "2026-11-18T23:58:51Z",
+    "updated_at": "2026-11-19T00:02:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
