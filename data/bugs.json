@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T03:18:28Z",
+ "generated_at": "2026-11-20T03:23:27Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,172 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep the path of the --server URL in request URLs",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T03:21:50Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2317,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2317"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -11,6 +11,7 @@"
+      ],
+      [
+       "c",
+       "import java.util.ArrayList;"
+      ],
+      [
+       "c",
+       "import java.util.Arrays;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "a",
+       "import java.util.Objects;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLine;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.CommandLineParser;"
+      ],
+      [
+       "c",
+       "import org.apache.commons.cli.DefaultParser;"
+      ],
+      [
+       "h",
+       "@@ -20,6 +21,8 @@"
+      ],
+      [
+       "c",
+       "import org.apache.logging.log4j.core.config.Configurator;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "public class UnityCatalogCli {"
+      ],
+      [
+       "a",
+       "  private static final String UC_BASE_PATH = \"/api/2.1/unity-catalog\";"
+      ],
+      [
+       "a",
+       "  private static final String CONTROL_BASE_PATH = \"/api/1.0/unity-control\";"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  static {"
+      ],
+      [
+       "c",
+       "    System.setProperty(\"log4j.configurationFile\", \"etc/conf/cli.log4j2.properties\");"
+      ],
+      [
+       "h",
+       "@@ -125,7 +128,7 @@"
+      ],
+      [
+       "c",
+       "      String command = subArgs[0];"
+      ],
+      [
+       "c",
+       "      switch (command) {"
+      ],
+      [
+       "c",
+       "        case CliUtils.AUTH:"
+      ],
+      [
+       "d",
+       "          apiClient.setBasePath(\"/api/1.0/unity-control\");"
+      ],
+      [
+       "a",
+       "          apiClient.updateBaseUri(getControlClient(cmd).getBaseUri());"
+      ],
+      [
+       "c",
+       "          AuthCli.handle(cmd, apiClient);"
+      ],
+      [
+       "c",
+       "          break;"
+      ],
+      [
+       "c",
+       "        case CliUtils.CATALOG:"
+      ],
+      [
+       "h",
+       "@@ -259,6 +262,7 @@"
+      ],
+      [
+       "c",
+       "      apiClient.setPort(uri.getPort());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    apiClient.setScheme(uri.getScheme());"
+      ]
+     ],
+     "truncated": true,
+     "additions": 17,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T03:21:38Z",
+    "updated_at": "2026-11-20T03:21:52Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 138
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
