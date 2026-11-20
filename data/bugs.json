@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T06:25:25Z",
+ "generated_at": "2026-11-20T07:29:51Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28903,
-   "forks": 6639,
+   "stars": 28904,
+   "forks": 6640,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22419894,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63581,
-   "forks": 13438,
+   "stars": 63587,
+   "forks": 13439,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,542 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep data-source options named like reserved table properties",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T07:28:06Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2324,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2324"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/java/io/unitycatalog/spark/UCTableProperties.java",
+     "lines": [
+      [
+       "h",
+       "@@ -93,15 +93,16 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * Keys that must not be forwarded on {@code createTable} / {@code createView}. Reserved V2 fields"
+      ],
+      [
+       "d",
+       "   * are first-class columns on the UC payload; {@code fs.*} is session-scoped credential config;"
+      ],
+      [
+       "d",
+       "   * Spark datasource schema JSON duplicates {@code uc_columns} and overflows varchar(255)."
+      ],
+      [
+       "a",
+       "   * are first-class columns on the UC payload, but an {@code option.} key of the same name, such as"
+      ],
+      [
+       "a",
+       "   * the CSV {@code comment} option, is a reader and writer option and is kept; {@code fs.*} is"
+      ],
+      [
+       "a",
+       "   * session-scoped credential config; Spark datasource schema JSON duplicates {@code uc_columns}"
+      ],
+      [
+       "a",
+       "   * and overflows varchar(255)."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public static boolean shouldPersistProperty(String key) {"
+      ],
+      [
+       "d",
+       "    String bare = withoutOptionPrefix(key);"
+      ],
+      [
+       "d",
+       "    if (V2_TABLE_PROPERTIES.contains(bare)) {"
+      ],
+      [
+       "a",
+       "    if (V2_TABLE_PROPERTIES.contains(key)) {"
+      ],
+      [
+       "c",
+       "      return false;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "d",
+       "    if (bare.startsWith(\"fs.\")) {"
+      ],
+      [
+       "a",
+       "    if (withoutOptionPrefix(key).startsWith(\"fs.\")) {"
+      ],
+      [
+       "c",
+       "      return false;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    return !isSparkDatasourceSchemaProperty(key);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 5
+    },
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -1218,10 +1218,18 @@"
+      ],
+      [
+       "c",
+       "      if (partitionIdx >= 0) column.setPartitionIndex(partitionIdx)"
+      ],
+      [
+       "c",
+       "      column"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "d",
+       "    val comment = Option(properties.get(TableCatalog.PROP_COMMENT))"
+      ],
+      [
+       "a",
+       "    val dataSourceFormat = convertDatasourceFormat(format)"
+      ],
+      [
+       "a",
+       "    // Spark also passes each OPTIONS entry without the `option.` prefix, so OPTIONS (comment '#')"
+      ],
+      [
+       "a",
+       "    // arrives as the table comment unless a COMMENT clause replaced it. For non-Delta tables,"
+      ],
+      [
+       "a",
+       "    // which split options from properties the same way on load, a comment equal to the option is"
+      ],
+      [
+       "a",
+       "    // that copy."
+      ],
+      [
+       "a",
+       "    val comment = Option(properties.get(TableCatalog.PROP_COMMENT)).filterNot { c =>"
+      ],
+      [
+       "a",
+       "      dataSourceFormat != DataSourceFormat.DELTA &&"
+      ],
+      [
+       "a",
+       "        c == properties.get(TableCatalog.OPTION_PREFIX + TableCatalog.PROP_COMMENT)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    comment.foreach(createTable.setComment(_))"
+      ],
+      [
+       "c",
+       "    createTable.setColumns(columns)"
+      ],
+      [
+       "d",
+       "    createTable.setDataSourceFormat(convertDatasourceFormat(format))"
+      ],
+      [
+       "a",
+       "    createTable.setDataSourceFormat(dataSourceFormat)"
+      ],
+      [
+       "c",
+       "    // Drop V2 reserved keys, vended fs.* credentials, and Spark Hive-metastore schema JSON."
+      ],
+      [
+       "c",
+       "    // Same deny-list as createView; see UCTableProperties.shouldPersistProperty."
+      ],
+      [
+       "c",
+       "    val propertiesToServer = properties.view"
+      ]
+     ],
+     "truncated": false,
+     "additions": 10,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T07:27:17Z",
+    "updated_at": "2026-11-20T07:28:07Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 145
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Serve the vended GCS token when credential renewal is disabled",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T06:24:56Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2323,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2323"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/auth/GcsFixedTokenProvider.java",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1,61 @@"
+      ],
+      [
+       "a",
+       "package io.unitycatalog.hadoop.internal.auth;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "import com.google.cloud.hadoop.util.AccessTokenProvider;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.client.internal.Clock;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.hadoop.internal.util.ClockUtil;"
+      ],
+      [
+       "a",
+       "import java.io.IOException;"
+      ],
+      [
+       "a",
+       "import java.time.Instant;"
+      ],
+      [
+       "a",
+       "import org.apache.hadoop.conf.Configuration;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "/**"
+      ],
+      [
+       "a",
+       " * Hadoop GCS access token provider that serves the token Unity Catalog vended when credential"
+      ],
+      [
+       "a",
+       " * renewal is disabled. The GCS connector has no setting that takes a token directly, so it needs a"
+      ],
+      [
+       "a",
+       " * provider even for a token that is never renewed. Once the token expires, {@link #refresh()} fails"
+      ],
+      [
+       "a",
+       " * rather than renewing it."
+      ],
+      [
+       "a",
+       " */"
+      ],
+      [
+       "a",
+       "public class GcsFixedTokenProvider implements AccessTokenProvider {"
+      ],
+      [
+       "a",
+       "  public static final String ACCESS_TOKEN_KEY = \"fs.gs.auth.access.token.credential\";"
+      ],
+      [
+       "a",
+       "  public static final String ACCESS_TOKEN_EXPIRATION_KEY = \"fs.gs.auth.access.token.expiration\";"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  private Configuration conf;"
+      ],
+      [
+       "a",
+       "  private Clock clock;"
+      ],
+      [
+       "a",
+       "  private AccessToken accessToken;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  @Override"
+      ],
+      [
+       "a",
+       "  public AccessToken getAccessToken() {"
+      ],
+      [
+       "a",
+       "    return accessToken;"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ]
+     ],
+     "truncated": true,
+     "additions": 61,
+     "deletions": 0
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/auth/GcsVendedTokenProvider.java",
+     "lines": [
+      [
+       "h",
+       "@@ -11,8 +11,6 @@"
+      ],
+      [
+       "c",
+       "public class GcsVendedTokenProvider extends GenericCredentialProvider"
+      ],
+      [
+       "c",
+       "    implements AccessTokenProvider {"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  public static final String ACCESS_TOKEN_KEY = \"fs.gs.auth.access.token.credential\";"
+      ],
+      [
+       "d",
+       "  public static final String ACCESS_TOKEN_EXPIRATION_KEY = \"fs.gs.auth.access.token.expiration\";"
+      ],
+      [
+       "c",
+       "  private Configuration conf;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public GcsVendedTokenProvider() {}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 0,
+     "deletions": 2
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/props/CredPropsBuilder.java",
+     "lines": [
+      [
+       "h",
+       "@@ -226,8 +226,9 @@"
+      ],
+      [
+       "c",
+       "  protected abstract void setInitRenewableCredKeys(GenericCredential cred);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "d",
+       "   * Returns the fixed-path credential secrets for this cloud, which {@link #build()} sets, or an"
+      ],
+      [
+       "d",
+       "   * empty map when the credential is not served through them."
+      ],
+      [
+       "a",
+       "   * Returns the fixed-path credential keys for this cloud, the secrets plus any provider the cloud"
+      ],
+      [
+       "a",
+       "   * needs to serve them, which {@link #build()} sets, or an empty map when the credential is not"
+      ],
+      [
+       "a",
+       "   * served through them."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  protected abstract Map<String, String> initFixedCredKeys(GenericCredential cred);"
+      ],
+      [
+       "c",
+       "}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/props/GcsCredPropsBuilder.java",
+     "lines": [
+      [
+       "h",
+       "@@ -3,17 +3,20 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.internal.Preconditions;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.UCHadoopConfConstants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.auth.GcsCredential;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.hadoop.internal.auth.GcsFixedTokenProvider;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.hadoop.internal.auth.GenericCredential;"
+      ],
+      [
+       "c",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import org.apache.hadoop.conf.Configuration;"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 14,
+     "deletions": 7
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T06:23:40Z",
+    "updated_at": "2026-11-20T06:24:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 144
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -481,8 +1017,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:23:37Z",
@@ -490,8 +1026,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 143
   },
@@ -623,8 +1159,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:04:32Z",
@@ -632,8 +1168,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 142
   },
@@ -809,8 +1345,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:03:26Z",
@@ -818,8 +1354,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 141
   },
@@ -935,8 +1471,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T05:49:41Z",
@@ -944,8 +1480,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 140
   },
@@ -3608,7 +4144,7 @@
      "lines": [
       [
        "h",
-       "@@ -2098,7 +2098,12 @@"
+       "@@ -2098,7 +2098,16 @@"
       ],
       [
        "c",
@@ -3636,19 +4172,35 @@
       ],
       [
        "a",
-       "        unit, a timestamp that is not at midnight when casting to a date, or a"
+       "        unit, a timestamp that is not at midnight in its time zone when"
       ],
       [
        "a",
-       "        decimal with more digits than the new scale. Floats can be downcasted"
+       "        casting to a date, a date64 value that is not a whole number of days"
       ],
       [
        "a",
-       "        with a loss of precision, but a finite value that is too large for the"
+       "        when casting to date32, or a decimal with digits beyond the new scale."
       ],
       [
        "a",
-       "        new type fails rather than becoming infinity. In general,"
+       "        Casting a timestamp to time32 or time64 keeps only the time of day, so"
+      ],
+      [
+       "a",
+       "        it can discard the date and any subsecond precision without failing."
+      ],
+      [
+       "a",
+       "        Floats can be downcasted with a loss of precision, but a finite value"
+      ],
+      [
+       "a",
+       "        that is too large for the new type fails rather than becoming"
+      ],
+      [
+       "a",
+       "        infinity. In general,"
       ],
       [
        "c",
@@ -3664,7 +4216,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 6,
+     "additions": 10,
      "deletions": 1
     },
     {
@@ -3792,15 +4344,15 @@
       ]
      ],
      "truncated": true,
-     "additions": 181,
-     "deletions": 14
+     "additions": 383,
+     "deletions": 15
     },
     {
      "path": "rust/lance/src/dataset/schema_evolution/cast.rs",
      "lines": [
       [
        "h",
-       "@@ -0,0 +1,128 @@"
+       "@@ -0,0 +1,193 @@"
       ],
       [
        "a",
@@ -3828,7 +4380,11 @@
       ],
       [
        "a",
-       "use arrow_array::{Array, ArrayRef};"
+       "use arrow_array::{Array, ArrayRef, BooleanArray};"
+      ],
+      [
+       "a",
+       "use arrow_buffer::BooleanBufferBuilder;"
       ],
       [
        "a",
@@ -3841,30 +4397,10 @@
       [
        "a",
        "use arrow_schema::DataType;"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "use crate::{Error, Result};"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "const STRICT: CastOptions<'static> = CastOptions {"
-      ],
-      [
-       "a",
-       "    safe: false,"
       ]
      ],
      "truncated": true,
-     "additions": 128,
+     "additions": 193,
      "deletions": 0
     }
    ],
@@ -3874,8 +4410,8 @@
     "checks": "failing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-19T06:09:47Z",
-    "updated_at": "2026-11-19T06:36:02Z",
+    "last_push": "2026-11-20T06:05:33Z",
+    "updated_at": "2026-11-20T06:43:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
