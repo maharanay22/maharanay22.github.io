@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T03:32:02Z",
+ "generated_at": "2026-11-20T04:11:21Z",
  "stages": [
   "reported",
   "fix sent",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50578,
+   "stars": 50577,
    "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63569,
-   "forks": 13433,
+   "stars": 63574,
+   "forks": 13434,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,172 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Make CREATE TABLE IF NOT EXISTS a no-op when UC reports the name is taken",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T04:09:28Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2318,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2318"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -9,6 +9,8 @@"
+      ],
+      [
+       "c",
+       "import scala.collection.mutable.ArrayBuffer"
+      ],
+      [
+       "c",
+       "import scala.language.existentials"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.core.JsonProcessingException"
+      ],
+      [
+       "a",
+       "import com.fasterxml.jackson.databind.ObjectMapper"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.api.{SchemasApi, TablesApi}"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.auth.TokenProvider"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.client.model.{"
+      ],
+      [
+       "h",
+       "@@ -317,7 +319,12 @@"
+      ],
+      [
+       "c",
+       "      .catalogName(name())"
+      ],
+      [
+       "c",
+       "      .schemaName(ident.namespace().head)"
+      ],
+      [
+       "c",
+       "      .name(ident.name())"
+      ],
+      [
+       "d",
+       "    val stagingTableInfo = tablesApi.createStagingTable(createStagingTable)"
+      ],
+      [
+       "a",
+       "    val stagingTableInfo = try {"
+      ],
+      [
+       "a",
+       "      tablesApi.createStagingTable(createStagingTable)"
+      ],
+      [
+       "a",
+       "    } catch {"
+      ],
+      [
+       "a",
+       "      case e: ApiException if UCSingleCatalog.isTableAlreadyExists(e) =>"
+      ],
+      [
+       "a",
+       "        throw new TableAlreadyExistsException(ident)"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    val stagingLocation = stagingTableInfo.getStagingLocation"
+      ],
+      [
+       "c",
+       "    val stagingTableId = stagingTableInfo.getId"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -779,7 +786,7 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       "}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "object UCSingleCatalog {"
+      ],
+      [
+       "a",
+       "object UCSingleCatalog extends Logging {"
+      ],
+      [
+       "c",
+       "  // DeltaCatalog loading status for testing purpose."
+      ]
+     ],
+     "truncated": true,
+     "additions": 45,
+     "deletions": 9
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T04:09:08Z",
+    "updated_at": "2026-11-20T04:09:29Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 139
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -1372,8 +1538,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:44:23Z",
@@ -1381,8 +1547,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 134
   },
@@ -1602,8 +1768,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:34:18Z",
@@ -1611,8 +1777,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 133
   },
@@ -9968,7 +10134,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:21:43Z",
-    "updated_at": "2026-11-20T03:30:24Z",
+    "updated_at": "2026-11-20T04:01:56Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -14786,8 +14952,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "shba24"
