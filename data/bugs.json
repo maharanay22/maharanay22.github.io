@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T00:44:32Z",
+ "generated_at": "2026-11-20T01:40:33Z",
  "stages": [
   "reported",
   "fix sent",
@@ -31,11 +31,11 @@
    "contributor_commits": 51,
    "contributor_total": 142,
    "contributors_checked": "2026-11-20",
-   "period_rank": 4,
-   "period_commits": 43,
-   "period_total": 39,
+   "period_rank": 2,
+   "period_commits": 51,
+   "period_total": 33,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "delta-io/delta-rs",
@@ -105,7 +105,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7370,
+   "stars": 7371,
    "forks": 956,
    "package": "pylance",
    "impact": null,
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50577,
+   "stars": 50578,
    "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -213,7 +213,7 @@
    "period_commits": null,
    "period_total": 55,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63561,
-   "forks": 13430,
+   "stars": 63562,
+   "forks": 13431,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,340 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "The manual Anthropic tool result flow can't mark a failed call with is_error",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T01:38:31Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2315,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2315"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-20T01:38:31Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 136
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Send the function error to the model when a tool call fails",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T01:38:14Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2314,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2314"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,5 +1,5 @@"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "d",
+       "from typing import Any, Dict, List, Optional, Union"
+      ],
+      [
+       "a",
+       "from typing import Any, Dict, List, Optional, Tuple, Union"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, Field, ValidationError"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -54,14 +54,21 @@"
+      ],
+      [
+       "c",
+       "            client (BaseFunctionClient): The client to use for executing the function."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "d",
+       "            str: The result of the function execution."
+      ],
+      [
+       "a",
+       "            str: The result of the function execution, or the JSON of the execution result,"
+      ],
+      [
+       "a",
+       "            including the error, if the function failed."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "a",
+       "        content, _ = self._execute(client)"
+      ],
+      [
+       "a",
+       "        return content"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    def _execute(self, client: BaseFunctionClient) -> Tuple[str, bool]:"
+      ],
+      [
+       "c",
+       "        result = client.execute_function("
+      ],
+      [
+       "c",
+       "            self.function_name,"
+      ],
+      [
+       "c",
+       "            self.arguments,"
+      ],
+      [
+       "c",
+       "            enable_retriever_tracing=mlflow_tracing_enabled(\"anthropic\"),"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "d",
+       "        return str(result.value)"
+      ],
+      [
+       "a",
+       "        if result.error is not None:"
+      ],
+      [
+       "a",
+       "            return result.to_json(), True"
+      ],
+      [
+       "a",
+       "        return str(result.value), False"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def to_tool_result_message(self, result: str) -> Dict[str, Any]:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 13,
+     "deletions": 6
+    },
+    {
+     "path": "ai/integrations/litellm/src/unitycatalog/ai/litellm/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -59,10 +59,11 @@"
+      ],
+      [
+       "c",
+       "            client (BaseFunctionClient): The client to use for executing the function."
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        Returns:"
+      ],
+      [
+       "d",
+       "            str: The result of the function execution."
+      ],
+      [
+       "a",
+       "            str: The result of the function execution, or the JSON of the execution result,"
+      ],
+      [
+       "a",
+       "            including the error, if the function failed."
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ],
+      [
+       "c",
+       "        result = client.execute_function(self.function_name, self.arguments)"
+      ],
+      [
+       "d",
+       "        return str(result.value)"
+      ],
+      [
+       "a",
+       "        return result.to_json() if result.error is not None else str(result.value)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    def to_tool_result_message(self, result: str) -> dict[str, Any]:"
+      ],
+      [
+       "c",
+       "        \"\"\""
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    },
+    {
+     "path": "ai/integrations/openai/src/unitycatalog/ai/openai/utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -41,9 +41,14 @@"
+      ],
+      [
+       "c",
+       "            result = client.execute_function("
+      ],
+      [
+       "c",
+       "                func_name, arguments, enable_retriever_tracing=mlflow_tracing_enabled(\"openai\")"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "a",
+       "            content = ("
+      ],
+      [
+       "a",
+       "                result.to_json()"
+      ],
+      [
+       "a",
+       "                if result.error is not None"
+      ],
+      [
+       "a",
+       "                else json.dumps({\"content\": result.value})"
+      ],
+      [
+       "a",
+       "            )"
+      ],
+      [
+       "c",
+       "            function_call_result_message = {"
+      ],
+      [
+       "c",
+       "                \"role\": \"tool\","
+      ],
+      [
+       "d",
+       "                \"content\": json.dumps({\"content\": result.value}),"
+      ],
+      [
+       "a",
+       "                \"content\": content,"
+      ],
+      [
+       "c",
+       "                \"tool_call_id\": tool_call.id,"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "c",
+       "            function_calls.append(function_call_result_message)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T01:38:46Z",
+    "updated_at": "2026-11-20T01:38:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 135
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -399,7 +733,27 @@
      "lines": [
       [
        "h",
-       "@@ -13,7 +13,7 @@"
+       "@@ -9,11 +9,11 @@"
+      ],
+      [
+       "c",
+       " *"
+      ],
+      [
+       "c",
+       " * <pre>{@code"
+      ],
+      [
+       "c",
+       " * RetryPolicy policy = JitterDelayRetryPolicy.builder().build();"
+      ],
+      [
+       "d",
+       " * for(int attempt = 1; policy.allowRetry(attempt); attempt +=1) {"
+      ],
+      [
+       "a",
+       " * for (int attempt = 1; attempt <= policy.maxAttempts(); attempt += 1) {"
       ],
       [
        "c",
@@ -419,7 +773,7 @@
       ],
       [
        "a",
-       " *     if (isRetryable(e) && attempt < policy.maxAttempts()) {"
+       " *     if (isRetryable(e) && attempt < policy.maxAttempts() && policy.allowRetry(attempt)) {"
       ],
       [
        "c",
@@ -435,7 +789,7 @@
       ],
       [
        "h",
-       "@@ -24,13 +24,12 @@"
+       "@@ -24,38 +24,36 @@"
       ],
       [
        "c",
@@ -496,19 +850,11 @@
       [
        "c",
        "   */"
-      ],
-      [
-       "c",
-       "  int maxAttempts();"
-      ],
-      [
-       "c",
-       ""
       ]
      ],
-     "truncated": false,
-     "additions": 5,
-     "deletions": 6
+     "truncated": true,
+     "additions": 14,
+     "deletions": 16
     }
    ],
    "track": {
@@ -517,8 +863,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-20T00:41:23Z",
-    "updated_at": "2026-11-20T00:41:40Z",
+    "last_push": "2026-11-20T01:11:45Z",
+    "updated_at": "2026-11-20T01:25:09Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -685,6 +1031,26 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-20T01:24:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5986132135",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 292356c0. The earlier items are addressed: the missing-name fix is verified by repro for a `type_json` without a name and for one with a different name, the range behavior is documented in the CHANGELOG, and the type list and restore tests are in. One normal item remains, inline on the CHANG…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T01:24:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4637356286",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal, wording only, not a regression: the sentence holds for top-level integer parameters, but not for values nested inside a `STRUCT`, `ARRAY` or `MAP`. A `STRUCT` value passes the client's type check as long as it is a dict, and nested fields are not checked. So a `6.5` in an `INT` field of a struct…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-20T00:28:23Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5985648634",
       "maintainer": true,
@@ -721,16 +1087,6 @@
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Nit: the entry lists `BYTE`, `SHORT`, `INT` and `LONG`, but the conversion also covers `BIGINT` and `INTEGER`. Could the list say so?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T00:28:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963745",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-      "text": "[AI Assisted] Nit: `_restore_integers` has no unit tests for nested composites, such as an array of structs or a map of arrays, or for unknown struct keys and values that do not match the type. A comment tying `_INTEGER_TYPE_NAMES` to the client's integer check would also help, because the two lists could drift apart.",
-      "answered": true
      }
     ],
     "stage": 3,
@@ -738,12 +1094,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T00:36:39Z",
-    "updated_at": "2026-11-20T00:40:54Z",
+    "updated_at": "2026-11-20T01:24:19Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 133
   },
@@ -9082,18 +9438,33 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-20T01:07:12Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#issuecomment-7027153609",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] This PR needs a rebase onto main. Main's latest step is now V4 (`V4__credentials_credential_as_text.sql`, from #2169), so the six steps here need to move from V4 to V9 to a new range above it. Rename the step files and their effect files, then regenerate the effect files with `build/sbt updateSchemaDumps…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:46:23Z",
-    "updated_at": "2026-11-19T22:12:58Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "updated_at": "2026-11-20T01:07:12Z",
+    "conflicts": true,
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-20T01:07:12Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 96
   },
@@ -13842,6 +14213,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-20T01:07:08Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-7027152458",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] This PR needs a rebase onto main. Main's latest step is now V4 (`V4__credentials_credential_as_text.sql`, from #2169), so the six steps here need to move from V4 to V9 to V5 to V10 on all three databases. Rename the step files and their effect files, then regenerate the effect files with `build/sbt updat…",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "shba24",
       "at": "2026-11-19T04:25:31Z",
@@ -13890,33 +14271,25 @@
       "path": "server/src/main/resources/db/migration/h2/V4__widen_function_param_type_text.sql",
       "text": "**Nit (not a blocker):** Two merge commits on the branch have no Signed-off-by trailer The contribution workflow asks for a DCO sign-off on every commit. Two merge commits on this branch, including 4fdcb25a2917332ae8ec423982fcb12925693f3b, carry no Signed-off-by trailer. CODE_REVIEW.md says a missing sign-off is not a…",
       "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "shba24",
-      "at": "2026-11-11T23:59:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#issuecomment-6810199677",
-      "maintainer": true,
-      "path": null,
-      "text": "A quick follow-up with something more concrete, so you know what to expect. I cherry-picked this PR onto the top of the stack (#2118) and ran its checks on H2, PostgreSQL and MySQL: - The merged-steps check and the \"type changes only widen\" rule both pass, so the widths and the NOT NULL on `type_text` look good. - `Mi…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "shba24"
+    ],
     "last_push": "2026-11-19T05:06:53Z",
-    "updated_at": "2026-11-19T23:32:09Z",
-    "conflicts": false,
+    "updated_at": "2026-11-20T01:07:08Z",
+    "conflicts": true,
     "last_comment": {
-     "who": "shba24",
-     "at": "2026-11-11T23:59:31Z",
+     "who": "yili-db",
+     "at": "2026-11-20T01:07:08Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 79
   },
