@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T01:40:33Z",
+ "generated_at": "2026-11-20T02:04:26Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63562,
-   "forks": 13431,
+   "stars": 63564,
+   "forks": 13432,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,224 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep the Iceberg metadata file when a commit's outcome is unknown",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T02:02:41Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2316,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2316"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -621,7 +621,7 @@"
+      ],
+      [
+       "c",
+       "    try {"
+      ],
+      [
+       "c",
+       "      tableInfo = tableRepository.createTableForIceberg(createTable, metadataLocation);"
+      ],
+      [
+       "c",
+       "    } catch (RuntimeException e) {"
+      ],
+      [
+       "d",
+       "      metadataService.deleteTableMetadata(metadataLocation, tableLocation);"
+      ],
+      [
+       "a",
+       "      deleteMetadataIfRejected(e, metadataLocation, tableLocation);"
+      ],
+      [
+       "c",
+       "      if (fromCommit"
+      ],
+      [
+       "c",
+       "          && e instanceof BaseException baseException"
+      ],
+      [
+       "c",
+       "          && baseException.getErrorCode() == ErrorCode.TABLE_ALREADY_EXISTS) {"
+      ],
+      [
+       "h",
+       "@@ -718,9 +718,7 @@"
+      ],
+      [
+       "c",
+       "          IcebergSchemaConverter.toColumnInfos(updated.schema()),"
+      ],
+      [
+       "c",
+       "          updated.properties());"
+      ],
+      [
+       "c",
+       "    } catch (RuntimeException e) {"
+      ],
+      [
+       "d",
+       "      // The metadata file was written before the swap, so any failure (a lost commit race or an"
+      ],
+      [
+       "d",
+       "      // unexpected error) leaves it orphaned unless we clean it up."
+      ],
+      [
+       "d",
+       "      metadataService.deleteTableMetadata(newMetadataLocation, tableLocation);"
+      ],
+      [
+       "a",
+       "      deleteMetadataIfRejected(e, newMetadataLocation, tableLocation);"
+      ],
+      [
+       "c",
+       "      throw e;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -732,6 +730,31 @@"
+      ],
+      [
+       "c",
+       "        .build();"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Deletes the metadata file a failed commit wrote, but only when the failure means the commit did"
+      ],
+      [
+       "a",
+       "   * not happen: a 4xx {@link BaseException}, which the repository raises before or within the"
+      ],
+      [
+       "a",
+       "   * transaction it rolls back. Any other failure, such as a lost connection during the database"
+      ],
+      [
+       "a",
+       "   * commit or a session close failing after it, may have stored this file as the table's metadata"
+      ],
+      [
+       "a",
+       "   * location, so the file is kept: deleting it would leave the table unreadable. Such a failure"
+      ]
+     ],
+     "truncated": true,
+     "additions": 27,
+     "deletions": 4
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/iceberg/MetadataService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -78,8 +78,8 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "d",
+       "   * Best-effort cleanup of a metadata file that lost a commit race or whose commit failed,"
+      ],
+      [
+       "d",
+       "   * constrained to the persisted table location."
+      ],
+      [
+       "a",
+       "   * Best-effort cleanup of a metadata file whose commit was rejected, such as one that lost a"
+      ],
+      [
+       "a",
+       "   * commit race, constrained to the persisted table location."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public void deleteTableMetadata("
+      ],
+      [
+       "c",
+       "      NormalizedURL metadataLocation, NormalizedURL persistedTableLocation) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T02:02:04Z",
+    "updated_at": "2026-11-20T02:02:42Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 137
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -1089,8 +1307,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T00:36:39Z",
