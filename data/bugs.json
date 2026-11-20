@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-19T23:36:34Z",
+ "generated_at": "2026-11-20T00:44:32Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,12 +25,12 @@
    "forks": 706,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 642042,
-   "downloads_checked": "2026-11-19",
-   "contributor_rank": 6,
-   "contributor_commits": 43,
-   "contributor_total": 141,
-   "contributors_checked": "2026-11-19",
+   "downloads_month": 643342,
+   "downloads_checked": "2026-11-20",
+   "contributor_rank": 4,
+   "contributor_commits": 51,
+   "contributor_total": 142,
+   "contributors_checked": "2026-11-20",
    "period_rank": 4,
    "period_commits": 43,
    "period_total": 39,
@@ -53,17 +53,17 @@
    "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10563244,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 10666705,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": 7,
    "period_commits": 21,
-   "period_total": 27,
+   "period_total": 28,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "mlflow/mlflow",
@@ -78,20 +78,20 @@
     "GenAI Eval"
    ],
    "stars": 28902,
-   "forks": 6638,
+   "forks": 6639,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 22182969,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 22419894,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "lance-format/lance",
@@ -109,17 +109,17 @@
    "forks": 956,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 4304986,
-   "downloads_checked": "2026-11-19",
-   "contributor_rank": 93,
-   "contributor_commits": 5,
+   "downloads_month": 4278768,
+   "downloads_checked": "2026-11-20",
+   "contributor_rank": 66,
+   "contributor_commits": 8,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
-   "period_rank": 50,
-   "period_commits": 5,
+   "contributors_checked": "2026-11-20",
+   "period_rank": 38,
+   "period_commits": 8,
    "period_total": 67,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "mindsdb/engine",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "pandas-dev/pandas",
@@ -165,17 +165,17 @@
    "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 706035536,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 710331967,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19",
+   "period_checked": "2026-11-20",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -203,12 +203,12 @@
    "forks": 2225,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24748071,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 24756379,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 55,
@@ -231,17 +231,17 @@
    "forks": 161,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 37842899,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 38006160,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -259,17 +259,17 @@
    "forks": 232,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4331404,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 4333876,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63558,
+   "stars": 63561,
    "forks": 13430,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 98646196,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 99782353,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": null,
    "period_commits": null,
    "period_total": 135,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -315,20 +315,218 @@
    "forks": 264,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 498935761,
-   "downloads_checked": "2026-11-19",
+   "downloads_month": 503519236,
+   "downloads_checked": "2026-11-20",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-19",
+   "contributors_checked": "2026-11-20",
    "period_rank": 29,
    "period_commits": 1,
    "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-19"
+   "period_checked": "2026-11-20"
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Don't sleep a backoff after the final retry attempt",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T00:41:38Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2312,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2312"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "clients/java/src/main/java/io/unitycatalog/client/internal/HttpRetryHandler.java",
+     "lines": [
+      [
+       "h",
+       "@@ -52,7 +52,7 @@"
+      ],
+      [
+       "c",
+       "        shouldRetry = isCausedByRecoverableEx(e);"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "      if (shouldRetry && retryPolicy.allowRetry(attempt)) {"
+      ],
+      [
+       "a",
+       "      if (shouldRetry && attempt < retryPolicy.maxAttempts() && retryPolicy.allowRetry(attempt)) {"
+      ],
+      [
+       "c",
+       "        try {"
+      ],
+      [
+       "c",
+       "          clock.sleep(retryPolicy.sleepTime(attempt));"
+      ],
+      [
+       "c",
+       "        } catch (InterruptedException interrupted) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
+     "lines": [
+      [
+       "h",
+       "@@ -13,7 +13,7 @@"
+      ],
+      [
+       "c",
+       " *   try {"
+      ],
+      [
+       "c",
+       " *     doSomeAction();"
+      ],
+      [
+       "c",
+       " *   } catch (Exception e) {"
+      ],
+      [
+       "d",
+       " *     if (isRetryable(e)){"
+      ],
+      [
+       "a",
+       " *     if (isRetryable(e) && attempt < policy.maxAttempts()) {"
+      ],
+      [
+       "c",
+       " *       Thread.sleep(policy.sleepTime(attempt).toMillis());"
+      ],
+      [
+       "c",
+       " *     } else {"
+      ],
+      [
+       "c",
+       " *       throw e;"
+      ],
+      [
+       "h",
+       "@@ -24,13 +24,12 @@"
+      ],
+      [
+       "c",
+       " */"
+      ],
+      [
+       "c",
+       "public interface RetryPolicy {"
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "d",
+       "   * Returns the maximum number of retry attempts allowed by this policy."
+      ],
+      [
+       "a",
+       "   * Returns the maximum number of attempts allowed by this policy."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "d",
+       "   * <p>This value determines the upper bound on retry attempts. A return value of 0 means no"
+      ],
+      [
+       "d",
+       "   * retries will be attempted (only the initial attempt), while a positive value indicates the"
+      ],
+      [
+       "d",
+       "   * maximum number of additional attempts after the initial failure."
+      ],
+      [
+       "a",
+       "   * <p>This value is the total number of attempts, including the initial one, so a value of 1 means"
+      ],
+      [
+       "a",
+       "   * no retries. No backoff is slept after the last attempt."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "d",
+       "   * @return the maximum number of retry attempts, must be non-negative"
+      ],
+      [
+       "a",
+       "   * @return the maximum number of attempts, must be positive"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  int maxAttempts();"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 6
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T00:41:23Z",
+    "updated_at": "2026-11-20T00:41:40Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 134
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -426,7 +624,7 @@
       ],
       [
        "h",
-       "@@ -36,6 +38,43 @@"
+       "@@ -36,6 +38,45 @@"
       ],
       [
        "c",
@@ -439,6 +637,14 @@
       [
        "c",
        ""
+      ],
+      [
+       "a",
+       "# Built from the mapping the function clients validate arguments against, so both agree on which"
+      ],
+      [
+       "a",
+       "# types need an int."
       ],
       [
        "a",
@@ -467,29 +673,72 @@
       [
        "a",
        "    \"\"\""
-      ],
-      [
-       "a",
-       "    Converts the integral floats in a function call argument back to int where the UC type is an"
-      ],
-      [
-       "a",
-       "    integer type, including in STRUCT fields, ARRAY elements and MAP values."
       ]
      ],
      "truncated": true,
-     "additions": 47,
+     "additions": 52,
      "deletions": 2
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T00:28:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5985648634",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 8ff6a96a. The integer conversion is right for the cases I checked: top-level and nested integers are converted, and non-whole floats, `DOUBLE`, `DECIMAL` and `STRING` are left alone. The blocker above needs fixing before merge. The Gemini unit tests were not run in this review, because the G…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T00:28:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963714",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+      "text": "[AI Assisted] Blocker: the synthetic top-level struct takes each parameter's name from inside its `type_json`. OSS keeps the parameter name as a separate field, and the server test fixture `BaseFunctionCRUDTest` builds parameters with a `type_json` of `{\"type\":\"int\"}` and no embedded name. For such a function, `_resto…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T00:28:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963726",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+      "text": "[AI Assisted] Followup: the conversion has no range check. `3e9` for an `INT` argument arrives as `3000000000`, and `300.0` for a `BYTE` argument arrives as `300`, without an error. The library does not bound-check integers elsewhere either, so this is consistent with it. Could this be noted in the CHANGELOG, or track…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T00:28:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963737",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Nit: the entry lists `BYTE`, `SHORT`, `INT` and `LONG`, but the conversion also covers `BIGINT` and `INTEGER`. Could the list say so?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T00:28:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963745",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+      "text": "[AI Assisted] Nit: `_restore_integers` has no unit tests for nested composites, such as an array of structs or a map of arrays, or for unknown struct keys and values that do not match the type. A comment tying `_INTEGER_TYPE_NAMES` to the client's integer check would also help, because the two lists could drift apart.",
+      "answered": true
+     }
+    ],
     "stage": 3,
     "checks": "running",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T23:01:46Z",
-    "updated_at": "2026-11-19T23:02:26Z",
+    "last_push": "2026-11-20T00:36:39Z",
+    "updated_at": "2026-11-20T00:40:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -501,11 +750,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Drop Spark's cached relation when a non-Delta table is dropped, created or refreshed",
    "date": "2026-11-19",
    "created_at": "2026-11-19T18:25:57Z",
-   "merged_at": null,
+   "merged_at": "2026-11-19",
    "reported": true,
    "pr": {
     "number": 2306,
@@ -651,6 +900,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-19T23:54:03Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2306#pullrequestreview-5985312442",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The mixed-case test now fails under the lowercasing overload, the warning branch and the session setup are fixed, and the suite passes (29 of 29) with checkstyle and javafmt clean. The remaining notes are optional.",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-19T20:59:33Z",
@@ -691,17 +950,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-19T22:09:03Z",
-    "updated_at": "2026-11-19T22:36:21Z",
+    "updated_at": "2026-11-19T23:56:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 132
   },
