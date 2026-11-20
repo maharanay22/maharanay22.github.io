@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T03:23:27Z",
+ "generated_at": "2026-11-20T03:32:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50578,
-   "forks": 20764,
+   "forks": 20765,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710331967,
@@ -9618,7 +9618,7 @@
      "lines": [
       [
        "h",
-       "@@ -42,10 +42,10 @@"
+       "@@ -44,10 +44,10 @@"
       ],
       [
        "c",
@@ -9722,7 +9722,7 @@
      "lines": [
       [
        "h",
-       "@@ -45,10 +45,10 @@"
+       "@@ -47,10 +47,10 @@"
       ],
       [
        "c",
@@ -9782,7 +9782,7 @@
      "lines": [
       [
        "h",
-       "@@ -31,7 +31,7 @@"
+       "@@ -33,7 +33,7 @@"
       ],
       [
        "c",
@@ -9822,87 +9822,7 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V4__widen_catalog_storage_root.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs ALTER COLUMN storage_root VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V5__widen_catalog_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V6__widen_schema_storage_root.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN storage_root VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_volumes ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V9__widen_model_version_source.sql",
+     "path": "server/src/main/resources/db/migration/h2/V10__widen_model_version_source.sql",
      "lines": [
       [
        "h",
@@ -9918,7 +9838,103 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V4__widen_catalog_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_catalog_storage_root.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs ALTER COLUMN storage_root VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_catalog_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_storage_root.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_schemas ALTER COLUMN storage_root VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_schema_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_schemas ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V9__widen_volume_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_volumes ALTER COLUMN storage_location VARCHAR(2048);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V10__widen_model_version_source.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_model_versions MODIFY COLUMN source varchar(2048) NULL;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V5__widen_catalog_storage_root.sql",
      "lines": [
       [
        "h",
@@ -9927,22 +9943,6 @@
       [
        "a",
        "ALTER TABLE uc_catalogs MODIFY COLUMN storage_root varchar(2048) NULL;"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/mysql/V5__widen_catalog_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_location varchar(2048) NULL;"
       ]
      ],
      "truncated": false,
@@ -9960,24 +9960,24 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] This PR needs a rebase onto main. Main's latest step is now V4 (`V4__credentials_credential_as_text.sql`, from #2169), so the six steps here need to move from V4 to V9 to a new range above it. Rename the step files and their effect files, then regenerate the effect files with `build/sbt updateSchemaDumps…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T03:46:23Z",
-    "updated_at": "2026-11-20T01:07:12Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T02:21:43Z",
+    "updated_at": "2026-11-20T03:30:24Z",
+    "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:12Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
@@ -14793,7 +14793,7 @@
      "shba24"
     ],
     "last_push": "2026-11-20T02:19:10Z",
-    "updated_at": "2026-11-20T02:39:23Z",
+    "updated_at": "2026-11-20T03:30:21Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
