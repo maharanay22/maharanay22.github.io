@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T13:19:18Z",
+ "generated_at": "2026-11-20T15:22:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28907,
-   "forks": 6642,
+   "stars": 28909,
+   "forks": 6643,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22419894,
@@ -106,7 +106,7 @@
     "AI data"
    ],
    "stars": 7373,
-   "forks": 957,
+   "forks": 959,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4278768,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50579,
-   "forks": 20768,
+   "stars": 50580,
+   "forks": 20767,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710331967,
@@ -200,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9083,
-   "forks": 2226,
+   "forks": 2227,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24756379,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63609,
+   "stars": 63615,
    "forks": 13444,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1160,6 +1160,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T14:51:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#pullrequestreview-5994565959",
+      "maintainer": true,
+      "path": null,
+      "text": "no production code issues -- the core fix looks good. left a couple comments on test coverage and CHANGELOG wording, and +1'd the open threads.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T14:51:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4643860382",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
+      "text": "this shared change affects CrewAI and LlamaIndex too, could we add regression tests for both? for CrewAI we can call `to_structured_tool().invoke({\"b\": 1})` and assert it raises `ValueError` for missing `a` without calling `execute_function`, and for LlamaIndex check `tool.metadata.fn_schema.model_json_schema()[\"requi…",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-20T09:15:14Z",
@@ -1205,12 +1225,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T06:04:32Z",
-    "updated_at": "2026-11-20T09:15:14Z",
+    "updated_at": "2026-11-20T14:51:10Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 142
   },
@@ -1526,6 +1546,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T13:49:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2319#pullrequestreview-5993703455",
+      "maintainer": true,
+      "path": null,
+      "text": "overall LGTM, the fix and regression test look solid. left a few small nits for follow-up, nothing blocking.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T13:49:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2319#discussion_r4643215495",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+      "text": "nit: unrelated to fixing this bug, but `RepositoryUtils.attachProperties` uses reflection and only fails when property rows exist. in a follow-up, should we pass a typed `BiConsumer<T, Map<String, String>>` setter (like `CatalogInfo::setProperties`) so incompatible models fail at compile time?",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-20T09:13:33Z",
@@ -1543,7 +1583,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-20T05:49:41Z",
-    "updated_at": "2026-11-20T09:14:04Z",
+    "updated_at": "2026-11-20T13:49:29Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -1705,6 +1745,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T13:28:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2318#pullrequestreview-5993419454",
+      "maintainer": true,
+      "path": null,
+      "text": "no production code issues, overall LGTM. left one comment on negative test coverage for the managed create path and a nit on the PR description.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T13:28:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2318#discussion_r4642988478",
+      "maintainer": true,
+      "path": "connectors/spark/src/test/java/io/unitycatalog/spark/UCSingleCatalogStagingTableTest.java",
+      "text": "these tests only check name conflicts, so what happens if `createStagingTable` fails with an unrelated 400 like `INVALID_ARGUMENT`? without a negative test for both `stageCreate` and `createTable`, nothing catches if that `isTableAlreadyExists` guard gets dropped. could we add one like this? [code]",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-20T09:09:48Z",
@@ -1722,7 +1782,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-20T04:09:08Z",
-    "updated_at": "2026-11-20T09:10:57Z",
+    "updated_at": "2026-11-20T13:28:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -1980,11 +2040,99 @@
    "release": null,
    "files": [
     {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/utils/TransactionManager.java",
+     "lines": [
+      [
+       "h",
+       "@@ -53,6 +53,11 @@"
+      ],
+      [
+       "c",
+       "   * 4xx or a {@link TransactionRollbackException}, which the error handler does not log, it is"
+      ],
+      [
+       "c",
+       "   * logged as a warning with these failures."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "a",
+       "   * <p>A {@link BaseException} with a 4xx status means nothing was committed: it comes only from"
+      ],
+      [
+       "a",
+       "   * the operation or from a database error that {@link DatabaseErrors} maps, both raised before or"
+      ],
+      [
+       "a",
+       "   * during the commit, never after it. Callers rely on this to undo the side effects of a rejected"
+      ],
+      [
+       "a",
+       "   * write, so a failure whose commit outcome is unknown must not be mapped to a 4xx."
+      ],
+      [
+       "a",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @param sessionFactory the Hibernate session factory"
+      ],
+      [
+       "c",
+       "   * @param operation the database operation to execute"
+      ],
+      [
+       "c",
+       "   * @param errorMessage the error message to use if the operation fails"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 0
+    },
+    {
      "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
      "lines": [
       [
        "h",
-       "@@ -621,7 +621,7 @@"
+       "@@ -33,6 +33,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.exception.ErrorCode;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.exception.IcebergRestExceptionHandler;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CatalogInfo;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.model.ColumnInfo;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CreateSchema;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CreateStagingTable;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CreateTable;"
+      ],
+      [
+       "h",
+       "@@ -621,7 +622,7 @@"
       ],
       [
        "c",
@@ -2020,92 +2168,60 @@
       ],
       [
        "h",
-       "@@ -718,9 +718,7 @@"
+       "@@ -707,6 +708,7 @@"
       ],
       [
        "c",
-       "          IcebergSchemaConverter.toColumnInfos(updated.schema()),"
+       "            .discardChanges()"
       ],
       [
        "c",
-       "          updated.properties());"
+       "            .withMetadataLocation(MetadataService.toIcebergMetadataLocation(newMetadataLocation))"
       ],
       [
        "c",
-       "    } catch (RuntimeException e) {"
-      ],
-      [
-       "d",
-       "      // The metadata file was written before the swap, so any failure (a lost commit race or an"
-      ],
-      [
-       "d",
-       "      // unexpected error) leaves it orphaned unless we clean it up."
-      ],
-      [
-       "d",
-       "      metadataService.deleteTableMetadata(newMetadataLocation, tableLocation);"
+       "            .build();"
       ],
       [
        "a",
-       "      deleteMetadataIfRejected(e, newMetadataLocation, tableLocation);"
+       "    List<ColumnInfo> columns = IcebergSchemaConverter.toColumnInfos(updated.schema());"
       ],
       [
        "c",
-       "      throw e;"
+       "    metadataService.writeTableMetadata(updated, newMetadataLocation, tableLocation);"
       ],
       [
        "c",
-       "    }"
+       "    try {"
       ],
       [
        "c",
-       ""
+       "      tableRepository.commitIcebergTable("
       ],
       [
        "h",
-       "@@ -732,6 +730,31 @@"
+       "@@ -715,12 +717,10 @@"
       ],
       [
        "c",
-       "        .build();"
+       "          table,"
       ],
       [
        "c",
-       "  }"
+       "          metadataLocation.toString(),"
       ],
       [
        "c",
-       ""
+       "          newMetadataLocation,"
       ],
       [
-       "a",
-       "  /**"
-      ],
-      [
-       "a",
-       "   * Deletes the metadata file a failed commit wrote, but only when the failure means the commit did"
-      ],
-      [
-       "a",
-       "   * not happen: a 4xx {@link BaseException}, which the repository raises before or within the"
-      ],
-      [
-       "a",
-       "   * transaction it rolls back. Any other failure, such as a lost connection during the database"
-      ],
-      [
-       "a",
-       "   * commit or a session close failing after it, may have stored this file as the table's metadata"
-      ],
-      [
-       "a",
-       "   * location, so the file is kept: deleting it would leave the table unreadable. Such a failure"
+       "d",
+       "          IcebergSchemaConverter.toColumnInfos(updated.schema()),"
       ]
      ],
      "truncated": true,
-     "additions": 27,
-     "deletions": 4
+     "additions": 31,
+     "deletions": 5
     },
     {
      "path": "server/src/main/java/io/unitycatalog/server/service/iceberg/MetadataService.java",
@@ -2170,7 +2286,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The core split is right: one helper deletes the new metadata file only on a 4xx `BaseException`, and both the update and create paths use it. I ran the service tests at head (26 pass, checkstyle clean) and reverted the fix in a scratch clone, where the five unknown-outcome cases fail as the description s…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2180,7 +2296,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
       "text": "[AI Assisted] `IcebergSchemaConverter.toColumnInfos(updated.schema())` runs inside this try, after the metadata file is written. For a schema with a type UC does not map, such as an Iceberg `time` column, it throws Iceberg's `BadRequestException` before any database call. The commit definitely failed, but the exceptio…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2190,7 +2306,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
       "text": "[AI Assisted] Nit: \"reaches the client as a 5xx\" is broader than the code guarantees. A raw Iceberg `BadRequestException` reaches the client as a 400. Once finding 1 is fixed, \"typically a 5xx\" would be accurate.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2200,7 +2316,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
       "text": "[AI Assisted] Nit: this check is correct only while every 4xx `BaseException` from the repository means the transaction was rolled back. That rule is stated only here. A later mapping of a commit-time database error to a 4xx code would bring back the unreadable table. A sentence on `TransactionManager.executeWithTrans…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2210,20 +2326,20 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/service/IcebergRestCatalogServiceTest.java",
       "text": "[AI Assisted] Nit: this test only uses an `INTERNAL` failure, but the description says each path covers both `INTERNAL` and a raw exception. Parameterizing it over `unknownOutcomeFailures()` would match the description.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T02:02:04Z",
-    "updated_at": "2026-11-20T04:53:56Z",
+    "last_push": "2026-11-20T14:33:11Z",
+    "updated_at": "2026-11-20T15:03:36Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 137
   },
@@ -2405,7 +2521,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 13,
+     "additions": 15,
      "deletions": 6
     },
     {
@@ -2466,10 +2582,42 @@
       [
        "c",
        "        \"\"\""
+      ],
+      [
+       "h",
+       "@@ -146,6 +147,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    Returns:"
+      ],
+      [
+       "c",
+       "        A list of messages containing the assistant message and the function call results."
+      ],
+      [
+       "a",
+       "        The result of a function that failed is the JSON of its execution result, with the error."
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    client = validate_or_set_default_client(client)"
+      ],
+      [
+       "c",
+       "    if isinstance(conversation_history, dict):"
       ]
      ],
      "truncated": false,
-     "additions": 3,
+     "additions": 4,
      "deletions": 2
     },
     {
@@ -2477,71 +2625,39 @@
      "lines": [
       [
        "h",
-       "@@ -41,9 +41,14 @@"
+       "@@ -29,6 +29,7 @@"
       ],
       [
        "c",
-       "            result = client.execute_function("
+       ""
       ],
       [
        "c",
-       "                func_name, arguments, enable_retriever_tracing=mlflow_tracing_enabled(\"openai\")"
+       "    Returns:"
       ],
       [
        "c",
-       "            )"
+       "        A list of messages containing the assistant message and the function call results."
       ],
       [
        "a",
-       "            content = ("
-      ],
-      [
-       "a",
-       "                result.to_json()"
-      ],
-      [
-       "a",
-       "                if result.error is not None"
-      ],
-      [
-       "a",
-       "                else json.dumps({\"content\": result.value})"
-      ],
-      [
-       "a",
-       "            )"
+       "        The result of a function that failed is the JSON of its execution result, with the error."
       ],
       [
        "c",
-       "            function_call_result_message = {"
+       "    \"\"\""
       ],
       [
        "c",
-       "                \"role\": \"tool\","
-      ],
-      [
-       "d",
-       "                \"content\": json.dumps({\"content\": result.value}),"
-      ],
-      [
-       "a",
-       "                \"content\": content,"
+       "    client = validate_or_set_default_client(client)"
       ],
       [
        "c",
-       "                \"tool_call_id\": tool_call.id,"
-      ],
-      [
-       "c",
-       "            }"
-      ],
-      [
-       "c",
-       "            function_calls.append(function_call_result_message)"
+       "    message = response.choices[choice_index].message"
       ]
      ],
-     "truncated": false,
-     "additions": 6,
+     "truncated": true,
+     "additions": 9,
      "deletions": 1
     }
    ],
@@ -2555,7 +2671,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Verdict: the change is correct and I found no blocker. It matches the other six toolkits, which already send the JSON of the execution result, and the empty-message case is handled. What I ran: the three integrations' utils tests at head and against the merge base, plus mutants of the failure check and o…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2565,7 +2681,7 @@
       "maintainer": true,
       "path": "ai/integrations/openai/src/unitycatalog/ai/openai/utils.py",
       "text": "[AI Assisted] The sandbox and subprocess executors put the full Python traceback into `error`, so this tool message now carries the traceback with local file paths and the sandbox frames. The other six toolkits already send the same string, so this is consistent, but OpenAI, Anthropic and LiteLLM users were not sent a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2575,7 +2691,7 @@
       "maintainer": true,
       "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
       "text": "[AI Assisted] nit: the `result.error is not None` rule is repeated in three helpers and two doc snippets (the OpenAI README and docs). A property on `FunctionExecutionResult`, or a named `is_error` on `to_tool_result_message`, would keep it in one place. Optional, and it could go with #2315.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2585,7 +2701,7 @@
       "maintainer": true,
       "path": "ai/integrations/openai/src/unitycatalog/ai/openai/utils.py",
       "text": "[AI Assisted] nit: a one-line comment above this conditional on why success keeps `{\"content\": ...}` while failure sends the execution result JSON would help the next reader.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2595,20 +2711,20 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] nit: this sentence can be read as applying `is_error` to LiteLLM's tool message too. Only the Anthropic `tool_result` lacks `is_error`, so could we say that directly?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T01:38:46Z",
-    "updated_at": "2026-11-20T04:46:58Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T14:25:20Z",
+    "updated_at": "2026-11-20T14:27:52Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 135
   },
@@ -11373,7 +11489,7 @@
       ],
       [
        "c",
-       "  @Column(name = \"comment\")"
+       "  @Column(name = \"comment\", length = 65536)"
       ],
       [
        "c",
@@ -11409,23 +11525,7 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V10__widen_model_version_source.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_model_versions ALTER COLUMN source VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V5__widen_catalog_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/h2/V11__widen_catalog_storage_root.sql",
      "lines": [
       [
        "h",
@@ -11441,7 +11541,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V6__widen_catalog_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V12__widen_catalog_storage_location.sql",
      "lines": [
       [
        "h",
@@ -11457,7 +11557,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V7__widen_schema_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/h2/V13__widen_schema_storage_root.sql",
      "lines": [
       [
        "h",
@@ -11473,7 +11573,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V8__widen_schema_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V14__widen_schema_storage_location.sql",
      "lines": [
       [
        "h",
@@ -11489,7 +11589,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V9__widen_volume_storage_location.sql",
+     "path": "server/src/main/resources/db/migration/h2/V15__widen_volume_storage_location.sql",
      "lines": [
       [
        "h",
@@ -11505,7 +11605,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V10__widen_model_version_source.sql",
+     "path": "server/src/main/resources/db/migration/h2/V16__widen_model_version_source.sql",
      "lines": [
       [
        "h",
@@ -11513,7 +11613,7 @@
       ],
       [
        "a",
-       "ALTER TABLE uc_model_versions MODIFY COLUMN source varchar(2048) NULL;"
+       "ALTER TABLE uc_model_versions ALTER COLUMN source VARCHAR(2048);"
       ]
      ],
      "truncated": false,
@@ -11521,7 +11621,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/mysql/V5__widen_catalog_storage_root.sql",
+     "path": "server/src/main/resources/db/migration/mysql/V11__widen_catalog_storage_root.sql",
      "lines": [
       [
        "h",
@@ -11530,6 +11630,22 @@
       [
        "a",
        "ALTER TABLE uc_catalogs MODIFY COLUMN storage_root varchar(2048) NULL;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/mysql/V12__widen_catalog_storage_location.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_location varchar(2048) NULL;"
       ]
      ],
      "truncated": false,
@@ -11550,21 +11666,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T02:21:43Z",
-    "updated_at": "2026-11-20T04:54:49Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T15:05:53Z",
+    "updated_at": "2026-11-20T15:20:01Z",
+    "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:12Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
