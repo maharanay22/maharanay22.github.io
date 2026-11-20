@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T02:04:26Z",
+ "generated_at": "2026-11-20T03:18:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7371,
+   "stars": 7373,
    "forks": 956,
    "package": "pylance",
    "impact": null,
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50578,
-   "forks": 20765,
+   "forks": 20764,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710331967,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63564,
-   "forks": 13432,
+   "stars": 63569,
+   "forks": 13433,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -533,17 +533,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T02:02:04Z",
-    "updated_at": "2026-11-20T02:02:42Z",
+    "updated_at": "2026-11-20T02:13:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 137
   },
@@ -867,17 +867,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T01:38:46Z",
-    "updated_at": "2026-11-20T01:38:48Z",
+    "updated_at": "2026-11-20T02:13:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 135
   },
@@ -907,7 +907,7 @@
      "lines": [
       [
        "h",
-       "@@ -52,7 +52,7 @@"
+       "@@ -52,7 +52,8 @@"
       ],
       [
        "c",
@@ -927,6 +927,10 @@
       ],
       [
        "a",
+       "      // No backoff after the final attempt, even if a custom policy's allowRetry allows one."
+      ],
+      [
+       "a",
        "      if (shouldRetry && attempt < retryPolicy.maxAttempts() && retryPolicy.allowRetry(attempt)) {"
       ],
       [
@@ -943,15 +947,99 @@
       ]
      ],
      "truncated": false,
-     "additions": 1,
+     "additions": 2,
      "deletions": 1
+    },
+    {
+     "path": "clients/java/src/main/java/io/unitycatalog/client/retry/JitterDelayRetryPolicy.java",
+     "lines": [
+      [
+       "h",
+       "@@ -79,14 +79,14 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "d",
+       "   * Determines whether a retry should be attempted based on the current attempt number."
+      ],
+      [
+       "a",
+       "   * Determines whether another attempt may follow the given failed attempt."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "d",
+       "   * @param attempt the current attempt number (1-indexed)"
+      ],
+      [
+       "d",
+       "   * @return true if retry is allowed, false otherwise"
+      ],
+      [
+       "a",
+       "   * @param attempt the number of the attempt that just failed (1-indexed)"
+      ],
+      [
+       "a",
+       "   * @return true while fewer than {@link #maxAttempts()} attempts have been made"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  @Override"
+      ],
+      [
+       "c",
+       "  public boolean allowRetry(int attempt) {"
+      ],
+      [
+       "d",
+       "    return attempt <= maxAttempts;"
+      ],
+      [
+       "a",
+       "    return attempt < maxAttempts;"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 4
     },
     {
      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
      "lines": [
       [
        "h",
-       "@@ -9,11 +9,11 @@"
+       "@@ -9,11 +9,12 @@"
       ],
       [
        "c",
@@ -982,6 +1070,10 @@
        " *     doSomeAction();"
       ],
       [
+       "a",
+       " *     return;"
+      ],
+      [
        "c",
        " *   } catch (Exception e) {"
       ],
@@ -1007,7 +1099,7 @@
       ],
       [
        "h",
-       "@@ -24,38 +24,36 @@"
+       "@@ -24,38 +25,35 @@"
       ],
       [
        "c",
@@ -1064,25 +1156,62 @@
       [
        "a",
        "   * @return the maximum number of attempts, must be positive"
-      ],
-      [
-       "c",
-       "   */"
       ]
      ],
      "truncated": true,
-     "additions": 14,
-     "deletions": 16
+     "additions": 15,
+     "deletions": 17
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T02:11:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#pullrequestreview-5986496180",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Summary: the handler fix is correct. The attempt count, the retry decisions and the final error are unchanged. `testRetriesExhaustedOnRetryableStatusReturnsLastResponse`, `testRetriesExhaustedOnRecoverableExceptionStillThrows` and `testSingleAttemptPolicyDoesNotSleep` fail without the handler guard (chec…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T02:11:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4637655208",
+      "maintainer": true,
+      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
+      "text": "[AI Assisted] The example loop still does not exit after a successful call. Nothing returns or breaks after `doSomeAction()`, so the next iteration runs the action again until the attempts run out. Since users copy this example, could we add a `return` (or `break`) after the call?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T02:11:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4637655215",
+      "maintainer": true,
+      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
+      "text": "[AI Assisted] nit: The `@throws` on the line below still says it is thrown when attempt is greater than `maxAttempts()`, but this `@param` limits attempt to 1 to `maxAttempts() - 1`. Could we make the two agree, for example `not less than maxAttempts()`, or drop the `@throws`?",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T02:11:07Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4637655219",
+      "maintainer": true,
+      "path": "clients/java/src/main/java/io/unitycatalog/client/internal/HttpRetryHandler.java",
+      "text": "[AI Assisted] nit: Can we add a short comment saying why `attempt < retryPolicy.maxAttempts()` is checked here? `allowRetry` looks like it already covers the last attempt, and a later cleanup could drop this check and bring the final sleep back. For example: `// No backoff after the final attempt; the loop is about to…",
+      "answered": true
+     }
+    ],
     "stage": 3,
     "checks": "running",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T01:11:45Z",
-    "updated_at": "2026-11-20T01:25:09Z",
+    "last_push": "2026-11-20T02:44:23Z",
+    "updated_at": "2026-11-20T02:52:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1254,7 +1383,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 292356c0. The earlier items are addressed: the missing-name fix is verified by repro for a `type_json` without a name and for one with a different name, the range behavior is documented in the CHANGELOG, and the type list and restore tests are in. One normal item remains, inline on the CHANG…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1264,7 +1393,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording only, not a regression: the sentence holds for top-level integer parameters, but not for values nested inside a `STRUCT`, `ARRAY` or `MAP`. A `STRUCT` value passes the client's type check as long as it is a dict, and nested fields are not checked. So a `6.5` in an `INT` field of a struct…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1307,17 +1436,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T00:36:39Z",
-    "updated_at": "2026-11-20T01:24:19Z",
+    "last_push": "2026-11-20T02:34:18Z",
+    "updated_at": "2026-11-20T02:36:06Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 133
   },
@@ -14112,7 +14241,7 @@
      "lines": [
       [
        "h",
-       "@@ -54,7 +54,7 @@"
+       "@@ -56,7 +56,7 @@"
       ],
       [
        "c",
@@ -14252,7 +14381,7 @@
      "lines": [
       [
        "h",
-       "@@ -27,7 +27,7 @@"
+       "@@ -29,7 +29,7 @@"
       ],
       [
        "c",
@@ -14296,7 +14425,7 @@
      "lines": [
       [
        "h",
-       "@@ -28,7 +28,7 @@"
+       "@@ -30,7 +30,7 @@"
       ],
       [
        "c",
@@ -14336,7 +14465,23 @@
      "deletions": 1
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V4__widen_function_param_type_text.sql",
+     "path": "server/src/main/resources/db/migration/h2/V10__widen_volume_comment.sql",
+     "lines": [
+      [
+       "h",
+       "@@ -0,0 +1 @@"
+      ],
+      [
+       "a",
+       "ALTER TABLE uc_volumes ALTER COLUMN \"COMMENT\" VARCHAR(65536);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/resources/db/migration/h2/V5__widen_function_param_type_text.sql",
      "lines": [
       [
        "h",
@@ -14352,7 +14497,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V5__widen_function_full_data_type.sql",
+     "path": "server/src/main/resources/db/migration/h2/V6__widen_function_full_data_type.sql",
      "lines": [
       [
        "h",
@@ -14368,7 +14513,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V6__widen_function_param_comment.sql",
+     "path": "server/src/main/resources/db/migration/h2/V7__widen_function_param_comment.sql",
      "lines": [
       [
        "h",
@@ -14384,7 +14529,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V7__widen_function_param_default.sql",
+     "path": "server/src/main/resources/db/migration/h2/V8__widen_function_param_default.sql",
      "lines": [
       [
        "h",
@@ -14400,23 +14545,7 @@
      "deletions": 0
     },
     {
-     "path": "server/src/main/resources/db/migration/h2/V8__widen_schema_comment.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN \"COMMENT\" VARCHAR(65536);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V9__widen_volume_comment.sql",
+     "path": "server/src/main/resources/db/migration/h2/V9__widen_schema_comment.sql",
      "lines": [
       [
        "h",
@@ -14438,7 +14567,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] This PR needs a rebase onto main. Main's latest step is now V4 (`V4__credentials_credential_as_text.sql`, from #2169), so the six steps here need to move from V4 to V9 to V5 to V10 on all three databases. Rename the step files and their effect files, then regenerate the effect files with `build/sbt updat…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -14486,28 +14615,28 @@
       "at": "2026-11-17T17:08:46Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072198",
       "maintainer": true,
-      "path": "server/src/main/resources/db/migration/h2/V4__widen_function_param_type_text.sql",
+      "path": "server/src/main/resources/db/migration/h2/V5__widen_function_param_type_text.sql",
       "text": "**Nit (not a blocker):** Two merge commits on the branch have no Signed-off-by trailer The contribution workflow asks for a DCO sign-off on every commit. Two merge commits on this branch, including 4fdcb25a2917332ae8ec423982fcb12925693f3b, carry no Signed-off-by trailer. CODE_REVIEW.md says a missing sign-off is not a…",
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "shba24"
     ],
-    "last_push": "2026-11-19T05:06:53Z",
-    "updated_at": "2026-11-20T01:07:08Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T02:19:10Z",
+    "updated_at": "2026-11-20T02:39:23Z",
+    "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:08Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by shba24. Waiting to be merged"
    },
    "id": 79
   },
@@ -17827,6 +17956,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "Shahzeb-DataEngineer",
+      "at": "2026-11-20T02:07:59Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4975#pullrequestreview-5986472769",
+      "maintainer": false,
+      "path": null,
+      "text": "Read the full diff and issue #4974. The fix is right: a remove for an existing file now carries the exact path from the log through `log_path`, and the manual `Serialize` impl writes it verbatim, falling back to `encode_path` when it is not set. That closes the mismatch where Spark logs `city=Zürich/...` raw and delta…",
+      "answered": true
+     },
+     {
       "kind": "comment",
       "who": "ion-elgreco",
       "at": "2026-10-28T19:09:06Z",
@@ -17839,10 +17978,12 @@
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "community approved",
+    "approved_by": [
+     "Shahzeb-DataEngineer"
+    ],
     "last_push": "2026-11-08T15:56:54Z",
-    "updated_at": "2026-11-11T20:20:03Z",
+    "updated_at": "2026-11-20T02:59:01Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
@@ -17851,7 +17992,7 @@
     },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
    },
    "id": 63
   },
@@ -21553,6 +21694,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "Shahzeb-DataEngineer",
+      "at": "2026-11-20T02:08:48Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4893#pullrequestreview-5986479320",
+      "maintainer": false,
+      "path": null,
+      "text": "Read the full diff and issue #4892. The fix is right: a literal is only narrowed to the column type when the cast round-trips exactly (`cast_literal_exactly`), otherwise the column is widened to the common comparison type. That stops `qty < 8.5` running as `qty < 8` and `price = 1.235` running as `price = 1.24`. I che…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "ethan-tyler",
       "at": "2026-10-24T18:10:00Z",
@@ -21565,15 +21716,17 @@
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "community approved",
+    "approved_by": [
+     "Shahzeb-DataEngineer"
+    ],
     "last_push": "2026-11-04T23:12:19Z",
-    "updated_at": "2026-11-11T20:19:34Z",
+    "updated_at": "2026-11-20T02:57:47Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
    },
    "id": 46
   },
