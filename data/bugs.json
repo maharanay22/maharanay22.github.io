@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T17:48:29Z",
+ "generated_at": "2026-11-20T18:40:40Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63615,
+   "stars": 63617,
    "forks": 13446,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,43 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Test create on a taken name against the server and keep unrelated staging errors",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T18:38:46Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2325,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2325"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T18:38:07Z",
+    "updated_at": "2026-11-20T18:38:47Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 146
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -859,7 +896,7 @@
       "maintainer": true,
       "path": null,
       "text": "production code looks good. i left a couple comments on test coverage and docs, plus one small nit on validation.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -869,20 +906,20 @@
       "maintainer": true,
       "path": "docs/integrations/unity-catalog-spark.md",
       "text": "does this apply to vended paths too, not just tables? also could we name `spark.sql.catalog.<name>.renewCredential.enabled=false` so readers know which setting disables renewal?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T06:23:40Z",
-    "updated_at": "2026-11-20T15:50:38Z",
+    "last_push": "2026-11-20T18:36:53Z",
+    "updated_at": "2026-11-20T18:37:42Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 144
   },
@@ -1099,7 +1136,7 @@
      "lines": [
       [
        "h",
-       "@@ -281,9 +281,11 @@"
+       "@@ -284,9 +284,11 @@"
       ],
       [
        "c",
@@ -1209,7 +1246,7 @@
       "maintainer": true,
       "path": null,
       "text": "no production code issues -- the core fix looks good. left a couple comments on test coverage and CHANGELOG wording, and +1'd the open threads.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1219,7 +1256,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
       "text": "this shared change affects CrewAI and LlamaIndex too, could we add regression tests for both? for CrewAI we can call `to_structured_tool().invoke({\"b\": 1})` and assert it raises `ValueError` for missing `a` without calling `execute_function`, and for LlamaIndex check `tool.metadata.fn_schema.model_json_schema()[\"requi…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1229,7 +1266,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Nit: the entry opens with \"Fixed tool schemas marking every function parameter as optional\". OpenAI, LiteLLM, DSPy and Gemini did not do that, so the claim is broader than the fix. Could it name the integrations, for example: \"Fixed Anthropic, LangChain, LlamaIndex, CrewAI and AutoGen tool schemas markin…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1239,7 +1276,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording: \"LangChain, CrewAI and AutoGen tools now reject a call that leaves out such an argument ... instead of sending `None` for it to the function.\" Before this change the client already rejected the `None`, both the OSS and the Databricks client reject `None` for any parameter without `DEFAUL…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1249,7 +1286,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording: \"The OpenAI, LiteLLM, DSPy and Gemini schemas are unchanged, because they already listed these parameters as required.\" OpenAI and Gemini check out. DSPy does not build a required list at all, so its schema is unchanged for a different reason: it does not read the model's required list.…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1259,20 +1296,20 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 227f2edc. The code change is correct, and I checked it by repro: a parameter without a default is now required and has no `default` key, parameters with `DEFAULT` or `DEFAULT NULL` stay optional, and nested `STRUCT` fields are unchanged. The OpenAI tool JSON is byte-identical before and afte…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T06:04:32Z",
-    "updated_at": "2026-11-20T14:51:10Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T18:19:10Z",
+    "updated_at": "2026-11-20T18:35:42Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 142
   },
@@ -1859,7 +1896,7 @@
      "lines": [
       [
        "h",
-       "@@ -11,6 +11,7 @@"
+       "@@ -11,6 +11,8 @@"
       ],
       [
        "c",
@@ -1878,6 +1915,10 @@
        "import java.util.Objects;"
       ],
       [
+       "a",
+       "import java.util.regex.Pattern;"
+      ],
+      [
        "c",
        "import org.apache.commons.cli.CommandLine;"
       ],
@@ -1891,7 +1932,7 @@
       ],
       [
        "h",
-       "@@ -20,6 +21,8 @@"
+       "@@ -20,6 +22,11 @@"
       ],
       [
        "c",
@@ -1914,6 +1955,18 @@
        "  private static final String CONTROL_BASE_PATH = \"/api/1.0/unity-control\";"
       ],
       [
+       "a",
+       "  private static final Pattern SERVER_PATH_SUFFIX ="
+      ],
+      [
+       "a",
+       "      Pattern.compile("
+      ],
+      [
+       "a",
+       "          \"/*(\" + Pattern.quote(UC_BASE_PATH) + \"|\" + Pattern.quote(CONTROL_BASE_PATH) + \")?/*$\");"
+      ],
+      [
        "c",
        ""
       ],
@@ -1927,7 +1980,7 @@
       ],
       [
        "h",
-       "@@ -125,7 +128,7 @@"
+       "@@ -125,7 +132,8 @@"
       ],
       [
        "c",
@@ -1947,7 +2000,11 @@
       ],
       [
        "a",
-       "          apiClient.updateBaseUri(getControlClient(cmd).getBaseUri());"
+       "          // The auth endpoints are part of the control API, not the UC API."
+      ],
+      [
+       "a",
+       "          apiClient.updateBaseUri(getBaseUri(cmd, CONTROL_BASE_PATH));"
       ],
       [
        "c",
@@ -1956,31 +2013,11 @@
       [
        "c",
        "          break;"
-      ],
-      [
-       "c",
-       "        case CliUtils.CATALOG:"
-      ],
-      [
-       "h",
-       "@@ -259,6 +262,7 @@"
-      ],
-      [
-       "c",
-       "      apiClient.setPort(uri.getPort());"
-      ],
-      [
-       "c",
-       "    }"
-      ],
-      [
-       "c",
-       "    apiClient.setScheme(uri.getScheme());"
       ]
      ],
      "truncated": true,
-     "additions": 17,
-     "deletions": 1
+     "additions": 52,
+     "deletions": 31
     }
    ],
    "track": {
@@ -1993,7 +2030,7 @@
       "maintainer": true,
       "path": null,
       "text": "overall looks good. left one small doc comment and +1'd Yi's comments -- mainly the API suffix compatibility question on T1.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2003,7 +2040,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for this. The path handling works for every case the new tests cover, and checkstyle is clean. Changes needed: the suffix case in the inline comment on `UnityCatalogCli.java` (line 265). A `--server` value ending in `/api/2.1/unity-catalog` works on main and breaks with this PR. Not in this diff,…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2013,7 +2050,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
       "text": "[AI Assisted] `getServerPath` keeps `/api/2.1/unity-catalog` when a user passes it, so `--server http://host:8080/api/2.1/unity-catalog` worked on main (the path was ignored) and now sends requests to `/api/2.1/unity-catalog/api/2.1/unity-catalog/...`. This form appears in this repo's REST docs as `BASE_URL`, so it is…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2023,7 +2060,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
       "text": "[AI Assisted] Nit: building a full control client only to read its URI needs a short comment saying why the UC client is pointed at the control URI. A follow-up could pass the control `ApiClient` into `AuthCli.handle`, as `UserCli` does.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2033,7 +2070,7 @@
       "maintainer": true,
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
       "text": "[AI Assisted] Followup: `getApiClient` and `getControlClient` repeat the host, port and scheme rules, which is how this bug appeared. A shared helper that resolves the base URI for a base path would keep them in sync.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2043,20 +2080,20 @@
       "maintainer": true,
       "path": "examples/cli/src/test/java/io/unitycatalog/cli/UnityCatalogCliTest.java",
       "text": "[AI Assisted] Nit: `auth login` does not assert that the exchanged `access_token` is returned, and no case checks the `Authorization` header on the prefixed clients. Asserting the token in this test would cover the first.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T03:21:38Z",
-    "updated_at": "2026-11-20T12:38:01Z",
+    "last_push": "2026-11-20T18:05:24Z",
+    "updated_at": "2026-11-20T18:12:51Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 138
   },
@@ -8508,16 +8545,6 @@
    "track": {
     "feedback": [
      {
-      "kind": "review commented",
-      "who": "timothyw553",
-      "at": "2026-11-20T10:24:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5991135588",
-      "maintainer": true,
-      "path": null,
-      "text": "left a few comments, mainly on closing `_replaced_rest_client` on the right event loop and tightening the shutdown cancellation test, plus a couple of +1s on open threads.",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "timothyw553",
       "at": "2026-11-20T10:24:12Z",
@@ -8535,16 +8562,6 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "doesn't `thread.join(timeout=30)` return silently if shutdown hangs, and `assert_session_closed()` only checks that new requests fail? could we check that the close thread and owned request thread actually stopped, and call `release.set()` in `finally`? [code]",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5971469058",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] I'd simplify the client lifecycle to one owner and one lock. `_SingleLoopRESTClient` should hold the close state, `shutdown` should hold the lock through teardown, and a pid check can replace the fork hooks. I'd keep the custom `rest_client` class rather than replacing it with the plain one. Details are…",
       "answered": true
      },
      {
@@ -8566,6 +8583,26 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Could we drop `_inherited_before_fork`? It only keeps objects alive for the reset hook, which would go away with the pid check.",
       "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006491",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Suggest replacing the `os.register_at_fork` registration with the owning process, saved in `__init__`: [code] Check it in `request` before taking the lock, and make `shutdown` a no-op in a child: [code]",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-19T08:17:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006502",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Could we build the owned client with the same class as the replaced one, `type(self._replaced_rest_client)(self._configuration)`, on the owned loop? That keeps a subclass's `request` override in use, as main does; this PR currently calls it zero times. Instance attributes on the original object would not…",
+      "answered": true
      }
     ],
     "stage": 3,
@@ -8573,7 +8610,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T17:40:56Z",
-    "updated_at": "2026-11-20T17:46:41Z",
+    "updated_at": "2026-11-20T17:53:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -19865,7 +19902,7 @@
      "Shahzeb-DataEngineer"
     ],
     "last_push": "2026-11-08T15:56:54Z",
-    "updated_at": "2026-11-20T16:08:45Z",
+    "updated_at": "2026-11-20T18:19:16Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
