@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T07:29:51Z",
+ "generated_at": "2026-11-20T11:55:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3371,
+   "stars": 3372,
    "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28904,
+   "stars": 28906,
    "forks": 6640,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -106,7 +106,7 @@
     "AI data"
    ],
    "stars": 7373,
-   "forks": 956,
+   "forks": 957,
    "package": "pylance",
    "impact": null,
    "downloads_month": 4278768,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50577,
-   "forks": 20765,
+   "stars": 50579,
+   "forks": 20768,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710331967,
@@ -200,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9083,
-   "forks": 2225,
+   "forks": 2226,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24756379,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63587,
-   "forks": 13439,
+   "stars": 63602,
+   "forks": 13442,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -311,7 +311,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1501,
+   "stars": 1502,
    "forks": 264,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -542,16 +542,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T07:27:17Z",
-    "updated_at": "2026-11-20T07:28:07Z",
-    "conflicts": false,
+    "updated_at": "2026-11-20T09:15:36Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 145
   },
@@ -856,7 +856,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:23:40Z",
-    "updated_at": "2026-11-20T06:24:57Z",
+    "updated_at": "2026-11-20T09:15:35Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1022,12 +1022,12 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:23:37Z",
-    "updated_at": "2026-11-20T06:23:43Z",
-    "conflicts": false,
+    "updated_at": "2026-11-20T09:15:34Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 143
   },
@@ -1158,29 +1158,70 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T09:15:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594782",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Nit: the entry opens with \"Fixed tool schemas marking every function parameter as optional\". OpenAI, LiteLLM, DSPy and Gemini did not do that, so the claim is broader than the fix. Could it name the integrations, for example: \"Fixed Anthropic, LangChain, LlamaIndex, CrewAI and AutoGen tool schemas markin…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T09:15:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594793",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal, wording: \"LangChain, CrewAI and AutoGen tools now reject a call that leaves out such an argument ... instead of sending `None` for it to the function.\" Before this change the client already rejected the `None`, both the OSS and the Databricks client reject `None` for any parameter without `DEFAUL…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T09:15:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594803",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal, wording: \"The OpenAI, LiteLLM, DSPy and Gemini schemas are unchanged, because they already listed these parameters as required.\" OpenAI and Gemini check out. DSPy does not build a required list at all, so its schema is unchanged for a different reason: it does not read the model's required list.…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T09:15:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#pullrequestreview-5990210621",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 227f2edc. The code change is correct, and I checked it by repro: a parameter without a default is now required and has no `default` key, parameters with `DEFAULT` or `DEFAULT NULL` stay optional, and nested `STRUCT` fields are unchanged. The OpenAI tool JSON is byte-identical before and afte…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T06:04:32Z",
-    "updated_at": "2026-11-20T06:20:54Z",
-    "conflicts": false,
+    "updated_at": "2026-11-20T09:15:14Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 142
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Leave inaccessible functions out of wildcard toolkits",
    "date": "2026-11-20",
    "created_at": "2026-11-20T06:03:17Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 2320,
@@ -1344,29 +1385,42 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T09:14:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2320#pullrequestreview-5990194751",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The wildcard branch now skips a `None` tool the same way the single-name branch does, and LiteLLM forwards the flag. I checked all nine toolkits against main and head, and the new tests fail with the fix reverted. Non-blocking follow-up: the OSS `UnitycatalogFunctionClient` raises `ForbiddenExce…",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T06:03:26Z",
-    "updated_at": "2026-11-20T06:20:54Z",
+    "updated_at": "2026-11-20T09:14:48Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 141
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Fix function ownership transfer for functions with properties",
    "date": "2026-11-20",
    "created_at": "2026-11-20T05:49:55Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 2319,
@@ -1470,29 +1524,42 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T09:13:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2319#pullrequestreview-5990184808",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 99d16b59. - The fix is in `FunctionRepository.updateFunction`. It uses the same `setProperties` helper that `getFunction` and `listFunctions` already use, so the update response matches a later get. - Verified: with the fix, `OwnershipRepositoryTest`, `SdkFunctionCRUDTest`, and `SdkFunctionA…",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T05:49:41Z",
-    "updated_at": "2026-11-20T06:20:52Z",
+    "updated_at": "2026-11-20T09:14:04Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 140
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Make CREATE TABLE IF NOT EXISTS a no-op when UC reports the name is taken",
    "date": "2026-11-20",
    "created_at": "2026-11-20T04:09:28Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 2318,
@@ -1636,18 +1703,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T09:09:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2318#pullrequestreview-5990129845",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The mapping matches what the server sends: 400 with `error_code` `TABLE_ALREADY_EXISTS` on the native `/tables` and `/staging-tables` paths, and 409 on the Delta-dialect path. I confirmed those responses against a real server built from this head. Non-blocking: - Suggestion: add a real-server ca…",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T04:09:08Z",
-    "updated_at": "2026-11-20T04:54:57Z",
+    "updated_at": "2026-11-20T09:10:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 139
   },
@@ -2514,7 +2594,7 @@
     "approved_by": [],
     "last_push": "2026-11-20T01:38:46Z",
     "updated_at": "2026-11-20T04:46:58Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
@@ -3103,7 +3183,7 @@
     "approved_by": [],
     "last_push": "2026-11-20T02:34:18Z",
     "updated_at": "2026-11-20T06:19:56Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
@@ -4121,11 +4201,11 @@
   {
    "kind": "fix",
    "repo": "lance-format/lance",
-   "status": "review",
+   "status": "merged",
    "title": "Reject lossy alter_columns casts",
    "date": "2026-11-19",
    "created_at": "2026-11-19T06:11:35Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 11257,
@@ -4406,17 +4486,19 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
+    "stage": 5,
+    "checks": "passing",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
     "last_push": "2026-11-20T06:05:33Z",
-    "updated_at": "2026-11-20T06:43:35Z",
+    "updated_at": "2026-11-20T09:09:10Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 128
   },
@@ -8299,6 +8381,36 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T10:24:12Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5991135588",
+      "maintainer": true,
+      "path": null,
+      "text": "left a few comments, mainly on closing `_replaced_rest_client` on the right event loop and tightening the shutdown cancellation test, plus a couple of +1s on open threads.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T10:24:12Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4641284139",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "what happens if `api_client` was already used on another loop before being wrapped here? `_close()` awaits `self._replaced_rest_client.close()` on the new background loop, so closing a pooled HTTP connection raises a different-loop error (and leaves the socket open in debug mode) while later close calls don't retry it…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T10:24:12Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4641284151",
+      "maintainer": true,
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "doesn't `thread.join(timeout=30)` return silently if shutdown hangs, and `assert_session_closed()` only checks that new requests fail? could we check that the close thread and owned request thread actually stopped, and call `release.set()` in `finally`? [code]",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-19T08:17:18Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-5971469058",
@@ -8326,36 +8438,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Could we drop `_inherited_before_fork`? It only keeps objects alive for the reset hook, which would go away with the pid check.",
       "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006491",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Suggest replacing the `os.register_at_fork` registration with the owning process, saved in `__init__`: [code] Check it in `request` before taking the lock, and make `shutdown` a no-op in a child: [code]",
-      "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006502",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Could we build the owned client with the same class as the replaced one, `type(self._replaced_rest_client)(self._configuration)`, on the owned loop? That keeps a subclass's `request` override in use, as main does; this PR currently calls it zero times. Instance attributes on the original object would not…",
-      "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006511",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Could we drop `_shut_down` and hold `_lock` through the whole shutdown instead? A second caller would then block on the lock and return once teardown is done.",
-      "answered": false
      }
     ],
     "stage": 4,
@@ -8363,12 +8445,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-19T03:54:17Z",
-    "updated_at": "2026-11-19T08:48:31Z",
+    "updated_at": "2026-11-20T10:24:12Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 110
   },
@@ -11464,15 +11546,15 @@
     "approved_by": [],
     "last_push": "2026-11-20T02:21:43Z",
     "updated_at": "2026-11-20T04:54:49Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:12Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 96
   },
@@ -15879,11 +15961,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Widen function parameter and return type columns",
    "date": "2026-11-11",
    "created_at": "2026-11-11T21:05:41Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 2187,
@@ -16221,6 +16303,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T08:18:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#pullrequestreview-5989502328",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at f48a8f75. The steps are V5 to V10 on all three databases, above main's V4, with the effect files. The remaining nits and the docs note are left as followups.",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "shba24",
       "at": "2026-11-20T04:37:04Z",
@@ -16228,7 +16320,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
       "text": "**Nit (not a blocker):** New comment columns use length 65536 while existing widened columns use 65535 The comment columns widened here (schema comment, volume comment, function parameter comment and parameter default) use length = 65536. The earlier widened columns in TableInfoDAO, FunctionInfoDAO, ColumnInfoDAO, Reg…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -16269,35 +16361,26 @@
       "path": "server/src/main/resources/db/migration/mysql/V8__widen_volume_comment.sql",
       "text": "**Blocker:** MySQL TEXT limit is in bytes, so multi-byte volume comments may still be rejected The MySQL step uses TEXT, which holds 65535 bytes, while the API limit is counted in characters. On a utf8mb4 database a long comment of multi-byte characters can exceed the byte limit and fail even though the API allows it,…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-17T17:08:47Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072413",
-      "maintainer": true,
-      "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
-      "text": "**Blocker:** Volume comment column is 65535 while the API allows 65536 api/all.yaml declares the volume comment with maxLength 65536, but this step and VolumeInfoDAO use 65535. A comment of exactly 65,536 ASCII characters is accepted by the API and would likely be rejected by the column. This could not be settled: the…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "shba24"
+     "shba24",
+     "yili-db"
     ],
     "last_push": "2026-11-20T02:19:10Z",
-    "updated_at": "2026-11-20T04:54:47Z",
+    "updated_at": "2026-11-20T08:20:43Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:08Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 79
   },
