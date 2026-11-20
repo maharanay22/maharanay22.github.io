@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T04:11:21Z",
+ "generated_at": "2026-11-20T05:51:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3582,
+   "stars": 3581,
    "forks": 706,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3370,
+   "stars": 3371,
    "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,7 +77,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28902,
+   "stars": 28903,
    "forks": 6639,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63574,
-   "forks": 13434,
+   "stars": 63580,
+   "forks": 13437,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,132 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Fix function ownership transfer for functions with properties",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T05:49:55Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2319,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2319"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/FunctionRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -19,7 +19,6 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.PropertyDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.dao.SchemaInfoDAO;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
+      ],
+      [
+       "d",
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.TransactionManager;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.IdentityUtils;"
+      ],
+      [
+       "h",
+       "@@ -257,8 +256,9 @@"
+      ],
+      [
+       "c",
+       "          dao.setUpdatedBy(IdentityUtils.findPrincipalEmailAddress());"
+      ],
+      [
+       "c",
+       "          FunctionInfo result = dao.toFunctionInfo();"
+      ],
+      [
+       "c",
+       "          addNamespaceInfo(result, parts[0], parts[1]);"
+      ],
+      [
+       "d",
+       "          return RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "              result, result.getFunctionId(), Constants.FUNCTION, session);"
+      ],
+      [
+       "a",
+       "          setProperties("
+      ],
+      [
+       "a",
+       "              result, PropertyRepository.findProperties(session, dao.getId(), Constants.FUNCTION));"
+      ],
+      [
+       "a",
+       "          return result;"
+      ],
+      [
+       "c",
+       "        },"
+      ],
+      [
+       "c",
+       "        \"Failed to update function\","
+      ],
+      [
+       "c",
+       "        /* readOnly= */ false);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T05:49:41Z",
+    "updated_at": "2026-11-20T05:49:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 140
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -481,17 +607,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T04:09:08Z",
-    "updated_at": "2026-11-20T04:09:29Z",
+    "updated_at": "2026-11-20T04:54:57Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 139
   },
@@ -646,18 +772,69 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 3,
-    "checks": "running",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T05:44:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-5988089699",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for this. The path handling works for every case the new tests cover, and checkstyle is clean. Changes needed: the suffix case in the inline comment on `UnityCatalogCli.java` (line 265). A `--server` value ending in `/api/2.1/unity-catalog` works on main and breaks with this PR. Not in this diff,…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:44:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939155",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
+      "text": "[AI Assisted] `getServerPath` keeps `/api/2.1/unity-catalog` when a user passes it, so `--server http://host:8080/api/2.1/unity-catalog` worked on main (the path was ignored) and now sends requests to `/api/2.1/unity-catalog/api/2.1/unity-catalog/...`. This form appears in this repo's REST docs as `BASE_URL`, so it is…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:44:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939163",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
+      "text": "[AI Assisted] Nit: building a full control client only to read its URI needs a short comment saying why the UC client is pointed at the control URI. A follow-up could pass the control `ApiClient` into `AuthCli.handle`, as `UserCli` does.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:44:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939165",
+      "maintainer": true,
+      "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
+      "text": "[AI Assisted] Followup: `getApiClient` and `getControlClient` repeat the host, port and scheme rules, which is how this bug appeared. A shared helper that resolves the base URI for a base path would keep them in sync.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:44:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939171",
+      "maintainer": true,
+      "path": "examples/cli/src/test/java/io/unitycatalog/cli/UnityCatalogCliTest.java",
+      "text": "[AI Assisted] Nit: `auth login` does not assert that the exchanged `access_token` is returned, and no case checks the `Authorization` header on the prefixed clients. Asserting the token in this test would cover the first.",
+      "answered": false
+     }
+    ],
+    "stage": 4,
+    "checks": "passing",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T03:21:38Z",
-    "updated_at": "2026-11-20T03:21:52Z",
+    "updated_at": "2026-11-20T05:44:14Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 138
   },
@@ -864,18 +1041,69 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T04:53:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2316#pullrequestreview-5987687700",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The core split is right: one helper deletes the new metadata file only on a 4xx `BaseException`, and both the update and create paths use it. I ran the service tests at head (26 pass, checkstyle clean) and reverted the fix in a scratch clone, where the five unknown-outcome cases fail as the description s…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:53:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2316#discussion_r4638622402",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+      "text": "[AI Assisted] `IcebergSchemaConverter.toColumnInfos(updated.schema())` runs inside this try, after the metadata file is written. For a schema with a type UC does not map, such as an Iceberg `time` column, it throws Iceberg's `BadRequestException` before any database call. The commit definitely failed, but the exceptio…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:53:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2316#discussion_r4638622408",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+      "text": "[AI Assisted] Nit: \"reaches the client as a 5xx\" is broader than the code guarantees. A raw Iceberg `BadRequestException` reaches the client as a 400. Once finding 1 is fixed, \"typically a 5xx\" would be accurate.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:53:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2316#discussion_r4638622413",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+      "text": "[AI Assisted] Nit: this check is correct only while every 4xx `BaseException` from the repository means the transaction was rolled back. That rule is stated only here. A later mapping of a commit-time database error to a 4xx code would bring back the unreadable table. A sentence on `TransactionManager.executeWithTrans…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:53:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2316#discussion_r4638622417",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/service/IcebergRestCatalogServiceTest.java",
+      "text": "[AI Assisted] Nit: this test only uses an `INTERNAL` failure, but the description says each path covers both `INTERNAL` and a raw exception. Parameterizing it over `unknownOutcomeFailures()` would match the description.",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:02:04Z",
-    "updated_at": "2026-11-20T02:13:08Z",
+    "updated_at": "2026-11-20T04:53:56Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 137
   },
@@ -1198,18 +1426,69 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T04:46:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#pullrequestreview-5987628549",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Verdict: the change is correct and I found no blocker. It matches the other six toolkits, which already send the JSON of the execution result, and the empty-message case is handled. What I ran: the three integrations' utils tests at head and against the merge base, plus mutants of the failure check and o…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:46:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#discussion_r4638581587",
+      "maintainer": true,
+      "path": "ai/integrations/openai/src/unitycatalog/ai/openai/utils.py",
+      "text": "[AI Assisted] The sandbox and subprocess executors put the full Python traceback into `error`, so this tool message now carries the traceback with local file paths and the sandbox frames. The other six toolkits already send the same string, so this is consistent, but OpenAI, Anthropic and LiteLLM users were not sent a…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:46:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#discussion_r4638581590",
+      "maintainer": true,
+      "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/utils.py",
+      "text": "[AI Assisted] nit: the `result.error is not None` rule is repeated in three helpers and two doc snippets (the OpenAI README and docs). A property on `FunctionExecutionResult`, or a named `is_error` on `to_tool_result_message`, would keep it in one place. Optional, and it could go with #2315.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:46:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#discussion_r4638581594",
+      "maintainer": true,
+      "path": "ai/integrations/openai/src/unitycatalog/ai/openai/utils.py",
+      "text": "[AI Assisted] nit: a one-line comment above this conditional on why success keeps `{\"content\": ...}` while failure sends the execution result JSON would help the next reader.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T04:46:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#discussion_r4638581598",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] nit: this sentence can be read as applying `is_error` to LiteLLM's tool message too. Only the Anthropic `tool_result` lacks `is_error`, so could we say that directly?",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T01:38:46Z",
-    "updated_at": "2026-11-20T02:13:04Z",
+    "updated_at": "2026-11-20T04:46:58Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 135
   },
@@ -1500,6 +1779,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-20T05:39:38Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#pullrequestreview-5988056096",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Summary: the handler guard fixes the extra sleep, and the exhausted and single-attempt tests check it. The `allowRetry` change on `JitterDelayRetryPolicy` is the one I would like to back out. - Blocker (inline on `JitterDelayRetryPolicy.java`): we suggested this change in the previous review. It turns ou…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:39:38Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4638911781",
+      "maintainer": true,
+      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/JitterDelayRetryPolicy.java",
+      "text": "[AI Assisted] Blocker: we suggested this change in the previous review, and I was wrong to. It changes released behavior. The `RetryPolicy` example in v0.5.1 through v0.7.0 is `for(int attempt = 1; policy.allowRetry(attempt); attempt +=1)`, so with `attempt < maxAttempts` that loop makes one fewer attempt (none with `…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T05:39:38Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4638911789",
+      "maintainer": true,
+      "path": "clients/java/src/test/java/io/unitycatalog/client/internal/HttpRetryHandlerTest.java",
+      "text": "[AI Assisted] nit: Optional: a variant where `send` throws `SocketTimeoutException` would pin the rethrow path for `maxAttempts(1)`. Assert `isSameAs` on the exception, one send, and no clock advance.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-20T02:11:07Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#pullrequestreview-5986496180",
       "maintainer": true,
@@ -1526,16 +1835,6 @@
       "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
       "text": "[AI Assisted] nit: The `@throws` on the line below still says it is thrown when attempt is greater than `maxAttempts()`, but this `@param` limits attempt to 1 to `maxAttempts() - 1`. Could we make the two agree, for example `not less than maxAttempts()`, or drop the `@throws`?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T02:11:07Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4637655219",
-      "maintainer": true,
-      "path": "clients/java/src/main/java/io/unitycatalog/client/internal/HttpRetryHandler.java",
-      "text": "[AI Assisted] nit: Can we add a short comment saying why `attempt < retryPolicy.maxAttempts()` is checked here? `allowRetry` looks like it already covers the last attempt, and a later cleanup could drop this check and bring the final sleep back. For example: `// No backoff after the final attempt; the loop is about to…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1543,12 +1842,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:44:23Z",
-    "updated_at": "2026-11-20T02:52:14Z",
+    "updated_at": "2026-11-20T05:39:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 134
   },
@@ -1773,7 +2072,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:34:18Z",
-    "updated_at": "2026-11-20T02:36:06Z",
+    "updated_at": "2026-11-20T04:54:53Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -10129,12 +10428,12 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:21:43Z",
-    "updated_at": "2026-11-20T04:01:56Z",
+    "updated_at": "2026-11-20T04:54:49Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -10142,8 +10441,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 96
   },
@@ -14892,6 +15191,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-20T04:37:04Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4638523617",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
+      "text": "**Nit (not a blocker):** New comment columns use length 65536 while existing widened columns use 65535 The comment columns widened here (schema comment, volume comment, function parameter comment and parameter default) use length = 65536. The earlier widened columns in TableInfoDAO, FunctionInfoDAO, ColumnInfoDAO, Reg…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-20T01:07:08Z",
@@ -14940,16 +15249,6 @@
       "path": "server/src/main/resources/db/migration/h2/V8__widen_volume_comment.sql",
       "text": "**Blocker:** Volume comment column is 65535 while the API allows 65536 api/all.yaml declares the volume comment with maxLength 65536, but this step and VolumeInfoDAO use 65535. A comment of exactly 65,536 ASCII characters is accepted by the API and would likely be rejected by the column. This could not be settled: the…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-17T17:08:46Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2187#discussion_r4603072198",
-      "maintainer": true,
-      "path": "server/src/main/resources/db/migration/h2/V5__widen_function_param_type_text.sql",
-      "text": "**Nit (not a blocker):** Two merge commits on the branch have no Signed-off-by trailer The contribution workflow asks for a DCO sign-off on every commit. Two merge commits on this branch, including 4fdcb25a2917332ae8ec423982fcb12925693f3b, carry no Signed-off-by trailer. CODE_REVIEW.md says a missing sign-off is not a…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -14959,16 +15258,16 @@
      "shba24"
     ],
     "last_push": "2026-11-20T02:19:10Z",
-    "updated_at": "2026-11-20T03:30:21Z",
+    "updated_at": "2026-11-20T04:54:47Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T01:07:08Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by shba24. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 79
   },
