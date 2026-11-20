@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T18:47:06Z",
+ "generated_at": "2026-11-20T20:24:12Z",
  "stages": [
   "reported",
   "fix sent",
@@ -66,34 +66,6 @@
    "period_checked": "2026-11-20"
   },
   {
-   "full": "mlflow/mlflow",
-   "name": "MLflow",
-   "url": "https://github.com/mlflow/mlflow",
-   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
-   "icon": "🧪",
-   "category": "ai engineering",
-   "tags": [
-    "AI Gateway",
-    "Streaming",
-    "GenAI Eval"
-   ],
-   "stars": 28910,
-   "forks": 6645,
-   "package": "mlflow",
-   "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 22419894,
-   "downloads_checked": "2026-11-20",
-   "contributor_rank": 127,
-   "contributor_commits": 5,
-   "contributor_total": 300,
-   "contributors_checked": "2026-11-20",
-   "period_rank": 40,
-   "period_commits": 4,
-   "period_total": 112,
-   "period_since": "2026-07-18",
-   "period_checked": "2026-11-20"
-  },
-  {
    "full": "lance-format/lance",
    "name": "Lance",
    "url": "https://github.com/lance-format/lance",
@@ -118,6 +90,34 @@
    "period_rank": 38,
    "period_commits": 8,
    "period_total": 67,
+   "period_since": "2026-07-18",
+   "period_checked": "2026-11-20"
+  },
+  {
+   "full": "mlflow/mlflow",
+   "name": "MLflow",
+   "url": "https://github.com/mlflow/mlflow",
+   "about": "Open source platform for building, tracking and evaluating ML models and AI agents, with an AI Gateway that routes requests to LLM providers.",
+   "icon": "🧪",
+   "category": "ai engineering",
+   "tags": [
+    "AI Gateway",
+    "Streaming",
+    "GenAI Eval"
+   ],
+   "stars": 28911,
+   "forks": 6646,
+   "package": "mlflow",
+   "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
+   "downloads_month": 22419894,
+   "downloads_checked": "2026-11-20",
+   "contributor_rank": 127,
+   "contributor_commits": 5,
+   "contributor_total": 300,
+   "contributors_checked": "2026-11-20",
+   "period_rank": 40,
+   "period_commits": 4,
+   "period_total": 112,
    "period_since": "2026-07-18",
    "period_checked": "2026-11-20"
   },
@@ -256,7 +256,7 @@
     "SQL DDL"
    ],
    "stars": 389,
-   "forks": 232,
+   "forks": 233,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4333876,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63617,
-   "forks": 13447,
+   "stars": 63620,
+   "forks": 13450,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,602 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Reject clones and branches of detached versions",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T19:33:35Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11326,
+    "url": "https://github.com/lance-format/lance/pull/11326"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "python/python/lance/dataset.py",
+     "lines": [
+      [
+       "h",
+       "@@ -423,6 +423,8 @@"
+      ],
+      [
+       "c",
+       "            a version number in a specified branch. (None, None) means the latest"
+      ],
+      [
+       "c",
+       "            version_number on the default branch. ``(\"main\", version)`` is an"
+      ],
+      [
+       "c",
+       "            explicit alias for the default branch in this reference context."
+      ],
+      [
+       "a",
+       "            The reference cannot resolve to a detached version, which is not"
+      ],
+      [
+       "a",
+       "            part of the dataset's history; restore it first."
+      ],
+      [
+       "c",
+       "        storage_options: Optional[Dict[str, str]]"
+      ],
+      [
+       "c",
+       "            Storage options for the underlying object store. If not provided,"
+      ],
+      [
+       "c",
+       "            the storage options from the current dataset will be used."
+      ],
+      [
+       "h",
+       "@@ -5007,6 +5009,8 @@"
+      ],
+      [
+       "c",
+       "            a version number in a specified branch. (None, None) means the latest"
+      ],
+      [
+       "c",
+       "            version_number on the default branch. ``(\"main\", version)`` is an"
+      ],
+      [
+       "c",
+       "            explicit alias for the default branch in this reference context."
+      ],
+      [
+       "a",
+       "            The reference cannot resolve to a detached version, which is not"
+      ],
+      [
+       "a",
+       "            part of the dataset's history; restore it first."
+      ],
+      [
+       "c",
+       "        storage_options : dict, optional"
+      ],
+      [
+       "c",
+       "            Object store configuration for the new dataset (e.g., credentials,"
+      ],
+      [
+       "c",
+       "            endpoints). This replaces the store the target metadata is written"
+      ],
+      [
+       "h",
+       "@@ -5187,6 +5191,8 @@"
+      ],
+      [
+       "c",
+       "            An integer specifies a version number in the current branch; a string"
+      ],
+      [
+       "c",
+       "            specifies a tag name; a Tuple[Optional[str], Optional[int]] specifies"
+      ],
+      [
+       "c",
+       "            a version number in a specified branch."
+      ],
+      [
+       "a",
+       "            The reference cannot resolve to a detached version, which is not"
+      ],
+      [
+       "a",
+       "            part of the dataset's history; restore it first."
+      ],
+      [
+       "c",
+       "        storage_options : dict, optional"
+      ],
+      [
+       "c",
+       "            Object store configuration for the destination dataset. If omitted,"
+      ],
+      [
+       "c",
+       "            the source dataset's storage options are used."
+      ]
+     ],
+     "truncated": false,
+     "additions": 6,
+     "deletions": 0
+    },
+    {
+     "path": "rust/lance/src/dataset.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -705,6 +705,8 @@"
+      ],
+      [
+       "c",
+       "    /// `\"main\"` is reserved for the default branch and cannot be used as a new branch name."
+      ],
+      [
+       "c",
+       "    /// A segment after the first cannot be a reserved dataset directory."
+      ],
+      [
+       "c",
+       "    /// A literal `.` path segment is rejected."
+      ],
+      [
+       "a",
+       "    /// The source cannot be a detached version: it is not part of the dataset's history."
+      ],
+      [
+       "a",
+       "    /// Restore it first to clone or branch from it."
+      ],
+      [
+       "c",
+       "    ///"
+      ],
+      [
+       "c",
+       "    /// New branch names are limited to a portable budget of 211 bytes, measured"
+      ],
+      [
+       "c",
+       "    /// after the name is path-part encoded twice: once for the branch metadata"
+      ],
+      [
+       "h",
+       "@@ -765,6 +767,8 @@"
+      ],
+      [
+       "c",
+       "        refs::check_new_branch(branch)?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        let (source_branch, version_number) = self.resolve_reference(version.into()).await?;"
+      ],
+      [
+       "a",
+       "        // Before the reservation is written, so a rejected source leaves no ref behind."
+      ],
+      [
+       "a",
+       "        refs::ensure_clone_source_attached(version_number)?;"
+      ],
+      [
+       "c",
+       "        let branch_location = self.branch_location().find_branch(Some(branch))?;"
+      ],
+      [
+       "c",
+       "        let branch_file = refs::branch_contents_path(&self.refs.root()?.path, branch);"
+      ],
+      [
+       "c",
+       "        if self.object_store.exists(&branch_file).await? {"
+      ],
+      [
+       "h",
+       "@@ -4177,6 +4181,8 @@"
+      ],
+      [
+       "c",
+       "    /// 'target_path': the uri string to clone the dataset into."
+      ],
+      [
+       "c",
+       "    /// 'version': the version cloned from, could be a version number or tag."
+      ],
+      [
+       "c",
+       "    /// 'store_params': the object store params to use for the new dataset."
+      ],
+      [
+       "a",
+       "    /// The source cannot be a detached version: it is not part of the dataset's history."
+      ],
+      [
+       "a",
+       "    /// Restore it first to clone or branch from it."
+      ],
+      [
+       "c",
+       "    ///"
+      ],
+      [
+       "c",
+       "    /// The returned handle retains the source's store parameters for shared files."
+      ],
+      [
+       "c",
+       "    /// When reopening a clone across stores, supply the source parameters with"
+      ],
+      [
+       "h",
+       "@@ -4278,6 +4284,7 @@"
+      ],
+      [
+       "c",
+       "    /// Parameters:"
+      ],
+      [
+       "c",
+       "    /// - `target_path`: the URI string to clone the dataset into."
+      ]
+     ],
+     "truncated": true,
+     "additions": 9,
+     "deletions": 0
+    },
+    {
+     "path": "rust/lance/src/dataset/refs.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -7,6 +7,7 @@"
+      ],
+      [
+       "c",
+       "use futures::stream::{StreamExt, TryStreamExt};"
+      ],
+      [
+       "c",
+       "use itertools::Itertools;"
+      ]
+     ],
+     "truncated": true,
+     "additions": 20,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T17:47:15Z",
+    "updated_at": "2026-11-20T19:54:28Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 149
+  },
+  {
+   "kind": "fix",
+   "repo": "lance-format/lance",
+   "status": "review",
+   "title": "Count logical nulls when training zone maps",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T19:33:32Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 11325,
+    "url": "https://github.com/lance-format/lance/pull/11325"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "rust/arrow-stats/src/lib.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -151,7 +151,9 @@"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        self.buffer_memory += array.get_buffer_memory_size() as u64;"
+      ],
+      [
+       "d",
+       "        self.null_count += array.null_count() as u64;"
+      ],
+      [
+       "a",
+       "        // Count logical nulls: a `NullArray` has no validity buffer, so its"
+      ],
+      [
+       "a",
+       "        // `null_count()` is 0 although every value is NULL."
+      ],
+      [
+       "a",
+       "        self.null_count += array.logical_null_count() as u64;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        match array.data_type() {"
+      ],
+      [
+       "c",
+       "            DataType::List(_) => {"
+      ],
+      [
+       "h",
+       "@@ -209,7 +211,7 @@"
+      ],
+      [
+       "c",
+       "            return Ok(());"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "        if let Some(ref mut item_nulls) = self.item_nulls {"
+      ],
+      [
+       "d",
+       "            *item_nulls += item_array.null_count() as u64;"
+      ],
+      [
+       "a",
+       "            *item_nulls += item_array.logical_null_count() as u64;"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       "        match item_array.data_type() {"
+      ],
+      [
+       "c",
+       "            DataType::List(_) => {"
+      ],
+      [
+       "h",
+       "@@ -586,6 +588,31 @@"
+      ],
+      [
+       "c",
+       "        assert_eq!(stats.null_count, 3);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    #[test]"
+      ],
+      [
+       "a",
+       "    fn test_null_type_counts_logical_nulls() {"
+      ],
+      [
+       "a",
+       "        // A NullArray has no validity buffer, so `null_count()` is 0."
+      ],
+      [
+       "a",
+       "        let mut acc = StatisticsAccumulator::new(&DataType::Null);"
+      ],
+      [
+       "a",
+       "        let array: ArrayRef = Arc::new(NullArray::new(3));"
+      ],
+      [
+       "a",
+       "        acc.update(&array).unwrap();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 29,
+     "deletions": 2
+    },
+    {
+     "path": "rust/lance-index/src/scalar/zoned.rs",
+     "lines": [
+      [
+       "h",
+       "@@ -578,9 +578,11 @@"
+      ],
+      [
+       "c",
+       "        let values = batch.column(0);"
+      ],
+      [
+       "c",
+       "        processor.process_chunk(values)?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "        // Logical nulls: a `NullArray` has no validity buffer, so `nulls()` is"
+      ],
+      [
+       "a",
+       "        // `None` although every value is NULL."
+      ],
+      [
+       "c",
+       "        if track_null_rows"
+      ],
+      [
+       "d",
+       "            && values.null_count() > 0"
+      ],
+      [
+       "d",
+       "            && let Some(nulls) = values.nulls()"
+      ],
+      [
+       "a",
+       "            && let Some(nulls) = values.logical_nulls()"
+      ],
+      [
+       "a",
+       "            && nulls.null_count() > 0"
+      ],
+      [
+       "c",
+       "        {"
+      ],
+      [
+       "c",
+       "            let row_addrs = row_addr_column(batch)?;"
+      ],
+      [
+       "c",
+       "            null_rows.extend("
+      ],
+      [
+       "h",
+       "@@ -1548,6 +1550,55 @@"
+      ],
+      [
+       "c",
+       "        assert_eq!(null_rows, RowAddrTreeMap::new());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    /// A `NullArray` has no validity buffer; every one of its rows is still a"
+      ],
+      [
+       "a",
+       "    /// NULL row."
+      ],
+      [
+       "a",
+       "    #[tokio::test]"
+      ],
+      [
+       "a",
+       "    async fn parallel_trainer_tracks_logical_null_rows() {"
+      ],
+      [
+       "a",
+       "        #[derive(Debug)]"
+      ],
+      [
+       "a",
+       "        struct RowCounter(usize);"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "        impl ZoneProcessor for RowCounter {"
+      ],
+      [
+       "a",
+       "            type ZoneStatistics = (usize, ZoneBound);"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "            fn process_chunk(&mut self, values: &ArrayRef) -> Result<()> {"
+      ],
+      [
+       "a",
+       "                self.0 += values.len();"
+      ]
+     ],
+     "truncated": true,
+     "additions": 53,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T17:14:30Z",
+    "updated_at": "2026-11-20T19:50:33Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 148
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -609,17 +1205,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T18:45:00Z",
-    "updated_at": "2026-11-20T18:45:04Z",
+    "updated_at": "2026-11-20T19:41:44Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 147
   },
@@ -647,16 +1243,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T18:38:07Z",
-    "updated_at": "2026-11-20T18:38:47Z",
+    "updated_at": "2026-11-20T19:41:39Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 146
   },
@@ -877,7 +1473,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T15:55:22Z",
-    "updated_at": "2026-11-20T15:55:26Z",
+    "updated_at": "2026-11-20T19:33:26Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -1203,17 +1799,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T18:36:53Z",
-    "updated_at": "2026-11-20T18:37:42Z",
+    "updated_at": "2026-11-20T19:33:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 144
   },
@@ -1371,13 +1967,43 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T19:32:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-5998282952",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] First review at 7dfc50b0. The fix loads the `DATE`, `TIMESTAMP`, `DECIMAL` and day-time `INTERVAL` types that failed before, and no output that loaded on `main` changes. pytest is not installed in the review environment, so the unit tests did not run here. Instead I compared the annotation output for man…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T19:32:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4646806101",
+      "maintainer": true,
+      "path": "docs/ai/client.md",
+      "text": "[AI Assisted] Normal: this bullet says the annotations apply inside `ARRAY` and `MAP` types, and the annotations promise `date`, `Decimal` and `timedelta` values. The OSS client converts only top-level `DATE`, `TIMESTAMP` and `DECIMAL` values. It leaves nested `ARRAY` and `MAP` elements as JSON strings, and it leaves…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T19:32:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4646806111",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Wording, three points in this entry: - \"A year-month `INTERVAL` is written as before.\" That form still fails to load. Could it say so, for example: \"A year-month `INTERVAL` still fails to load.\" - \"A `DECIMAL` type was annotated as `decimal(38, 18)`, which failed with a `NameError` too.\" A plain `DECIMAL…",
+      "answered": true
+     },
+     {
+      "kind": "review commented",
       "who": "timothyw553",
       "at": "2026-11-20T15:21:15Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-5995027585",
       "maintainer": true,
       "path": null,
       "text": "overall lgtm, no runtime issues found. i left a few comments on test coverage, docstrings, and an unused test helper option.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1387,20 +2013,20 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_callable_utils.py",
       "text": "this checks the header and execution, not the generated docstring's `Returns:` section, and `test_parse_full_sql_data_type_for_return_types` also misses `CHAR(n)` and `STRING COLLATE ...`. without those, broken `CHAR` rendering or the old decimal docstring output would still pass all tests. could we extend both tests…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T06:23:37Z",
-    "updated_at": "2026-11-20T15:21:15Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T19:42:58Z",
+    "updated_at": "2026-11-20T19:47:30Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 143
   },
@@ -1593,17 +2219,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T18:19:10Z",
-    "updated_at": "2026-11-20T18:35:42Z",
+    "updated_at": "2026-11-20T19:38:44Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 142
   },
@@ -1956,7 +2582,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-20T05:49:41Z",
-    "updated_at": "2026-11-20T13:49:29Z",
+    "updated_at": "2026-11-20T19:30:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -2377,17 +3003,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T18:05:24Z",
-    "updated_at": "2026-11-20T18:12:51Z",
+    "updated_at": "2026-11-20T19:38:42Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 138
   },
@@ -2707,7 +3333,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T14:33:11Z",
-    "updated_at": "2026-11-20T15:03:36Z",
+    "updated_at": "2026-11-20T19:41:36Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3092,7 +3718,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T14:25:20Z",
-    "updated_at": "2026-11-20T14:27:52Z",
+    "updated_at": "2026-11-20T19:38:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3411,7 +4037,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T15:23:52Z",
-    "updated_at": "2026-11-20T15:28:27Z",
+    "updated_at": "2026-11-20T19:38:34Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3641,7 +4267,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T15:29:51Z",
-    "updated_at": "2026-11-20T15:32:15Z",
+    "updated_at": "2026-11-20T19:38:23Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -8899,17 +9525,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T17:40:56Z",
-    "updated_at": "2026-11-20T17:53:15Z",
+    "updated_at": "2026-11-20T19:41:53Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },
@@ -12004,7 +12630,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T15:05:53Z",
-    "updated_at": "2026-11-20T15:21:33Z",
+    "updated_at": "2026-11-20T19:41:48Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
