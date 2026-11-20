@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T06:05:09Z",
+ "generated_at": "2026-11-20T06:25:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63580,
-   "forks": 13437,
+   "stars": 63581,
+   "forks": 13438,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,314 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Annotate DATE, TIMESTAMP, DECIMAL and INTERVAL so get_function_as_callable and get_function_source load",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T06:23:24Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2322,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2322"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1116,6 +1116,17 @@"
+      ],
+      [
+       "c",
+       "    return parts"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _python_type_annotation(python_type: type) -> str:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Returns the annotation of a Python type in a reconstructed function. Types of the `datetime`"
+      ],
+      [
+       "a",
+       "    module are qualified and `Decimal` is not, the same as in the `repr` of their values, so the"
+      ],
+      [
+       "a",
+       "    definition needs only `import datetime` and `from decimal import Decimal`."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    if python_type.__module__ == \"datetime\":"
+      ],
+      [
+       "a",
+       "        return f\"datetime.{python_type.__name__}\""
+      ],
+      [
+       "a",
+       "    return python_type.__name__"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "def _parse_sql_data_type(type_str: str) -> str:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "c",
+       "    Convert a full SQL type string (e.g. \"MAP<STRING, ARRAY<STRING>>\")"
+      ],
+      [
+       "h",
+       "@@ -1124,10 +1135,14 @@"
+      ],
+      [
+       "c",
+       "    type_str = type_str.strip()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    if \"<\" not in type_str:"
+      ],
+      [
+       "d",
+       "        if mapped := SQL_TYPE_TO_PYTHON_TYPE_MAPPING.get(type_str.upper()):"
+      ],
+      [
+       "d",
+       "            return mapped[0].__name__ if isinstance(mapped, tuple) else mapped.__name__"
+      ],
+      [
+       "d",
+       "        else:"
+      ],
+      [
+       "a",
+       "        base_type = _base_type_name(type_str.upper())"
+      ],
+      [
+       "a",
+       "        mapped = SQL_TYPE_TO_PYTHON_TYPE_MAPPING.get(base_type)"
+      ],
+      [
+       "a",
+       "        # Only a day-time interval is a `datetime.timedelta`, not a year-month interval."
+      ],
+      [
+       "a",
+       "        if mapped is None or ("
+      ],
+      [
+       "a",
+       "            base_type == \"INTERVAL\" and re.search(r\"\\b(YEAR|MONTH)\\b\", type_str.upper())"
+      ]
+     ],
+     "truncated": true,
+     "additions": 39,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T06:23:37Z",
+    "updated_at": "2026-11-20T06:23:43Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 143
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Mark parameters without a default as required in tool schemas",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T06:04:22Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2321,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2321"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
+     "lines": [
+      [
+       "h",
+       "@@ -281,9 +281,11 @@"
+      ],
+      [
+       "c",
+       "    for param_info in param_infos:"
+      ],
+      [
+       "c",
+       "        pydantic_field = param_info_to_pydantic_type(param_info, strict=strict)"
+      ],
+      [
+       "c",
+       "        strict = strict and pydantic_field.strict"
+      ],
+      [
+       "a",
+       "        # Required without a default, the same rule validate_input_params applies at call time."
+      ],
+      [
+       "a",
+       "        default = ... if param_info.parameter_default is None else pydantic_field.default"
+      ],
+      [
+       "c",
+       "        fields[param_info.name] = ("
+      ],
+      [
+       "c",
+       "            pydantic_field.pydantic_type,"
+      ],
+      [
+       "d",
+       "            Field(default=pydantic_field.default, description=pydantic_field.description),"
+      ],
+      [
+       "a",
+       "            Field(default=default, description=pydantic_field.description),"
+      ],
+      [
+       "c",
+       "        )"
+      ],
+      [
+       "c",
+       "    model = create_model(params_name, **fields, __config__={\"extra\": \"forbid\"})"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    },
+    {
+     "path": "ai/integrations/anthropic/anthropic_example.ipynb",
+     "lines": [
+      [
+       "h",
+       "@@ -172,7 +172,7 @@"
+      ],
+      [
+       "c",
+       "    {"
+      ],
+      [
+       "c",
+       "     \"data\": {"
+      ],
+      [
+       "c",
+       "      \"text/plain\": ["
+      ],
+      [
+       "d",
+       "       \"[AnthropicTool(name='AICatalog__AISchema__fetch_weather', description='Fetches the current weather in celsius for a given location.', input_schema={'type': 'object', 'properties': {'location': {'default': None, 'description': 'The location to fetch the weather for.', 'title': 'Location', 'type': 'string'}}, 'required': []})]\""
+      ],
+      [
+       "a",
+       "       \"[AnthropicTool(name='AICatalog__AISchema__fetch_weather', description='Fetches the current weather in celsius for a given location.', input_schema={'type': 'object', 'properties': {'location': {'description': 'The location to fetch the weather for.', 'title': 'Location', 'type': 'string'}}, 'required': ['location']})]\""
+      ],
+      [
+       "c",
+       "      ]"
+      ],
+      [
+       "c",
+       "     },"
+      ],
+      [
+       "c",
+       "     \"execution_count\": 7,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T06:04:32Z",
+    "updated_at": "2026-11-20T06:20:54Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 142
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -506,7 +814,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T06:03:26Z",
-    "updated_at": "2026-11-20T06:03:27Z",
+    "updated_at": "2026-11-20T06:20:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -632,7 +940,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T05:49:41Z",
-    "updated_at": "2026-11-20T05:49:57Z",
+    "updated_at": "2026-11-20T06:20:52Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2195,6 +2503,26 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-20T06:19:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5988376546",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Thanks for the round-2 fix to the fractional sentence. It now matches what we asked for. I re-read every sentence of the Gemini entry against the code and the repros. The opening sentence is the only one left to change, and the inline comment covers it. The Gemini unit tests were not run here, because th…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T06:19:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4639168698",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Wording: the opening sentence says the `Parameter x should be of type LONG ...` error happened for integers nested in a `STRUCT`, `ARRAY` or `MAP`. Nested integers never raised that error. The client checks only top-level parameter types, so they reached the function as floats. This sentence was already…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-20T01:24:19Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5986132135",
       "maintainer": true,
@@ -2231,26 +2559,6 @@
       "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
       "text": "[AI Assisted] Blocker: the synthetic top-level struct takes each parameter's name from inside its `type_json`. OSS keeps the parameter name as a separate field, and the server test fixture `BaseFunctionCRUDTest` builds parameters with a `type_json` of `{\"type\":\"int\"}` and no embedded name. For such a function, `_resto…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T00:28:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963726",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-      "text": "[AI Assisted] Followup: the conversion has no range check. `3e9` for an `INT` argument arrives as `3000000000`, and `300.0` for a `BYTE` argument arrives as `300`, without an error. The library does not bound-check integers elsewhere either, so this is consistent with it. Could this be noted in the CHANGELOG, or track…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T00:28:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963737",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] Nit: the entry lists `BYTE`, `SHORT`, `INT` and `LONG`, but the conversion also covers `BIGINT` and `INTEGER`. Could the list say so?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -2258,12 +2566,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T02:34:18Z",
-    "updated_at": "2026-11-20T04:54:53Z",
+    "updated_at": "2026-11-20T06:19:56Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 133
   },
