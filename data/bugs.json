@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T20:24:12Z",
+ "generated_at": "2026-11-20T21:22:24Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28911,
+   "stars": 28914,
    "forks": 6646,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63620,
+   "stars": 63621,
    "forks": 13450,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1243,16 +1243,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-20T18:38:07Z",
-    "updated_at": "2026-11-20T19:41:39Z",
+    "last_push": "2026-11-20T21:17:29Z",
+    "updated_at": "2026-11-20T21:17:32Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 146
   },
@@ -1780,6 +1780,46 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T20:31:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#pullrequestreview-5998954085",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Comment. The docs update is accurate. Approve-worthy once the `APPLICATION_DEFAULT` row is added: the PR states this override and no test exercises it. Hadoop tests pass, and reverting the fixed-path wiring fails the 68 tests the description names.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T20:31:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#discussion_r4647355195",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/test/java/io/unitycatalog/hadoop/internal/GcsCredPropsTest.java",
+      "text": "[AI Assisted] The PR says the fixed path overrides a session-wide `fs.gs.auth.type` (the checkpoint docs use `APPLICATION_DEFAULT` for exactly this case), but no row starts from a configuration that already sets it. Could we add a row that sets `fs.gs.auth.type=APPLICATION_DEFAULT` before the built props are applied,…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T20:31:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#discussion_r4647355205",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/auth/GcsFixedTokenProvider.java",
+      "text": "[AI Assisted] Nit: `Long.MAX_VALUE` as the no-expiration value is written by `GcsCredPropsBuilder` and read back here as the default. A shared constant would keep the two in step.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T20:31:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#discussion_r4647355215",
+      "maintainer": true,
+      "path": "connectors/hadoop/src/test/java/io/unitycatalog/hadoop/internal/GcsCredPropsTest.java",
+      "text": "[AI Assisted] Nit: the 60 second expiry is deliberately inside google-auth's expiration margin, so each request goes through `refresh()`. A short comment here would stop a later margin change from looking like a provider bug.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "timothyw553",
       "at": "2026-11-20T15:50:37Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#pullrequestreview-5995430636",
@@ -1804,12 +1844,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T18:36:53Z",
-    "updated_at": "2026-11-20T19:33:21Z",
+    "updated_at": "2026-11-20T20:31:34Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 144
   },
@@ -2020,13 +2060,13 @@
     "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T19:42:58Z",
-    "updated_at": "2026-11-20T19:47:30Z",
-    "conflicts": false,
+    "last_push": "2026-11-20T21:09:01Z",
+    "updated_at": "2026-11-20T21:10:21Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 143
   },
@@ -2225,11 +2265,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T18:19:10Z",
     "updated_at": "2026-11-20T19:38:44Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 142
   },
@@ -2944,6 +2984,26 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-20T20:59:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-5999311659",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review: the suffix and gateway path handling works at this head, and the tests and checkstyle pass. One normal doc item remains, inline at `docs/usage/cli.md:829`, with the same exception at line 827. The double suffix in `TableCli` itself can go to the follow-up issue.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-20T20:59:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4647648252",
+      "maintainer": true,
+      "path": "docs/usage/cli.md",
+      "text": "[AI Assisted] This sentence, and the one at line 827 (\"sends its requests under that path\"), do not hold for managed `table create`. That command still sends its request to a doubled API path, `/api/2.1/unity-catalog/api/2.1/unity-catalog/...`, because the delta client appends the suffix again. Could we add an excepti…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "timothyw553",
       "at": "2026-11-20T12:38:01Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-5992763066",
@@ -2981,26 +3041,6 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
       "text": "[AI Assisted] Nit: building a full control client only to read its URI needs a short comment saying why the UC client is pointed at the control URI. A follow-up could pass the control `ApiClient` into `AuthCli.handle`, as `UserCli` does.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T05:44:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939165",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
-      "text": "[AI Assisted] Followup: `getApiClient` and `getControlClient` repeat the host, port and scheme rules, which is how this bug appeared. A shared helper that resolves the base URI for a base path would keep them in sync.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T05:44:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939171",
-      "maintainer": true,
-      "path": "examples/cli/src/test/java/io/unitycatalog/cli/UnityCatalogCliTest.java",
-      "text": "[AI Assisted] Nit: `auth login` does not assert that the exchanged `access_token` is returned, and no case checks the `Authorization` header on the prefixed clients. Asserting the token in this test would cover the first.",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3008,12 +3048,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T18:05:24Z",
-    "updated_at": "2026-11-20T19:38:42Z",
+    "updated_at": "2026-11-20T20:59:37Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 138
   },
@@ -3377,11 +3417,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Send the function error to the model when a tool call fails",
    "date": "2026-11-20",
    "created_at": "2026-11-20T01:38:14Z",
-   "merged_at": null,
+   "merged_at": "2026-11-20",
    "reported": true,
    "pr": {
     "number": 2314,
@@ -3663,6 +3703,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T21:03:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2314#pullrequestreview-5999362071",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The change is correct, and the tests and mutants behave as the PR says. One non-blocking request: please open a tracking issue for trimming the sandbox traceback in `ai/core`, and link it from the CHANGELOG entry, so the follow-up is not lost.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T04:46:57Z",
@@ -3713,17 +3763,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T14:25:20Z",
-    "updated_at": "2026-11-20T19:38:21Z",
+    "updated_at": "2026-11-20T21:11:12Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 135
   },
@@ -3972,6 +4024,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T20:35:51Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#pullrequestreview-5999006125",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The handler guard fixes the extra backoff after the final attempt, the attempt count and the final error are unchanged, and the exhausted and single-attempt tests fail without the guard (checked by reverting it in a scratch clone). Client retry tests and format checks pass at this head. Thanks f…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T05:39:38Z",
@@ -4020,29 +4082,21 @@
       "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
       "text": "[AI Assisted] The example loop still does not exit after a successful call. Nothing returns or breaks after `doSomeAction()`, so the next iteration runs the action again until the attempts run out. Since users copy this example, could we add a `return` (or `break`) after the call?",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T02:11:07Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2312#discussion_r4637655215",
-      "maintainer": true,
-      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
-      "text": "[AI Assisted] nit: The `@throws` on the line below still says it is thrown when attempt is greater than `maxAttempts()`, but this `@param` limits attempt to 1 to `maxAttempts() - 1`. Could we make the two agree, for example `not less than maxAttempts()`, or drop the `@throws`?",
-      "answered": true
      }
     ],
     "stage": 3,
-    "checks": "failing",
-    "review": "commented",
-    "approved_by": [],
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T15:23:52Z",
-    "updated_at": "2026-11-20T19:38:34Z",
+    "updated_at": "2026-11-20T20:35:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 134
   },
@@ -4202,6 +4256,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-20T21:17:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#issuecomment-7050848462",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] This PR is dirty again after main moved: the only conflict is in ai/CHANGELOG.md, at the Bug Fixes entries. Could you merge or rebase main into the branch so the Gemini entry sits after the current Bug Fixes items?",
+      "answered": false
+     },
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-20T21:12:44Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5999479524",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 640f633d. The earlier items are addressed: the missing-name fix (verified by repro for a `type_json` with no name and one with a different name), the range behavior is documented, the type list and restore tests are in, and the CHANGELOG entry now matches the behavior for top-level and neste…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T06:19:56Z",
@@ -4240,39 +4314,25 @@
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording only, not a regression: the sentence holds for top-level integer parameters, but not for values nested inside a `STRUCT`, `ARRAY` or `MAP`. A `STRUCT` value passes the client's type check as long as it is a dict, and nested fields are not checked. So a `6.5` in an `INT` field of a struct…",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-20T00:28:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#pullrequestreview-5985648634",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at 8ff6a96a. The integer conversion is right for the cases I checked: top-level and nested integers are converted, and non-whole floats, `DOUBLE`, `DECIMAL` and `STRING` are left alone. The blocker above needs fixing before merge. The Gemini unit tests were not run in this review, because the G…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T00:28:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2310#discussion_r4636963714",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-      "text": "[AI Assisted] Blocker: the synthetic top-level struct takes each parameter's name from inside its `type_json`. OSS keeps the parameter name as a separate field, and the server test fixture `BaseFunctionCRUDTest` builds parameters with a `type_json` of `{\"type\":\"int\"}` and no embedded name. For such a function, `_resto…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T15:29:51Z",
-    "updated_at": "2026-11-20T19:38:23Z",
-    "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "updated_at": "2026-11-20T21:17:47Z",
+    "conflicts": true,
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-20T21:17:46Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 133
   },
@@ -26324,7 +26384,7 @@
      "lines": [
       [
        "h",
-       "@@ -332,22 +332,7 @@"
+       "@@ -318,22 +318,7 @@"
       ],
       [
        "c",
@@ -26420,7 +26480,7 @@
       ],
       [
        "h",
-       "@@ -486,7 +471,18 @@"
+       "@@ -489,7 +474,18 @@"
       ],
       [
        "c",
@@ -26586,17 +26646,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-10-31T21:24:55Z",
-    "updated_at": "2026-11-12T03:49:37Z",
+    "last_push": "2026-11-20T21:20:12Z",
+    "updated_at": "2026-11-20T21:20:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 38
   },
