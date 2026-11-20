@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T11:55:48Z",
+ "generated_at": "2026-11-20T13:19:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28906,
-   "forks": 6640,
+   "stars": 28907,
+   "forks": 6642,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22419894,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63602,
-   "forks": 13442,
+   "stars": 63609,
+   "forks": 13444,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -312,7 +312,7 @@
     "CLI"
    ],
    "stars": 1502,
-   "forks": 264,
+   "forks": 265,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 503519236,
@@ -1885,6 +1885,16 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T12:38:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-5992763066",
+      "maintainer": true,
+      "path": null,
+      "text": "overall looks good. left one small doc comment and +1'd Yi's comments -- mainly the API suffix compatibility question on T1.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T05:44:14Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-5988089699",
@@ -1939,12 +1949,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T03:21:38Z",
-    "updated_at": "2026-11-20T05:44:14Z",
+    "updated_at": "2026-11-20T12:38:01Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 138
   },
