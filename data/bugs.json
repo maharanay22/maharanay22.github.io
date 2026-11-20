@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T15:22:09Z",
+ "generated_at": "2026-11-20T17:48:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,8 +77,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28909,
-   "forks": 6643,
+   "stars": 28910,
+   "forks": 6645,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22419894,
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50580,
-   "forks": 20767,
+   "forks": 20766,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710331967,
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63615,
-   "forks": 13444,
+   "forks": 13446,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -451,7 +451,7 @@
      "lines": [
       [
        "h",
-       "@@ -1218,10 +1218,18 @@"
+       "@@ -1255,10 +1255,18 @@"
       ],
       [
        "c",
@@ -541,17 +541,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-20T07:27:17Z",
-    "updated_at": "2026-11-20T09:15:36Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T15:55:22Z",
+    "updated_at": "2026-11-20T15:55:26Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 145
   },
@@ -850,18 +850,39 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T15:50:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#pullrequestreview-5995430636",
+      "maintainer": true,
+      "path": null,
+      "text": "production code looks good. i left a couple comments on test coverage and docs, plus one small nit on validation.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T15:50:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#discussion_r4644522650",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "does this apply to vended paths too, not just tables? also could we name `spark.sql.catalog.<name>.renewCredential.enabled=false` so readers know which setting disables renewal?",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T06:23:40Z",
-    "updated_at": "2026-11-20T09:15:35Z",
+    "updated_at": "2026-11-20T15:50:38Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 144
   },
@@ -1016,18 +1037,39 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-20T15:21:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-5995027585",
+      "maintainer": true,
+      "path": null,
+      "text": "overall lgtm, no runtime issues found. i left a few comments on test coverage, docstrings, and an unused test helper option.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-20T15:21:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4644194830",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_callable_utils.py",
+      "text": "this checks the header and execution, not the generated docstring's `Returns:` section, and `test_parse_full_sql_data_type_for_return_types` also misses `CHAR(n)` and `STRING COLLATE ...`. without those, broken `CHAR` rendering or the old decimal docstring output would still pass all tests. could we extend both tests…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T06:23:37Z",
-    "updated_at": "2026-11-20T09:15:34Z",
+    "updated_at": "2026-11-20T15:21:15Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 143
   },
@@ -2329,8 +2371,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T14:33:11Z",
@@ -2338,8 +2380,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 137
   },
@@ -2714,8 +2756,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T14:25:20Z",
@@ -2723,8 +2765,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 135
   },
@@ -2802,27 +2844,15 @@
      "lines": [
       [
        "h",
-       "@@ -79,14 +79,14 @@"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "c",
-       ""
+       "@@ -67,7 +67,7 @@"
       ],
       [
        "c",
        "  /**"
       ],
       [
-       "d",
-       "   * Determines whether a retry should be attempted based on the current attempt number."
-      ],
-      [
-       "a",
-       "   * Determines whether another attempt may follow the given failed attempt."
+       "c",
+       "   * Calculates the sleep time before the next retry attempt using exponential backoff with jitter."
       ],
       [
        "c",
@@ -2833,16 +2863,12 @@
        "   * @param attempt the current attempt number (1-indexed)"
       ],
       [
-       "d",
-       "   * @return true if retry is allowed, false otherwise"
-      ],
-      [
        "a",
        "   * @param attempt the number of the attempt that just failed (1-indexed)"
       ],
       [
-       "a",
-       "   * @return true while fewer than {@link #maxAttempts()} attempts have been made"
+       "c",
+       "   * @return the duration to sleep before retrying"
       ],
       [
        "c",
@@ -2851,35 +2877,11 @@
       [
        "c",
        "  @Override"
-      ],
-      [
-       "c",
-       "  public boolean allowRetry(int attempt) {"
-      ],
-      [
-       "d",
-       "    return attempt <= maxAttempts;"
-      ],
-      [
-       "a",
-       "    return attempt < maxAttempts;"
-      ],
-      [
-       "c",
-       "  }"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "  /**"
       ]
      ],
      "truncated": false,
-     "additions": 4,
-     "deletions": 4
+     "additions": 1,
+     "deletions": 1
     },
     {
      "path": "clients/java/src/main/java/io/unitycatalog/client/retry/RetryPolicy.java",
@@ -2946,7 +2948,7 @@
       ],
       [
        "h",
-       "@@ -24,38 +25,35 @@"
+       "@@ -24,37 +25,35 @@"
       ],
       [
        "c",
@@ -3007,7 +3009,7 @@
      ],
      "truncated": true,
      "additions": 15,
-     "deletions": 17
+     "deletions": 16
     }
    ],
    "track": {
@@ -3020,7 +3022,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Summary: the handler guard fixes the extra sleep, and the exhausted and single-attempt tests check it. The `allowRetry` change on `JitterDelayRetryPolicy` is the one I would like to back out. - Blocker (inline on `JitterDelayRetryPolicy.java`): we suggested this change in the previous review. It turns ou…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3030,7 +3032,7 @@
       "maintainer": true,
       "path": "clients/java/src/main/java/io/unitycatalog/client/retry/JitterDelayRetryPolicy.java",
       "text": "[AI Assisted] Blocker: we suggested this change in the previous review, and I was wrong to. It changes released behavior. The `RetryPolicy` example in v0.5.1 through v0.7.0 is `for(int attempt = 1; policy.allowRetry(attempt); attempt +=1)`, so with `attempt < maxAttempts` that loop makes one fewer attempt (none with `…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3040,7 +3042,7 @@
       "maintainer": true,
       "path": "clients/java/src/test/java/io/unitycatalog/client/internal/HttpRetryHandlerTest.java",
       "text": "[AI Assisted] nit: Optional: a variant where `send` throws `SocketTimeoutException` would pin the rethrow path for `maxAttempts(1)`. Assert `isSameAs` on the exception, one send, and no clock advance.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3073,17 +3075,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T02:44:23Z",
-    "updated_at": "2026-11-20T05:39:38Z",
+    "last_push": "2026-11-20T15:23:52Z",
+    "updated_at": "2026-11-20T15:28:27Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 134
   },
@@ -3250,7 +3252,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Thanks for the round-2 fix to the fractional sentence. It now matches what we asked for. I re-read every sentence of the Gemini entry against the code and the repros. The opening sentence is the only one left to change, and the inline comment covers it. The Gemini unit tests were not run here, because th…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3260,7 +3262,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Wording: the opening sentence says the `Parameter x should be of type LONG ...` error happened for integers nested in a `STRUCT`, `ARRAY` or `MAP`. Nested integers never raised that error. The client checks only top-level parameter types, so they reached the function as floats. This sentence was already…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3307,13 +3309,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T02:34:18Z",
-    "updated_at": "2026-11-20T06:19:56Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T15:29:51Z",
+    "updated_at": "2026-11-20T15:32:15Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 133
   },
@@ -8379,7 +8381,7 @@
      "lines": [
       [
        "h",
-       "@@ -1,9 +1,13 @@"
+       "@@ -1,9 +1,12 @@"
       ],
       [
        "c",
@@ -8418,10 +8420,6 @@
        "import threading"
       ],
       [
-       "a",
-       "import weakref"
-      ],
-      [
        "c",
        "from enum import Enum"
       ],
@@ -8435,39 +8433,7 @@
       ],
       [
        "h",
-       "@@ -54,6 +58,7 @@"
-      ],
-      [
-       "c",
-       "    SchemasApi,"
-      ],
-      [
-       "c",
-       ")"
-      ],
-      [
-       "c",
-       "from unitycatalog.client.exceptions import NotFoundException, ServiceException"
-      ],
-      [
-       "a",
-       "from unitycatalog.client.rest import RESTClientObject"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "nest_asyncio.apply()"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "h",
-       "@@ -106,6 +111,22 @@"
+       "@@ -107,6 +110,42 @@"
       ],
       [
        "c",
@@ -8487,19 +8453,55 @@
       ],
       [
        "a",
+       "_OTHER_PROCESS = ("
+      ],
+      [
+       "a",
+       "    \"The ApiClient was set up in another process. Create a new ApiClient in the child process.\""
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "a",
        ""
       ],
       [
        "a",
-       "_clients_to_reset_after_fork: \"weakref.WeakSet[_SingleLoopRESTClient]\" = weakref.WeakSet()"
+       ""
       ],
       [
        "a",
-       "# A forked child shares the parent's epoll instance, so finalizing the inherited session would"
+       "def _session_loop(rest_client) -> Optional[asyncio.AbstractEventLoop]:"
+      ],
+      [
+       "a",
+       "    # aiohttp only exposes a session's loop publicly through its deprecated `loop` property."
+      ],
+      [
+       "a",
+       "    loop = getattr(getattr(rest_client, \"pool_manager\", None), \"_loop\", None)"
+      ],
+      [
+       "a",
+       "    return loop if isinstance(loop, asyncio.AbstractEventLoop) else None"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _run_on_new_thread(function: Callable[[], Any]) -> concurrent.futures.Future:"
       ]
      ],
      "truncated": true,
-     "additions": 186,
+     "additions": 184,
      "deletions": 34
     }
    ],
@@ -8513,7 +8515,7 @@
       "maintainer": true,
       "path": null,
       "text": "left a few comments, mainly on closing `_replaced_rest_client` on the right event loop and tightening the shutdown cancellation test, plus a couple of +1s on open threads.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -8523,7 +8525,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "what happens if `api_client` was already used on another loop before being wrapped here? `_close()` awaits `self._replaced_rest_client.close()` on the new background loop, so closing a pooled HTTP connection raises a different-loop error (and leaves the socket open in debug mode) while later close calls don't retry it…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -8533,7 +8535,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "doesn't `thread.join(timeout=30)` return silently if shutdown hangs, and `assert_session_closed()` only checks that new requests fail? could we check that the close thread and owned request thread actually stopped, and call `release.set()` in `finally`? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -8543,7 +8545,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] I'd simplify the client lifecycle to one owner and one lock. `_SingleLoopRESTClient` should hold the close state, `shutdown` should hold the lock through teardown, and a pid check can replace the fork hooks. I'd keep the custom `rest_client` class rather than replacing it with the plain one. Details are…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -8553,7 +8555,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Could we remove the `_clients_to_reset_after_fork` WeakSet and the `_reset_clients_after_fork` hook? A pid check makes a registry unnecessary.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -8563,20 +8565,20 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Could we drop `_inherited_before_fork`? It only keeps objects alive for the reset hook, which would go away with the pid check.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-19T03:54:17Z",
-    "updated_at": "2026-11-20T10:24:12Z",
-    "conflicts": true,
+    "last_push": "2026-11-20T17:40:56Z",
+    "updated_at": "2026-11-20T17:46:41Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 110
   },
@@ -11666,12 +11668,12 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T15:05:53Z",
-    "updated_at": "2026-11-20T15:20:01Z",
+    "updated_at": "2026-11-20T15:21:33Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -11679,8 +11681,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 96
   },
@@ -19537,7 +19539,7 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "closed",
    "title": "DELETE, UPDATE, MERGE, OPTIMIZE and overwrite corrupt Spark-written tables partitioned by non-ASCII strings",
    "date": "2026-10-28",
    "created_at": "2026-10-28T00:57:57Z",
@@ -19826,6 +19828,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "ion-elgreco",
+      "at": "2026-11-20T16:08:28Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4975#issuecomment-7044343146",
+      "maintainer": true,
+      "path": null,
+      "text": "So I did some digging in the RFC2396 spec which is defined in the delta protocol but Spark is here not writing compliant paths, `Zürich` should be encoded since the u is here a non ascii character and not part of US-AASCII, which the RFC2396 refers to.. Your best bet is to fix the issue in spark upstream so they write…",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "Shahzeb-DataEngineer",
       "at": "2026-11-20T02:07:59Z",
@@ -19846,23 +19858,23 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 2,
     "checks": "passing",
     "review": "community approved",
     "approved_by": [
      "Shahzeb-DataEngineer"
     ],
     "last_push": "2026-11-08T15:56:54Z",
-    "updated_at": "2026-11-20T02:59:01Z",
+    "updated_at": "2026-11-20T16:08:45Z",
     "conflicts": false,
     "last_comment": {
      "who": "ion-elgreco",
-     "at": "2026-10-28T19:09:06Z",
+     "at": "2026-11-20T16:08:28Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Closed without merging"
    },
    "id": 63
   },
