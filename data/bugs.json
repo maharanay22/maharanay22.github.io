@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-20T18:40:40Z",
+ "generated_at": "2026-11-20T18:47:06Z",
  "stages": [
   "reported",
   "fix sent",
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63617,
-   "forks": 13446,
+   "forks": 13447,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 99782353,
@@ -329,6 +329,300 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Pass a typed properties setter to RepositoryUtils.attachProperties",
+   "date": "2026-11-20",
+   "created_at": "2026-11-20T18:45:03Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2326,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2326"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/CatalogRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -115,7 +115,7 @@"
+      ],
+      [
+       "c",
+       "    for (CatalogInfoDAO catalogInfoDAO : catalogInfoDAOList) {"
+      ],
+      [
+       "c",
+       "      CatalogInfo catalogInfo = catalogInfoDAO.toCatalogInfo();"
+      ],
+      [
+       "c",
+       "      RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "          catalogInfo, catalogInfo.getId(), Constants.CATALOG, session);"
+      ],
+      [
+       "a",
+       "          catalogInfo, CatalogInfo::setProperties, catalogInfo.getId(), Constants.CATALOG, session);"
+      ],
+      [
+       "c",
+       "      result.add(catalogInfo);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    return new ListCatalogsResponse().catalogs(result).nextPageToken(nextPageToken);"
+      ],
+      [
+       "h",
+       "@@ -128,7 +128,11 @@"
+      ],
+      [
+       "c",
+       "          CatalogInfoDAO catalogInfoDAO = getCatalogDaoOrThrow(session, name);"
+      ],
+      [
+       "c",
+       "          CatalogInfo catalogInfo = catalogInfoDAO.toCatalogInfo();"
+      ],
+      [
+       "c",
+       "          return RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "              catalogInfo, catalogInfo.getId(), Constants.CATALOG, session);"
+      ],
+      [
+       "a",
+       "              catalogInfo,"
+      ],
+      [
+       "a",
+       "              CatalogInfo::setProperties,"
+      ],
+      [
+       "a",
+       "              catalogInfo.getId(),"
+      ],
+      [
+       "a",
+       "              Constants.CATALOG,"
+      ],
+      [
+       "a",
+       "              session);"
+      ],
+      [
+       "c",
+       "        },"
+      ],
+      [
+       "c",
+       "        \"Failed to get catalog\","
+      ],
+      [
+       "c",
+       "        /* readOnly= */ true);"
+      ],
+      [
+       "h",
+       "@@ -173,7 +177,11 @@"
+      ],
+      [
+       "c",
+       "                  || updateCatalog.getProperties().isEmpty())) {"
+      ],
+      [
+       "c",
+       "            CatalogInfo catalogInfo = catalogInfoDAO.toCatalogInfo();"
+      ],
+      [
+       "c",
+       "            return RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "                catalogInfo, catalogInfo.getId(), Constants.CATALOG, session);"
+      ],
+      [
+       "a",
+       "                catalogInfo,"
+      ],
+      [
+       "a",
+       "                CatalogInfo::setProperties,"
+      ],
+      [
+       "a",
+       "                catalogInfo.getId(),"
+      ]
+     ],
+     "truncated": true,
+     "additions": 16,
+     "deletions": 4
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/SchemaRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -112,7 +112,7 @@"
+      ],
+      [
+       "c",
+       "    SchemaInfo schemaInfo = schemaInfoDAO.toSchemaInfo();"
+      ],
+      [
+       "c",
+       "    addNamespaceData(schemaInfo, catalogName);"
+      ],
+      [
+       "c",
+       "    return RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "        schemaInfo, schemaInfo.getSchemaId(), Constants.SCHEMA, session);"
+      ],
+      [
+       "a",
+       "        schemaInfo, SchemaInfo::setProperties, schemaInfo.getSchemaId(), Constants.SCHEMA, session);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public SchemaInfoDAO getSchemaDaoOrThrow("
+      ],
+      [
+       "h",
+       "@@ -203,7 +203,11 @@"
+      ],
+      [
+       "c",
+       "    for (SchemaInfoDAO schemaInfoDAO : schemaInfoDAOList) {"
+      ],
+      [
+       "c",
+       "      SchemaInfo schemaInfo = schemaInfoDAO.toSchemaInfo();"
+      ],
+      [
+       "c",
+       "      RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "          schemaInfo, schemaInfo.getSchemaId(), Constants.SCHEMA, session);"
+      ],
+      [
+       "a",
+       "          schemaInfo,"
+      ],
+      [
+       "a",
+       "          SchemaInfo::setProperties,"
+      ],
+      [
+       "a",
+       "          schemaInfo.getSchemaId(),"
+      ],
+      [
+       "a",
+       "          Constants.SCHEMA,"
+      ],
+      [
+       "a",
+       "          session);"
+      ],
+      [
+       "c",
+       "      addNamespaceData(schemaInfo, catalogName);"
+      ],
+      [
+       "c",
+       "      result.add(schemaInfo);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "h",
+       "@@ -215,9 +219,7 @@"
+      ],
+      [
+       "c",
+       "        sessionFactory,"
+      ],
+      [
+       "c",
+       "        session -> {"
+      ],
+      [
+       "c",
+       "          SchemaInfoDAO schemaInfoDAO = getSchemaDaoOrThrow(session, fullName);"
+      ],
+      [
+       "d",
+       "          SchemaInfo schemaInfo = convertFromDAO(session, schemaInfoDAO, fullName);"
+      ],
+      [
+       "d",
+       "          return RepositoryUtils.attachProperties("
+      ],
+      [
+       "d",
+       "              schemaInfo, schemaInfo.getSchemaId(), Constants.SCHEMA, session);"
+      ],
+      [
+       "a",
+       "          return convertFromDAO(session, schemaInfoDAO, fullName);"
+      ]
+     ],
+     "truncated": true,
+     "additions": 7,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-20T18:45:00Z",
+    "updated_at": "2026-11-20T18:45:04Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 147
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -1861,7 +2155,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-20T04:09:08Z",
-    "updated_at": "2026-11-20T13:28:10Z",
+    "updated_at": "2026-11-20T18:41:50Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
