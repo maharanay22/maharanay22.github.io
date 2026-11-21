@@ -1141,12 +1141,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "running",
   "conflicts": false,
   "last_comment": "shba24@2026-11-21T07:31:01Z",
   "last_comment_who": "shba24",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2237": {
   "approved_by": [
