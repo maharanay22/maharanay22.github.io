@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-21T02:18:25Z",
+ "generated_at": "2026-11-21T02:40:49Z",
  "stages": [
   "reported",
   "fix sent",
@@ -61,9 +61,9 @@
    "contributors_checked": "2026-11-21",
    "period_rank": 7,
    "period_commits": 21,
-   "period_total": 28,
+   "period_total": 30,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-20"
+   "period_checked": "2026-11-21"
   },
   {
    "full": "lance-format/lance",
@@ -13296,7 +13296,39 @@
      "lines": [
       [
        "h",
-       "@@ -44,10 +44,10 @@"
+       "@@ -1,5 +1,7 @@"
+      ],
+      [
+       "c",
+       "package io.unitycatalog.server.persist.dao;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.CatalogInfo;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Column;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Entity;"
+      ],
+      [
+       "h",
+       "@@ -44,10 +46,10 @@"
       ],
       [
        "c",
@@ -13316,7 +13348,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"storage_root\", length = 2048)"
+       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
       ],
       [
        "c",
@@ -13332,7 +13364,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"storage_location\", length = 2048)"
+       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
       ],
       [
        "c",
@@ -13348,7 +13380,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
+     "additions": 4,
      "deletions": 2
     },
     {
@@ -13400,7 +13432,39 @@
      "lines": [
       [
        "h",
-       "@@ -47,10 +47,10 @@"
+       "@@ -1,5 +1,7 @@"
+      ],
+      [
+       "c",
+       "package io.unitycatalog.server.persist.dao;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.model.SchemaInfo;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Column;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Entity;"
+      ],
+      [
+       "h",
+       "@@ -47,10 +49,10 @@"
       ],
       [
        "c",
@@ -13420,7 +13484,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"storage_root\", length = 2048)"
+       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
       ],
       [
        "c",
@@ -13436,7 +13500,7 @@
       ],
       [
        "a",
-       "  @Column(name = \"storage_location\", length = 2048)"
+       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
       ],
       [
        "c",
@@ -13452,180 +13516,52 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
+     "additions": 4,
      "deletions": 2
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/VolumeInfoDAO.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/StagingTableDAO.java",
      "lines": [
       [
        "h",
-       "@@ -33,7 +33,7 @@"
+       "@@ -1,5 +1,7 @@"
       ],
       [
        "c",
-       "  @Column(name = \"comment\", length = 65536)"
-      ],
-      [
-       "c",
-       "  private String comment;"
+       "package io.unitycatalog.server.persist.dao;"
       ],
       [
        "c",
        ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"storage_location\")"
       ],
       [
        "a",
-       "  @Column(name = \"storage_location\", length = 2048)"
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
       ],
       [
-       "c",
-       "  private String storageLocation;"
-      ],
-      [
-       "c",
+       "a",
        ""
       ],
       [
        "c",
-       "  @Column(name = \"owner\")"
+       "import io.unitycatalog.server.model.StagingTableInfo;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Column;"
+      ],
+      [
+       "c",
+       "import jakarta.persistence.Entity;"
+      ],
+      [
+       "h",
+       "@@ -34,7 +36,7 @@"
       ]
      ],
-     "truncated": false,
-     "additions": 1,
+     "truncated": true,
+     "additions": 3,
      "deletions": 1
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V11__widen_catalog_storage_root.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs ALTER COLUMN storage_root VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V12__widen_catalog_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V13__widen_schema_storage_root.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN storage_root VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V14__widen_schema_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_schemas ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V15__widen_volume_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_volumes ALTER COLUMN storage_location VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/h2/V16__widen_model_version_source.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_model_versions ALTER COLUMN source VARCHAR(2048);"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/mysql/V11__widen_catalog_storage_root.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_root varchar(2048) NULL;"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
-    },
-    {
-     "path": "server/src/main/resources/db/migration/mysql/V12__widen_catalog_storage_location.sql",
-     "lines": [
-      [
-       "h",
-       "@@ -0,0 +1 @@"
-      ],
-      [
-       "a",
-       "ALTER TABLE uc_catalogs MODIFY COLUMN storage_location varchar(2048) NULL;"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 0
     }
    ],
    "track": {
@@ -13638,7 +13574,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/managedlocation/SdkManagedLocationTest.java",
       "text": "**Blocker:** Long-root test stops about 1,000 characters short of the boundary where child locations overflow The new test uses a root built with c.repeat(1000), which leaves a lot of headroom, so it passes without exercising the case where the catalog location fits but a derived child location does not. If the suffix…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -13648,7 +13584,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
       "text": "**Blocker:** Catalog storage_root can be long enough that child managed locations overflow their 2048 columns The catalog storage_root and storage_location columns are now 2,048 characters, but managed volume and staging-table locations are built by appending the managed-storage prefix and ids to that root. By my read…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -13658,7 +13594,7 @@
       "maintainer": true,
       "path": null,
       "text": "@shba24 could you take a look at this one first? It widens the catalog, schema, volume and model version path columns with new schema steps, like #2187. I will review after you approve.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -13671,21 +13607,21 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T15:05:53Z",
-    "updated_at": "2026-11-21T01:50:14Z",
+    "last_push": "2026-11-21T02:20:04Z",
+    "updated_at": "2026-11-21T02:22:05Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-21T01:28:03Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
