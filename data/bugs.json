@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-21T22:27:18Z",
+ "generated_at": "2026-11-21T23:19:04Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63672,
+   "stars": 63671,
    "forks": 13462,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -13560,6 +13560,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-21T22:41:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4655364868",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
+      "text": "**Blocker:** Two-character child allowance rejects an external location that names a single object The length check adds 2 to the UTF-8 key length of every location, so it always leaves room for a child object. For an external table or volume that points at one file, no child is ever written, so the allowance can reje…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-21T22:41:23Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4655364800",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "**Nit (not a blocker):** Validator in the credential package depends on the Hibernate Session StorageLocationValidator lives in service.credential, but its public methods take an org.hibernate.Session, for example validateLocation(Session, NormalizedURL, int). Only persist repositories call it, from inside their trans…",
+      "answered": true
+     },
+     {
       "kind": "review changes requested",
       "who": "shba24",
       "at": "2026-11-21T19:49:48Z",
@@ -13598,34 +13618,14 @@
       "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLocationValidator.java",
       "text": "**Blocker:** Registration checks the read/write STS policy even for locations that only need read access cloudLimitViolation always builds the policy context with SELECT and UPDATE, and the AWS policy generator adds more actions for UPDATE, so the read/write policy is longer than the read-only one. A path length there…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T16:47:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4653744108",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "**Nit (not a blocker):** Credential-only update skips the URL limit checks for the new credential In the branch that sets a new credential, validateUrlLimits runs only when updateExternalLocation.getUrl() != null. An update that changes only credential_name therefore skips the object-key and STS session-policy checks…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T08:10:33Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4651513260",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLocationValidator.java",
-      "text": "**Nit (not a blocker):** credentialFor swallows credential lookup errors without logging The catch at lines 220-221 turns any BaseException from the lookup into Optional.empty(), which skips every cloud-limit check, and it logs nothing. The comment covers the force-deleted-credential case, but getExternalLocationCrede…",
-      "answered": true
      }
     ],
     "stage": 3,
     "checks": "running",
-    "review": "changes requested",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-21T21:30:55Z",
-    "updated_at": "2026-11-21T22:03:17Z",
+    "last_push": "2026-11-21T22:56:25Z",
+    "updated_at": "2026-11-21T22:56:43Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
@@ -13633,8 +13633,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Requested changes are pushed. Waiting for shba24 to look again"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 96
   },
@@ -27753,17 +27753,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-21T21:25:49Z",
-    "updated_at": "2026-11-21T21:48:47Z",
+    "updated_at": "2026-11-21T22:48:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 38
   },

@@ -1379,6 +1379,7 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2310": {
   "approved_by": [
+   "shba24",
    "yili-db"
   ],
   "checks": "passing",
@@ -1386,7 +1387,7 @@
   "last_comment": "yili-db@2026-11-20T21:27:42Z",
   "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2312": {
   "approved_by": [
