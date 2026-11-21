@@ -1141,10 +1141,10 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [],
-  "checks": "passing",
+  "checks": "failing",
   "conflicts": false,
-  "last_comment": "yili-db@2026-11-21T01:28:03Z",
-  "last_comment_who": "yili-db",
+  "last_comment": "shba24@2026-11-21T07:31:01Z",
+  "last_comment_who": "shba24",
   "status": "review",
   "waiting_on": "you"
  },

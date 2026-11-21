@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-21T02:40:49Z",
+ "generated_at": "2026-11-21T09:57:59Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3582,
+   "stars": 3583,
    "forks": 706,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28916,
+   "stars": 28919,
    "forks": 6649,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50582,
-   "forks": 20701,
+   "stars": 50584,
+   "forks": 20702,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 713640700,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63630,
-   "forks": 13438,
+   "stars": 63644,
+   "forks": 13440,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100586360,
@@ -13274,7 +13274,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Widen catalog, schema, volume and model version path columns",
+   "title": "Widen storage path columns and validate locations against their column and cloud limits",
    "date": "2026-11-13",
    "created_at": "2026-11-13T20:38:05Z",
    "merged_at": null,
@@ -13292,243 +13292,107 @@
    "release": null,
    "files": [
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/CatalogRepository.java",
      "lines": [
       [
        "h",
-       "@@ -1,5 +1,7 @@"
+       "@@ -71,6 +71,11 @@"
       ],
       [
        "c",
-       "package io.unitycatalog.server.persist.dao;"
+       "    return TransactionManager.executeWithTransaction("
       ],
       [
        "c",
-       ""
+       "        sessionFactory,"
+      ],
+      [
+       "c",
+       "        session -> {"
       ],
       [
        "a",
-       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
+       "          if (storageRoot != null) {"
       ],
       [
        "a",
-       ""
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.model.CatalogInfo;"
-      ],
-      [
-       "c",
-       "import jakarta.persistence.Column;"
-      ],
-      [
-       "c",
-       "import jakarta.persistence.Entity;"
-      ],
-      [
-       "h",
-       "@@ -44,10 +46,10 @@"
-      ],
-      [
-       "c",
-       "  @Column(name = \"updated_by\")"
-      ],
-      [
-       "c",
-       "  private String updatedBy;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"storage_root\")"
+       "            repositories"
       ],
       [
        "a",
-       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
-      ],
-      [
-       "c",
-       "  private String storageRoot;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"storage_location\")"
+       "                .getStorageLocationValidator()"
       ],
       [
        "a",
-       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
+       "                .validateCatalogStorageRoot(session, storageRoot);"
+      ],
+      [
+       "a",
+       "          }"
       ],
       [
        "c",
-       "  private String storageLocation;"
+       "          if (RepositoryUtils.getCatalogDaoOpt(session, createCatalog.getName()).isPresent()) {"
       ],
       [
        "c",
-       ""
+       "            throw new BaseException("
       ],
       [
        "c",
-       "  public static CatalogInfoDAO from(CatalogInfo catalogInfo) {"
+       "                ErrorCode.CATALOG_ALREADY_EXISTS,"
       ]
      ],
      "truncated": false,
-     "additions": 4,
-     "deletions": 2
+     "additions": 5,
+     "deletions": 0
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/ModelVersionInfoDAO.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
      "lines": [
       [
        "h",
-       "@@ -39,7 +39,7 @@"
+       "@@ -15,6 +15,7 @@"
       ],
       [
        "c",
-       "  @Column(name = \"version\")"
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
       ],
       [
        "c",
-       "  private Long version;"
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
       ],
       [
        "c",
-       ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"source\")"
+       "import io.unitycatalog.server.persist.utils.TransactionManager;"
       ],
       [
        "a",
-       "  @Column(name = \"source\", length = 2048)"
+       "import io.unitycatalog.server.utils.Constants;"
       ],
       [
        "c",
-       "  private String source;"
+       "import io.unitycatalog.server.utils.IdentityUtils;"
       ],
       [
        "c",
-       ""
+       "import io.unitycatalog.server.utils.NormalizedURL;"
       ],
       [
        "c",
-       "  @Column(name = \"run_id\")"
-      ]
-     ],
-     "truncated": false,
-     "additions": 1,
-     "deletions": 1
-    },
-    {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
-     "lines": [
-      [
-       "h",
-       "@@ -1,5 +1,7 @@"
-      ],
-      [
-       "c",
-       "package io.unitycatalog.server.persist.dao;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "a",
-       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.model.SchemaInfo;"
-      ],
-      [
-       "c",
-       "import jakarta.persistence.Column;"
-      ],
-      [
-       "c",
-       "import jakarta.persistence.Entity;"
+       "import io.unitycatalog.server.utils.ValidationUtils;"
       ],
       [
        "h",
-       "@@ -47,10 +49,10 @@"
+       "@@ -65,6 +66,14 @@"
       ],
       [
        "c",
-       "  @Column(name = \"updated_by\")"
+       "    return credentialDAO;"
       ],
       [
        "c",
-       "  private String updatedBy;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"storage_root\")"
-      ],
-      [
-       "a",
-       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
-      ],
-      [
-       "c",
-       "  private String storageRoot;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "  @Column(name = \"storage_location\")"
-      ],
-      [
-       "a",
-       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
-      ],
-      [
-       "c",
-       "  private String storageLocation;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "  public static SchemaInfoDAO from(SchemaInfo schemaInfo) {"
-      ]
-     ],
-     "truncated": false,
-     "additions": 4,
-     "deletions": 2
-    },
-    {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/StagingTableDAO.java",
-     "lines": [
-      [
-       "h",
-       "@@ -1,5 +1,7 @@"
-      ],
-      [
-       "c",
-       "package io.unitycatalog.server.persist.dao;"
+       "  }"
       ],
       [
        "c",
@@ -13536,7 +13400,31 @@
       ],
       [
        "a",
-       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
+       "  /** Checks that an external location URL fits its column and the cloud limits of its storage. */"
+      ],
+      [
+       "a",
+       "  private void validateUrlLimits(String url, Optional<CredentialDAO> credentialDAO) {"
+      ],
+      [
+       "a",
+       "    repositories"
+      ],
+      [
+       "a",
+       "        .getStorageLocationValidator()"
+      ],
+      [
+       "a",
+       "        .validateLocation("
+      ],
+      [
+       "a",
+       "            NormalizedURL.from(url), Constants.MAX_EXTERNAL_LOCATION_URL_LENGTH, credentialDAO);"
+      ],
+      [
+       "a",
+       "  }"
       ],
       [
        "a",
@@ -13544,24 +13432,128 @@
       ],
       [
        "c",
-       "import io.unitycatalog.server.model.StagingTableInfo;"
+       "  /**"
       ],
       [
        "c",
-       "import jakarta.persistence.Column;"
+       "   * Checks that a location can be reached with its credential: an {@code s3_compatible} credential"
       ],
       [
        "c",
-       "import jakarta.persistence.Entity;"
+       "   * names S3-compatible storage, so its locations must be {@code s3://} paths."
       ],
       [
        "h",
-       "@@ -34,7 +36,7 @@"
+       "@@ -109,6 +118,7 @@"
+      ],
+      [
+       "c",
+       "          CredentialDAO credentialDAO ="
+      ],
+      [
+       "c",
+       "              validateAndGetCredentialDAO(session, createExternalLocation.getCredentialName());"
+      ],
+      [
+       "c",
+       "          validateUrlForCredential(url.toString(), credentialDAO);"
+      ],
+      [
+       "a",
+       "          validateUrlLimits(url.toString(), Optional.of(credentialDAO));"
+      ],
+      [
+       "c",
+       "          UUID externalLocationId = UUID.randomUUID();"
+      ],
+      [
+       "c",
+       "          ExternalLocationDAO externalLocationDAO ="
       ]
      ],
      "truncated": true,
-     "additions": 3,
-     "deletions": 1
+     "additions": 16,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ModelRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -19,6 +19,8 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.FileOperations;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.service.credential.StorageLocationValidator;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.IdentityUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.NormalizedURL;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ServerProperties;"
+      ],
+      [
+       "h",
+       "@@ -243,6 +245,7 @@"
+      ],
+      [
+       "c",
+       "              catalogAndSchemaDao, this::getDefaultModelsStorageRoot);"
+      ],
+      [
+       "c",
+       "      NormalizedURL storageLocation ="
+      ],
+      [
+       "c",
+       "          ExternalLocationUtils.getManagedLocationForModel(parentStorageLocation, modelId);"
+      ],
+      [
+       "a",
+       "      repositories.getStorageLocationValidator().validateModelLocation(session, storageLocation);"
+      ],
+      [
+       "c",
+       "      SchemaInfoDAO schemaInfoDAO = catalogAndSchemaDao.schemaInfoDAO();"
+      ],
+      [
+       "c",
+       "      try {"
+      ],
+      [
+       "c",
+       "        // Check if registered model already exists"
+      ],
+      [
+       "h",
+       "@@ -569,6 +572,12 @@"
+      ]
+     ],
+     "truncated": true,
+     "additions": 12,
+     "deletions": 0
     }
    ],
    "track": {
@@ -13569,59 +13561,79 @@
      {
       "kind": "inline comment",
       "who": "shba24",
-      "at": "2026-11-21T01:50:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4649783966",
+      "at": "2026-11-21T08:10:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4651513260",
       "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/sdk/managedlocation/SdkManagedLocationTest.java",
-      "text": "**Blocker:** Long-root test stops about 1,000 characters short of the boundary where child locations overflow The new test uses a root built with c.repeat(1000), which leaves a lot of headroom, so it passes without exercising the case where the catalog location fits but a derived child location does not. If the suffix…",
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLocationValidator.java",
+      "text": "**Nit (not a blocker):** credentialFor swallows credential lookup errors without logging The catch at lines 220-221 turns any BaseException from the lookup into Optional.empty(), which skips every cloud-limit check, and it logs nothing. The comment covers the force-deleted-credential case, but getExternalLocationCrede…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-21T08:10:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4651513183",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "**Nit (not a blocker):** No test fails if the validateUrlLimits call in the credential-change update branch is removed Every update in BaseExternalLocationCRUDTest that sets credentialName leaves out url, and testUrlUpToTheColumnLimit sends only url, so it reaches the keep-current-credential branch. No test in server/…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-21T08:10:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4651513114",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
+      "text": "**Blocker:** Character limit counts UTF-16 units, which may reject values PostgreSQL stores today Unit.CHARACTERS uses String.length(), which counts UTF-16 code units, while PostgreSQL and MySQL utf8mb4 count varchar length in code points. NormalizedURL.normalize (NormalizedURL.java:186,199) leaves non-ASCII character…",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "shba24",
+      "at": "2026-11-21T07:31:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#issuecomment-7059309747",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 Take your time. Few more comments coming as this is a very important and critical change. Thank you for making the contribution. This is really helpful.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-21T05:31:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4650816826",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/ExternalLocationUtils.java",
+      "text": "**Nit (not a blocker):** managedStoragePrefix accepts any String although only two values are valid The Javadoc says only MANAGED_STORAGE_CATALOG_PREFIX or MANAGED_STORAGE_SCHEMA_PREFIX are valid, but the signature takes any String. Both current callers (CatalogRepository.java:65 and SchemaRepository.java:85) pass the…",
       "answered": true
      },
      {
       "kind": "inline comment",
       "who": "shba24",
-      "at": "2026-11-21T01:41:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4649742276",
+      "at": "2026-11-21T05:31:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4650816704",
       "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
-      "text": "**Blocker:** Catalog storage_root can be long enough that child managed locations overflow their 2048 columns The catalog storage_root and storage_location columns are now 2,048 characters, but managed volume and staging-table locations are built by appending the managed-storage prefix and ids to that root. By my read…",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-21T01:28:03Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#issuecomment-7055127782",
-      "maintainer": true,
-      "path": null,
-      "text": "@shba24 could you take a look at this one first? It widens the catalog, schema, volume and model version path columns with new schema steps, like #2187. I will review after you approve.",
-      "answered": true
-     },
-     {
-      "kind": "comment",
-      "who": "yili-db",
-      "at": "2026-11-20T01:07:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#issuecomment-7027153609",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] This PR needs a rebase onto main. Main's latest step is now V4 (`V4__credentials_credential_as_text.sql`, from #2169), so the six steps here need to move from V4 to V9 to a new range above it. Rename the step files and their effect files, then regenerate the effect files with `build/sbt updateSchemaDumps…",
+      "path": "server/src/main/java/io/unitycatalog/server/utils/Constants.java",
+      "text": "**Nit (not a blocker):** MAX_STORAGE_LOCATION_LENGTH is used as characters in the DAOs and as UTF-8 bytes in the validator The @Column length attributes count characters, while validateManagedLocationsFit compares UTF-8 bytes against the same constant. The byte check is stricter, so nothing that passes can overflow a…",
       "answered": true
      }
     ],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-21T02:20:04Z",
-    "updated_at": "2026-11-21T02:22:05Z",
+    "last_push": "2026-11-21T06:29:10Z",
+    "updated_at": "2026-11-21T08:10:34Z",
     "conflicts": false,
     "last_comment": {
-     "who": "yili-db",
-     "at": "2026-11-21T01:28:03Z",
+     "who": "shba24",
+     "at": "2026-11-21T07:31:01Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 96
   },
