@@ -13,11 +13,11 @@
    "VANDRANKI"
   ],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
@@ -1386,8 +1386,8 @@
   "conflicts": false,
   "last_comment": "yili-db@2026-11-20T21:27:42Z",
   "last_comment_who": "yili-db",
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2312": {
   "approved_by": [
@@ -1397,8 +1397,8 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2314": {
   "approved_by": [
@@ -1468,21 +1468,21 @@
   "approved_by": [
    "yili-db"
   ],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
-  "last_comment": null,
-  "last_comment_who": null,
+  "last_comment": "yili-db@2026-11-22T10:53:45Z",
+  "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2322": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2323": {
   "approved_by": [],
@@ -1503,13 +1503,15 @@
   "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2325": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2326": {
   "approved_by": [
