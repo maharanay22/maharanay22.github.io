@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-22T06:52:01Z",
+ "generated_at": "2026-11-22T10:19:02Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3583,
+   "stars": 3584,
    "forks": 707,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28925,
+   "stars": 28926,
    "forks": 6645,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50595,
-   "forks": 20706,
+   "stars": 50598,
+   "forks": 20707,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 706926284,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63677,
-   "forks": 13466,
+   "stars": 63686,
+   "forks": 13469,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100252220,
@@ -311,7 +311,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1503,
+   "stars": 1504,
    "forks": 266,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -2174,7 +2174,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-20T21:41:04Z",
-    "updated_at": "2026-11-20T21:41:06Z",
+    "updated_at": "2026-11-22T08:59:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3208,7 +3208,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-20T21:36:47Z",
-    "updated_at": "2026-11-20T21:37:41Z",
+    "updated_at": "2026-11-22T08:59:09Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -5280,7 +5280,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-21T19:45:34Z",
-    "updated_at": "2026-11-21T20:03:46Z",
+    "updated_at": "2026-11-22T08:59:08Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -13625,7 +13625,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-21T22:56:25Z",
-    "updated_at": "2026-11-22T00:13:41Z",
+    "updated_at": "2026-11-22T08:59:10Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
