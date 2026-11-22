@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-22T17:56:56Z",
+ "generated_at": "2026-11-22T21:47:47Z",
  "stages": [
   "reported",
   "fix sent",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50600,
+   "stars": 50603,
    "forks": 20706,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63704,
-   "forks": 13472,
+   "stars": 63714,
+   "forks": 13475,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100252220,
@@ -13434,7 +13434,7 @@
       ],
       [
        "a",
-       "        .validateLocation("
+       "        .validateExternalLocationUrl("
       ],
       [
        "a",
@@ -13579,6 +13579,26 @@
      {
       "kind": "inline comment",
       "who": "shba24",
+      "at": "2026-11-22T18:38:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4659420211",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/VolumeRepository.java",
+      "text": "**Blocker:** External volume location is checked as if it could be a single object, so a location with no room for children is accepted The external volume path calls validateLocation, which uses Use.REQUESTED and Extent.OBJECT_OR_PREFIX. That extent exists because an external table can be a single file (StorageLimits…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-22T18:38:48Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4659420133",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
+      "text": "**Blocker:** Azure locations are checked against the flat-namespace segment limit, so a hierarchical-namespace account accepts locations that cannot be used The comment at lines 25-29 says hierarchical-namespace accounts allow 63 segments, counting the account and container. azurePathSegmentViolation then always compa…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
       "at": "2026-11-21T22:41:24Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4655364868",
       "maintainer": true,
@@ -13615,34 +13635,14 @@
       "path": "server/src/main/java/io/unitycatalog/server/service/credential/aws/AwsCredentialGenerator.java",
       "text": "**Nit (not a blocker):** No test fails if the S3-compatible skip of the session policy limit is removed assumeRole applies sessionPolicyViolation only when !isS3Compatible, so S3-compatible STS endpoints should reach the endpoint unchecked. The only test on the S3-compatible side, testS3CompatibleStorageIsLimitedOnlyB…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T16:47:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4653744318",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLocationValidator.java",
-      "text": "**Nit (not a blocker):** credentialFor returns a nested Optional for three different states credentialFor returns Optional<Optional<CredentialDAO>>. An empty outer value means the lookup failed and cloud limits are skipped. An empty inner value means no external location covers the path. A present value is the credent…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T16:47:25Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4653744216",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLocationValidator.java",
-      "text": "**Blocker:** Registration checks the read/write STS policy even for locations that only need read access cloudLimitViolation always builds the policy context with SELECT and UPDATE, and the AWS policy generator adds more actions for UPDATE, so the read/write policy is longer than the read-only one. A path length there…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-21T22:56:25Z",
-    "updated_at": "2026-11-22T08:59:10Z",
+    "last_push": "2026-11-22T19:46:13Z",
+    "updated_at": "2026-11-22T20:59:35Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
