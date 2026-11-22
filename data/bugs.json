@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-22T10:19:02Z",
+ "generated_at": "2026-11-22T13:22:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28926,
+   "stars": 28927,
    "forks": 6645,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63686,
-   "forks": 13469,
+   "stars": 63692,
+   "forks": 13470,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100252220,
@@ -2149,11 +2149,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Test create on a taken name against the server and keep unrelated staging errors",
    "date": "2026-11-20",
    "created_at": "2026-11-20T18:38:46Z",
-   "merged_at": null,
+   "merged_at": "2026-11-22",
    "reported": true,
    "pr": {
     "number": 2325,
@@ -2168,18 +2168,31 @@
    "release": null,
    "files": [],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-22T10:46:53Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2325#pullrequestreview-6011831142",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. Both blockers from the earlier round are fixed: the second location now has a `file:` URI, and the storage location assertion compares with the location read after the first create. I ran the new case with and without the mapping from #2318; it passes with it and fails without it. Non-blocking:…",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T21:41:04Z",
-    "updated_at": "2026-11-22T08:59:11Z",
+    "updated_at": "2026-11-22T10:47:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 146
   },
@@ -3004,11 +3017,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T21:46:31Z",
     "updated_at": "2026-11-22T00:12:55Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 143
   },
@@ -3141,6 +3154,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "yili-db",
+      "at": "2026-11-22T10:53:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#issuecomment-7078086026",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] I merged main and resolved the `ai/CHANGELOG.md` conflict to save a round; no code changes.",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-20T21:21:06Z",
@@ -3189,31 +3212,25 @@
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording: \"LangChain, CrewAI and AutoGen tools now reject a call that leaves out such an argument ... instead of sending `None` for it to the function.\" Before this change the client already rejected the `None`, both the OSS and the Databricks client reject `None` for any parameter without `DEFAUL…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T09:15:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594803",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] Normal, wording: \"The OpenAI, LiteLLM, DSPy and Gemini schemas are unchanged, because they already listed these parameters as required.\" OpenAI and Gemini check out. DSPy does not build a required list at all, so its schema is unchanged for a different reason: it does not read the model's required list.…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
-    "last_push": "2026-11-20T21:36:47Z",
-    "updated_at": "2026-11-22T08:59:09Z",
+    "last_push": "2026-11-22T10:53:23Z",
+    "updated_at": "2026-11-22T10:53:45Z",
     "conflicts": false,
-    "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "last_comment": {
+     "who": "yili-db",
+     "at": "2026-11-22T10:53:45Z",
+     "maintainer": true
+    },
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db commented. Reply or update the PR"
    },
    "id": 142
   },
@@ -4738,11 +4755,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Don't sleep a backoff after the final retry attempt",
    "date": "2026-11-20",
    "created_at": "2026-11-20T00:41:38Z",
-   "merged_at": null,
+   "merged_at": "2026-11-22",
    "reported": true,
    "pr": {
     "number": 2312,
@@ -5040,30 +5057,30 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-20T15:23:52Z",
-    "updated_at": "2026-11-20T20:35:51Z",
+    "updated_at": "2026-11-22T10:51:06Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 134
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Gemini tools send integer arguments as floats",
    "date": "2026-11-19",
    "created_at": "2026-11-19T23:01:10Z",
-   "merged_at": null,
+   "merged_at": "2026-11-22",
    "reported": true,
    "pr": {
     "number": 2310,
@@ -5272,7 +5289,7 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
@@ -5280,16 +5297,16 @@
      "yili-db"
     ],
     "last_push": "2026-11-21T19:45:34Z",
-    "updated_at": "2026-11-22T08:59:08Z",
+    "updated_at": "2026-11-22T10:49:55Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T21:27:42Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by shba24, yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 133
   },
@@ -30816,11 +30833,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
