@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-22T21:47:47Z",
+ "generated_at": "2026-11-22T23:31:24Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28931,
+   "stars": 28934,
    "forks": 6648,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -2799,7 +2799,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T21:27:55Z",
-    "updated_at": "2026-11-20T21:32:05Z",
+    "updated_at": "2026-11-22T23:17:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3016,7 +3016,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T21:46:31Z",
-    "updated_at": "2026-11-22T00:12:55Z",
+    "updated_at": "2026-11-22T23:17:16Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
@@ -3221,7 +3221,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-22T10:53:23Z",
-    "updated_at": "2026-11-22T10:53:45Z",
+    "updated_at": "2026-11-22T23:17:12Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -4009,7 +4009,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T21:33:39Z",
-    "updated_at": "2026-11-20T21:34:45Z",
+    "updated_at": "2026-11-22T23:17:15Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -10500,63 +10500,63 @@
     "feedback": [
      {
       "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-20T10:24:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4641284139",
+      "who": "yili-db",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495131",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "what happens if `api_client` was already used on another loop before being wrapped here? `_close()` awaits `self._replaced_rest_client.close()` on the new background loop, so closing a pooled HTTP connection raises a different-loop error (and leaves the socket open in debug mode) while later close calls don't retry it…",
-      "answered": true
+      "text": "[AI Assisted] Holds `_INSTALL_LOCK` around the install, so two clients built at the same time on one `ApiClient` install one REST client. `test_clients_built_at_the_same_time_on_one_api_client_install_one_rest_client` covers it. [code]",
+      "answered": false
      },
      {
       "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-20T10:24:12Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4641284151",
+      "who": "yili-db",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495135",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/client.py",
+      "text": "[AI Assisted] Docstring for `close_async`: a second call waits for the first one to finish instead of returning at once. [code]",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495142",
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "doesn't `thread.join(timeout=30)` return silently if shutdown hangs, and `assert_session_closed()` only checks that new requests fail? could we check that the close thread and owned request thread actually stopped, and call `release.set()` in `finally`? [code]",
-      "answered": true
+      "text": "[AI Assisted] Builds the client on the loop that owns the session, as the docs now say. `UnitycatalogFunctionClient` is created inside the coroutine, not on the caller's loop. [code]",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006477",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495147",
       "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Could we remove the `_clients_to_reset_after_fork` WeakSet and the `_reset_clients_after_fork` hook? A pid check makes a registry unnecessary.",
-      "answered": true
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] Unpacks the `ApiClient` and the client that the owning loop built, for both the running and the stopped loop branches. [code]",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006486",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495153",
       "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Could we drop `_inherited_before_fork`? It only keeps objects alive for the reset hook, which would go away with the pid check.",
-      "answered": true
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] Waits for the close and the pending request on worker threads, so the loop that owns the session is free to run the close. [code]",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006491",
+      "at": "2026-11-22T23:12:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495160",
       "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Suggest replacing the `os.register_at_fork` registration with the owning process, saved in `__init__`: [code] Check it in `request` before taking the lock, and make `shutdown` a no-op in a child: [code]",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-19T08:17:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4626006502",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/client.py",
-      "text": "[AI Assisted] Could we build the owned client with the same class as the replaced one, `type(self._replaced_rest_client)(self._configuration)`, on the owned loop? That keeps a subclass's `request` override in use, as main does; this PR currently calls it zero times. Instance attributes on the original object would not…",
-      "answered": true
+      "path": "ai/core/tests/core/oss/test_oss_client.py",
+      "text": "[AI Assisted] Silences the fork `DeprecationWarning` for this test only. The sandbox executor on main triggers it too. [code]",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -10564,12 +10564,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T17:40:56Z",
-    "updated_at": "2026-11-20T19:41:53Z",
+    "updated_at": "2026-11-22T23:12:41Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 110
   },
