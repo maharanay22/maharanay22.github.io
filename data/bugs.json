@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T15:31:19Z",
+ "generated_at": "2026-11-23T16:25:37Z",
  "stages": [
   "reported",
   "fix sent",
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50605,
-   "forks": 20711,
+   "forks": 20710,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63768,
+   "stars": 63770,
    "forks": 13495,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,334 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Drop the trailing slash of the server URI before adding the API path",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T16:23:21Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2337,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2337"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "high",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "clients/java/src/main/java/io/unitycatalog/client/ApiClientBuilder.java",
+     "lines": [
+      [
+       "h",
+       "@@ -60,7 +60,8 @@"
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * Sets the Unity Catalog server URI."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "d",
+       "   * <p>The base path {@code /api/2.1/unity-catalog} will be automatically appended."
+      ],
+      [
+       "a",
+       "   * <p>The base path {@code /api/2.1/unity-catalog} will be automatically appended, after any"
+      ],
+      [
+       "a",
+       "   * trailing slashes of the URI path are removed."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @param uri the Unity Catalog server URI, must not be null"
+      ],
+      [
+       "c",
+       "   * @return this builder instance for method chaining"
+      ],
+      [
+       "h",
+       "@@ -183,7 +184,7 @@"
+      ],
+      [
+       "c",
+       "    apiClient.setScheme(uri.getScheme());"
+      ],
+      [
+       "c",
+       "    apiClient.setHost(uri.getHost());"
+      ],
+      [
+       "c",
+       "    apiClient.setPort(uri.getPort());"
+      ],
+      [
+       "d",
+       "    apiClient.setBasePath(uri.getPath() + BASE_PATH);"
+      ],
+      [
+       "a",
+       "    apiClient.setBasePath(uri.getPath().replaceAll(\"/+$\", \"\") + BASE_PATH);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    // Add the User-Agent request interceptor."
+      ],
+      [
+       "c",
+       "    if (!appVersionMap.isEmpty()) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T16:16:32Z",
+    "updated_at": "2026-11-23T16:23:22Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 157
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Pass the server URI, not the API base URI, to the Delta commit client",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T16:23:18Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2336,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2336"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/TableCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -38,7 +38,8 @@"
+      ],
+      [
+       "c",
+       "  private static final ObjectMapper objectMapper = CliUtils.getObjectMapper();"
+      ],
+      [
+       "c",
+       "  private static ObjectWriter objectWriter;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  public static void handle(CommandLine cmd, ApiClient apiClient, String authToken)"
+      ],
+      [
+       "a",
+       "  public static void handle("
+      ],
+      [
+       "a",
+       "      CommandLine cmd, ApiClient apiClient, String serverUrl, String authToken)"
+      ],
+      [
+       "c",
+       "      throws JsonProcessingException, ApiException {"
+      ],
+      [
+       "c",
+       "    TablesApi tablesApi = new TablesApi(apiClient);"
+      ],
+      [
+       "c",
+       "    TemporaryCredentialsApi temporaryCredentialsApi = new TemporaryCredentialsApi(apiClient);"
+      ],
+      [
+       "h",
+       "@@ -47,7 +48,6 @@"
+      ],
+      [
+       "c",
+       "    objectWriter = CliUtils.getObjectWriter(cmd);"
+      ],
+      [
+       "c",
+       "    JSONObject json = CliUtils.createJsonFromOptions(cmd);"
+      ],
+      [
+       "c",
+       "    String output = EMPTY;"
+      ],
+      [
+       "d",
+       "    String serverUrl = apiClient.getBaseUri();"
+      ],
+      [
+       "c",
+       "    switch (subCommand) {"
+      ],
+      [
+       "c",
+       "      case CliUtils.CREATE:"
+      ],
+      [
+       "c",
+       "        output = createTable(tablesApi, temporaryCredentialsApi, json, serverUrl, authToken);"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -146,7 +146,8 @@"
+      ],
+      [
+       "c",
+       "          VolumeCli.handle(cmd, apiClient);"
+      ],
+      [
+       "c",
+       "          break;"
+      ],
+      [
+       "c",
+       "        case CliUtils.TABLE:"
+      ],
+      [
+       "d",
+       "          TableCli.handle(cmd, apiClient, loadProperty(CliUtils.AUTH_TOKEN, cmd));"
+      ],
+      [
+       "a",
+       "          TableCli.handle("
+      ],
+      [
+       "a",
+       "              cmd, apiClient, getBaseUri(cmd, \"\"), loadProperty(CliUtils.AUTH_TOKEN, cmd));"
+      ],
+      [
+       "c",
+       "          break;"
+      ],
+      [
+       "c",
+       "        case CliUtils.FUNCTION:"
+      ],
+      [
+       "c",
+       "          FunctionCli.handle(cmd, apiClient);"
+      ],
+      [
+       "h",
+       "@@ -282,7 +283,8 @@"
+      ],
+      [
+       "c",
+       "   * Without a port, it uses 443 for https and 8080 for http."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @param cmd the parsed command line"
+      ],
+      [
+       "d",
+       "   * @param basePath the base path of the API, such as {@code /api/2.1/unity-catalog}"
+      ],
+      [
+       "a",
+       "   * @param basePath the base path of the API, such as {@code /api/2.1/unity-catalog}, or empty for"
+      ],
+      [
+       "a",
+       "   *     the server URI itself"
+      ],
+      [
+       "c",
+       "   * @return the server URL with its port and the base path appended to its path"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  private static String getBaseUri(CommandLine cmd, String basePath) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T16:22:19Z",
+    "updated_at": "2026-11-23T16:23:20Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 156
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -3308,7 +3636,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T15:28:48Z",
-    "updated_at": "2026-11-23T15:28:54Z",
+    "updated_at": "2026-11-23T15:45:50Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
