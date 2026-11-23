@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T16:25:37Z",
+ "generated_at": "2026-11-23T18:02:17Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7382,
+   "stars": 7383,
    "forks": 958,
    "package": "pylance",
    "impact": null,
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28940,
+   "stars": 28941,
    "forks": 6649,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63770,
-   "forks": 13495,
+   "stars": 63772,
+   "forks": 13498,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -329,6 +329,2602 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Pass each PostgreSQL extraParams entry as a JDBC URL parameter",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:59:00Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2351,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2351"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": ".github/workflows/helm-chart-tests.yml",
+     "lines": [
+      [
+       "h",
+       "@@ -155,6 +155,24 @@"
+      ],
+      [
+       "c",
+       "          grep -qF 'jdbc:mysql://mysql:3306/uc%2Bdb?connectionTimeZone=%2B05%3A30&sslMode=REQUIRED' <<<\"$out\""
+      ],
+      [
+       "c",
+       "          grep -qF -- '--module-path=/home/unitycatalog/jdbc-drivers/mysql-connector-j.jar' <<<\"$out\""
+      ],
+      [
+       "c",
+       "          grep -qF 'mountPath: /home/unitycatalog/jdbc-drivers/mysql-connector-j.jar' <<<\"$out\""
+      ],
+      [
+       "a",
+       "          # Each PostgreSQL extra parameter is a URL parameter of its own, next to the ones ssl sets, with its value"
+      ],
+      [
+       "a",
+       "          # encoded."
+      ],
+      [
+       "a",
+       "          pg=(-f helm/ci/postgresql-values.yaml --set server.db.postgresqlConfig.ssl.enabled=true"
+      ],
+      [
+       "a",
+       "            --set-string server.db.postgresqlConfig.ssl.rootCert=ci-cert)"
+      ],
+      [
+       "a",
+       "          out=\"$(helm template uc helm \"${pg[@]}\" \\"
+      ],
+      [
+       "a",
+       "            --set-string 'server.db.postgresqlConfig.extraParams.ApplicationName=uc ci+test' \\"
+      ],
+      [
+       "a",
+       "            --set-string 'server.db.postgresqlConfig.extraParams.currentSchema=uc')\""
+      ],
+      [
+       "a",
+       "          url=\"$(sed -n 's/^ *hibernate\\.connection\\.url=//p' <<<\"$out\")\""
+      ],
+      [
+       "a",
+       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?ApplicationName=uc+ci%2Btest&currentSchema=uc&sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
+      ],
+      [
+       "a",
+       "          # An extra parameter that ssl also sets fails the render. Without ssl, it is passed on."
+      ],
+      [
+       "a",
+       "          if err=\"$(helm template uc helm \"${pg[@]}\" --set-string server.db.postgresqlConfig.extraParams.sslmode=disable 2>&1)\"; then"
+      ],
+      [
+       "a",
+       "            exit 1"
+      ],
+      [
+       "a",
+       "          fi"
+      ],
+      [
+       "a",
+       "          grep -qF 'server.db.postgresqlConfig.extraParams.sslmode is set by server.db.postgresqlConfig.ssl' <<<\"$err\""
+      ],
+      [
+       "a",
+       "          out=\"$(helm template uc helm -f helm/ci/postgresql-values.yaml \\"
+      ],
+      [
+       "a",
+       "            --set-string server.db.postgresqlConfig.extraParams.sslmode=require)\""
+      ],
+      [
+       "a",
+       "          url=\"$(sed -n 's/^ *hibernate\\.connection\\.url=//p' <<<\"$out\")\""
+      ],
+      [
+       "a",
+       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?sslmode=require' ]"
+      ],
+      [
+       "c",
+       "          # With storage secrets too, the server container has one env list that holds both. The upgrade-schema"
+      ],
+      [
+       "c",
+       "          # container gets the database password and the driver, but no storage secrets."
+      ],
+      [
+       "c",
+       "          out=\"$(helm template uc helm -f helm/ci/mysql-values.yaml -f helm/ci/secrets-values.yaml \\"
+      ]
+     ],
+     "truncated": false,
+     "additions": 18,
+     "deletions": 0
+    },
+    {
+     "path": "helm/templates/server/_config.tpl",
+     "lines": [
+      [
+       "h",
+       "@@ -58,13 +58,17 @@"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "{{- if .Values.server.db.postgresqlConfig.extraParams }}"
+      ],
+      [
+       "d",
+       "{{- $params = merge $params (dict \"extraParams\" .Values.server.db.postgresqlConfig.extraParams) }}"
+      ],
+      [
+       "a",
+       "{{- range $key, $value := .Values.server.db.postgresqlConfig.extraParams }}"
+      ],
+      [
+       "a",
+       "{{- if hasKey $params $key }}"
+      ],
+      [
+       "a",
+       "{{- fail (printf \"server.db.postgresqlConfig.extraParams.%s is set by server.db.postgresqlConfig.ssl: remove it from extraParams\" $key) }}"
+      ],
+      [
+       "a",
+       "{{- end }}"
+      ],
+      [
+       "a",
+       "{{- $_ := set $params $key $value }}"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{{- $urlParamsList := list }}"
+      ],
+      [
+       "a",
+       "{{- /* PgJDBC form-decodes the parameter values but not their names, so only the values are escaped. */}}"
+      ],
+      [
+       "c",
+       "{{- range $key, $value := $params }}"
+      ],
+      [
+       "d",
+       "{{- $urlParamsList = append $urlParamsList (printf \"%s=%s\" $key $value) }}"
+      ],
+      [
+       "a",
+       "{{- $urlParamsList = append $urlParamsList (printf \"%s=%s\" $key (urlquery $value)) }}"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{{- $urlParams := \"\" }}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 7,
+     "deletions": 3
+    },
+    {
+     "path": "helm/values.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -281,13 +281,16 @@"
+      ],
+      [
+       "c",
+       "        # @default -- ca.crt"
+      ],
+      [
+       "c",
+       "        rootCertConfigMapKey: ca.crt"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "      # -- (object) Postgres params"
+      ],
+      [
+       "a",
+       "      # -- (object) PostgreSQL JDBC URL params"
+      ],
+      [
+       "c",
+       "      # @default -- not set"
+      ],
+      [
+       "c",
+       "      # @raw"
+      ],
+      [
+       "c",
+       "      #"
+      ],
+      [
+       "a",
+       "      # With `ssl.enabled`, the chart sets `sslmode` and `sslrootcert` from `ssl` and fails to render when they are"
+      ],
+      [
+       "a",
+       "      # also set here."
+      ],
+      [
+       "a",
+       "      #"
+      ],
+      [
+       "c",
+       "      # Example:"
+      ],
+      [
+       "c",
+       "      # ```yaml"
+      ]
+     ],
+     "truncated": true,
+     "additions": 5,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T15:59:15Z",
+    "updated_at": "2026-11-23T17:59:01Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 171
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Point the server at the mounted GCS key file",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:58Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2350,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2350"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": ".github/workflows/helm-chart-tests.yml",
+     "lines": [
+      [
+       "h",
+       "@@ -250,6 +250,19 @@"
+      ],
+      [
+       "c",
+       "          grep -A6 -- '- name: OAUTH_CLIENT_SECRET$' <<<\"$out\" | grep -qF 'optional: true'"
+      ],
+      [
+       "c",
+       "          out=\"$(helm template uc helm -f helm/ci/secrets-values.yaml)\""
+      ],
+      [
+       "c",
+       "          ! grep -qE -- '- name: OAUTH_CLIENT_SECRET$' <<<\"$out\" || exit 1"
+      ],
+      [
+       "a",
+       "          # The server reads each GCS key file where the server container mounts it from the Secret."
+      ],
+      [
+       "a",
+       "          gcs=()"
+      ],
+      [
+       "a",
+       "          for i in 0 1; do"
+      ],
+      [
+       "a",
+       "            gcs+=(--set \"storage.credentials.gcs[$i].bucketPath=gs://ci-bucket-$i\""
+      ],
+      [
+       "a",
+       "              --set \"storage.credentials.gcs[$i].credentialsSecretName=ci-gcs-$i\")"
+      ],
+      [
+       "a",
+       "          done"
+      ],
+      [
+       "a",
+       "          out=\"$(helm template uc helm \"${gcs[@]}\")\""
+      ],
+      [
+       "a",
+       "          server=\"$(sed -n '/^        - name: server$/,/^      volumes:$/p' <<<\"$out\")\""
+      ],
+      [
+       "a",
+       "          for i in 0 1; do"
+      ],
+      [
+       "a",
+       "            key_file=\"$(sed -n \"s/^ *gcs\\.jsonKeyFilePath\\.$i=//p\" <<<\"$out\")\""
+      ],
+      [
+       "a",
+       "            [ -n \"$key_file\" ]"
+      ],
+      [
+       "a",
+       "            grep -A1 -- \"- name: gcs-credentials-$i\\$\" <<<\"$server\" | sed -n 's/^ *mountPath: //p' | grep -qxF -- \"$key_file\""
+      ],
+      [
+       "a",
+       "          done"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "      - name: Build the server and UI images"
+      ],
+      [
+       "c",
+       "        run: |"
+      ]
+     ],
+     "truncated": false,
+     "additions": 13,
+     "deletions": 0
+    },
+    {
+     "path": "helm/templates/server/_config.tpl",
+     "lines": [
+      [
+       "h",
+       "@@ -31,7 +31,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{{- range $index, $config := .Values.storage.credentials.gcs }}"
+      ],
+      [
+       "c",
+       "gcs.bucketPath.{{ $index }}={{ $config.bucketPath }}"
+      ],
+      [
+       "d",
+       "gcs.jsonKeyFilePath.{{ $index }}=/etc/conf/gcs-credentials-{{ $index }}.json"
+      ],
+      [
+       "a",
+       "gcs.jsonKeyFilePath.{{ $index }}=/home/unitycatalog/etc/conf/gcs-credentials-{{ $index }}.json"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T15:59:14Z",
+    "updated_at": "2026-11-23T17:58:59Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 170
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Declare Gemini tools by their tool name so same-named functions can be used together",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:55Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2349,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2349"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -191,7 +191,9 @@"
+      ],
+      [
+       "c",
+       "                )"
+      ],
+      [
+       "c",
+       "            )"
+      ],
+      [
+       "c",
+       "        ]"
+      ],
+      [
+       "d",
+       "        schema = dict(name=function_info.name, description=function_info.comment)"
+      ],
+      [
+       "a",
+       "        schema = dict("
+      ],
+      [
+       "a",
+       "            name=get_tool_name(function_info.full_name), description=function_info.comment"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "c",
+       "        if parameters[\"properties\"]:"
+      ],
+      [
+       "c",
+       "            schema[\"parameters\"] = parameters"
+      ],
+      [
+       "c",
+       "        return schema"
+      ],
+      [
+       "h",
+       "@@ -232,7 +234,12 @@"
+      ],
+      [
+       "c",
+       "        else:"
+      ],
+      [
+       "c",
+       "            raise ValueError(\"Either function_name or function_info should be provided.\")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "        schema = UCFunctionToolkit.convert_to_gemini_schema(function_info, strict=True)"
+      ],
+      [
+       "a",
+       "        tool_name = get_tool_name(function_name)"
+      ],
+      [
+       "a",
+       "        # Gemini dispatches by the declared name, and the client's full_name can differ in case."
+      ],
+      [
+       "a",
+       "        schema = {"
+      ],
+      [
+       "a",
+       "            **UCFunctionToolkit.convert_to_gemini_schema(function_info, strict=True),"
+      ],
+      [
+       "a",
+       "            \"name\": tool_name,"
+      ],
+      [
+       "a",
+       "        }"
+      ],
+      [
+       "c",
+       "        param_infos = function_info.input_params.parameters if function_info.input_params else []"
+      ],
+      [
+       "c",
+       "        params_type_json = {"
+      ],
+      [
+       "c",
+       "            \"type\": \"struct\","
+      ],
+      [
+       "h",
+       "@@ -254,7 +261,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        return GeminiTool("
+      ],
+      [
+       "c",
+       "            fn=func,"
+      ],
+      [
+       "d",
+       "            name=get_tool_name(function_name),"
+      ]
+     ],
+     "truncated": true,
+     "additions": 10,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:38:52Z",
+    "updated_at": "2026-11-23T17:58:56Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 169
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Return 400 for a malformed uniform converted_delta_timestamp on commit",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:52Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2348,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2348"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUniformUtils.java",
+     "lines": [
+      [
+       "h",
+       "@@ -14,6 +14,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "c",
+       "import java.net.URI;"
+      ],
+      [
+       "c",
+       "import java.time.Instant;"
+      ],
+      [
+       "a",
+       "import java.time.format.DateTimeParseException;"
+      ],
+      [
+       "c",
+       "import java.util.Map;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -52,7 +53,7 @@"
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * UniForm Iceberg fields, normalized once at the request boundary. Callers normalize the"
+      ],
+      [
+       "c",
+       "   * metadata-location (using {@link NormalizedURL#from(String)} or {@link NormalizedURL#from(URI)})"
+      ],
+      [
+       "d",
+       "   * and convert the timestamp to epoch ms (parsing the RFC 3339 string once on the commit-side"
+      ],
+      [
+       "a",
+       "   * and convert the timestamp to epoch ms (parsing the ISO 8601 string once on the commit-side"
+      ],
+      [
+       "c",
+       "   * path), then assemble this record. After {@link #requireBasicShape} succeeds the first three"
+      ],
+      [
+       "c",
+       "   * fields are non-null and the location is within the size bound, so downstream code (subpath"
+      ],
+      [
+       "c",
+       "   * check, DAO write) reads them without re-checking. {@code baseConvertedDeltaVersion} is the"
+      ],
+      [
+       "h",
+       "@@ -181,12 +182,13 @@"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * <ul>"
+      ],
+      [
+       "c",
+       "   *   <li>{@code uniform.iceberg} is not null;"
+      ],
+      [
+       "a",
+       "   *   <li>{@code converted-delta-timestamp} parses as an instant that fits in epoch milliseconds;"
+      ],
+      [
+       "c",
+       "   *   <li>basic shape (presence + size) via {@link #requireBasicShape};"
+      ],
+      [
+       "c",
+       "   *   <li>commit-version atomicity: {@code converted-delta-version} must equal {@code"
+      ],
+      [
+       "c",
+       "   *       commit.commitInfo.version} when commit-info is present."
+      ],
+      [
+       "c",
+       "   * </ul>"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "d",
+       "   * <p>The metadata-location is normalized exactly once and the RFC 3339 timestamp parsed exactly"
+      ],
+      [
+       "a",
+       "   * <p>The metadata-location is normalized exactly once and the ISO 8601 timestamp parsed exactly"
+      ],
+      [
+       "c",
+       "   * once; both are returned in {@link UniformIcebergFields} so the subpath check ({@code"
+      ]
+     ],
+     "truncated": true,
+     "additions": 28,
+     "deletions": 3
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T13:17:42Z",
+    "updated_at": "2026-11-23T17:58:53Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 168
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Reject a Delta protocol without min-reader-version or min-writer-version with 400",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:49Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2347,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2347"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaPropertyMapper.java",
+     "lines": [
+      [
+       "h",
+       "@@ -12,6 +12,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.exception.ErrorCode;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.service.delta.DeltaConsts.DomainMetadataNames;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.service.delta.DeltaConsts.TableProperties;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "c",
+       "import java.util.HashMap;"
+      ],
+      [
+       "c",
+       "import java.util.HashSet;"
+      ],
+      [
+       "c",
+       "import java.util.List;"
+      ],
+      [
+       "h",
+       "@@ -87,11 +88,20 @@"
+      ],
+      [
+       "c",
+       "   * has been validated -- if a reader-feature is missing from writer-features (a Delta-spec"
+      ],
+      [
+       "c",
+       "   * violation that {@link UcManagedDeltaContract#validate} catches), this method still emits an"
+      ],
+      [
+       "c",
+       "   * entry for it."
+      ],
+      [
+       "a",
+       "   *"
+      ],
+      [
+       "a",
+       "   * @throws BaseException with INVALID_ARGUMENT if {@code min-reader-version} or {@code"
+      ],
+      [
+       "a",
+       "   *     min-writer-version} is missing"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  public static void deriveFromProtocol(Map<String, String> props, DeltaProtocol protocol) {"
+      ],
+      [
+       "c",
+       "    if (protocol == null) return;"
+      ],
+      [
+       "d",
+       "    props.put(TableProperties.MIN_READER_VERSION, protocol.getMinReaderVersion().toString());"
+      ],
+      [
+       "d",
+       "    props.put(TableProperties.MIN_WRITER_VERSION, protocol.getMinWriterVersion().toString());"
+      ],
+      [
+       "a",
+       "    Integer minReader ="
+      ],
+      [
+       "a",
+       "        ValidationUtils.checkNotNull("
+      ],
+      [
+       "a",
+       "            protocol.getMinReaderVersion(), \"protocol.min-reader-version is required.\");"
+      ],
+      [
+       "a",
+       "    Integer minWriter ="
+      ],
+      [
+       "a",
+       "        ValidationUtils.checkNotNull("
+      ],
+      [
+       "a",
+       "            protocol.getMinWriterVersion(), \"protocol.min-writer-version is required.\");"
+      ],
+      [
+       "a",
+       "    props.put(TableProperties.MIN_READER_VERSION, minReader.toString());"
+      ],
+      [
+       "a",
+       "    props.put(TableProperties.MIN_WRITER_VERSION, minWriter.toString());"
+      ],
+      [
+       "c",
+       "    addFeatureProperties(props, protocol.getReaderFeatures());"
+      ],
+      [
+       "c",
+       "    addFeatureProperties(props, protocol.getWriterFeatures());"
+      ]
+     ],
+     "truncated": true,
+     "additions": 12,
+     "deletions": 2
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUpdateTableMapper.java",
+     "lines": [
+      [
+       "h",
+       "@@ -529,9 +529,9 @@"
+      ],
+      [
+       "c",
+       "  /** Full replacement of the protocol block; other stored properties are left alone. */"
+      ],
+      [
+       "c",
+       "  private static void applySetProtocol(MutablePropertyMap properties, DeltaProtocol protocol) {"
+      ],
+      [
+       "c",
+       "    ValidationUtils.checkNotNull(protocol, \"set-protocol requires a protocol.\");"
+      ],
+      [
+       "d",
+       "    properties.removeMatchingPrefix(TableProperties.FEATURE_PREFIX);"
+      ],
+      [
+       "c",
+       "    Map<String, String> derived = new HashMap<>();"
+      ],
+      [
+       "c",
+       "    DeltaPropertyMapper.deriveFromProtocol(derived, protocol);"
+      ],
+      [
+       "a",
+       "    properties.removeMatchingPrefix(TableProperties.FEATURE_PREFIX);"
+      ],
+      [
+       "c",
+       "    properties.putAll(derived);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:40:32Z",
+    "updated_at": "2026-11-23T17:58:50Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 167
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Default a new credential's purpose to STORAGE",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:46Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2346,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2346"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "api/all.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1247,6 +1247,7 @@"
+      ],
+      [
+       "c",
+       "      summary: Create a credential"
+      ],
+      [
+       "c",
+       "      description: |-"
+      ],
+      [
+       "c",
+       "        Creates a new credential. The type of credential to be created is determined by the **purpose** field."
+      ],
+      [
+       "a",
+       "        `purpose` defaults to `STORAGE` when it is not set."
+      ],
+      [
+       "c",
+       "        Set exactly one of `aws_iam_role` and `s3_compatible`; otherwise the request fails with"
+      ],
+      [
+       "c",
+       "        `INVALID_ARGUMENT`."
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CredentialDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -29,6 +29,7 @@"
+      ],
+      [
+       "c",
+       "import java.security.NoSuchAlgorithmException;"
+      ],
+      [
+       "c",
+       "import java.util.Date;"
+      ],
+      [
+       "c",
+       "import java.util.HexFormat;"
+      ],
+      [
+       "a",
+       "import java.util.Objects;"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "c",
+       "import java.util.UUID;"
+      ],
+      [
+       "c",
+       "import lombok.AccessLevel;"
+      ],
+      [
+       "h",
+       "@@ -117,7 +118,8 @@"
+      ],
+      [
+       "c",
+       "        CredentialDAO.builder()"
+      ],
+      [
+       "c",
+       "            .id(UUID.randomUUID())"
+      ],
+      [
+       "c",
+       "            .name(createRequest.getName())"
+      ],
+      [
+       "d",
+       "            .purpose(createRequest.getPurpose())"
+      ],
+      [
+       "a",
+       "            .purpose("
+      ],
+      [
+       "a",
+       "                Objects.requireNonNullElse(createRequest.getPurpose(), CredentialPurpose.STORAGE))"
+      ],
+      [
+       "c",
+       "            .comment(createRequest.getComment())"
+      ],
+      [
+       "c",
+       "            .owner(callerId)"
+      ],
+      [
+       "c",
+       "            .createdAt(now)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:37:17Z",
+    "updated_at": "2026-11-23T17:58:48Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 166
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep struct definitions in Anthropic tool input schemas",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:43Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2345,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2345"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/anthropic/src/unitycatalog/ai/anthropic/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -112,12 +112,15 @@"
+      ],
+      [
+       "c",
+       "            raise e"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        fn_schema = generate_function_input_params_schema(function_info)"
+      ],
+      [
+       "a",
+       "        json_schema = fn_schema.pydantic_model.model_json_schema()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        input_schema = {"
+      ],
+      [
+       "c",
+       "            \"type\": \"object\","
+      ],
+      [
+       "d",
+       "            \"properties\": fn_schema.pydantic_model.model_json_schema().get(\"properties\", {}),"
+      ],
+      [
+       "d",
+       "            \"required\": fn_schema.pydantic_model.model_json_schema().get(\"required\", []),"
+      ],
+      [
+       "a",
+       "            \"properties\": json_schema.get(\"properties\", {}),"
+      ],
+      [
+       "a",
+       "            \"required\": json_schema.get(\"required\", []),"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "a",
+       "        if \"$defs\" in json_schema:"
+      ],
+      [
+       "a",
+       "            input_schema[\"$defs\"] = json_schema[\"$defs\"]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        return AnthropicTool("
+      ],
+      [
+       "c",
+       "            name=get_tool_name(function_name),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:39:31Z",
+    "updated_at": "2026-11-23T17:58:45Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 165
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep stdout of the function out of the local execution result",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:40Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2344,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2344"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
+     "lines": [
+      [
+       "h",
+       "@@ -16,14 +16,19 @@"
+      ],
+      [
+       "c",
+       "    EXECUTOR_TIMEOUT,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.executor.common import ("
+      ],
+      [
+       "a",
+       "    EXITED_WITHOUT_RESULT_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    MB_CONVERSION,"
+      ],
+      [
+       "c",
+       "    NO_OUTPUT_MESSAGE,"
+      ],
+      [
+       "a",
+       "    TERMINATED_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    TIMEOUT_ERROR_MESSAGE,"
+      ],
+      [
+       "a",
+       "    UNREADABLE_RESULT_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.code_layout import dedent_code"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "_logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "_MAX_STDERR_CHARS_IN_MESSAGE = 4096"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _extract_function_name(function_source: str) -> str:"
+      ],
+      [
+       "c",
+       "    \"\"\""
+      ],
+      [
+       "h",
+       "@@ -73,6 +78,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def main():"
+      ],
+      [
+       "c",
+       "    _limit_resources()"
+      ],
+      [
+       "a",
+       "    result_path = sys.argv[2]"
+      ],
+      [
+       "c",
+       "    try:"
+      ],
+      [
+       "c",
+       "        b64_params = sys.argv[1]"
+      ],
+      [
+       "c",
+       "        params = cloudpickle.loads(base64.b64decode(b64_params))"
+      ],
+      [
+       "h",
+       "@@ -81,12 +87,12 @@"
+      ],
+      [
+       "c",
+       "            result = asyncio.run(result)"
+      ]
+     ],
+     "truncated": true,
+     "additions": 68,
+     "deletions": 26
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:37:33Z",
+    "updated_at": "2026-11-23T17:58:42Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 164
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Pass LangChain tool arguments named config or run_manager to the function",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:38Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2343,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2343"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1,6 +1,7 @@"
+      ],
+      [
+       "c",
+       "import logging"
+      ],
+      [
+       "c",
+       "from typing import Any, Dict, List, Optional"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "from langchain_core.runnables.config import run_in_executor"
+      ],
+      [
+       "c",
+       "from langchain_core.tools import StructuredTool"
+      ],
+      [
+       "c",
+       "from pydantic import BaseModel, Field, model_validator"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -25,6 +26,15 @@"
+      ],
+      [
+       "c",
+       "        description=\"Configuration of the client for managing the tool\","
+      ],
+      [
+       "c",
+       "    )"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "    # LangChain injects its `run_manager` and a `RunnableConfig` parameter (`config` in"
+      ],
+      [
+       "a",
+       "    # StructuredTool) into `_run` and `_arun` when their signatures declare them, which would"
+      ],
+      [
+       "a",
+       "    # overwrite UC function parameters with those names."
+      ],
+      [
+       "a",
+       "    def _run(self, *args: Any, **kwargs: Any) -> Any:"
+      ],
+      [
+       "a",
+       "        return self.func(*args, **kwargs)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "    async def _arun(self, *args: Any, **kwargs: Any) -> Any:"
+      ],
+      [
+       "a",
+       "        return await run_in_executor(None, self._run, *args, **kwargs)"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "class UCFunctionToolkit(BaseModel):"
+      ],
+      [
+       "c",
+       "    function_names: List[str] = Field("
+      ]
+     ],
+     "truncated": false,
+     "additions": 10,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:40:07Z",
+    "updated_at": "2026-11-23T17:58:39Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 163
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Leave expiration-time-ms out of Delta credentials that do not expire",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:35Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2342,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2342"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "api/delta.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -588,7 +588,6 @@"
+      ],
+      [
+       "c",
+       "      required:"
+      ],
+      [
+       "c",
+       "        - prefix"
+      ],
+      [
+       "c",
+       "        - operation"
+      ],
+      [
+       "d",
+       "        - expiration-time-ms"
+      ],
+      [
+       "c",
+       "        - config"
+      ],
+      [
+       "c",
+       "      properties:"
+      ],
+      [
+       "c",
+       "        prefix:"
+      ],
+      [
+       "h",
+       "@@ -637,7 +636,8 @@"
+      ],
+      [
+       "c",
+       "          type: integer"
+      ],
+      [
+       "c",
+       "          format: int64"
+      ],
+      [
+       "c",
+       "          description: |"
+      ],
+      [
+       "d",
+       "            Credential expiration time in epoch milliseconds."
+      ],
+      [
+       "a",
+       "            Credential expiration time in epoch milliseconds. Absent when the credential has no"
+      ],
+      [
+       "a",
+       "            expiration time, for example for a local file system path."
+      ],
+      [
+       "c",
+       "            This standardized field avoids the need for provider-specific expiration keys"
+      ],
+      [
+       "c",
+       "            (e.g., s3.session-token-expires-at-ms, adls.sas-token-expires-at-ms, etc.)"
+      ],
+      [
+       "c",
+       "            EXPERIMENTAL: when the config has `s3.endpoint` but no `s3.session-token`, it is a"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 2
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:37:49Z",
+    "updated_at": "2026-11-23T17:58:36Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 162
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Only write a Delta log when creating a Delta table",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:32Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2341,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2341"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/TableCli.java",
+     "lines": [
+      [
+       "h",
+       "@@ -95,6 +95,7 @@"
+      ],
+      [
+       "c",
+       "    // Set fields in json object for seamless deserialization"
+      ],
+      [
+       "c",
+       "    List<ColumnInfo> columnInfoList ="
+      ],
+      [
+       "c",
+       "        CliUtils.parseColumns(json.getString(CliParams.COLUMNS.getServerParam()));"
+      ],
+      [
+       "a",
+       "    DataSourceFormat dataSourceFormat = DataSourceFormat.valueOf(format.toUpperCase());"
+      ],
+      [
+       "c",
+       "    CreateTable createTable ="
+      ],
+      [
+       "c",
+       "        new CreateTable()"
+      ],
+      [
+       "c",
+       "            .name(json.getString(CliParams.NAME.getServerParam()))"
+      ],
+      [
+       "h",
+       "@@ -105,7 +106,7 @@"
+      ],
+      [
+       "c",
+       "            .tableType("
+      ],
+      [
+       "c",
+       "                TableType.valueOf("
+      ],
+      [
+       "c",
+       "                    json.getString(CliParams.TABLE_TYPE.getServerParam()).toUpperCase()))"
+      ],
+      [
+       "d",
+       "            .dataSourceFormat(DataSourceFormat.valueOf(format.toUpperCase()));"
+      ],
+      [
+       "a",
+       "            .dataSourceFormat(dataSourceFormat);"
+      ],
+      [
+       "c",
+       "    TemporaryCredentials temporaryCredentials;"
+      ],
+      [
+       "c",
+       "    String stagingTableId = null;"
+      ],
+      [
+       "c",
+       "    if (createTable.getTableType() == TableType.EXTERNAL) {"
+      ],
+      [
+       "h",
+       "@@ -131,7 +132,7 @@"
+      ],
+      [
+       "c",
+       "        throw new CliException(\"Storage location is not allowed for managed tables\");"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "      // Create staging table if format is Delta"
+      ],
+      [
+       "d",
+       "      if (!DataSourceFormat.DELTA.name().equals(format.toUpperCase())) {"
+      ],
+      [
+       "a",
+       "      if (dataSourceFormat != DataSourceFormat.DELTA) {"
+      ],
+      [
+       "c",
+       "        throw new CliException(\"Only Delta tables are supported for managed tables: \" + format);"
+      ],
+      [
+       "c",
+       "      }"
+      ],
+      [
+       "c",
+       "      CreateStagingTable createStagingTable ="
+      ],
+      [
+       "h",
+       "@@ -155,35 +156,37 @@"
+      ],
+      [
+       "c",
+       "      throw new CliException(\"Unknown table type: \" + createTable.getTableType());"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       ""
+      ]
+     ],
+     "truncated": true,
+     "additions": 34,
+     "deletions": 31
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
+     "lines": [
+      [
+       "h",
+       "@@ -37,7 +37,8 @@"
+      ],
+      [
+       "c",
+       "  DATA_SOURCE_FORMAT("
+      ],
+      [
+       "c",
+       "      \"format\","
+      ],
+      [
+       "c",
+       "      \"The format of the data source. Supported values are DELTA, PARQUET, ORC, JSON, CSV, AVRO and\""
+      ],
+      [
+       "d",
+       "          + \" TEXT.\","
+      ],
+      [
+       "a",
+       "          + \" TEXT. For DELTA, table create writes a Delta log at the storage location unless one\""
+      ],
+      [
+       "a",
+       "          + \" is already there. For other formats, it only registers the table.\","
+      ],
+      [
+       "c",
+       "      \"data_source_format\"),"
+      ],
+      [
+       "c",
+       "  COLUMNS("
+      ],
+      [
+       "c",
+       "      \"columns\","
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T15:25:02Z",
+    "updated_at": "2026-11-23T17:58:33Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 161
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Keep each ApiClient's token and headers when an ApiClientBuilder is reused",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:29Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2340,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2340"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "clients/java/src/main/java/io/unitycatalog/client/ApiClientBuilder.java",
+     "lines": [
+      [
+       "h",
+       "@@ -168,6 +168,9 @@"
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * Builds and returns a configured {@link ApiClient} instance."
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "a",
+       "   * <p>The builder can be reused. Each built client keeps the settings the builder had when {@code"
+      ],
+      [
+       "a",
+       "   * build()} was called, so later changes to the builder only apply to clients built after them."
+      ],
+      [
+       "a",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @return a configured {@link ApiClient} instance"
+      ],
+      [
+       "c",
+       "   * @throws NullPointerException if {@code uri} or {@code tokenProvider} is null"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "h",
+       "@@ -185,22 +188,19 @@"
+      ],
+      [
+       "c",
+       "    apiClient.setPort(uri.getPort());"
+      ],
+      [
+       "c",
+       "    apiClient.setBasePath(uri.getPath() + BASE_PATH);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "    // Add the User-Agent request interceptor."
+      ],
+      [
+       "d",
+       "    if (!appVersionMap.isEmpty()) {"
+      ],
+      [
+       "d",
+       "      String userAgent ="
+      ],
+      [
+       "d",
+       "          appVersionMap.entrySet().stream()"
+      ],
+      [
+       "d",
+       "              .map(e -> String.format(\"%s/%s\", e.getKey(), e.getValue()))"
+      ],
+      [
+       "d",
+       "              .collect(Collectors.joining(\" \"));"
+      ],
+      [
+       "d",
+       "      addRequestInterceptor(builder -> builder.header(\"User-Agent\", userAgent));"
+      ],
+      [
+       "d",
+       "    }"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "    // Add the client's token interceptor."
+      ],
+      [
+       "c",
+       "    Preconditions.checkNotNull(tokenProvider, \"The unitycatalog token provider cannot be null\");"
+      ],
+      [
+       "d",
+       "    addRequestInterceptor("
+      ],
+      [
+       "d",
+       "        builder -> builder.header(\"Authorization\", \"Bearer \" + tokenProvider.accessToken()));"
+      ],
+      [
+       "d",
+       ""
+      ],
+      [
+       "d",
+       "    // Set the composed request interceptor on the API client."
+      ],
+      [
+       "d",
+       "    apiClient.setRequestInterceptor(requestInterceptor);"
+      ]
+     ],
+     "truncated": true,
+     "additions": 15,
+     "deletions": 15
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:43:20Z",
+    "updated_at": "2026-11-23T17:58:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 160
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Resolve unqualified names against schema default in a UC catalog",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:26Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2339,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2339"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/spark/src/main/scala-shims/spark-4.2-4.3/io/unitycatalog/spark/UCProxyViewSupport.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -50,7 +50,7 @@"
+      ],
+      [
+       "c",
+       "trait UCProxyViewSupport extends RelationCatalog { self: UCProxy =>"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  override def listViews(namespace: Array[String]): Array[Identifier] = {"
+      ],
+      [
+       "d",
+       "    UCSingleCatalog.checkUnsupportedNestedNamespace(namespace)"
+      ],
+      [
+       "a",
+       "    UCSingleCatalog.checkSingleLevelNamespace(namespace)"
+      ],
+      [
+       "c",
+       "    listUCTableLikes(namespace)"
+      ],
+      [
+       "c",
+       "      .filter(t => UCViewTypes.isViewLikeTableType(t.getTableType))"
+      ],
+      [
+       "c",
+       "      .map(table => Identifier.of(namespace, table.getName))"
+      ],
+      [
+       "h",
+       "@@ -74,7 +74,7 @@"
+      ],
+      [
+       "c",
+       "   * real read (e.g. `SELECT`) still correctly fails, since that genuinely needs credentials."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  override def listTableSummaries(namespace: Array[String]): Array[TableSummary] = {"
+      ],
+      [
+       "d",
+       "    UCSingleCatalog.checkUnsupportedNestedNamespace(namespace)"
+      ],
+      [
+       "a",
+       "    UCSingleCatalog.checkSingleLevelNamespace(namespace)"
+      ],
+      [
+       "c",
+       "    listUCTableLikes(namespace)"
+      ],
+      [
+       "c",
+       "      .filterNot(t => UCViewTypes.isViewLikeTableType(t.getTableType))"
+      ],
+      [
+       "c",
+       "      .map { table =>"
+      ],
+      [
+       "h",
+       "@@ -125,7 +125,7 @@"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  override def createView(ident: Identifier, view: View): View = {"
+      ],
+      [
+       "d",
+       "    UCSingleCatalog.checkUnsupportedNestedNamespace(ident.namespace())"
+      ],
+      [
+       "a",
+       "    UCSingleCatalog.checkSingleLevelNamespace(ident)"
+      ],
+      [
+       "c",
+       "    val properties: util.Map[String, String] = view.properties()"
+      ],
+      [
+       "c",
+       "    // A plain `CREATE VIEW` may omit PROP_TABLE_TYPE; treat that as a regular VIEW."
+      ],
+      [
+       "c",
+       "    val sparkTableType ="
+      ]
+     ],
+     "truncated": false,
+     "additions": 3,
+     "deletions": 3
+    },
+    {
+     "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+     "lines": [
+      [
+       "h",
+       "@@ -200,6 +200,9 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  override def name(): String = delegate.name()"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /** Names without a schema resolve against schema `default`, as in Spark's session catalog. */"
+      ],
+      [
+       "a",
+       "  override def defaultNamespace(): Array[String] = Array(\"default\")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  override def listTables(namespace: Array[String]): Array[Identifier] = delegate.listTables(namespace)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  override def loadTable(ident: Identifier): Table = {"
+      ],
+      [
+       "h",
+       "@@ -238,24 +241,32 @@"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * Delta and Iceberg path identifiers remain delegated so DeltaCatalog can resolve"
+      ],
+      [
+       "c",
+       "   * `delta.`path`` via `loadPathTable` and `iceberg.`path`` via `newIcebergPathTable`."
+      ],
+      [
+       "d",
+       "   * Nested namespaces fail with [[UCSingleCatalog.checkUnsupportedNestedNamespace]] on load so"
+      ],
+      [
+       "d",
+       "   * they are not mistaken for a missing table."
+      ],
+      [
+       "a",
+       "   * An empty namespace, as in `<catalog>.t`, is reported as `NoSuchTableException` rather than"
+      ],
+      [
+       "a",
+       "   * rejected, because that is the only exception Spark treats as a missing table. Every table load"
+      ],
+      [
+       "a",
+       "   * comes through here, including reads, time travel, write targets and `loadRelation`, so SELECT,"
+      ],
+      [
+       "a",
+       "   * DESCRIBE, INSERT and the other table commands report `TABLE_OR_VIEW_NOT_FOUND`, and"
+      ],
+      [
+       "a",
+       "   * `DROP TABLE IF EXISTS` stays a no-op where Spark resolves it through `loadRelation`. Nested"
+      ],
+      [
+       "a",
+       "   * namespaces fail with [[UCSingleCatalog.checkSingleLevelNamespace]] on load so they are not"
+      ],
+      [
+       "a",
+       "   * mistaken for a missing table."
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  private def requireAddressableTableNameOrPathTable(ident: Identifier): Unit = {"
+      ],
+      [
+       "c",
+       "    if (isDeltaOrIcebergPath(ident)) {"
+      ],
+      [
+       "c",
+       "      return"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "d",
+       "    UCSingleCatalog.checkUnsupportedNestedNamespace(ident.namespace())"
+      ],
+      [
+       "a",
+       "    if (ident.namespace().isEmpty) {"
+      ]
+     ],
+     "truncated": true,
+     "additions": 53,
+     "deletions": 17
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T17:34:55Z",
+    "updated_at": "2026-11-23T17:58:27Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 159
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Accept a backfill-only Delta commit on a UniForm table",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T17:58:22Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2338,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2338"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "api/all.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -3334,6 +3334,8 @@"
+      ],
+      [
+       "c",
+       "            keeping the conversion state synchronized with the Delta version."
+      ],
+      [
+       "c",
+       "            Uniform enables Delta tables to be read by other table formats (e.g., Iceberg) without data conversion."
+      ],
+      [
+       "c",
+       "            Independent of the `metadata` field, both can be provided together or separately."
+      ],
+      [
+       "a",
+       "            Must not be set without `commit_info`. A request that only sets `latest_backfilled_version`"
+      ],
+      [
+       "a",
+       "            adds no commit to convert."
+      ],
+      [
+       "c",
+       "      required:"
+      ],
+      [
+       "c",
+       "        - table_id"
+      ],
+      [
+       "c",
+       "        - table_uri"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/DeltaCommitRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -146,6 +146,10 @@"
+      ],
+      [
+       "c",
+       "   */"
+      ],
+      [
+       "c",
+       "  private static final int MAX_NUM_COMMITS_PER_TABLE = 10;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /** Message for a uniform block sent without a commit. */"
+      ],
+      [
+       "a",
+       "  private static final String UNIFORM_WITHOUT_COMMIT_MESSAGE ="
+      ],
+      [
+       "a",
+       "      \"Uniform metadata requires an accompanying commit.\";"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * The batch size limit for commit delete operations. This limit is set to be larger than"
+      ],
+      [
+       "c",
+       "   * MAX_NUM_COMMITS_PER_TABLE so that it should never hit this limit at all. But it serves the"
+      ],
+      [
+       "h",
+       "@@ -654,8 +658,7 @@"
+      ],
+      [
+       "c",
+       "        commitInfoOpt.isPresent() || latestBackfilledVersion.isPresent(),"
+      ],
+      [
+       "c",
+       "        \"At least one of add-commit or set-latest-backfilled-version is required.\");"
+      ],
+      [
+       "c",
+       "    if (uniformFields.isPresent() && commitInfoOpt.isEmpty()) {"
+      ],
+      [
+       "d",
+       "      throw new BaseException("
+      ],
+      [
+       "d",
+       "          ErrorCode.INVALID_ARGUMENT, \"Uniform metadata requires an accompanying commit.\");"
+      ],
+      [
+       "a",
+       "      throw new BaseException(ErrorCode.INVALID_ARGUMENT, UNIFORM_WITHOUT_COMMIT_MESSAGE);"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "    if (newestCommits.isEmpty()) {"
+      ],
+      [
+       "c",
+       "      serverProperties.checkManagedTableEnabled();"
+      ],
+      [
+       "h",
+       "@@ -1372,7 +1375,7 @@"
+      ],
+      [
+       "c",
+       "   *   <li>If metadata properties are present: validates that table ID property matches the commit's"
+      ],
+      [
+       "c",
+       "   *       table ID"
+      ],
+      [
+       "c",
+       "   *   <li>If commit info is absent: ensures this is a valid backfill-only commit with backfilled"
+      ],
+      [
+       "d",
+       "   *       version set"
+      ],
+      [
+       "a",
+       "   *       version set and no metadata or uniform"
+      ],
+      [
+       "c",
+       "   * </ul>"
+      ],
+      [
+       "c",
+       "   *"
+      ],
+      [
+       "c",
+       "   * @param commit the commit request to validate"
+      ]
+     ],
+     "truncated": true,
+     "additions": 15,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T14:36:51Z",
+    "updated_at": "2026-11-23T17:58:23Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 158
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -437,8 +3033,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T16:16:32Z",
@@ -446,8 +3042,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 157
   },
@@ -643,8 +3239,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T16:22:19Z",
@@ -652,8 +3248,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 156
   },
@@ -3631,8 +6227,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T15:28:48Z",
@@ -3640,8 +6236,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 143
   },
@@ -4631,7 +7227,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-23T01:05:01Z",
-    "updated_at": "2026-11-23T09:10:45Z",
+    "updated_at": "2026-11-23T17:57:00Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -31457,11 +34053,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
