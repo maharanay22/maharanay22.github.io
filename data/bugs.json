@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T02:48:11Z",
+ "generated_at": "2026-11-23T03:59:01Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28935,
+   "stars": 28936,
    "forks": 6650,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50604,
-   "forks": 20708,
+   "forks": 20709,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63723,
-   "forks": 13476,
+   "stars": 63731,
+   "forks": 13478,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -329,6 +329,254 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Allow dict outputs after non-dict outputs in evaluation dataset records",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T03:56:54Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 28052,
+    "url": "https://github.com/mlflow/mlflow/pull/28052"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "mlflow/store/tracking/sqlalchemy_store.py",
+     "lines": [
+      [
+       "h",
+       "@@ -8241,7 +8241,7 @@"
+      ],
+      [
+       "c",
+       "                        schema[\"inputs\"][key] = self._infer_field_type(value)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "            if (outputs := record.get(\"outputs\")) is not None:"
+      ],
+      [
+       "d",
+       "                if isinstance(outputs, dict):"
+      ],
+      [
+       "a",
+       "                if isinstance(outputs, dict) and isinstance(schema[\"outputs\"], dict):"
+      ],
+      [
+       "c",
+       "                    for key, value in outputs.items():"
+      ],
+      [
+       "c",
+       "                        if key not in schema[\"outputs\"]:"
+      ],
+      [
+       "c",
+       "                            schema[\"outputs\"][key] = self._infer_field_type(value)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T03:33:59Z",
+    "updated_at": "2026-11-23T03:57:30Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
+   },
+   "id": 154
+  },
+  {
+   "kind": "fix",
+   "repo": "mlflow/mlflow",
+   "status": "review",
+   "title": "Skip aggregations with invalid metric keys instead of failing `mlflow.genai.evaluate`",
+   "date": "2026-11-23",
+   "created_at": "2026-11-23T03:55:49Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 28051,
+    "url": "https://github.com/mlflow/mlflow/pull/28051"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "mlflow/genai/scorers/aggregation.py",
+     "lines": [
+      [
+       "h",
+       "@@ -18,6 +18,14 @@"
+      ],
+      [
+       "c",
+       "_logger = logging.getLogger(__name__)"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "def _is_valid_metric_key(key: str) -> bool:"
+      ],
+      [
+       "a",
+       "    return ("
+      ],
+      [
+       "a",
+       "        len(key) <= MAX_ENTITY_KEY_LENGTH"
+      ],
+      [
+       "a",
+       "        and validate_param_and_metric_name(key)"
+      ],
+      [
+       "a",
+       "        and not path_not_unique(key)"
+      ],
+      [
+       "a",
+       "    )"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "_AGGREGATE_FUNCTIONS = {"
+      ],
+      [
+       "c",
+       "    \"min\": np.min,"
+      ],
+      [
+       "c",
+       "    \"max\": np.max,"
+      ],
+      [
+       "h",
+       "@@ -84,19 +92,19 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        # Each aggregation should be logged as a separate metric"
+      ],
+      [
+       "c",
+       "        for agg_name, agg_value in aggregation_results.items():"
+      ],
+      [
+       "d",
+       "            result[f\"{name}/{agg_name}\"] = agg_value"
+      ],
+      [
+       "a",
+       "            key = f\"{name}/{agg_name}\""
+      ],
+      [
+       "a",
+       "            if not _is_valid_metric_key(key):"
+      ],
+      [
+       "a",
+       "                _logger.warning(\"Skipping aggregation with invalid metric key %r.\", key)"
+      ],
+      [
+       "a",
+       "                continue"
+      ],
+      [
+       "a",
+       "            result[key] = agg_value"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    # Count failures per scorer invocation (a row, or a session for session-level scorers), the"
+      ],
+      [
+       "c",
+       "    # same count as the failure summary. A custom aggregation named \"error_count\" takes precedence."
+      ],
+      [
+       "c",
+       "    for name, stat in (scorer_stats or {}).items():"
+      ],
+      [
+       "c",
+       "        if not stat.has_failures:"
+      ]
+     ],
+     "truncated": true,
+     "additions": 14,
+     "deletions": 6
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-23T03:33:58Z",
+    "updated_at": "2026-11-23T03:56:02Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
+   },
+   "id": 153
+  },
   {
    "kind": "fix",
    "repo": "lance-format/lance",
@@ -13579,6 +13827,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "shba24",
+      "at": "2026-11-23T03:17:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6016182741",
+      "maintainer": true,
+      "path": null,
+      "text": "Reviewed at f4be8f54: no blocking issues found.",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "shba24",
       "at": "2026-11-22T18:38:49Z",
@@ -13627,24 +13885,16 @@
       "path": null,
       "text": "I forgot there are still open review comments. Can you reply to those and resolve threads if you have already done the changes for this and refer to the commit.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T18:41:55Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4654344779",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/aws/AwsCredentialGenerator.java",
-      "text": "**Nit (not a blocker):** No test fails if the S3-compatible skip of the session policy limit is removed assumeRole applies sessionPolicyViolation only when !isS3Compatible, so S3-compatible STS endpoints should reach the endpoint unchecked. The only test on the S3-compatible side, testS3CompatibleStorageIsLimitedOnlyB…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "shba24"
+    ],
     "last_push": "2026-11-22T19:46:13Z",
-    "updated_at": "2026-11-22T20:59:35Z",
+    "updated_at": "2026-11-23T03:17:14Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
@@ -13653,7 +13903,7 @@
     },
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by shba24. Waiting to be merged"
    },
    "id": 96
   },
