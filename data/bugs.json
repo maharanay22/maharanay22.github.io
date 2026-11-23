@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T19:10:30Z",
+ "generated_at": "2026-11-23T20:01:31Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "AI data"
    ],
    "stars": 7383,
-   "forks": 958,
+   "forks": 956,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3969470,
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28945,
+   "stars": 28941,
    "forks": 6649,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -162,7 +162,7 @@
     "String regex"
    ],
    "stars": 50605,
-   "forks": 20710,
+   "forks": 20709,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -953,8 +953,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T18:53:45Z",
@@ -962,8 +962,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 169
   },
@@ -1779,8 +1779,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T18:42:11Z",
@@ -2039,8 +2039,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T18:32:21Z",
@@ -2048,8 +2048,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 162
   },
@@ -2419,8 +2419,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:43:20Z",
@@ -2428,8 +2428,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 160
   },
@@ -2911,8 +2911,8 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T18:34:06Z",
@@ -2920,8 +2920,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 158
   },
@@ -6167,6 +6167,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T19:47:50Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4671096382",
+      "maintainer": true,
+      "path": "docs/ai/client.md",
+      "text": "[AI Assisted] Same point as the CHANGELOG entry: the top-level list should include `BINARY`, which is base64 decoded at top level.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T19:47:50Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4671096389",
+      "maintainer": true,
+      "path": "ai/core/README.md",
+      "text": "[AI Assisted] Same point as the CHANGELOG entry: the top-level list should include `BINARY`.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-23T19:47:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-6028359966",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 0d3de59f. The earlier items are addressed: the `TIMESTAMP_NTZ` wording in all three places, the rebase (no conflicts with current main), the `TODO(#2335)` at the fallback, and the year-month test. `BINARY` was in the same top-level list last round when we raised `TIMESTAMP_NTZ`, so we should…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T19:47:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4671096374",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Normal, wording: this sentence says `UnitycatalogFunctionClient` converts only top-level `DATE`, `TIMESTAMP`, `TIMESTAMP_NTZ` and `DECIMAL` arguments. `BINARY` is also converted at top level: `convert_json_argument` base64 decodes it, so `aGk=` becomes `b'hi'`. Could the list name `BINARY` too?",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-23T08:30:56Z",
@@ -6185,46 +6225,6 @@
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording: this entry says `UnitycatalogFunctionClient` converts only top-level `DATE`, `TIMESTAMP` and `DECIMAL` arguments. `TIMESTAMP_NTZ` is also converted at top level (`client.py`, `_convert_json_value`), and the bullet annotates `TIMESTAMP_NTZ` as `datetime.datetime`, so the word \"only\" reads…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-23T08:30:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395209",
-      "maintainer": true,
-      "path": "docs/ai/client.md",
-      "text": "[AI Assisted] Same wording point as in the CHANGELOG entry: the list of top-level conversions should name `TIMESTAMP_NTZ` as well as `DATE`, `TIMESTAMP` and `DECIMAL`, because `_convert_json_value` converts it at top level.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-23T08:30:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395216",
-      "maintainer": true,
-      "path": "ai/core/README.md",
-      "text": "[AI Assisted] Same wording point as in the CHANGELOG entry: the list of top-level conversions should name `TIMESTAMP_NTZ` as well as `DATE`, `TIMESTAMP` and `DECIMAL`.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-23T08:30:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395224",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
-      "text": "[AI Assisted] Nit: the known gaps have no tracking reference in the code yet. A `TODO(#NNNN)` at the fallback that returns `type_str.lower()` would point to the issue for year-month `INTERVAL`, `VARIANT`, `SMALLINT`, `TINYINT`, `VARCHAR(n)` and `TIMESTAMP_LTZ`.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-23T08:30:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395228",
-      "maintainer": true,
-      "path": "ai/core/tests/core/test_callable_utils.py",
-      "text": "[AI Assisted] Nit: `test_year_month_interval_still_fails_to_load` asserts a `SyntaxError`. That pins a known gap as expected behavior, so a follow-up that adds support would fail this test and look like a regression. Either reference the tracking issue in the test, or assert the annotation text `interval year to month…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -6232,12 +6232,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T15:28:48Z",
-    "updated_at": "2026-11-23T18:59:32Z",
+    "updated_at": "2026-11-23T19:47:50Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 143
   },
