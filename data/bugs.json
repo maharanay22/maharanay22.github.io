@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T20:01:31Z",
+ "generated_at": "2026-11-23T20:32:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -106,7 +106,7 @@
     "GenAI Eval"
    ],
    "stars": 28941,
-   "forks": 6649,
+   "forks": 6646,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22622825,
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63774,
+   "stars": 63775,
    "forks": 13499,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1785,11 +1785,11 @@
     "approved_by": [],
     "last_push": "2026-11-23T18:42:11Z",
     "updated_at": "2026-11-23T18:59:02Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 164
   },
@@ -1927,11 +1927,11 @@
     "approved_by": [],
     "last_push": "2026-11-23T14:40:07Z",
     "updated_at": "2026-11-23T18:58:58Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 163
   },
@@ -2910,29 +2910,50 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T20:29:15Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#discussion_r4671591355",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/sdk/deltacommits/SdkDeltaCommitsCRUDTest.java",
+      "text": "[AI Assisted] `validateCommit` rejects the `uniform` block before it reads it, so the version in this payload does not matter. A one-line comment here would stop a reader from assuming the version mismatch is the case under test. The PR description also lists a non-UniForm backfill-only case and a malformed-block case…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-23T20:29:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#pullrequestreview-6028985542",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Verdict: no blockers. The gating and the new rejection are correct, and the new test passes on the head and fails when either half of the fix is reverted. Normal, PR description: - The malformed-block sentence says the request gets the new message \"still as a 400\". On main, an unparseable `converted_delt…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T18:34:06Z",
-    "updated_at": "2026-11-23T18:58:43Z",
+    "updated_at": "2026-11-23T20:29:15Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 158
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Drop the trailing slash of the server URI before adding the API path",
    "date": "2026-11-23",
    "created_at": "2026-11-23T16:23:21Z",
-   "merged_at": null,
+   "merged_at": "2026-11-23",
    "reported": true,
    "pr": {
     "number": 2337,
@@ -3032,29 +3053,42 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-23T20:21:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2337#pullrequestreview-6028866138",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at cdeafbb7. The builder now drops a trailing slash before adding the API path, which fixes the Spark and Hadoop connectors for a URI that ends in a slash, and the new tests fail on main for exactly those rows. Merge note: #2340 changes the same build() block; the source merges cleanly, but Api…",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T16:16:32Z",
-    "updated_at": "2026-11-23T18:58:41Z",
+    "updated_at": "2026-11-23T20:23:09Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 157
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Pass the server URI, not the API base URI, to the Delta commit client",
    "date": "2026-11-23",
    "created_at": "2026-11-23T16:23:18Z",
-   "merged_at": null,
+   "merged_at": "2026-11-23",
    "reported": true,
    "pr": {
     "number": 2336,
@@ -3238,18 +3272,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-23T20:18:51Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2336#pullrequestreview-6028831461",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 404b7762. The CLI now passes the server URI with its path prefix to the Delta commit client, which removes the doubled /api/2.1/unity-catalog suffix. The new test covers the server path variants and passes on this head, and it fails on main.",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T16:22:19Z",
-    "updated_at": "2026-11-23T18:58:33Z",
+    "updated_at": "2026-11-23T20:20:44Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 156
   },
@@ -4741,11 +4788,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 149
   },
@@ -5035,11 +5082,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 148
   },
@@ -6040,6 +6087,42 @@
      "lines": [
       [
        "h",
+       "@@ -756,7 +756,7 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def _base_type_name(sql_type: str) -> str:"
+      ],
+      [
+       "c",
+       "    \"\"\"Returns the base type name, e.g. DECIMAL for DECIMAL(38, 18) and ARRAY for ARRAY<LONG>.\"\"\""
+      ],
+      [
+       "d",
+       "    return re.split(r\"[<( ]\", sql_type, maxsplit=1)[0]"
+      ],
+      [
+       "a",
+       "    return re.split(r\"[<(\\s]\", sql_type, maxsplit=1)[0]"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "def extract_function_metadata(func: Callable[..., Any]) -> FunctionMetadata:"
+      ],
+      [
+       "h",
        "@@ -1116,6 +1116,17 @@"
       ],
       [
@@ -6121,47 +6204,11 @@
       [
        "c",
        ""
-      ],
-      [
-       "c",
-       "    if \"<\" not in type_str:"
-      ],
-      [
-       "d",
-       "        if mapped := SQL_TYPE_TO_PYTHON_TYPE_MAPPING.get(type_str.upper()):"
-      ],
-      [
-       "d",
-       "            return mapped[0].__name__ if isinstance(mapped, tuple) else mapped.__name__"
-      ],
-      [
-       "d",
-       "        else:"
-      ],
-      [
-       "a",
-       "        base_type = _base_type_name(type_str.upper())"
-      ],
-      [
-       "a",
-       "        mapped = SQL_TYPE_TO_PYTHON_TYPE_MAPPING.get(base_type)"
-      ],
-      [
-       "a",
-       "        # Only a day-time interval is a `datetime.timedelta`, not a year-month interval."
-      ],
-      [
-       "a",
-       "        if mapped is None or ("
-      ],
-      [
-       "a",
-       "            base_type == \"INTERVAL\" and re.search(r\"\\b(YEAR|MONTH)\\b\", type_str.upper())"
       ]
      ],
      "truncated": true,
-     "additions": 41,
-     "deletions": 5
+     "additions": 42,
+     "deletions": 6
     }
    ],
    "track": {
@@ -6174,7 +6221,7 @@
       "maintainer": true,
       "path": "docs/ai/client.md",
       "text": "[AI Assisted] Same point as the CHANGELOG entry: the top-level list should include `BINARY`, which is base64 decoded at top level.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -6184,7 +6231,7 @@
       "maintainer": true,
       "path": "ai/core/README.md",
       "text": "[AI Assisted] Same point as the CHANGELOG entry: the top-level list should include `BINARY`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -6194,7 +6241,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 0d3de59f. The earlier items are addressed: the `TIMESTAMP_NTZ` wording in all three places, the rebase (no conflicts with current main), the `TODO(#2335)` at the fallback, and the year-month test. `BINARY` was in the same top-level list last round when we raised `TIMESTAMP_NTZ`, so we should…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -6204,7 +6251,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Normal, wording: this sentence says `UnitycatalogFunctionClient` converts only top-level `DATE`, `TIMESTAMP`, `TIMESTAMP_NTZ` and `DECIMAL` arguments. `BINARY` is also converted at top level: `convert_json_argument` base64 decodes it, so `aGk=` becomes `b'hi'`. Could the list name `BINARY` too?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -6227,17 +6274,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T15:28:48Z",
-    "updated_at": "2026-11-23T19:47:50Z",
+    "last_push": "2026-11-23T20:13:35Z",
+    "updated_at": "2026-11-23T20:13:49Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 143
   },
