@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T18:02:17Z",
+ "generated_at": "2026-11-23T19:10:30Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28941,
+   "stars": 28945,
    "forks": 6649,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63772,
-   "forks": 13498,
+   "stars": 63774,
+   "forks": 13499,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -617,17 +617,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T15:59:15Z",
-    "updated_at": "2026-11-23T17:59:01Z",
+    "updated_at": "2026-11-23T18:59:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 171
   },
@@ -787,17 +787,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T15:59:14Z",
-    "updated_at": "2026-11-23T17:58:59Z",
+    "updated_at": "2026-11-23T18:59:12Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 170
   },
@@ -954,16 +954,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-23T14:38:52Z",
-    "updated_at": "2026-11-23T17:58:56Z",
+    "last_push": "2026-11-23T18:53:45Z",
+    "updated_at": "2026-11-23T18:59:11Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 169
   },
@@ -1119,17 +1119,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T13:17:42Z",
-    "updated_at": "2026-11-23T17:58:53Z",
+    "updated_at": "2026-11-23T18:59:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 168
   },
@@ -1337,17 +1337,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:40:32Z",
-    "updated_at": "2026-11-23T17:58:50Z",
+    "updated_at": "2026-11-23T18:59:06Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 167
   },
@@ -1495,17 +1495,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:37:17Z",
-    "updated_at": "2026-11-23T17:58:48Z",
+    "updated_at": "2026-11-23T18:59:05Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 166
   },
@@ -1613,17 +1613,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:39:31Z",
-    "updated_at": "2026-11-23T17:58:45Z",
+    "updated_at": "2026-11-23T18:59:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 165
   },
@@ -1783,13 +1783,13 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-23T14:37:33Z",
-    "updated_at": "2026-11-23T17:58:42Z",
-    "conflicts": false,
+    "last_push": "2026-11-23T18:42:11Z",
+    "updated_at": "2026-11-23T18:59:02Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 164
   },
@@ -1921,17 +1921,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:40:07Z",
-    "updated_at": "2026-11-23T17:58:39Z",
-    "conflicts": false,
+    "updated_at": "2026-11-23T18:58:58Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 163
   },
@@ -2043,8 +2043,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-23T14:37:49Z",
-    "updated_at": "2026-11-23T17:58:36Z",
+    "last_push": "2026-11-23T18:32:21Z",
+    "updated_at": "2026-11-23T18:58:57Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2253,17 +2253,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T15:25:02Z",
-    "updated_at": "2026-11-23T17:58:33Z",
+    "updated_at": "2026-11-23T18:58:56Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 161
   },
@@ -2424,7 +2424,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T14:43:20Z",
-    "updated_at": "2026-11-23T17:58:30Z",
+    "updated_at": "2026-11-23T18:58:55Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2701,17 +2701,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T17:34:55Z",
-    "updated_at": "2026-11-23T17:58:27Z",
+    "updated_at": "2026-11-23T18:58:44Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 159
   },
@@ -2915,8 +2915,8 @@
     "checks": "running",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-23T14:36:51Z",
-    "updated_at": "2026-11-23T17:58:23Z",
+    "last_push": "2026-11-23T18:34:06Z",
+    "updated_at": "2026-11-23T18:58:43Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3038,7 +3038,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T16:16:32Z",
-    "updated_at": "2026-11-23T16:23:22Z",
+    "updated_at": "2026-11-23T18:58:41Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3244,7 +3244,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T16:22:19Z",
-    "updated_at": "2026-11-23T16:23:20Z",
+    "updated_at": "2026-11-23T18:58:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -5035,11 +5035,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 148
   },
@@ -6232,7 +6232,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T15:28:48Z",
-    "updated_at": "2026-11-23T15:45:50Z",
+    "updated_at": "2026-11-23T18:59:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -13568,11 +13568,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Run OSS function client calls on one event loop so they work from any thread",
    "date": "2026-11-15",
    "created_at": "2026-11-15T05:43:54Z",
-   "merged_at": null,
+   "merged_at": "2026-11-23",
    "reported": true,
    "pr": {
     "number": 2242,
@@ -13717,6 +13717,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-23T18:54:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#pullrequestreview-6027569071",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 3cf1602e. This is clearly better than main for normal use. Calls from other threads and other event loops that fail on main with `Timeout context manager should be used inside a task` now work (16 of 16 concurrent sync calls from a thread pool failed on main and all succeeded here), the orig…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-22T23:12:40Z",
@@ -13765,29 +13775,21 @@
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Waits for the close and the pending request on worker threads, so the loop that owns the session is free to run the close. [code]",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-22T23:12:40Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2242#discussion_r4660495160",
-      "maintainer": true,
-      "path": "ai/core/tests/core/oss/test_oss_client.py",
-      "text": "[AI Assisted] Silences the fork `DeprecationWarning` for this test only. The sandbox executor on main triggers it too. [code]",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T00:12:57Z",
-    "updated_at": "2026-11-23T08:54:07Z",
+    "updated_at": "2026-11-23T18:57:05Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 110
   },
