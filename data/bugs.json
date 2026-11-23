@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T03:59:01Z",
+ "generated_at": "2026-11-23T12:46:37Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3583,
+   "stars": 3584,
    "forks": 707,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3372,
-   "forks": 711,
+   "forks": 713,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10431946,
@@ -77,8 +77,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7380,
-   "forks": 959,
+   "stars": 7382,
+   "forks": 958,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3969470,
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28936,
-   "forks": 6650,
+   "stars": 28940,
+   "forks": 6649,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22622825,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50604,
-   "forks": 20709,
+   "stars": 50605,
+   "forks": 20711,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63731,
-   "forks": 13478,
+   "stars": 63753,
+   "forks": 13492,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -312,7 +312,7 @@
     "CLI"
    ],
    "stars": 1504,
-   "forks": 267,
+   "forks": 266,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 492730868,
@@ -1785,11 +1785,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 149
   },
@@ -2688,11 +2688,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Serve the vended GCS token when credential renewal is disabled",
    "date": "2026-11-20",
    "created_at": "2026-11-20T06:24:56Z",
-   "merged_at": null,
+   "merged_at": "2026-11-23",
    "reported": true,
    "pr": {
     "number": 2323,
@@ -3042,19 +3042,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-20T21:27:55Z",
-    "updated_at": "2026-11-23T00:13:36Z",
+    "updated_at": "2026-11-23T08:53:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 144
   },
@@ -3213,52 +3213,62 @@
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-20T19:32:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-5998282952",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-6018544410",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] First review at 7dfc50b0. The fix loads the `DATE`, `TIMESTAMP`, `DECIMAL` and day-time `INTERVAL` types that failed before, and no output that loaded on `main` changes. pytest is not installed in the review environment, so the unit tests did not run here. Instead I compared the annotation output for man…",
-      "answered": true
+      "text": "[AI Assisted] Re-review at f6d739dd. Earlier items are addressed: the annotation-vs-value limitation, the CHANGELOG wording points, the test coverage for CHAR, COLLATE and the Returns section, and the docs note that imports cover annotations only. Open: the rebase request, the `TIMESTAMP_NTZ` wording item, and two sma…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-20T19:32:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4646806101",
-      "maintainer": true,
-      "path": "docs/ai/client.md",
-      "text": "[AI Assisted] Normal: this bullet says the annotations apply inside `ARRAY` and `MAP` types, and the annotations promise `date`, `Decimal` and `timedelta` values. The OSS client converts only top-level `DATE`, `TIMESTAMP` and `DECIMAL` values. It leaves nested `ARRAY` and `MAP` elements as JSON strings, and it leaves…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T19:32:42Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4646806111",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395203",
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] Wording, three points in this entry: - \"A year-month `INTERVAL` is written as before.\" That form still fails to load. Could it say so, for example: \"A year-month `INTERVAL` still fails to load.\" - \"A `DECIMAL` type was annotated as `decimal(38, 18)`, which failed with a `NameError` too.\" A plain `DECIMAL…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "timothyw553",
-      "at": "2026-11-20T15:21:15Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-5995027585",
-      "maintainer": true,
-      "path": null,
-      "text": "overall lgtm, no runtime issues found. i left a few comments on test coverage, docstrings, and an unused test helper option.",
-      "answered": true
+      "text": "[AI Assisted] Normal, wording: this entry says `UnitycatalogFunctionClient` converts only top-level `DATE`, `TIMESTAMP` and `DECIMAL` arguments. `TIMESTAMP_NTZ` is also converted at top level (`client.py`, `_convert_json_value`), and the bullet annotates `TIMESTAMP_NTZ` as `datetime.datetime`, so the word \"only\" reads…",
+      "answered": false
      },
      {
       "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-20T15:21:15Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4644194830",
+      "who": "yili-db",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395209",
+      "maintainer": true,
+      "path": "docs/ai/client.md",
+      "text": "[AI Assisted] Same wording point as in the CHANGELOG entry: the list of top-level conversions should name `TIMESTAMP_NTZ` as well as `DATE`, `TIMESTAMP` and `DECIMAL`, because `_convert_json_value` converts it at top level.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395216",
+      "maintainer": true,
+      "path": "ai/core/README.md",
+      "text": "[AI Assisted] Same wording point as in the CHANGELOG entry: the list of top-level conversions should name `TIMESTAMP_NTZ` as well as `DATE`, `TIMESTAMP` and `DECIMAL`.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395224",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/utils/callable_utils.py",
+      "text": "[AI Assisted] Nit: the known gaps have no tracking reference in the code yet. A `TODO(#NNNN)` at the fallback that returns `type_str.lower()` would point to the issue for year-month `INTERVAL`, `VARIANT`, `SMALLINT`, `TINYINT`, `VARCHAR(n)` and `TIMESTAMP_LTZ`.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-23T08:30:56Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#discussion_r4663395228",
       "maintainer": true,
       "path": "ai/core/tests/core/test_callable_utils.py",
-      "text": "this checks the header and execution, not the generated docstring's `Returns:` section, and `test_parse_full_sql_data_type_for_return_types` also misses `CHAR(n)` and `STRING COLLATE ...`. without those, broken `CHAR` rendering or the old decimal docstring output would still pass all tests. could we extend both tests…",
-      "answered": true
+      "text": "[AI Assisted] Nit: `test_year_month_interval_still_fails_to_load` asserts a `SyntaxError`. That pins a known gap as expected behavior, so a follow-up that adds support would fail this test and look like a regression. Either reference the tracking issue in the test, or assert the annotation text `interval year to month…",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -3266,12 +3276,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T21:46:31Z",
-    "updated_at": "2026-11-22T23:17:16Z",
+    "updated_at": "2026-11-23T08:30:57Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 143
   },
@@ -4044,11 +4054,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep the path of the --server URL in request URLs",
    "date": "2026-11-20",
    "created_at": "2026-11-20T03:21:50Z",
-   "merged_at": null,
+   "merged_at": "2026-11-23",
    "reported": true,
    "pr": {
     "number": 2317,
@@ -4194,6 +4204,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-23T09:09:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#pullrequestreview-6018964252",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 5d8ebe37. The suffix and gateway path handling works, the tests and checkstyle pass, and the docs item from the last round is addressed. Non-blocking follow-ups: - The `TableCli` double suffix for managed table creation, which you already plan as a follow-up PR. - The shared Java client stil…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T20:59:37Z",
@@ -4242,29 +4262,21 @@
       "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
       "text": "[AI Assisted] `getServerPath` keeps `/api/2.1/unity-catalog` when a user passes it, so `--server http://host:8080/api/2.1/unity-catalog` worked on main (the path was ignored) and now sends requests to `/api/2.1/unity-catalog/api/2.1/unity-catalog/...`. This form appears in this repo's REST docs as `BASE_URL`, so it is…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T05:44:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2317#discussion_r4638939163",
-      "maintainer": true,
-      "path": "examples/cli/src/main/java/io/unitycatalog/cli/UnityCatalogCli.java",
-      "text": "[AI Assisted] Nit: building a full control client only to read its URI needs a short comment saying why the UC client is pointed at the control URI. A follow-up could pass the control `ApiClient` into `AuthCli.handle`, as `UserCli` does.",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T01:05:01Z",
-    "updated_at": "2026-11-23T01:05:09Z",
+    "updated_at": "2026-11-23T09:10:45Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 138
   },
@@ -10814,7 +10826,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T00:12:57Z",
-    "updated_at": "2026-11-23T02:20:16Z",
+    "updated_at": "2026-11-23T08:54:07Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",

@@ -466,11 +466,11 @@
  "https://github.com/lance-format/lance/pull/11326": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/lance-format/lance/pull/11330": {
   "approved_by": [],
@@ -684,6 +684,24 @@
   "conflicts": false,
   "last_comment": "its-amann@2026-11-14T07:17:40Z",
   "last_comment_who": "its-amann",
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mlflow/mlflow/pull/28051": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "maintainers"
+ },
+ "https://github.com/mlflow/mlflow/pull/28052": {
+  "approved_by": [],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
   "status": "review",
   "waiting_on": "maintainers"
  },
@@ -1140,7 +1158,9 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
-  "approved_by": [],
+  "approved_by": [
+   "shba24"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": "shba24@2026-11-21T07:31:01Z",
@@ -1423,13 +1443,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2317": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2318": {
   "approved_by": [
@@ -1492,8 +1514,8 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2324": {
   "approved_by": [],
