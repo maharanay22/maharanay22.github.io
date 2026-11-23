@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-22T23:31:24Z",
+ "generated_at": "2026-11-23T02:48:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,21 +21,21 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3584,
+   "stars": 3583,
    "forks": 707,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 642126,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 639822,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": 4,
-   "contributor_commits": 58,
+   "contributor_commits": 61,
    "contributor_total": 142,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": 2,
-   "period_commits": 58,
+   "period_commits": 61,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "delta-io/delta-rs",
@@ -53,17 +53,17 @@
    "forks": 711,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10546806,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 10431946,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": 8,
    "period_commits": 21,
-   "period_total": 30,
+   "period_total": 28,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "lance-format/lance",
@@ -77,21 +77,21 @@
     "Python",
     "AI data"
    ],
-   "stars": 7377,
+   "stars": 7380,
    "forks": 959,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 4077962,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 3969470,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": 37,
    "period_commits": 9,
    "period_total": 68,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "mlflow/mlflow",
@@ -105,21 +105,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28934,
-   "forks": 6648,
+   "stars": 28935,
+   "forks": 6650,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 22692058,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 22622825,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "mindsdb/engine",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "pandas-dev/pandas",
@@ -161,21 +161,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50603,
-   "forks": 20706,
+   "stars": 50604,
+   "forks": 20708,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 706926284,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 701489158,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22",
+   "period_checked": "2026-11-23",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -203,17 +203,17 @@
    "forks": 2227,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24469795,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 24302309,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 56,
+   "period_total": 55,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -227,21 +227,21 @@
     "CloudFetch",
     "Arrow"
    ],
-   "stars": 236,
+   "stars": 235,
    "forks": 162,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 37671177,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 37278728,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -259,17 +259,17 @@
    "forks": 234,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4263729,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 4213613,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63714,
-   "forks": 13475,
+   "stars": 63723,
+   "forks": 13476,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 100252220,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 100197330,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 135,
+   "period_total": 136,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -315,17 +315,17 @@
    "forks": 267,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 498053859,
-   "downloads_checked": "2026-11-22",
+   "downloads_month": 492730868,
+   "downloads_checked": "2026-11-23",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 134,
-   "contributors_checked": "2026-11-22",
+   "contributors_checked": "2026-11-23",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-22"
+   "period_checked": "2026-11-23"
   }
  ],
  "items": [
@@ -2734,6 +2734,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-23T00:13:36Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#pullrequestreview-6015302702",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The earlier points are addressed: the session-wide `APPLICATION_DEFAULT` rows catch a regression in the fixed auth type, the expiration constant is shared, and the 60 second comment is in place. Hadoop tests pass, and reverting the fixed-path wiring fails the GCS tests.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-20T20:31:34Z",
@@ -2782,29 +2792,21 @@
       "path": null,
       "text": "production code looks good. i left a couple comments on test coverage and docs, plus one small nit on validation.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-20T15:50:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2323#discussion_r4644522650",
-      "maintainer": true,
-      "path": "docs/integrations/unity-catalog-spark.md",
-      "text": "does this apply to vended paths too, not just tables? also could we name `spark.sql.catalog.<name>.renewCredential.enabled=false` so readers know which setting disables renewal?",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-20T21:27:55Z",
-    "updated_at": "2026-11-22T23:17:17Z",
+    "updated_at": "2026-11-23T00:13:36Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 144
   },
@@ -4004,17 +4006,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T21:33:39Z",
-    "updated_at": "2026-11-22T23:17:15Z",
+    "last_push": "2026-11-23T01:05:01Z",
+    "updated_at": "2026-11-23T01:05:09Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 138
   },
@@ -10424,7 +10426,7 @@
       ],
       [
        "h",
-       "@@ -107,6 +110,42 @@"
+       "@@ -107,6 +110,52 @@"
       ],
       [
        "c",
@@ -10441,6 +10443,22 @@
       [
        "a",
        "_SESSION_CLOSED = \"Session is closed\""
+      ],
+      [
+       "a",
+       "_REPLACED_CLOSE_TIMEOUT = 30"
+      ],
+      [
+       "a",
+       "_LOOP_PROBE_TIMEOUT = 1"
+      ],
+      [
+       "a",
+       "# Guards installing the REST client adapter, so two clients built on one ApiClient don't race."
+      ],
+      [
+       "a",
+       "_INSTALL_LOCK = threading.Lock()"
       ],
       [
        "a",
@@ -10464,35 +10482,19 @@
       ],
       [
        "a",
-       "def _session_loop(rest_client) -> Optional[asyncio.AbstractEventLoop]:"
+       "def _running_loop() -> Optional[asyncio.AbstractEventLoop]:"
       ],
       [
        "a",
-       "    # aiohttp only exposes a session's loop publicly through its deprecated `loop` property."
+       "    try:"
       ],
       [
        "a",
-       "    loop = getattr(getattr(rest_client, \"pool_manager\", None), \"_loop\", None)"
-      ],
-      [
-       "a",
-       "    return loop if isinstance(loop, asyncio.AbstractEventLoop) else None"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "def _run_on_new_thread(function: Callable[[], Any]) -> concurrent.futures.Future:"
+       "        return asyncio.get_running_loop()"
       ]
      ],
      "truncated": true,
-     "additions": 184,
+     "additions": 232,
      "deletions": 34
     }
    ],
@@ -10506,7 +10508,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Holds `_INSTALL_LOCK` around the install, so two clients built at the same time on one `ApiClient` install one REST client. `test_clients_built_at_the_same_time_on_one_api_client_install_one_rest_client` covers it. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10516,7 +10518,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/client.py",
       "text": "[AI Assisted] Docstring for `close_async`: a second call waits for the first one to finish instead of returning at once. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10526,7 +10528,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Builds the client on the loop that owns the session, as the docs now say. `UnitycatalogFunctionClient` is created inside the coroutine, not on the caller's loop. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10536,7 +10538,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Unpacks the `ApiClient` and the client that the owning loop built, for both the running and the stopped loop branches. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10546,7 +10548,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Waits for the close and the pending request on worker threads, so the loop that owns the session is free to run the close. [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -10556,20 +10558,20 @@
       "maintainer": true,
       "path": "ai/core/tests/core/oss/test_oss_client.py",
       "text": "[AI Assisted] Silences the fork `DeprecationWarning` for this test only. The sandbox executor on main triggers it too. [code]",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T17:40:56Z",
-    "updated_at": "2026-11-22T23:12:41Z",
+    "last_push": "2026-11-23T00:12:57Z",
+    "updated_at": "2026-11-23T02:20:16Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 110
   },

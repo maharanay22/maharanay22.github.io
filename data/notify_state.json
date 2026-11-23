@@ -1424,12 +1424,12 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2317": {
   "approved_by": [],
-  "checks": "failing",
+  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2318": {
   "approved_by": [
@@ -1485,7 +1485,9 @@
   "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2323": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
