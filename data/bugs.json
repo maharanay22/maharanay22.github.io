@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T19:15:18Z",
+ "generated_at": "2026-11-24T20:27:29Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28954,
+   "stars": 28955,
    "forks": 6653,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50617,
-   "forks": 20714,
+   "stars": 50618,
+   "forks": 20715,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63833,
-   "forks": 13531,
+   "stars": 63835,
+   "forks": 13532,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -515,7 +515,7 @@
      "lines": [
       [
        "h",
-       "@@ -155,6 +155,24 @@"
+       "@@ -155,6 +155,38 @@"
       ],
       [
        "c",
@@ -567,31 +567,27 @@
       ],
       [
        "a",
-       "          # An extra parameter that ssl also sets fails the render. Without ssl, it is passed on."
+       "          # An extra parameter that ssl also sets fails the render, with the root certificate given inline or from a"
       ],
       [
        "a",
-       "          if err=\"$(helm template uc helm \"${pg[@]}\" --set-string server.db.postgresqlConfig.extraParams.sslmode=disable 2>&1)\"; then"
+       "          # config map. Without ssl, it is passed on."
       ],
       [
        "a",
-       "            exit 1"
+       "          pg_cm=(-f helm/ci/postgresql-values.yaml --set server.db.postgresqlConfig.ssl.enabled=true"
       ],
       [
        "a",
-       "          fi"
+       "            --set-string server.db.postgresqlConfig.ssl.rootCertConfigMapName=db-root-cert"
       ],
       [
        "a",
-       "          grep -qF 'server.db.postgresqlConfig.extraParams.sslmode is set by server.db.postgresqlConfig.ssl' <<<\"$err\""
+       "            --set-string server.db.postgresqlConfig.ssl.rootCertConfigMapKey=ca.crt)"
       ],
       [
        "a",
-       "          out=\"$(helm template uc helm -f helm/ci/postgresql-values.yaml \\"
-      ],
-      [
-       "a",
-       "            --set-string server.db.postgresqlConfig.extraParams.sslmode=require)\""
+       "          out=\"$(helm template uc helm \"${pg_cm[@]}\")\""
       ],
       [
        "a",
@@ -599,23 +595,47 @@
       ],
       [
        "a",
-       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?sslmode=require' ]"
+       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
       ],
       [
-       "c",
-       "          # With storage secrets too, the server container has one env list that holds both. The upgrade-schema"
+       "a",
+       "          check_ssl_params_clash() {"
       ],
       [
-       "c",
-       "          # container gets the database password and the driver, but no storage secrets."
+       "a",
+       "            for key in sslmode sslrootcert; do"
       ],
       [
-       "c",
-       "          out=\"$(helm template uc helm -f helm/ci/mysql-values.yaml -f helm/ci/secrets-values.yaml \\"
+       "a",
+       "              if err=\"$(helm template uc helm \"$@\" --set-string \"server.db.postgresqlConfig.extraParams.${key}=/x\" 2>&1)\"; then"
+      ],
+      [
+       "a",
+       "                echo \"expected the render to fail for extraParams.${key}\""
+      ],
+      [
+       "a",
+       "                exit 1"
+      ],
+      [
+       "a",
+       "              fi"
+      ],
+      [
+       "a",
+       "              grep -qF \"server.db.postgresqlConfig.extraParams.${key} is set by server.db.postgresqlConfig.ssl\" <<<\"$err\""
+      ],
+      [
+       "a",
+       "            done"
+      ],
+      [
+       "a",
+       "          }"
       ]
      ],
-     "truncated": false,
-     "additions": 18,
+     "truncated": true,
+     "additions": 32,
      "deletions": 0
     },
     {
@@ -748,26 +768,6 @@
       [
        "c",
        "      #"
-      ],
-      [
-       "a",
-       "      # With `ssl.enabled`, the chart sets `sslmode` and `sslrootcert` from `ssl` and fails to render when they are"
-      ],
-      [
-       "a",
-       "      # also set here."
-      ],
-      [
-       "a",
-       "      #"
-      ],
-      [
-       "c",
-       "      # Example:"
-      ],
-      [
-       "c",
-       "      # ```yaml"
       ]
      ],
      "truncated": true,
@@ -776,18 +776,39 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T19:16:05Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4685237248",
+      "maintainer": true,
+      "path": "helm/values.yaml",
+      "text": "**Nit (not a blocker):** Docs say sslrootcert is always set under ssl, but the chart sets it only when a root certificate is configured The comment says that with `ssl.enabled` the chart sets `sslmode` and `sslrootcert` and fails the render when they are repeated in `extraParams`. In `_config.tpl:54-58`, `sslrootcert`…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T19:16:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4685236625",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** A guard narrowed to sslmode, or run after the extraParams loop, would still pass CI The guard in `_config.tpl` uses `hasKey` and today rejects a conflicting `sslrootcert` correctly. The only clash check in this step passes `extraParams.sslmode`, so nothing would notice if the guard covered onl…",
+      "answered": true
+     }
+    ],
+    "stage": 3,
+    "checks": "running",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T15:59:15Z",
-    "updated_at": "2026-11-24T01:51:40Z",
+    "last_push": "2026-11-24T20:25:12Z",
+    "updated_at": "2026-11-24T20:25:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 171
   },
@@ -946,18 +967,29 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T19:16:55Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2350#discussion_r4685247060",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** Helm render check fails if mountPath is not on the line right after the mount name The check uses `grep -A1` after `- name: gcs-credentials-$i`, so it only sees `mountPath` when that field is on the very next line. Valid YAML can put another field between them without changing the mount. If th…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T15:59:14Z",
-    "updated_at": "2026-11-24T01:45:14Z",
+    "updated_at": "2026-11-24T19:16:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 170
   },
@@ -2174,11 +2206,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Pass LangChain tool arguments named config or run_manager to the function",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:38Z",
-   "merged_at": null,
+   "merged_at": "2026-11-24",
    "reported": true,
    "pr": {
     "number": 2343,
@@ -2324,6 +2356,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T19:31:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2343#pullrequestreview-6045967968",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at c5123114. Tool arguments named config or run_manager now reach the function, a coroutine set on UnityCatalogTool is awaited again, and the CHANGELOG and description disclose that a directly built func or coroutine no longer receives LangChain's callbacks or RunnableConfig. Optional: the rese…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T07:47:29Z",
@@ -2374,17 +2416,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T16:47:48Z",
-    "updated_at": "2026-11-24T19:06:20Z",
+    "updated_at": "2026-11-24T19:32:03Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 163
   },
@@ -3287,6 +3331,26 @@
      {
       "kind": "inline comment",
       "who": "yili-db",
+      "at": "2026-11-24T19:23:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4685326877",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] The sentence just extended reads incorrectly: the clause \"when no schema has been selected with USE\" sits before `<catalog_name>.default`. Suggested text: A name without a schema, such as `SELECT * FROM marksheet;`, resolves to `<catalog_name>.default` unless a different schema was selected with `USE <sc…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T19:23:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6045853842",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 7d30e653. The earlier blocker is fixed: the 404 mapping now matches the error code, and a `TABLE_NOT_FOUND` 404 stays an `ApiException`. The staging and `createView` paths are mapped too. One normal item before merge (the docs sentence, inline). Question: with the Delta API on, a managed Del…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
       "at": "2026-11-24T07:35:06Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4676845057",
       "maintainer": true,
@@ -3323,26 +3387,6 @@
       "path": null,
       "text": "[AI Assisted] Changes needed: one blocker and one required change, both outside the diff so they are written here rather than inline. The docs and nits are inline. Resolving unqualified names to `<catalog>.default` is accepted as designed. Outside the diff (UCSingleCatalog.scala:637 and :677, not anchorable): blocker:…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T00:35:57Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948250",
-      "maintainer": true,
-      "path": "docs/integrations/unity-catalog-spark.md",
-      "text": "[AI Assisted] Replacement for these two lines: A name without a schema, such as `SELECT * FROM marksheet;`, resolves to the `default` schema of the current catalog, `<catalog_name>.default`. That schema must exist. If it does not, create it with `CREATE SCHEMA <catalog_name>.default`, or qualify the name. `USE <schema…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T00:35:57Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948253",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
-      "text": "[AI Assisted] nit: the empty case is handled just above, so the check at line 259 only needs to catch nested names. Passing `ident.namespace()` to `checkSingleLevelNamespace` would make that explicit.",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3350,12 +3394,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T15:08:17Z",
-    "updated_at": "2026-11-24T19:06:19Z",
+    "updated_at": "2026-11-24T19:23:27Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 159
   },
@@ -3556,6 +3600,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T19:32:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#pullrequestreview-6045985194",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 10b760f9. A backfill-only commit on a UniForm table is now accepted, a uniform block on a backfill-only request is rejected with a clear 400, the generated UI file is left for its own regeneration, and the new tests fail when either half of the fix is reverted. Small factual note for the nul…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-24T07:52:46Z",
@@ -3598,15 +3652,17 @@
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T17:11:31Z",
-    "updated_at": "2026-11-24T19:11:21Z",
+    "updated_at": "2026-11-24T19:32:33Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 158
   },
@@ -34768,11 +34824,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
