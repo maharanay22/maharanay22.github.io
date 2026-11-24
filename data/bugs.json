@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T01:50:49Z",
+ "generated_at": "2026-11-24T02:27:22Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28945,
+   "stars": 28946,
    "forks": 6647,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -213,7 +213,7 @@
    "period_commits": null,
    "period_total": 55,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63779,
+   "stars": 63780,
    "forks": 13506,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Force delete of a schema or catalog leaves its uncommitted staging tables behind",
+   "date": "2026-11-24",
+   "created_at": "2026-11-24T02:24:54Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2358,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2358"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-24T02:24:54Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 172
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -622,7 +654,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-23T15:59:15Z",
-    "updated_at": "2026-11-23T18:59:17Z",
+    "updated_at": "2026-11-24T01:51:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2003,7 +2035,7 @@
     "approved_by": [],
     "last_push": "2026-11-23T18:42:11Z",
     "updated_at": "2026-11-24T01:15:18Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
@@ -2176,7 +2208,7 @@
     "approved_by": [],
     "last_push": "2026-11-23T14:40:07Z",
     "updated_at": "2026-11-24T01:12:05Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
@@ -2188,7 +2220,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Leave expiration-time-ms out of Delta credentials that do not expire",
+   "title": "Make expiration-time-ms nullable in Delta credentials that do not expire",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:35Z",
    "merged_at": null,
@@ -2210,43 +2242,27 @@
      "lines": [
       [
        "h",
-       "@@ -588,7 +588,6 @@"
+       "@@ -634,10 +634,12 @@"
       ],
       [
        "c",
-       "      required:"
+       "              type: string"
       ],
       [
        "c",
-       "        - prefix"
+       "              description: GCP OAuth token"
       ],
       [
        "c",
-       "        - operation"
+       "        expiration-time-ms:"
       ],
       [
        "d",
-       "        - expiration-time-ms"
-      ],
-      [
-       "c",
-       "        - config"
-      ],
-      [
-       "c",
-       "      properties:"
-      ],
-      [
-       "c",
-       "        prefix:"
-      ],
-      [
-       "h",
-       "@@ -637,7 +636,8 @@"
-      ],
-      [
-       "c",
        "          type: integer"
+      ],
+      [
+       "a",
+       "          type: [integer, \"null\"]"
       ],
       [
        "c",
@@ -2262,11 +2278,15 @@
       ],
       [
        "a",
-       "            Credential expiration time in epoch milliseconds. Absent when the credential has no"
+       "            Credential expiration time in epoch milliseconds, or null when the credential has no"
       ],
       [
        "a",
-       "            expiration time, for example for a local file system path."
+       "            expiration time, for example for a local file system path or static credentials"
+      ],
+      [
+       "a",
+       "            configured on the server."
       ],
       [
        "c",
@@ -2282,7 +2302,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 2,
+     "additions": 4,
      "deletions": 2
     }
    ],
@@ -2296,7 +2316,7 @@
       "maintainer": true,
       "path": "api/delta.yaml",
       "text": "[AI Assisted] Lead suggestion: could we keep `expiration-time-ms` in `required` and make it nullable, `type: [integer, \"null\"]` (OpenAPI 3.1)? The server already sends null for these credentials, so the wire output stays identical to main, and readers that index the key keep working. The Python client gets `Optional[S…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2306,7 +2326,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/service/delta/DeltaCredentialsMapperTest.java",
       "text": "[AI Assisted] This S3 case has a session token. The static per-bucket credentials in the description are a key pair without one, and the server's static generator sends the configured session token, which may be unset. Could we add a key-pair-only S3 credential to `credentialsWithoutExpiration()`? The file case could…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2316,7 +2336,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/service/delta/DeltaCredentialsMapperTest.java",
       "text": "[AI Assisted] Nit: if the absent-key form is kept, could we assert on the quoted key, `\"expiration-time-ms\"`, rather than the substring `expiration`? The substring would also fail on any unrelated future key that contains the word. With the nullable form this assertion is already on the quoted key.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2326,7 +2346,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/service/delta/DeltaStagingTableMapperTest.java",
       "text": "[AI Assisted] Nit: same as the credentials mapper test. If the absent-key form is kept, assert on the quoted `\"expiration-time-ms\"` key instead of the substring `expiration`.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2336,7 +2356,7 @@
       "maintainer": true,
       "path": "clients/python/tests/test_delta_table.py",
       "text": "[AI Assisted] The `unity.default.numbers` check depends on the sample database (`examples/sample-database/src/main/java/io/unitycatalog/server/utils/SampleDatabase.java:340`), not on the staging flow this test is about. A failure there would look like a staging regression. Could we split it into its own test, or add a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2346,20 +2366,20 @@
       "maintainer": true,
       "path": "clients/python/tests/test_delta_table.py",
       "text": "[AI Assisted] Nit: this case uses an `s3` prefix with an empty config, which the server does not send for this case. A `file` prefix would match the real case.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T18:32:21Z",
-    "updated_at": "2026-11-24T01:10:16Z",
+    "last_push": "2026-11-24T02:25:16Z",
+    "updated_at": "2026-11-24T02:25:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 162
   },
@@ -2609,7 +2629,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T01:24:53Z",
-    "updated_at": "2026-11-24T01:24:56Z",
+    "updated_at": "2026-11-24T02:13:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3106,8 +3126,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T01:17:52Z",
@@ -3115,8 +3135,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 159
   },
