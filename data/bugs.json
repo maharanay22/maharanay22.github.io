@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T16:50:53Z",
+ "generated_at": "2026-11-24T17:13:37Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63820,
+   "stars": 63823,
    "forks": 13526,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -2379,7 +2379,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T16:47:48Z",
-    "updated_at": "2026-11-24T16:47:59Z",
+    "updated_at": "2026-11-24T17:07:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3549,52 +3549,8 @@
       ]
      ],
      "truncated": true,
-     "additions": 15,
+     "additions": 16,
      "deletions": 5
-    },
-    {
-     "path": "ui/src/types/api/catalog.gen.ts",
-     "lines": [
-      [
-       "h",
-       "@@ -1768,6 +1768,8 @@"
-      ],
-      [
-       "c",
-       "       *     keeping the conversion state synchronized with the Delta version."
-      ],
-      [
-       "c",
-       "       *     Uniform enables Delta tables to be read by other table formats (e.g., Iceberg) without data conversion."
-      ],
-      [
-       "c",
-       "       *     Independent of the `metadata` field, both can be provided together or separately."
-      ],
-      [
-       "a",
-       "       *     Must not be set without `commit_info`. A request that only sets `latest_backfilled_version`"
-      ],
-      [
-       "a",
-       "       *     adds no commit to convert."
-      ],
-      [
-       "c",
-       "       *      */"
-      ],
-      [
-       "c",
-       "      uniform?: components['schemas']['DeltaUniform'];"
-      ],
-      [
-       "c",
-       "    };"
-      ]
-     ],
-     "truncated": false,
-     "additions": 2,
-     "deletions": 0
     }
    ],
    "track": {
@@ -3607,7 +3563,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/deltacommits/SdkDeltaCommitsCRUDTest.java",
       "text": "[AI Assisted] A backfill-only request with a `uniform` block whose `iceberg` is null is not pinned by a test. The description names this as a changed case: it now gets the new message instead of the shape-validation message. One more `assertApiException` with `createBackfillOnlyCommitObject(1L).uniform(new DeltaUnifor…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3617,7 +3573,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 9f6a1b543. The round-1 items are addressed: the malformed-block description now says the timestamp case moves from 500 to 400, the title names the new rejection, the Delta REST guard is described as defensive, and the two non-UniForm assertions and the comment are in. No blockers. The fixes…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3640,17 +3596,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T20:45:34Z",
-    "updated_at": "2026-11-24T07:52:46Z",
+    "last_push": "2026-11-24T17:11:31Z",
+    "updated_at": "2026-11-24T17:11:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 158
   },
@@ -5496,11 +5452,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 149
   },
@@ -5790,11 +5746,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 148
   },
