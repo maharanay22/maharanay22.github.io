@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T03:22:26Z",
+ "generated_at": "2026-11-24T03:30:09Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63781,
+   "stars": 63782,
    "forks": 13506,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "ListCredentials ignores the documented purpose filter",
+   "date": "2026-11-24",
+   "created_at": "2026-11-24T03:27:57Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2361,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2361"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-24T03:27:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 175
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -1556,7 +1588,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Default a new credential's purpose to STORAGE",
+   "title": "Require purpose when creating a credential",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:46Z",
    "merged_at": null,
@@ -1578,7 +1610,11 @@
      "lines": [
       [
        "h",
-       "@@ -1247,6 +1247,7 @@"
+       "@@ -1246,7 +1246,7 @@"
+      ],
+      [
+       "c",
+       "      operationId: createCredential"
       ],
       [
        "c",
@@ -1589,12 +1625,12 @@
        "      description: |-"
       ],
       [
-       "c",
+       "d",
        "        Creates a new credential. The type of credential to be created is determined by the **purpose** field."
       ],
       [
        "a",
-       "        `purpose` defaults to `STORAGE` when it is not set."
+       "        Creates a new credential. The credential type is determined by which credential field is set."
       ],
       [
        "c",
@@ -1607,91 +1643,87 @@
       [
        "c",
        ""
+      ],
+      [
+       "h",
+       "@@ -3047,6 +3047,7 @@"
+      ],
+      [
+       "c",
+       "      type: object"
+      ],
+      [
+       "c",
+       "      required:"
+      ],
+      [
+       "c",
+       "        - name"
+      ],
+      [
+       "a",
+       "        - purpose"
+      ],
+      [
+       "c",
+       "      properties:"
+      ],
+      [
+       "c",
+       "        name:"
+      ],
+      [
+       "c",
+       "          description: The credential name. The name must be unique within the metastore."
       ]
      ],
      "truncated": false,
-     "additions": 1,
-     "deletions": 0
+     "additions": 2,
+     "deletions": 1
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CredentialDAO.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/CredentialRepository.java",
      "lines": [
       [
        "h",
-       "@@ -29,6 +29,7 @@"
+       "@@ -64,6 +64,8 @@"
       ],
       [
        "c",
-       "import java.security.NoSuchAlgorithmException;"
+       ""
       ],
       [
        "c",
-       "import java.util.Date;"
+       "  public CredentialInfo addCredential(CreateCredentialRequest createCredentialRequest) {"
       ],
       [
        "c",
-       "import java.util.HexFormat;"
+       "    ValidationUtils.validateSqlObjectName(createCredentialRequest.getName());"
       ],
       [
        "a",
-       "import java.util.Objects;"
-      ],
-      [
-       "c",
-       "import java.util.Optional;"
-      ],
-      [
-       "c",
-       "import java.util.UUID;"
-      ],
-      [
-       "c",
-       "import lombok.AccessLevel;"
-      ],
-      [
-       "h",
-       "@@ -117,7 +118,8 @@"
-      ],
-      [
-       "c",
-       "        CredentialDAO.builder()"
-      ],
-      [
-       "c",
-       "            .id(UUID.randomUUID())"
-      ],
-      [
-       "c",
-       "            .name(createRequest.getName())"
-      ],
-      [
-       "d",
-       "            .purpose(createRequest.getPurpose())"
+       "    ValidationUtils.checkArgument("
       ],
       [
        "a",
-       "            .purpose("
-      ],
-      [
-       "a",
-       "                Objects.requireNonNullElse(createRequest.getPurpose(), CredentialPurpose.STORAGE))"
+       "        createCredentialRequest.getPurpose() != null, \"purpose is required.\");"
       ],
       [
        "c",
-       "            .comment(createRequest.getComment())"
+       "    if (createCredentialRequest.getS3Compatible() != null) {"
       ],
       [
        "c",
-       "            .owner(callerId)"
+       "      serverProperties.checkS3CompatibleStorageEnabled();"
       ],
       [
        "c",
-       "            .createdAt(now)"
+       "    }"
       ]
      ],
      "truncated": false,
-     "additions": 3,
-     "deletions": 1
+     "additions": 2,
+     "deletions": 0
     }
    ],
    "track": {
@@ -1704,7 +1736,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Review of e8e8f703a. No blockers. The inline comment on `CredentialDAO` replaces the test and Javadoc points I had drafted. Outside the diff: - Followup: the `purpose` query parameter of `listCredentials` (`api/all.yaml`, around line 1324) is documented as a filter, but the server ignores it. Please open…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1714,7 +1746,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CredentialDAO.java",
       "text": "Instead of defaulting a missing `purpose` to `STORAGE`, could we reject it with a 400 (`INVALID_ARGUMENT`, naming the field) and mark `purpose` as required in `CreateCredentialRequest`? - `purpose` decides what kind of credential this is. `STORAGE` is the only value today, but if another purpose is added later, a requ…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1724,20 +1756,20 @@
       "maintainer": true,
       "path": "api/all.yaml",
       "text": "[AI Assisted] The sentence before the new one is no longer accurate. The credential type comes from which credential field is set (`aws_iam_role` or `s3_compatible`), not from `purpose`. Could we reword it so it stays right as more credential types are added? [code] If the request is rejected without `purpose`, drop t…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T14:37:17Z",
-    "updated_at": "2026-11-24T01:37:02Z",
+    "last_push": "2026-11-24T03:28:19Z",
+    "updated_at": "2026-11-24T03:28:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 166
   },
@@ -1871,7 +1903,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:20:07Z",
-    "updated_at": "2026-11-24T03:20:10Z",
+    "updated_at": "2026-11-24T03:21:56Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2457,8 +2489,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T02:25:16Z",
@@ -2466,8 +2498,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 162
   },
