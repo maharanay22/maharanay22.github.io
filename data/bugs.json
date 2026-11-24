@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T21:13:54Z",
+ "generated_at": "2026-11-24T21:36:49Z",
  "stages": [
   "reported",
   "fix sent",
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63835,
-   "forks": 13533,
+   "forks": 13537,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -798,8 +798,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T20:25:12Z",
@@ -807,8 +807,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 171
   },
@@ -1154,6 +1154,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:21:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4686721088",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+      "text": "[AI Assisted] Normal: the hash-suffixed names are not checked against the names of tools that keep theirs. With `catalog.s.a__b`, `catalog.s__a.b` and a third function `catalog.s.a__b_29e7ac5e` (the third name is chosen to equal the suffix), the first two become `catalog__s__a__b_<hash>`, and the third stays `catalog_…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:21:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4686721103",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
+      "text": "[AI Assisted] Nit: `get_tool_name` already cuts to 64 characters and logs the cut name, and this line cuts again to 63. So the log can name a different string from the declared one (for example a 67-character name logs `ain__...` at 64 and is declared as `in__...` at 63), and an exact 64-character name is cut with no…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:21:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4686721113",
+      "maintainer": true,
+      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
+      "text": "[AI Assisted] Nit: this hunk is not related to the PR. `main` has `lambda: \"databricks-uc\"` on one line, and this revision wraps it in parentheses. Could it be reverted to the main form?",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:21:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4686721122",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Nit: \"which the other integrations also use\" is true for the tool name, but the other integrations do not sanitize or cut it, so the same function can differ for names with `@` or longer than 63 characters. Optional wording. Normal: \"each gets a short hash of its full function name appended\" and \"still e…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T21:21:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#pullrequestreview-6047614205",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review. The round-one blockers are addressed: declared names are capped at 63 characters, `@` is replaced, and the `__` pair gets distinct names (checked by repro, with the 63, 64 and `@` cases). The comments on the two round-one normal items are addressed too. Normal, inline on `_with_unique_names`:…",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T01:43:23Z",
@@ -1162,46 +1212,6 @@
       "path": null,
       "text": "[AI Assisted] Verdict: changes needed. The same-name and mixed-case fix works. Both same-named functions build and dispatch correctly, and the new tests fail on main (`ValueError`, `KeyError: 'Catalog__HR__Test'`) and pass here. Three declared-name cases that work on main now regress: declared names that reach 64 char…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:43:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4674432981",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-      "text": "[AI Assisted] Blocker: the declared name can now reach 64 characters, one over the documented limit. `get_tool_name` keeps up to 64 characters, but the `FunctionDeclaration.name` docstring in the installed google-ai-generativelanguage package (v1beta `types/content.py`) allows a maximum of 63. For `main.customer_analy…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:43:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4674432987",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
-      "text": "[AI Assisted] Blocker: two functions in one toolkit can now get the same declared name. `get_tool_name` joins the parts with `__` and does not escape an underscore already in a name, so `catalog.s.a__b` and `catalog.s__a.b` both become `catalog__s__a__b`. On main they were declared as `a__b` and `b`, and the toolkit b…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:43:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4674432995",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] This changes a declared name that has shipped since `ai-v0.2.0`, so the entry should cover all of it. It names `fc.name` and `convert_to_gemini_schema`, but not `GeminiTool.schema[\"name\"]`, which changes too. Could the entry also give the migration step, for example \"compare `fc.name` with `tool.name` in…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:43:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#discussion_r4674433004",
-      "maintainer": true,
-      "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
-      "text": "[AI Assisted] Nit: the new tests all build the toolkit from `function_names`. Could one test pass two same-named `FunctionInfo` objects through the `function_info=` path and check that the declared names are unique?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -1209,12 +1219,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T04:06:19Z",
-    "updated_at": "2026-11-24T20:43:27Z",
+    "updated_at": "2026-11-24T21:21:41Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 169
   },
@@ -1950,6 +1960,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T21:30:24Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2345#pullrequestreview-6047731662",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at d8485af2. STRUCT definitions now stay in the Anthropic input_schema, including structs inside ARRAY, MAP and nested STRUCT and the nullable element case, schemas without a STRUCT are unchanged, and the DSPy gap is tracked in #2360. I merged main into the branch to resolve the ai/CHANGELOG.md…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T01:16:36Z",
@@ -1970,17 +1990,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
-    "last_push": "2026-11-24T03:20:07Z",
-    "updated_at": "2026-11-24T20:43:24Z",
-    "conflicts": true,
+    "stage": 3,
+    "checks": "running",
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
+    "last_push": "2026-11-24T21:28:25Z",
+    "updated_at": "2026-11-24T21:30:24Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 165
   },
@@ -2139,6 +2161,36 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-24T21:26:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6047680225",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at c4aec6fb. The earlier items are addressed: the `open` shadowing, the `RecursionError` escape, the CHANGELOG merge with main, the locale-dependent test, the shared-helper follow-up, and the stderr tail on the unreadable branch. One blocker remains (inline). In the description: it says every n…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:26:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4686777123",
+      "maintainer": true,
+      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
+      "text": "[AI Assisted] The runner's `main()` now has locals `result_path`, `output` and `f`, and the generated script imports `builtins` at module level. A UC function with one of those names is shadowed inside `main()`. A function named `f` or `output` raises `UnboundLocalError`, a function named `result_path` raises `TypeErr…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:26:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4686777140",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_subprocess_executor.py",
+      "text": "[AI Assisted] This test only covers `open`, and it passes on main, so it guards the intermediate state rather than the regression. Folding it into the parametrized test from the comment on the runner would cover `f`, `output`, `result_path` and `builtins` as well.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-24T01:15:17Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6032147714",
       "maintainer": true,
@@ -2165,36 +2217,6 @@
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] A result nested deeper than the parent's recursion limit makes `json.loads` raise `RecursionError`. `_read_result` does not catch it, so the call raises instead of returning an error result, and main returned an error result for the same input. Could we catch `RecursionError` here as well, with a test fo…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4674238767",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] This PR conflicts with main in `ai/CHANGELOG.md`. Could you merge main into the branch to resolve it? Optionally, this entry is about 1,030 characters against about 850 for the longest neighbor; the exit-code and stderr details could fit in one shorter sentence.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4674238774",
-      "maintainer": true,
-      "path": "ai/core/tests/core/test_local_subprocess_executor.py",
-      "text": "[AI Assisted] The undecodable-output case expects U+FFFD, which depends on the locale. Could we pin the encoding, or assert only that the call does not raise and that a debug record exists? A non-ASCII result round trip would also be a useful case, since the result file is now UTF-8.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4674238783",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
-      "text": "[AI Assisted] Follow-up, not a blocker: the no-result branches here repeat the decision order in `executor/local.py::_receive_result`. Could we track a shared helper in `executor/common.py` in an issue and link it here?",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -2202,12 +2224,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:10:56Z",
-    "updated_at": "2026-11-24T20:43:15Z",
+    "updated_at": "2026-11-24T21:26:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 164
   },
@@ -3337,6 +3359,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T21:22:40Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6047627723",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 362ce5ce. Unqualified names resolve to `<catalog>.default`, a missing schema is reported as SCHEMA_NOT_FOUND by matching the error code, and the docs sentence is fixed. One open question, not blocking: with the Delta API on, a managed Delta `CREATE TABLE` goes to the Delta delegate, and a mi…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-24T19:23:27Z",
@@ -3385,29 +3417,21 @@
       "path": null,
       "text": "[AI Assisted] Re-review at 27fedb06. The earlier blocker (Delta API replace path) is fixed, and the guard is covered by the parameterized staging test. One blocker remains: the 404 mapping matches on status, so a `TABLE_NOT_FOUND` from a missing staging row is reported as a missing schema (inline at line 1315). Normal…",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T00:35:57Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6031807312",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Changes needed: one blocker and one required change, both outside the diff so they are written here rather than inline. The docs and nits are inline. Resolving unqualified names to `<catalog>.default` is accepted as designed. Outside the diff (UCSingleCatalog.scala:637 and :677, not anchorable): blocker:…",
-      "answered": true
      }
     ],
     "stage": 3,
     "checks": "running",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T20:36:11Z",
-    "updated_at": "2026-11-24T20:43:13Z",
+    "updated_at": "2026-11-24T21:22:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 159
   },
