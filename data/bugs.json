@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T21:36:49Z",
+ "generated_at": "2026-11-24T21:52:43Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3586,
+   "stars": 3587,
    "forks": 708,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63835,
+   "stars": 63836,
    "forks": 13537,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -515,7 +515,7 @@
      "lines": [
       [
        "h",
-       "@@ -155,6 +155,38 @@"
+       "@@ -155,6 +155,39 @@"
       ],
       [
        "c",
@@ -535,7 +535,7 @@
       ],
       [
        "a",
-       "          # encoded."
+       "          # encoded and its name as given."
       ],
       [
        "a",
@@ -551,7 +551,11 @@
       ],
       [
        "a",
-       "            --set-string 'server.db.postgresqlConfig.extraParams.ApplicationName=uc ci+test' \\"
+       "            --set-string 'server.db.postgresqlConfig.extraParams.ApplicationName=uc ci+test&x=1' \\"
+      ],
+      [
+       "a",
+       "            --set-string 'server.db.postgresqlConfig.extraParams.a b=1' \\"
       ],
       [
        "a",
@@ -563,7 +567,7 @@
       ],
       [
        "a",
-       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?ApplicationName=uc+ci%2Btest&currentSchema=uc&sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
+       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?ApplicationName=uc+ci%2Btest%26x%3D1&a b=1&currentSchema=uc&sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
       ],
       [
        "a",
@@ -628,14 +632,10 @@
       [
        "a",
        "            done"
-      ],
-      [
-       "a",
-       "          }"
       ]
      ],
      "truncated": true,
-     "additions": 32,
+     "additions": 33,
      "deletions": 0
     },
     {
@@ -643,14 +643,34 @@
      "lines": [
       [
        "h",
-       "@@ -58,13 +58,17 @@"
+       "@@ -53,18 +53,20 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "{{- if .Values.server.db.postgresqlConfig.ssl.enabled }}"
+      ],
+      [
+       "c",
+       "{{- $params = merge $params (dict \"sslmode\" .Values.server.db.postgresqlConfig.ssl.mode) }}"
+      ],
+      [
+       "d",
+       "{{- if or .Values.server.db.postgresqlConfig.ssl.rootCert .Values.server.db.postgresqlConfig.ssl.rootCertConfigMapName }}"
+      ],
+      [
+       "c",
+       "{{- $params = merge $params (dict \"sslrootcert\" \"/home/unitycatalog/etc/conf/dbrootca.crt\") }}"
       ],
       [
        "c",
        "{{- end }}"
       ],
       [
-       "c",
+       "d",
        "{{- end }}"
       ],
       [
@@ -728,14 +748,14 @@
      ],
      "truncated": false,
      "additions": 7,
-     "deletions": 3
+     "deletions": 5
     },
     {
      "path": "helm/values.yaml",
      "lines": [
       [
        "h",
-       "@@ -281,13 +281,16 @@"
+       "@@ -281,13 +281,18 @@"
       ],
       [
        "c",
@@ -748,35 +768,65 @@
       [
        "c",
        ""
-      ],
-      [
-       "d",
-       "      # -- (object) Postgres params"
-      ],
-      [
-       "a",
-       "      # -- (object) PostgreSQL JDBC URL params"
-      ],
-      [
-       "c",
-       "      # @default -- not set"
-      ],
-      [
-       "c",
-       "      # @raw"
-      ],
-      [
-       "c",
-       "      #"
       ]
      ],
      "truncated": true,
-     "additions": 5,
+     "additions": 7,
      "deletions": 2
     }
    ],
    "track": {
     "feedback": [
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T21:39:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914942",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Nit (not a blocker):** Map or list values in extraParams render as Go syntax instead of failing The only guard in the loop checks for name clashes, not value types. A map or list value reaches `urlquery` and is formatted with Go's default syntax, and the render still succeeds. The MySQL loop (line 86) and `extraProp…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T21:39:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914786",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** Raw PostgreSQL parameter names are not pinned by any test The template deliberately leaves names unencoded because PgJDBC does not decode them (the comment at _config.tpl:69 records this), while the MySQL branch encodes them. Every PostgreSQL name in the assertions is plain letters, so encodin…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T21:39:19Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914601",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** Docs and conditional describe an SSL-without-certificate case that fails to render The new comment in values.yaml and README.md says `sslrootcert` is set only when a root certificate setting is present, which implies `ssl.enabled` without a certificate is a valid setup. deployment.yaml:117 alr…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T21:39:18Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914443",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** Encoding render test would still pass if `&` were left unescaped The PostgreSQL render test covers a space and `+`, plus `/` in the certificate path, but no value contains `&`, `=` or `%`. An encoder that escapes only those three characters would pass, yet a value containing `&` would split in…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-24T21:39:17Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914235",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Nit (not a blocker):** Unquoted large numbers in extraParams render in exponent form and the driver rejects them Helm loads unquoted YAML numbers as float64 (per my reading of the pinned Helm source; helm is not installed here, so I did not render it), and `urlquery` formats them with `fmt.Sprint`. A value of 1e6 or…",
+      "answered": true
+     },
      {
       "kind": "inline comment",
       "who": "shba24",
@@ -786,29 +836,19 @@
       "path": "helm/values.yaml",
       "text": "**Nit (not a blocker):** Docs say sslrootcert is always set under ssl, but the chart sets it only when a root certificate is configured The comment says that with `ssl.enabled` the chart sets `sslmode` and `sslrootcert` and fails the render when they are repeated in `extraParams`. In `_config.tpl:54-58`, `sslrootcert`…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T19:16:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4685236625",
-      "maintainer": true,
-      "path": ".github/workflows/helm-chart-tests.yml",
-      "text": "**Nit (not a blocker):** A guard narrowed to sslmode, or run after the extraParams loop, would still pass CI The guard in `_config.tpl` uses `hasKey` and today rejects a conflicting `sslrootcert` correctly. The only clash check in this step passes `extraParams.sslmode`, so nothing would notice if the guard covered onl…",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T20:25:12Z",
-    "updated_at": "2026-11-24T20:31:20Z",
+    "last_push": "2026-11-24T21:49:37Z",
+    "updated_at": "2026-11-24T21:50:25Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 171
   },
@@ -987,17 +1027,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T20:33:33Z",
-    "updated_at": "2026-11-24T20:33:35Z",
+    "updated_at": "2026-11-24T21:46:52Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 170
   },
@@ -1231,11 +1271,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Return 400 for a malformed or out-of-range uniform converted_delta_timestamp on commit",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:52Z",
-   "merged_at": null,
+   "merged_at": "2026-11-24",
    "reported": true,
    "pr": {
     "number": 2348,
@@ -1381,6 +1421,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T21:39:21Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2348#pullrequestreview-6047839640",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 07692f64. A malformed `converted_delta_timestamp` on a commit now gets a 400 that names the field instead of a 500, and the earlier points are addressed. Nits, not blocking: the Javadoc bullet in `getUniformFields(DeltaCommit)` still says `converted-delta-timestamp`; and the message and Java…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T01:40:30Z",
@@ -1421,17 +1471,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T03:52:30Z",
-    "updated_at": "2026-11-24T20:43:26Z",
+    "updated_at": "2026-11-24T21:40:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 168
   },
@@ -1813,6 +1865,26 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-24T21:35:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2346#pullrequestreview-6047790050",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 116e27e4. Changes needed: the new base test fails in the CLI test run (inline). The 400 approach is in place and the server side checks out. Outside the diff: the `listCredentials` `purpose` followup still needs a tracking issue.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T21:35:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2346#discussion_r4686871994",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/base/credential/BaseCredentialCRUDTest.java",
+      "text": "[AI Assisted] Putting it in BaseCredentialCRUDTest was our suggestion last round, so this one is on us. This test is in the shared base, so CliCredentialCRUDTest runs it too. The CLI always sends `purpose=STORAGE` (`CredentialCli.java:105`), so the create succeeds and `assertApiException` fails with \"Expected ApiExcep…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-24T01:37:02Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2346#pullrequestreview-6032323258",
       "maintainer": true,
@@ -1846,12 +1918,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:28:19Z",
-    "updated_at": "2026-11-24T20:43:25Z",
+    "updated_at": "2026-11-24T21:35:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 166
   },
@@ -3052,6 +3124,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:44:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2340#pullrequestreview-6047906165",
+      "maintainer": true,
+      "path": null,
+      "text": "overall LGTM, no blocking issues. i left a couple of small comments on the tests and an optional nit on a comment.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:44:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2340#discussion_r4686972401",
+      "maintainer": true,
+      "path": "clients/java/src/test/java/io/unitycatalog/client/ApiClientBuilderTest.java",
+      "text": "nit: `firstValue` only checks the first header, so an extra `User-Agent` containing `LaterApp` would still pass. could we check `allValues` with `singleElement()` like below? [code]",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-24T00:49:43Z",
@@ -3069,12 +3161,12 @@
      "yili-db"
     ],
     "last_push": "2026-11-23T14:43:20Z",
-    "updated_at": "2026-11-24T00:49:43Z",
+    "updated_at": "2026-11-24T21:44:54Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 160
   },
@@ -3419,14 +3511,14 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-24T20:36:11Z",
-    "updated_at": "2026-11-24T21:22:40Z",
+    "updated_at": "2026-11-24T21:45:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -34856,11 +34948,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
