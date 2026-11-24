@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T17:13:37Z",
+ "generated_at": "2026-11-24T19:15:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28953,
-   "forks": 6651,
+   "stars": 28954,
+   "forks": 6653,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22622825,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50615,
-   "forks": 20713,
+   "stars": 50617,
+   "forks": 20714,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9085,
+   "stars": 9086,
    "forks": 2228,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63823,
-   "forks": 13526,
+   "stars": 63833,
+   "forks": 13531,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -312,7 +312,7 @@
     "CLI"
    ],
    "stars": 1505,
-   "forks": 266,
+   "forks": 268,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 492730868,
@@ -2374,17 +2374,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T16:47:48Z",
-    "updated_at": "2026-11-24T17:07:30Z",
+    "updated_at": "2026-11-24T19:06:20Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 163
   },
@@ -3350,7 +3350,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T15:08:17Z",
-    "updated_at": "2026-11-24T16:43:10Z",
+    "updated_at": "2026-11-24T19:06:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3596,17 +3596,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T17:11:31Z",
-    "updated_at": "2026-11-24T17:11:33Z",
+    "updated_at": "2026-11-24T19:11:21Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 158
   },
@@ -34768,11 +34768,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
