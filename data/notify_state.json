@@ -22,29 +22,29 @@
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/databricks-sql-python/pull/979": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/databricks-sql-python/pull/982": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/dbt-databricks/pull/1709": {
   "approved_by": [],
@@ -1493,20 +1493,22 @@
    "yili-db"
   ],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": "yili-db@2026-11-22T10:53:45Z",
   "last_comment_who": "yili-db",
   "status": "review",
   "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2322": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2323": {
   "approved_by": [
@@ -1579,7 +1581,7 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2339": {
   "approved_by": [],
@@ -1602,16 +1604,21 @@
   "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2341": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2342": {
-  "approved_by": [],
+  "approved_by": [
+   "tdas",
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
@@ -1631,24 +1638,24 @@
  "https://github.com/unitycatalog/unitycatalog/pull/2344": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": true,
-  "last_comment": null,
-  "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
- },
- "https://github.com/unitycatalog/unitycatalog/pull/2345": {
-  "approved_by": [],
-  "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
   "waiting_on": "maintainers"
  },
- "https://github.com/unitycatalog/unitycatalog/pull/2346": {
+ "https://github.com/unitycatalog/unitycatalog/pull/2345": {
   "approved_by": [],
   "checks": "passing",
+  "conflicts": true,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "review",
+  "waiting_on": "you"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2346": {
+  "approved_by": [],
+  "checks": "failing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
@@ -1656,13 +1663,15 @@
   "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2347": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2348": {
   "approved_by": [],
@@ -1676,11 +1685,11 @@
  "https://github.com/unitycatalog/unitycatalog/pull/2349": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2350": {
   "approved_by": [],

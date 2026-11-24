@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T03:54:28Z",
+ "generated_at": "2026-11-24T10:57:55Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Windows"
    ],
    "stars": 3584,
-   "forks": 707,
+   "forks": 709,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 639822,
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3372,
+   "stars": 3373,
    "forks": 715,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,8 +77,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7383,
-   "forks": 956,
+   "stars": 7384,
+   "forks": 958,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3969470,
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28946,
-   "forks": 6647,
+   "stars": 28950,
+   "forks": 6650,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22622825,
@@ -133,7 +133,7 @@
     "Databricks",
     "Connectors"
    ],
-   "stars": 26,
+   "stars": 27,
    "forks": 11,
    "package": null,
    "impact": "In review: PostgreSQL, SQL Server and Databricks connector fixes for exact integers with NULLs, connection-string escaping and native queries.",
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50609,
-   "forks": 20711,
+   "stars": 50611,
+   "forks": 20713,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63782,
-   "forks": 13507,
+   "stars": 63806,
+   "forks": 13514,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -311,7 +311,7 @@
     "Env Vars",
     "CLI"
    ],
-   "stars": 1504,
+   "stars": 1505,
    "forks": 266,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
@@ -987,107 +987,43 @@
      "lines": [
       [
        "h",
-       "@@ -191,7 +191,9 @@"
-      ],
-      [
-       "c",
-       "                )"
-      ],
-      [
-       "c",
-       "            )"
-      ],
-      [
-       "c",
-       "        ]"
-      ],
-      [
-       "d",
-       "        schema = dict(name=function_info.name, description=function_info.comment)"
+       "@@ -1,5 +1,8 @@"
       ],
       [
        "a",
-       "        schema = dict("
+       "import hashlib"
+      ],
+      [
+       "c",
+       "import json"
+      ],
+      [
+       "c",
+       "import logging"
       ],
       [
        "a",
-       "            name=get_tool_name(function_info.full_name), description=function_info.comment"
+       "import re"
       ],
       [
        "a",
-       "        )"
+       "from collections import Counter"
       ],
       [
        "c",
-       "        if parameters[\"properties\"]:"
+       "from collections.abc import Mapping, Sequence"
       ],
       [
        "c",
-       "            schema[\"parameters\"] = parameters"
-      ],
-      [
-       "c",
-       "        return schema"
-      ],
-      [
-       "h",
-       "@@ -232,7 +234,12 @@"
-      ],
-      [
-       "c",
-       "        else:"
-      ],
-      [
-       "c",
-       "            raise ValueError(\"Either function_name or function_info should be provided.\")"
+       "from typing import Any, Callable, Dict, List, Optional, Union"
       ],
       [
        "c",
        ""
       ],
       [
-       "d",
-       "        schema = UCFunctionToolkit.convert_to_gemini_schema(function_info, strict=True)"
-      ],
-      [
-       "a",
-       "        tool_name = get_tool_name(function_name)"
-      ],
-      [
-       "a",
-       "        # Gemini dispatches by the declared name, and the client's full_name can differ in case."
-      ],
-      [
-       "a",
-       "        schema = {"
-      ],
-      [
-       "a",
-       "            **UCFunctionToolkit.convert_to_gemini_schema(function_info, strict=True),"
-      ],
-      [
-       "a",
-       "            \"name\": tool_name,"
-      ],
-      [
-       "a",
-       "        }"
-      ],
-      [
-       "c",
-       "        param_infos = function_info.input_params.parameters if function_info.input_params else []"
-      ],
-      [
-       "c",
-       "        params_type_json = {"
-      ],
-      [
-       "c",
-       "            \"type\": \"struct\","
-      ],
-      [
        "h",
-       "@@ -254,7 +261,7 @@"
+       "@@ -22,6 +25,31 @@"
       ],
       [
        "c",
@@ -1095,20 +1031,84 @@
       ],
       [
        "c",
-       "        return GeminiTool("
+       "_logger = logging.getLogger(__name__)"
       ],
       [
        "c",
-       "            fn=func,"
+       ""
       ],
       [
-       "d",
-       "            name=get_tool_name(function_name),"
+       "a",
+       "# The Gemini FunctionDeclaration name allows a-z, A-Z, 0-9, underscores and dashes, with a maximum"
+      ],
+      [
+       "a",
+       "# length of 63."
+      ],
+      [
+       "a",
+       "_GEMINI_NAME_MAX_LENGTH = 63"
+      ],
+      [
+       "a",
+       "_GEMINI_NAME_DISALLOWED_CHARACTERS = re.compile(r\"[^a-zA-Z0-9_-]\")"
+      ],
+      [
+       "a",
+       "_DISAMBIGUATION_HASH_LENGTH = 8"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _gemini_function_name(function_name: str) -> str:"
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    Returns the name Gemini declares a UC function by: its tool name, with every character that"
+      ],
+      [
+       "a",
+       "    Gemini does not allow replaced by an underscore, cut to its last 63 characters."
+      ],
+      [
+       "a",
+       "    \"\"\""
+      ],
+      [
+       "a",
+       "    name = _GEMINI_NAME_DISALLOWED_CHARACTERS.sub(\"_\", get_tool_name(function_name))"
+      ],
+      [
+       "a",
+       "    return name[-_GEMINI_NAME_MAX_LENGTH:]"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "a",
+       "def _disambiguated_gemini_function_name(name: str, function_name: str) -> str:"
       ]
      ],
      "truncated": true,
-     "additions": 10,
-     "deletions": 3
+     "additions": 62,
+     "deletions": 4
     }
    ],
    "track": {
@@ -1121,7 +1121,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Verdict: changes needed. The same-name and mixed-case fix works. Both same-named functions build and dispatch correctly, and the new tests fail on main (`ValueError`, `KeyError: 'Catalog__HR__Test'`) and pass here. Three declared-name cases that work on main now regress: declared names that reach 64 char…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1131,7 +1131,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
       "text": "[AI Assisted] Blocker: the declared name can now reach 64 characters, one over the documented limit. `get_tool_name` keeps up to 64 characters, but the `FunctionDeclaration.name` docstring in the installed google-ai-generativelanguage package (v1beta `types/content.py`) allows a maximum of 63. For `main.customer_analy…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1141,7 +1141,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
       "text": "[AI Assisted] Blocker: two functions in one toolkit can now get the same declared name. `get_tool_name` joins the parts with `__` and does not escape an underscore already in a name, so `catalog.s.a__b` and `catalog.s__a.b` both become `catalog__s__a__b`. On main they were declared as `a__b` and `b`, and the toolkit b…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1151,7 +1151,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] This changes a declared name that has shipped since `ai-v0.2.0`, so the entry should cover all of it. It names `fc.name` and `convert_to_gemini_schema`, but not `GeminiTool.schema[\"name\"]`, which changes too. Could the entry also give the migration step, for example \"compare `fc.name` with `tool.name` in…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1161,20 +1161,20 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
       "text": "[AI Assisted] Nit: the new tests all build the toolkit from `function_names`. Could one test pass two same-named `FunctionInfo` objects through the `function_info=` path and check that the declared names are unique?",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T18:53:45Z",
-    "updated_at": "2026-11-24T01:43:23Z",
-    "conflicts": false,
+    "last_push": "2026-11-24T04:06:19Z",
+    "updated_at": "2026-11-24T04:10:33Z",
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 169
   },
@@ -1371,17 +1371,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:52:30Z",
-    "updated_at": "2026-11-24T03:52:33Z",
+    "updated_at": "2026-11-24T04:02:43Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 168
   },
@@ -1792,7 +1792,7 @@
      }
     ],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:28:19Z",
@@ -1800,8 +1800,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "A test job failed for a reason outside this change. Waiting for a maintainer to re-run it"
    },
    "id": 166
   },
@@ -1930,17 +1930,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:20:07Z",
     "updated_at": "2026-11-24T03:21:56Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 165
   },
@@ -2157,8 +2157,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:10:56Z",
@@ -2166,8 +2166,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 164
   },
@@ -2326,6 +2326,26 @@
      {
       "kind": "review commented",
       "who": "yili-db",
+      "at": "2026-11-24T07:47:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2343#pullrequestreview-6035461047",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 5b028b4a. The coroutine blocker and the merge conflict are fixed, thanks. Changes needed for the description (the CHANGELOG disclosure is inline): - Coroutine paragraph: on main a coroutine never received `run_manager`. It did receive `callbacks` and `RunnableConfig`. Suggested: \"A `func` th…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T07:47:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2343#discussion_r4676958617",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "[AI Assisted] Required disclosure, not a code blocker. A `func` or `coroutine` set directly on a `UnityCatalogTool` no longer receives LangChain's `callbacks` or `RunnableConfig`. Suggested sentence for this entry (please also add it to the PR description): > A `func` or `coroutine` set directly on a `UnityCatalogTool…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
       "at": "2026-11-24T01:12:05Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2343#pullrequestreview-6032118979",
       "maintainer": true,
@@ -2354,17 +2374,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T02:57:29Z",
-    "updated_at": "2026-11-24T03:03:01Z",
-    "conflicts": false,
+    "updated_at": "2026-11-24T07:47:29Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 163
   },
@@ -2461,6 +2481,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T07:16:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2342#pullrequestreview-6035139516",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at d8859ff9. Keeping expiration-time-ms required and nullable keeps the wire output identical to main for local file and static key-pair credentials, the generated Python model now accepts null, and the earlier test and doc points are all addressed, with the staging cleanup tracked in #2358. Op…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-24T01:10:16Z",
@@ -2509,40 +2539,33 @@
       "path": "clients/python/tests/test_delta_table.py",
       "text": "[AI Assisted] The `unity.default.numbers` check depends on the sample database (`examples/sample-database/src/main/java/io/unitycatalog/server/utils/SampleDatabase.java:340`), not on the staging flow this test is about. A failure there would look like a staging regression. Could we split it into its own test, or add a…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T01:10:16Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2342#discussion_r4674199716",
-      "maintainer": true,
-      "path": "clients/python/tests/test_delta_table.py",
-      "text": "[AI Assisted] Nit: this case uses an `s3` prefix with an empty config, which the server does not send for this case. A `file` prefix would match the real case.",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db",
+     "tdas"
+    ],
     "last_push": "2026-11-24T02:25:16Z",
-    "updated_at": "2026-11-24T02:59:08Z",
+    "updated_at": "2026-11-24T08:42:43Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 162
   },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Only write a Delta log when creating a Delta table",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:32Z",
-   "merged_at": null,
+   "merged_at": "2026-11-24",
    "reported": true,
    "pr": {
     "number": 2341,
@@ -2736,6 +2759,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T07:51:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2341#pullrequestreview-6035502077",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at c573c21b. Non-Delta formats are now only registered, a Delta log is written only for DELTA, and the earlier test, docs and description points are all addressed. Follow-ups, not blocking: `TableCli` upper-cases the format without `Locale.ROOT`, so under a Turkish locale `iceberg` becomes `İCE…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-24T00:56:22Z",
@@ -2776,17 +2809,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T01:24:53Z",
-    "updated_at": "2026-11-24T02:59:06Z",
+    "updated_at": "2026-11-24T07:51:51Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 161
   },
@@ -3238,6 +3273,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T07:35:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4676845057",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] blocker: this catch maps every 404 to a missing schema. The server also returns 404 with `error_code` `TABLE_NOT_FOUND` when the staging row is missing (`commitStagingTable`), so that error now reads as `SCHEMA_NOT_FOUND` for a schema that exists. I reproduced it on Spark 4.1: `createTable` with that res…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T07:35:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4676845068",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] nit: a one-line comment would help here. The guard rejects an empty name before the Delta API hand-off and leaves nested names to Delta. The same applies to the guard at line 674.",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T07:35:05Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6035332919",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 27fedb06. The earlier blocker (Delta API replace path) is fixed, and the guard is covered by the parameterized staging test. One blocker remains: the 404 mapping matches on status, so a `TABLE_NOT_FOUND` from a missing staging row is reported as a missing schema (inline at line 1315). Normal…",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T00:35:57Z",
@@ -3266,16 +3331,6 @@
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "[AI Assisted] nit: the empty case is handled just above, so the check at line 259 only needs to catch nested names. Passing `ident.namespace()` to `checkSingleLevelNamespace` would make that explicit.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T00:35:57Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948261",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
-      "text": "[AI Assisted] nit: this Javadoc describes per-command behavior that will go stale as commands change. Keep the reason (Spark treats only `NoSuchTableException` as a missing table) and drop the command list. The `tableExists` comment at lines 266-267 also has a version number (`Delta 4.3+`). The project's review guidan…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3283,12 +3338,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T01:17:52Z",
-    "updated_at": "2026-11-24T02:59:05Z",
+    "updated_at": "2026-11-24T07:35:06Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 159
   },
@@ -3535,6 +3590,26 @@
      {
       "kind": "inline comment",
       "who": "yili-db",
+      "at": "2026-11-24T07:52:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#discussion_r4677000886",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/sdk/deltacommits/SdkDeltaCommitsCRUDTest.java",
+      "text": "[AI Assisted] A backfill-only request with a `uniform` block whose `iceberg` is null is not pinned by a test. The description names this as a changed case: it now gets the new message instead of the shape-validation message. One more `assertApiException` with `createBackfillOnlyCommitObject(1L).uniform(new DeltaUnifor…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T07:52:45Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#pullrequestreview-6035513414",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Re-review at 9f6a1b543. The round-1 items are addressed: the malformed-block description now says the timestamp case moves from 500 to 400, the title names the new rejection, the Delta REST guard is described as defensive, and the two non-UniForm assertions and the comment are in. No blockers. The fixes…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
       "at": "2026-11-23T20:29:15Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#discussion_r4671591355",
       "maintainer": true,
@@ -3558,12 +3633,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T20:45:34Z",
-    "updated_at": "2026-11-24T02:59:04Z",
+    "updated_at": "2026-11-24T07:52:46Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 158
   },
@@ -6685,11 +6760,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Annotate DATE, TIMESTAMP, DECIMAL and INTERVAL so get_function_as_callable and get_function_source load",
    "date": "2026-11-20",
    "created_at": "2026-11-20T06:23:24Z",
-   "merged_at": null,
+   "merged_at": "2026-11-24",
    "reported": true,
    "pr": {
     "number": 2322,
@@ -6835,6 +6910,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T07:45:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-6035444523",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 352cdd79. DATE, TIMESTAMP, DECIMAL and INTERVAL functions now load and run, the conversion list in the CHANGELOG, client docs and README matches what convert_json_argument converts, and the tab-separated type is handled. Optional nit: INTERVAL types other than DAY TO SECOND are annotated as…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-23T19:47:50Z",
@@ -6875,16 +6960,6 @@
       "answered": true
      },
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-23T08:30:56Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2322#pullrequestreview-6018544410",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at f6d739dd. Earlier items are addressed: the annotation-vs-value limitation, the CHANGELOG wording points, the test coverage for CHAR, COLLATE and the Returns section, and the docs note that imports cover annotations only. Open: the rebase request, the `TIMESTAMP_NTZ` wording item, and two sma…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-23T08:30:56Z",
@@ -6895,17 +6970,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T21:00:57Z",
-    "updated_at": "2026-11-24T02:59:03Z",
+    "updated_at": "2026-11-24T07:46:36Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 143
   },
@@ -7106,7 +7183,7 @@
     ],
     "last_push": "2026-11-22T10:53:23Z",
     "updated_at": "2026-11-22T23:17:12Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-22T10:53:45Z",
