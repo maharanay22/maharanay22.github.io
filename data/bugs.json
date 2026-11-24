@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T02:27:22Z",
+ "generated_at": "2026-11-24T03:13:43Z",
  "stages": [
   "reported",
   "fix sent",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63780,
+   "stars": 63781,
    "forks": 13506,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "Share the no-result error handling of the sandbox and local executors",
+   "date": "2026-11-24",
+   "created_at": "2026-11-24T03:10:43Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2359,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2359"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-24T03:10:43Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 173
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -1922,7 +1954,27 @@
       ],
       [
        "h",
-       "@@ -73,6 +78,7 @@"
+       "@@ -49,7 +54,7 @@"
+      ],
+      [
+       "c",
+       "    function_source = dedent_code(function_source)"
+      ],
+      [
+       "c",
+       "    function_name = _extract_function_name(function_source)"
+      ],
+      [
+       "c",
+       "    script = f\"\"\""
+      ],
+      [
+       "d",
+       "import sys, base64, cloudpickle, json, traceback, asyncio, os"
+      ],
+      [
+       "a",
+       "import sys, base64, builtins, cloudpickle, json, traceback, asyncio, os"
       ],
       [
        "c",
@@ -1930,40 +1982,20 @@
       ],
       [
        "c",
-       "def main():"
+       "try:"
       ],
       [
        "c",
-       "    _limit_resources()"
-      ],
-      [
-       "a",
-       "    result_path = sys.argv[2]"
-      ],
-      [
-       "c",
-       "    try:"
-      ],
-      [
-       "c",
-       "        b64_params = sys.argv[1]"
-      ],
-      [
-       "c",
-       "        params = cloudpickle.loads(base64.b64decode(b64_params))"
+       "    import resource"
       ],
       [
        "h",
-       "@@ -81,12 +87,12 @@"
-      ],
-      [
-       "c",
-       "            result = asyncio.run(result)"
+       "@@ -73,6 +78,7 @@"
       ]
      ],
      "truncated": true,
-     "additions": 68,
-     "deletions": 26
+     "additions": 72,
+     "deletions": 28
     }
    ],
    "track": {
@@ -1976,7 +2008,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Changes needed. The fix covers the reported stdout cases, and the new tests fail on main as expected. Blocking: a UC function named `open` now fails with a `TypeError` (inline). Also needed: a merge of main to resolve `ai/CHANGELOG.md`, and handling of the `RecursionError` that escapes `_read_result` (in…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1986,7 +2018,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] The runner calls the unqualified `open` after the function source is inserted at module scope. A function named `open` shadows the builtin, so the result write calls the user function with `encoding=` and fails with a `TypeError`. The same function returns `3` on main. Could we bind the builtin before th…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1996,7 +2028,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] A result nested deeper than the parent's recursion limit makes `json.loads` raise `RecursionError`. `_read_result` does not catch it, so the call raises instead of returning an error result, and main returned an error result for the same input. Could we catch `RecursionError` here as well, with a test fo…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2006,7 +2038,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] This PR conflicts with main in `ai/CHANGELOG.md`. Could you merge main into the branch to resolve it? Optionally, this entry is about 1,030 characters against about 850 for the longest neighbor; the exit-code and stderr details could fit in one shorter sentence.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2016,7 +2048,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
       "text": "[AI Assisted] The undecodable-output case expects U+FFFD, which depends on the locale. Could we pin the encoding, or assert only that the call does not raise and that a debug record exists? A non-ASCII result round trip would also be a useful case, since the result file is now UTF-8.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2026,20 +2058,20 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] Follow-up, not a blocker: the no-result branches here repeat the decision order in `executor/local.py::_receive_result`. Could we track a shared helper in `executor/common.py` in an issue and link it here?",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T18:42:11Z",
-    "updated_at": "2026-11-24T01:15:18Z",
-    "conflicts": true,
+    "last_push": "2026-11-24T03:10:56Z",
+    "updated_at": "2026-11-24T03:11:13Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 164
   },
@@ -2101,7 +2133,7 @@
       ],
       [
        "h",
-       "@@ -25,6 +26,15 @@"
+       "@@ -25,6 +26,21 @@"
       ],
       [
        "c",
@@ -2133,6 +2165,14 @@
       ],
       [
        "a",
+       "        if self.func is None:"
+      ],
+      [
+       "a",
+       "            raise NotImplementedError(\"StructuredTool does not support sync invocation.\")"
+      ],
+      [
+       "a",
        "        return self.func(*args, **kwargs)"
       ],
       [
@@ -2142,6 +2182,22 @@
       [
        "a",
        "    async def _arun(self, *args: Any, **kwargs: Any) -> Any:"
+      ],
+      [
+       "a",
+       "        if self.coroutine is not None:"
+      ],
+      [
+       "a",
+       "            return await self.coroutine(*args, **kwargs)"
+      ],
+      [
+       "a",
+       "        # run_in_executor keeps the blocking call off the event loop and passes the caller's"
+      ],
+      [
+       "a",
+       "        # context to the worker thread."
       ],
       [
        "a",
@@ -2165,7 +2221,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 10,
+     "additions": 16,
      "deletions": 0
     }
    ],
@@ -2179,7 +2235,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Changes needed for the coroutine path (inline). The reserved-name fix itself is correct and was checked on langchain-core 1.2.18 and 1.0.0. The branch also conflicts with main in `ai/integrations/langchain/tests/test_langchain_toolkit_oss.py`, because both sides add tests at the end of the file. Please m…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2189,7 +2245,7 @@
       "maintainer": true,
       "path": "ai/integrations/langchain/src/unitycatalog/ai/langchain/toolkit.py",
       "text": "[AI Assisted] `_arun` now always calls `_run`, so a `coroutine` set on `UnityCatalogTool` is never awaited. Before this change `StructuredTool._arun` awaited `self.coroutine`. On this head a tool built with only `coroutine` fails `ainvoke` and `arun` with `TypeError: 'NoneType' object is not callable`, and a tool buil…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2199,20 +2255,20 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] nit: \"when the tool ran through `invoke`, `ainvoke`, `arun` or a tool call\" reads as four call paths. Maybe \"when the tool was called with `invoke`, `ainvoke` or `arun`, with a plain input or a tool call\".",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T14:40:07Z",
-    "updated_at": "2026-11-24T01:12:05Z",
-    "conflicts": true,
+    "last_push": "2026-11-24T02:57:29Z",
+    "updated_at": "2026-11-24T03:03:01Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 163
   },
@@ -2374,7 +2430,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T02:25:16Z",
-    "updated_at": "2026-11-24T02:25:22Z",
+    "updated_at": "2026-11-24T02:59:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2624,17 +2680,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T01:24:53Z",
-    "updated_at": "2026-11-24T02:13:17Z",
+    "updated_at": "2026-11-24T02:59:06Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 161
   },
@@ -3131,7 +3187,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T01:17:52Z",
-    "updated_at": "2026-11-24T01:21:24Z",
+    "updated_at": "2026-11-24T02:59:05Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3406,7 +3462,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T20:45:34Z",
-    "updated_at": "2026-11-23T20:59:50Z",
+    "updated_at": "2026-11-24T02:59:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6748,7 +6804,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T21:00:57Z",
-    "updated_at": "2026-11-23T23:46:58Z",
+    "updated_at": "2026-11-24T02:59:03Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
