@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T20:35:35Z",
+ "generated_at": "2026-11-24T20:38:19Z",
  "stages": [
   "reported",
   "fix sent",
@@ -3330,7 +3330,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 75,
+     "additions": 79,
      "deletions": 19
     }
    ],
@@ -3344,7 +3344,7 @@
       "maintainer": true,
       "path": "docs/integrations/unity-catalog-spark.md",
       "text": "[AI Assisted] The sentence just extended reads incorrectly: the clause \"when no schema has been selected with USE\" sits before `<catalog_name>.default`. Suggested text: A name without a schema, such as `SELECT * FROM marksheet;`, resolves to `<catalog_name>.default` unless a different schema was selected with `USE <sc…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3354,7 +3354,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 7d30e653. The earlier blocker is fixed: the 404 mapping now matches the error code, and a `TABLE_NOT_FOUND` 404 stays an `ApiException`. The staging and `createView` paths are mapped too. One normal item before merge (the docs sentence, inline). Question: with the Delta API on, a managed Del…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3397,17 +3397,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T15:08:17Z",
-    "updated_at": "2026-11-24T19:23:27Z",
+    "last_push": "2026-11-24T20:36:11Z",
+    "updated_at": "2026-11-24T20:36:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 159
   },
@@ -34832,11 +34832,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
