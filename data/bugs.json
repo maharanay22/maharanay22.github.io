@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T03:30:09Z",
+ "generated_at": "2026-11-24T03:54:28Z",
  "stages": [
   "reported",
   "fix sent",
@@ -284,7 +284,7 @@
     "Tool Calls"
    ],
    "stars": 63782,
-   "forks": 13506,
+   "forks": 13507,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "UniForm validation messages use Delta REST field names on the UC REST commit endpoint",
+   "date": "2026-11-24",
+   "created_at": "2026-11-24T03:51:58Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2362,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2362"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-24T03:51:58Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 176
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -1150,7 +1182,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Return 400 for a malformed uniform converted_delta_timestamp on commit",
+   "title": "Return 400 for a malformed or out-of-range uniform converted_delta_timestamp on commit",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:52Z",
    "merged_at": null,
@@ -1204,7 +1236,51 @@
       ],
       [
        "h",
-       "@@ -52,7 +53,7 @@"
+       "@@ -39,6 +40,10 @@"
+      ],
+      [
+       "c",
+       " * </ul>"
+      ],
+      [
+       "c",
+       " */"
+      ],
+      [
+       "c",
+       "public final class DeltaUniformUtils {"
+      ],
+      [
+       "a",
+       "  private static final Instant MIN_CONVERTED_DELTA_TIMESTAMP ="
+      ],
+      [
+       "a",
+       "      Instant.parse(\"1000-01-01T00:00:00Z\");"
+      ],
+      [
+       "a",
+       "  private static final Instant END_CONVERTED_DELTA_TIMESTAMP ="
+      ],
+      [
+       "a",
+       "      Instant.parse(\"+10000-01-01T00:00:00Z\");"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  private DeltaUniformUtils() {}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -52,7 +57,7 @@"
       ],
       [
        "c",
@@ -1240,59 +1316,15 @@
       ],
       [
        "h",
-       "@@ -181,12 +182,13 @@"
+       "@@ -181,12 +186,14 @@"
       ],
       [
        "c",
        "   *"
-      ],
-      [
-       "c",
-       "   * <ul>"
-      ],
-      [
-       "c",
-       "   *   <li>{@code uniform.iceberg} is not null;"
-      ],
-      [
-       "a",
-       "   *   <li>{@code converted-delta-timestamp} parses as an instant that fits in epoch milliseconds;"
-      ],
-      [
-       "c",
-       "   *   <li>basic shape (presence + size) via {@link #requireBasicShape};"
-      ],
-      [
-       "c",
-       "   *   <li>commit-version atomicity: {@code converted-delta-version} must equal {@code"
-      ],
-      [
-       "c",
-       "   *       commit.commitInfo.version} when commit-info is present."
-      ],
-      [
-       "c",
-       "   * </ul>"
-      ],
-      [
-       "c",
-       "   *"
-      ],
-      [
-       "d",
-       "   * <p>The metadata-location is normalized exactly once and the RFC 3339 timestamp parsed exactly"
-      ],
-      [
-       "a",
-       "   * <p>The metadata-location is normalized exactly once and the ISO 8601 timestamp parsed exactly"
-      ],
-      [
-       "c",
-       "   * once; both are returned in {@link UniformIcebergFields} so the subpath check ({@code"
       ]
      ],
      "truncated": true,
-     "additions": 28,
+     "additions": 46,
      "deletions": 3
     }
    ],
@@ -1306,7 +1338,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Comment, no blocker. Finding 1 (the field name in the message) is worth fixing before merge. Finding 2 (the MySQL range gap) needs a tracking link or a bound. The remaining items are nits. Nit 4, optional: no new test pins the null \"is required\" path in `DeltaUniformUtilsTest`. The path is pre-existing,…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1316,7 +1348,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUniformUtils.java",
       "text": "[AI Assisted] The new message names `uniform.iceberg.converted-delta-timestamp`, but on this endpoint the field a client sends is `uniform.iceberg.converted_delta_timestamp` (see `DeltaUniformIceberg` in api/all.yaml), which is also how the description spells it. Could the message name the field the caller actually se…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1326,7 +1358,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUniformUtils.java",
       "text": "[AI Assisted] This is disclosed in the description, which is good. The title says a malformed value gets a 400, but an instant that is within the epoch-millisecond range, such as `+10000-01-01T00:00:00Z`, still fails at the write on MySQL. Could we either bound the helper to years 1000 to 9999 for every backend, or li…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1336,20 +1368,20 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/delta/DeltaUniformUtils.java",
       "text": "[AI Assisted] nit: \"a non-null converted-delta-timestamp parses as an ISO 8601 instant that fits in epoch milliseconds\" would avoid reading as a null rule.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T13:17:42Z",
-    "updated_at": "2026-11-24T01:40:30Z",
+    "last_push": "2026-11-24T03:52:30Z",
+    "updated_at": "2026-11-24T03:52:33Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 168
   },
@@ -1764,7 +1796,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:28:19Z",
-    "updated_at": "2026-11-24T03:28:22Z",
+    "updated_at": "2026-11-24T03:31:51Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
