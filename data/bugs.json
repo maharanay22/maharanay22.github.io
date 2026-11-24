@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T03:13:43Z",
+ "generated_at": "2026-11-24T03:22:26Z",
  "stages": [
   "reported",
   "fix sent",
@@ -329,6 +329,38 @@
   }
  ],
  "items": [
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "DSPy tools lose struct definitions for ARRAY, MAP and nested STRUCT arguments",
+   "date": "2026-11-24",
+   "created_at": "2026-11-24T03:19:45Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2360,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2360"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-24T03:19:45Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 174
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -1821,7 +1853,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] No blocker. The change is correct and narrow, and the new tests fail on main and pass with this change. One item to fix in the description before merge: - The description says DSPy is not affected because its per-argument schema keeps its own `$defs`. That holds only for a top-level `STRUCT`. For `ARRAY<…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1831,20 +1863,20 @@
       "maintainer": true,
       "path": "ai/integrations/anthropic/tests/test_anthropic_toolkit.py",
       "text": "[AI Assisted] Nit: the description says the helper follows refs \"including refs inside lists such as `anyOf`\", but no case uses a nullable struct element, so that path has no test. Adding an `ARRAY<STRUCT<a: INT>>` row with `containsNull: True` would cover it. At head the resolved `items` for that case is `{\"anyOf\": […",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T14:39:31Z",
-    "updated_at": "2026-11-24T01:16:36Z",
+    "last_push": "2026-11-24T03:20:07Z",
+    "updated_at": "2026-11-24T03:20:10Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 165
   },
@@ -2066,7 +2098,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T03:10:56Z",
-    "updated_at": "2026-11-24T03:11:13Z",
+    "updated_at": "2026-11-24T03:16:38Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -35400,11 +35432,11 @@
     "approved_by": [],
     "last_push": "2026-11-14T20:53:22Z",
     "updated_at": "2026-11-14T20:54:05Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 20
   },
@@ -36241,11 +36273,11 @@
     "approved_by": [],
     "last_push": "2026-11-14T20:47:36Z",
     "updated_at": "2026-11-14T20:49:05Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 16
   },
@@ -36407,11 +36439,11 @@
     "approved_by": [],
     "last_push": "2026-11-14T20:47:28Z",
     "updated_at": "2026-11-14T20:49:08Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 15
   },
