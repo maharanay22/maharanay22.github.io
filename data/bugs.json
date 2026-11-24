@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-23T20:32:10Z",
+ "generated_at": "2026-11-24T00:54:31Z",
  "stages": [
   "reported",
   "fix sent",
@@ -26,16 +26,16 @@
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 639822,
-   "downloads_checked": "2026-11-23",
-   "contributor_rank": 4,
-   "contributor_commits": 61,
+   "downloads_checked": "2026-11-24",
+   "contributor_rank": 3,
+   "contributor_commits": 66,
    "contributor_total": 142,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": 2,
-   "period_commits": 61,
+   "period_commits": 66,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "delta-io/delta-rs",
@@ -50,20 +50,20 @@
     "Data Loss"
    ],
    "stars": 3372,
-   "forks": 714,
+   "forks": 715,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10431946,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": 8,
    "period_commits": 21,
    "period_total": 28,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "lance-format/lance",
@@ -82,11 +82,11 @@
    "package": "pylance",
    "impact": null,
    "downloads_month": 3969470,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": 37,
    "period_commits": 9,
    "period_total": 68,
@@ -105,21 +105,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28941,
+   "stars": 28944,
    "forks": 6646,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 22622825,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "mindsdb/engine",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "pandas-dev/pandas",
@@ -161,21 +161,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50605,
-   "forks": 20709,
+   "stars": 50609,
+   "forks": 20710,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 701489158,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23",
+   "period_checked": "2026-11-24",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -204,11 +204,11 @@
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24302309,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
    "period_total": 55,
@@ -232,11 +232,11 @@
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
    "downloads_month": 37278728,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
@@ -260,16 +260,16 @@
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
    "downloads_month": 4213613,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63775,
-   "forks": 13499,
+   "stars": 63779,
+   "forks": 13504,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 100197330,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-23",
+   "contributors_checked": "2026-11-24",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 136,
+   "period_total": 140,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -316,16 +316,16 @@
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 492730868,
-   "downloads_checked": "2026-11-23",
+   "downloads_checked": "2026-11-24",
    "contributor_rank": 113,
    "contributor_commits": 1,
-   "contributor_total": 134,
-   "contributors_checked": "2026-11-23",
+   "contributor_total": 133,
+   "contributors_checked": "2026-11-24",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-23"
+   "period_checked": "2026-11-24"
   }
  ],
  "items": [
@@ -1785,11 +1785,11 @@
     "approved_by": [],
     "last_push": "2026-11-23T18:42:11Z",
     "updated_at": "2026-11-23T18:59:02Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 164
   },
@@ -1927,11 +1927,11 @@
     "approved_by": [],
     "last_push": "2026-11-23T14:40:07Z",
     "updated_at": "2026-11-23T18:58:58Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 163
   },
@@ -2418,18 +2418,31 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-24T00:49:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2340#pullrequestreview-6031921363",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 4a06a7af. Each client built from a reused ApiClientBuilder now keeps its own token provider, interceptors and headers, and the three new tests fail against the previous builder. Non-blocking: please open a tracking issue for the interceptor that sets Authorization or User-Agent itself (the d…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-23T14:43:20Z",
-    "updated_at": "2026-11-23T18:58:55Z",
-    "conflicts": false,
+    "updated_at": "2026-11-24T00:49:43Z",
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 160
   },
@@ -2700,18 +2713,59 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T00:35:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6031807312",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Changes needed: one blocker and one required change, both outside the diff so they are written here rather than inline. The docs and nits are inline. Resolving unqualified names to `<catalog>.default` is accepted as designed. Outside the diff (UCSingleCatalog.scala:637 and :677, not anchorable): blocker:…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T00:35:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948250",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "[AI Assisted] Replacement for these two lines: A name without a schema, such as `SELECT * FROM marksheet;`, resolves to the `default` schema of the current catalog, `<catalog_name>.default`. That schema must exist. If it does not, create it with `CREATE SCHEMA <catalog_name>.default`, or qualify the name. `USE <schema…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T00:35:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948253",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] nit: the empty case is handled just above, so the check at line 259 only needs to catch nested names. Passing `ident.namespace()` to `checkSingleLevelNamespace` would make that explicit.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-24T00:35:57Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4673948261",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "[AI Assisted] nit: this Javadoc describes per-command behavior that will go stale as commands change. Keep the reason (Spark treats only `NoSuchTableException` as a missing table) and drop the command list. The `tableExists` comment at lines 266-267 also has a version number (`Delta 4.3+`). The project's review guidan…",
+      "answered": false
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-23T17:34:55Z",
-    "updated_at": "2026-11-23T18:58:44Z",
+    "updated_at": "2026-11-24T00:35:57Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 159
   },
@@ -2719,7 +2773,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Accept a backfill-only Delta commit on a UniForm table",
+   "title": "Accept a backfill-only Delta commit on a UniForm table and reject one that carries uniform",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:22Z",
    "merged_at": null,
@@ -2907,6 +2961,50 @@
      "truncated": true,
      "additions": 15,
      "deletions": 5
+    },
+    {
+     "path": "ui/src/types/api/catalog.gen.ts",
+     "lines": [
+      [
+       "h",
+       "@@ -1768,6 +1768,8 @@"
+      ],
+      [
+       "c",
+       "       *     keeping the conversion state synchronized with the Delta version."
+      ],
+      [
+       "c",
+       "       *     Uniform enables Delta tables to be read by other table formats (e.g., Iceberg) without data conversion."
+      ],
+      [
+       "c",
+       "       *     Independent of the `metadata` field, both can be provided together or separately."
+      ],
+      [
+       "a",
+       "       *     Must not be set without `commit_info`. A request that only sets `latest_backfilled_version`"
+      ],
+      [
+       "a",
+       "       *     adds no commit to convert."
+      ],
+      [
+       "c",
+       "       *      */"
+      ],
+      [
+       "c",
+       "      uniform?: components['schemas']['DeltaUniform'];"
+      ],
+      [
+       "c",
+       "    };"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 0
     }
    ],
    "track": {
@@ -2919,7 +3017,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/sdk/deltacommits/SdkDeltaCommitsCRUDTest.java",
       "text": "[AI Assisted] `validateCommit` rejects the `uniform` block before it reads it, so the version in this payload does not matter. A one-line comment here would stop a reader from assuming the version mismatch is the case under test. The PR description also lists a non-UniForm backfill-only case and a malformed-block case…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2929,20 +3027,20 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Verdict: no blockers. The gating and the new rejection are correct, and the new test passes on the head and fails when either half of the fix is reverted. Normal, PR description: - The malformed-block sentence says the request gets the new message \"still as a 400\". On main, an unparseable `converted_delt…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T18:34:06Z",
-    "updated_at": "2026-11-23T20:29:15Z",
+    "last_push": "2026-11-23T20:45:34Z",
+    "updated_at": "2026-11-23T20:59:50Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 158
   },
@@ -4788,11 +4886,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 149
   },
@@ -5082,11 +5180,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 148
   },
@@ -6274,17 +6372,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T20:13:35Z",
-    "updated_at": "2026-11-23T20:13:49Z",
+    "last_push": "2026-11-23T21:00:57Z",
+    "updated_at": "2026-11-23T23:46:58Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 143
   },
