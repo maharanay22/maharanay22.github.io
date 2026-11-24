@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T20:27:29Z",
+ "generated_at": "2026-11-24T20:35:35Z",
  "stages": [
   "reported",
   "fix sent",
@@ -803,7 +803,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T20:25:12Z",
-    "updated_at": "2026-11-24T20:25:14Z",
+    "updated_at": "2026-11-24T20:31:20Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -838,7 +838,7 @@
      "lines": [
       [
        "h",
-       "@@ -250,6 +250,19 @@"
+       "@@ -250,6 +250,21 @@"
       ],
       [
        "c",
@@ -898,7 +898,15 @@
       ],
       [
        "a",
-       "            grep -A1 -- \"- name: gcs-credentials-$i\\$\" <<<\"$server\" | sed -n 's/^ *mountPath: //p' | grep -qxF -- \"$key_file\""
+       "            mount_path=\"$(awk -v n=\"gcs-credentials-$i\" '$0 ~ \"- name: \" n \"$\" {f = 1; next}"
+      ],
+      [
+       "a",
+       "              f && /- name:/ {f = 0} f && /mountPath:/ {sub(/^ *mountPath: /, \"\"); print}' <<<\"$server\")\""
+      ],
+      [
+       "a",
+       "            [ \"$mount_path\" = \"$key_file\" ]"
       ],
       [
        "a",
@@ -918,7 +926,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 13,
+     "additions": 15,
      "deletions": 0
     },
     {
@@ -976,20 +984,20 @@
       "maintainer": true,
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** Helm render check fails if mountPath is not on the line right after the mount name The check uses `grep -A1` after `- name: gcs-credentials-$i`, so it only sees `mountPath` when that field is on the very next line. Valid YAML can put another field between them without changing the mount. If th…",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T15:59:14Z",
-    "updated_at": "2026-11-24T19:16:57Z",
+    "last_push": "2026-11-24T20:33:33Z",
+    "updated_at": "2026-11-24T20:33:35Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 170
   },
@@ -34824,11 +34832,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
