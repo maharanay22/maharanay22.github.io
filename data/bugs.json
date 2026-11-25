@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T15:00:22Z",
+ "generated_at": "2026-11-25T18:22:05Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28965,
-   "forks": 6657,
+   "stars": 28967,
+   "forks": 6658,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23207524,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50631,
-   "forks": 20717,
+   "stars": 50634,
+   "forks": 20719,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710918731,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63896,
-   "forks": 13560,
+   "stars": 63901,
+   "forks": 13561,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 102115552,
@@ -312,7 +312,7 @@
     "CLI"
    ],
    "stars": 1505,
-   "forks": 268,
+   "forks": 269,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 502603032,
@@ -329,6 +329,340 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Validate storage locations against their column and cloud limits",
+   "date": "2026-11-25",
+   "created_at": "2026-11-25T18:19:35Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2378,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2378"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/CatalogRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -71,6 +71,11 @@"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "c",
+       "        sessionFactory,"
+      ],
+      [
+       "c",
+       "        session -> {"
+      ],
+      [
+       "a",
+       "          if (storageRoot != null) {"
+      ],
+      [
+       "a",
+       "            repositories"
+      ],
+      [
+       "a",
+       "                .getStorageLocationValidator()"
+      ],
+      [
+       "a",
+       "                .validateCatalogStorageRoot(session, storageRoot);"
+      ],
+      [
+       "a",
+       "          }"
+      ],
+      [
+       "c",
+       "          if (RepositoryUtils.getCatalogDaoOpt(session, createCatalog.getName()).isPresent()) {"
+      ],
+      [
+       "c",
+       "            throw new BaseException("
+      ],
+      [
+       "c",
+       "                ErrorCode.CATALOG_ALREADY_EXISTS,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 5,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -15,6 +15,7 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.TransactionManager;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.IdentityUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.NormalizedURL;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "h",
+       "@@ -65,6 +66,14 @@"
+      ],
+      [
+       "c",
+       "    return credentialDAO;"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /** Checks that an external location URL fits its column and the cloud limits of its storage. */"
+      ],
+      [
+       "a",
+       "  private void validateUrlLimits(String url, Optional<CredentialDAO> credentialDAO) {"
+      ],
+      [
+       "a",
+       "    repositories"
+      ],
+      [
+       "a",
+       "        .getStorageLocationValidator()"
+      ],
+      [
+       "a",
+       "        .validateExternalLocationUrl("
+      ],
+      [
+       "a",
+       "            NormalizedURL.from(url), Constants.MAX_EXTERNAL_LOCATION_URL_LENGTH, credentialDAO);"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  /**"
+      ],
+      [
+       "c",
+       "   * Checks that a location can be reached with its credential: an {@code s3_compatible} credential"
+      ],
+      [
+       "c",
+       "   * names S3-compatible storage, so its locations must be {@code s3://} paths."
+      ],
+      [
+       "h",
+       "@@ -109,6 +118,7 @@"
+      ],
+      [
+       "c",
+       "          CredentialDAO credentialDAO ="
+      ],
+      [
+       "c",
+       "              validateAndGetCredentialDAO(session, createExternalLocation.getCredentialName());"
+      ],
+      [
+       "c",
+       "          validateUrlForCredential(url.toString(), credentialDAO);"
+      ],
+      [
+       "a",
+       "          validateUrlLimits(url.toString(), Optional.of(credentialDAO));"
+      ],
+      [
+       "c",
+       "          UUID externalLocationId = UUID.randomUUID();"
+      ],
+      [
+       "c",
+       "          ExternalLocationDAO externalLocationDAO ="
+      ]
+     ],
+     "truncated": true,
+     "additions": 20,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/ModelRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -19,6 +19,8 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.FileOperations;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.service.credential.StorageLimits;"
+      ],
+      [
+       "a",
+       "import io.unitycatalog.server.utils.Constants;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.IdentityUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.NormalizedURL;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ServerProperties;"
+      ],
+      [
+       "h",
+       "@@ -243,6 +245,7 @@"
+      ],
+      [
+       "c",
+       "              catalogAndSchemaDao, this::getDefaultModelsStorageRoot);"
+      ],
+      [
+       "c",
+       "      NormalizedURL storageLocation ="
+      ],
+      [
+       "c",
+       "          ExternalLocationUtils.getManagedLocationForModel(parentStorageLocation, modelId);"
+      ],
+      [
+       "a",
+       "      repositories.getStorageLocationValidator().validateModelLocation(session, storageLocation);"
+      ],
+      [
+       "c",
+       "      SchemaInfoDAO schemaInfoDAO = catalogAndSchemaDao.schemaInfoDAO();"
+      ],
+      [
+       "c",
+       "      try {"
+      ],
+      [
+       "c",
+       "        // Check if registered model already exists"
+      ],
+      [
+       "h",
+       "@@ -569,6 +572,14 @@"
+      ]
+     ],
+     "truncated": true,
+     "additions": 18,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-25T18:19:00Z",
+    "updated_at": "2026-11-25T18:19:37Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 178
+  },
+  {
+   "kind": "report",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "open",
+   "title": "ApiClientBuilder adds a second Authorization or User-Agent header when a custom interceptor sets one",
+   "date": "2026-11-25",
+   "created_at": "2026-11-25T16:08:37Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": null,
+   "issue": {
+    "number": 2376,
+    "url": "https://github.com/unitycatalog/unitycatalog/issues/2376"
+   },
+   "proof": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 1,
+    "checks": null,
+    "review": null,
+    "approved_by": [],
+    "last_push": null,
+    "updated_at": "2026-11-25T16:08:37Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Reported with a reproduction. Waiting for maintainers"
+   },
+   "id": 177
+  },
   {
    "kind": "report",
    "repo": "unitycatalog/unitycatalog",
@@ -779,6 +1113,56 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "shba24",
+      "at": "2026-11-25T16:20:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#pullrequestreview-6061042732",
+      "maintainer": true,
+      "path": null,
+      "text": "Reviewed at 93e735c7: no blocking issues found.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T16:20:43Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4697608433",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** Number and boolean extraParams values are never rendered in CI Every `extraParams` entry in the render tests uses `--set-string`, so Helm only ever hands the template strings. The docs and README say a value may be a string, number or boolean, and the template runs `urlquery $value` on whateve…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T16:20:41Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4697607935",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** The extraParams name guard is only tested with chart-managed SSL on Both invalid-name renders reuse the `pg` argument array, which turns `ssl.enabled` on. The guard in `_config.tpl` sits outside the SSL block today, so the code is correct. Moving it under `if ssl.enabled`, or behind the clash…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T16:20:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4697607200",
+      "maintainer": true,
+      "path": ".github/workflows/helm-chart-tests.yml",
+      "text": "**Nit (not a blocker):** sslrootcert pass-through with chart-managed SSL off is not tested The workflow comment says that without chart-managed SSL, the keys are passed on. The only SSL-off render passes `sslmode` alone, and both `sslrootcert` clash renders run with SSL on. A change that reserved `sslrootcert` in both…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T16:20:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4697606683",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Nit (not a blocker):** PostgreSQL and MySQL URL parameter loops are separate, so new rules must be written twice The PostgreSQL and MySQL branches each build their own `$urlParamsList`, join it with `&` and prefix `?`. This PR adds a name guard, a clash check and values-only encoding to the PostgreSQL copy only. Som…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "timothyw553",
       "at": "2026-11-25T11:10:22Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#pullrequestreview-6056516405",
@@ -786,69 +1170,21 @@
       "path": null,
       "text": "overall looks good. i left one optional nit on the ssl root cert default doc, which we can fix here or in a follow up.",
       "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-25T11:10:22Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4694016587",
-      "maintainer": true,
-      "path": "helm/templates/server/_config.tpl",
-      "text": "nit: since `sslrootcert` is always set here when ssl is enabled (and `deployment.yaml` requires `rootCert` or `rootCertConfigMapName`), `helm/values.yaml` line 263 and `helm/README.md` line 789 still say `public root CAs`, which fails rendering if followed. since that line is outside your diff, could we update it here…",
-      "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T03:45:37Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4690129378",
-      "maintainer": true,
-      "path": "helm/templates/server/_config.tpl",
-      "text": "**Blocker:** An extraParams name with a backslash passes the guard, then `Properties.load` turns it into other URL parameters The guard rejects `&` and `=` in a name, but the name is then written unescaped into `hibernate.properties`, and the server reads that file with `Properties.load`. `Properties.load` decodes `\\u…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T00:12:34Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4688394701",
-      "maintainer": true,
-      "path": "helm/templates/server/_config.tpl",
-      "text": "**Blocker:** An extraParams name with `&` overrides sslmode and silently turns TLS off The clash check at line 61 runs hasKey on the literal key, and line 69 then renders the name raw. A key such as `z&sslmode` passes the check, but the driver splits the URL on `&` and reads a second `sslmode` that wins over the chart…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T21:39:21Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914942",
-      "maintainer": true,
-      "path": "helm/templates/server/_config.tpl",
-      "text": "**Nit (not a blocker):** Map or list values in extraParams render as Go syntax instead of failing The only guard in the loop checks for name clashes, not value types. A map or list value reaches `urlquery` and is formatted with Go's default syntax, and the render still succeeds. The MySQL loop (line 86) and `extraProp…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T21:39:20Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914786",
-      "maintainer": true,
-      "path": ".github/workflows/helm-chart-tests.yml",
-      "text": "**Nit (not a blocker):** Raw PostgreSQL parameter names are not pinned by any test The template deliberately leaves names unencoded because PgJDBC does not decode them (the comment at _config.tpl:69 records this), while the MySQL branch encodes them. Every PostgreSQL name in the assertions is plain letters, so encodin…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "timothyw553"
+    ],
     "last_push": "2026-11-25T04:08:40Z",
-    "updated_at": "2026-11-25T11:10:22Z",
+    "updated_at": "2026-11-25T18:08:05Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 171
   },
@@ -1139,15 +1475,18 @@
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "shba24",
+     "timothyw553"
+    ],
     "last_push": "2026-11-25T03:12:21Z",
-    "updated_at": "2026-11-25T03:13:16Z",
+    "updated_at": "2026-11-25T18:06:10Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by shba24, timothyw553. Waiting to be merged"
    },
    "id": 170
   },
@@ -1371,7 +1710,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-24T23:27:26Z",
-    "updated_at": "2026-11-25T08:46:44Z",
+    "updated_at": "2026-11-25T16:02:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "done",
@@ -1975,6 +2314,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-25T18:12:16Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2346#pullrequestreview-6062677574",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approving at 38114e5a. The missing-purpose rejection, the spec change and the moved SDK test check out, and the CLI suite passes. Follow-up for the listCredentials purpose filter is tracked in #2361.",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T21:35:13Z",
@@ -2027,15 +2376,17 @@
     ],
     "stage": 4,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-25T01:37:33Z",
-    "updated_at": "2026-11-25T08:05:04Z",
+    "updated_at": "2026-11-25T18:12:16Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
     "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 166
   },
@@ -3243,7 +3594,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] The earlier comment says the follow-up for custom `Authorization` and User-Agent headers is tracked in `#XXXX` and linked from the description, but the placeholder is still there and the description has no link yet. Could you replace `#XXXX` with the tracking issue and link it from the description? I'll…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -3293,16 +3644,16 @@
      "timothyw553"
     ],
     "last_push": "2026-11-25T01:56:01Z",
-    "updated_at": "2026-11-25T08:52:10Z",
+    "updated_at": "2026-11-25T17:41:58Z",
     "conflicts": false,
     "last_comment": {
      "who": "timothyw553",
      "at": "2026-11-24T21:53:02Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by timothyw553. Waiting to be merged"
    },
    "id": 160
   },
@@ -3860,6 +4211,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "tdas",
+      "at": "2026-11-25T17:07:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2338#discussion_r4698219185",
+      "maintainer": false,
+      "path": "api/all.yaml",
+      "text": "Double negative. Can be phrased better..like...commit-info must be set for this to be set.",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-24T19:32:32Z",
@@ -3914,15 +4275,16 @@
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "yili-db"
+     "yili-db",
+     "tdas"
     ],
     "last_push": "2026-11-24T17:11:31Z",
-    "updated_at": "2026-11-24T23:21:32Z",
+    "updated_at": "2026-11-25T17:07:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "tdas left review comments. Reply or update the PR"
    },
    "id": 158
   },
@@ -17472,11 +17834,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 98
   },
@@ -17566,7 +17928,7 @@
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
    "status": "review",
-   "title": "Widen storage path columns and validate locations against their column and cloud limits",
+   "title": "Widen storage path columns",
    "date": "2026-11-13",
    "created_at": "2026-11-13T20:38:05Z",
    "merged_at": null,
@@ -17584,107 +17946,107 @@
    "release": null,
    "files": [
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/CatalogRepository.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
      "lines": [
       [
        "h",
-       "@@ -71,6 +71,11 @@"
+       "@@ -1,5 +1,7 @@"
       ],
       [
        "c",
-       "    return TransactionManager.executeWithTransaction("
+       "package io.unitycatalog.server.persist.dao;"
       ],
       [
        "c",
-       "        sessionFactory,"
-      ],
-      [
-       "c",
-       "        session -> {"
+       ""
       ],
       [
        "a",
-       "          if (storageRoot != null) {"
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
       ],
       [
        "a",
-       "            repositories"
-      ],
-      [
-       "a",
-       "                .getStorageLocationValidator()"
-      ],
-      [
-       "a",
-       "                .validateCatalogStorageRoot(session, storageRoot);"
-      ],
-      [
-       "a",
-       "          }"
+       ""
       ],
       [
        "c",
-       "          if (RepositoryUtils.getCatalogDaoOpt(session, createCatalog.getName()).isPresent()) {"
+       "import io.unitycatalog.server.model.CatalogInfo;"
       ],
       [
        "c",
-       "            throw new BaseException("
+       "import jakarta.persistence.Column;"
       ],
       [
        "c",
-       "                ErrorCode.CATALOG_ALREADY_EXISTS,"
+       "import jakarta.persistence.Entity;"
+      ],
+      [
+       "h",
+       "@@ -44,10 +46,10 @@"
+      ],
+      [
+       "c",
+       "  @Column(name = \"updated_by\")"
+      ],
+      [
+       "c",
+       "  private String updatedBy;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_root\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
+      ],
+      [
+       "c",
+       "  private String storageRoot;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_location\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
+      ],
+      [
+       "c",
+       "  private String storageLocation;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static CatalogInfoDAO from(CatalogInfo catalogInfo) {"
       ]
      ],
      "truncated": false,
-     "additions": 5,
-     "deletions": 0
+     "additions": 4,
+     "deletions": 2
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/ModelVersionInfoDAO.java",
      "lines": [
       [
        "h",
-       "@@ -15,6 +15,7 @@"
+       "@@ -1,5 +1,7 @@"
       ],
       [
        "c",
-       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.persist.utils.TransactionManager;"
-      ],
-      [
-       "a",
-       "import io.unitycatalog.server.utils.Constants;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.IdentityUtils;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.NormalizedURL;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.ValidationUtils;"
-      ],
-      [
-       "h",
-       "@@ -65,6 +66,14 @@"
-      ],
-      [
-       "c",
-       "    return credentialDAO;"
-      ],
-      [
-       "c",
-       "  }"
+       "package io.unitycatalog.server.persist.dao;"
       ],
       [
        "c",
@@ -17692,31 +18054,7 @@
       ],
       [
        "a",
-       "  /** Checks that an external location URL fits its column and the cloud limits of its storage. */"
-      ],
-      [
-       "a",
-       "  private void validateUrlLimits(String url, Optional<CredentialDAO> credentialDAO) {"
-      ],
-      [
-       "a",
-       "    repositories"
-      ],
-      [
-       "a",
-       "        .getStorageLocationValidator()"
-      ],
-      [
-       "a",
-       "        .validateExternalLocationUrl("
-      ],
-      [
-       "a",
-       "            NormalizedURL.from(url), Constants.MAX_EXTERNAL_LOCATION_URL_LENGTH, credentialDAO);"
-      ],
-      [
-       "a",
-       "  }"
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
       ],
       [
        "a",
@@ -17724,128 +18062,160 @@
       ],
       [
        "c",
-       "  /**"
+       "import io.unitycatalog.server.model.ModelVersionInfo;"
       ],
       [
        "c",
-       "   * Checks that a location can be reached with its credential: an {@code s3_compatible} credential"
+       "import io.unitycatalog.server.model.ModelVersionStatus;"
       ],
       [
        "c",
-       "   * names S3-compatible storage, so its locations must be {@code s3://} paths."
+       "import jakarta.persistence.Column;"
       ],
       [
        "h",
-       "@@ -109,6 +118,7 @@"
+       "@@ -39,7 +41,7 @@"
       ],
       [
        "c",
-       "          CredentialDAO credentialDAO ="
+       "  @Column(name = \"version\")"
       ],
       [
        "c",
-       "              validateAndGetCredentialDAO(session, createExternalLocation.getCredentialName());"
+       "  private Long version;"
       ],
       [
        "c",
-       "          validateUrlForCredential(url.toString(), credentialDAO);"
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"source\")"
       ],
       [
        "a",
-       "          validateUrlLimits(url.toString(), Optional.of(credentialDAO));"
+       "  @Column(name = \"source\", length = MAX_STORAGE_LOCATION_LENGTH)"
       ],
       [
        "c",
-       "          UUID externalLocationId = UUID.randomUUID();"
+       "  private String source;"
       ],
       [
        "c",
-       "          ExternalLocationDAO externalLocationDAO ="
+       ""
+      ],
+      [
+       "c",
+       "  @Column(name = \"run_id\")"
       ]
      ],
-     "truncated": true,
-     "additions": 20,
-     "deletions": 0
+     "truncated": false,
+     "additions": 3,
+     "deletions": 1
     },
     {
-     "path": "server/src/main/java/io/unitycatalog/server/persist/ModelRepository.java",
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/SchemaInfoDAO.java",
      "lines": [
       [
        "h",
-       "@@ -19,6 +19,7 @@"
+       "@@ -1,5 +1,7 @@"
       ],
       [
        "c",
-       "import io.unitycatalog.server.persist.utils.FileOperations;"
+       "package io.unitycatalog.server.persist.dao;"
       ],
       [
        "c",
-       "import io.unitycatalog.server.persist.utils.PagedListingHelper;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+       ""
       ],
       [
        "a",
-       "import io.unitycatalog.server.utils.Constants;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.IdentityUtils;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.NormalizedURL;"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.utils.ServerProperties;"
-      ],
-      [
-       "h",
-       "@@ -243,6 +244,7 @@"
-      ],
-      [
-       "c",
-       "              catalogAndSchemaDao, this::getDefaultModelsStorageRoot);"
-      ],
-      [
-       "c",
-       "      NormalizedURL storageLocation ="
-      ],
-      [
-       "c",
-       "          ExternalLocationUtils.getManagedLocationForModel(parentStorageLocation, modelId);"
+       "import static io.unitycatalog.server.utils.Constants.MAX_STORAGE_LOCATION_LENGTH;"
       ],
       [
        "a",
-       "      repositories.getStorageLocationValidator().validateModelLocation(session, storageLocation);"
+       ""
       ],
       [
        "c",
-       "      SchemaInfoDAO schemaInfoDAO = catalogAndSchemaDao.schemaInfoDAO();"
+       "import io.unitycatalog.server.model.SchemaInfo;"
       ],
       [
        "c",
-       "      try {"
+       "import jakarta.persistence.Column;"
       ],
       [
        "c",
-       "        // Check if registered model already exists"
+       "import jakarta.persistence.Entity;"
       ],
       [
        "h",
-       "@@ -569,6 +571,14 @@"
+       "@@ -47,10 +49,10 @@"
       ],
       [
        "c",
-       "    long createTime = System.currentTimeMillis();"
+       "  @Column(name = \"updated_by\")"
+      ],
+      [
+       "c",
+       "  private String updatedBy;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_root\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_root\", length = MAX_STORAGE_LOCATION_LENGTH)"
+      ],
+      [
+       "c",
+       "  private String storageRoot;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "  @Column(name = \"storage_location\")"
+      ],
+      [
+       "a",
+       "  @Column(name = \"storage_location\", length = MAX_STORAGE_LOCATION_LENGTH)"
+      ],
+      [
+       "c",
+       "  private String storageLocation;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  public static SchemaInfoDAO from(SchemaInfo schemaInfo) {"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 2
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/dao/StagingTableDAO.java",
+     "lines": [
+      [
+       "h",
+       "@@ -1,5 +1,7 @@"
       ]
      ],
      "truncated": true,
-     "additions": 13,
-     "deletions": 0
+     "additions": 3,
+     "deletions": 1
     }
    ],
    "track": {
@@ -17858,7 +18228,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Verdict: comment. Thanks for addressing the three thread points (force-deleted credential, docs limits, and the production-lookup test); they look right. The scope split is still open and has had no reply: the PR now also adds the storage limits and the cloud checks, which are separable from the widening…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17868,7 +18238,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
       "text": "[AI Assisted] Normal. Table locations are checked with `PREFIX(2, 1)`, which reserves only a slash and one character under the location. A Delta table writes a `_delta_log` commit file, and a managed Delta table also writes a staged-commit file, so a location near the limit can pass validation and still have no room f…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17878,7 +18248,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "[AI Assisted] Normal. External tables, external volumes and external location URLs are checked only against the read policy (`Use.REQUESTED`, which is `SELECT` only). A writable table or volume can pass here and then fail every write vend, because the longer `SELECT` and `UPDATE` policy is what gets sent. Ask: validat…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17888,7 +18258,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "[AI Assisted] Nit. `validateExternalLocationUrl` and `credentialFor` both decide the credential branch through `limitsDependOnCredential`. Folding the choice into one place would keep them from drifting.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -17911,23 +18281,23 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "shba24"
     ],
-    "last_push": "2026-11-25T04:08:29Z",
-    "updated_at": "2026-11-25T08:55:54Z",
+    "last_push": "2026-11-25T18:10:05Z",
+    "updated_at": "2026-11-25T18:19:41Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-21T07:31:01Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by shba24. Waiting to be merged"
    },
    "id": 96
   },
@@ -35109,11 +35479,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
