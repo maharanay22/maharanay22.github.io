@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T00:32:36Z",
+ "generated_at": "2026-11-25T01:39:50Z",
  "stages": [
   "reported",
   "fix sent",
@@ -241,7 +241,7 @@
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -843,7 +843,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T21:49:37Z",
-    "updated_at": "2026-11-25T00:12:36Z",
+    "updated_at": "2026-11-25T00:46:08Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -1880,7 +1880,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at 116e27e4. Changes needed: the new base test fails in the CLI test run (inline). The 400 approach is in place and the server side checks out. Outside the diff: the `listCredentials` `purpose` followup still needs a tracking issue.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1890,7 +1890,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/base/credential/BaseCredentialCRUDTest.java",
       "text": "[AI Assisted] Putting it in BaseCredentialCRUDTest was our suggestion last round, so this one is on us. This test is in the shared base, so CliCredentialCRUDTest runs it too. The CLI always sends `purpose=STORAGE` (`CredentialCli.java:105`), so the create succeeds and `assertApiException` fails with \"Expected ApiExcep…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1924,16 +1924,16 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T03:28:19Z",
-    "updated_at": "2026-11-24T21:35:13Z",
+    "last_push": "2026-11-25T01:37:33Z",
+    "updated_at": "2026-11-25T01:37:46Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 166
   },
@@ -2301,17 +2301,17 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T00:29:39Z",
-    "updated_at": "2026-11-25T00:29:42Z",
+    "updated_at": "2026-11-25T00:40:40Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 164
   },
@@ -3476,6 +3476,36 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-25T00:31:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6049685809",
+      "maintainer": true,
+      "path": null,
+      "text": "overall the change looks good. i left a few comments on the view error handling, keeping the existing public helper for compatibility, and a couple of small doc/test things. nit: the PR description says \"a catalog created before the server started creating it\", which makes it sound like an old-catalog issue, when cata…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-25T00:31:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4688531134",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala-shims/spark-4.2-4.3/io/unitycatalog/spark/UCProxyViewSupport.scala",
+      "text": "doesn't the server check both the view's destination schema and its dependency schemas here? if a query references a missing schema in another catalog, this catch would report `ident.namespace()` as missing instead. could we check `namespaceExists(ident.namespace())` before mapping to `NoSuchNamespaceException`, and a…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-25T00:31:20Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4688531143",
+      "maintainer": true,
+      "path": "docs/integrations/unity-catalog-spark.md",
+      "text": "nit: in spark 4.0.1, `spark.catalog.listTables()` resolves `default` through `spark_catalog` even when UC is the current catalog, which could confuse users into thinking their UC tables are missing. should we add a short caveat here (and maybe a test with tables in both catalogs, checking 4.1/4.2 as well)? [code]",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-24T21:22:40Z",
@@ -3504,36 +3534,6 @@
       "path": null,
       "text": "[AI Assisted] Re-review at 7d30e653. The earlier blocker is fixed: the 404 mapping now matches the error code, and a `TABLE_NOT_FOUND` 404 stays an `ApiException`. The staging and `createView` paths are mapped too. One normal item before merge (the docs sentence, inline). Question: with the Delta API on, a managed Del…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T07:35:06Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4676845057",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
-      "text": "[AI Assisted] blocker: this catch maps every 404 to a missing schema. The server also returns 404 with `error_code` `TABLE_NOT_FOUND` when the staging row is missing (`commitStagingTable`), so that error now reads as `SCHEMA_NOT_FOUND` for a schema that exists. I reproduced it on Spark 4.1: `createTable` with that res…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T07:35:06Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4676845068",
-      "maintainer": true,
-      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
-      "text": "[AI Assisted] nit: a one-line comment would help here. The guard rejects an empty name before the Delta API hand-off and leaves nested names to Delta. The same applies to the guard at line 674.",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T07:35:05Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6035332919",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at 27fedb06. The earlier blocker (Delta API replace path) is fixed, and the guard is covered by the parameterized staging test. One blocker remains: the 404 mapping matches on status, so a `TABLE_NOT_FOUND` from a missing staging row is reported as a missing schema (inline at line 1315). Normal…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3543,12 +3543,12 @@
      "yili-db"
     ],
     "last_push": "2026-11-24T20:36:11Z",
-    "updated_at": "2026-11-24T21:45:19Z",
+    "updated_at": "2026-11-25T00:31:20Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 159
   },
@@ -7368,8 +7368,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "timothyw553",
