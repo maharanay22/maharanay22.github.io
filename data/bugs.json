@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T02:16:23Z",
+ "generated_at": "2026-11-25T02:22:18Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28955,
+   "stars": 28954,
    "forks": 6653,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -211,9 +211,9 @@
    "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 55,
+   "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -6568,7 +6568,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T02:13:56Z",
-    "updated_at": "2026-11-25T02:14:13Z",
+    "updated_at": "2026-11-25T02:16:50Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -7379,8 +7379,8 @@
      "timothyw553",
      "yili-db"
     ],
-    "last_push": "2026-11-24T23:39:57Z",
-    "updated_at": "2026-11-24T23:50:18Z",
+    "last_push": "2026-11-25T02:20:32Z",
+    "updated_at": "2026-11-25T02:20:34Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
