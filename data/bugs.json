@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T01:39:50Z",
+ "generated_at": "2026-11-25T02:16:23Z",
  "stages": [
   "reported",
   "fix sent",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28956,
+   "stars": 28955,
    "forks": 6653,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50621,
+   "stars": 50623,
    "forks": 20717,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,7 +283,7 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63835,
+   "stars": 63836,
    "forks": 13538,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
@@ -1928,7 +1928,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T01:37:33Z",
-    "updated_at": "2026-11-25T01:37:46Z",
+    "updated_at": "2026-11-25T01:53:11Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -3007,7 +3007,7 @@
      "lines": [
       [
        "h",
-       "@@ -168,6 +168,9 @@"
+       "@@ -169,6 +169,9 @@"
       ],
       [
        "c",
@@ -3047,7 +3047,7 @@
       ],
       [
        "h",
-       "@@ -185,22 +188,19 @@"
+       "@@ -186,22 +189,19 @@"
       ],
       [
        "c",
@@ -3055,7 +3055,7 @@
       ],
       [
        "c",
-       "    apiClient.setBasePath(uri.getPath() + BASE_PATH);"
+       "    apiClient.setBasePath(uri.getPath().replaceAll(\"/+$\", \"\") + BASE_PATH);"
       ],
       [
        "c",
@@ -3141,7 +3141,7 @@
       "maintainer": true,
       "path": null,
       "text": "@maharanay22 could you fix the merge conflict?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -3151,7 +3151,7 @@
       "maintainer": true,
       "path": null,
       "text": "overall LGTM, no blocking issues. i left a couple of small comments on the tests and an optional nit on a comment.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3161,7 +3161,7 @@
       "maintainer": true,
       "path": "clients/java/src/test/java/io/unitycatalog/client/ApiClientBuilderTest.java",
       "text": "nit: `firstValue` only checks the first header, so an extra `User-Agent` containing `LaterApp` would still pass. could we check `allValues` with `singleElement()` like below? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -3174,24 +3174,24 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "timothyw553",
      "yili-db"
     ],
-    "last_push": "2026-11-23T14:43:20Z",
-    "updated_at": "2026-11-24T21:53:03Z",
-    "conflicts": true,
+    "last_push": "2026-11-25T01:56:01Z",
+    "updated_at": "2026-11-25T01:58:14Z",
+    "conflicts": false,
     "last_comment": {
      "who": "timothyw553",
      "at": "2026-11-24T21:53:02Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by timothyw553, yili-db. Waiting to be merged"
    },
    "id": 160
   },
@@ -6438,7 +6438,7 @@
      "lines": [
       [
        "h",
-       "@@ -1255,10 +1255,18 @@"
+       "@@ -1255,10 +1255,19 @@"
       ],
       [
        "c",
@@ -6470,11 +6470,15 @@
       ],
       [
        "a",
-       "    // which split options from properties the same way on load, a comment equal to the option is"
+       "    // which split options from properties the same way on load, equal values are treated as the"
       ],
       [
        "a",
-       "    // that copy."
+       "    // option's bare copy. Spark passes the same properties for an explicit COMMENT with the same"
+      ],
+      [
+       "a",
+       "    // value, so that description is also dropped."
       ],
       [
        "a",
@@ -6522,7 +6526,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 10,
+     "additions": 11,
      "deletions": 2
     }
    ],
@@ -6536,7 +6540,7 @@
       "maintainer": true,
       "path": null,
       "text": "overall LGTM, nothing production-level blocking. i left two small comments on clarifying the equal-value trade-off and the direct `UCProxy` test scope.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -6546,7 +6550,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
       "text": "nit: the comment presents equal values as proof it's a copy, whereas spark passes the exact same properties for `COMMENT '#' OPTIONS (comment '#')` and we drop that description too. could we clarify the comment and add that explicit equal-value case to `testCsvCommentOptionSkipsCommentLines`? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "comment",
@@ -6556,24 +6560,24 @@
       "maintainer": true,
       "path": null,
       "text": "@timothyw553 this changes how data-source options named like reserved table properties are stored and shown, so could you review it first? I will take another look after you approve.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T15:55:22Z",
-    "updated_at": "2026-11-24T23:09:09Z",
+    "last_push": "2026-11-25T02:13:56Z",
+    "updated_at": "2026-11-25T02:14:13Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-20T21:42:24Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 145
   },
