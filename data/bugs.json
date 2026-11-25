@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T02:22:18Z",
+ "generated_at": "2026-11-25T02:59:54Z",
  "stages": [
   "reported",
   "fix sent",
@@ -78,7 +78,7 @@
     "AI data"
    ],
    "stars": 7385,
-   "forks": 958,
+   "forks": 957,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3995733,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50623,
-   "forks": 20717,
+   "stars": 50624,
+   "forks": 20716,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710918731,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63836,
-   "forks": 13538,
+   "stars": 63837,
+   "forks": 13541,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 102115552,
@@ -515,11 +515,39 @@
      "lines": [
       [
        "h",
-       "@@ -155,6 +155,39 @@"
+       "@@ -150,11 +150,55 @@"
       ],
       [
        "c",
+       "          # The driver jar goes on the module path, and the database name and URL parameters are encoded: + would"
+      ],
+      [
+       "c",
+       "          # read as a space."
+      ],
+      [
+       "c",
+       "          out=\"$(helm template uc helm -f helm/ci/mysql-values.yaml --set-string 'server.db.mysqlConfig.dbName=uc+db' \\"
+      ],
+      [
+       "d",
+       "            --set-string 'server.db.mysqlConfig.extraParams.connectionTimeZone=+05:30' \\"
+      ],
+      [
+       "a",
+       "            --set-string 'server.db.mysqlConfig.extraParams.connectionTimeZone=+05:30&x=1' \\"
+      ],
+      [
+       "c",
+       "            --set-string 'server.db.mysqlConfig.extraParams.sslMode=REQUIRED')\""
+      ],
+      [
+       "d",
        "          grep -qF 'jdbc:mysql://mysql:3306/uc%2Bdb?connectionTimeZone=%2B05%3A30&sslMode=REQUIRED' <<<\"$out\""
+      ],
+      [
+       "a",
+       "          grep -qF 'jdbc:mysql://mysql:3306/uc%2Bdb?connectionTimeZone=%2B05%3A30%26x%3D1&sslMode=REQUIRED' <<<\"$out\""
       ],
       [
        "c",
@@ -604,46 +632,18 @@
       [
        "a",
        "          check_ssl_params_clash() {"
-      ],
-      [
-       "a",
-       "            for key in sslmode sslrootcert; do"
-      ],
-      [
-       "a",
-       "              if err=\"$(helm template uc helm \"$@\" --set-string \"server.db.postgresqlConfig.extraParams.${key}=/x\" 2>&1)\"; then"
-      ],
-      [
-       "a",
-       "                echo \"expected the render to fail for extraParams.${key}\""
-      ],
-      [
-       "a",
-       "                exit 1"
-      ],
-      [
-       "a",
-       "              fi"
-      ],
-      [
-       "a",
-       "              grep -qF \"server.db.postgresqlConfig.extraParams.${key} is set by server.db.postgresqlConfig.ssl\" <<<\"$err\""
-      ],
-      [
-       "a",
-       "            done"
       ]
      ],
      "truncated": true,
-     "additions": 33,
-     "deletions": 0
+     "additions": 46,
+     "deletions": 2
     },
     {
      "path": "helm/templates/server/_config.tpl",
      "lines": [
       [
        "h",
-       "@@ -53,18 +53,20 @@"
+       "@@ -53,18 +53,23 @@"
       ],
       [
        "c",
@@ -688,6 +688,18 @@
       [
        "a",
        "{{- range $key, $value := .Values.server.db.postgresqlConfig.extraParams }}"
+      ],
+      [
+       "a",
+       "{{- if or (contains \"&\" $key) (contains \"=\" $key) }}"
+      ],
+      [
+       "a",
+       "{{- fail (printf \"server.db.postgresqlConfig.extraParams.%s: a parameter name cannot contain & or =\" $key) }}"
+      ],
+      [
+       "a",
+       "{{- end }}"
       ],
       [
        "a",
@@ -747,7 +759,7 @@
       ]
      ],
      "truncated": false,
-     "additions": 7,
+     "additions": 10,
      "deletions": 5
     },
     {
@@ -755,23 +767,11 @@
      "lines": [
       [
        "h",
-       "@@ -281,13 +281,18 @@"
-      ],
-      [
-       "c",
-       "        # @default -- ca.crt"
-      ],
-      [
-       "c",
-       "        rootCertConfigMapKey: ca.crt"
-      ],
-      [
-       "c",
-       ""
+       "@@ -281,13 +281,19 @@"
       ]
      ],
      "truncated": true,
-     "additions": 7,
+     "additions": 8,
      "deletions": 2
     }
    ],
@@ -785,7 +785,7 @@
       "maintainer": true,
       "path": "helm/templates/server/_config.tpl",
       "text": "**Blocker:** An extraParams name with `&` overrides sslmode and silently turns TLS off The clash check at line 61 runs hasKey on the literal key, and line 69 then renders the name raw. A key such as `z&sslmode` passes the check, but the driver splits the URL on `&` and reads a second `sslmode` that wins over the chart…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -838,17 +838,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T21:49:37Z",
-    "updated_at": "2026-11-25T00:46:08Z",
+    "last_push": "2026-11-25T02:40:45Z",
+    "updated_at": "2026-11-25T02:40:59Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 171
   },
@@ -970,6 +970,106 @@
      "deletions": 0
     },
     {
+     "path": "helm/templates/_helpers.tpl",
+     "lines": [
+      [
+       "h",
+       "@@ -136,7 +136,7 @@"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       "{{- range $index, $config := .Values.storage.credentials.gcs }}"
+      ],
+      [
+       "c",
+       "- name: gcs-credentials-{{ $index }}"
+      ],
+      [
+       "d",
+       "  mountPath: /home/unitycatalog/etc/conf/gcs-credentials-{{ $index }}.json"
+      ],
+      [
+       "a",
+       "  mountPath: {{ include \"unitycatalog.server.gcsKeyFilePath\" $index }}"
+      ],
+      [
+       "c",
+       "  subPath: jsonKey"
+      ],
+      [
+       "c",
+       "  readOnly: true"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "h",
+       "@@ -171,6 +171,13 @@"
+      ],
+      [
+       "c",
+       "{{- default (printf \"%s-%s\" (include \"unitycatalog.server.fullname\" .) \"jwt-key\") .Values.server.jwtKeypairSecret.name }}"
+      ],
+      [
+       "c",
+       "{{- end }}"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "{{/*"
+      ],
+      [
+       "a",
+       "Path of the key file of GCS credential N in the server container. The volume mount and server.properties both use it."
+      ],
+      [
+       "a",
+       "*/}}"
+      ],
+      [
+       "a",
+       "{{- define \"unitycatalog.server.gcsKeyFilePath\" -}}"
+      ],
+      [
+       "a",
+       "/home/unitycatalog/etc/conf/gcs-credentials-{{ . }}.json"
+      ],
+      [
+       "a",
+       "{{- end }}"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "{{/*"
+      ],
+      [
+       "c",
+       "Enable UI API proxy"
+      ],
+      [
+       "c",
+       "*/}}"
+      ]
+     ],
+     "truncated": false,
+     "additions": 8,
+     "deletions": 1
+    },
+    {
      "path": "helm/templates/server/_config.tpl",
      "lines": [
       [
@@ -994,7 +1094,7 @@
       ],
       [
        "a",
-       "gcs.jsonKeyFilePath.{{ $index }}=/home/unitycatalog/etc/conf/gcs-credentials-{{ $index }}.json"
+       "gcs.jsonKeyFilePath.{{ $index }}={{ include \"unitycatalog.server.gcsKeyFilePath\" $index }}"
       ],
       [
        "c",
@@ -1024,7 +1124,7 @@
       "maintainer": true,
       "path": "helm/templates/server/_config.tpl",
       "text": "**Nit (not a blocker):** GCS key file path is written twice, so the two copies can drift apart again `gcs.jsonKeyFilePath.N` in `_config.tpl` and the `gcs-credentials-N` `mountPath` in `unitycatalog.server.volumeMounts` (`_helpers.tpl:139`) are separate literals. They had drifted at base (`/etc/conf/...` against `/hom…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1037,17 +1137,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T20:33:33Z",
-    "updated_at": "2026-11-25T00:11:20Z",
+    "last_push": "2026-11-25T02:43:01Z",
+    "updated_at": "2026-11-25T02:43:13Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 170
   },
@@ -1923,8 +2023,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T01:37:33Z",
@@ -1932,8 +2032,8 @@
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 166
   },
@@ -3174,8 +3274,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "timothyw553",
@@ -3341,7 +3441,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 6,
+     "additions": 8,
      "deletions": 3
     },
     {
@@ -3469,8 +3569,8 @@
       ]
      ],
      "truncated": true,
-     "additions": 79,
-     "deletions": 19
+     "additions": 88,
+     "deletions": 18
     }
    ],
    "track": {
@@ -3483,7 +3583,7 @@
       "maintainer": true,
       "path": null,
       "text": "overall the change looks good. i left a few comments on the view error handling, keeping the existing public helper for compatibility, and a couple of small doc/test things. nit: the PR description says \"a catalog created before the server started creating it\", which makes it sound like an old-catalog issue, when cata…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3493,7 +3593,7 @@
       "maintainer": true,
       "path": "connectors/spark/src/main/scala-shims/spark-4.2-4.3/io/unitycatalog/spark/UCProxyViewSupport.scala",
       "text": "doesn't the server check both the view's destination schema and its dependency schemas here? if a query references a missing schema in another catalog, this catch would report `ident.namespace()` as missing instead. could we check `namespaceExists(ident.namespace())` before mapping to `NoSuchNamespaceException`, and a…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -3503,7 +3603,7 @@
       "maintainer": true,
       "path": "docs/integrations/unity-catalog-spark.md",
       "text": "nit: in spark 4.0.1, `spark.catalog.listTables()` resolves `default` through `spark_catalog` even when UC is the current catalog, which could confuse users into thinking their UC tables are missing. should we add a short caveat here (and maybe a test with tables in both catalogs, checking 4.1/4.2 as well)? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -3536,19 +3636,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
-    "last_push": "2026-11-24T20:36:11Z",
-    "updated_at": "2026-11-25T00:31:20Z",
+    "last_push": "2026-11-25T02:51:24Z",
+    "updated_at": "2026-11-25T02:51:50Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by yili-db. Waiting to be merged"
    },
    "id": 159
   },
@@ -7372,15 +7472,15 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "timothyw553",
      "yili-db"
     ],
     "last_push": "2026-11-25T02:20:32Z",
-    "updated_at": "2026-11-25T02:20:34Z",
+    "updated_at": "2026-11-25T02:36:56Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -17747,7 +17847,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Comment at f4be8f54. Replies in the inline threads cover the items that overlap timothyw553's comments: the force-deleted credential in the update path, the test that bypasses the production lookup, and the docs limits. The s3:/// point is a pushback in its thread. Normal items: 1. Force-deleted credenti…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17757,7 +17857,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "what happens if someone passes `s3:///` or `gs:///` as a storage root? to my understanding `location.toUri()` throws `IllegalArgumentException` here and turns catalog or schema creation into an HTTP 500 instead of 400. could we catch that and throw `INVALID_ARGUMENT`, plus add tests for those malformed roots and a val…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17767,7 +17867,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "if the assigned credential was force-deleted, `current` is null here. passing `Optional.empty()` tells the validator to fall back to bucket config, even though real vending fails on the missing credential and never uses that bucket role (e.g. an 82 `*` URL hits a policy-length error while 82 `a`s passes). should we pr…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17777,7 +17877,7 @@
       "maintainer": true,
       "path": "docs/server/configuration.md",
       "text": "catalog and schema roots have to leave room for generated child paths, so the effective limit is 1,942 and 1,943 UTF-8 bytes rather than 2,048 characters. also on line 170, GCS and Azure object-name checks run regardless of bucket credential config while S3 and GCS access-boundary checks depend on it. could we separat…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17787,7 +17887,7 @@
       "maintainer": true,
       "path": "server/src/test/java/io/unitycatalog/server/persist/utils/StorageLocationValidatorTest.java",
       "text": "these unit tests pass the credential in directly, so they'd still pass if the production lookup stopped supplying the covering IAM-role credential. could we extend a server test to create a credential and external location and verify a volume under it (short path passes, policy-expanding path fails, plus the force-del…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -17797,26 +17897,26 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "nit: `GcpCredentialVendor` rejects a supplied storage credential with `UNIMPLEMENTED` right now, so this comment about GCS building credentials from a storage credential is a bit misleading.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "shba24"
     ],
-    "last_push": "2026-11-22T19:46:13Z",
-    "updated_at": "2026-11-24T23:23:01Z",
+    "last_push": "2026-11-25T02:55:26Z",
+    "updated_at": "2026-11-25T02:57:55Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-21T07:31:01Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by shba24. Waiting to be merged"
    },
    "id": 96
   },
