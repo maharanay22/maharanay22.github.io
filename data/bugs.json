@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T04:37:40Z",
+ "generated_at": "2026-11-25T14:27:19Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,8 +21,8 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3587,
-   "forks": 708,
+   "stars": 3588,
+   "forks": 709,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 661222,
@@ -77,8 +77,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7385,
-   "forks": 957,
+   "stars": 7387,
+   "forks": 959,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3995733,
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28954,
-   "forks": 6654,
+   "stars": 28964,
+   "forks": 6657,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23207524,
@@ -161,8 +161,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50625,
-   "forks": 20716,
+   "stars": 50631,
+   "forks": 20717,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 710918731,
@@ -200,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9086,
-   "forks": 2228,
+   "forks": 2229,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24428488,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63846,
-   "forks": 13542,
+   "stars": 63892,
+   "forks": 13558,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 102115552,
@@ -778,6 +778,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-25T11:10:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#pullrequestreview-6056516405",
+      "maintainer": true,
+      "path": null,
+      "text": "overall looks good. i left one optional nit on the ssl root cert default doc, which we can fix here or in a follow up.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-25T11:10:22Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4694016587",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "nit: since `sslrootcert` is always set here when ssl is enabled (and `deployment.yaml` requires `rootCert` or `rootCertConfigMapName`), `helm/values.yaml` line 263 and `helm/README.md` line 789 still say `public root CAs`, which fails rendering if followed. since that line is outside your diff, could we update it here…",
+      "answered": false
+     },
+     {
       "kind": "inline comment",
       "who": "shba24",
       "at": "2026-11-25T03:45:37Z",
@@ -816,39 +836,19 @@
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** Raw PostgreSQL parameter names are not pinned by any test The template deliberately leaves names unencoded because PgJDBC does not decode them (the comment at _config.tpl:69 records this), while the MySQL branch encodes them. Every PostgreSQL name in the assertions is plain letters, so encodin…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T21:39:19Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914601",
-      "maintainer": true,
-      "path": ".github/workflows/helm-chart-tests.yml",
-      "text": "**Nit (not a blocker):** Docs and conditional describe an SSL-without-certificate case that fails to render The new comment in values.yaml and README.md says `sslrootcert` is set only when a root certificate setting is present, which implies `ssl.enabled` without a certificate is a valid setup. deployment.yaml:117 alr…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T21:39:18Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914443",
-      "maintainer": true,
-      "path": ".github/workflows/helm-chart-tests.yml",
-      "text": "**Nit (not a blocker):** Encoding render test would still pass if `&` were left unescaped The PostgreSQL render test covers a space and `+`, plus `/` in the certificate path, but no value contains `&`, `=` or `%`. An encoder that escapes only those three characters would pass, yet a value containing `&` would split in…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T04:08:40Z",
-    "updated_at": "2026-11-25T04:10:35Z",
+    "updated_at": "2026-11-25T11:10:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 171
   },
@@ -1154,11 +1154,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Declare Gemini tools by their tool name so same-named functions can be used together",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:55Z",
-   "merged_at": null,
+   "merged_at": "2026-11-25",
    "reported": true,
    "pr": {
     "number": 2349,
@@ -1304,6 +1304,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "yili-db",
+      "at": "2026-11-25T08:44:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#pullrequestreview-6054331808",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Approve. The three-function collision from the last round is fixed, with a test that fails without the taken-name check. Non-blocking follow-ups: - The truncation policy now lives in two places: `_gemini_function_name` repeats the validate, `to_tool_name`, cut and warn steps of core `get_tool_name` with…",
+      "answered": true
+     },
+     {
       "kind": "inline comment",
       "who": "yili-db",
       "at": "2026-11-24T21:21:41Z",
@@ -1352,29 +1362,21 @@
       "path": null,
       "text": "[AI Assisted] Re-review. The round-one blockers are addressed: declared names are capped at 63 characters, `@` is replaced, and the `__` pair gets distinct names (checked by repro, with the 63, 64 and `@` cases). The comments on the two round-one normal items are addressed too. Normal, inline on `_with_unique_names`:…",
       "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T01:43:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2349#pullrequestreview-6032370554",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Verdict: changes needed. The same-name and mixed-case fix works. Both same-named functions build and dispatch correctly, and the new tests fail on main (`ValueError`, `KeyError: 'Catalog__HR__Test'`) and pass here. Three declared-name cases that work on main now regress: declared names that reach 64 char…",
-      "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
-    "review": "commented",
-    "approved_by": [],
+    "review": "approved",
+    "approved_by": [
+     "yili-db"
+    ],
     "last_push": "2026-11-24T23:27:26Z",
-    "updated_at": "2026-11-25T00:22:42Z",
+    "updated_at": "2026-11-25T08:46:44Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 169
   },
@@ -2028,7 +2030,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T01:37:33Z",
-    "updated_at": "2026-11-25T01:53:11Z",
+    "updated_at": "2026-11-25T08:05:04Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -2180,11 +2182,11 @@
     ],
     "last_push": "2026-11-24T21:28:25Z",
     "updated_at": "2026-11-24T21:30:24Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 165
   },
@@ -2341,64 +2343,64 @@
    "track": {
     "feedback": [
      {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T21:26:13Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6047680225",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at c4aec6fb. The earlier items are addressed: the `open` shadowing, the `RecursionError` escape, the CHANGELOG merge with main, the locale-dependent test, the shared-helper follow-up, and the stderr tail on the unreadable branch. One blocker remains (inline). In the description: it says every n…",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T21:26:13Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4686777123",
-      "maintainer": true,
-      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
-      "text": "[AI Assisted] The runner's `main()` now has locals `result_path`, `output` and `f`, and the generated script imports `builtins` at module level. A UC function with one of those names is shadowed inside `main()`. A function named `f` or `output` raises `UnboundLocalError`, a function named `result_path` raises `TypeErr…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T21:26:13Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4686777140",
+      "who": "timothyw553",
+      "at": "2026-11-25T13:20:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4695483592",
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
-      "text": "[AI Assisted] This test only covers `open`, and it passes on main, so it guards the intermediate state rather than the regression. Folding it into the parametrized test from the comment on the runner would cover `f`, `output`, `result_path` and `builtins` as well.",
-      "answered": true
+      "text": "if `setrlimit` prints a warning to stderr, that warning sits between the header and `writer stopped` (and the same for `bad config` on line 255). could we check the header and the function stderr text separately so a `setrlimit` warning doesn't break these? [code]",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-25T13:20:12Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6058356686",
+      "maintainer": true,
+      "path": null,
+      "text": "looks like a solid fix overall. no production code issues, i just left one small comment on the test assertions.",
+      "answered": false
      },
      {
       "kind": "review commented",
       "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6032147714",
+      "at": "2026-11-25T08:47:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#pullrequestreview-6054368702",
       "maintainer": true,
       "path": null,
-      "text": "[AI Assisted] Changes needed. The fix covers the reported stdout cases, and the new tests fail on main as expected. Blocking: a UC function named `open` now fails with a `TypeError` (inline). Also needed: a merge of main to resolve `ai/CHANGELOG.md`, and handling of the `RecursionError` that escapes `_read_result` (in…",
-      "answered": true
+      "text": "[AI Assisted] Changes needed for the `_uc_` regression (inline). The memory-limit wording is a normal item (inline). The other two are nits (inline). Optional, not blocking: - The `TODO(#2359)` sits above `_stderr_tail`, but the decision chain it refers to is at the end of `run_in_sandbox_subprocess`. Moving it there…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4674238752",
+      "at": "2026-11-25T08:47:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4692397323",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
-      "text": "[AI Assisted] The runner calls the unqualified `open` after the function source is inserted at module scope. A function named `open` shadows the builtin, so the result write calls the user function with `encoding=` and fails with a `TypeError`. The same function returns `3` on main. Could we bind the builtin before th…",
-      "answered": true
+      "text": "[AI Assisted] The `_uc_` prefix moves the collision instead of removing it. A function named `_uc_result`, `_uc_params`, `_uc_main` or `_uc_output` passes on main and fails here. `_uc_result = _uc_result(**_uc_params)` makes `_uc_result` a local of `_uc_main`, so the call raises `UnboundLocalError`, and a function nam…",
+      "answered": false
      },
      {
       "kind": "inline comment",
       "who": "yili-db",
-      "at": "2026-11-24T01:15:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4674238757",
+      "at": "2026-11-25T08:47:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4692397334",
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
-      "text": "[AI Assisted] A result nested deeper than the parent's recursion limit makes `json.loads` raise `RecursionError`. `_read_result` does not catch it, so the call raises instead of returning an error result, and main returned an error result for the same input. Could we catch `RecursionError` here as well, with a test fo…",
-      "answered": true
+      "text": "[AI Assisted] The shared terminated message says the memory limit applies on top of the address space the sandbox process inherits. That holds for `sandbox`, where `executor/local.py` adds the limit to the address space in use. The local runner sets `RLIMIT_AS` to the absolute value, so the interpreter counts against…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-25T08:47:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2344#discussion_r4692397342",
+      "maintainer": true,
+      "path": "ai/core/tests/core/test_local_subprocess_executor.py",
+      "text": "[AI Assisted] The `\"\"` expectation makes the `in` check always true. Could we pin the encoding in this test and assert on the replacement character, or keep only the `startswith` check?",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -2406,12 +2408,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T00:29:39Z",
-    "updated_at": "2026-11-25T00:40:40Z",
+    "updated_at": "2026-11-25T13:20:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 164
   },
@@ -3234,6 +3236,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-25T08:52:10Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2340#pullrequestreview-6054427328",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] The earlier comment says the follow-up for custom `Authorization` and User-Agent headers is tracked in `#XXXX` and linked from the description, but the placeholder is still there and the description has no link yet. Could you replace `#XXXX` with the tracking issue and link it from the description? I'll…",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "timothyw553",
       "at": "2026-11-24T21:53:02Z",
@@ -3278,20 +3290,19 @@
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "timothyw553",
-     "yili-db"
+     "timothyw553"
     ],
     "last_push": "2026-11-25T01:56:01Z",
-    "updated_at": "2026-11-25T01:58:14Z",
+    "updated_at": "2026-11-25T08:52:10Z",
     "conflicts": false,
     "last_comment": {
      "who": "timothyw553",
      "at": "2026-11-24T21:53:02Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by timothyw553, yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 160
   },
@@ -3578,6 +3589,26 @@
      {
       "kind": "review commented",
       "who": "timothyw553",
+      "at": "2026-11-25T13:59:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6058968005",
+      "maintainer": true,
+      "path": null,
+      "text": "overall the change looks good. i left one comment about empty namespaces still reaching Delta in `tableExists` when the Delta API is enabled, which the SQL tests currently miss.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-25T13:59:13Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4695977616",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "`tableExists` still forwards an empty namespace to Delta, so with the Delta API enabled `DROP TABLE IF EXISTS <catalog>.t` and `CREATE TABLE` fail with Delta's namespace-length error (the SQL tests miss this because `UCProxyTestFixture` sets `DELTA_API_ENABLED` to `false`). should we return `false` for an empty namesp…",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
+      "who": "timothyw553",
       "at": "2026-11-25T00:31:20Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6049685809",
       "maintainer": true,
@@ -3614,26 +3645,6 @@
       "path": null,
       "text": "[AI Assisted] Approving at 362ce5ce. Unqualified names resolve to `<catalog>.default`, a missing schema is reported as SCHEMA_NOT_FOUND by matching the error code, and the docs sentence is fixed. One open question, not blocking: with the Delta API on, a managed Delta `CREATE TABLE` goes to the Delta delegate, and a mi…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-24T19:23:27Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#discussion_r4685326877",
-      "maintainer": true,
-      "path": "docs/integrations/unity-catalog-spark.md",
-      "text": "[AI Assisted] The sentence just extended reads incorrectly: the clause \"when no schema has been selected with USE\" sits before `<catalog_name>.default`. Suggested text: A name without a schema, such as `SELECT * FROM marksheet;`, resolves to `<catalog_name>.default` unless a different schema was selected with `USE <sc…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T19:23:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2339#pullrequestreview-6045853842",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Re-review at 7d30e653. The earlier blocker is fixed: the 404 mapping now matches the error code, and a `TABLE_NOT_FOUND` 404 stays an `ApiException`. The staging and `createView` paths are mapped too. One normal item before merge (the docs sentence, inline). Question: with the Delta API on, a managed Del…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -3643,12 +3654,12 @@
      "yili-db"
     ],
     "last_push": "2026-11-25T02:51:24Z",
-    "updated_at": "2026-11-25T03:06:45Z",
+    "updated_at": "2026-11-25T13:59:13Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 159
   },
@@ -7481,15 +7492,15 @@
     ],
     "last_push": "2026-11-25T02:20:32Z",
     "updated_at": "2026-11-25T02:36:56Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-22T10:53:45Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by timothyw553, yili-db. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 142
   },
@@ -17840,6 +17851,46 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-25T08:55:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6054474604",
+      "maintainer": true,
+      "path": null,
+      "text": "[AI Assisted] Verdict: comment. Thanks for addressing the three thread points (force-deleted credential, docs limits, and the production-lookup test); they look right. The scope split is still open and has had no reply: the PR now also adds the storage limits and the cloud checks, which are separable from the widening…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-25T08:55:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4692484096",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
+      "text": "[AI Assisted] Normal. Table locations are checked with `PREFIX(2, 1)`, which reserves only a slash and one character under the location. A Delta table writes a `_delta_log` commit file, and a managed Delta table also writes a staged-commit file, so a location near the limit can pass validation and still have no room f…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-25T08:55:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4692484110",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "[AI Assisted] Normal. External tables, external volumes and external location URLs are checked only against the read policy (`Use.REQUESTED`, which is `SELECT` only). A writable table or volume can pass here and then fail every write vend, because the longer `SELECT` and `UPDATE` policy is what gets sent. Ask: validat…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "yili-db",
+      "at": "2026-11-25T08:55:58Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4692484123",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "[AI Assisted] Nit. `validateExternalLocationUrl` and `credentialFor` both decide the credential branch through `limitsDependOnCredential`. Folding the choice into one place would keep them from drifting.",
+      "answered": false
+     },
+     {
       "kind": "review approved",
       "who": "shba24",
       "at": "2026-11-25T03:43:31Z",
@@ -17858,65 +17909,25 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "**Nit (not a blocker):** Overlapping external locations skip the cloud limit checks with only a warning `credentialFor` catches every `BaseException` from the credential lookup and returns Unresolvable. That also covers the INTERNAL error that `ExternalLocationUtils.java:336-339` throws when two external locations cov…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T03:43:28Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115408",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/service/credential/CloudCredentialVendorTest.java",
-      "text": "**Nit (not a blocker):** Test only checks the second STS request, so the first one is never inspected The second vend added at this line captures a second `AssumeRoleRequest`. The role, policy, signing key and signer assertions that follow all read `requestCaptor.getValue()`, which returns the last capture. The first…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T03:43:27Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115308",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "**Nit (not a blocker):** Which schemes need the storage credential is copied into the persistence layer `CREDENTIAL_SCHEMES` records which vendors' `limitViolation` reads the credential. Both `credentialFor` (about line 285) and `validateExternalLocationUrl` (about line 128) use it. Nothing makes a vendor change updat…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T03:43:26Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115234",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/aws/AwsCredentialVendor.java",
-      "text": "**Nit (not a blocker):** Create-time limit check re-derives which generator the vend would use `isOnAwsS3` and `awsStsRole` work out for themselves whether a vend would reach the AWS STS path, which role and region it would use, and whether a session token skips STS. `vendAwsCredentials` and `createPerBucketCredential…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-24T23:23:01Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6048993061",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Comment at f4be8f54. Replies in the inline threads cover the items that overlap timothyw553's comments: the force-deleted credential in the update path, the test that bypasses the production lookup, and the docs limits. The s3:/// point is a pushback in its thread. Normal items: 1. Force-deleted credenti…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "shba24"
     ],
     "last_push": "2026-11-25T04:08:29Z",
-    "updated_at": "2026-11-25T04:08:31Z",
+    "updated_at": "2026-11-25T08:55:54Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-21T07:31:01Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by shba24. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 96
   },
