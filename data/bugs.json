@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T14:27:19Z",
+ "generated_at": "2026-11-25T15:00:22Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3375,
+   "stars": 3376,
    "forks": 716,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28964,
+   "stars": 28965,
    "forks": 6657,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63892,
-   "forks": 13558,
+   "stars": 63896,
+   "forks": 13560,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 102115552,
@@ -35109,11 +35109,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
