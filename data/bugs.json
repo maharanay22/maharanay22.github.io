@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T18:22:05Z",
+ "generated_at": "2026-11-25T18:56:56Z",
  "stages": [
   "reported",
   "fix sent",
@@ -618,16 +618,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-25T18:19:00Z",
-    "updated_at": "2026-11-25T18:19:37Z",
+    "last_push": "2026-11-25T18:22:27Z",
+    "updated_at": "2026-11-25T18:22:37Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 178
   },
@@ -849,7 +849,7 @@
      "lines": [
       [
        "h",
-       "@@ -150,11 +150,55 @@"
+       "@@ -150,11 +150,65 @@"
       ],
       [
        "c",
@@ -921,7 +921,15 @@
       ],
       [
        "a",
-       "            --set-string 'server.db.postgresqlConfig.extraParams.currentSchema=uc')\""
+       "            --set-string 'server.db.postgresqlConfig.extraParams.currentSchema=uc' \\"
+      ],
+      [
+       "a",
+       "            --set server.db.postgresqlConfig.extraParams.socketTimeout=0 \\"
+      ],
+      [
+       "a",
+       "            --set server.db.postgresqlConfig.extraParams.tcpKeepAlive=false)\""
       ],
       [
        "a",
@@ -929,7 +937,7 @@
       ],
       [
        "a",
-       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?ApplicationName=uc+ci%2Btest%26x%3D1&a b=1&currentSchema=uc&sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
+       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?ApplicationName=uc+ci%2Btest%26x%3D1&a b=1&currentSchema=uc&socketTimeout=0&sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt&tcpKeepAlive=false' ]"
       ],
       [
        "a",
@@ -958,18 +966,10 @@
       [
        "a",
        "          url=\"$(sed -n 's/^ *hibernate\\.connection\\.url=//p' <<<\"$out\")\""
-      ],
-      [
-       "a",
-       "          [ \"$url\" = 'jdbc:postgresql://postgresql:5432/ucdb?sslmode=verify-full&sslrootcert=%2Fhome%2Funitycatalog%2Fetc%2Fconf%2Fdbrootca.crt' ]"
-      ],
-      [
-       "a",
-       "          check_ssl_params_clash() {"
       ]
      ],
      "truncated": true,
-     "additions": 46,
+     "additions": 56,
      "deletions": 2
     },
     {
@@ -977,7 +977,7 @@
      "lines": [
       [
        "h",
-       "@@ -53,18 +53,23 @@"
+       "@@ -53,18 +53,24 @@"
       ],
       [
        "c",
@@ -1025,11 +1025,15 @@
       ],
       [
        "a",
-       "{{- if or (contains \"&\" $key) (contains \"=\" $key) }}"
+       "{{- /* hibernate.properties is read with Properties.load, which decodes backslash escapes and ends an entry at a line break. */}}"
       ],
       [
        "a",
-       "{{- fail (printf \"server.db.postgresqlConfig.extraParams.%s: a parameter name cannot contain & or =\" $key) }}"
+       "{{- if regexMatch \"[&=\\\\\\\\[:cntrl:]]\" $key }}"
+      ],
+      [
+       "a",
+       "{{- fail (printf \"server.db.postgresqlConfig.extraParams.%q: a parameter name cannot contain &, =, a backslash or a control character\" $key) }}"
       ],
       [
        "a",
@@ -1093,20 +1097,8 @@
       ]
      ],
      "truncated": false,
-     "additions": 10,
+     "additions": 11,
      "deletions": 5
-    },
-    {
-     "path": "helm/values.yaml",
-     "lines": [
-      [
-       "h",
-       "@@ -281,13 +281,19 @@"
-      ]
-     ],
-     "truncated": true,
-     "additions": 8,
-     "deletions": 2
     }
    ],
    "track": {
@@ -1119,7 +1111,7 @@
       "maintainer": true,
       "path": null,
       "text": "Reviewed at 93e735c7: no blocking issues found.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1129,7 +1121,7 @@
       "maintainer": true,
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** Number and boolean extraParams values are never rendered in CI Every `extraParams` entry in the render tests uses `--set-string`, so Helm only ever hands the template strings. The docs and README say a value may be a string, number or boolean, and the template runs `urlquery $value` on whateve…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1139,7 +1131,7 @@
       "maintainer": true,
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** The extraParams name guard is only tested with chart-managed SSL on Both invalid-name renders reuse the `pg` argument array, which turns `ssl.enabled` on. The guard in `_config.tpl` sits outside the SSL block today, so the code is correct. Moving it under `if ssl.enabled`, or behind the clash…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1149,7 +1141,7 @@
       "maintainer": true,
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** sslrootcert pass-through with chart-managed SSL off is not tested The workflow comment says that without chart-managed SSL, the keys are passed on. The only SSL-off render passes `sslmode` alone, and both `sslrootcert` clash renders run with SSL on. A change that reserved `sslrootcert` in both…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1159,7 +1151,7 @@
       "maintainer": true,
       "path": "helm/templates/server/_config.tpl",
       "text": "**Nit (not a blocker):** PostgreSQL and MySQL URL parameter loops are separate, so new rules must be written twice The PostgreSQL and MySQL branches each build their own `$urlParamsList`, join it with `&` and prefix `?`. This PR adds a name guard, a clash check and values-only encoding to the PostgreSQL copy only. Som…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1169,22 +1161,22 @@
       "maintainer": true,
       "path": null,
       "text": "overall looks good. i left one optional nit on the ssl root cert default doc, which we can fix here or in a follow up.",
-      "answered": false
+      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "timothyw553"
     ],
-    "last_push": "2026-11-25T04:08:40Z",
-    "updated_at": "2026-11-25T18:08:05Z",
+    "last_push": "2026-11-25T18:46:32Z",
+    "updated_at": "2026-11-25T18:46:51Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "shba24 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by timothyw553. Waiting to be merged"
    },
    "id": 171
   },
@@ -2563,11 +2555,191 @@
    "release": null,
    "files": [
     {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/common.py",
+     "lines": [
+      [
+       "h",
+       "@@ -47,12 +47,19 @@"
+      ],
+      [
+       "c",
+       "    \"you are certain that your function is behaving as expected:\\n\""
+      ],
+      [
+       "c",
+       "    \"\\t1. EXECUTOR_MAX_CPU_TIME_LIMIT: Maximum CPU execution time limit for the executor \""
+      ],
+      [
+       "c",
+       "    \"measured in CPU seconds (total CPU execution time, not wall-clock time).\\n\""
+      ],
+      [
+       "d",
+       "    \"\\t2. EXECUTOR_MAX_MEMORY_LIMIT: Maximum virtual memory, measured in MB, that the function \""
+      ],
+      [
+       "d",
+       "    \"can allocate on top of the address space the sandbox process inherits. \""
+      ],
+      [
+       "a",
+       "    \"\\t2. EXECUTOR_MAX_MEMORY_LIMIT: Maximum virtual memory, measured in MB, \""
+      ],
+      [
+       "a",
+       "    \"{memory_limit_scope}. \""
+      ],
+      [
+       "c",
+       "    \"The default value is 100 MB. Note that this restriction is only applicable to Linux environments \""
+      ],
+      [
+       "c",
+       "    \"and has no functional use in Mac OSX or Windows.\\n\""
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "SANDBOX_MEMORY_LIMIT_SCOPE = ("
+      ],
+      [
+       "a",
+       "    \"that the function can allocate on top of the address space the sandbox process inherits\""
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "a",
+       "LOCAL_MEMORY_LIMIT_SCOPE = ("
+      ],
+      [
+       "a",
+       "    \"of the whole function execution process, the Python interpreter and its imports included\""
+      ],
+      [
+       "a",
+       ")"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "EXITED_WITHOUT_RESULT_MESSAGE_TEMPLATE = ("
+      ],
+      [
+       "c",
+       "    \"The function execution process exited with code {exit_code} before it could report a result. \""
+      ],
+      [
+       "c",
+       "    \"This can happen when the function exits the process itself, or when the process runs out of \""
+      ]
+     ],
+     "truncated": false,
+     "additions": 9,
+     "deletions": 2
+    },
+    {
+     "path": "ai/core/src/unitycatalog/ai/core/executor/local.py",
+     "lines": [
+      [
+       "h",
+       "@@ -25,6 +25,7 @@"
+      ],
+      [
+       "c",
+       "    MB_CONVERSION,"
+      ],
+      [
+       "c",
+       "    NO_OUTPUT_MESSAGE,"
+      ],
+      [
+       "c",
+       "    OPEN_DISALLOWED_MESSAGE,"
+      ],
+      [
+       "a",
+       "    SANDBOX_MEMORY_LIMIT_SCOPE,"
+      ],
+      [
+       "c",
+       "    SANDBOX_UNSUPPORTED_MESSAGE,"
+      ],
+      [
+       "c",
+       "    TERMINATED_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "c",
+       "    TIMEOUT_ERROR_MESSAGE,"
+      ],
+      [
+       "h",
+       "@@ -186,7 +187,9 @@"
+      ],
+      [
+       "c",
+       "    if result is not None:"
+      ],
+      [
+       "c",
+       "        return result"
+      ],
+      [
+       "c",
+       "    if exit_code is not None and exit_code < 0:"
+      ],
+      [
+       "d",
+       "        return False, TERMINATED_MESSAGE_TEMPLATE.format(signal_num=-exit_code)"
+      ],
+      [
+       "a",
+       "        return False, TERMINATED_MESSAGE_TEMPLATE.format("
+      ],
+      [
+       "a",
+       "            signal_num=-exit_code, memory_limit_scope=SANDBOX_MEMORY_LIMIT_SCOPE"
+      ],
+      [
+       "a",
+       "        )"
+      ],
+      [
+       "c",
+       "    if read_error is not None:"
+      ],
+      [
+       "c",
+       "        return False, UNREADABLE_RESULT_MESSAGE_TEMPLATE.format("
+      ],
+      [
+       "c",
+       "            exit_code=exit_code, error=read_error"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 1
+    },
+    {
      "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
      "lines": [
       [
        "h",
-       "@@ -16,14 +16,19 @@"
+       "@@ -16,14 +16,20 @@"
       ],
       [
        "c",
@@ -2584,6 +2756,10 @@
       [
        "a",
        "    EXITED_WITHOUT_RESULT_MESSAGE_TEMPLATE,"
+      ],
+      [
+       "a",
+       "    LOCAL_MEMORY_LIMIT_SCOPE,"
       ],
       [
        "c",
@@ -2636,59 +2812,11 @@
       [
        "c",
        ""
-      ],
-      [
-       "c",
-       "def _extract_function_name(function_source: str) -> str:"
-      ],
-      [
-       "c",
-       "    \"\"\""
-      ],
-      [
-       "h",
-       "@@ -50,51 +55,82 @@"
-      ],
-      [
-       "c",
-       "    function_name = _extract_function_name(function_source)"
-      ],
-      [
-       "c",
-       "    script = f\"\"\""
-      ],
-      [
-       "c",
-       "import sys, base64, cloudpickle, json, traceback, asyncio, os"
-      ],
-      [
-       "a",
-       "import sys as _uc_sys, base64 as _uc_base64, builtins as _uc_builtins"
-      ],
-      [
-       "a",
-       "import cloudpickle as _uc_cloudpickle, json as _uc_json, traceback as _uc_traceback"
-      ],
-      [
-       "a",
-       "import asyncio as _uc_asyncio"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "try:"
-      ],
-      [
-       "c",
-       "    import resource"
       ]
      ],
      "truncated": true,
-     "additions": 91,
-     "deletions": 44
+     "additions": 101,
+     "deletions": 36
     }
    ],
    "track": {
@@ -2701,7 +2829,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
       "text": "if `setrlimit` prints a warning to stderr, that warning sits between the header and `writer stopped` (and the same for `bad config` on line 255). could we check the header and the function stderr text separately so a `setrlimit` warning doesn't break these? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2711,7 +2839,7 @@
       "maintainer": true,
       "path": null,
       "text": "looks like a solid fix overall. no production code issues, i just left one small comment on the test assertions.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2721,7 +2849,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Changes needed for the `_uc_` regression (inline). The memory-limit wording is a normal item (inline). The other two are nits (inline). Optional, not blocking: - The `TODO(#2359)` sits above `_stderr_tail`, but the decision chain it refers to is at the end of `run_in_sandbox_subprocess`. Moving it there…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2731,7 +2859,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] The `_uc_` prefix moves the collision instead of removing it. A function named `_uc_result`, `_uc_params`, `_uc_main` or `_uc_output` passes on main and fails here. `_uc_result = _uc_result(**_uc_params)` makes `_uc_result` a local of `_uc_main`, so the call raises `UnboundLocalError`, and a function nam…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2741,7 +2869,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] The shared terminated message says the memory limit applies on top of the address space the sandbox process inherits. That holds for `sandbox`, where `executor/local.py` adds the limit to the address space in use. The local runner sets `RLIMIT_AS` to the absolute value, so the interpreter counts against…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2751,20 +2879,20 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
       "text": "[AI Assisted] The `\"\"` expectation makes the `in` check always true. Could we pin the encoding in this test and assert on the replacement character, or keep only the `startswith` check?",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-25T00:29:39Z",
-    "updated_at": "2026-11-25T13:20:13Z",
+    "last_push": "2026-11-25T18:54:20Z",
+    "updated_at": "2026-11-25T18:54:22Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 164
   },
@@ -6130,11 +6258,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 149
   },
@@ -6424,11 +6552,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 148
   },
@@ -18261,16 +18389,6 @@
       "answered": true
      },
      {
-      "kind": "review approved",
-      "who": "shba24",
-      "at": "2026-11-25T03:43:31Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6051543109",
-      "maintainer": true,
-      "path": null,
-      "text": "Reviewed at cbe567ed: no blocking issues found.",
-      "answered": true
-     },
-     {
       "kind": "inline comment",
       "who": "shba24",
       "at": "2026-11-25T03:43:29Z",
@@ -18278,6 +18396,16 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "**Nit (not a blocker):** Overlapping external locations skip the cloud limit checks with only a warning `credentialFor` catches every `BaseException` from the credential lookup and returns Unresolvable. That also covers the INTERNAL error that `ExternalLocationUtils.java:336-339` throws when two external locations cov…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115408",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/service/credential/CloudCredentialVendorTest.java",
+      "text": "**Nit (not a blocker):** Test only checks the second STS request, so the first one is never inspected The second vend added at this line captures a second `AssumeRoleRequest`. The role, policy, signing key and signer assertions that follow all read `requestCaptor.getValue()`, which returns the last capture. The first…",
       "answered": true
      }
     ],
@@ -18288,7 +18416,7 @@
      "shba24"
     ],
     "last_push": "2026-11-25T18:10:05Z",
-    "updated_at": "2026-11-25T18:19:41Z",
+    "updated_at": "2026-11-25T18:40:51Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
