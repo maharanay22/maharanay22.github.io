@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-24T21:52:43Z",
+ "generated_at": "2026-11-25T00:32:36Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,17 +25,17 @@
    "forks": 708,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 639822,
-   "downloads_checked": "2026-11-24",
-   "contributor_rank": 3,
-   "contributor_commits": 66,
-   "contributor_total": 142,
-   "contributors_checked": "2026-11-24",
-   "period_rank": 2,
-   "period_commits": 66,
+   "downloads_month": 661222,
+   "downloads_checked": "2026-11-25",
+   "contributor_rank": 2,
+   "contributor_commits": 71,
+   "contributor_total": 143,
+   "contributors_checked": "2026-11-25",
+   "period_rank": 1,
+   "period_commits": 71,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "delta-io/delta-rs",
@@ -49,21 +49,21 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3373,
+   "stars": 3374,
    "forks": 716,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10431946,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 10626578,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": 8,
    "period_commits": 21,
-   "period_total": 28,
+   "period_total": 29,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "lance-format/lance",
@@ -77,21 +77,21 @@
     "Python",
     "AI data"
    ],
-   "stars": 7386,
+   "stars": 7385,
    "forks": 958,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 3969470,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 3995733,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": 37,
    "period_commits": 9,
    "period_total": 68,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "mlflow/mlflow",
@@ -109,17 +109,17 @@
    "forks": 6653,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 22622825,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 23207524,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 112,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "mindsdb/engine",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "pandas-dev/pandas",
@@ -161,21 +161,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50620,
-   "forks": 20715,
+   "stars": 50621,
+   "forks": 20717,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 701489158,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 710918731,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24",
+   "period_checked": "2026-11-25",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -203,12 +203,12 @@
    "forks": 2228,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24302309,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 24428488,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
    "period_total": 55,
@@ -231,12 +231,12 @@
    "forks": 162,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 37278728,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 37830487,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
@@ -259,17 +259,17 @@
    "forks": 234,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4213613,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 4316006,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63836,
-   "forks": 13537,
+   "stars": 63835,
+   "forks": 13538,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 100197330,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 102115552,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 140,
+   "period_total": 144,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -315,17 +315,17 @@
    "forks": 268,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 492730868,
-   "downloads_checked": "2026-11-24",
+   "downloads_month": 502603032,
+   "downloads_checked": "2026-11-25",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-24",
+   "contributors_checked": "2026-11-25",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-24"
+   "period_checked": "2026-11-25"
   }
  ],
  "items": [
@@ -780,6 +780,16 @@
      {
       "kind": "inline comment",
       "who": "shba24",
+      "at": "2026-11-25T00:12:34Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4688394701",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Blocker:** An extraParams name with `&` overrides sslmode and silently turns TLS off The clash check at line 61 runs hasKey on the literal key, and line 69 then renders the name raw. A key such as `z&sslmode` passes the check, but the driver splits the URL on `&` and reads a second `sslmode` that wins over the chart…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
       "at": "2026-11-24T21:39:21Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914942",
       "maintainer": true,
@@ -826,29 +836,19 @@
       "path": "helm/templates/server/_config.tpl",
       "text": "**Nit (not a blocker):** Unquoted large numbers in extraParams render in exponent form and the driver rejects them Helm loads unquoted YAML numbers as float64 (per my reading of the pinned Helm source; helm is not installed here, so I did not render it), and `urlquery` formats them with `fmt.Sprint`. A value of 1e6 or…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T19:16:05Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4685237248",
-      "maintainer": true,
-      "path": "helm/values.yaml",
-      "text": "**Nit (not a blocker):** Docs say sslrootcert is always set under ssl, but the chart sets it only when a root certificate is configured The comment says that with `ssl.enabled` the chart sets `sslmode` and `sslrootcert` and fails the render when they are repeated in `extraParams`. In `_config.tpl:54-58`, `sslrootcert`…",
-      "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T21:49:37Z",
-    "updated_at": "2026-11-24T21:50:25Z",
+    "updated_at": "2026-11-25T00:12:36Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 171
   },
@@ -1019,6 +1019,16 @@
      {
       "kind": "inline comment",
       "who": "shba24",
+      "at": "2026-11-24T21:57:33Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2350#discussion_r4687102297",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Nit (not a blocker):** GCS key file path is written twice, so the two copies can drift apart again `gcs.jsonKeyFilePath.N` in `_config.tpl` and the `gcs-credentials-N` `mountPath` in `unitycatalog.server.volumeMounts` (`_helpers.tpl:139`) are separate literals. They had drifted at base (`/etc/conf/...` against `/hom…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
       "at": "2026-11-24T19:16:55Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2350#discussion_r4685247060",
       "maintainer": true,
@@ -1032,12 +1042,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-24T20:33:33Z",
-    "updated_at": "2026-11-24T21:46:52Z",
+    "updated_at": "2026-11-25T00:11:20Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 170
   },
@@ -1067,11 +1077,15 @@
      "lines": [
       [
        "h",
-       "@@ -1,5 +1,8 @@"
+       "@@ -1,5 +1,9 @@"
       ],
       [
        "a",
        "import hashlib"
+      ],
+      [
+       "a",
+       "import itertools"
       ],
       [
        "c",
@@ -1103,7 +1117,59 @@
       ],
       [
        "h",
-       "@@ -22,6 +25,31 @@"
+       "@@ -10,18 +14,52 @@"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.client import BaseFunctionClient"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.client_utils import validate_or_set_default_client"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.function_processing_utils import ("
+      ],
+      [
+       "d",
+       "    get_tool_name,"
+      ],
+      [
+       "c",
+       "    param_info_to_pydantic_type,"
+      ],
+      [
+       "c",
+       "    process_function_names,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.pydantic_utils import ("
+      ],
+      [
+       "c",
+       "    PydanticFunctionInputParams,"
+      ],
+      [
+       "c",
+       ")"
+      ],
+      [
+       "c",
+       "from unitycatalog.ai.core.utils.type_utils import UC_TYPE_JSON_MAPPING"
+      ],
+      [
+       "d",
+       "from unitycatalog.ai.core.utils.validation_utils import mlflow_tracing_enabled"
+      ],
+      [
+       "a",
+       "from unitycatalog.ai.core.utils.validation_utils import FullFunctionName, mlflow_tracing_enabled"
       ],
       [
        "c",
@@ -1128,67 +1194,11 @@
       [
        "a",
        "_GEMINI_NAME_MAX_LENGTH = 63"
-      ],
-      [
-       "a",
-       "_GEMINI_NAME_DISALLOWED_CHARACTERS = re.compile(r\"[^a-zA-Z0-9_-]\")"
-      ],
-      [
-       "a",
-       "_DISAMBIGUATION_HASH_LENGTH = 8"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "def _gemini_function_name(function_name: str) -> str:"
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    Returns the name Gemini declares a UC function by: its tool name, with every character that"
-      ],
-      [
-       "a",
-       "    Gemini does not allow replaced by an underscore, cut to its last 63 characters."
-      ],
-      [
-       "a",
-       "    \"\"\""
-      ],
-      [
-       "a",
-       "    name = _GEMINI_NAME_DISALLOWED_CHARACTERS.sub(\"_\", get_tool_name(function_name))"
-      ],
-      [
-       "a",
-       "    return name[-_GEMINI_NAME_MAX_LENGTH:]"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "def _disambiguated_gemini_function_name(name: str, function_name: str) -> str:"
       ]
      ],
      "truncated": true,
-     "additions": 62,
-     "deletions": 4
+     "additions": 80,
+     "deletions": 6
     }
    ],
    "track": {
@@ -1201,7 +1211,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
       "text": "[AI Assisted] Normal: the hash-suffixed names are not checked against the names of tools that keep theirs. With `catalog.s.a__b`, `catalog.s__a.b` and a third function `catalog.s.a__b_29e7ac5e` (the third name is chosen to equal the suffix), the first two become `catalog__s__a__b_<hash>`, and the third stays `catalog_…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1211,7 +1221,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/src/unitycatalog/ai/gemini/toolkit.py",
       "text": "[AI Assisted] Nit: `get_tool_name` already cuts to 64 characters and logs the cut name, and this line cuts again to 63. So the log can name a different string from the declared one (for example a 67-character name logs `ain__...` at 64 and is declared as `in__...` at 63), and an exact 64-character name is cut with no…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1221,7 +1231,7 @@
       "maintainer": true,
       "path": "ai/integrations/gemini/tests/test_gemini_toolkit.py",
       "text": "[AI Assisted] Nit: this hunk is not related to the PR. `main` has `lambda: \"databricks-uc\"` on one line, and this revision wraps it in parentheses. Could it be reverted to the main form?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -1231,7 +1241,7 @@
       "maintainer": true,
       "path": "ai/CHANGELOG.md",
       "text": "[AI Assisted] Nit: \"which the other integrations also use\" is true for the tool name, but the other integrations do not sanitize or cut it, so the same function can differ for names with `@` or longer than 63 characters. Optional wording. Normal: \"each gets a short hash of its full function name appended\" and \"still e…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1241,7 +1251,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review. The round-one blockers are addressed: declared names are capped at 63 characters, `@` is replaced, and the `__` pair gets distinct names (checked by repro, with the 63, 64 and `@` cases). The comments on the two round-one normal items are addressed too. Normal, inline on `_with_unique_names`:…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -1258,13 +1268,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T04:06:19Z",
-    "updated_at": "2026-11-24T21:21:41Z",
-    "conflicts": true,
+    "last_push": "2026-11-24T23:27:26Z",
+    "updated_at": "2026-11-25T00:22:42Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 169
   },
@@ -2062,8 +2072,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
@@ -2184,11 +2194,7 @@
       ],
       [
        "h",
-       "@@ -49,7 +54,7 @@"
-      ],
-      [
-       "c",
-       "    function_source = dedent_code(function_source)"
+       "@@ -50,51 +55,82 @@"
       ],
       [
        "c",
@@ -2199,12 +2205,20 @@
        "    script = f\"\"\""
       ],
       [
-       "d",
+       "c",
        "import sys, base64, cloudpickle, json, traceback, asyncio, os"
       ],
       [
        "a",
-       "import sys, base64, builtins, cloudpickle, json, traceback, asyncio, os"
+       "import sys as _uc_sys, base64 as _uc_base64, builtins as _uc_builtins"
+      ],
+      [
+       "a",
+       "import cloudpickle as _uc_cloudpickle, json as _uc_json, traceback as _uc_traceback"
+      ],
+      [
+       "a",
+       "import asyncio as _uc_asyncio"
       ],
       [
        "c",
@@ -2217,15 +2231,11 @@
       [
        "c",
        "    import resource"
-      ],
-      [
-       "h",
-       "@@ -73,6 +78,7 @@"
       ]
      ],
      "truncated": true,
-     "additions": 72,
-     "deletions": 28
+     "additions": 91,
+     "deletions": 44
     }
    ],
    "track": {
@@ -2238,7 +2248,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Re-review at c4aec6fb. The earlier items are addressed: the `open` shadowing, the `RecursionError` escape, the CHANGELOG merge with main, the locale-dependent test, the shared-helper follow-up, and the stderr tail on the unreadable branch. One blocker remains (inline). In the description: it says every n…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2248,7 +2258,7 @@
       "maintainer": true,
       "path": "ai/core/src/unitycatalog/ai/core/executor/local_subprocess.py",
       "text": "[AI Assisted] The runner's `main()` now has locals `result_path`, `output` and `f`, and the generated script imports `builtins` at module level. A UC function with one of those names is shadowed inside `main()`. A function named `f` or `output` raises `UnboundLocalError`, a function named `result_path` raises `TypeErr…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2258,7 +2268,7 @@
       "maintainer": true,
       "path": "ai/core/tests/core/test_local_subprocess_executor.py",
       "text": "[AI Assisted] This test only covers `open`, and it passes on main, so it guards the intermediate state rather than the regression. Folding it into the parametrized test from the comment on the runner would cover `f`, `output`, `result_path` and `builtins` as well.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2291,17 +2301,17 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-24T03:10:56Z",
-    "updated_at": "2026-11-24T21:26:13Z",
+    "last_push": "2026-11-25T00:29:39Z",
+    "updated_at": "2026-11-25T00:29:42Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 164
   },
@@ -3124,6 +3134,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:02Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2340#issuecomment-7145515511",
+      "maintainer": true,
+      "path": null,
+      "text": "@maharanay22 could you fix the merge conflict?",
+      "answered": false
+     },
+     {
       "kind": "review commented",
       "who": "timothyw553",
       "at": "2026-11-24T21:44:54Z",
@@ -3158,12 +3178,17 @@
     "checks": "passing",
     "review": "approved",
     "approved_by": [
+     "timothyw553",
      "yili-db"
     ],
     "last_push": "2026-11-23T14:43:20Z",
-    "updated_at": "2026-11-24T21:44:54Z",
+    "updated_at": "2026-11-24T21:53:03Z",
     "conflicts": true,
-    "last_comment": null,
+    "last_comment": {
+     "who": "timothyw553",
+     "at": "2026-11-24T21:53:02Z",
+     "maintainer": true
+    },
     "state": "action",
     "waiting_on": "you",
     "next": "timothyw553 left review comments. Reply or update the PR"
@@ -3781,7 +3806,7 @@
      "yili-db"
     ],
     "last_push": "2026-11-24T17:11:31Z",
-    "updated_at": "2026-11-24T19:32:33Z",
+    "updated_at": "2026-11-24T23:21:32Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6504,6 +6529,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-24T23:09:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2324#pullrequestreview-6048859858",
+      "maintainer": true,
+      "path": null,
+      "text": "overall LGTM, nothing production-level blocking. i left two small comments on clarifying the equal-value trade-off and the direct `UCProxy` test scope.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T23:09:09Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2324#discussion_r4687791582",
+      "maintainer": true,
+      "path": "connectors/spark/src/main/scala/io/unitycatalog/spark/UCSingleCatalog.scala",
+      "text": "nit: the comment presents equal values as proof it's a copy, whereas spark passes the exact same properties for `COMMENT '#' OPTIONS (comment '#')` and we drop that description too. could we clarify the comment and add that explicit equal-value case to `testCsvCommentOptionSkipsCommentLines`? [code]",
+      "answered": false
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-20T21:42:24Z",
@@ -6519,7 +6564,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-20T15:55:22Z",
-    "updated_at": "2026-11-20T21:42:24Z",
+    "updated_at": "2026-11-24T23:09:09Z",
     "conflicts": false,
     "last_comment": {
      "who": "yili-db",
@@ -6528,7 +6573,7 @@
     },
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 145
   },
@@ -7263,6 +7308,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-24T22:28:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#pullrequestreview-6048406217",
+      "maintainer": true,
+      "path": null,
+      "text": "core fix and new tests look good, overall LGTM. just one small nit on the DSPy explanation in the changelog.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T22:28:39Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4687405805",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "nit: to my understanding DSPy does build a `required` list with every argument, and it's just unchanged because it doesn't use the shared model builder. should we update this sentence? [code]",
+      "answered": true
+     },
+     {
       "kind": "comment",
       "who": "yili-db",
       "at": "2026-11-22T10:53:45Z",
@@ -7270,7 +7335,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] I merged main and resolved the `ai/CHANGELOG.md` conflict to save a round; no code changes.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review approved",
@@ -7301,45 +7366,26 @@
       "path": "ai/core/src/unitycatalog/ai/core/utils/function_processing_utils.py",
       "text": "this shared change affects CrewAI and LlamaIndex too, could we add regression tests for both? for CrewAI we can call `to_structured_tool().invoke({\"b\": 1})` and assert it raises `ValueError` for missing `a` without calling `execute_function`, and for LlamaIndex check `tool.metadata.fn_schema.model_json_schema()[\"requi…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T09:15:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594782",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] Nit: the entry opens with \"Fixed tool schemas marking every function parameter as optional\". OpenAI, LiteLLM, DSPy and Gemini did not do that, so the claim is broader than the fix. Could it name the integrations, for example: \"Fixed Anthropic, LangChain, LlamaIndex, CrewAI and AutoGen tool schemas markin…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-20T09:15:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2321#discussion_r4640594793",
-      "maintainer": true,
-      "path": "ai/CHANGELOG.md",
-      "text": "[AI Assisted] Normal, wording: \"LangChain, CrewAI and AutoGen tools now reject a call that leaves out such an argument ... instead of sending `None` for it to the function.\" Before this change the client already rejected the `None`, both the OSS and the Databricks client reject `None` for any parameter without `DEFAUL…",
-      "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
+     "timothyw553",
      "yili-db"
     ],
-    "last_push": "2026-11-22T10:53:23Z",
-    "updated_at": "2026-11-22T23:17:12Z",
-    "conflicts": true,
+    "last_push": "2026-11-24T23:39:57Z",
+    "updated_at": "2026-11-24T23:50:18Z",
+    "conflicts": false,
     "last_comment": {
      "who": "yili-db",
      "at": "2026-11-22T10:53:45Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "yili-db commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by timothyw553, yili-db. Waiting to be merged"
    },
    "id": 142
   },
@@ -17690,64 +17736,64 @@
    "track": {
     "feedback": [
      {
-      "kind": "review approved",
-      "who": "shba24",
-      "at": "2026-11-23T03:17:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6016182741",
+      "kind": "review commented",
+      "who": "yili-db",
+      "at": "2026-11-24T23:23:01Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6048993061",
       "maintainer": true,
       "path": null,
-      "text": "Reviewed at f4be8f54: no blocking issues found.",
-      "answered": true
+      "text": "[AI Assisted] Comment at f4be8f54. Replies in the inline threads cover the items that overlap timothyw553's comments: the force-deleted credential in the update path, the test that bypasses the production lookup, and the docs limits. The s3:/// point is a pushback in its thread. Normal items: 1. Force-deleted credenti…",
+      "answered": false
      },
      {
       "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-22T18:38:49Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4659420211",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/VolumeRepository.java",
-      "text": "**Blocker:** External volume location is checked as if it could be a single object, so a location with no room for children is accepted The external volume path calls validateLocation, which uses Use.REQUESTED and Extent.OBJECT_OR_PREFIX. That extent exists because an external table can be a single file (StorageLimits…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-22T18:38:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4659420133",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
-      "text": "**Blocker:** Azure locations are checked against the flat-namespace segment limit, so a hierarchical-namespace account accepts locations that cannot be used The comment at lines 25-29 says hierarchical-namespace accounts allow 63 segments, counting the account and container. azurePathSegmentViolation then always compa…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T22:41:24Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4655364868",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
-      "text": "**Blocker:** Two-character child allowance rejects an external location that names a single object The length check adds 2 to the UTF-8 key length of every location, so it always leaves room for a child object. For an external table or volume that points at one file, no child is ever written, so the allowance can reje…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-21T22:41:23Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4655364800",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057295",
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "**Nit (not a blocker):** Validator in the credential package depends on the Hibernate Session StorageLocationValidator lives in service.credential, but its public methods take an org.hibernate.Session, for example validateLocation(Session, NormalizedURL, int). Only persist repositories call it, from inside their trans…",
-      "answered": true
+      "text": "what happens if someone passes `s3:///` or `gs:///` as a storage root? to my understanding `location.toUri()` throws `IllegalArgumentException` here and turns catalog or schema creation into an HTTP 500 instead of 400. could we catch that and throw `INVALID_ARGUMENT`, plus add tests for those malformed roots and a val…",
+      "answered": false
      },
      {
-      "kind": "review changes requested",
-      "who": "shba24",
-      "at": "2026-11-21T19:49:48Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6007769304",
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057303",
       "maintainer": true,
-      "path": null,
-      "text": "I forgot there are still open review comments. Can you reply to those and resolve threads if you have already done the changes for this and refer to the commit.",
-      "answered": true
+      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
+      "text": "if the assigned credential was force-deleted, `current` is null here. passing `Optional.empty()` tells the validator to fall back to bucket config, even though real vending fails on the missing credential and never uses that bucket role (e.g. an 82 `*` URL hits a policy-length error while 82 `a`s passes). should we pr…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057309",
+      "maintainer": true,
+      "path": "docs/server/configuration.md",
+      "text": "catalog and schema roots have to leave room for generated child paths, so the effective limit is 1,942 and 1,943 UTF-8 bytes rather than 2,048 characters. also on line 170, GCS and Azure object-name checks run regardless of bucket credential config while S3 and GCS access-boundary checks depend on it. could we separat…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057311",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/persist/utils/StorageLocationValidatorTest.java",
+      "text": "these unit tests pass the credential in directly, so they'd still pass if the production lookup stopped supplying the covering IAM-role credential. could we extend a server test to create a credential and external location and verify a volume under it (short path passes, policy-expanding path fails, plus the force-del…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-24T21:53:14Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057318",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "nit: `GcpCredentialVendor` rejects a supplied storage credential with `UNIMPLEMENTED` right now, so this comment about GCS building credentials from a storage credential is a bit misleading.",
+      "answered": false
      }
     ],
     "stage": 4,
@@ -17757,16 +17803,16 @@
      "shba24"
     ],
     "last_push": "2026-11-22T19:46:13Z",
-    "updated_at": "2026-11-23T03:17:14Z",
+    "updated_at": "2026-11-24T23:23:01Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
      "at": "2026-11-21T07:31:01Z",
      "maintainer": true
     },
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by shba24. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "yili-db left review comments. Reply or update the PR"
    },
    "id": 96
   },
@@ -34948,11 +34994,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
