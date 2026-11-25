@@ -13,11 +13,11 @@
    "VANDRANKI"
   ],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
@@ -672,11 +672,11 @@
  "https://github.com/mlflow/mlflow/pull/27772": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/mlflow/mlflow/pull/27773": {
   "approved_by": [],
@@ -1159,14 +1159,15 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2234": {
   "approved_by": [
-   "shba24"
+   "shba24",
+   "yili-db"
   ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": "shba24@2026-11-21T07:31:01Z",
   "last_comment_who": "shba24",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2237": {
   "approved_by": [
@@ -1495,8 +1496,8 @@
   ],
   "checks": "passing",
   "conflicts": true,
-  "last_comment": "yili-db@2026-11-22T10:53:45Z",
-  "last_comment_who": "yili-db",
+  "last_comment": "timothyw553@2026-11-25T23:06:10Z",
+  "last_comment_who": "timothyw553",
   "status": "review",
   "waiting_on": "you"
  },
@@ -1523,13 +1524,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2324": {
-  "approved_by": [],
+  "approved_by": [
+   "timothyw553"
+  ],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": "yili-db@2026-11-20T21:42:24Z",
   "last_comment_who": "yili-db",
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2325": {
   "approved_by": [
@@ -1577,25 +1580,24 @@
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2338": {
   "approved_by": [
+   "tdas",
    "yili-db"
   ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2339": {
-  "approved_by": [
-   "yili-db"
-  ],
+  "approved_by": [],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2340": {
   "approved_by": [
@@ -1605,8 +1607,8 @@
   "conflicts": false,
   "last_comment": "timothyw553@2026-11-24T21:53:02Z",
   "last_comment_who": "timothyw553",
-  "status": "review",
-  "waiting_on": "you"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2341": {
   "approved_by": [
@@ -1628,8 +1630,8 @@
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2343": {
   "approved_by": [
@@ -1649,21 +1651,23 @@
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2345": {
   "approved_by": [
    "yili-db"
   ],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2346": {
-  "approved_by": [],
+  "approved_by": [
+   "yili-db"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
@@ -1705,7 +1709,23 @@
   "waiting_on": "nobody"
  },
  "https://github.com/unitycatalog/unitycatalog/pull/2350": {
-  "approved_by": [],
+  "approved_by": [
+   "shba24",
+   "timothyw553",
+   "yili-db"
+  ],
+  "checks": "passing",
+  "conflicts": false,
+  "last_comment": null,
+  "last_comment_who": null,
+  "status": "merged",
+  "waiting_on": "nobody"
+ },
+ "https://github.com/unitycatalog/unitycatalog/pull/2351": {
+  "approved_by": [
+   "shba24",
+   "timothyw553"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
@@ -1713,10 +1733,10 @@
   "status": "review",
   "waiting_on": "maintainers"
  },
- "https://github.com/unitycatalog/unitycatalog/pull/2351": {
+ "https://github.com/unitycatalog/unitycatalog/pull/2378": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
