@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T02:59:54Z",
+ "generated_at": "2026-11-25T04:12:25Z",
  "stages": [
   "reported",
   "fix sent",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3374,
+   "stars": 3375,
    "forks": 716,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -106,7 +106,7 @@
     "GenAI Eval"
    ],
    "stars": 28954,
-   "forks": 6653,
+   "forks": 6654,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23207524,
@@ -161,7 +161,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50624,
+   "stars": 50625,
    "forks": 20716,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63837,
-   "forks": 13541,
+   "stars": 63845,
+   "forks": 13542,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 102115552,
@@ -780,6 +780,16 @@
      {
       "kind": "inline comment",
       "who": "shba24",
+      "at": "2026-11-25T03:45:37Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4690129378",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Blocker:** An extraParams name with a backslash passes the guard, then `Properties.load` turns it into other URL parameters The guard rejects `&` and `=` in a name, but the name is then written unescaped into `hibernate.properties`, and the server reads that file with `Properties.load`. `Properties.load` decodes `\\u…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
       "at": "2026-11-25T00:12:34Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4688394701",
       "maintainer": true,
@@ -826,29 +836,19 @@
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** Encoding render test would still pass if `&` were left unescaped The PostgreSQL render test covers a space and `+`, plus `/` in the certificate path, but no value contains `&`, `=` or `%`. An encoder that escapes only those three characters would pass, yet a value containing `&` would split in…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-24T21:39:17Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4686914235",
-      "maintainer": true,
-      "path": "helm/templates/server/_config.tpl",
-      "text": "**Nit (not a blocker):** Unquoted large numbers in extraParams render in exponent form and the driver rejects them Helm loads unquoted YAML numbers as float64 (per my reading of the pinned Helm source; helm is not installed here, so I did not render it), and `urlquery` formats them with `fmt.Sprint`. A value of 1e6 or…",
-      "answered": true
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-25T02:40:45Z",
-    "updated_at": "2026-11-25T02:40:59Z",
+    "last_push": "2026-11-25T04:08:40Z",
+    "updated_at": "2026-11-25T04:10:35Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 171
   },
@@ -878,7 +878,7 @@
      "lines": [
       [
        "h",
-       "@@ -250,6 +250,21 @@"
+       "@@ -265,6 +265,21 @@"
       ],
       [
        "c",
@@ -1138,16 +1138,16 @@
      }
     ],
     "stage": 3,
-    "checks": "failing",
+    "checks": "running",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-25T02:43:01Z",
-    "updated_at": "2026-11-25T02:43:13Z",
+    "last_push": "2026-11-25T03:12:21Z",
+    "updated_at": "2026-11-25T03:13:16Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
    },
    "id": 170
   },
@@ -3636,14 +3636,14 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-25T02:51:24Z",
-    "updated_at": "2026-11-25T02:51:50Z",
+    "updated_at": "2026-11-25T03:06:45Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6663,8 +6663,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T02:13:56Z",
@@ -6676,8 +6676,8 @@
      "maintainer": true
     },
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 145
   },
@@ -7472,8 +7472,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "timothyw553",
@@ -17840,6 +17840,56 @@
    "track": {
     "feedback": [
      {
+      "kind": "review approved",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:31Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6051543109",
+      "maintainer": true,
+      "path": null,
+      "text": "Reviewed at cbe567ed: no blocking issues found.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:29Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115520",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "**Nit (not a blocker):** Overlapping external locations skip the cloud limit checks with only a warning `credentialFor` catches every `BaseException` from the credential lookup and returns Unresolvable. That also covers the INTERNAL error that `ExternalLocationUtils.java:336-339` throws when two external locations cov…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:28Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115408",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/service/credential/CloudCredentialVendorTest.java",
+      "text": "**Nit (not a blocker):** Test only checks the second STS request, so the first one is never inspected The second vend added at this line captures a second `AssumeRoleRequest`. The role, policy, signing key and signer assertions that follow all read `requestCaptor.getValue()`, which returns the last capture. The first…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:27Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115308",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
+      "text": "**Nit (not a blocker):** Which schemes need the storage credential is copied into the persistence layer `CREDENTIAL_SCHEMES` records which vendors' `limitViolation` reads the credential. Both `credentialFor` (about line 285) and `validateExternalLocationUrl` (about line 128) use it. Nothing makes a vendor change updat…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-25T03:43:26Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115234",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/service/credential/aws/AwsCredentialVendor.java",
+      "text": "**Nit (not a blocker):** Create-time limit check re-derives which generator the vend would use `isOnAwsS3` and `awsStsRole` work out for themselves whether a vend would reach the AWS STS path, which role and region it would use, and whether a session token skips STS. `vendAwsCredentials` and `createPerBucketCredential…",
+      "answered": true
+     },
+     {
       "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-24T23:23:01Z",
@@ -17847,56 +17897,6 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Comment at f4be8f54. Replies in the inline threads cover the items that overlap timothyw553's comments: the force-deleted credential in the update path, the test that bypasses the production lookup, and the docs limits. The s3:/// point is a pushback in its thread. Normal items: 1. Force-deleted credenti…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-24T21:53:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057295",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "what happens if someone passes `s3:///` or `gs:///` as a storage root? to my understanding `location.toUri()` throws `IllegalArgumentException` here and turns catalog or schema creation into an HTTP 500 instead of 400. could we catch that and throw `INVALID_ARGUMENT`, plus add tests for those malformed roots and a val…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-24T21:53:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057303",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
-      "text": "if the assigned credential was force-deleted, `current` is null here. passing `Optional.empty()` tells the validator to fall back to bucket config, even though real vending fails on the missing credential and never uses that bucket role (e.g. an 82 `*` URL hits a policy-length error while 82 `a`s passes). should we pr…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-24T21:53:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057309",
-      "maintainer": true,
-      "path": "docs/server/configuration.md",
-      "text": "catalog and schema roots have to leave room for generated child paths, so the effective limit is 1,942 and 1,943 UTF-8 bytes rather than 2,048 characters. also on line 170, GCS and Azure object-name checks run regardless of bucket credential config while S3 and GCS access-boundary checks depend on it. could we separat…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-24T21:53:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057311",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/persist/utils/StorageLocationValidatorTest.java",
-      "text": "these unit tests pass the credential in directly, so they'd still pass if the production lookup stopped supplying the covering IAM-role credential. could we extend a server test to create a credential and external location and verify a volume under it (short path passes, policy-expanding path fails, plus the force-del…",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-24T21:53:14Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4687057318",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "nit: `GcpCredentialVendor` rejects a supplied storage credential with `UNIMPLEMENTED` right now, so this comment about GCS building credentials from a storage credential is a bit misleading.",
       "answered": true
      }
     ],
@@ -17906,8 +17906,8 @@
     "approved_by": [
      "shba24"
     ],
-    "last_push": "2026-11-25T02:55:26Z",
-    "updated_at": "2026-11-25T02:57:55Z",
+    "last_push": "2026-11-25T04:08:29Z",
+    "updated_at": "2026-11-25T04:08:31Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
@@ -35098,11 +35098,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
