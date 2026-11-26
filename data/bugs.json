@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-25T23:35:29Z",
+ "generated_at": "2026-11-26T00:55:13Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,17 +25,17 @@
    "forks": 709,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 661222,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 675670,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": 2,
-   "contributor_commits": 71,
-   "contributor_total": 143,
-   "contributors_checked": "2026-11-25",
+   "contributor_commits": 79,
+   "contributor_total": 144,
+   "contributors_checked": "2026-11-26",
    "period_rank": 1,
-   "period_commits": 71,
+   "period_commits": 79,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "delta-io/delta-rs",
@@ -53,17 +53,17 @@
    "forks": 716,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10626578,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 10848443,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": 8,
    "period_commits": 21,
    "period_total": 29,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "lance-format/lance",
@@ -77,16 +77,16 @@
     "Python",
     "AI data"
    ],
-   "stars": 7387,
+   "stars": 7388,
    "forks": 959,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 3995733,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 4007141,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": 37,
    "period_commits": 9,
    "period_total": 68,
@@ -105,21 +105,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28968,
-   "forks": 6658,
+   "stars": 28971,
+   "forks": 6659,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 23207524,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 23727174,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": 40,
    "period_commits": 4,
-   "period_total": 112,
+   "period_total": 114,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "mindsdb/engine",
@@ -142,12 +142,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "pandas-dev/pandas",
@@ -161,21 +161,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50638,
+   "stars": 50641,
    "forks": 20720,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 710918731,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 719517331,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25",
+   "period_checked": "2026-11-26",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -203,12 +203,12 @@
    "forks": 2229,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24428488,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 24548285,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 56,
@@ -231,17 +231,17 @@
    "forks": 162,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 37830487,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 38410622,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -259,17 +259,17 @@
    "forks": 234,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4316006,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 4391487,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63910,
-   "forks": 13569,
+   "stars": 63915,
+   "forks": 13571,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 102115552,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 104106902,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": null,
    "period_commits": null,
    "period_total": 144,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -312,23 +312,1416 @@
     "CLI"
    ],
    "stars": 1505,
-   "forks": 269,
+   "forks": 270,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 502603032,
-   "downloads_checked": "2026-11-25",
+   "downloads_month": 512741778,
+   "downloads_checked": "2026-11-26",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-25",
+   "contributors_checked": "2026-11-26",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-25"
+   "period_checked": "2026-11-26"
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Validate a whole permissions update before writing any grant",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:25Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2387,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2387"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/PermissionService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -10,12 +10,13 @@"
+      ],
+      [
+       "c",
+       "import static io.unitycatalog.server.model.SecurableType.SCHEMA;"
+      ],
+      [
+       "c",
+       "import static io.unitycatalog.server.model.SecurableType.TABLE;"
+      ],
+      [
+       "c",
+       "import static io.unitycatalog.server.model.SecurableType.VOLUME;"
+      ],
+      [
+       "a",
+       "import static io.unitycatalog.server.utils.ValidationUtils.checkArgument;"
+      ],
+      [
+       "a",
+       "import static io.unitycatalog.server.utils.ValidationUtils.checkNotNull;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "import com.linecorp.armeria.common.HttpResponse;"
+      ],
+      [
+       "c",
+       "import com.linecorp.armeria.server.annotation.Get;"
+      ],
+      [
+       "c",
+       "import com.linecorp.armeria.server.annotation.Param;"
+      ],
+      [
+       "c",
+       "import com.linecorp.armeria.server.annotation.Patch;"
+      ],
+      [
+       "d",
+       "import io.unitycatalog.control.model.User;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.auth.AuthorizeExpressions;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.auth.UnityCatalogAuthorizer;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.auth.annotation.AuthorizeExpression;"
+      ],
+      [
+       "h",
+       "@@ -341,14 +342,24 @@"
+      ],
+      [
+       "c",
+       "  private HttpResponse updateAuthorization("
+      ],
+      [
+       "c",
+       "      SecurableType securableType, String name, UpdatePermissions request) {"
+      ],
+      [
+       "c",
+       "    UUID resourceId = getResourceId(securableType, name);"
+      ],
+      [
+       "d",
+       "    List<PermissionsChange> changes = request.getChanges();"
+      ],
+      [
+       "a",
+       "    List<PermissionsChange> changes = validateChanges(request);"
+      ],
+      [
+       "c",
+       "    validateAddedPrivileges(securableType, changes, strictPrivilegeChecks);"
+      ],
+      [
+       "a",
+       "    // Every principal is resolved before the first grant is written, so a rejected request changes"
+      ],
+      [
+       "a",
+       "    // nothing."
+      ],
+      [
+       "a",
+       "    Map<String, UUID> principalIdsByEmail ="
+      ],
+      [
+       "a",
+       "        changes.stream()"
+      ],
+      [
+       "a",
+       "            .map(PermissionsChange::getPrincipal)"
+      ],
+      [
+       "a",
+       "            .distinct()"
+      ],
+      [
+       "a",
+       "            .collect("
+      ],
+      [
+       "a",
+       "                Collectors.toMap("
+      ]
+     ],
+     "truncated": true,
+     "additions": 40,
+     "deletions": 5
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T00:38:14Z",
+    "updated_at": "2026-11-26T00:52:26Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 185
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Apply the principal filter when getting permissions",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:21Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2386,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2386"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "api/all.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -1190,7 +1190,7 @@"
+      ],
+      [
+       "c",
+       "        - name: principal"
+      ],
+      [
+       "c",
+       "          in: query"
+      ],
+      [
+       "c",
+       "          description: |"
+      ],
+      [
+       "d",
+       "            If provided, only the permissions for the specified principal (user or group) are returned."
+      ],
+      [
+       "a",
+       "            If provided and not empty, only the permissions for the specified principal (user or group) are returned."
+      ],
+      [
+       "c",
+       "          schema:"
+      ],
+      [
+       "c",
+       "            type: string"
+      ],
+      [
+       "c",
+       "          required: false"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 1
+    },
+    {
+     "path": "examples/cli/src/main/java/io/unitycatalog/cli/utils/CliParams.java",
+     "lines": [
+      [
+       "h",
+       "@@ -68,7 +68,10 @@"
+      ],
+      [
+       "c",
+       "  VERSION(\"version\", \"Version number of a registered model entity.\", \"version\"),"
+      ],
+      [
+       "c",
+       "  FORCE(\"force\", \"To force the operation even if it would otherwise be refused\", \"force\"),"
+      ],
+      [
+       "c",
+       "  SECURABLE_TYPE(\"securable_type\", \"The type of the securable\", \"securable_type\"),"
+      ],
+      [
+       "d",
+       "  PRINCIPAL(\"principal\", \"The target principal of the permission change\", \"principal\"),"
+      ],
+      [
+       "a",
+       "  PRINCIPAL("
+      ],
+      [
+       "a",
+       "      \"principal\","
+      ],
+      [
+       "a",
+       "      \"The principal (a user's email) whose permissions are changed or listed\","
+      ],
+      [
+       "a",
+       "      \"principal\"),"
+      ],
+      [
+       "c",
+       "  PRIVILEGE(\"privilege\", \"The privilege to grant or revoke\", \"privilege\"),"
+      ],
+      [
+       "c",
+       "  ID(\"id\", \"The unique id of the user\", \"id\"),"
+      ],
+      [
+       "c",
+       "  EXTERNAL_ID(\"external_id\", \"The identity provider's id for the user\", \"externalId\"),"
+      ]
+     ],
+     "truncated": false,
+     "additions": 4,
+     "deletions": 1
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/persist/UserRepository.java",
+     "lines": [
+      [
+       "h",
+       "@@ -140,6 +140,20 @@"
+      ],
+      [
+       "c",
+       "        /* readOnly= */ true);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Looks up a user's id by email, matched as {@link #getUserByEmail(String)} matches it."
+      ],
+      [
+       "a",
+       "   *"
+      ],
+      [
+       "a",
+       "   * @param email the email to look up"
+      ],
+      [
+       "a",
+       "   * @return the user's id, or empty if no user has that email"
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  public Optional<UUID> findUserIdByEmail(String email) {"
+      ],
+      [
+       "a",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "a",
+       "        sessionFactory,"
+      ],
+      [
+       "a",
+       "        session -> Optional.ofNullable(getUserByEmail(session, email)).map(UserDAO::getId),"
+      ],
+      [
+       "a",
+       "        \"Failed to find user by email\","
+      ],
+      [
+       "a",
+       "        /* readOnly= */ true);"
+      ],
+      [
+       "a",
+       "  }"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  public User getUserByExternalId(String externalId) {"
+      ],
+      [
+       "c",
+       "    return TransactionManager.executeWithTransaction("
+      ],
+      [
+       "c",
+       "        sessionFactory,"
+      ]
+     ],
+     "truncated": false,
+     "additions": 14,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/PermissionService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -86,59 +86,69 @@"
+      ],
+      [
+       "c",
+       "  // TODO: Refactor these endpoints to use a common method with dynamic resource id lookup"
+      ],
+      [
+       "c",
+       "  @Get(\"/metastore/{name}\")"
+      ],
+      [
+       "c",
+       "  @AuthorizeExpression(AuthorizeExpressions.GET_RESOURCE_AUTHORIZATION)"
+      ],
+      [
+       "d",
+       "  public HttpResponse getMetastoreAuthorization(@Param(\"name\") String name) {"
+      ],
+      [
+       "d",
+       "    return getAuthorization(METASTORE, name);"
+      ],
+      [
+       "a",
+       "  public HttpResponse getMetastoreAuthorization("
+      ],
+      [
+       "a",
+       "      @Param(\"name\") String name, @Param(\"principal\") Optional<String> principal) {"
+      ],
+      [
+       "a",
+       "    return getAuthorization(METASTORE, name, principal);"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "  @Get(\"/catalog/{name}\")"
+      ],
+      [
+       "c",
+       "  @AuthorizeExpression(AuthorizeExpressions.GET_RESOURCE_AUTHORIZATION)"
+      ],
+      [
+       "d",
+       "  public HttpResponse getCatalogAuthorization(@Param(\"name\") String name) {"
+      ],
+      [
+       "d",
+       "    return getAuthorization(CATALOG, name);"
+      ],
+      [
+       "a",
+       "  public HttpResponse getCatalogAuthorization("
+      ],
+      [
+       "a",
+       "      @Param(\"name\") String name, @Param(\"principal\") Optional<String> principal) {"
+      ],
+      [
+       "a",
+       "    return getAuthorization(CATALOG, name, principal);"
+      ]
+     ],
+     "truncated": true,
+     "additions": 36,
+     "deletions": 19
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T00:39:06Z",
+    "updated_at": "2026-11-26T00:52:22Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 184
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Reuse a cached credential only while half its received lifetime remains",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:17Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2385,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2385"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/UCCredentialHadoopConfs.java",
+     "lines": [
+      [
+       "h",
+       "@@ -125,7 +125,8 @@"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    /**"
+      ],
+      [
+       "c",
+       "     * Whether to enable automatic credential renewal (default {@code true}). When enabled,"
+      ],
+      [
+       "d",
+       "     * configures a vended-token provider that refreshes credentials before they expire."
+      ],
+      [
+       "a",
+       "     * configures a vended-token provider that refreshes credentials before they expire. When"
+      ],
+      [
+       "a",
+       "     * disabled, the vended credential is set as fixed keys that are never refreshed."
+      ],
+      [
+       "c",
+       "     */"
+      ],
+      [
+       "c",
+       "    public Builder enableCredentialRenewal(boolean enabled) {"
+      ],
+      [
+       "c",
+       "      this.credentialRenewalEnabled = enabled;"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    },
+    {
+     "path": "connectors/hadoop/src/main/java/io/unitycatalog/hadoop/internal/CredPropsUtil.java",
+     "lines": [
+      [
+       "h",
+       "@@ -55,6 +55,13 @@"
+      ],
+      [
+       "c",
+       "  static final CredentialCache<CredId, List<GenericCredential>> initialCredCache ="
+      ],
+      [
+       "c",
+       "      CredentialCache.createInitialCredentialCache();"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * The least part of the lifetime a credential had left when received that must remain for {@link"
+      ],
+      [
+       "a",
+       "   * #initialCredCache} to hand it to another load. Without renewal the credential is written as"
+      ],
+      [
+       "a",
+       "   * fixed keys that nothing refreshes, so this is the least a query starts with."
+      ],
+      [
+       "a",
+       "   */"
+      ],
+      [
+       "a",
+       "  private static final double MIN_REMAINING_LIFETIME_FRACTION = 0.5;"
+      ],
+      [
+       "a",
+       ""
+      ],
+      [
+       "c",
+       "  // Keys used to build the credential-context id (see #credContextId)."
+      ],
+      [
+       "c",
+       "  private static final String CRED_CONTEXT_CATALOG_URI_KEY = \"catalogUri\";"
+      ],
+      [
+       "c",
+       "  private static final String CRED_CONTEXT_SCHEME_KEY = \"scheme\";"
+      ],
+      [
+       "h",
+       "@@ -274,16 +281,42 @@"
+      ],
+      [
+       "c",
+       "          Clock clock = ClockUtil.resolveClock(hadoopConf);"
+      ],
+      [
+       "c",
+       "          List<GenericCredential> credentials ="
+      ],
+      [
+       "c",
+       "              createCredentials(apiClient, catalogUri, tokenProvider, appVersions, credId);"
+      ],
+      [
+       "a",
+       "          long receivedAtMillis = clock.now().toEpochMilli();"
+      ],
+      [
+       "c",
+       "          return new RenewableCredential<>(credentials) {"
+      ],
+      [
+       "c",
+       "            @Override"
+      ],
+      [
+       "c",
+       "            public boolean readyToRenew() {"
+      ],
+      [
+       "c",
+       "              return credentials.stream()"
+      ],
+      [
+       "d",
+       "                  .anyMatch(c -> c.readyToRenew(clock, renewalLeadTimeMillis));"
+      ],
+      [
+       "a",
+       "                  .anyMatch("
+      ],
+      [
+       "a",
+       "                      c ->"
+      ],
+      [
+       "a",
+       "                          c.readyToRenew("
+      ],
+      [
+       "a",
+       "                              clock,"
+      ],
+      [
+       "a",
+       "                              reuseLeadTimeMillis(c, receivedAtMillis, renewalLeadTimeMillis)));"
+      ],
+      [
+       "c",
+       "            }"
+      ]
+     ],
+     "truncated": true,
+     "additions": 34,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T00:27:46Z",
+    "updated_at": "2026-11-26T00:52:18Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 183
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Answer an Iceberg table commit that Iceberg rejects with 409 or 400 instead of 500",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:13Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2384,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2384"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -78,9 +78,11 @@"
+      ],
+      [
+       "c",
+       "import java.util.Optional;"
+      ],
+      [
+       "c",
+       "import java.util.Set;"
+      ],
+      [
+       "c",
+       "import java.util.UUID;"
+      ],
+      [
+       "a",
+       "import java.util.function.Supplier;"
+      ],
+      [
+       "c",
+       "import java.util.stream.Stream;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.MetadataUpdate;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.PartitionSpec;"
+      ],
+      [
+       "a",
+       "import org.apache.iceberg.RetryableValidationException;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.SortOrder;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.TableMetadata;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.UpdateRequirement;"
+      ],
+      [
+       "h",
+       "@@ -92,6 +94,7 @@"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.exceptions.NamespaceNotEmptyException;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.exceptions.NoSuchTableException;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.exceptions.NoSuchViewException;"
+      ],
+      [
+       "a",
+       "import org.apache.iceberg.exceptions.ValidationException;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.rest.Endpoint;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.rest.RESTCatalogProperties;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.rest.RESTCatalogProperties.SnapshotMode;"
+      ],
+      [
+       "h",
+       "@@ -536,6 +539,16 @@"
+      ],
+      [
+       "c",
+       "          CreateTableRequest request) {"
+      ],
+      [
+       "c",
+       "    serverProperties.checkIcebergTableEnabled();"
+      ],
+      [
+       "c",
+       "    request.validate();"
+      ],
+      [
+       "a",
+       "    Map<String, String> properties = request.properties() == null ? Map.of() : request.properties();"
+      ],
+      [
+       "a",
+       "    PartitionSpec spec = request.spec() == null ? PartitionSpec.unpartitioned() : request.spec();"
+      ],
+      [
+       "a",
+       "    SortOrder writeOrder ="
+      ],
+      [
+       "a",
+       "        request.writeOrder() == null ? SortOrder.unsorted() : request.writeOrder();"
+      ],
+      [
+       "a",
+       "    // Built before the location is known so that metadata Iceberg rejects leaves no staging row."
+      ],
+      [
+       "a",
+       "    TableMetadata withoutLocation ="
+      ]
+     ],
+     "truncated": true,
+     "additions": 68,
+     "deletions": 11
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T00:05:51Z",
+    "updated_at": "2026-11-26T00:52:14Z",
+    "conflicts": true,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
+   },
+   "id": 182
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Delete old Iceberg metadata files when delete-after-commit is enabled",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:09Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2383,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2383"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/IcebergRestCatalogService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -723,6 +723,7 @@"
+      ],
+      [
+       "c",
+       "      deleteMetadataIfRejected(e, newMetadataLocation, tableLocation);"
+      ],
+      [
+       "c",
+       "      throw e;"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "a",
+       "    metadataService.deleteRemovedMetadataFiles(base, updated, tableLocation);"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "    return LoadTableResponse.builder()"
+      ],
+      [
+       "c",
+       "        .withTableMetadata(updated)"
+      ]
+     ],
+     "truncated": false,
+     "additions": 1,
+     "deletions": 0
+    },
+    {
+     "path": "server/src/main/java/io/unitycatalog/server/service/iceberg/MetadataService.java",
+     "lines": [
+      [
+       "h",
+       "@@ -8,13 +8,20 @@"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.UriScheme;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.utils.ValidationUtils;"
+      ],
+      [
+       "c",
+       "import java.nio.file.Paths;"
+      ],
+      [
+       "a",
+       "import java.util.List;"
+      ],
+      [
+       "a",
+       "import java.util.Map;"
+      ],
+      [
+       "a",
+       "import java.util.Set;"
+      ],
+      [
+       "c",
+       "import java.util.UUID;"
+      ],
+      [
+       "c",
+       "import java.util.regex.Matcher;"
+      ],
+      [
+       "c",
+       "import java.util.regex.Pattern;"
+      ],
+      [
+       "a",
+       "import java.util.stream.Collectors;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.TableMetadata;"
+      ],
+      [
+       "a",
+       "import org.apache.iceberg.TableMetadata.MetadataLogEntry;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.TableMetadataParser;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.TableProperties;"
+      ],
+      [
+       "a",
+       "import org.apache.iceberg.io.BulkDeletionFailureException;"
+      ],
+      [
+       "c",
+       "import org.apache.iceberg.io.FileIO;"
+      ],
+      [
+       "a",
+       "import org.apache.iceberg.io.SupportsBulkOperations;"
+      ],
+      [
+       "c",
+       "import org.slf4j.Logger;"
+      ],
+      [
+       "c",
+       "import org.slf4j.LoggerFactory;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -95,6 +102,90 @@"
+      ],
+      [
+       "c",
+       "    }"
+      ],
+      [
+       "c",
+       "  }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "  /**"
+      ],
+      [
+       "a",
+       "   * Best-effort deletion of the metadata files a commit dropped from the table's metadata log, when"
+      ],
+      [
+       "a",
+       "   * the committed metadata sets {@link TableProperties#METADATA_DELETE_AFTER_COMMIT_ENABLED}. A"
+      ],
+      [
+       "a",
+       "   * REST client leaves this to the catalog. Only Iceberg metadata files under the persisted table"
+      ],
+      [
+       "a",
+       "   * location are deleted, since the log comes from metadata files this server may not have written."
+      ]
+     ],
+     "truncated": true,
+     "additions": 91,
+     "deletions": 0
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-25T23:06:02Z",
+    "updated_at": "2026-11-26T00:52:10Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 181
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Look up each configured user by email in the create-users job",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:52:05Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2382,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2382"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": null,
+   "files": [
+    {
+     "path": ".github/workflows/helm-chart-tests.yml",
+     "lines": [
+      [
+       "h",
+       "@@ -281,6 +281,110 @@"
+      ],
+      [
+       "c",
+       "            [ \"$mount_path\" = \"$key_file\" ]"
+      ],
+      [
+       "c",
+       "          done"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "a",
+       "      - name: Run the create-users job script against a stub server"
+      ],
+      [
+       "a",
+       "        if: matrix.db == 'file'"
+      ],
+      [
+       "a",
+       "        run: |"
+      ],
+      [
+       "a",
+       "          set -euo pipefail"
+      ],
+      [
+       "a",
+       "          dir=\"$(mktemp -d)\""
+      ],
+      [
+       "a",
+       "          mkdir \"$dir/bin\" \"$dir/key\""
+      ],
+      [
+       "a",
+       "          touch \"$dir/key/private_key.pem\""
+      ],
+      [
+       "a",
+       "          printf '#!/bin/sh\\n' > \"$dir/bin/apk\""
+      ],
+      [
+       "a",
+       "          printf '#!/bin/sh\\necho token\\n' > \"$dir/bin/jwt\""
+      ],
+      [
+       "a",
+       "          cp \"$dir/bin/jwt\" \"$dir/bin/uuidgen\""
+      ],
+      [
+       "a",
+       "          chmod +x \"$dir/bin/\"*"
+      ],
+      [
+       "a",
+       "          # Like Scim2UserService, an unfiltered list returns the first 50 users, and the filter ignores case. raced@"
+      ],
+      [
+       "a",
+       "          # exists but the lookup misses it, as when another client creates it after the lookup."
+      ],
+      [
+       "a",
+       "          python3 - \"$dir\" <<'EOF' &"
+      ],
+      [
+       "a",
+       "          import json, os, re, sys"
+      ],
+      [
+       "a",
+       "          from http.server import BaseHTTPRequestHandler, HTTPServer"
+      ],
+      [
+       "a",
+       "          from urllib.parse import parse_qs, urlsplit"
+      ],
+      [
+       "a",
+       "          users = [f\"user{i}@example.com\" for i in range(58)]"
+      ],
+      [
+       "a",
+       "          users += [\"CaseUser@example.com\", 'late+\"quoted\"@example.com', \"raced@example.com\"]"
+      ],
+      [
+       "a",
+       "          log = open(f\"{sys.argv[1]}/requests.jsonl\", \"a\")"
+      ],
+      [
+       "a",
+       "          class Stub(BaseHTTPRequestHandler):"
+      ],
+      [
+       "a",
+       "              def log_message(self, *args):"
+      ],
+      [
+       "a",
+       "                  pass"
+      ],
+      [
+       "a",
+       "              def reply(self, status, body):"
+      ],
+      [
+       "a",
+       "                  self.send_response(status)"
+      ],
+      [
+       "a",
+       "                  self.end_headers()"
+      ]
+     ],
+     "truncated": true,
+     "additions": 104,
+     "deletions": 0
+    },
+    {
+     "path": "helm/templates/server/create-users-job.yaml",
+     "lines": [
+      [
+       "h",
+       "@@ -55,30 +55,39 @@"
+      ],
+      [
+       "c",
+       "              -X GET \"http://{{ include \"unitycatalog.server.fullname\" . }}:{{ .Values.server.service.port }}/api/2.1/unity-catalog/metastore_summary\" \\"
+      ],
+      [
+       "c",
+       "              -H \"Content-Type: application/json\" | jq -e '.metastore_id')"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "d",
+       "              USERS_RESPONSE=$(curl --fail-with-body -H \"Authorization: Bearer ${TOKEN}\" \\"
+      ],
+      [
+       "d",
+       "                  -X GET \"http://{{ include \"unitycatalog.server.fullname\" $ }}:{{ $.Values.server.service.port }}/api/1.0/unity-control/scim2/Users\" \\"
+      ],
+      [
+       "d",
+       "                  -H \"Content-Type: application/json\")"
+      ],
+      [
+       "a",
+       "              USERS_URL=\"http://{{ include \"unitycatalog.server.fullname\" $ }}:{{ $.Values.server.service.port }}/api/1.0/unity-control/scim2/Users\""
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "              {{- range $index, $user := .Values.auth.users }}"
+      ],
+      [
+       "d",
+       "              if echo \"${USERS_RESPONSE}\" | jq -e '.Resources[] | select(.emails[0].value == \"{{ $user.email }}\")'"
+      ],
+      [
+       "a",
+       "              EMAIL='{{ required \"auth.users[].email is required\" $user.email | toString | replace \"'\" \"'\\\\''\" }}'"
+      ],
+      [
+       "a",
+       "              NAME='{{ $user.name | default \"\" | toString | replace \"'\" \"'\\\\''\" }}'"
+      ],
+      [
+       "a",
+       "              # The list returns one page of users, so look the user up by email."
+      ],
+      [
+       "a",
+       "              FILTER=$(jq -rn --arg email \"${EMAIL}\" '\"emails.value eq \\($email | tojson)\"')"
+      ],
+      [
+       "a",
+       "              USER_EXISTS=$(curl --fail-with-body -sS -G -H \"Authorization: Bearer ${TOKEN}\" \\"
+      ],
+      [
+       "a",
+       "                  --data-urlencode \"filter=${FILTER}\" \"${USERS_URL}\" \\"
+      ],
+      [
+       "a",
+       "                  | jq --arg email \"${EMAIL}\" 'any(.Resources[]?; .emails[0].value == $email)')"
+      ],
+      [
+       "a",
+       "              if [ \"${USER_EXISTS}\" = true ]"
+      ],
+      [
+       "c",
+       "              then"
+      ],
+      [
+       "d",
+       "                  USER_ID=$(echo \"${USERS_RESPONSE}\" | jq -r '.Resources[] | select(.emails[0].value == \"{{ $user.email }}\") | .id')"
+      ],
+      [
+       "d",
+       "                  echo \"User {{ $user.email }} already exists\""
+      ],
+      [
+       "a",
+       "                  echo \"User ${EMAIL} already exists\""
+      ],
+      [
+       "c",
+       "              else"
+      ],
+      [
+       "d",
+       "                  echo \"User {{ $user.email }} is being created\""
+      ],
+      [
+       "d",
+       "                  USER_ID=$(curl --fail-with-body -H \"Authorization: Bearer ${TOKEN}\" \\"
+      ],
+      [
+       "d",
+       "                  -X POST \"http://{{ include \"unitycatalog.server.fullname\" $ }}:{{ $.Values.server.service.port }}/api/1.0/unity-control/scim2/Users\" \\"
+      ],
+      [
+       "a",
+       "                  echo \"User ${EMAIL} is being created\""
+      ],
+      [
+       "a",
+       "                  STATUS=$(curl -sS -o /dev/stderr -w '%{http_code}' -H \"Authorization: Bearer ${TOKEN}\" \\"
+      ],
+      [
+       "a",
+       "                  -X POST \"${USERS_URL}\" \\"
+      ]
+     ],
+     "truncated": true,
+     "additions": 22,
+     "deletions": 13
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "running",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-25T22:09:19Z",
+    "updated_at": "2026-11-26T00:52:06Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "nobody",
+    "next": "Tests are running"
+   },
+   "id": 180
+  },
+  {
+   "kind": "fix",
+   "repo": "unitycatalog/unitycatalog",
+   "status": "review",
+   "title": "Add the #2345 entry to the AI changelog",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T00:39:45Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 2381,
+    "url": "https://github.com/unitycatalog/unitycatalog/pull/2381"
+   },
+   "issue": null,
+   "proof": null,
+   "impact": {
+    "level": "low",
+    "auto": true
+   },
+   "release": null,
+   "files": [],
+   "track": {
+    "feedback": [],
+    "stage": 3,
+    "checks": "failing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T00:37:30Z",
+    "updated_at": "2026-11-26T00:39:46Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
+   },
+   "id": 179
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -619,6 +2012,36 @@
     "feedback": [
      {
       "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-26T00:04:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#pullrequestreview-6066734362",
+      "maintainer": true,
+      "path": null,
+      "text": "useful checks overall, and thanks for addressing the earlier threads. i left two comments, one on iceberg staging table reserves and a small wording fix in the docs.",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-26T00:04:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#discussion_r4702354929",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/StagingTableRepository.java",
+      "text": "iceberg rest table creation without a location also goes through here, so it ends up reserving 162 chars for a delta checkpoint sidecar file and failing with a delta-specific error. should we let the caller pass the extent (keeping `MANAGED_DELTA_TABLE` for delta and using an iceberg extent from `IcebergRestCatalogSer…",
+      "answered": false
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-26T00:04:49Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#discussion_r4702354934",
+      "maintainer": true,
+      "path": "docs/server/configuration.md",
+      "text": "cloud checks still run when no external location covers the path, and are only skipped when a covering location's credential was force-deleted (which also skips the gcs object-name check). could we tighten the wording here? [code]",
+      "answered": false
+     },
+     {
+      "kind": "review commented",
       "who": "yili-db",
       "at": "2026-11-25T22:19:39Z",
       "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#pullrequestreview-6065783845",
@@ -646,36 +2069,6 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] A credential-only update re-checks the stored URL against the new credential's limits, so a location created before these limits, with an over-limit URL, cannot have its credential rotated unless the URL also changes. Ask: state this rule in configuration.md and pin it with a test, or check only the rule…",
       "answered": false
-     },
-     {
-      "kind": "inline comment",
-      "who": "yili-db",
-      "at": "2026-11-25T22:19:39Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#discussion_r4701545234",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "[AI Assisted] External tables, external volumes and external location URLs are checked only against the read policy (Use.REQUESTED, which is SELECT only). A writable table or volume can pass here and then fail on every write vend, which sends the longer SELECT and UPDATE policy. Ask: validate these with SELECT and UPD…",
-      "answered": false
-     },
-     {
-      "kind": "review commented",
-      "who": "timothyw553",
-      "at": "2026-11-25T20:00:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#pullrequestreview-6064123284",
-      "maintainer": true,
-      "path": null,
-      "text": "useful set of checks, though i left comments on two failing tests (Iceberg createTable and staging table message), checkpoint reserves, and opaque cloud URIs. i also asked about external Delta reserves and test coverage for URL updates with a live credential.",
-      "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "timothyw553",
-      "at": "2026-11-25T20:00:04Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2378#discussion_r4700174784",
-      "maintainer": true,
-      "path": "server/src/test/java/io/unitycatalog/server/sdk/managedlocation/SdkManagedLocationTest.java",
-      "text": "to my understanding `createExternalTable` goes through the native `createTable` endpoint, which rejects `DataSourceFormat.ICEBERG` with `UNSUPPORTED_TABLE_FORMAT` before the location validator ever runs. so won't both this assertion and the success case right below fail, without actually covering Iceberg location vali…",
-      "answered": true
      }
     ],
     "stage": 4,
@@ -683,12 +2076,12 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-25T20:21:22Z",
-    "updated_at": "2026-11-25T22:19:39Z",
+    "updated_at": "2026-11-26T00:04:49Z",
     "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "yili-db left review comments. Reply or update the PR"
+    "next": "timothyw553 left review comments. Reply or update the PR"
    },
    "id": 178
   },
@@ -2458,11 +3851,11 @@
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
-   "status": "review",
+   "status": "merged",
    "title": "Keep struct definitions in Anthropic tool input schemas",
    "date": "2026-11-23",
    "created_at": "2026-11-23T17:58:43Z",
-   "merged_at": null,
+   "merged_at": "2026-11-26",
    "reported": true,
    "pr": {
     "number": 2345,
@@ -2560,6 +3953,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "review commented",
+      "who": "timothyw553",
+      "at": "2026-11-25T23:41:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2345#pullrequestreview-6066536050",
+      "maintainer": true,
+      "path": null,
+      "text": "overall LGTM, the `$defs` fix and tests look good. just one small nit to add the #2345 entry under `### Change Log` in `ai/CHANGELOG.md`.",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "timothyw553",
+      "at": "2026-11-25T23:41:06Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2345#discussion_r4702184416",
+      "maintainer": true,
+      "path": "ai/CHANGELOG.md",
+      "text": "nit: looks like we added the bug fix entry here, should we also add #2345 under `### Change Log` after line 35? [code]",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-24T21:30:24Z",
@@ -2590,19 +4003,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
+    "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
      "yili-db"
     ],
     "last_push": "2026-11-25T21:39:27Z",
-    "updated_at": "2026-11-25T21:39:59Z",
+    "updated_at": "2026-11-26T00:44:37Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by yili-db. Waiting to be merged"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 165
   },
@@ -7993,7 +9406,7 @@
       "maintainer": true,
       "path": null,
       "text": "@maharanay22 could you please rebase?",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -8046,24 +9459,24 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "running",
     "review": "approved",
     "approved_by": [
      "timothyw553",
      "yili-db"
     ],
-    "last_push": "2026-11-25T02:20:32Z",
-    "updated_at": "2026-11-25T23:06:10Z",
-    "conflicts": true,
+    "last_push": "2026-11-26T00:32:37Z",
+    "updated_at": "2026-11-26T00:47:18Z",
+    "conflicts": false,
     "last_comment": {
      "who": "timothyw553",
      "at": "2026-11-25T23:06:10Z",
      "maintainer": true
     },
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 commented. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Approved by timothyw553, yili-db. Waiting to be merged"
    },
    "id": 142
   },
@@ -18035,11 +19448,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 98
   },
@@ -35681,11 +37094,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
