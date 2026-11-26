@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-26T00:55:13Z",
+ "generated_at": "2026-11-26T05:28:41Z",
  "stages": [
   "reported",
   "fix sent",
@@ -50,7 +50,7 @@
     "Data Loss"
    ],
    "stars": 3376,
-   "forks": 716,
+   "forks": 717,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
    "downloads_month": 10848443,
@@ -77,7 +77,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7388,
+   "stars": 7391,
    "forks": 959,
    "package": "pylance",
    "impact": null,
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28971,
+   "stars": 28973,
    "forks": 6659,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -120,6 +120,44 @@
    "period_total": 114,
    "period_since": "2026-07-18",
    "period_checked": "2026-11-26"
+  },
+  {
+   "full": "pandas-dev/pandas",
+   "name": "pandas",
+   "url": "https://github.com/pandas-dev/pandas",
+   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
+   "icon": "🐼",
+   "category": "data analysis",
+   "tags": [
+    "Arrow dtypes",
+    "Reductions",
+    "String regex"
+   ],
+   "stars": 50643,
+   "forks": 20724,
+   "package": "pandas",
+   "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
+   "downloads_month": 719517331,
+   "downloads_checked": "2026-11-26",
+   "contributor_rank": null,
+   "contributor_commits": null,
+   "contributor_total": 300,
+   "contributors_checked": "2026-11-26",
+   "period_rank": null,
+   "period_commits": null,
+   "period_total": 27,
+   "period_since": "2026-07-18",
+   "period_checked": "2026-11-26",
+   "release_notes": [
+    {
+     "version": "3.1.0",
+     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.0.html#contributors"
+    },
+    {
+     "version": "3.1.1",
+     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.1.html#contributors"
+    }
+   ]
   },
   {
    "full": "mindsdb/engine",
@@ -150,44 +188,6 @@
    "period_checked": "2026-11-26"
   },
   {
-   "full": "pandas-dev/pandas",
-   "name": "pandas",
-   "url": "https://github.com/pandas-dev/pandas",
-   "about": "The standard Python library for working with tables of data. Almost every data scientist, analyst and data engineer uses it daily.",
-   "icon": "🐼",
-   "category": "data analysis",
-   "tags": [
-    "Arrow dtypes",
-    "Reductions",
-    "String regex"
-   ],
-   "stars": 50641,
-   "forks": 20720,
-   "package": "pandas",
-   "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 719517331,
-   "downloads_checked": "2026-11-26",
-   "contributor_rank": null,
-   "contributor_commits": null,
-   "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
-   "period_rank": null,
-   "period_commits": null,
-   "period_total": 27,
-   "period_since": "2026-07-18",
-   "period_checked": "2026-11-26",
-   "release_notes": [
-    {
-     "version": "3.1.0",
-     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.0.html#contributors"
-    },
-    {
-     "version": "3.1.1",
-     "url": "https://pandas.pydata.org/docs/whatsnew/v3.1.1.html#contributors"
-    }
-   ]
-  },
-  {
    "full": "delta-io/delta",
    "name": "Delta Lake",
    "url": "https://github.com/delta-io/delta",
@@ -200,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9086,
-   "forks": 2229,
+   "forks": 2228,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24548285,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63915,
-   "forks": 13571,
+   "stars": 63925,
+   "forks": 13580,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 104106902,
@@ -329,6 +329,95 @@
   }
  ],
  "items": [
+  {
+   "kind": "fix",
+   "repo": "pandas-dev/pandas",
+   "status": "review",
+   "title": "Setting an int too large for a signed dtype but within its unsigned range raises \"AssertionError: Something has gone wrong",
+   "date": "2026-11-26",
+   "created_at": "2026-11-26T02:36:17Z",
+   "merged_at": null,
+   "reported": true,
+   "pr": {
+    "number": 72329,
+    "url": "https://github.com/pandas-dev/pandas/pull/72329"
+   },
+   "issue": {
+    "number": 72328,
+    "url": "https://github.com/pandas-dev/pandas/issues/72328"
+   },
+   "proof": null,
+   "impact": {
+    "level": "medium",
+    "auto": true
+   },
+   "release": "3.2.0",
+   "files": [
+    {
+     "path": "pandas/core/dtypes/cast.py",
+     "lines": [
+      [
+       "h",
+       "@@ -1234,7 +1234,8 @@"
+      ],
+      [
+       "c",
+       "                right = left_dtype"
+      ],
+      [
+       "c",
+       "            elif ("
+      ],
+      [
+       "c",
+       "                not np.issubdtype(left_dtype, np.unsignedinteger)"
+      ],
+      [
+       "d",
+       "                and 0 < right <= np.iinfo(right_dtype).max"
+      ],
+      [
+       "a",
+       "                and right_dtype.kind == \"u\""
+      ],
+      [
+       "a",
+       "                and 0 < right <= np.iinfo(f\"i{right_dtype.itemsize}\").max"
+      ],
+      [
+       "c",
+       "            ):"
+      ],
+      [
+       "c",
+       "                # If left dtype isn't unsigned, check if it fits in the signed dtype"
+      ],
+      [
+       "c",
+       "                right = np.dtype(f\"i{right_dtype.itemsize}\")"
+      ]
+     ],
+     "truncated": false,
+     "additions": 2,
+     "deletions": 1
+    }
+   ],
+   "track": {
+    "feedback": [],
+    "stage": 4,
+    "checks": "passing",
+    "review": "waiting",
+    "approved_by": [],
+    "last_push": "2026-11-26T02:23:20Z",
+    "updated_at": "2026-11-26T02:39:57Z",
+    "conflicts": false,
+    "last_comment": null,
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
+   },
+   "id": 186
+  },
   {
    "kind": "fix",
    "repo": "unitycatalog/unitycatalog",
@@ -481,17 +570,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-26T00:38:14Z",
-    "updated_at": "2026-11-26T00:52:26Z",
+    "updated_at": "2026-11-26T01:08:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 185
   },
@@ -791,17 +880,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-26T00:39:06Z",
-    "updated_at": "2026-11-26T00:52:22Z",
+    "updated_at": "2026-11-26T01:08:18Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 184
   },
@@ -1005,17 +1094,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-26T00:27:46Z",
-    "updated_at": "2026-11-26T00:52:18Z",
+    "updated_at": "2026-11-26T01:08:17Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 183
   },
@@ -1125,7 +1214,7 @@
       ],
       [
        "h",
-       "@@ -536,6 +539,16 @@"
+       "@@ -537,6 +540,16 @@"
       ],
       [
        "c",
@@ -1175,13 +1264,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-26T00:05:51Z",
-    "updated_at": "2026-11-26T00:52:14Z",
-    "conflicts": true,
+    "last_push": "2026-11-26T01:56:18Z",
+    "updated_at": "2026-11-26T01:56:19Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 182
   },
@@ -1377,17 +1466,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-25T23:06:02Z",
-    "updated_at": "2026-11-26T00:52:10Z",
+    "last_push": "2026-11-26T01:54:07Z",
+    "updated_at": "2026-11-26T01:54:09Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 181
   },
@@ -1672,16 +1761,16 @@
    "track": {
     "feedback": [],
     "stage": 3,
-    "checks": "running",
+    "checks": "failing",
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-25T22:09:19Z",
-    "updated_at": "2026-11-26T00:52:06Z",
+    "updated_at": "2026-11-26T01:08:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "nobody",
-    "next": "Tests are running"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 180
   },
@@ -1713,7 +1802,7 @@
     "review": "waiting",
     "approved_by": [],
     "last_push": "2026-11-26T00:37:30Z",
-    "updated_at": "2026-11-26T00:39:46Z",
+    "updated_at": "2026-11-26T01:08:06Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -1748,7 +1837,7 @@
      "lines": [
       [
        "h",
-       "@@ -71,6 +71,11 @@"
+       "@@ -72,6 +72,11 @@"
       ],
       [
        "c",
@@ -1924,7 +2013,7 @@
       ]
      ],
      "truncated": true,
-     "additions": 20,
+     "additions": 24,
      "deletions": 0
     },
     {
@@ -1932,11 +2021,7 @@
      "lines": [
       [
        "h",
-       "@@ -19,6 +19,8 @@"
-      ],
-      [
-       "c",
-       "import io.unitycatalog.server.persist.utils.FileOperations;"
+       "@@ -20,6 +20,8 @@"
       ],
       [
        "c",
@@ -1945,6 +2030,10 @@
       [
        "c",
        "import io.unitycatalog.server.persist.utils.RepositoryUtils;"
+      ],
+      [
+       "c",
+       "import io.unitycatalog.server.persist.utils.TransactionManager;"
       ],
       [
        "a",
@@ -1968,7 +2057,7 @@
       ],
       [
        "h",
-       "@@ -243,6 +245,7 @@"
+       "@@ -245,6 +247,7 @@"
       ],
       [
        "c",
@@ -2000,7 +2089,7 @@
       ],
       [
        "h",
-       "@@ -569,6 +572,14 @@"
+       "@@ -574,6 +577,14 @@"
       ]
      ],
      "truncated": true,
@@ -2018,7 +2107,7 @@
       "maintainer": true,
       "path": null,
       "text": "useful checks overall, and thanks for addressing the earlier threads. i left two comments, one on iceberg staging table reserves and a small wording fix in the docs.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2028,7 +2117,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/StagingTableRepository.java",
       "text": "iceberg rest table creation without a location also goes through here, so it ends up reserving 162 chars for a delta checkpoint sidecar file and failing with a delta-specific error. should we let the caller pass the extent (keeping `MANAGED_DELTA_TABLE` for delta and using an iceberg extent from `IcebergRestCatalogSer…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2038,7 +2127,7 @@
       "maintainer": true,
       "path": "docs/server/configuration.md",
       "text": "cloud checks still run when no external location covers the path, and are only skipped when a covering location's credential was force-deleted (which also skips the gcs object-name check). could we tighten the wording here? [code]",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "review commented",
@@ -2048,7 +2137,7 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Comment at f2af7af7. Thanks for fixing the Delta budget, the catch-all, and the two failing tests. Three normal items remain, with inline notes: the Iceberg metadata budget, the credential-only update path, and the read-only check on external locations. The Delta and managed sidecar budgets look right.",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2058,7 +2147,7 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/service/credential/StorageLimits.java",
       "text": "[AI Assisted] Iceberg tables still use PREFIX, which reserves only a slash and one character under the table location. MetadataService writes a metadata file named with the version and a UUID under the table, so a location near the limit can pass validation and still have no room for its metadata. Ask: add an Iceberg…",
-      "answered": false
+      "answered": true
      },
      {
       "kind": "inline comment",
@@ -2068,20 +2157,20 @@
       "maintainer": true,
       "path": "server/src/main/java/io/unitycatalog/server/persist/ExternalLocationRepository.java",
       "text": "[AI Assisted] A credential-only update re-checks the stored URL against the new credential's limits, so a location created before these limits, with an over-limit URL, cannot have its credential rotated unless the URL also changes. Ask: state this rule in configuration.md and pin it with a test, or check only the rule…",
-      "answered": false
+      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-25T20:21:22Z",
-    "updated_at": "2026-11-26T00:04:49Z",
-    "conflicts": true,
+    "last_push": "2026-11-26T00:54:34Z",
+    "updated_at": "2026-11-26T01:52:00Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "timothyw553 left review comments. Reply or update the PR"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 178
   },
@@ -8655,7 +8744,7 @@
      "timothyw553"
     ],
     "last_push": "2026-11-25T02:13:56Z",
-    "updated_at": "2026-11-25T23:06:27Z",
+    "updated_at": "2026-11-26T01:08:03Z",
     "conflicts": true,
     "last_comment": {
      "who": "yili-db",
@@ -9459,8 +9548,8 @@
       "answered": true
      }
     ],
-    "stage": 3,
-    "checks": "running",
+    "stage": 4,
+    "checks": "passing",
     "review": "approved",
     "approved_by": [
      "timothyw553",
@@ -37094,11 +37183,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
