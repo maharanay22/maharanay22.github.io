@@ -457,7 +457,7 @@
  "https://github.com/lance-format/lance/pull/11325": {
   "approved_by": [],
   "checks": "failing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
@@ -466,11 +466,11 @@
  "https://github.com/lance-format/lance/pull/11326": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/lance-format/lance/pull/11330": {
   "approved_by": [],
@@ -672,11 +672,11 @@
  "https://github.com/mlflow/mlflow/pull/27772": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/mlflow/mlflow/pull/27773": {
   "approved_by": [],
