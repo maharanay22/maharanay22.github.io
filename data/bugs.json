@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-27T00:06:11Z",
+ "generated_at": "2026-11-27T02:12:53Z",
  "stages": [
   "reported",
   "fix sent",
@@ -22,7 +22,7 @@
     "Windows"
    ],
    "stars": 3591,
-   "forks": 709,
+   "forks": 710,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
    "downloads_month": 675375,
@@ -63,7 +63,7 @@
    "period_commits": 21,
    "period_total": 29,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "lance-format/lance",
@@ -78,7 +78,7 @@
     "AI data"
    ],
    "stars": 7393,
-   "forks": 963,
+   "forks": 964,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3937230,
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28984,
-   "forks": 6666,
+   "stars": 28985,
+   "forks": 6668,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23876265,
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50654,
-   "forks": 20723,
+   "stars": 50655,
+   "forks": 20725,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 721603437,
@@ -269,7 +269,7 @@
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63973,
-   "forks": 13606,
+   "stars": 63976,
+   "forks": 13607,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 105179538,
@@ -2287,13 +2287,24 @@
    "proof": null,
    "files": [],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "greglum",
+      "at": "2026-11-27T01:53:46Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/issues/2360#issuecomment-7207662967",
+      "maintainer": false,
+      "path": null,
+      "text": "take",
+      "answered": false
+     }
+    ],
     "stage": 1,
     "checks": null,
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-24T03:19:45Z",
+    "updated_at": "2026-11-27T01:53:46Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -6625,7 +6636,7 @@
     "review": "commented",
     "approved_by": [],
     "last_push": "2026-11-26T22:01:06Z",
-    "updated_at": "2026-11-26T22:01:52Z",
+    "updated_at": "2026-11-27T00:26:54Z",
     "conflicts": false,
     "last_comment": {
      "who": "ashwingadhave",
@@ -19552,11 +19563,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 98
   },
