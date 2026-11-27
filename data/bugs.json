@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-26T19:02:34Z",
+ "generated_at": "2026-11-27T00:06:11Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,17 +25,17 @@
    "forks": 709,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 675670,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 675375,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": 2,
    "contributor_commits": 79,
    "contributor_total": 144,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": 1,
    "period_commits": 79,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "delta-io/delta-rs",
@@ -53,12 +53,12 @@
    "forks": 718,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10848443,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 10887274,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": 24,
    "contributor_commits": 21,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": 8,
    "period_commits": 21,
    "period_total": 29,
@@ -78,15 +78,15 @@
     "AI data"
    ],
    "stars": 7393,
-   "forks": 962,
+   "forks": 963,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 4007141,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 3937230,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": 37,
    "period_commits": 9,
    "period_total": 70,
@@ -105,21 +105,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28982,
-   "forks": 6667,
+   "stars": 28984,
+   "forks": 6666,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 23727174,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 23876265,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 114,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,21 +133,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50650,
-   "forks": 20724,
+   "stars": 50654,
+   "forks": 20723,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 719517331,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 721603437,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26",
+   "period_checked": "2026-11-27",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -180,12 +180,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "delta-io/delta",
@@ -203,12 +203,12 @@
    "forks": 2228,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24548285,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 24517313,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 56,
@@ -231,17 +231,17 @@
    "forks": 162,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 38410622,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 38452337,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -255,16 +255,16 @@
     "Delta Lake",
     "SQL DDL"
    ],
-   "stars": 389,
+   "stars": 390,
    "forks": 235,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4391487,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 4371908,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
@@ -283,21 +283,21 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63961,
-   "forks": 13602,
+   "stars": 63973,
+   "forks": 13606,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 104106902,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 105179538,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
    "period_total": 144,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -315,17 +315,17 @@
    "forks": 270,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 512741778,
-   "downloads_checked": "2026-11-26",
+   "downloads_month": 516061563,
+   "downloads_checked": "2026-11-27",
    "contributor_rank": 113,
    "contributor_commits": 1,
    "contributor_total": 133,
-   "contributors_checked": "2026-11-26",
+   "contributors_checked": "2026-11-27",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   }
  ],
  "items": [
@@ -6543,7 +6543,7 @@
       ],
       [
        "h",
-       "@@ -84,19 +92,19 @@"
+       "@@ -84,19 +92,23 @@"
       ],
       [
        "c",
@@ -6571,7 +6571,23 @@
       ],
       [
        "a",
-       "                _logger.warning(\"Skipping aggregation with invalid metric key %r.\", key)"
+       "                _logger.warning("
+      ],
+      [
+       "a",
+       "                    \"Skipping aggregation with invalid metric key %r. Rename the scorer, or use a \""
+      ],
+      [
+       "a",
+       "                    \"named function instead of a lambda for a custom aggregation.\","
+      ],
+      [
+       "a",
+       "                    key,"
+      ],
+      [
+       "a",
+       "                )"
       ],
       [
        "a",
@@ -6584,39 +6600,38 @@
       [
        "c",
        ""
-      ],
-      [
-       "c",
-       "    # Count failures per scorer invocation (a row, or a session for session-level scorers), the"
-      ],
-      [
-       "c",
-       "    # same count as the failure summary. A custom aggregation named \"error_count\" takes precedence."
-      ],
-      [
-       "c",
-       "    for name, stat in (scorer_stats or {}).items():"
-      ],
-      [
-       "c",
-       "        if not stat.has_failures:"
       ]
      ],
      "truncated": true,
-     "additions": 14,
+     "additions": 18,
      "deletions": 6
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "comment",
+      "who": "ashwingadhave",
+      "at": "2026-11-26T21:57:28Z",
+      "url": "https://github.com/mlflow/mlflow/pull/28051#issuecomment-7204221706",
+      "maintainer": false,
+      "path": null,
+      "text": "I ran this end to end against master. Besides lambdas, it also fixes scorers whose own name is not a valid metric key, such as `judge?` or a name longer than 245 characters. On master those fail the whole run at the end. With this PR they finish, skip the key with a warning, and `error_count` still works. Could you ad…",
+      "answered": true
+     }
+    ],
     "stage": 4,
     "checks": "passing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-23T03:33:58Z",
-    "updated_at": "2026-11-23T03:56:02Z",
+    "last_push": "2026-11-26T22:01:06Z",
+    "updated_at": "2026-11-26T22:01:52Z",
     "conflicts": false,
-    "last_comment": null,
+    "last_comment": {
+     "who": "ashwingadhave",
+     "at": "2026-11-26T21:57:28Z",
+     "maintainer": false
+    },
     "state": "waiting",
     "waiting_on": "maintainers",
     "next": "Tests pass. A maintainer's approval is required before it can merge"
@@ -31884,7 +31899,7 @@
       ],
       [
        "h",
-       "@@ -23,12 +26,21 @@"
+       "@@ -24,12 +27,21 @@"
       ],
       [
        "c",
@@ -32087,19 +32102,19 @@
       "answered": true
      }
     ],
-    "stage": 4,
-    "checks": "passing",
+    "stage": 3,
+    "checks": "failing",
     "review": "community approved",
     "approved_by": [
      "Shahzeb-DataEngineer"
     ],
-    "last_push": "2026-11-04T23:12:19Z",
-    "updated_at": "2026-11-20T02:57:47Z",
+    "last_push": "2026-11-26T22:03:18Z",
+    "updated_at": "2026-11-26T22:18:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. Shahzeb-DataEngineer approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "Some tests failed. Check the logs"
    },
    "id": 46
   },
