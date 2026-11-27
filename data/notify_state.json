@@ -13,11 +13,11 @@
    "VANDRANKI"
   ],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
@@ -209,11 +209,11 @@
  "https://github.com/delta-io/delta-rs/pull/4899": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": true,
+  "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "you"
+  "waiting_on": "maintainers"
  },
  "https://github.com/delta-io/delta-rs/pull/4945": {
   "approved_by": [

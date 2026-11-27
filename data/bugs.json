@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-27T18:20:51Z",
+ "generated_at": "2026-11-27T19:59:48Z",
  "stages": [
   "reported",
   "fix sent",
@@ -87,11 +87,11 @@
    "contributor_commits": 9,
    "contributor_total": 300,
    "contributors_checked": "2026-11-27",
-   "period_rank": 37,
+   "period_rank": 38,
    "period_commits": 9,
    "period_total": 70,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "mlflow/mlflow",
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28996,
+   "stars": 28998,
    "forks": 6669,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50635,
-   "forks": 20725,
+   "stars": 50636,
+   "forks": 20726,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 721603437,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 64026,
-   "forks": 13627,
+   "stars": 64028,
+   "forks": 13629,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 105179538,
@@ -19573,11 +19573,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 98
   },
@@ -30085,268 +30085,132 @@
    "release": null,
    "files": [
     {
-     "path": "crates/core/src/kernel/snapshot/iterators.rs",
-     "lines": [
-      [
-       "h",
-       "@@ -318,22 +318,7 @@"
-      ],
-      [
-       "c",
-       "            .files"
-      ],
-      [
-       "c",
-       "            .column_by_name(FIELD_NAME_DELETION_VECTOR)"
-      ],
-      [
-       "c",
-       "            .and_then(|col| col.as_struct_opt())?;"
-      ],
-      [
-       "d",
-       "        if dv_col.null_count() == dv_col.len() {"
-      ],
-      [
-       "d",
-       "            return None;"
-      ],
-      [
-       "d",
-       "        }"
-      ],
-      [
-       "d",
-       "        dv_col"
-      ],
-      [
-       "d",
-       "            .is_valid(self.index)"
-      ],
-      [
-       "d",
-       "            .then(|| {"
-      ],
-      [
-       "d",
-       "                let storage_col ="
-      ],
-      [
-       "d",
-       "                    dv_col.column(*DV_FIELD_INDICES.get(DV_FIELD_STORAGE_TYPE).unwrap());"
-      ],
-      [
-       "d",
-       "                storage_col"
-      ],
-      [
-       "d",
-       "                    .is_valid(self.index)"
-      ],
-      [
-       "d",
-       "                    .then_some(DeletionVectorView {"
-      ],
-      [
-       "d",
-       "                        data: dv_col,"
-      ],
-      [
-       "d",
-       "                        index: self.index,"
-      ],
-      [
-       "d",
-       "                    })"
-      ],
-      [
-       "d",
-       "            })"
-      ],
-      [
-       "d",
-       "            .flatten()"
-      ],
-      [
-       "a",
-       "        DeletionVectorView::try_new(dv_col, self.index)"
-      ],
-      [
-       "c",
-       "    }"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "    /// Internal API"
-      ],
-      [
-       "h",
-       "@@ -489,7 +474,18 @@"
-      ],
-      [
-       "c",
-       "    index: usize,"
-      ],
-      [
-       "c",
-       "}"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "impl DeletionVectorView<'_> {"
-      ],
-      [
-       "a",
-       "impl<'a> DeletionVectorView<'a> {"
-      ]
-     ],
-     "truncated": true,
-     "additions": 13,
-     "deletions": 17
-    },
-    {
-     "path": "crates/core/src/kernel/snapshot/iterators/tombstones.rs",
-     "lines": [
-      [
-       "h",
-       "@@ -7,7 +7,8 @@"
-      ],
-      [
-       "c",
-       "use delta_kernel::{actions::Remove, schema::ToSchema};"
-      ],
-      [
-       "c",
-       "use percent_encoding::percent_decode_str;"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "d",
-       "use crate::kernel::snapshot::iterators::get_string_value;"
-      ],
-      [
-       "a",
-       "use crate::kernel::DeletionVectorDescriptor;"
-      ],
-      [
-       "a",
-       "use crate::kernel::snapshot::iterators::{DeletionVectorView, get_string_value};"
-      ],
-      [
-       "c",
-       ""
-      ],
-      [
-       "c",
-       "/// A lightweight, cloneable view over a single tombstone (`Remove` action) row."
-      ],
-      [
-       "c",
-       "///"
-      ],
-      [
-       "h",
-       "@@ -71,4 +72,16 @@"
-      ],
-      [
-       "c",
-       "            .as_primitive_opt::<Int64Type>()"
-      ],
-      [
-       "c",
-       "            .map(|a| a.value(self.index))"
-      ],
-      [
-       "c",
-       "    }"
-      ],
-      [
-       "a",
-       ""
-      ],
-      [
-       "a",
-       "    /// Returns the deletion vector of the removed file, if it had one."
-      ],
-      [
-       "a",
-       "    pub fn deletion_vector_descriptor(&self) -> Option<DeletionVectorDescriptor> {"
-      ],
-      [
-       "a",
-       "        static FIELD_INDEX: LazyLock<usize> = LazyLock::new(|| {"
-      ],
-      [
-       "a",
-       "            Remove::to_schema()"
-      ],
-      [
-       "a",
-       "                .field_with_index(\"deletionVector\")"
-      ],
-      [
-       "a",
-       "                .unwrap()"
-      ],
-      [
-       "a",
-       "                .0"
-      ],
-      [
-       "a",
-       "        });"
-      ],
-      [
-       "a",
-       "        let dv_col = self.data.column(*FIELD_INDEX).as_struct_opt()?;"
-      ],
-      [
-       "a",
-       "        DeletionVectorView::try_new(dv_col, self.index).map(|dv| dv.descriptor())"
-      ],
-      [
-       "a",
-       "    }"
-      ],
-      [
-       "c",
-       "}"
-      ]
-     ],
-     "truncated": false,
-     "additions": 14,
-     "deletions": 1
-    },
-    {
      "path": "crates/core/src/operations/vacuum.rs",
      "lines": [
       [
        "h",
-       "@@ -40,8 +40,8 @@"
+       "@@ -390,7 +390,7 @@"
       ],
       [
        "c",
-       "use crate::errors::{DeltaResult, DeltaTableError};"
+       "        let mut file_count = 0;"
       ],
       [
        "c",
-       "use crate::kernel::transaction::{CommitBuilder, CommitProperties};"
+       ""
+      ],
+      [
+       "c",
+       "        let tombstone_retention_timestamp = now_millis - retention_period.num_milliseconds();"
+      ],
+      [
+       "d",
+       "        let (expired_tombstones, tombstone_path_sets) ="
+      ],
+      [
+       "a",
+       "        let (expired_files, tombstone_path_sets) ="
+      ],
+      [
+       "c",
+       "            collect_tombstones(snapshot, tombstone_retention_timestamp, &self.log_store).await?;"
+      ],
+      [
+       "c",
+       "        let valid_files = collect_active_paths(snapshot, self.log_store.as_ref()).await?;"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -400,14 +400,13 @@"
+      ],
+      [
+       "c",
+       "        let mut file_sizes = vec![];"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "c",
+       "        // VacuumMode::Lite file set"
+      ],
+      [
+       "d",
+       "        // Expired tombstones are deleted unless the file is still in use or kept for time travel"
+      ],
+      [
+       "d",
+       "        for tombs in expired_tombstones.iter() {"
+      ],
+      [
+       "d",
+       "            let path = tombstone_object_store_path(tombs);"
+      ],
+      [
+       "a",
+       "        // Files of expired tombstones are deleted unless still in use or kept for time travel"
+      ],
+      [
+       "a",
+       "        for (path, size) in expired_files {"
+      ],
+      [
+       "c",
+       "            if !tombstone_path_sets.retained_paths.contains(&path)"
+      ],
+      [
+       "c",
+       "                && ok_to_delete(&path, &valid_files, &keep_files, partition_columns)?"
+      ],
+      [
+       "c",
+       "            {"
+      ],
+      [
+       "c",
+       "                files_to_delete.push(path);"
+      ],
+      [
+       "d",
+       "                file_sizes.push(tombs.size().unwrap_or(0));"
+      ],
+      [
+       "a",
+       "                file_sizes.push(size);"
+      ],
+      [
+       "c",
+       "            }"
+      ],
+      [
+       "c",
+       "        }"
+      ],
+      [
+       "c",
+       ""
+      ],
+      [
+       "h",
+       "@@ -966,34 +965,37 @@"
+      ],
+      [
+       "c",
+       "        })"
+      ],
+      [
+       "c",
+       "}"
       ]
      ],
      "truncated": true,
-     "additions": 199,
-     "deletions": 77
+     "additions": 70,
+     "deletions": 29
     }
    ],
    "track": {
@@ -30355,13 +30219,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-27T03:43:10Z",
-    "updated_at": "2026-11-27T04:46:25Z",
-    "conflicts": true,
+    "last_push": "2026-11-27T19:55:47Z",
+    "updated_at": "2026-11-27T19:56:07Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 54
   },
