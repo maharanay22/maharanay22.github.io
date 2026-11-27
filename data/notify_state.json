@@ -13,11 +13,11 @@
    "VANDRANKI"
   ],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/databricks/databricks-sql-python/pull/977": {
   "approved_by": [],
@@ -152,13 +152,15 @@
   "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4858": {
-  "approved_by": [],
+  "approved_by": [
+   "ethan-tyler"
+  ],
   "checks": "passing",
   "conflicts": false,
   "last_comment": null,
   "last_comment_who": null,
-  "status": "review",
-  "waiting_on": "maintainers"
+  "status": "merged",
+  "waiting_on": "nobody"
  },
  "https://github.com/delta-io/delta-rs/pull/4881": {
   "approved_by": [
@@ -206,8 +208,8 @@
  },
  "https://github.com/delta-io/delta-rs/pull/4899": {
   "approved_by": [],
-  "checks": "failing",
-  "conflicts": false,
+  "checks": "passing",
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
@@ -672,11 +674,11 @@
  "https://github.com/mlflow/mlflow/pull/27772": {
   "approved_by": [],
   "checks": "passing",
-  "conflicts": false,
+  "conflicts": true,
   "last_comment": null,
   "last_comment_who": null,
   "status": "review",
-  "waiting_on": "maintainers"
+  "waiting_on": "you"
  },
  "https://github.com/mlflow/mlflow/pull/27773": {
   "approved_by": [],
