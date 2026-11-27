@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-27T02:12:53Z",
+ "generated_at": "2026-11-27T08:20:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -77,7 +77,7 @@
     "Python",
     "AI data"
    ],
-   "stars": 7393,
+   "stars": 7395,
    "forks": 964,
    "package": "pylance",
    "impact": null,
@@ -105,8 +105,8 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28985,
-   "forks": 6668,
+   "stars": 28989,
+   "forks": 6667,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23876265,
@@ -133,7 +133,7 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50655,
+   "stars": 50658,
    "forks": 20725,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
@@ -200,7 +200,7 @@
     "Lakehouse"
    ],
    "stars": 9085,
-   "forks": 2228,
+   "forks": 2229,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
    "downloads_month": 24517313,
@@ -211,9 +211,9 @@
    "contributors_checked": "2026-11-27",
    "period_rank": null,
    "period_commits": null,
-   "period_total": 56,
+   "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-26"
+   "period_checked": "2026-11-27"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 63976,
-   "forks": 13607,
+   "stars": 63998,
+   "forks": 13610,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 105179538,
@@ -2291,6 +2291,16 @@
      {
       "kind": "comment",
       "who": "greglum",
+      "at": "2026-11-27T02:31:54Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/issues/2360#issuecomment-7208208273",
+      "maintainer": false,
+      "path": null,
+      "text": "I have a fix ready for this (following up on #2345). `dspy.Tool` places each parameter schema under `parameters.properties` without hoisting per-argument `$defs` to the tool root, so Pydantic's `\"$ref\": \"#/$defs/...\"` pointers go unresolved for nullable `STRUCT` parameters and structs inside `ARRAY`, `MAP`, or nested…",
+      "answered": false
+     },
+     {
+      "kind": "comment",
+      "who": "greglum",
       "at": "2026-11-27T01:53:46Z",
       "url": "https://github.com/unitycatalog/unitycatalog/issues/2360#issuecomment-7207662967",
       "maintainer": false,
@@ -2304,7 +2314,7 @@
     "review": null,
     "approved_by": [],
     "last_push": null,
-    "updated_at": "2026-11-27T01:53:46Z",
+    "updated_at": "2026-11-27T02:31:54Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -7857,11 +7867,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:47:15Z",
     "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 149
   },
@@ -8151,11 +8161,11 @@
     "approved_by": [],
     "last_push": "2026-11-20T17:14:30Z",
     "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 148
   },
@@ -30341,17 +30351,17 @@
    ],
    "track": {
     "feedback": [],
-    "stage": 3,
-    "checks": "failing",
+    "stage": 4,
+    "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-20T21:22:23Z",
-    "updated_at": "2026-11-20T22:24:56Z",
-    "conflicts": false,
+    "last_push": "2026-11-27T03:43:10Z",
+    "updated_at": "2026-11-27T04:46:25Z",
+    "conflicts": true,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 54
   },
@@ -33858,11 +33868,11 @@
   {
    "kind": "fix",
    "repo": "delta-io/delta-rs",
-   "status": "review",
+   "status": "merged",
    "title": "Vacuum deletes files still referenced by unexpired tombstones on tables with deletion vectors, breaking time travel",
    "date": "2026-10-11",
    "created_at": "2026-10-11T16:51:39Z",
-   "merged_at": null,
+   "merged_at": "2026-11-27",
    "reported": true,
    "pr": {
     "number": 4858,
@@ -33884,7 +33894,7 @@
      "lines": [
       [
        "h",
-       "@@ -318,22 +318,7 @@"
+       "@@ -323,22 +323,7 @@"
       ],
       [
        "c",
@@ -33980,7 +33990,7 @@
       ],
       [
        "h",
-       "@@ -489,7 +474,18 @@"
+       "@@ -494,7 +479,18 @@"
       ],
       [
        "c",
@@ -34145,18 +34155,31 @@
     }
    ],
    "track": {
-    "feedback": [],
-    "stage": 4,
+    "feedback": [
+     {
+      "kind": "review approved",
+      "who": "ethan-tyler",
+      "at": "2026-11-27T05:05:19Z",
+      "url": "https://github.com/delta-io/delta-rs/pull/4858#pullrequestreview-6083716735",
+      "maintainer": true,
+      "path": null,
+      "text": "lgtm - thanks @maharanay22",
+      "answered": true
+     }
+    ],
+    "stage": 5,
     "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-21T21:25:49Z",
-    "updated_at": "2026-11-21T22:48:21Z",
+    "review": "approved",
+    "approved_by": [
+     "ethan-tyler"
+    ],
+    "last_push": "2026-11-27T05:01:29Z",
+    "updated_at": "2026-11-27T06:06:07Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review"
+    "state": "done",
+    "waiting_on": "nobody",
+    "next": "Merged. It ships in the project's next release"
    },
    "id": 38
   },
