@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-27T19:59:48Z",
+ "generated_at": "2026-11-28T01:34:38Z",
  "stages": [
   "reported",
   "fix sent",
@@ -25,17 +25,17 @@
    "forks": 711,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
-   "downloads_month": 675375,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 670068,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": 2,
    "contributor_commits": 79,
    "contributor_total": 144,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": 1,
    "period_commits": 79,
    "period_total": 35,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "delta-io/delta-rs",
@@ -50,20 +50,20 @@
     "Data Loss"
    ],
    "stars": 3376,
-   "forks": 718,
+   "forks": 719,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
-   "downloads_month": 10887274,
-   "downloads_checked": "2026-11-27",
-   "contributor_rank": 24,
-   "contributor_commits": 21,
+   "downloads_month": 10825991,
+   "downloads_checked": "2026-11-28",
+   "contributor_rank": 22,
+   "contributor_commits": 23,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
-   "period_rank": 8,
-   "period_commits": 21,
-   "period_total": 29,
+   "contributors_checked": "2026-11-28",
+   "period_rank": 7,
+   "period_commits": 23,
+   "period_total": 30,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "lance-format/lance",
@@ -78,20 +78,20 @@
     "AI data"
    ],
    "stars": 7396,
-   "forks": 964,
+   "forks": 965,
    "package": "pylance",
    "impact": null,
-   "downloads_month": 3937230,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 3842670,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": 61,
    "contributor_commits": 9,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": 38,
    "period_commits": 9,
    "period_total": 70,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "mlflow/mlflow",
@@ -105,21 +105,21 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28998,
-   "forks": 6669,
+   "stars": 28993,
+   "forks": 6666,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
-   "downloads_month": 23876265,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 23819118,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": 127,
    "contributor_commits": 5,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": 40,
    "period_commits": 4,
    "period_total": 114,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "pandas-dev/pandas",
@@ -133,21 +133,21 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50636,
-   "forks": 20726,
+   "stars": 50634,
+   "forks": 20725,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
-   "downloads_month": 721603437,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 720618847,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 27,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27",
+   "period_checked": "2026-11-28",
    "release_notes": [
     {
      "version": "3.1.0",
@@ -180,12 +180,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 4,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "delta-io/delta",
@@ -208,12 +208,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 57,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "databricks/databricks-sql-python",
@@ -236,12 +236,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 11,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "databricks/dbt-databricks",
@@ -264,12 +264,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 19,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "BerriAI/litellm",
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 64028,
-   "forks": 13629,
+   "stars": 64044,
+   "forks": 13632,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 105179538,
@@ -292,12 +292,12 @@
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
-   "contributors_checked": "2026-11-27",
+   "contributors_checked": "2026-11-28",
    "period_rank": null,
    "period_commits": null,
    "period_total": 144,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   },
   {
    "full": "pydantic/pydantic-settings",
@@ -317,10 +317,10 @@
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
    "downloads_month": 516061563,
    "downloads_checked": "2026-11-27",
-   "contributor_rank": 113,
+   "contributor_rank": 117,
    "contributor_commits": 1,
-   "contributor_total": 133,
-   "contributors_checked": "2026-11-27",
+   "contributor_total": 137,
+   "contributors_checked": "2026-11-28",
    "period_rank": 27,
    "period_commits": 1,
    "period_total": 56,
@@ -19573,11 +19573,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 98
   },
@@ -22005,7 +22005,7 @@
      "Shahzeb-DataEngineer"
     ],
     "last_push": "2026-11-19T05:07:17Z",
-    "updated_at": "2026-11-19T05:14:51Z",
+    "updated_at": "2026-11-27T22:47:29Z",
     "conflicts": false,
     "last_comment": null,
     "state": "waiting",
@@ -37096,11 +37096,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
