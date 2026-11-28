@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-28T02:43:20Z",
+ "generated_at": "2026-11-28T09:27:10Z",
  "stages": [
   "reported",
   "fix sent",
@@ -21,7 +21,7 @@
     "Tool Calling",
     "Windows"
    ],
-   "stars": 3592,
+   "stars": 3593,
    "forks": 711,
    "package": "unitycatalog-ai",
    "impact": "Keeps catalog data correct across the server, Spark and the CLI: Spark keeps column DEFAULT values, CREATE SCHEMA keeps its comment and location, column type names keep their case, DECIMAL(p,s) columns can be created from the CLI, and force-deleting a credential no longer breaks external locations. Also makes Unity Catalog functions work correctly as tools for AI agents, with arguments and results converted correctly for Anthropic, LiteLLM and the OSS client.",
@@ -49,7 +49,7 @@
     "Python",
     "Data Loss"
    ],
-   "stars": 3376,
+   "stars": 3377,
    "forks": 719,
    "package": "deltalake",
    "impact": "Prevents silent data loss and wrong results: VACUUM keeps files still in use, deletion vectors and change data feed return the right rows, timestamps and decimal statistics are read and written correctly, and MERGE and ADD CONSTRAINT no longer duplicate rows or commit over violating data.",
@@ -77,8 +77,8 @@
     "Python",
     "AI data"
    ],
-   "stars": 7396,
-   "forks": 965,
+   "stars": 7397,
+   "forks": 968,
    "package": "pylance",
    "impact": null,
    "downloads_month": 3842670,
@@ -105,7 +105,7 @@
     "Streaming",
     "GenAI Eval"
    ],
-   "stars": 28993,
+   "stars": 28998,
    "forks": 6665,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
@@ -133,8 +133,8 @@
     "Reductions",
     "String regex"
    ],
-   "stars": 50634,
-   "forks": 20725,
+   "stars": 50641,
+   "forks": 20724,
    "package": "pandas",
    "impact": "Correct results for Arrow-backed data in pandas 3: regex classes match Unicode and Python whitespace, Series.mode works on booleans, and ffill/bfill no longer return a view that silently changes the original.",
    "downloads_month": 720618847,
@@ -199,7 +199,7 @@
     "Scala",
     "Lakehouse"
    ],
-   "stars": 9085,
+   "stars": 9086,
    "forks": 2229,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
@@ -231,8 +231,8 @@
    "forks": 161,
    "package": "databricks-sql-connector",
    "impact": "In review: NaN kept distinct from NULL, no ZeroDivisionError on fast CloudFetch downloads, and faster row iteration.",
-   "downloads_month": 38452337,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 37944800,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 66,
@@ -259,8 +259,8 @@
    "forks": 235,
    "package": "dbt-databricks",
    "impact": "In review: correct column order for replace_where and microbatch below DBR 18.0, quoted struct field names, and escaped backslashes in comments.",
-   "downloads_month": 4371908,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 4297784,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 107,
@@ -283,8 +283,8 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 64045,
-   "forks": 13632,
+   "stars": 64058,
+   "forks": 13638,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
    "downloads_month": 105713666,
@@ -312,11 +312,11 @@
     "CLI"
    ],
    "stars": 1504,
-   "forks": 270,
+   "forks": 272,
    "package": "pydantic-settings",
    "impact": "Settings read field names correctly when validate_by_alias=False is used with pydantic 2.14.",
-   "downloads_month": 516061563,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 513354422,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": 117,
    "contributor_commits": 1,
    "contributor_total": 137,
@@ -2668,6 +2668,16 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-28T07:51:42Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4726088896",
+      "maintainer": true,
+      "path": "helm/templates/server/_config.tpl",
+      "text": "**Nit (not a blocker):** An extra parameter can redirect schema upgrades to another database PgJDBC reads the database from the URL path and then applies the `dbname` query parameter to the same property. The schema migrator uses that URL too, so **the effective migration target can differ from the chart's database se…",
+      "answered": false
+     },
+     {
       "kind": "review changes requested",
       "who": "shba24",
       "at": "2026-11-25T19:48:22Z",
@@ -2716,32 +2726,21 @@
       "path": ".github/workflows/helm-chart-tests.yml",
       "text": "**Nit (not a blocker):** Number and boolean extraParams values are never rendered in CI Every `extraParams` entry in the render tests uses `--set-string`, so Helm only ever hands the template strings. The docs and README say a value may be a string, number or boolean, and the template runs `urlquery $value` on whateve…",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T16:20:41Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2351#discussion_r4697607935",
-      "maintainer": true,
-      "path": ".github/workflows/helm-chart-tests.yml",
-      "text": "**Nit (not a blocker):** The extraParams name guard is only tested with chart-managed SSL on Both invalid-name renders reuse the `pg` argument array, which turns `ssl.enabled` on. The guard in `_config.tpl` sits outside the SSL block today, so the code is correct. Moving it under `if ssl.enabled`, or behind the clash…",
-      "answered": true
      }
     ],
     "stage": 4,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "shba24",
      "timothyw553"
     ],
     "last_push": "2026-11-25T20:12:53Z",
-    "updated_at": "2026-11-25T22:28:02Z",
+    "updated_at": "2026-11-28T07:51:42Z",
     "conflicts": false,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Approved by shba24, timothyw553. Waiting to be merged"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "shba24 left review comments. Reply or update the PR"
    },
    "id": 171
   },
@@ -6959,8 +6958,8 @@
     "checks": "failing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-20T21:31:56Z",
-    "updated_at": "2026-11-20T21:58:36Z",
+    "last_push": "2026-11-28T06:05:10Z",
+    "updated_at": "2026-11-28T06:17:30Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -7031,7 +7030,7 @@
       ],
       [
        "h",
-       "@@ -387,6 +387,10 @@"
+       "@@ -393,6 +393,10 @@"
       ],
       [
        "c",
@@ -7075,7 +7074,7 @@
       ],
       [
        "h",
-       "@@ -400,6 +404,7 @@"
+       "@@ -406,6 +410,7 @@"
       ],
       [
        "c",
@@ -7115,11 +7114,11 @@
      "lines": [
       [
        "h",
-       "@@ -270,11 +270,11 @@"
+       "@@ -280,11 +280,11 @@"
       ],
       [
        "c",
-       "    use super::*;"
+       "    use crate::feature_flags::{FLAG_ZONE_WRITE_SEEDS, ZONE_WRITE_SEEDS_VERSION_KEY};"
       ],
       [
        "c",
@@ -7171,7 +7170,7 @@
       ],
       [
        "h",
-       "@@ -699,4 +699,98 @@"
+       "@@ -779,4 +779,98 @@"
       ],
       [
        "c",
@@ -7243,7 +7242,7 @@
      "lines": [
       [
        "h",
-       "@@ -51,7 +51,9 @@"
+       "@@ -52,7 +52,9 @@"
       ],
       [
        "c",
@@ -7256,18 +7255,29 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "Xuanwo",
+      "at": "2026-11-28T09:17:19Z",
+      "url": "https://github.com/lance-format/lance/pull/11331#pullrequestreview-6096932081",
+      "maintainer": true,
+      "path": null,
+      "text": "**AI-assisted technical review of `e10ffb8b`** Two blockers remain from source inspection. 1. `packed_markers` and the 2.0 struct writer apply different rules for alias precedence and key presence. A metadata edit that passes the commit check can still change how a later append lays out the struct. Please validate aga…",
+      "answered": false
+     }
+    ],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T20:39:14Z",
-    "updated_at": "2026-11-20T21:59:46Z",
+    "last_push": "2026-11-28T06:05:56Z",
+    "updated_at": "2026-11-28T09:17:19Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "Some tests failed. Check the logs"
+    "next": "Xuanwo left review comments. Reply or update the PR"
    },
    "id": 151
   },
@@ -7599,7 +7609,7 @@
      "lines": [
       [
        "h",
-       "@@ -423,6 +423,8 @@"
+       "@@ -442,6 +442,8 @@"
       ],
       [
        "c",
@@ -7635,7 +7645,7 @@
       ],
       [
        "h",
-       "@@ -5007,6 +5009,8 @@"
+       "@@ -5069,6 +5071,8 @@"
       ],
       [
        "c",
@@ -7671,7 +7681,7 @@
       ],
       [
        "h",
-       "@@ -5187,6 +5191,8 @@"
+       "@@ -5251,6 +5255,8 @@"
       ],
       [
        "c",
@@ -7711,51 +7721,43 @@
      "deletions": 0
     },
     {
-     "path": "rust/lance/src/dataset.rs",
+     "path": "rust/lance-table-runtime/src/commit/builder.rs",
      "lines": [
       [
        "h",
-       "@@ -705,6 +705,8 @@"
+       "@@ -613,6 +613,11 @@"
       ],
       [
        "c",
-       "    /// `\"main\"` is reserved for the default branch and cannot be used as a new branch name."
+       "                 Use deep_clone instead.\","
       ],
       [
        "c",
-       "    /// A segment after the first cannot be a reserved dataset directory."
+       "            ));"
       ],
       [
        "c",
-       "    /// A literal `.` path segment is rejected."
+       "        }"
       ],
       [
        "a",
-       "    /// The source cannot be a detached version: it is not part of the dataset's history."
+       "        // Also reached by Clone transactions built outside `shallow_clone`,"
       ],
       [
        "a",
-       "    /// Restore it first to clone or branch from it."
+       "        // `deep_clone` and `create_branch`, which check their source earlier."
       ],
       [
-       "c",
-       "    ///"
+       "a",
+       "        if let Operation::Clone { ref_version, .. } = &transaction.operation {"
       ],
       [
-       "c",
-       "    /// New branch names are limited to a portable budget of 211 bytes, measured"
+       "a",
+       "            crate::refs::ensure_clone_source_attached(*ref_version)?;"
       ],
       [
-       "c",
-       "    /// after the name is path-part encoded twice: once for the branch metadata"
-      ],
-      [
-       "h",
-       "@@ -765,6 +767,8 @@"
-      ],
-      [
-       "c",
-       "        refs::check_new_branch(branch)?;"
+       "a",
+       "        }"
       ],
       [
        "c",
@@ -7763,115 +7765,125 @@
       ],
       [
        "c",
-       "        let (source_branch, version_number) = self.resolve_reference(version.into()).await?;"
-      ],
-      [
-       "a",
-       "        // Before the reservation is written, so a rejected source leaves no ref behind."
-      ],
-      [
-       "a",
-       "        refs::ensure_clone_source_attached(version_number)?;"
+       "        let session = self"
       ],
       [
        "c",
-       "        let branch_location = self.branch_location().find_branch(Some(branch))?;"
-      ],
-      [
-       "c",
-       "        let branch_file = refs::branch_contents_path(&self.refs.root()?.path, branch);"
-      ],
-      [
-       "c",
-       "        if self.object_store.exists(&branch_file).await? {"
-      ],
-      [
-       "h",
-       "@@ -4177,6 +4181,8 @@"
-      ],
-      [
-       "c",
-       "    /// 'target_path': the uri string to clone the dataset into."
-      ],
-      [
-       "c",
-       "    /// 'version': the version cloned from, could be a version number or tag."
-      ],
-      [
-       "c",
-       "    /// 'store_params': the object store params to use for the new dataset."
-      ],
-      [
-       "a",
-       "    /// The source cannot be a detached version: it is not part of the dataset's history."
-      ],
-      [
-       "a",
-       "    /// Restore it first to clone or branch from it."
-      ],
-      [
-       "c",
-       "    ///"
-      ],
-      [
-       "c",
-       "    /// The returned handle retains the source's store parameters for shared files."
-      ],
-      [
-       "c",
-       "    /// When reopening a clone across stores, supply the source parameters with"
-      ],
-      [
-       "h",
-       "@@ -4278,6 +4284,7 @@"
-      ],
-      [
-       "c",
-       "    /// Parameters:"
-      ],
-      [
-       "c",
-       "    /// - `target_path`: the URI string to clone the dataset into."
+       "            .session"
       ]
      ],
-     "truncated": true,
-     "additions": 9,
+     "truncated": false,
+     "additions": 5,
      "deletions": 0
     },
     {
-     "path": "rust/lance/src/dataset/refs.rs",
+     "path": "rust/lance-table-runtime/src/commit/transaction.rs",
      "lines": [
       [
        "h",
-       "@@ -7,6 +7,7 @@"
+       "@@ -306,6 +306,17 @@"
       ],
       [
        "c",
-       "use futures::stream::{StreamExt, TryStreamExt};"
+       "        expected_latest_version,"
       ],
       [
        "c",
-       "use itertools::Itertools;"
+       "        tagged_frag_reuse_trim,"
+      ],
+      [
+       "c",
+       "    } = options;"
+      ],
+      [
+       "a",
+       "    // The next attached version follows the one the transaction read. A"
+      ],
+      [
+       "a",
+       "    // detached version has no place in the history to follow, so this is the"
+      ],
+      [
+       "a",
+       "    // caller's mistake rather than an exhausted version space."
+      ],
+      [
+       "a",
+       "    if is_detached_version(transaction.read_version) {"
+      ],
+      [
+       "a",
+       "        return Err(Error::invalid_input(format!("
+      ],
+      [
+       "a",
+       "            \"cannot commit on top of detached version {}: detached versions are not part of \\"
+      ],
+      [
+       "a",
+       "             the dataset's history. Commit the change as detached to build on it, or restore \\"
+      ],
+      [
+       "a",
+       "             the detached version to make it the latest version first\","
+      ],
+      [
+       "a",
+       "            transaction.read_version"
+      ],
+      [
+       "a",
+       "        )));"
+      ],
+      [
+       "a",
+       "    }"
+      ],
+      [
+       "c",
+       "    if append_idempotency_key.is_some()"
+      ],
+      [
+       "c",
+       "        && (expected_latest_version.is_some() || build_config.disable_transaction_file())"
+      ],
+      [
+       "c",
+       "    {"
+      ],
+      [
+       "h",
+       "@@ -545,7 +556,7 @@"
+      ],
+      [
+       "c",
+       "        target_version = dataset.manifest.version + 1;"
+      ],
+      [
+       "c",
+       "        if is_detached_version(target_version) {"
       ]
      ],
      "truncated": true,
-     "additions": 20,
-     "deletions": 0
+     "additions": 12,
+     "deletions": 1
     }
    ],
    "track": {
     "feedback": [],
-    "stage": 4,
-    "checks": "passing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-20T17:47:15Z",
-    "updated_at": "2026-11-20T19:54:28Z",
-    "conflicts": true,
+    "stage": 3,
+    "checks": "failing",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
+    "last_push": "2026-11-28T06:06:06Z",
+    "updated_at": "2026-11-28T08:59:23Z",
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Some tests failed. Check the logs"
    },
    "id": 149
   },
@@ -7897,7 +7909,7 @@
    "release": null,
    "files": [
     {
-     "path": "rust/arrow-stats/src/lib.rs",
+     "path": "rust/lance-arrow/src/stats.rs",
      "lines": [
       [
        "h",
@@ -8154,18 +8166,29 @@
     }
    ],
    "track": {
-    "feedback": [],
+    "feedback": [
+     {
+      "kind": "review commented",
+      "who": "Xuanwo",
+      "at": "2026-11-28T08:43:19Z",
+      "url": "https://github.com/lance-format/lance/pull/11325#pullrequestreview-6096807653",
+      "maintainer": true,
+      "path": null,
+      "text": "**AI-assisted technical review of `66dd44de`** Training now counts logical nulls correctly. On a historical V0 dataset with indexed and unindexed fragments, the indexed queries agree with a full scan: `IS NULL` finds 9 rows and `IS NOT NULL` finds 0. One blocker remains. Deleting a middle row before building a zone ma…",
+      "answered": false
+     }
+    ],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
+    "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-20T17:14:30Z",
-    "updated_at": "2026-11-20T19:50:33Z",
-    "conflicts": true,
+    "last_push": "2026-11-28T03:52:24Z",
+    "updated_at": "2026-11-28T08:43:19Z",
+    "conflicts": false,
     "last_comment": null,
     "state": "action",
     "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "next": "Xuanwo left review comments. Reply or update the PR"
    },
    "id": 148
   },
@@ -12422,7 +12445,7 @@
      "lines": [
       [
        "h",
-       "@@ -1454,17 +1454,20 @@"
+       "@@ -1477,17 +1477,20 @@"
       ],
       [
        "c",
@@ -12514,7 +12537,7 @@
       ],
       [
        "h",
-       "@@ -1486,7 +1489,7 @@"
+       "@@ -1509,7 +1512,7 @@"
       ],
       [
        "c",
@@ -12678,10 +12701,12 @@
     "feedback": [],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-19T06:10:25Z",
-    "updated_at": "2026-11-19T06:36:08Z",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
+    "last_push": "2026-11-28T06:06:05Z",
+    "updated_at": "2026-11-28T08:30:14Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -13788,7 +13813,7 @@
      "lines": [
       [
        "h",
-       "@@ -402,6 +402,19 @@"
+       "@@ -403,6 +403,19 @@"
       ],
       [
        "c",
@@ -13868,7 +13893,7 @@
       ],
       [
        "h",
-       "@@ -420,20 +433,20 @@"
+       "@@ -421,20 +434,20 @@"
       ],
       [
        "c",
@@ -13916,10 +13941,12 @@
     "feedback": [],
     "stage": 3,
     "checks": "failing",
-    "review": "waiting",
-    "approved_by": [],
-    "last_push": "2026-11-19T04:43:02Z",
-    "updated_at": "2026-11-19T05:18:47Z",
+    "review": "approved",
+    "approved_by": [
+     "Xuanwo"
+    ],
+    "last_push": "2026-11-28T06:06:13Z",
+    "updated_at": "2026-11-28T07:13:38Z",
     "conflicts": false,
     "last_comment": null,
     "state": "action",
@@ -19573,11 +19600,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. A maintainer's approval is required before it can merge"
    },
    "id": 98
   },
@@ -19960,6 +19987,26 @@
    "track": {
     "feedback": [
      {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-28T07:51:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4726088174",
+      "maintainer": true,
+      "path": "server/src/main/java/io/unitycatalog/server/persist/dao/CatalogInfoDAO.java",
+      "text": "**Nit (not a blocker):** API callers cannot determine which long paths fit The create-request descriptions identify the path fields but omit the new storage widths. For catalogs and schemas, **the generated location must also fit** after the server appends its suffix. **For example:** A normalized catalog root of `204…",
+      "answered": true
+     },
+     {
+      "kind": "inline comment",
+      "who": "shba24",
+      "at": "2026-11-28T07:51:32Z",
+      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4726088178",
+      "maintainer": true,
+      "path": "server/src/test/java/io/unitycatalog/server/sdk/managedlocation/SdkManagedLocationTest.java",
+      "text": "**Nit (not a blocker):** A 2,049-character volume location or model version source still gets a 500 The new test stores values of exactly 2,048 characters, so the widened columns are covered from the inside. One character more, the database raises SQLSTATE `22001`. `DatabaseErrors` maps only PostgreSQL's `54000`, so t…",
+      "answered": true
+     },
+     {
       "kind": "review approved",
       "who": "yili-db",
       "at": "2026-11-25T21:07:52Z",
@@ -19967,16 +20014,6 @@
       "maintainer": true,
       "path": null,
       "text": "[AI Assisted] Approving at 4c3bb6cf. The column widening is good, and the location validator now lives in #2378. Non-blocking follow-ups: - The \"Going back to the baseline release\" section of `docs/server/upgrades.md` should list the widened columns, since a downgrade narrows them the same way. - The constant name and…",
-      "answered": true
-     },
-     {
-      "kind": "review commented",
-      "who": "yili-db",
-      "at": "2026-11-25T08:55:58Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#pullrequestreview-6054474604",
-      "maintainer": true,
-      "path": null,
-      "text": "[AI Assisted] Verdict: comment. Thanks for addressing the three thread points (force-deleted credential, docs limits, and the production-lookup test); they look right. The scope split is still open and has had no reply: the PR now also adds the storage limits and the cloud checks, which are separable from the widening…",
       "answered": true
      },
      {
@@ -20008,27 +20045,16 @@
       "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
       "text": "[AI Assisted] Nit. `validateExternalLocationUrl` and `credentialFor` both decide the credential branch through `limitsDependOnCredential`. Folding the choice into one place would keep them from drifting.",
       "answered": true
-     },
-     {
-      "kind": "inline comment",
-      "who": "shba24",
-      "at": "2026-11-25T03:43:29Z",
-      "url": "https://github.com/unitycatalog/unitycatalog/pull/2234#discussion_r4690115520",
-      "maintainer": true,
-      "path": "server/src/main/java/io/unitycatalog/server/persist/utils/StorageLocationValidator.java",
-      "text": "**Nit (not a blocker):** Overlapping external locations skip the cloud limit checks with only a warning `credentialFor` catches every `BaseException` from the credential lookup and returns Unresolvable. That also covers the INTERNAL error that `ExternalLocationUtils.java:336-339` throws when two external locations cov…",
-      "answered": true
      }
     ],
     "stage": 5,
     "checks": "passing",
     "review": "approved",
     "approved_by": [
-     "shba24",
      "yili-db"
     ],
     "last_push": "2026-11-25T18:10:05Z",
-    "updated_at": "2026-11-25T21:10:56Z",
+    "updated_at": "2026-11-28T07:51:32Z",
     "conflicts": false,
     "last_comment": {
      "who": "shba24",
@@ -37096,11 +37122,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 23
   },
@@ -37867,13 +37893,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T20:53:22Z",
-    "updated_at": "2026-11-14T20:54:05Z",
-    "conflicts": true,
+    "last_push": "2026-11-28T05:35:09Z",
+    "updated_at": "2026-11-28T05:35:13Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 20
   },
@@ -38675,15 +38701,15 @@
       ],
       [
        "c",
-       "        return [ResultRow(*v) for v in res]"
+       "        rows = []"
       ],
       [
        "c",
-       ""
+       "        for start in range(0, len(res), 1024):"
       ],
       [
        "c",
-       "    @property"
+       "            rows += _create_rows(ResultRow, res[start : start + 1024].tolist())"
       ]
      ],
      "truncated": false,
@@ -38708,13 +38734,13 @@
     "checks": "passing",
     "review": "commented",
     "approved_by": [],
-    "last_push": "2026-11-14T20:47:36Z",
-    "updated_at": "2026-11-14T20:49:05Z",
-    "conflicts": true,
+    "last_push": "2026-11-28T05:35:16Z",
+    "updated_at": "2026-11-28T05:35:19Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 16
   },
@@ -38874,13 +38900,13 @@
     "checks": "passing",
     "review": "waiting",
     "approved_by": [],
-    "last_push": "2026-11-14T20:47:28Z",
-    "updated_at": "2026-11-14T20:49:08Z",
-    "conflicts": true,
+    "last_push": "2026-11-28T05:35:04Z",
+    "updated_at": "2026-11-28T05:35:07Z",
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review"
    },
    "id": 15
   },
