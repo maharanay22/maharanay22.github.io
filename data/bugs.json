@@ -1,6 +1,6 @@
 {
  "login": "maharanay22",
- "generated_at": "2026-11-28T01:34:38Z",
+ "generated_at": "2026-11-28T02:43:20Z",
  "stages": [
   "reported",
   "fix sent",
@@ -106,7 +106,7 @@
     "GenAI Eval"
    ],
    "stars": 28993,
-   "forks": 6666,
+   "forks": 6665,
    "package": "mlflow",
    "impact": "Keeps MLflow's AI gateway and tracking reliable: streaming responses carry correct content, token usage and tool definitions across Databricks, Mistral, Anthropic and Gemini, async logging keeps batches in order, and GenAI scorers accept NumPy values.",
    "downloads_month": 23819118,
@@ -203,8 +203,8 @@
    "forks": 2229,
    "package": "delta-spark",
    "impact": "In review: replaceWhere and generated columns with BETWEEN, case-insensitive CLUSTER BY, and Python clone returning a DeltaTable.",
-   "downloads_month": 24517313,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 24349014,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
@@ -283,12 +283,12 @@
     "Streaming",
     "Tool Calls"
    ],
-   "stars": 64044,
+   "stars": 64045,
    "forks": 13632,
    "package": "litellm",
    "impact": "In review: proxy keeps its internal callbacks, including per-model budget limits, when callbacks is configured as a single string.",
-   "downloads_month": 105179538,
-   "downloads_checked": "2026-11-27",
+   "downloads_month": 105713666,
+   "downloads_checked": "2026-11-28",
    "contributor_rank": null,
    "contributor_commits": null,
    "contributor_total": 300,
@@ -321,11 +321,11 @@
    "contributor_commits": 1,
    "contributor_total": 137,
    "contributors_checked": "2026-11-28",
-   "period_rank": 27,
+   "period_rank": 30,
    "period_commits": 1,
-   "period_total": 56,
+   "period_total": 60,
    "period_since": "2026-07-18",
-   "period_checked": "2026-11-27"
+   "period_checked": "2026-11-28"
   }
  ],
  "items": [
@@ -19573,11 +19573,11 @@
     "approved_by": [],
     "last_push": "2026-11-15T20:09:30Z",
     "updated_at": "2026-11-15T20:29:55Z",
-    "conflicts": false,
+    "conflicts": true,
     "last_comment": null,
-    "state": "waiting",
-    "waiting_on": "maintainers",
-    "next": "Tests pass. A maintainer's approval is required before it can merge"
+    "state": "action",
+    "waiting_on": "you",
+    "next": "The branch conflicts with main. Rebase it"
    },
    "id": 98
   },
@@ -37096,11 +37096,11 @@
     ],
     "last_push": "2026-11-10T21:58:18Z",
     "updated_at": "2026-11-19T02:30:25Z",
-    "conflicts": true,
+    "conflicts": false,
     "last_comment": null,
-    "state": "action",
-    "waiting_on": "you",
-    "next": "The branch conflicts with main. Rebase it"
+    "state": "waiting",
+    "waiting_on": "maintainers",
+    "next": "Tests pass. Waiting for a maintainer to review. VANDRANKI approved it as a community reviewer"
    },
    "id": 23
   },
